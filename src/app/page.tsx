@@ -1,6 +1,8 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, FileText, ScanLine, Sparkles, Wand2 } from "lucide-react";
 import { BRAND_BUTTON_CLASSES, OUTLINE_BUTTON_CLASSES } from "@/components/ui/button";
+import { Footer } from "@/components/footer";
 import { getCurrentUser } from "@/lib/auth";
 
 const BRAND_TOKENS = [
@@ -40,12 +42,9 @@ export default async function HomePage() {
       <div className="absolute -top-40 left-1/2 -z-10 h-[500px] w-[900px] -translate-x-1/2 rounded-full bg-mint/10 blur-3xl" />
 
       <header className="mx-auto flex max-w-6xl items-center justify-between px-6 py-6">
-        <div className="flex items-center gap-2.5">
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-mint">
-            <span className="font-display text-lg font-bold text-navy-900">A</span>
-          </div>
-          <span className="font-display text-xl font-bold text-soft-white">AlmiCV</span>
-        </div>
+        <Link href="/" className="flex items-center">
+          <Image src="/logo-light.svg" alt="AlmiWorld" width={180} height={60} priority />
+        </Link>
         {!user ? (
           <Link
             href="/login"
@@ -121,9 +120,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <footer className="mx-auto max-w-6xl px-6 py-12 text-center text-xs text-muted">
-        <p>AlmiCV · Built with Next.js, Prisma, and Tailwind CSS</p>
-      </footer>
+      <Footer />
     </main>
   );
 }

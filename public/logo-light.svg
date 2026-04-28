@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 200" role="img" aria-label="AlmiWorld">
+  <text x="60" y="115" font-family="Allura, 'Pinyon Script', 'Great Vibes', cursive" font-size="100" fill="#F8FAFC">almi</text>
+  <g transform="translate(245, 38)" fill="#D4A24C"><path d="M12 21s-7-4.5-9.5-9C.5 9 2 5 6 5c2.2 0 3.5 1.2 6 3.5C14.5 6.2 15.8 5 18 5c4 0 5.5 4 3.5 7-2.5 4.5-9.5 9-9.5 9z"/></g>
+  <text x="278" y="115" font-family="Montserrat, sans-serif" font-weight="600" font-size="68" fill="#F8FAFC">world</text>
+  <line x1="130" y1="160" x2="200" y2="160" stroke="#D4A24C" stroke-width="1.5"/>
+  <line x1="430" y1="160" x2="500" y2="160" stroke="#D4A24C" stroke-width="1.5"/>
+  <text x="315" y="170" text-anchor="middle" font-family="Allura, cursive" font-size="40" fill="#D4A24C" font-style="italic">live beautifully</text>
+</svg>
