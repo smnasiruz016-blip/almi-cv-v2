@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Plus_Jakarta_Sans } from "next/font/google";
+import { Inter, Fraunces, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
 const sansFont = Inter({
@@ -7,9 +7,15 @@ const sansFont = Inter({
   variable: "--font-inter",
 });
 
-const displayFont = Plus_Jakarta_Sans({
+const displayFont = Fraunces({
   subsets: ["latin"],
-  variable: "--font-display-jakarta",
+  variable: "--font-fraunces",
+  style: ["normal", "italic"],
+});
+
+const monoFont = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-jetbrains-mono",
 });
 
 export const metadata: Metadata = {
@@ -22,7 +28,10 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${sansFont.variable} ${displayFont.variable}`}>
+    <html
+      lang="en"
+      className={`${sansFont.variable} ${displayFont.variable} ${monoFont.variable}`}
+    >
       <body className="min-h-screen bg-navy-900 text-soft-white antialiased">
         {children}
       </body>

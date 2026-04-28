@@ -3,12 +3,57 @@
 @theme {
   --color-navy-900: #0F1729;
   --color-navy-800: #1A2238;
+  --color-navy-700: #232D4A;
   --color-mint: #5EEAD4;
+  --color-mint-glow: #7FF3DF;
   --color-soft-white: #F8FAFC;
   --color-muted: #94A3B8;
+  --color-gold: #D4A24C;
 
-  --font-sans: var(--font-inter);
-  --font-display: var(--font-display-jakarta);
+  --font-sans: var(--font-inter), system-ui, -apple-system, sans-serif;
+  --font-display: var(--font-fraunces), Georgia, "Times New Roman", serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, "SFMono-Regular", monospace;
+
+  --text-xs: 12px;
+  --text-xs--line-height: 16px;
+  --text-sm: 14px;
+  --text-sm--line-height: 20px;
+  --text-base: 16px;
+  --text-base--line-height: 24px;
+  --text-lg: 18px;
+  --text-lg--line-height: 28px;
+  --text-xl: 20px;
+  --text-xl--line-height: 28px;
+  --text-2xl: 24px;
+  --text-2xl--line-height: 32px;
+  --text-3xl: 30px;
+  --text-3xl--line-height: 36px;
+  --text-4xl: 36px;
+  --text-4xl--line-height: 40px;
+  --text-5xl: 48px;
+  --text-5xl--line-height: 52px;
+  --text-6xl: 60px;
+  --text-6xl--line-height: 64px;
+  --text-7xl: 72px;
+  --text-7xl--line-height: 76px;
+
+  --radius-sm: 6px;
+  --radius: 8px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+  --radius-2xl: 28px;
+  --radius-pill: 9999px;
+
+  --shadow-card: 0 1px 2px rgba(15, 23, 41, 0.06), 0 4px 12px rgba(15, 23, 41, 0.08);
+  --shadow-card-hover: 0 4px 8px rgba(15, 23, 41, 0.10), 0 12px 32px rgba(15, 23, 41, 0.12);
+  --shadow-mint-glow: 0 0 0 4px rgba(94, 234, 212, 0.18);
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --duration-250: 250ms;
+  --duration-400: 400ms;
 }
 
 html,
@@ -18,10 +63,22 @@ body {
 }
 
 body {
-  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-.font-display {
-  font-family: var(--font-display), var(--font-sans), system-ui, sans-serif;
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 500;
   letter-spacing: -0.02em;
+}
+
+::selection {
+  background-color: rgb(94 234 212 / 0.30);
+  color: var(--color-soft-white);
+}
+
+@utility text-balance {
+  text-wrap: balance;
 }
