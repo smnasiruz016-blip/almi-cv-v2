@@ -1,11 +1,12 @@
 import Link from "next/link";
-import { ArrowRight, Check, Sparkles } from "lucide-react";
+import { ArrowRight, Sparkles } from "lucide-react";
 import {
   BRAND_BUTTON_CLASSES,
   GHOST_BUTTON_CLASSES,
   OUTLINE_BUTTON_CLASSES,
 } from "@/components/ui/button";
 import { Footer } from "@/components/footer";
+import { HeroPreview } from "@/components/hero-preview";
 import { Container } from "@/components/ui/container";
 import { Section } from "@/components/ui/section";
 import { Card } from "@/components/ui/card";
@@ -17,12 +18,6 @@ const TRUST_STATS = [
   { value: "60+ designs", label: "Coming soon" },
   { value: "$10 once", label: "Lifetime premium" },
   { value: "5 languages", label: "EN · UR · DE · DA · IS" },
-];
-
-const PREVIEW_BULLETS = [
-  "ATS-friendly templates that pass screeners",
-  "AI writing that keeps your voice",
-  "Real-time match score, not vibes",
 ];
 
 const STEPS = [
@@ -51,7 +46,6 @@ export default async function HomePage() {
     <main>
       <SiteHeader isLoggedIn={isLoggedIn} />
       <HeroSection isLoggedIn={isLoggedIn} />
-      <PreviewSection />
       <TrustSection />
       <TemplatesSection />
       <HowItWorksSection />
@@ -91,116 +85,38 @@ function HeroSection({ isLoggedIn }: { isLoggedIn: boolean }) {
   const label = isLoggedIn ? "Open dashboard" : "Get started — free";
 
   return (
-    <Section className="relative isolate overflow-hidden bg-navy-900 pt-20 pb-30">
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -top-40 left-1/2 -z-10 h-[500px] w-[900px] -translate-x-1/2 rounded-full bg-mint/10 blur-3xl"
-      />
-      <Container>
-        <div className="mx-auto max-w-4xl text-center">
-          <Badge variant="mint">
-            <Sparkles className="h-3.5 w-3.5" />
-            Brand-quality CVs without the design work
-          </Badge>
-          <h1 className="mt-8 text-balance text-6xl font-medium leading-[1.05] text-soft-white md:text-7xl">
-            A CV that looks like it was{" "}
-            <span className="text-mint">designed for you.</span>
-          </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-lg text-muted">
-            Premium-grade templates, an editor that updates live, AI writing that respects your voice, and an ATS score that tells you when you&apos;re ready.
-          </p>
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
-            <Link href={href} className={`${BRAND_BUTTON_CLASSES} gap-2`}>
-              {label}
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-            <Link href="/templates" className={OUTLINE_BUTTON_CLASSES}>
-              See templates
-            </Link>
-          </div>
-          <p className="mt-5 text-sm text-muted">
-            Free to start · No credit card · 3 CVs included
-          </p>
-        </div>
-      </Container>
-    </Section>
-  );
-}
-
-function PreviewSection() {
-  return (
-    <Section className="bg-soft-white py-30">
+    <Section className="relative isolate overflow-hidden bg-navy-900 pt-20 pb-30 md:min-h-[600px]">
       <Container>
         <div className="grid items-center gap-12 md:grid-cols-2">
           <div>
-            <Badge variant="mint">See it work</Badge>
-            <h2 className="mt-4 text-4xl text-navy-900">
-              Watch a CV become a Best Match.
-            </h2>
-            <p className="mt-4 text-lg text-navy-700">
-              Paste a job description. Pick a template. Watch AlmiCV tune the wording, score the match, and tell you exactly what to fix.
+            <Badge variant="mint">
+              <Sparkles className="h-3.5 w-3.5" />
+              Brand-quality CVs without the design work
+            </Badge>
+            <h1 className="mt-8 max-w-xl text-balance text-5xl font-medium leading-[1.05] text-soft-white lg:text-6xl xl:text-7xl">
+              A CV that looks like it was{" "}
+              <span className="text-mint">designed for you.</span>
+            </h1>
+            <p className="mt-6 max-w-md text-lg text-muted">
+              Premium templates, an editor that updates live, AI writing that respects your voice, and an ATS score that tells you when you&apos;re ready.
             </p>
-            <ul className="mt-6 space-y-3">
-              {PREVIEW_BULLETS.map((bullet) => (
-                <li key={bullet} className="flex items-start gap-3 text-navy-700">
-                  <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-mint/20">
-                    <Check className="h-3 w-3 text-mint" strokeWidth={3} />
-                  </span>
-                  <span>{bullet}</span>
-                </li>
-              ))}
-            </ul>
+            <div className="mt-10 flex flex-wrap items-center gap-3">
+              <Link href={href} className={`${BRAND_BUTTON_CLASSES} gap-2`}>
+                {label}
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+              <Link href="/templates" className={OUTLINE_BUTTON_CLASSES}>
+                See templates
+              </Link>
+            </div>
+            <p className="mt-5 text-sm text-muted">
+              Free to start · No credit card · 3 CVs included
+            </p>
           </div>
-          <PreviewCard />
+          <HeroPreview />
         </div>
       </Container>
     </Section>
-  );
-}
-
-function PreviewCard() {
-  return (
-    <div className="rounded-2xl bg-white p-6 shadow-card-hover transition-shadow hover:shadow-card-glow">
-      <div className="flex items-center justify-between gap-4">
-        <div className="flex items-center gap-3">
-          <div className="flex h-12 w-12 items-center justify-center rounded-full bg-mint text-base font-medium text-navy-900">
-            MR
-          </div>
-          <div>
-            <p className="text-base font-medium text-navy-900">Maya Rodriguez</p>
-            <p className="text-sm text-navy-700">Senior Product Designer</p>
-          </div>
-        </div>
-        <span className="inline-flex items-center whitespace-nowrap rounded-pill bg-mint px-4 py-2 text-base font-semibold text-navy-900">
-          92/100 match
-        </span>
-      </div>
-      <div className="my-5 h-px w-full bg-navy-700/15" />
-      <div className="space-y-4">
-        <div className="rounded-lg border border-navy-700/10 bg-soft-white p-4">
-          <h3 className="text-base font-medium text-navy-900">Why it matched</h3>
-          <ul className="mt-2 space-y-1.5 text-sm text-navy-700">
-            <li className="flex gap-2">
-              <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-mint" />
-              <span>Led design systems at 3 fintechs (job asks for systems experience)</span>
-            </li>
-            <li className="flex gap-2">
-              <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-mint" />
-              <span>Shipped to 2M+ users (job asks for scale)</span>
-            </li>
-          </ul>
-        </div>
-        <div className="rounded-lg border border-navy-700/10 bg-soft-white p-4">
-          <h3 className="flex items-center gap-2 text-base font-medium text-navy-900">
-            <Sparkles className="h-4 w-4 text-mint" />
-            Resume tip
-          </h3>
-          <p className="mt-2 text-sm italic text-navy-700">
-            Mention your Figma + Storybook workflow in the summary — recruiters search for it.
-          </p>
-        </div>
-      </div>
-    </div>
   );
 }
 
