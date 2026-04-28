@@ -2,7 +2,6 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/db";
 import { createSession, hashPassword } from "@/lib/auth";
-import { BRAND_BUTTON_CLASSES } from "@/components/ui/button";
 
 async function signupAction(formData: FormData) {
   "use server";
@@ -36,26 +35,26 @@ export default async function SignupPage({
   const error = params.error;
 
   return (
-    <div className="rounded-3xl border border-muted/20 bg-navy-800/50 p-8 backdrop-blur">
-      <h1 className="font-display text-3xl font-bold text-soft-white">Create your account</h1>
-      <p className="mt-2 text-sm text-muted">
+    <div className="rounded-2xl border border-peach/30 bg-white p-8 shadow-warm-card-hover">
+      <h1 className="text-3xl text-plum">Create your account</h1>
+      <p className="mt-2 text-sm text-plum-soft">
         Start building polished CVs in minutes — free, no credit card.
       </p>
 
       {error === "taken" && (
-        <p className="mt-4 rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-300">
+        <p className="mt-4 rounded-xl border border-coral/30 bg-coral/10 px-4 py-3 text-sm text-coral-deep">
           An account with that email already exists.
         </p>
       )}
       {error === "invalid" && (
-        <p className="mt-4 rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-300">
+        <p className="mt-4 rounded-xl border border-coral/30 bg-coral/10 px-4 py-3 text-sm text-coral-deep">
           Please fill in all fields. Password must be at least 8 characters.
         </p>
       )}
 
       <form action={signupAction} className="mt-6 space-y-4">
         <div>
-          <label htmlFor="name" className="block text-sm font-medium text-soft-white">
+          <label htmlFor="name" className="block text-sm font-medium text-plum">
             Name
           </label>
           <input
@@ -64,11 +63,11 @@ export default async function SignupPage({
             name="name"
             required
             autoComplete="name"
-            className="mt-2 w-full rounded-xl border border-muted/20 bg-navy-900 px-4 py-3 text-sm text-soft-white placeholder-muted focus:border-mint focus:outline-none focus:ring-2 focus:ring-mint/30"
+            className="mt-2 w-full rounded-xl border border-plum/15 bg-cream-soft px-4 py-3 text-sm text-plum placeholder:text-plum-faint focus:border-coral focus:outline-none focus:ring-2 focus:ring-coral/20"
           />
         </div>
         <div>
-          <label htmlFor="email" className="block text-sm font-medium text-soft-white">
+          <label htmlFor="email" className="block text-sm font-medium text-plum">
             Email
           </label>
           <input
@@ -77,11 +76,11 @@ export default async function SignupPage({
             name="email"
             required
             autoComplete="email"
-            className="mt-2 w-full rounded-xl border border-muted/20 bg-navy-900 px-4 py-3 text-sm text-soft-white placeholder-muted focus:border-mint focus:outline-none focus:ring-2 focus:ring-mint/30"
+            className="mt-2 w-full rounded-xl border border-plum/15 bg-cream-soft px-4 py-3 text-sm text-plum placeholder:text-plum-faint focus:border-coral focus:outline-none focus:ring-2 focus:ring-coral/20"
           />
         </div>
         <div>
-          <label htmlFor="password" className="block text-sm font-medium text-soft-white">
+          <label htmlFor="password" className="block text-sm font-medium text-plum">
             Password
           </label>
           <input
@@ -91,18 +90,21 @@ export default async function SignupPage({
             required
             autoComplete="new-password"
             minLength={8}
-            className="mt-2 w-full rounded-xl border border-muted/20 bg-navy-900 px-4 py-3 text-sm text-soft-white focus:border-mint focus:outline-none focus:ring-2 focus:ring-mint/30"
+            className="mt-2 w-full rounded-xl border border-plum/15 bg-cream-soft px-4 py-3 text-sm text-plum focus:border-coral focus:outline-none focus:ring-2 focus:ring-coral/20"
           />
-          <p className="mt-2 text-xs text-muted">At least 8 characters.</p>
+          <p className="mt-2 text-xs text-plum-faint">At least 8 characters.</p>
         </div>
-        <button type="submit" className={`${BRAND_BUTTON_CLASSES} w-full`}>
+        <button
+          type="submit"
+          className="inline-flex w-full min-h-[44px] items-center justify-center gap-2 rounded-pill bg-coral px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-coral-deep focus:outline-none focus:ring-4 focus:ring-coral/30"
+        >
           Create account
         </button>
       </form>
 
-      <p className="mt-6 text-center text-sm text-muted">
+      <p className="mt-6 text-center text-sm text-plum-soft">
         Already have an account?{" "}
-        <Link href="/login" className="font-semibold text-mint transition hover:opacity-80">
+        <Link href="/login" className="font-medium text-coral hover:underline">
           Log in
         </Link>
       </p>

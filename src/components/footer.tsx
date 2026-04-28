@@ -10,7 +10,7 @@ const FOOTER_LINKS = [
 
 export function Footer() {
   return (
-    <footer className="bg-soft-white">
+    <footer className="bg-cream-soft">
       <div className="mx-auto flex max-w-6xl flex-col items-center gap-6 px-6 py-12 md:flex-row md:justify-between">
         <Link href="/" className="flex items-center">
           <Image src="/logo-dark.svg" alt="AlmiWorld" width={180} height={60} />
@@ -20,7 +20,7 @@ export function Footer() {
             <Link
               key={link.href}
               href={link.href}
-              className="text-sm font-medium text-navy-900/70 transition hover:text-navy-900"
+              className="text-sm font-medium text-plum-soft transition hover:text-coral"
             >
               {link.label}
             </Link>

@@ -32,7 +32,7 @@ export default function RootLayout({
       lang="en"
       className={`${sansFont.variable} ${displayFont.variable} ${monoFont.variable}`}
     >
-      <body className="min-h-screen bg-navy-900 text-soft-white antialiased">
+      <body className="min-h-screen bg-cream text-plum antialiased">
         {children}
       </body>
     </html>

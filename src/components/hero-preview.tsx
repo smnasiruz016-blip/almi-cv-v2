@@ -14,9 +14,9 @@ const RESUME_TIP =
   "Mention your Figma + Storybook workflow in the summary — recruiters search for it.";
 
 const CARD_SHADOW =
-  "0 4px 8px rgba(15,23,41,0.10), 0 12px 32px rgba(15,23,41,0.12), 0 0 0 4px rgba(94,234,212,0.18)";
+  "0 4px 8px rgba(45,27,61,0.06), 0 12px 32px rgba(255,122,107,0.18), 0 0 0 6px rgba(94,234,212,0.20)";
 const CARD_SHADOW_HOVER =
-  "0 8px 16px rgba(15,23,41,0.18), 0 24px 48px rgba(15,23,41,0.20), 0 0 0 6px rgba(94,234,212,0.25)";
+  "0 8px 16px rgba(45,27,61,0.08), 0 24px 48px rgba(255,122,107,0.24), 0 0 0 8px rgba(94,234,212,0.35)";
 
 const GHOST_MOCKUPS = [
   { rotate: -8, position: "left-4 top-0" },
@@ -26,16 +26,16 @@ const GHOST_MOCKUPS = [
 
 const PARTICLES = [
   { color: "bg-mint", left: "8%", top: "15%" },
-  { color: "bg-gold", left: "22%", top: "30%" },
-  { color: "bg-mint", left: "35%", top: "8%" },
-  { color: "bg-gold", left: "48%", top: "45%" },
-  { color: "bg-mint", left: "62%", top: "20%" },
+  { color: "bg-coral", left: "22%", top: "30%" },
+  { color: "bg-gold", left: "35%", top: "8%" },
+  { color: "bg-mint", left: "48%", top: "45%" },
+  { color: "bg-coral", left: "62%", top: "20%" },
   { color: "bg-gold", left: "78%", top: "55%" },
   { color: "bg-mint", left: "90%", top: "35%" },
-  { color: "bg-gold", left: "12%", top: "65%" },
-  { color: "bg-mint", left: "28%", top: "85%" },
-  { color: "bg-gold", left: "55%", top: "75%" },
-  { color: "bg-mint", left: "70%", top: "90%" },
+  { color: "bg-coral", left: "12%", top: "65%" },
+  { color: "bg-gold", left: "28%", top: "85%" },
+  { color: "bg-mint", left: "55%", top: "75%" },
+  { color: "bg-coral", left: "70%", top: "90%" },
   { color: "bg-gold", left: "85%", top: "70%" },
 ];
 
@@ -48,7 +48,7 @@ export function HeroPreview() {
     <div className="relative min-h-[480px] md:min-h-[560px]">
       <div
         aria-hidden
-        className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_center,rgba(94,234,212,0.18),transparent_60%)]"
+        className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_center,rgba(255,122,107,0.16),transparent_65%)]"
       />
 
       <div
@@ -59,7 +59,7 @@ export function HeroPreview() {
           className="h-full w-full rounded-full blur-3xl"
           style={{
             background:
-              "radial-gradient(circle, rgba(94,234,212,0.25) 0%, transparent 70%)",
+              "radial-gradient(circle, rgba(255,122,107,0.20) 0%, transparent 70%)",
           }}
           animate={
             reduce
@@ -89,15 +89,15 @@ export function HeroPreview() {
                 ? undefined
                 : { duration: 6 + i * 1.5, repeat: Infinity, ease: "easeInOut" }
             }
-            className={`absolute ${mockup.position} h-64 w-48 rounded-xl bg-navy-800/40 p-4 opacity-50`}
+            className={`absolute ${mockup.position} h-64 w-48 rounded-xl border border-peach bg-white/50 p-4 opacity-50`}
           >
             <div className="space-y-2">
-              <div className="h-3 w-2/3 rounded bg-soft-white/15" />
-              <div className="h-2 w-1/2 rounded bg-soft-white/10" />
-              <div className="my-3 h-px w-full bg-soft-white/10" />
-              <div className="h-2 w-full rounded bg-soft-white/10" />
-              <div className="h-2 w-5/6 rounded bg-soft-white/10" />
-              <div className="h-2 w-3/4 rounded bg-soft-white/10" />
+              <div className="h-3 w-2/3 rounded bg-plum/10" />
+              <div className="h-2 w-1/2 rounded bg-plum/10" />
+              <div className="my-3 h-px w-full bg-plum/10" />
+              <div className="h-2 w-full rounded bg-plum/10" />
+              <div className="h-2 w-5/6 rounded bg-plum/10" />
+              <div className="h-2 w-3/4 rounded bg-plum/10" />
             </div>
           </motion.div>
         ))}
@@ -148,7 +148,7 @@ export function HeroPreview() {
               ? undefined
               : { duration: 6, repeat: Infinity, ease: "easeInOut" }
           }
-          className="relative overflow-hidden rounded-2xl bg-soft-white p-5 shadow-card-glow"
+          className="relative overflow-hidden rounded-2xl bg-white p-5 shadow-warm-card"
         >
           {!reduce && (
             <motion.div
@@ -219,43 +219,43 @@ function PreviewCardContent({ reduce }: { reduce: ReduceMotion }) {
     <>
       <div className="flex items-center justify-between gap-4">
         <div className="flex items-center gap-3">
-          <div className="flex h-12 w-12 items-center justify-center rounded-full bg-mint text-base font-medium text-navy-900">
+          <div className="flex h-12 w-12 items-center justify-center rounded-full bg-mint text-base font-medium text-plum">
             MR
           </div>
           <div>
-            <p className="text-base font-medium text-navy-900">Maya Rodriguez</p>
-            <p className="text-sm text-navy-700">Senior Product Designer</p>
+            <p className="text-base font-medium text-plum">Maya Rodriguez</p>
+            <p className="text-sm text-plum-soft">Senior Product Designer</p>
           </div>
         </div>
         <ScoreBadge reduce={reduce} />
       </div>
-      <div className="my-5 h-px w-full bg-navy-700/15" />
+      <div className="my-5 h-px w-full bg-plum/15" />
       <div className="space-y-4">
-        <div className="rounded-lg border border-navy-700/10 bg-white p-4">
-          <h3 className="flex items-center gap-2 text-base font-medium text-navy-900">
+        <div className="rounded-lg border border-sage/30 bg-sage-soft p-4">
+          <h3 className="flex items-center gap-2 text-base font-medium text-plum">
             <motion.span
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               transition={{ delay: 1.2, type: "spring", stiffness: 200 }}
               className="inline-flex"
             >
-              <CheckCircle2 className="h-4 w-4 text-mint" />
+              <CheckCircle2 className="h-4 w-4 text-sage" />
             </motion.span>
             Why it matched
           </h3>
-          <ul className="mt-2 space-y-1.5 text-sm text-navy-700">
+          <ul className="mt-2 space-y-1.5 text-sm text-plum-soft">
             <li className="flex gap-2">
-              <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-mint" />
+              <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-sage" />
               <span>Led design systems at 3 fintechs (job asks for systems experience)</span>
             </li>
             <li className="flex gap-2">
-              <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-mint" />
+              <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-sage" />
               <span>Shipped to 2M+ users (job asks for scale)</span>
             </li>
           </ul>
         </div>
-        <div className="rounded-lg border border-navy-700/10 bg-white p-4">
-          <h3 className="flex items-center gap-2 text-base font-medium text-navy-900">
+        <div className="rounded-lg border border-lavender/30 bg-lavender-soft p-4">
+          <h3 className="flex items-center gap-2 text-base font-medium text-plum">
             <motion.span
               animate={
                 reduce
@@ -272,11 +272,11 @@ function PreviewCardContent({ reduce }: { reduce: ReduceMotion }) {
               }
               className="inline-flex"
             >
-              <Sparkles className="h-4 w-4 text-mint" />
+              <Sparkles className="h-4 w-4 text-[#9B7FD9]" />
             </motion.span>
-            Resume tip
+            AI suggestion
           </h3>
-          <p className="mt-2 text-sm italic text-navy-700">
+          <p className="mt-2 text-sm italic text-plum-soft">
             <Typewriter text={RESUME_TIP} reduce={reduce} />
           </p>
         </div>
@@ -333,7 +333,7 @@ function ScoreBadge({ reduce }: { reduce: ReduceMotion }) {
           ? undefined
           : { duration: 2, repeat: Infinity, ease: "easeInOut" }
       }
-      className="inline-flex items-center whitespace-nowrap rounded-pill bg-mint px-4 py-2 text-base font-semibold text-navy-900"
+      className="inline-flex items-center whitespace-nowrap rounded-pill bg-mint px-4 py-2 text-base font-semibold text-plum"
     >
       <motion.span>{rounded}</motion.span>/100 match
     </motion.span>

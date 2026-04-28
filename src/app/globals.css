@@ -10,6 +10,21 @@
   --color-muted: #94A3B8;
   --color-gold: #D4A24C;
 
+  --color-cream: #FFFBF5;
+  --color-cream-soft: #FFF5E8;
+  --color-peach: #FFE8D6;
+  --color-peach-soft: #FFF1E3;
+  --color-coral: #FF7A6B;
+  --color-coral-soft: #FFB5AB;
+  --color-coral-deep: #D85A4D;
+  --color-lavender: #C9B8E8;
+  --color-lavender-soft: #F5F1FA;
+  --color-sage: #A8D5BA;
+  --color-sage-soft: #F0F8F3;
+  --color-plum: #2D1B3D;
+  --color-plum-soft: #6B5B7A;
+  --color-plum-faint: #9D8FAB;
+
   --font-sans: var(--font-inter), system-ui, -apple-system, sans-serif;
   --font-display: var(--font-fraunces), Georgia, "Times New Roman", serif;
   --font-mono: var(--font-jetbrains-mono), ui-monospace, "SFMono-Regular", monospace;
@@ -50,6 +65,10 @@
   --shadow-mint-glow: 0 0 0 4px rgba(94, 234, 212, 0.18);
   --shadow-card-glow: 0 4px 8px rgba(15, 23, 41, 0.10), 0 12px 32px rgba(15, 23, 41, 0.12), 0 0 0 4px rgba(94, 234, 212, 0.18);
 
+  --shadow-warm-card: 0 1px 2px rgba(45,27,61,0.04), 0 4px 12px rgba(255,122,107,0.10);
+  --shadow-warm-card-hover: 0 4px 8px rgba(45,27,61,0.06), 0 12px 32px rgba(255,122,107,0.18);
+  --shadow-warm-glow: 0 4px 8px rgba(45,27,61,0.06), 0 12px 32px rgba(255,122,107,0.18), 0 0 0 6px rgba(94,234,212,0.20);
+
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
 
@@ -59,8 +78,8 @@
 
 html,
 body {
-  background-color: var(--color-navy-900);
-  color: var(--color-soft-white);
+  background-color: var(--color-cream);
+  color: var(--color-plum);
 }
 
 body {
@@ -77,7 +96,7 @@ h1, h2, h3, h4, h5, h6 {
 
 ::selection {
   background-color: rgb(94 234 212 / 0.30);
-  color: var(--color-soft-white);
+  color: var(--color-plum);
 }
 
 @utility text-balance {
