@@ -42,7 +42,7 @@ export default async function HomePage() {
 
       <header className="mx-auto flex max-w-6xl items-center justify-between px-6 py-6">
         <Link href="/" className="flex items-center gap-2">
-          <span className="w-9 h-9 rounded-lg bg-mint flex items-center justify-center text-deep-navy font-bold text-lg">A</span>
+          <span className="w-9 h-9 rounded-lg bg-mint flex items-center justify-center text-navy-900 font-bold text-lg">A</span>
           <span className="text-soft-white font-semibold text-xl tracking-tight">AlmiCV</span>
         </Link>
         {!user ? (
