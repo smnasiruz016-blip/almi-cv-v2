@@ -91,7 +91,7 @@ function HeroSection({ isLoggedIn }: { isLoggedIn: boolean }) {
   const label = isLoggedIn ? "Open dashboard" : "Get started — free";
 
   return (
-    <Section className="relative isolate overflow-hidden bg-navy-900 py-30">
+    <Section className="relative isolate overflow-hidden bg-navy-900 pt-20 pb-30">
       <div
         aria-hidden
         className="pointer-events-none absolute -top-40 left-1/2 -z-10 h-[500px] w-[900px] -translate-x-1/2 rounded-full bg-mint/10 blur-3xl"
