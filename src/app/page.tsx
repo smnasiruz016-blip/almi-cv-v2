@@ -101,7 +101,7 @@ function HeroSection({ isLoggedIn }: { isLoggedIn: boolean }) {
               Premium templates, an editor that updates live, AI writing that respects your voice, and an ATS score that tells you when you&apos;re ready.
             </p>
             <div className="mt-10 flex flex-wrap items-center gap-3">
-              <Link href={href} className={`${BRAND_BUTTON_CLASSES} gap-2`}>
+              <Link href={href} className={`${BRAND_BUTTON_CLASSES} gap-2 !text-navy-900`}>
                 {label}
                 <ArrowRight className="h-4 w-4" />
               </Link>
@@ -297,7 +297,7 @@ function FinalCTASection({ isLoggedIn }: { isLoggedIn: boolean }) {
             Free to start. Three CVs included. Upgrade once for $10 and unlock everything — for life.
           </p>
           <div className="mt-10 flex justify-center">
-            <Link href={href} className={`${BRAND_BUTTON_CLASSES} gap-2`}>
+            <Link href={href} className={`${BRAND_BUTTON_CLASSES} gap-2 !text-navy-900`}>
               {label}
               <ArrowRight className="h-4 w-4" />
             </Link>
