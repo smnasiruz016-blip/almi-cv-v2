@@ -160,7 +160,7 @@ function PreviewSection() {
 
 function PreviewCard() {
   return (
-    <div className="rounded-2xl bg-white p-6 shadow-card-hover transition-shadow hover:shadow-mint-glow">
+    <div className="rounded-2xl bg-white p-6 shadow-card-hover transition-shadow hover:shadow-card-glow">
       <div className="flex items-center justify-between gap-4">
         <div className="flex items-center gap-3">
           <div className="flex h-12 w-12 items-center justify-center rounded-full bg-mint text-base font-medium text-navy-900">
