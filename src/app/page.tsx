@@ -201,25 +201,38 @@ function TemplateCard({ name, children }: { name: string; children: React.ReactN
 
 function ClassicSerifThumb() {
   return (
-    <div className="aspect-[3/4] rounded-lg bg-soft-white p-3">
-      <div className="h-8 w-full rounded-sm bg-navy-900" />
-      <div className="mt-3 space-y-1.5">
-        <div className="h-1.5 w-3/4 rounded-sm bg-navy-700/25" />
-        <div className="h-1.5 w-1/2 rounded-sm bg-navy-700/25" />
+    <div className="aspect-[3/4] overflow-hidden rounded-lg border border-plum/5 bg-white shadow-inner">
+      <div className="flex h-8 items-center justify-between bg-plum px-3">
+        <span className="font-display text-[10px] tracking-wide text-cream">MAYA RODRIGUEZ</span>
+        <span className="text-[7px] text-cream/70">Senior Product Designer</span>
       </div>
-      <div className="mt-3 h-px w-full bg-navy-700/20" />
-      <div className="mt-3 grid grid-cols-2 gap-2">
-        <div className="space-y-1">
-          <div className="h-1 w-full rounded-sm bg-navy-700/15" />
-          <div className="h-1 w-full rounded-sm bg-navy-700/15" />
-          <div className="h-1 w-3/4 rounded-sm bg-navy-700/15" />
-          <div className="h-1 w-2/3 rounded-sm bg-navy-700/15" />
+      <div className="space-y-2 p-2">
+        <div>
+          <p className="font-display text-[7px] tracking-[0.15em] text-plum">EXPERIENCE</p>
+          <p className="mt-1 whitespace-nowrap text-[6px] font-medium leading-tight text-plum">
+            Acme Inc. · 2021–Present
+          </p>
+          <div className="mt-1 space-y-[2px]">
+            <div className="h-[2px] w-full rounded bg-plum/40" />
+            <div className="h-[2px] w-3/4 rounded bg-plum/40" />
+          </div>
+          <p className="mt-1.5 whitespace-nowrap text-[6px] font-medium leading-tight text-plum">
+            Globex Corp · 2018–2021
+          </p>
+          <div className="mt-1 space-y-[2px]">
+            <div className="h-[2px] w-full rounded bg-plum/40" />
+            <div className="h-[2px] w-2/3 rounded bg-plum/40" />
+          </div>
         </div>
-        <div className="space-y-1">
-          <div className="h-1 w-full rounded-sm bg-navy-700/15" />
-          <div className="h-1 w-2/3 rounded-sm bg-navy-700/15" />
-          <div className="h-1 w-full rounded-sm bg-navy-700/15" />
-          <div className="h-1 w-3/4 rounded-sm bg-navy-700/15" />
+        <div className="border-t border-plum/10 pt-1.5">
+          <p className="font-display text-[7px] tracking-[0.15em] text-plum">EDUCATION</p>
+          <p className="mt-1 whitespace-nowrap text-[6px] leading-tight text-plum">
+            MIT · BSc Computer Science · 2018
+          </p>
+        </div>
+        <div className="border-t border-plum/10 pt-1.5">
+          <p className="font-display text-[7px] tracking-[0.15em] text-plum">SKILLS</p>
+          <div className="mt-1 h-[2px] w-full rounded bg-plum/40" />
         </div>
       </div>
     </div>
@@ -228,24 +241,52 @@ function ClassicSerifThumb() {
 
 function ModernMonoThumb() {
   return (
-    <div className="flex aspect-[3/4] gap-2 rounded-lg bg-soft-white p-2">
-      <div className="w-1/3 rounded-sm bg-mint/25 p-1.5">
-        <div className="h-3 w-3 rounded-full bg-mint" />
-        <div className="mt-2 space-y-1">
-          <div className="h-1 w-3/4 rounded-sm bg-navy-700/35" />
-          <div className="h-1 w-2/3 rounded-sm bg-navy-700/35" />
-          <div className="h-1 w-1/2 rounded-sm bg-navy-700/35" />
+    <div className="flex aspect-[3/4] overflow-hidden rounded-lg border border-plum/5 bg-white shadow-inner">
+      <div className="w-[35%] space-y-2 bg-mint/30 p-2">
+        <div className="mx-auto h-6 w-6 rounded-full bg-mint" />
+        <p className="text-center font-display text-[7px] text-plum">ALEX CHEN</p>
+        <p className="text-center text-[6px] text-plum-soft">Frontend Engineer</p>
+        <div className="border-t border-mint/50 pt-1.5">
+          <p className="text-[6px] tracking-wider text-plum">CONTACT</p>
+          <div className="mt-1 space-y-[2px]">
+            <div className="h-[2px] w-full rounded bg-plum/30" />
+            <div className="h-[2px] w-3/4 rounded bg-plum/30" />
+          </div>
+        </div>
+        <div>
+          <p className="text-[6px] tracking-wider text-plum">SKILLS</p>
+          <div className="mt-1 space-y-[2px]">
+            <div className="h-[2px] w-full rounded bg-plum/30" />
+            <div className="h-[2px] w-2/3 rounded bg-plum/30" />
+            <div className="h-[2px] w-3/4 rounded bg-plum/30" />
+          </div>
         </div>
       </div>
-      <div className="flex-1 space-y-1.5 p-1">
-        <div className="h-2 w-3/4 rounded-sm bg-navy-700/35" />
-        <div className="h-1 w-full rounded-sm bg-navy-700/15" />
-        <div className="h-1 w-full rounded-sm bg-navy-700/15" />
-        <div className="h-1 w-2/3 rounded-sm bg-navy-700/15" />
-        <div className="mt-3 h-2 w-1/2 rounded-sm bg-navy-700/35" />
-        <div className="h-1 w-full rounded-sm bg-navy-700/15" />
-        <div className="h-1 w-full rounded-sm bg-navy-700/15" />
-        <div className="h-1 w-3/4 rounded-sm bg-navy-700/15" />
+      <div className="flex-1 space-y-2 p-2">
+        <div>
+          <p className="font-display text-[7px] tracking-wider text-plum">EXPERIENCE</p>
+          <p className="mt-1 whitespace-nowrap text-[6px] font-medium leading-tight text-plum">
+            Stripe · 2022–Now
+          </p>
+          <div className="mt-1 space-y-[2px]">
+            <div className="h-[2px] w-full rounded bg-plum/30" />
+            <div className="h-[2px] w-3/4 rounded bg-plum/30" />
+          </div>
+          <p className="mt-1.5 whitespace-nowrap text-[6px] font-medium leading-tight text-plum">
+            Vercel · 2020–2022
+          </p>
+          <div className="mt-1 space-y-[2px]">
+            <div className="h-[2px] w-full rounded bg-plum/30" />
+            <div className="h-[2px] w-2/3 rounded bg-plum/30" />
+          </div>
+        </div>
+        <div>
+          <p className="font-display text-[7px] tracking-wider text-plum">EDUCATION</p>
+          <p className="mt-1 whitespace-nowrap text-[6px] leading-tight text-plum">
+            Stanford · BS · 2020
+          </p>
+          <div className="mt-1 h-[2px] w-3/4 rounded bg-plum/30" />
+        </div>
       </div>
     </div>
   );
@@ -253,18 +294,44 @@ function ModernMonoThumb() {
 
 function EditorialBoldThumb() {
   return (
-    <div className="flex aspect-[3/4] flex-col overflow-hidden rounded-lg bg-soft-white">
-      <div className="bg-gold/85 p-3">
-        <div className="h-2 w-1/2 rounded-sm bg-navy-900" />
-        <div className="mt-1.5 h-1 w-3/4 rounded-sm bg-navy-900/40" />
+    <div className="flex aspect-[3/4] flex-col overflow-hidden rounded-lg border border-plum/5 bg-white shadow-inner">
+      <div className="flex h-10 items-center justify-between bg-gold px-3">
+        <span className="font-display text-[10px] text-plum">PRIYA PATEL</span>
+        <span className="text-[7px] text-plum">Marketing Director</span>
       </div>
-      <div className="flex-1 space-y-1.5 p-3">
-        <div className="h-1 w-full rounded-sm bg-navy-700/20" />
-        <div className="h-1 w-full rounded-sm bg-navy-700/20" />
-        <div className="h-1 w-2/3 rounded-sm bg-navy-700/20" />
-        <div className="h-1 w-full rounded-sm bg-navy-700/20" />
-        <div className="h-1 w-3/4 rounded-sm bg-navy-700/20" />
-        <div className="h-1 w-full rounded-sm bg-navy-700/20" />
+      <div className="flex-1 space-y-2 p-2">
+        <div className="space-y-[2px]">
+          <div className="h-[2px] w-full rounded bg-plum/40" />
+          <div className="h-[2px] w-full rounded bg-plum/40" />
+          <div className="h-[2px] w-2/3 rounded bg-plum/40" />
+        </div>
+        <div className="grid grid-cols-2 gap-2">
+          <div>
+            <p className="font-display text-[7px] tracking-wider text-plum">EXPERIENCE</p>
+            <p className="mt-1 whitespace-nowrap text-[6px] font-medium leading-tight text-plum">
+              Nike · 2021–Now
+            </p>
+            <div className="mt-1 space-y-[2px]">
+              <div className="h-[2px] w-full rounded bg-plum/30" />
+              <div className="h-[2px] w-3/4 rounded bg-plum/30" />
+            </div>
+            <p className="mt-1.5 whitespace-nowrap text-[6px] font-medium leading-tight text-plum">
+              Adobe · 2017–2021
+            </p>
+            <div className="mt-1 space-y-[2px]">
+              <div className="h-[2px] w-full rounded bg-plum/30" />
+              <div className="h-[2px] w-2/3 rounded bg-plum/30" />
+            </div>
+          </div>
+          <div>
+            <p className="font-display text-[7px] tracking-wider text-plum">EDUCATION</p>
+            <p className="mt-1 whitespace-nowrap text-[6px] leading-tight text-plum">
+              Wharton MBA · 2017
+            </p>
+            <p className="mt-2 font-display text-[7px] tracking-wider text-plum">AWARDS</p>
+            <div className="mt-1 h-[2px] w-3/4 rounded bg-plum/30" />
+          </div>
+        </div>
       </div>
     </div>
   );
