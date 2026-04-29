@@ -1,10 +1,10 @@
+import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight, Lock, Sparkles } from "lucide-react";
 import { Footer } from "@/components/footer";
 import { HeroPreview } from "@/components/hero-preview";
 import { Container } from "@/components/ui/container";
 import { Section } from "@/components/ui/section";
-import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { getCurrentUser } from "@/lib/auth";
 
@@ -164,17 +164,42 @@ function TemplatesSection() {
             Start with one of three free classics. Unlock 60+ premium variations any time.
           </p>
         </div>
-        <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
-          <TemplateCard name="Classic Serif">
+
+        <p className="mt-12 mb-4 text-center text-xs font-medium uppercase tracking-widest text-coral">
+          Free templates
+        </p>
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+          <TemplateCard name="Classic Serif" subtitle="Free · Customize colors" tier="FREE">
             <ClassicSerifThumb />
           </TemplateCard>
-          <TemplateCard name="Modern Mono">
+          <TemplateCard name="Modern Mono" subtitle="Free · Customize colors" tier="FREE">
             <ModernMonoThumb />
           </TemplateCard>
-          <TemplateCard name="Editorial Bold">
+          <TemplateCard name="Editorial Bold" subtitle="Free · Customize colors" tier="FREE">
             <EditorialBoldThumb />
           </TemplateCard>
         </div>
+
+        <div className="mt-14 mb-6 flex items-center gap-4">
+          <div className="h-px flex-1 bg-plum/10" />
+          <span className="inline-flex items-center gap-2 text-sm text-plum-soft">
+            <Lock className="h-3.5 w-3.5" />
+            Premium templates · Unlock all with $10 once
+          </span>
+          <div className="h-px flex-1 bg-plum/10" />
+        </div>
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+          <TemplateCard name="Soft Bloom" subtitle="Premium · Photo & accents" tier="PREMIUM">
+            <SoftBloomThumb />
+          </TemplateCard>
+          <TemplateCard name="Studio Portfolio" subtitle="Premium · Creative pro" tier="PREMIUM">
+            <StudioPortfolioThumb />
+          </TemplateCard>
+          <TemplateCard name="Heritage Resume" subtitle="Premium · Academic & senior" tier="PREMIUM">
+            <HeritageResumeThumb />
+          </TemplateCard>
+        </div>
+
         <div className="mt-10 flex justify-center">
           <Link
             href="/templates"
@@ -189,50 +214,85 @@ function TemplatesSection() {
   );
 }
 
-function TemplateCard({ name, children }: { name: string; children: React.ReactNode }) {
+function TemplateCard({
+  name,
+  subtitle,
+  tier,
+  children,
+}: {
+  name: string;
+  subtitle: string;
+  tier: "FREE" | "PREMIUM";
+  children: React.ReactNode;
+}) {
   return (
-    <Card className="border-peach/40 bg-white shadow-warm-card transition-shadow hover:shadow-warm-card-hover">
-      {children}
-      <h3 className="mt-5 text-xl text-plum">{name}</h3>
-      <p className="mt-1 text-sm text-plum-soft">Free · Customize colors</p>
-    </Card>
+    <div className="group relative rounded-2xl border border-peach/40 bg-white p-3 shadow-warm-card transition-all hover:shadow-warm-card-hover">
+      <div className="relative aspect-[3/4] overflow-hidden rounded-lg border border-plum/5 bg-white shadow-inner">
+        {children}
+        {tier === "PREMIUM" && (
+          <div className="absolute inset-0 flex flex-col items-center justify-center gap-1 bg-plum/45 backdrop-blur-[2px] transition-opacity duration-300 group-hover:opacity-0">
+            <Lock className="h-5 w-5 text-cream" />
+            <span className="text-[10px] font-medium text-cream">Unlock for $10</span>
+          </div>
+        )}
+      </div>
+      <div className="mt-3 flex items-start justify-between gap-2">
+        <div className="min-w-0">
+          <h3 className="text-sm font-medium text-plum">{name}</h3>
+          <p className="mt-0.5 text-xs text-plum-soft">{subtitle}</p>
+        </div>
+        <span
+          className={
+            tier === "FREE"
+              ? "shrink-0 rounded-pill bg-sage/30 px-2 py-0.5 text-[10px] font-medium text-[#1F4A2E]"
+              : "shrink-0 rounded-pill bg-gold/20 px-2 py-0.5 text-[10px] font-medium text-[#8A5F1F]"
+          }
+        >
+          {tier === "FREE" ? "Free" : "Premium"}
+        </span>
+      </div>
+    </div>
   );
 }
 
 function ClassicSerifThumb() {
   return (
-    <div className="aspect-[3/4] overflow-hidden rounded-lg border border-plum/5 bg-white shadow-inner">
-      <div className="flex h-8 items-center justify-between bg-plum px-3">
-        <span className="font-display text-[10px] tracking-wide text-cream">MAYA RODRIGUEZ</span>
-        <span className="text-[7px] text-cream/70">Senior Product Designer</span>
+    <div className="h-full">
+      <div className="flex h-16 items-center gap-2 bg-plum px-3">
+        <Image
+          src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=200&h=200&fit=crop&crop=faces"
+          alt="Maya Rodriguez"
+          width={40}
+          height={40}
+          className="h-10 w-10 rounded-full border-2 border-cream object-cover"
+        />
+        <div className="min-w-0">
+          <p className="truncate font-display text-[10px] tracking-wide text-cream">MAYA RODRIGUEZ</p>
+          <p className="truncate text-[7px] text-cream/70">Senior Product Designer</p>
+        </div>
       </div>
       <div className="space-y-2 p-2">
         <div>
-          <p className="font-display text-[7px] tracking-[0.15em] text-plum">EXPERIENCE</p>
-          <p className="mt-1 whitespace-nowrap text-[6px] font-medium leading-tight text-plum">
-            Acme Inc. · 2021–Present
+          <p className="font-display text-[7px] tracking-widest text-plum">EXPERIENCE</p>
+          <p className="mt-1 truncate text-[6px] font-medium leading-tight text-plum">
+            Acme Inc. — Senior PM <span className="text-[5px] font-normal text-plum-soft">· 2021–Present</span>
           </p>
-          <div className="mt-1 space-y-[2px]">
-            <div className="h-[2px] w-full rounded bg-plum/40" />
-            <div className="h-[2px] w-3/4 rounded bg-plum/40" />
-          </div>
-          <p className="mt-1.5 whitespace-nowrap text-[6px] font-medium leading-tight text-plum">
-            Globex Corp · 2018–2021
+          <p className="text-[5px] leading-tight text-plum-soft">• Led team of 8 designers across 3 product lines</p>
+          <p className="text-[5px] leading-tight text-plum-soft">• Shipped redesign that grew DAU by 40%</p>
+          <p className="mt-1 truncate text-[6px] font-medium leading-tight text-plum">
+            Globex Corp — Product Manager <span className="text-[5px] font-normal text-plum-soft">· 2018–2021</span>
           </p>
-          <div className="mt-1 space-y-[2px]">
-            <div className="h-[2px] w-full rounded bg-plum/40" />
-            <div className="h-[2px] w-2/3 rounded bg-plum/40" />
-          </div>
+          <p className="text-[5px] leading-tight text-plum-soft">• Owned roadmap for B2B fintech vertical</p>
         </div>
         <div className="border-t border-plum/10 pt-1.5">
-          <p className="font-display text-[7px] tracking-[0.15em] text-plum">EDUCATION</p>
-          <p className="mt-1 whitespace-nowrap text-[6px] leading-tight text-plum">
-            MIT · BSc Computer Science · 2018
-          </p>
+          <p className="font-display text-[7px] tracking-widest text-plum">EDUCATION</p>
+          <p className="mt-1 truncate text-[6px] leading-tight text-plum">MIT · BSc Computer Science · 2018</p>
         </div>
         <div className="border-t border-plum/10 pt-1.5">
-          <p className="font-display text-[7px] tracking-[0.15em] text-plum">SKILLS</p>
-          <div className="mt-1 h-[2px] w-full rounded bg-plum/40" />
+          <p className="font-display text-[7px] tracking-widest text-plum">SKILLS</p>
+          <p className="mt-1 truncate text-[5px] leading-tight text-plum-soft">
+            Product Strategy · User Research · Figma · A/B Testing
+          </p>
         </div>
       </div>
     </div>
@@ -241,51 +301,44 @@ function ClassicSerifThumb() {
 
 function ModernMonoThumb() {
   return (
-    <div className="flex aspect-[3/4] overflow-hidden rounded-lg border border-plum/5 bg-white shadow-inner">
-      <div className="w-[35%] space-y-2 bg-mint/30 p-2">
-        <div className="mx-auto h-6 w-6 rounded-full bg-mint" />
-        <p className="text-center font-display text-[7px] text-plum">ALEX CHEN</p>
-        <p className="text-center text-[6px] text-plum-soft">Frontend Engineer</p>
-        <div className="border-t border-mint/50 pt-1.5">
-          <p className="text-[6px] tracking-wider text-plum">CONTACT</p>
-          <div className="mt-1 space-y-[2px]">
-            <div className="h-[2px] w-full rounded bg-plum/30" />
-            <div className="h-[2px] w-3/4 rounded bg-plum/30" />
-          </div>
+    <div className="flex h-full">
+      <div className="w-[35%] space-y-2 bg-mint/30 p-2 text-center">
+        <Image
+          src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=200&h=200&fit=crop&crop=faces"
+          alt="Alex Chen"
+          width={36}
+          height={36}
+          className="mx-auto h-9 w-9 rounded-full border-2 border-white object-cover"
+        />
+        <p className="font-display text-[8px] text-plum">ALEX CHEN</p>
+        <p className="text-[6px] text-plum-soft">Frontend Engineer</p>
+        <div className="border-t border-mint/50 pt-1.5 text-left">
+          <p className="text-[6px] font-medium tracking-widest text-plum">CONTACT</p>
+          <p className="text-[5px] leading-tight text-plum-soft">alex@dev.io</p>
+          <p className="text-[5px] leading-tight text-plum-soft">+1 415 555 0142</p>
+          <p className="text-[5px] leading-tight text-plum-soft">github.com/achen</p>
         </div>
-        <div>
-          <p className="text-[6px] tracking-wider text-plum">SKILLS</p>
-          <div className="mt-1 space-y-[2px]">
-            <div className="h-[2px] w-full rounded bg-plum/30" />
-            <div className="h-[2px] w-2/3 rounded bg-plum/30" />
-            <div className="h-[2px] w-3/4 rounded bg-plum/30" />
-          </div>
+        <div className="text-left">
+          <p className="text-[6px] font-medium tracking-widest text-plum">SKILLS</p>
+          <p className="text-[5px] leading-tight text-plum-soft">React · TypeScript · Node · GraphQL · AWS</p>
         </div>
       </div>
       <div className="flex-1 space-y-2 p-2">
         <div>
-          <p className="font-display text-[7px] tracking-wider text-plum">EXPERIENCE</p>
-          <p className="mt-1 whitespace-nowrap text-[6px] font-medium leading-tight text-plum">
-            Stripe · 2022–Now
+          <p className="font-display text-[7px] tracking-widest text-plum">EXPERIENCE</p>
+          <p className="mt-1 truncate text-[6px] font-medium leading-tight text-plum">
+            Stripe — Senior Engineer <span className="text-[5px] font-normal text-plum-soft">· 2022–Present</span>
           </p>
-          <div className="mt-1 space-y-[2px]">
-            <div className="h-[2px] w-full rounded bg-plum/30" />
-            <div className="h-[2px] w-3/4 rounded bg-plum/30" />
-          </div>
-          <p className="mt-1.5 whitespace-nowrap text-[6px] font-medium leading-tight text-plum">
-            Vercel · 2020–2022
+          <p className="text-[5px] leading-tight text-plum-soft">• Migrated payment flow to micro-frontends</p>
+          <p className="text-[5px] leading-tight text-plum-soft">• Reduced bundle size 38% via code splitting</p>
+          <p className="mt-1 truncate text-[6px] font-medium leading-tight text-plum">
+            Vercel — Engineer <span className="text-[5px] font-normal text-plum-soft">· 2020–2022</span>
           </p>
-          <div className="mt-1 space-y-[2px]">
-            <div className="h-[2px] w-full rounded bg-plum/30" />
-            <div className="h-[2px] w-2/3 rounded bg-plum/30" />
-          </div>
+          <p className="text-[5px] leading-tight text-plum-soft">• Built Edge Functions developer dashboard</p>
         </div>
         <div>
-          <p className="font-display text-[7px] tracking-wider text-plum">EDUCATION</p>
-          <p className="mt-1 whitespace-nowrap text-[6px] leading-tight text-plum">
-            Stanford · BS · 2020
-          </p>
-          <div className="mt-1 h-[2px] w-3/4 rounded bg-plum/30" />
+          <p className="font-display text-[7px] tracking-widest text-plum">EDUCATION</p>
+          <p className="mt-1 truncate text-[6px] leading-tight text-plum">Stanford · BS Computer Science · 2020</p>
         </div>
       </div>
     </div>
@@ -294,43 +347,160 @@ function ModernMonoThumb() {
 
 function EditorialBoldThumb() {
   return (
-    <div className="flex aspect-[3/4] flex-col overflow-hidden rounded-lg border border-plum/5 bg-white shadow-inner">
-      <div className="flex h-10 items-center justify-between bg-gold px-3">
-        <span className="font-display text-[10px] text-plum">PRIYA PATEL</span>
-        <span className="text-[7px] text-plum">Marketing Director</span>
+    <div className="flex h-full flex-col">
+      <div className="flex h-16 items-center gap-2 bg-gold px-3">
+        <Image
+          src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=200&h=200&fit=crop&crop=faces"
+          alt="Priya Patel"
+          width={40}
+          height={40}
+          className="h-10 w-10 rounded-full border-2 border-cream object-cover"
+        />
+        <div className="min-w-0">
+          <p className="truncate font-display text-[10px] text-plum">PRIYA PATEL</p>
+          <p className="truncate text-[7px] text-plum/70">Marketing Director</p>
+        </div>
       </div>
       <div className="flex-1 space-y-2 p-2">
-        <div className="space-y-[2px]">
-          <div className="h-[2px] w-full rounded bg-plum/40" />
-          <div className="h-[2px] w-full rounded bg-plum/40" />
-          <div className="h-[2px] w-2/3 rounded bg-plum/40" />
-        </div>
+        <p className="text-[5px] italic leading-snug text-plum-soft">
+          Brand strategist with 10+ years scaling consumer brands across APAC and EU. Led campaigns reaching
+          200M+ users.
+        </p>
         <div className="grid grid-cols-2 gap-2">
           <div>
-            <p className="font-display text-[7px] tracking-wider text-plum">EXPERIENCE</p>
-            <p className="mt-1 whitespace-nowrap text-[6px] font-medium leading-tight text-plum">
-              Nike · 2021–Now
-            </p>
-            <div className="mt-1 space-y-[2px]">
-              <div className="h-[2px] w-full rounded bg-plum/30" />
-              <div className="h-[2px] w-3/4 rounded bg-plum/30" />
-            </div>
-            <p className="mt-1.5 whitespace-nowrap text-[6px] font-medium leading-tight text-plum">
-              Adobe · 2017–2021
-            </p>
-            <div className="mt-1 space-y-[2px]">
-              <div className="h-[2px] w-full rounded bg-plum/30" />
-              <div className="h-[2px] w-2/3 rounded bg-plum/30" />
-            </div>
+            <p className="font-display text-[7px] tracking-widest text-plum">EXPERIENCE</p>
+            <p className="mt-1 truncate text-[6px] font-medium leading-tight text-plum">Nike — Marketing Director</p>
+            <p className="text-[5px] leading-tight text-plum-soft">· 2021–Now</p>
+            <p className="text-[5px] leading-tight text-plum-soft">• Led ROAR (600M impressions)</p>
+            <p className="text-[5px] leading-tight text-plum-soft">• Rebrand for EMEA market</p>
+            <p className="mt-1 truncate text-[6px] font-medium leading-tight text-plum">Adobe — Sr. Manager</p>
+            <p className="text-[5px] leading-tight text-plum-soft">· 2017–2021</p>
+            <p className="text-[5px] leading-tight text-plum-soft">• Launched CC for Education</p>
           </div>
           <div>
-            <p className="font-display text-[7px] tracking-wider text-plum">EDUCATION</p>
-            <p className="mt-1 whitespace-nowrap text-[6px] leading-tight text-plum">
-              Wharton MBA · 2017
-            </p>
-            <p className="mt-2 font-display text-[7px] tracking-wider text-plum">AWARDS</p>
-            <div className="mt-1 h-[2px] w-3/4 rounded bg-plum/30" />
+            <p className="font-display text-[7px] tracking-widest text-plum">EDUCATION</p>
+            <p className="mt-1 truncate text-[6px] leading-tight text-plum">Wharton MBA · 2017</p>
+            <p className="mt-2 font-display text-[7px] tracking-widest text-plum">AWARDS</p>
+            <p className="mt-1 text-[5px] leading-tight text-plum-soft">• Cannes Lion 2022</p>
+            <p className="text-[5px] leading-tight text-plum-soft">• Effie Gold 2021</p>
           </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function SoftBloomThumb() {
+  return (
+    <div className="h-full bg-gradient-to-br from-peach/40 to-lavender-soft p-3">
+      <div className="flex items-start justify-between gap-2">
+        <div className="min-w-0">
+          <p className="truncate font-display text-[12px] italic text-plum">AYESHA KHAN</p>
+          <p className="truncate text-[6px] text-plum-soft">UX Designer · Karachi</p>
+        </div>
+        <Image
+          src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&h=200&fit=crop&crop=faces"
+          alt="Ayesha Khan"
+          width={48}
+          height={48}
+          className="h-12 w-12 shrink-0 rounded-full border-2 border-white object-cover shadow-sm"
+        />
+      </div>
+      <div className="my-3 h-px bg-gold/40" />
+      <div className="space-y-2">
+        <div>
+          <p className="font-display text-[6px] tracking-widest text-coral">ABOUT ME</p>
+          <p className="mt-0.5 text-[5px] italic leading-tight text-plum-soft">
+            Designer passionate about inclusive interfaces. 6 years across e-commerce, fintech, edtech.
+          </p>
+        </div>
+        <div>
+          <p className="font-display text-[6px] tracking-widest text-coral">EXPERIENCE</p>
+          <p className="mt-0.5 truncate text-[6px] font-medium leading-tight text-plum">Daraz — Lead UX · 2022–Present</p>
+          <p className="text-[5px] leading-tight text-plum-soft">• Redesigned checkout (cart abandonment ↓ 22%)</p>
+          <p className="mt-0.5 truncate text-[6px] font-medium leading-tight text-plum">Easypaisa — Sr. UX · 2019–2022</p>
+        </div>
+        <div>
+          <p className="font-display text-[6px] tracking-widest text-coral">EDUCATION</p>
+          <p className="mt-0.5 truncate text-[5px] leading-tight text-plum-soft">NUST · BS Design</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function StudioPortfolioThumb() {
+  return (
+    <div className="flex h-full">
+      <div className="flex w-[30%] flex-col items-center gap-2 bg-sage/40 p-2 text-center">
+        <Image
+          src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&h=200&fit=crop&crop=faces"
+          alt="Marcus Webb"
+          width={56}
+          height={56}
+          className="h-14 w-14 rounded-md object-cover"
+        />
+        <p className="font-display text-[9px] text-plum">MARCUS WEBB</p>
+        <p className="text-[6px] text-plum-soft">Art Director</p>
+        <div className="mt-1 flex flex-col items-center gap-1">
+          <span className="h-1.5 w-1.5 rounded-full bg-plum/30" />
+          <span className="h-1.5 w-1.5 rounded-full bg-plum/30" />
+          <span className="h-1.5 w-1.5 rounded-full bg-plum/30" />
+        </div>
+      </div>
+      <div className="flex-1 space-y-2 bg-cream-soft p-2">
+        <div>
+          <p className="font-display text-[7px] tracking-widest text-plum">SELECTED WORK</p>
+          <p className="mt-1 truncate text-[6px] font-medium leading-tight text-plum">Apple — WWDC 2024</p>
+          <p className="text-[5px] leading-tight text-plum-soft">Branding · Motion · Print</p>
+          <p className="mt-1 truncate text-[6px] font-medium leading-tight text-plum">Spotify — Wrapped 2023</p>
+          <p className="text-[5px] leading-tight text-plum-soft">Branding · Type design</p>
+          <p className="mt-1 truncate text-[6px] font-medium leading-tight text-plum">Nike Air — 50th Capsule</p>
+        </div>
+        <div>
+          <p className="font-display text-[7px] tracking-widest text-plum">EDUCATION</p>
+          <p className="mt-1 truncate text-[5px] leading-tight text-plum-soft">RISD · BFA Graphic Design · 2014</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function HeritageResumeThumb() {
+  return (
+    <div className="h-full bg-lavender-soft">
+      <div className="p-3 text-center">
+        <Image
+          src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=faces"
+          alt="Dr. Kamal Hassan"
+          width={48}
+          height={48}
+          className="mx-auto h-12 w-12 rounded-full border-2 border-white object-cover shadow-sm"
+        />
+        <p className="mt-2 font-display text-[11px] text-plum">DR. KAMAL HASSAN</p>
+        <p className="text-[6px] italic text-plum-soft">Professor of Engineering · Stanford</p>
+      </div>
+      <div className="mx-4 my-2 border-t-2 border-double border-lavender" />
+      <div className="space-y-2 p-2 text-center">
+        <div>
+          <p className="font-display text-[7px] tracking-widest text-plum">RESEARCH</p>
+          <p className="text-[5px] italic leading-tight text-plum-soft">
+            Computational Fluid Dynamics · Renewable Energy
+          </p>
+        </div>
+        <div>
+          <p className="font-display text-[7px] tracking-widest text-plum">PUBLICATIONS</p>
+          <p className="text-[5px] leading-tight text-plum-soft">• Hassan, K. et al. (2024). Nature Energy</p>
+          <p className="text-[5px] leading-tight text-plum-soft">• 47 peer-reviewed papers, 3,200+ citations</p>
+        </div>
+        <div>
+          <p className="font-display text-[7px] tracking-widest text-plum">EXPERIENCE</p>
+          <p className="text-[5px] leading-tight text-plum-soft">Stanford — Professor · 2015–Present</p>
+          <p className="text-[5px] leading-tight text-plum-soft">MIT — Postdoc · 2012–2015</p>
+        </div>
+        <div>
+          <p className="font-display text-[7px] tracking-widest text-plum">EDUCATION</p>
+          <p className="text-[5px] leading-tight text-plum-soft">PhD Mechanical Eng · Cambridge · 2012</p>
         </div>
       </div>
     </div>
