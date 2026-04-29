@@ -17,6 +17,7 @@ export default async function EditCVPage({
       resumeId={resume.id}
       initialTitle={resume.title}
       initialData={resume.data as unknown as CVData}
+      templateSlug={resume.template ?? "classic-serif"}
     />
   );
 }

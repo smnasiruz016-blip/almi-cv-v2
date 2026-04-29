@@ -182,21 +182,31 @@ function TemplatesSection() {
               <ClassicSerifThumb />
             </TemplateCard>
           </Link>
-          <TemplateCard name="Modern Mono" tier="FREE">
-            <ModernMonoThumb />
-          </TemplateCard>
-          <TemplateCard name="Editorial Bold" tier="FREE">
-            <EditorialBoldThumb />
-          </TemplateCard>
-          <TemplateCard name="Atelier" tier="PREMIUM">
-            <AtelierThumb />
-          </TemplateCard>
-          <TemplateCard name="Director" tier="PREMIUM">
-            <DirectorThumb />
-          </TemplateCard>
-          <TemplateCard name="Atelier Pro" tier="PREMIUM">
-            <AtelierProThumb />
-          </TemplateCard>
+          <Link href="/templates/modern-mono" className="block">
+            <TemplateCard name="Modern Mono" tier="FREE">
+              <ModernMonoThumb />
+            </TemplateCard>
+          </Link>
+          <Link href="/templates/editorial-bold" className="block">
+            <TemplateCard name="Editorial Bold" tier="FREE">
+              <EditorialBoldThumb />
+            </TemplateCard>
+          </Link>
+          <Link href="/templates/atelier" className="block">
+            <TemplateCard name="Atelier" tier="PREMIUM">
+              <AtelierThumb />
+            </TemplateCard>
+          </Link>
+          <Link href="/templates/director" className="block">
+            <TemplateCard name="Director" tier="PREMIUM">
+              <DirectorThumb />
+            </TemplateCard>
+          </Link>
+          <Link href="/templates/atelier-pro" className="block">
+            <TemplateCard name="Atelier Pro" tier="PREMIUM">
+              <AtelierProThumb />
+            </TemplateCard>
+          </Link>
         </div>
 
         <div className="mt-10 flex justify-center">

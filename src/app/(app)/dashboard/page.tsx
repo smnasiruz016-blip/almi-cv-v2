@@ -2,20 +2,7 @@ import Link from "next/link";
 import { ArrowRight, FileText, MoreVertical, Plus, Sparkles } from "lucide-react";
 import { requireUser } from "@/lib/auth";
 import { listResumes } from "@/lib/resume-actions";
-
-const TEMPLATE_LABELS: Record<string, string> = {
-  "classic-serif": "Classic Serif",
-  "modern-mono": "Modern Mono",
-  "editorial-bold": "Editorial Bold",
-  atelier: "Atelier",
-  director: "Director",
-  "atelier-pro": "Atelier Pro",
-  "brand-essence": "Brand Essence",
-};
-
-function templateLabel(key: string) {
-  return TEMPLATE_LABELS[key] ?? key;
-}
+import { getTemplate } from "@/lib/templates";
 
 const RTF = new Intl.RelativeTimeFormat("en", { numeric: "auto" });
 
@@ -108,7 +95,7 @@ export default async function DashboardPage() {
               >
                 <div className="flex items-start justify-between gap-2">
                   <p className="text-xs font-medium uppercase tracking-widest text-coral">
-                    {templateLabel(resume.templateKey)}
+                    {getTemplate(resume.template).name}
                   </p>
                   <p className="shrink-0 text-xs text-plum-faint">
                     Edited {relativeTime(resume.updatedAt)}

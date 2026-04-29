@@ -3,10 +3,10 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { ArrowLeft, Check } from "lucide-react";
-import { ClassicSerif } from "@/components/templates/ClassicSerif";
 import { CVEditorSidebar } from "@/components/editor/CVEditorSidebar";
 import { updateResume } from "@/lib/resume-actions";
 import type { CVData } from "@/lib/cv-types";
+import { getTemplate } from "@/lib/templates";
 
 type SaveStatus = "idle" | "saving" | "saved" | "error";
 
@@ -14,11 +14,15 @@ export function EditorClient({
   resumeId,
   initialTitle,
   initialData,
+  templateSlug,
 }: {
   resumeId: string;
   initialTitle: string;
   initialData: CVData;
+  templateSlug: string;
 }) {
+  const template = getTemplate(templateSlug);
+  const TemplateComponent = template.Component;
   const [cvData, setCvData] = useState<CVData>(initialData);
   const [cvName, setCvName] = useState(initialTitle);
   const [saveStatus, setSaveStatus] = useState<SaveStatus>("saved");
@@ -96,7 +100,7 @@ export function EditorClient({
             Live preview · A4
           </p>
           <div className="print-target w-full max-w-[600px]">
-            <ClassicSerif data={cvData} />
+            <TemplateComponent data={cvData} />
           </div>
         </main>
       </div>
