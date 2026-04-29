@@ -508,3 +508,132 @@ export const ayeshaKhan: CVData = {
     "Open-source typography",
   ],
 };
+
+export const marcusWebb: CVData = {
+  basics: {
+    fullName: "Marcus Webb",
+    role: "Art Director",
+    email: "marcus@webb.studio",
+    phone: "+1 718 555 0142",
+    location: "Brooklyn, NY",
+    website: "marcuswebb.studio",
+    linkedIn: "linkedin.com/in/marcuswebb",
+    photoUrl:
+      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop&crop=faces",
+    summary:
+      "Creative director with 12 years building visual identities for global brands and emerging artists. I work at the intersection of branding, motion design, and editorial — Apple, Spotify, Nike — and the small studios that need a singular vision. Currently building my own brand consultancy.",
+  },
+  experience: [
+    {
+      company: "Independent",
+      role: "Creative Director",
+      location: "Brooklyn, NY",
+      startDate: "2022",
+      endDate: "Present",
+      bullets: [
+        "Lead branding for Apple at Worldwide Developer Conference 2024 — visual identity, motion, print collateral.",
+        "Designed Spotify Wrapped 2023 visual identity — most-shared brand campaign in company history.",
+        "Created the Nike Air 50th Anniversary capsule branding across 6 products and 14 markets.",
+        "Built and led a team of 4 designers + 2 motion artists across project-based engagements.",
+      ],
+    },
+    {
+      company: "Pentagram",
+      role: "Senior Designer",
+      location: "New York, NY",
+      startDate: "2018",
+      endDate: "2022",
+      bullets: [
+        "Lead designer on identity rebrand for The New York Public Library system.",
+        "Co-led the Mastercard sonic and visual identity refresh across 80+ touchpoints.",
+        "Authored the studio's internal type-design playbook, still in use today.",
+      ],
+    },
+    {
+      company: "Wieden+Kennedy",
+      role: "Designer",
+      location: "Portland, OR",
+      startDate: "2014",
+      endDate: "2018",
+      bullets: [
+        "Design lead for Nike's Equality campaign — 2018 Cannes Lions Bronze.",
+        "Created motion identity for Old Spice's 'The Man Your Man Could Smell Like' rebrand.",
+      ],
+    },
+  ],
+  education: [
+    {
+      school: "Rhode Island School of Design (RISD)",
+      degree: "BFA Graphic Design",
+      location: "Providence, RI",
+      startDate: "2010",
+      endDate: "2014",
+      notes: "Senior thesis: Type as Architecture. Honors in Visual Identity.",
+    },
+  ],
+  skills: [
+    "Branding",
+    "Motion Design",
+    "Editorial Design",
+    "Type Design",
+    "Identity Systems",
+    "Art Direction",
+    "Creative Strategy",
+    "Adobe Creative Suite",
+    "Cinema 4D",
+    "After Effects",
+    "Print Production",
+    "Color Theory",
+  ],
+  projects: [
+    {
+      name: "Apple WWDC 2024 — Visual Identity",
+      description:
+        "Branding, motion, and print collateral for Apple's annual developer conference. 50M+ views on launch keynote.",
+    },
+    {
+      name: "Spotify Wrapped 2023",
+      description:
+        "Visual identity for the global year-end campaign. Most-shared brand campaign in Spotify's history.",
+    },
+    {
+      name: "Nike Air 50th — Capsule Branding",
+      description:
+        "Branding system for the 50th anniversary collection across 6 products and 14 markets.",
+    },
+  ],
+  languages: [
+    { name: "English", level: "Native" },
+    { name: "Spanish", level: "Conversational" },
+  ],
+  awards: [
+    {
+      title: "ADC Gold Cube — Brand Identity",
+      issuer: "The One Club",
+      year: "2023",
+    },
+    {
+      title: "D&AD Wood Pencil — Editorial Design",
+      issuer: "D&AD",
+      year: "2022",
+    },
+    {
+      title: "Cannes Lions Bronze — Equality Campaign",
+      issuer: "Cannes Lions",
+      year: "2018",
+    },
+  ],
+  certifications: [
+    {
+      name: "TYPE@Cooper Certificate in Type Design",
+      issuer: "Cooper Union",
+      year: "2020",
+    },
+  ],
+  interests: [
+    "Vintage type specimens",
+    "Analog photography",
+    "Brutalist architecture",
+    "Independent record stores",
+  ],
+};

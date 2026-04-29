@@ -4,9 +4,11 @@ import { ClassicSerif } from "@/components/templates/ClassicSerif";
 import { ModernMono } from "@/components/templates/ModernMono";
 import { EditorialBold } from "@/components/templates/EditorialBold";
 import { Atelier } from "@/components/templates/Atelier";
+import { Director } from "@/components/templates/Director";
 import {
   alexChen,
   ayeshaKhan,
+  marcusWebb,
   mayaRodriguez,
   priyaPatel,
 } from "@/lib/sample-cv-data";
@@ -77,7 +79,8 @@ export const TEMPLATES: Record<TemplateSlug, TemplateMeta> = {
     tagline: "Bold · Creative · Editorial",
     description:
       "Sage-and-cream split with bold typography. Built for art directors, creative leads, and design veterans.",
-    Component: ClassicSerif,
+    Component: Director,
+    sampleData: marcusWebb,
   },
   "atelier-pro": {
     slug: "atelier-pro",
