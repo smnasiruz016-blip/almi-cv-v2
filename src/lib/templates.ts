@@ -2,7 +2,8 @@ import type { ComponentType } from "react";
 import type { CVData } from "@/lib/cv-types";
 import { ClassicSerif } from "@/components/templates/ClassicSerif";
 import { ModernMono } from "@/components/templates/ModernMono";
-import { alexChen, mayaRodriguez } from "@/lib/sample-cv-data";
+import { EditorialBold } from "@/components/templates/EditorialBold";
+import { alexChen, mayaRodriguez, priyaPatel } from "@/lib/sample-cv-data";
 
 export type TemplateSlug =
   | "classic-serif"
@@ -50,7 +51,8 @@ export const TEMPLATES: Record<TemplateSlug, TemplateMeta> = {
     tagline: "Bold · Creative · Magazine",
     description:
       "A magazine-style CV with a gold banner header and 2-column body. Perfect for marketing, brand, and creative roles.",
-    Component: ClassicSerif,
+    Component: EditorialBold,
+    sampleData: priyaPatel,
   },
   atelier: {
     slug: "atelier",

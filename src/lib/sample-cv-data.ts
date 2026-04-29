@@ -237,3 +237,141 @@ export const alexChen: CVData = {
   ],
   interests: ["Climbing", "Open-source", "Synthwave music", "Specialty coffee"],
 };
+
+export const priyaPatel: CVData = {
+  basics: {
+    fullName: "Priya Patel",
+    role: "Marketing Director",
+    email: "priya@patel.studio",
+    phone: "+44 20 7946 0958",
+    location: "London, UK",
+    website: "priyapatel.studio",
+    linkedIn: "linkedin.com/in/priyapatel",
+    photoUrl:
+      "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=400&fit=crop&crop=faces",
+    summary:
+      "Brand strategist with 10+ years scaling consumer brands across APAC and EMEA. Led campaigns reaching 200M+ users at Nike and Adobe. Cannes Lion + Effie Award recipient. Specialty: turning cultural insight into commercial growth.",
+  },
+  experience: [
+    {
+      company: "Nike",
+      role: "Marketing Director, EMEA",
+      location: "London, UK",
+      startDate: "2021",
+      endDate: "Present",
+      bullets: [
+        "Led the ROAR global campaign — 600M impressions, 32% lift in unaided brand recall across 14 markets.",
+        "Owned the EMEA rebrand for Nike Women; revenue up 18% YoY in launch markets.",
+        "Built and led a 24-person cross-functional team spanning brand, performance, and PR.",
+        "Negotiated co-marketing partnerships with adidas-owned (yes, that one) properties — first time in 8 years.",
+      ],
+    },
+    {
+      company: "Adobe",
+      role: "Senior Marketing Manager",
+      location: "London, UK",
+      startDate: "2017",
+      endDate: "2021",
+      bullets: [
+        "Launched Creative Cloud for Education in 23 markets; subscriptions up 47% in year one.",
+        "Designed Adobe MAX London — the conference grew from 800 to 4,200 attendees in 3 years.",
+        "Authored Adobe's first DEI-led marketing playbook, now used across all regional teams.",
+      ],
+    },
+    {
+      company: "Saatchi & Saatchi",
+      role: "Account Director",
+      location: "London, UK",
+      startDate: "2014",
+      endDate: "2017",
+      bullets: [
+        "Led brand strategy for Procter & Gamble's haircare portfolio across UK and Ireland.",
+        "Effie Gold winner for the Pantene #StrongIsBeautiful campaign.",
+      ],
+    },
+  ],
+  education: [
+    {
+      school: "Wharton School",
+      degree: "MBA, Marketing",
+      location: "Philadelphia, PA",
+      startDate: "2015",
+      endDate: "2017",
+      notes: "Concentration in consumer behavior. Wharton Marketing Club VP.",
+    },
+    {
+      school: "King's College London",
+      degree: "BA, English Literature",
+      location: "London, UK",
+      startDate: "2010",
+      endDate: "2013",
+    },
+  ],
+  skills: [
+    "Brand Strategy",
+    "Campaign Leadership",
+    "Cross-functional Team Building",
+    "Consumer Research",
+    "Cultural Insight",
+    "Performance Marketing",
+    "Partnership Negotiation",
+    "Storytelling",
+    "DEI in Marketing",
+    "Cannes Lions Jury",
+    "Effie Jury",
+    "Public Speaking",
+  ],
+  projects: [
+    {
+      name: "Nike ROAR — Global Campaign 2022",
+      description:
+        "600M impressions across 14 markets. Cultural moment for women's sport in EMEA.",
+    },
+    {
+      name: "Adobe Create Your World",
+      description:
+        "Multi-year campaign localized across 47 markets. 12% lift in brand consideration among Gen Z.",
+    },
+    {
+      name: "P&G Insider Newsletter",
+      description:
+        "Internal marketing publication I founded; reached 18,000 P&G employees globally.",
+    },
+  ],
+  languages: [
+    { name: "English", level: "Native" },
+    { name: "Hindi", level: "Native" },
+    { name: "Gujarati", level: "Conversational" },
+    { name: "French", level: "Basic" },
+  ],
+  awards: [
+    {
+      title: "Cannes Lion · Bronze, Brand Experience",
+      issuer: "Cannes Lions",
+      year: "2022",
+    },
+    {
+      title: "Effie Gold, Sustained Success",
+      issuer: "Effie Awards",
+      year: "2021",
+    },
+    {
+      title: "Marketing Week Top 100 — Rising Stars",
+      issuer: "Marketing Week",
+      year: "2020",
+    },
+  ],
+  certifications: [
+    {
+      name: "Cannes Lions Jury Member",
+      issuer: "Cannes Lions Festival",
+      year: "2023",
+    },
+  ],
+  interests: [
+    "Cultural anthropology",
+    "Hindi cinema",
+    "Open-water swimming",
+    "Long-form journalism",
+  ],
+};
