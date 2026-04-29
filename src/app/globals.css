@@ -102,3 +102,53 @@ h1, h2, h3, h4, h5, h6 {
 @utility text-balance {
   text-wrap: balance;
 }
+
+@media print {
+  header,
+  aside,
+  .print-hide {
+    display: none !important;
+  }
+
+  body * {
+    visibility: hidden;
+  }
+
+  .print-target,
+  .print-target * {
+    visibility: visible;
+  }
+
+  .print-target {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 210mm;
+    margin: 0;
+    padding: 0;
+    box-shadow: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+  }
+
+  .print-target article {
+    aspect-ratio: auto !important;
+    overflow: visible !important;
+    max-width: none !important;
+    width: 210mm !important;
+    height: auto !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+  }
+
+  body,
+  html,
+  .print-target {
+    background: white !important;
+  }
+
+  @page {
+    margin: 0;
+    size: A4 portrait;
+  }
+}

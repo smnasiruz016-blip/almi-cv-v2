@@ -43,9 +43,13 @@ export function EditorClient({
     return () => clearTimeout(timer);
   }, [cvData, cvName, resumeId]);
 
+  useEffect(() => {
+    document.title = cvName ? `${cvName} - AlmiCV` : "AlmiCV";
+  }, [cvName]);
+
   return (
     <div className="flex min-h-screen flex-col bg-cream-soft">
-      <div className="sticky top-0 z-30 border-b border-plum/10 bg-white/95 backdrop-blur-md">
+      <div className="print-hide sticky top-0 z-30 border-b border-plum/10 bg-white/95 backdrop-blur-md">
         <div className="flex w-full items-center justify-between px-6 py-3">
           <div className="flex items-center gap-3">
             <Link
@@ -71,8 +75,9 @@ export function EditorClient({
               Preview
             </Link>
             <button
-              disabled
-              className="inline-flex cursor-not-allowed items-center gap-2 rounded-pill bg-coral/60 px-4 py-2 text-sm font-medium text-white"
+              type="button"
+              onClick={() => window.print()}
+              className="inline-flex items-center gap-2 rounded-pill bg-coral px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-coral-deep focus:outline-none focus:ring-4 focus:ring-coral/30"
             >
               Download PDF
             </button>
@@ -81,16 +86,16 @@ export function EditorClient({
       </div>
 
       <div className="flex flex-1 overflow-hidden">
-        <aside className="w-[420px] overflow-y-auto border-r border-plum/10 bg-white">
+        <aside className="print-hide w-[420px] overflow-y-auto border-r border-plum/10 bg-white">
           <div className="p-6">
             <CVEditorSidebar data={cvData} onChange={setCvData} />
           </div>
         </aside>
         <main className="flex flex-1 flex-col items-center overflow-y-auto bg-cream p-8">
-          <p className="mb-3 text-xs uppercase tracking-widest text-plum-soft">
+          <p className="print-hide mb-3 text-xs uppercase tracking-widest text-plum-soft">
             Live preview · A4
           </p>
-          <div className="w-full max-w-[600px]">
+          <div className="print-target w-full max-w-[600px]">
             <ClassicSerif data={cvData} />
           </div>
         </main>
