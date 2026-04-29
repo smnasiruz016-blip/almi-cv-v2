@@ -2,7 +2,17 @@ import { Globe, Link2, Mail, MapPin, Phone } from "lucide-react";
 import type { CVData } from "@/lib/cv-types";
 
 export function ClassicSerif({ data }: { data: CVData }) {
-  const { basics, experience, education, skills, projects, languages, awards, certifications, interests } = data;
+  const basics = data?.basics ?? { fullName: "", role: "", email: "" };
+  const experience = data?.experience ?? [];
+  const education = data?.education ?? [];
+  const skills = data?.skills ?? [];
+  const projects = data?.projects ?? [];
+  const languages = data?.languages ?? [];
+  const awards = data?.awards ?? [];
+  const certifications = data?.certifications ?? [];
+  const interests = data?.interests ?? [];
+
+  const displayName = basics.fullName?.trim() ? basics.fullName : "Untitled";
 
   return (
     <article className="mx-auto aspect-[210/297] w-full max-w-[800px] overflow-hidden rounded-lg bg-white p-12 shadow-warm-card-hover">
@@ -12,15 +22,17 @@ export function ClassicSerif({ data }: { data: CVData }) {
             // eslint-disable-next-line @next/next/no-img-element
             <img
               src={basics.photoUrl}
-              alt={basics.fullName}
+              alt={displayName}
               className="h-20 w-20 shrink-0 rounded-full border-2 border-cream object-cover"
             />
           )}
           <div className="min-w-0">
             <h1 className="font-display text-4xl font-medium tracking-wide text-cream">
-              {basics.fullName.toUpperCase()}
+              {displayName.toUpperCase()}
             </h1>
-            <p className="mt-1 text-lg italic text-cream/80">{basics.role}</p>
+            {basics.role && (
+              <p className="mt-1 text-lg italic text-cream/80">{basics.role}</p>
+            )}
             <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-xs text-cream/90">
               {basics.email && (
                 <span className="inline-flex items-center gap-1.5">
@@ -63,77 +75,98 @@ export function ClassicSerif({ data }: { data: CVData }) {
           <p className="text-sm leading-relaxed text-plum-soft">{basics.summary}</p>
         </section>
       )}
-      <Divider />
 
-      <section>
-        <SectionHeading>EXPERIENCE</SectionHeading>
-        <div className="space-y-5">
-          {experience.map((job) => (
-            <div key={`${job.company}-${job.startDate}`}>
-              <div className="mb-1 flex items-baseline justify-between gap-4">
-                <p className="text-base font-medium text-plum">
-                  {job.company} — {job.role}
-                </p>
-                <p className="shrink-0 text-sm text-plum-soft">
-                  {job.startDate} — {job.endDate ?? "Present"}
-                </p>
-              </div>
-              {job.location && (
-                <p className="mb-2 text-xs italic text-plum-soft">{job.location}</p>
-              )}
-              <ul className="space-y-1 text-sm leading-relaxed text-plum-soft">
-                {job.bullets.map((bullet, i) => (
-                  <li key={i} className="relative pl-4 before:absolute before:left-0 before:content-['•']">
-                    {bullet}
-                  </li>
-                ))}
-              </ul>
+      {experience.length > 0 && (
+        <>
+          {basics.summary && <Divider />}
+          <section>
+            <SectionHeading>EXPERIENCE</SectionHeading>
+            <div className="space-y-5">
+              {experience.map((job, i) => (
+                <div key={`${job.company}-${job.startDate}-${i}`}>
+                  <div className="mb-1 flex items-baseline justify-between gap-4">
+                    <p className="text-base font-medium text-plum">
+                      {job.company}
+                      {job.role ? ` — ${job.role}` : ""}
+                    </p>
+                    <p className="shrink-0 text-sm text-plum-soft">
+                      {job.startDate} — {job.endDate ?? "Present"}
+                    </p>
+                  </div>
+                  {job.location && (
+                    <p className="mb-2 text-xs italic text-plum-soft">{job.location}</p>
+                  )}
+                  {job.bullets && job.bullets.length > 0 && (
+                    <ul className="space-y-1 text-sm leading-relaxed text-plum-soft">
+                      {job.bullets.map((bullet, bi) => (
+                        <li
+                          key={bi}
+                          className="relative pl-4 before:absolute before:left-0 before:content-['•']"
+                        >
+                          {bullet}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
-      </section>
-      <Divider />
+          </section>
+        </>
+      )}
 
-      <section>
-        <SectionHeading>EDUCATION</SectionHeading>
-        <div className="space-y-3">
-          {education.map((entry) => (
-            <div key={`${entry.school}-${entry.startDate}`}>
-              <div className="mb-1 flex items-baseline justify-between gap-4">
-                <p className="text-base font-medium text-plum">
-                  {entry.school} — {entry.degree}
-                </p>
-                <p className="shrink-0 text-sm text-plum-soft">
-                  {entry.startDate} — {entry.endDate}
-                </p>
-              </div>
-              {entry.location && (
-                <p className="text-xs italic text-plum-soft">{entry.location}</p>
-              )}
-              {entry.notes && (
-                <p className="mt-1 text-sm leading-relaxed text-plum-soft">{entry.notes}</p>
-              )}
+      {education.length > 0 && (
+        <>
+          <Divider />
+          <section>
+            <SectionHeading>EDUCATION</SectionHeading>
+            <div className="space-y-3">
+              {education.map((entry, i) => (
+                <div key={`${entry.school}-${entry.startDate}-${i}`}>
+                  <div className="mb-1 flex items-baseline justify-between gap-4">
+                    <p className="text-base font-medium text-plum">
+                      {entry.school}
+                      {entry.degree ? ` — ${entry.degree}` : ""}
+                    </p>
+                    <p className="shrink-0 text-sm text-plum-soft">
+                      {entry.startDate} — {entry.endDate}
+                    </p>
+                  </div>
+                  {entry.location && (
+                    <p className="text-xs italic text-plum-soft">{entry.location}</p>
+                  )}
+                  {entry.notes && (
+                    <p className="mt-1 text-sm leading-relaxed text-plum-soft">{entry.notes}</p>
+                  )}
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
-      </section>
-      <Divider />
+          </section>
+        </>
+      )}
 
-      <section>
-        <SectionHeading>SKILLS</SectionHeading>
-        <p className="text-sm leading-relaxed text-plum-soft">{skills.join(" · ")}</p>
-      </section>
+      {skills.length > 0 && (
+        <>
+          <Divider />
+          <section>
+            <SectionHeading>SKILLS</SectionHeading>
+            <p className="text-sm leading-relaxed text-plum-soft">{skills.join(" · ")}</p>
+          </section>
+        </>
+      )}
 
-      {projects && projects.length > 0 && (
+      {projects.length > 0 && (
         <>
           <Divider />
           <section>
             <SectionHeading>PROJECTS</SectionHeading>
             <div className="space-y-3">
-              {projects.map((project) => (
-                <div key={project.name}>
+              {projects.map((project, i) => (
+                <div key={`${project.name}-${i}`}>
                   <p className="text-base font-medium text-plum">{project.name}</p>
-                  <p className="text-sm leading-relaxed text-plum-soft">{project.description}</p>
+                  {project.description && (
+                    <p className="text-sm leading-relaxed text-plum-soft">{project.description}</p>
+                  )}
                   {project.url && (
                     <a
                       href={`https://${project.url}`}
@@ -151,7 +184,7 @@ export function ClassicSerif({ data }: { data: CVData }) {
         </>
       )}
 
-      {languages && languages.length > 0 && (
+      {languages.length > 0 && (
         <>
           <Divider />
           <section>
@@ -163,7 +196,7 @@ export function ClassicSerif({ data }: { data: CVData }) {
         </>
       )}
 
-      {awards && awards.length > 0 && (
+      {awards.length > 0 && (
         <>
           <Divider />
           <section>
@@ -172,7 +205,8 @@ export function ClassicSerif({ data }: { data: CVData }) {
               {awards.map((award, i) => (
                 <li key={i}>
                   {award.title}
-                  {award.issuer ? ` · ${award.issuer}` : ""} · {award.year}
+                  {award.issuer ? ` · ${award.issuer}` : ""}
+                  {award.year ? ` · ${award.year}` : ""}
                 </li>
               ))}
             </ul>
@@ -180,7 +214,7 @@ export function ClassicSerif({ data }: { data: CVData }) {
         </>
       )}
 
-      {certifications && certifications.length > 0 && (
+      {certifications.length > 0 && (
         <>
           <Divider />
           <section>
@@ -198,7 +232,7 @@ export function ClassicSerif({ data }: { data: CVData }) {
         </>
       )}
 
-      {interests && interests.length > 0 && (
+      {interests.length > 0 && (
         <>
           <Divider />
           <section>

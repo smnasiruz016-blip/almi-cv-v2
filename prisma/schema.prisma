@@ -60,6 +60,8 @@ model Resume {
   templateTier TemplateTier   @default(FREE)
   status       DocumentStatus @default(DRAFT)
   draftData    Json?
+  template     String         @default("classic-serif")
+  data         Json           @default("{}")
   user         User           @relation(fields: [userId], references: [id], onDelete: Cascade)
   createdAt    DateTime       @default(now())
   updatedAt    DateTime       @default(now()) @updatedAt

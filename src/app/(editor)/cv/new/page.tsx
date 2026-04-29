@@ -1,5 +1,5 @@
-// STUB: Stage 3B will replace this with real DB-backed creation
 import { redirect } from "next/navigation";
+import { createResume } from "@/lib/resume-actions";
 
 export default async function NewCVPage({
   searchParams,
@@ -8,5 +8,6 @@ export default async function NewCVPage({
 }) {
   const params = await searchParams;
   const template = params.template ?? "classic-serif";
-  redirect(`/cv/temp-id/edit?template=${template}`);
+  const id = await createResume(template);
+  redirect(`/cv/${id}/edit`);
 }

@@ -1,14 +1,38 @@
 import Link from "next/link";
-import { ArrowRight, FileText, Plus, Sparkles } from "lucide-react";
+import { ArrowRight, FileText, MoreVertical, Plus, Sparkles } from "lucide-react";
 import { requireUser } from "@/lib/auth";
-import { prisma } from "@/lib/db";
+import { listResumes } from "@/lib/resume-actions";
+
+const TEMPLATE_LABELS: Record<string, string> = {
+  "classic-serif": "Classic Serif",
+  "modern-mono": "Modern Mono",
+  "editorial-bold": "Editorial Bold",
+  atelier: "Atelier",
+  director: "Director",
+  "atelier-pro": "Atelier Pro",
+  "brand-essence": "Brand Essence",
+};
+
+function templateLabel(key: string) {
+  return TEMPLATE_LABELS[key] ?? key;
+}
+
+const RTF = new Intl.RelativeTimeFormat("en", { numeric: "auto" });
+
+function relativeTime(date: Date) {
+  const diffSec = Math.round((date.getTime() - Date.now()) / 1000);
+  const abs = Math.abs(diffSec);
+  if (abs < 60) return RTF.format(diffSec, "second");
+  if (abs < 3600) return RTF.format(Math.round(diffSec / 60), "minute");
+  if (abs < 86400) return RTF.format(Math.round(diffSec / 3600), "hour");
+  if (abs < 86400 * 30) return RTF.format(Math.round(diffSec / 86400), "day");
+  if (abs < 86400 * 365) return RTF.format(Math.round(diffSec / (86400 * 30)), "month");
+  return RTF.format(Math.round(diffSec / (86400 * 365)), "year");
+}
 
 export default async function DashboardPage() {
   const user = await requireUser();
-  const resumes = await prisma.resume.findMany({
-    where: { userId: user.id },
-    orderBy: { updatedAt: "desc" },
-  });
+  const resumes = await listResumes();
 
   return (
     <div className="space-y-8">
@@ -49,7 +73,7 @@ export default async function DashboardPage() {
             <p className="mt-2 text-sm text-plum-soft">Start with a brand-quality template.</p>
           </div>
           <Link
-            href="/templates"
+            href="/cv/new?template=classic-serif"
             className="inline-flex items-center justify-center gap-2 rounded-pill bg-coral px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-coral-deep focus:outline-none focus:ring-4 focus:ring-coral/30"
           >
             <Plus className="h-4 w-4" />
@@ -64,35 +88,45 @@ export default async function DashboardPage() {
             </div>
             <h3 className="mt-4 text-xl text-plum">No CVs yet</h3>
             <p className="mx-auto mt-2 max-w-md text-sm text-plum-soft">
-              Pick a template to start. The editor and AI writing helper land in the next session.
+              Start with Classic Serif — fill in your story, and your CV updates live.
             </p>
             <Link
-              href="/templates"
+              href="/cv/new?template=classic-serif"
               className="mt-6 inline-flex items-center justify-center gap-2 rounded-pill bg-coral px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-coral-deep focus:outline-none focus:ring-4 focus:ring-coral/30"
             >
-              Browse templates
+              Start your first CV
               <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
         ) : (
-          <ul className="mt-6 space-y-3">
+          <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
             {resumes.map((resume) => (
-              <li
+              <Link
                 key={resume.id}
-                className="flex items-center justify-between rounded-2xl border border-peach/30 bg-cream-soft px-5 py-4"
+                href={`/cv/${resume.id}/edit`}
+                className="group relative block rounded-2xl border border-peach/40 bg-white p-5 shadow-warm-card transition-all hover:shadow-warm-card-hover"
               >
-                <div>
-                  <p className="font-medium text-plum">{resume.title}</p>
-                  <p className="text-xs text-plum-faint">
-                    {resume.templateKey} · Updated {resume.updatedAt.toLocaleDateString()}
+                <div className="flex items-start justify-between gap-2">
+                  <p className="text-xs font-medium uppercase tracking-widest text-coral">
+                    {templateLabel(resume.templateKey)}
+                  </p>
+                  <p className="shrink-0 text-xs text-plum-faint">
+                    Edited {relativeTime(resume.updatedAt)}
                   </p>
                 </div>
-                <span className="rounded-full bg-mint/15 px-3 py-1 text-xs font-medium text-[#0F4A42]">
-                  {resume.status.toLowerCase()}
-                </span>
-              </li>
+                <p className="mt-2 font-display text-lg text-plum">{resume.title}</p>
+                <div className="mt-3 flex aspect-[3/4] items-center justify-center rounded-md bg-cream-soft text-xs italic text-plum-faint">
+                  Preview coming
+                </div>
+                <div className="mt-4 flex items-center justify-between">
+                  <span className="text-sm font-medium text-coral">Open editor →</span>
+                  <span className="text-plum-faint transition-colors group-hover:text-plum">
+                    <MoreVertical className="h-4 w-4" />
+                  </span>
+                </div>
+              </Link>
             ))}
-          </ul>
+          </div>
         )}
       </section>
     </div>
