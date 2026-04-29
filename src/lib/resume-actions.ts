@@ -18,7 +18,6 @@ export async function createResume(template: string = "classic-serif"): Promise<
       data: mayaRodriguez as unknown as Prisma.InputJsonValue,
     },
   });
-  revalidatePath("/dashboard");
   return resume.id;
 }
 
