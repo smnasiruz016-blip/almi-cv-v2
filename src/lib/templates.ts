@@ -3,7 +3,13 @@ import type { CVData } from "@/lib/cv-types";
 import { ClassicSerif } from "@/components/templates/ClassicSerif";
 import { ModernMono } from "@/components/templates/ModernMono";
 import { EditorialBold } from "@/components/templates/EditorialBold";
-import { alexChen, mayaRodriguez, priyaPatel } from "@/lib/sample-cv-data";
+import { Atelier } from "@/components/templates/Atelier";
+import {
+  alexChen,
+  ayeshaKhan,
+  mayaRodriguez,
+  priyaPatel,
+} from "@/lib/sample-cv-data";
 
 export type TemplateSlug =
   | "classic-serif"
@@ -61,7 +67,8 @@ export const TEMPLATES: Record<TemplateSlug, TemplateMeta> = {
     tagline: "Card-based · Multilingual · Feminine",
     description:
       "Soft peach-and-lavender card-based layout. Multilingual-friendly. Designed for designers, students, and creative professionals.",
-    Component: ClassicSerif,
+    Component: Atelier,
+    sampleData: ayeshaKhan,
   },
   director: {
     slug: "director",

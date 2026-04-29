@@ -375,3 +375,136 @@ export const priyaPatel: CVData = {
     "Long-form journalism",
   ],
 };
+
+export const ayeshaKhan: CVData = {
+  basics: {
+    fullName: "Ayesha Khan",
+    role: "UX Designer · Stockholm",
+    email: "ayesha@khan.design",
+    phone: "+46 70 555 0142",
+    location: "Stockholm, Sweden",
+    website: "ayeshakhan.design",
+    linkedIn: "linkedin.com/in/ayeshakhan",
+    photoUrl:
+      "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=400&fit=crop&crop=faces",
+    summary:
+      "Designer focused on inclusive interfaces. 6+ years across e-commerce, fintech, and edtech in EU and APAC. I lead user research, build cross-cultural design systems, and ship products that work for everyone — from first-time smartphone users in rural Pakistan to power users in Stockholm.",
+  },
+  experience: [
+    {
+      company: "Daraz",
+      role: "Lead UX Designer",
+      location: "Karachi, Pakistan (Remote from Stockholm)",
+      startDate: "2022",
+      endDate: "Present",
+      bullets: [
+        "Redesigned the checkout flow across 4 markets — cart abandonment dropped 22% in three months.",
+        "Built the Daraz design system (Lotus) — now used by 60+ designers across South Asia.",
+        "Led user research with 200+ first-time mobile commerce users in Pakistan and Bangladesh.",
+        "Mentored a team of 4 designers; 2 promoted to senior within 18 months.",
+      ],
+    },
+    {
+      company: "Easypaisa",
+      role: "Senior UX Designer",
+      location: "Karachi, Pakistan",
+      startDate: "2019",
+      endDate: "2022",
+      bullets: [
+        "Designed the bills-and-utilities flow used by 8M+ active users monthly.",
+        "Owned the merchant onboarding redesign — onboarding completion rate up 31%.",
+        "Co-authored Easypaisa's first accessibility guidelines.",
+      ],
+    },
+    {
+      company: "Independent",
+      role: "UX Designer",
+      location: "Karachi, Pakistan",
+      startDate: "2018",
+      endDate: "2019",
+      bullets: [
+        "Designed for early-stage startups across edtech and health-tech.",
+        "Wrote a Urdu-language UX blog read by 12K designers in Pakistan and India.",
+      ],
+    },
+  ],
+  education: [
+    {
+      school: "NUST (National University of Sciences and Technology)",
+      degree: "BS Communication Design",
+      location: "Islamabad, Pakistan",
+      startDate: "2014",
+      endDate: "2018",
+      notes: "Final-year project: Inclusive UI patterns for low-literacy users.",
+    },
+    {
+      school: "Hyper Island",
+      degree: "Service Design Intensive",
+      location: "Stockholm, Sweden",
+      startDate: "2021",
+      endDate: "2021",
+    },
+  ],
+  skills: [
+    "Figma",
+    "Prototyping",
+    "User Research",
+    "Design Systems",
+    "A/B Testing",
+    "Inclusive Design",
+    "Cross-cultural UX",
+    "Workshop Facilitation",
+    "Service Design",
+    "Accessibility (WCAG)",
+    "Storybook",
+    "User Interviews",
+  ],
+  projects: [
+    {
+      name: "Daraz Lotus Design System",
+      description:
+        "Multi-market design system supporting RTL languages and low-bandwidth contexts. Adopted by 60+ designers.",
+    },
+    {
+      name: "Easypaisa Bills Redesign",
+      description:
+        "Reduced average task time from 47 to 18 seconds for utility bill payments. Used by 8M+ users.",
+    },
+  ],
+  languages: [
+    { name: "Urdu", level: "Native" },
+    { name: "English", level: "Native" },
+    { name: "Swedish", level: "Conversational" },
+    { name: "French", level: "Basic" },
+  ],
+  awards: [
+    {
+      title: "Awwwards · Honorable Mention",
+      issuer: "Awwwards",
+      year: "2023",
+    },
+    {
+      title: "Adobe Design Achievement Award",
+      issuer: "Adobe",
+      year: "2021",
+    },
+  ],
+  certifications: [
+    {
+      name: "NN/g UX Certification",
+      issuer: "Nielsen Norman Group",
+      year: "2022",
+    },
+    {
+      name: "IBM Enterprise Design Thinking",
+      issuer: "IBM",
+      year: "2020",
+    },
+  ],
+  interests: [
+    "South Asian textile design",
+    "Urdu poetry",
+    "Cycling",
+    "Open-source typography",
+  ],
+};
