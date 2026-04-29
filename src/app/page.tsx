@@ -230,7 +230,7 @@ function TemplateCard({
       <div className="relative aspect-[3/4] overflow-hidden rounded-lg border border-plum/5 bg-white shadow-inner">
         {children}
         {tier === "PREMIUM" && (
-          <div className="absolute right-2 top-2 z-10 inline-flex items-center gap-1 rounded-pill bg-plum/90 px-2 py-1 text-[9px] font-medium uppercase tracking-widest text-cream">
+          <div className="absolute left-2 top-2 z-10 inline-flex items-center gap-1 rounded-pill bg-plum/90 px-2 py-1 text-[9px] font-medium uppercase tracking-widest text-cream">
             <Lock className="h-2.5 w-2.5" />
             Premium
           </div>
@@ -471,9 +471,21 @@ function AtelierThumb() {
           </p>
         </div>
       </div>
-      <p className="mt-2 text-center text-[6px] tracking-widest text-coral">
+      <p className="mt-2 mb-2 text-center text-[6px] tracking-widest text-coral">
         <span className="font-medium">LANGUES</span> · EN · FR · UR
       </p>
+      <div className="space-y-2">
+        <div className="rounded-md bg-white/80 p-2 shadow-sm">
+          <p className="mb-1 font-display text-[6px] font-medium tracking-widest text-coral">RECONNAISSANCE</p>
+          <p className="text-[5px] leading-tight text-plum-soft">• Awwwards Honorable · 2023</p>
+          <p className="text-[5px] leading-tight text-plum-soft">• Adobe Design Achievement · 2021</p>
+        </div>
+        <div className="rounded-md bg-white/80 p-2 shadow-sm">
+          <p className="mb-1 font-display text-[6px] font-medium tracking-widest text-coral">ÉDUCATION</p>
+          <p className="text-[5px] leading-tight text-plum-soft">NUST · BS Communication Design · 2019</p>
+          <p className="text-[5px] leading-tight text-plum-soft">Hyper Island · Service Design · 2021</p>
+        </div>
+      </div>
     </div>
   );
 }
@@ -525,6 +537,17 @@ function DirectorThumb() {
           <p className="font-display text-[7px] tracking-widest text-plum">DISTINCTIONS</p>
           <p className="mt-1 text-[5px] leading-tight text-plum-soft">• ADC Gold Cube · 2023</p>
           <p className="text-[5px] leading-tight text-plum-soft">• D&amp;AD Wood Pencil · 2022</p>
+        </div>
+        <div>
+          <p className="font-display text-[7px] tracking-widest text-plum">PROJETS</p>
+          <p className="mt-1 text-[6px] leading-tight text-plum">• Vogue Italia — Editorial 2024</p>
+          <p className="text-[6px] leading-tight text-plum">• MoMA — Identity Refresh 2023</p>
+          <p className="text-[6px] leading-tight text-plum">• Acne Studios — SS24 Campaign</p>
+        </div>
+        <div>
+          <p className="font-display text-[7px] tracking-widest text-plum">PRESSE &amp; MENTIONS</p>
+          <p className="mt-1 text-[5px] leading-tight text-plum-soft">• It&apos;s Nice That · Featured · 2024</p>
+          <p className="text-[5px] leading-tight text-plum-soft">• Eye on Design · Interview · 2023</p>
         </div>
       </div>
     </div>
