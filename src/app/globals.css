@@ -104,6 +104,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @media print {
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+
   header,
   aside,
   .print-hide {
@@ -139,6 +145,12 @@ h1, h2, h3, h4, h5, h6 {
     height: auto !important;
     box-shadow: none !important;
     border-radius: 0 !important;
+    background: white !important;
+  }
+
+  .print-target article > header,
+  .print-target [class*="bg-plum"] {
+    background-color: #2D1B3D !important;
   }
 
   body,
