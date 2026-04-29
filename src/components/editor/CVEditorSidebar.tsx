@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { ChevronDown, Plus, Trash2 } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { ChevronDown, Loader2, Plus, Trash2, Upload } from "lucide-react";
+import { uploadPhoto } from "@/lib/photo-upload";
 import type { CVData } from "@/lib/cv-types";
 
 const inputClass =
@@ -65,6 +66,97 @@ function ArrayEntry({
       </button>
       {children}
     </div>
+  );
+}
+
+function PhotoUploadField({
+  value,
+  onChange,
+}: {
+  value: string | undefined;
+  onChange: (url: string) => void;
+}) {
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const [uploading, setUploading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const handleFile = async (file: File) => {
+    setUploading(true);
+    setError(null);
+    try {
+      const fd = new FormData();
+      fd.append("photo", file);
+      const result = await uploadPhoto(fd);
+      if ("error" in result) {
+        setError(result.error);
+      } else {
+        onChange(result.url);
+      }
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Upload failed");
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  return (
+    <>
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept="image/*"
+        className="hidden"
+        onChange={(e) => {
+          const file = e.target.files?.[0];
+          if (file) void handleFile(file);
+          e.target.value = "";
+        }}
+      />
+      {uploading ? (
+        <div className="flex items-center justify-center gap-2 rounded-md border-2 border-dashed border-plum/15 p-4 text-sm text-plum-soft">
+          <Loader2 className="h-4 w-4 animate-spin" />
+          Uploading…
+        </div>
+      ) : value ? (
+        <div className="flex items-center gap-3">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={value}
+            alt="Photo preview"
+            className="h-16 w-16 shrink-0 rounded-full border-2 border-cream object-cover shadow-sm"
+          />
+          <div className="flex flex-col gap-1">
+            <button
+              type="button"
+              onClick={() => fileInputRef.current?.click()}
+              className="text-left text-sm text-coral hover:underline"
+            >
+              Replace photo
+            </button>
+            <button
+              type="button"
+              onClick={() => onChange("")}
+              className="text-left text-sm text-plum-faint transition-colors hover:text-coral-deep"
+            >
+              Remove
+            </button>
+          </div>
+        </div>
+      ) : (
+        <button
+          type="button"
+          onClick={() => fileInputRef.current?.click()}
+          className="flex w-full flex-col items-center justify-center rounded-md border-2 border-dashed border-plum/15 p-4 text-center transition-colors hover:border-coral/40 hover:bg-cream-soft"
+        >
+          <Upload className="mx-auto mb-2 h-5 w-5 text-plum-soft" />
+          <p className="text-sm text-plum-soft">Click to upload photo</p>
+          <p className="text-xs text-plum-faint">JPG, PNG up to 5MB</p>
+        </button>
+      )}
+      {error && (
+        <p className="mt-1 text-xs text-coral-deep">{error}</p>
+      )}
+    </>
   );
 }
 
@@ -166,12 +258,10 @@ export function CVEditorSidebar({
             onChange={(e) => updateBasics("linkedIn", e.target.value)}
           />
         </Field>
-        <Field label="Photo URL">
-          <input
-            className={inputClass}
-            value={data.basics.photoUrl ?? ""}
-            onChange={(e) => updateBasics("photoUrl", e.target.value)}
-            placeholder="https://..."
+        <Field label="Photo">
+          <PhotoUploadField
+            value={data.basics.photoUrl}
+            onChange={(url) => updateBasics("photoUrl", url)}
           />
         </Field>
         <Field label="Summary">
