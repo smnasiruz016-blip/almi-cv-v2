@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Lock, Sparkles } from "lucide-react";
+import { ArrowRight, Crown, Sparkles } from "lucide-react";
 import { Footer } from "@/components/footer";
 import { HeroPreview } from "@/components/hero-preview";
 import { Container } from "@/components/ui/container";
@@ -165,37 +165,26 @@ function TemplatesSection() {
           </p>
         </div>
 
-        <p className="mt-12 mb-4 text-center text-xs font-medium uppercase tracking-widest text-coral">
-          Free templates
+        <p className="mt-8 mb-8 text-center text-sm text-plum-soft">
+          6 designs · 3 free · 3 unlock with $10
         </p>
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-          <TemplateCard name="Classic Serif" subtitle="Free · Customize colors" tier="FREE">
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 lg:gap-4">
+          <TemplateCard name="Classic Serif" tier="FREE">
             <ClassicSerifThumb />
           </TemplateCard>
-          <TemplateCard name="Modern Mono" subtitle="Free · Customize colors" tier="FREE">
+          <TemplateCard name="Modern Mono" tier="FREE">
             <ModernMonoThumb />
           </TemplateCard>
-          <TemplateCard name="Editorial Bold" subtitle="Free · Customize colors" tier="FREE">
+          <TemplateCard name="Editorial Bold" tier="FREE">
             <EditorialBoldThumb />
           </TemplateCard>
-        </div>
-
-        <div className="mt-14 mb-6 flex items-center gap-4">
-          <div className="h-px flex-1 bg-plum/10" />
-          <span className="inline-flex items-center gap-2 text-sm text-plum-soft">
-            <Lock className="h-3.5 w-3.5" />
-            Premium templates · Unlock all with $10 once
-          </span>
-          <div className="h-px flex-1 bg-plum/10" />
-        </div>
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-          <TemplateCard name="Atelier" subtitle="Premium · Card-based, multilingual" tier="PREMIUM">
+          <TemplateCard name="Atelier" tier="PREMIUM">
             <AtelierThumb />
           </TemplateCard>
-          <TemplateCard name="Director" subtitle="Premium · Bold creative" tier="PREMIUM">
+          <TemplateCard name="Director" tier="PREMIUM">
             <DirectorThumb />
           </TemplateCard>
-          <TemplateCard name="Atelier Pro" subtitle="Premium · Sidebar layout" tier="PREMIUM">
+          <TemplateCard name="Atelier Pro" tier="PREMIUM">
             <AtelierProThumb />
           </TemplateCard>
         </div>
@@ -216,41 +205,33 @@ function TemplatesSection() {
 
 function TemplateCard({
   name,
-  subtitle,
   tier,
   children,
 }: {
   name: string;
-  subtitle: string;
   tier: "FREE" | "PREMIUM";
   children: React.ReactNode;
 }) {
   return (
-    <div className="relative rounded-2xl border border-peach/40 bg-white p-3 shadow-warm-card transition-all hover:shadow-warm-card-hover">
+    <div className="relative rounded-2xl border border-peach/40 bg-white p-2 shadow-warm-card transition-all hover:shadow-warm-card-hover">
       <div className="relative aspect-[3/4] overflow-hidden rounded-lg border border-plum/5 bg-white shadow-inner">
         {children}
-        {tier === "PREMIUM" && (
-          <div className="absolute left-2 top-2 z-10 inline-flex items-center gap-1 rounded-pill bg-plum/90 px-2 py-1 text-[9px] font-medium uppercase tracking-widest text-cream">
-            <Lock className="h-2.5 w-2.5" />
-            Premium
-          </div>
-        )}
       </div>
-      <div className="mt-3 flex items-start justify-between gap-2">
-        <div className="min-w-0">
-          <h3 className="text-sm font-medium text-plum">{name}</h3>
-          <p className="mt-0.5 text-xs text-plum-soft">{subtitle}</p>
-        </div>
-        <span
+      <div className="mt-2">
+        <h3 className="font-display text-sm text-plum">{name}</h3>
+        <p
           className={
             tier === "FREE"
-              ? "shrink-0 rounded-pill bg-sage/30 px-2 py-0.5 text-[10px] font-medium text-[#1F4A2E]"
-              : "shrink-0 rounded-pill bg-gold/20 px-2 py-0.5 text-[10px] font-medium text-[#8A5F1F]"
+              ? "text-[10px] text-sage"
+              : "text-[10px] text-coral"
           }
         >
           {tier === "FREE" ? "Free" : "Premium"}
-        </span>
+        </p>
       </div>
+      {tier === "PREMIUM" && (
+        <Crown className="absolute bottom-2 right-2 h-3.5 w-3.5 text-gold" />
+      )}
     </div>
   );
 }
