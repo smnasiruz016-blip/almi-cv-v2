@@ -1,6 +1,8 @@
 import type { ComponentType } from "react";
 import type { CVData } from "@/lib/cv-types";
 import { ClassicSerif } from "@/components/templates/ClassicSerif";
+import { ModernMono } from "@/components/templates/ModernMono";
+import { alexChen, mayaRodriguez } from "@/lib/sample-cv-data";
 
 export type TemplateSlug =
   | "classic-serif"
@@ -17,6 +19,7 @@ export type TemplateMeta = {
   tagline: string;
   description: string;
   Component: ComponentType<{ data: CVData }>;
+  sampleData?: CVData;
 };
 
 export const TEMPLATES: Record<TemplateSlug, TemplateMeta> = {
@@ -28,6 +31,7 @@ export const TEMPLATES: Record<TemplateSlug, TemplateMeta> = {
     description:
       "A timeless, formal CV layout with a single-column structure. Designed for executives, consultants, and traditional industries.",
     Component: ClassicSerif,
+    sampleData: mayaRodriguez,
   },
   "modern-mono": {
     slug: "modern-mono",
@@ -36,7 +40,8 @@ export const TEMPLATES: Record<TemplateSlug, TemplateMeta> = {
     tagline: "Modern · Tech · Sidebar",
     description:
       "A clean tech-focused layout with a mint sidebar for contact and skills, content on the right.",
-    Component: ClassicSerif,
+    Component: ModernMono,
+    sampleData: alexChen,
   },
   "editorial-bold": {
     slug: "editorial-bold",

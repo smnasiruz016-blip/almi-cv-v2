@@ -50,6 +50,7 @@ export default async function TemplatePreviewPage({
 
   const template = getTemplate(slug);
   const TemplateComponent = template.Component;
+  const sampleData = template.sampleData ?? mayaRodriguez;
   const otherTemplates = TEMPLATE_LIST.filter((t) => t.slug !== template.slug);
 
   return (
@@ -72,7 +73,7 @@ export default async function TemplatePreviewPage({
         <div>
           <p className="mb-3 text-xs uppercase tracking-widest text-plum-soft">Preview</p>
           <div className="mx-auto aspect-[210/297] w-full max-w-[600px] overflow-hidden rounded-lg shadow-warm-card-hover">
-            <TemplateComponent data={mayaRodriguez} />
+            <TemplateComponent data={sampleData} />
           </div>
           <p className="mt-4 text-center text-xs text-plum-faint">
             A4 Portrait · 21 × 29.7 cm

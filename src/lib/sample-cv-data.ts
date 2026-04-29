@@ -131,3 +131,109 @@ export const mayaRodriguez: CVData = {
   ],
   interests: ["Sustainable design", "Mentoring", "Trail running", "Specialty coffee"],
 };
+
+export const alexChen: CVData = {
+  basics: {
+    fullName: "Alex Chen",
+    role: "Frontend Engineer",
+    email: "alex@dev.io",
+    phone: "+1 415 555 0142",
+    location: "San Francisco, CA",
+    website: "alexchen.dev",
+    linkedIn: "linkedin.com/in/achen",
+    photoUrl:
+      "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=400&fit=crop&crop=faces",
+    summary:
+      "Senior Frontend Engineer with 7 years shipping React, TypeScript, and Edge-first apps at Stripe and Vercel. I lead performance, design-system architecture, and developer-experience tooling — turning slow flows into fast ones and tangled code into systems teams love.",
+  },
+  experience: [
+    {
+      company: "Stripe",
+      role: "Senior Engineer",
+      location: "San Francisco, CA",
+      startDate: "2022",
+      endDate: "Present",
+      bullets: [
+        "Migrated payment flow to a micro-frontend architecture serving 40+ teams; cut build times 60%.",
+        "Reduced bundle size 38% via aggressive code splitting and React Server Components rollout.",
+        "Led the Stripe Connect onboarding redesign; conversion lifted 14% across 12 markets.",
+        "Mentored 6 engineers across 3 product teams; 4 promoted to senior within 18 months.",
+        "Built internal Edge cache layer now used by 8 product surfaces.",
+      ],
+    },
+    {
+      company: "Vercel",
+      role: "Engineer",
+      location: "Remote",
+      startDate: "2020",
+      endDate: "2022",
+      bullets: [
+        "Built the Edge Functions developer dashboard from zero to GA in 9 months.",
+        "Shipped real-time deployment logs feature; adopted by 80% of paid users in first quarter.",
+        "Authored internal RFC framework still in use across the platform team.",
+      ],
+    },
+    {
+      company: "Independent",
+      role: "Frontend Consultant",
+      location: "Remote",
+      startDate: "2018",
+      endDate: "2020",
+      bullets: [
+        "Delivered React + Next.js builds for 11 startups; 3 raised Series A using shipped product.",
+        "Wrote technical content read by 200K+ developers monthly on personal blog.",
+      ],
+    },
+  ],
+  education: [
+    {
+      school: "Stanford University",
+      degree: "BS Computer Science",
+      location: "Stanford, CA",
+      startDate: "2014",
+      endDate: "2018",
+      notes:
+        "Concentration in Human-Computer Interaction. Senior thesis on Edge-rendering performance budgets.",
+    },
+  ],
+  skills: [
+    "React",
+    "TypeScript",
+    "Node.js",
+    "GraphQL",
+    "AWS",
+    "Edge Functions",
+    "Next.js",
+    "Performance Engineering",
+    "Design Systems",
+    "Webpack / Turbopack",
+    "PostgreSQL",
+    "Storybook",
+  ],
+  projects: [
+    {
+      name: "react-aria-tabs",
+      description:
+        "Open-source accessible tabs primitive. 2.4k stars, used by 18 production apps.",
+      url: "github.com/achen/react-aria-tabs",
+    },
+    {
+      name: "Vercel Edge Config Dashboard",
+      description:
+        "Internal tool used by 2k+ teams; reduced support ticket volume by 35%.",
+    },
+  ],
+  languages: [
+    { name: "English", level: "Native" },
+    { name: "Mandarin", level: "Professional" },
+    { name: "Japanese", level: "Conversational" },
+  ],
+  awards: [
+    { title: "GitHub Stars program", issuer: "GitHub", year: "2023" },
+    { title: "React Conf invited speaker", issuer: "React Foundation", year: "2023" },
+  ],
+  certifications: [
+    { name: "AWS Certified Solutions Architect", issuer: "Amazon", year: "2022" },
+  ],
+  interests: ["Climbing", "Open-source", "Synthwave music", "Specialty coffee"],
+};
