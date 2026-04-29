@@ -3,7 +3,13 @@
 import { useEffect, useRef, useState } from "react";
 import { ChevronDown, Loader2, Plus, Trash2, Upload } from "lucide-react";
 import { uploadPhoto } from "@/lib/photo-upload";
-import type { CVData } from "@/lib/cv-types";
+import type {
+  BodyFontKey,
+  CVData,
+  HeadingFontKey,
+  ThemeKey,
+} from "@/lib/cv-types";
+import { BODY_FONTS, HEADING_FONTS, THEMES } from "@/lib/cv-themes";
 
 const inputClass =
   "w-full rounded-md border border-plum/15 bg-cream-soft px-3 py-2 text-sm text-plum focus:border-coral focus:outline-none focus:ring-2 focus:ring-coral/20";
@@ -204,8 +210,123 @@ export function CVEditorSidebar({
     onChange({ ...data, basics: { ...data.basics, [key]: value } });
   };
 
+  const updateStyle = <K extends keyof NonNullable<CVData["style"]>>(
+    key: K,
+    value: NonNullable<CVData["style"]>[K],
+  ) => {
+    onChange({ ...data, style: { ...(data.style ?? {}), [key]: value } });
+  };
+
+  const currentTheme = (data.style?.themeKey ?? "plum") as ThemeKey;
+  const currentHeadingFont = (data.style?.headingFont ?? "fraunces") as HeadingFontKey;
+  const currentBodyFont = (data.style?.bodyFont ?? "inter") as BodyFontKey;
+  const currentDensity = data.style?.density ?? "comfortable";
+
   return (
     <div className="space-y-1">
+      {/* STYLE */}
+      <SectionAccordion title="Style" defaultOpen>
+        <Field label="Theme color">
+          <div className="grid grid-cols-6 gap-2">
+            {(Object.entries(THEMES) as [ThemeKey, (typeof THEMES)[ThemeKey]][]).map(
+              ([key, t]) => {
+                const selected = key === currentTheme;
+                return (
+                  <button
+                    key={key}
+                    type="button"
+                    onClick={() => updateStyle("themeKey", key)}
+                    aria-label={t.name}
+                    title={t.name}
+                    className={`h-9 w-9 rounded-full border-2 transition-shadow ${
+                      selected
+                        ? "ring-2 ring-coral/30 ring-offset-2"
+                        : ""
+                    }`}
+                    style={{
+                      backgroundColor: t.colors.primary,
+                      borderColor: selected
+                        ? t.colors.accent
+                        : "rgba(45, 27, 61, 0.15)",
+                    }}
+                  />
+                );
+              },
+            )}
+          </div>
+        </Field>
+
+        <Field label="Heading font">
+          <select
+            className={inputClass}
+            value={currentHeadingFont}
+            onChange={(e) => updateStyle("headingFont", e.target.value as HeadingFontKey)}
+          >
+            {(Object.entries(HEADING_FONTS) as [HeadingFontKey, (typeof HEADING_FONTS)[HeadingFontKey]][]).map(
+              ([key, f]) => (
+                <option key={key} value={key}>
+                  {f.name}
+                </option>
+              ),
+            )}
+          </select>
+          <p
+            className="mt-2 text-2xl text-plum"
+            style={{
+              fontFamily: `${HEADING_FONTS[currentHeadingFont].cssVar}, ${HEADING_FONTS[currentHeadingFont].fallback}`,
+            }}
+          >
+            Aa Sample
+          </p>
+        </Field>
+
+        <Field label="Body font">
+          <select
+            className={inputClass}
+            value={currentBodyFont}
+            onChange={(e) => updateStyle("bodyFont", e.target.value as BodyFontKey)}
+          >
+            {(Object.entries(BODY_FONTS) as [BodyFontKey, (typeof BODY_FONTS)[BodyFontKey]][]).map(
+              ([key, f]) => (
+                <option key={key} value={key}>
+                  {f.name}
+                </option>
+              ),
+            )}
+          </select>
+          <p
+            className="mt-2 text-sm text-plum"
+            style={{
+              fontFamily: `${BODY_FONTS[currentBodyFont].cssVar}, ${BODY_FONTS[currentBodyFont].fallback}`,
+            }}
+          >
+            The quick brown fox jumps over the lazy dog
+          </p>
+        </Field>
+
+        <Field label="Density">
+          <div className="flex gap-2">
+            {(["comfortable", "compact"] as const).map((option) => {
+              const active = currentDensity === option;
+              return (
+                <button
+                  key={option}
+                  type="button"
+                  onClick={() => updateStyle("density", option)}
+                  className={`rounded-pill border px-4 py-2 text-sm transition-colors ${
+                    active
+                      ? "border-coral/40 bg-coral/15 text-coral"
+                      : "border-plum/15 bg-cream-soft text-plum-soft hover:text-plum"
+                  }`}
+                >
+                  {option === "comfortable" ? "Comfortable" : "Compact"}
+                </button>
+              );
+            })}
+          </div>
+        </Field>
+      </SectionAccordion>
+
       {/* BASICS */}
       <SectionAccordion title="Basics" defaultOpen>
         <Field label="Full name">

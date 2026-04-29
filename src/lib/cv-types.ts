@@ -47,4 +47,14 @@ export type CVData = {
     year?: string;
   }>;
   interests?: string[];
+  style?: {
+    themeKey?: ThemeKey;
+    headingFont?: HeadingFontKey;
+    bodyFont?: BodyFontKey;
+    density?: "comfortable" | "compact";
+  };
 };
+
+export type ThemeKey = "plum" | "navy" | "forest" | "wine" | "charcoal" | "coral";
+export type HeadingFontKey = "fraunces" | "playfair" | "inter" | "jakarta";
+export type BodyFontKey = "inter" | "plex" | "source";

@@ -1,5 +1,7 @@
+import type { CSSProperties } from "react";
 import { Globe, Link2, Mail, MapPin, Phone } from "lucide-react";
 import type { CVData } from "@/lib/cv-types";
+import { resolveStyle, withAlpha } from "@/lib/cv-themes";
 
 export function ClassicSerif({ data }: { data: CVData }) {
   const basics = data?.basics ?? { fullName: "", role: "", email: "" };
@@ -12,55 +14,92 @@ export function ClassicSerif({ data }: { data: CVData }) {
   const certifications = data?.certifications ?? [];
   const interests = data?.interests ?? [];
 
+  const { theme, headingFont, bodyFont, density } = resolveStyle(data?.style);
+  const densityClass = density === "compact" ? "compact" : "";
+
   const displayName = basics.fullName?.trim() ? basics.fullName : "Untitled";
 
+  const articleStyle: CSSProperties = {
+    fontFamily: `${bodyFont.cssVar}, ${bodyFont.fallback}`,
+    color: theme.text,
+  };
+  const headingStyle: CSSProperties = {
+    fontFamily: `${headingFont.cssVar}, ${headingFont.fallback}`,
+    color: theme.text,
+  };
+  const dividerStyle: CSSProperties = {
+    borderColor: withAlpha(theme.text, 0.15),
+  };
+  const onPrimary = theme.primaryText;
+
   return (
-    <article className="mx-auto aspect-[210/297] w-full max-w-[800px] overflow-hidden rounded-lg bg-white p-12 shadow-warm-card-hover">
-      <header className="-mx-12 -mt-12 mb-8 bg-plum px-12 pb-8 pt-10">
+    <article
+      className={`mx-auto aspect-[210/297] w-full max-w-[800px] overflow-hidden rounded-lg bg-white p-12 shadow-warm-card-hover ${densityClass}`.trim()}
+      style={articleStyle}
+    >
+      <header
+        className="-mx-12 -mt-12 mb-8 px-12 pb-8 pt-10"
+        style={{ backgroundColor: theme.primary }}
+      >
         <div className="flex items-center gap-6">
           {basics.photoUrl && (
             // eslint-disable-next-line @next/next/no-img-element
             <img
               src={basics.photoUrl}
               alt={displayName}
-              className="h-20 w-20 shrink-0 rounded-full border-2 border-cream object-cover"
+              className="h-20 w-20 shrink-0 rounded-full border-2 object-cover"
+              style={{ borderColor: onPrimary }}
             />
           )}
           <div className="min-w-0">
-            <h1 className="font-display text-4xl font-medium tracking-wide text-cream">
+            <h1
+              className="text-4xl font-medium tracking-wide"
+              style={{
+                fontFamily: `${headingFont.cssVar}, ${headingFont.fallback}`,
+                color: onPrimary,
+              }}
+            >
               {displayName.toUpperCase()}
             </h1>
             {basics.role && (
-              <p className="mt-1 text-lg italic text-cream/80">{basics.role}</p>
+              <p
+                className="mt-1 text-lg italic"
+                style={{ color: withAlpha(onPrimary, 0.8) }}
+              >
+                {basics.role}
+              </p>
             )}
-            <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-xs text-cream/90">
+            <div
+              className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-xs"
+              style={{ color: withAlpha(onPrimary, 0.9) }}
+            >
               {basics.email && (
                 <span className="inline-flex items-center gap-1.5">
-                  <Mail className="h-3.5 w-3.5 text-cream/70" />
+                  <Mail className="h-3.5 w-3.5" style={{ color: withAlpha(onPrimary, 0.7) }} />
                   {basics.email}
                 </span>
               )}
               {basics.phone && (
                 <span className="inline-flex items-center gap-1.5">
-                  <Phone className="h-3.5 w-3.5 text-cream/70" />
+                  <Phone className="h-3.5 w-3.5" style={{ color: withAlpha(onPrimary, 0.7) }} />
                   {basics.phone}
                 </span>
               )}
               {basics.location && (
                 <span className="inline-flex items-center gap-1.5">
-                  <MapPin className="h-3.5 w-3.5 text-cream/70" />
+                  <MapPin className="h-3.5 w-3.5" style={{ color: withAlpha(onPrimary, 0.7) }} />
                   {basics.location}
                 </span>
               )}
               {basics.website && (
                 <span className="inline-flex items-center gap-1.5">
-                  <Globe className="h-3.5 w-3.5 text-cream/70" />
+                  <Globe className="h-3.5 w-3.5" style={{ color: withAlpha(onPrimary, 0.7) }} />
                   {basics.website}
                 </span>
               )}
               {basics.linkedIn && (
                 <span className="inline-flex items-center gap-1.5">
-                  <Link2 className="h-3.5 w-3.5 text-cream/70" />
+                  <Link2 className="h-3.5 w-3.5" style={{ color: withAlpha(onPrimary, 0.7) }} />
                   {basics.linkedIn}
                 </span>
               )}
@@ -71,39 +110,47 @@ export function ClassicSerif({ data }: { data: CVData }) {
 
       {basics.summary && (
         <section>
-          <SectionHeading>PROFILE</SectionHeading>
-          <p className="text-sm leading-relaxed text-plum-soft">{basics.summary}</p>
+          <SectionHeading style={headingStyle}>PROFILE</SectionHeading>
+          <p className="text-sm leading-relaxed" style={{ color: theme.textSoft }}>
+            {basics.summary}
+          </p>
         </section>
       )}
 
       {experience.length > 0 && (
         <>
-          {basics.summary && <Divider />}
+          {basics.summary && <Divider style={dividerStyle} />}
           <section>
-            <SectionHeading>EXPERIENCE</SectionHeading>
+            <SectionHeading style={headingStyle}>EXPERIENCE</SectionHeading>
             <div className="space-y-5">
               {experience.map((job, i) => (
                 <div key={`${job.company}-${job.startDate}-${i}`}>
                   <div className="mb-1 flex items-baseline justify-between gap-4">
-                    <p className="text-base font-medium text-plum">
+                    <p className="text-base font-medium" style={{ color: theme.text }}>
                       {job.company}
                       {job.role ? ` — ${job.role}` : ""}
                     </p>
-                    <p className="shrink-0 text-sm text-plum-soft">
+                    <p className="shrink-0 text-sm" style={{ color: theme.textSoft }}>
                       {job.startDate} — {job.endDate ?? "Present"}
                     </p>
                   </div>
                   {job.location && (
-                    <p className="mb-2 text-xs italic text-plum-soft">{job.location}</p>
+                    <p
+                      className="mb-2 text-xs italic"
+                      style={{ color: theme.textSoft }}
+                    >
+                      {job.location}
+                    </p>
                   )}
                   {job.bullets && job.bullets.length > 0 && (
-                    <ul className="space-y-1 text-sm leading-relaxed text-plum-soft">
+                    <ul
+                      className="space-y-1 text-sm leading-relaxed"
+                      style={{ color: theme.textSoft }}
+                    >
                       {job.bullets.map((bullet, bi) => (
-                        <li
-                          key={bi}
-                          className="relative pl-4 before:absolute before:left-0 before:content-['•']"
-                        >
-                          {bullet}
+                        <li key={bi} className="flex gap-2">
+                          <span aria-hidden>•</span>
+                          <span>{bullet}</span>
                         </li>
                       ))}
                     </ul>
@@ -117,26 +164,33 @@ export function ClassicSerif({ data }: { data: CVData }) {
 
       {education.length > 0 && (
         <>
-          <Divider />
+          <Divider style={dividerStyle} />
           <section>
-            <SectionHeading>EDUCATION</SectionHeading>
+            <SectionHeading style={headingStyle}>EDUCATION</SectionHeading>
             <div className="space-y-3">
               {education.map((entry, i) => (
                 <div key={`${entry.school}-${entry.startDate}-${i}`}>
                   <div className="mb-1 flex items-baseline justify-between gap-4">
-                    <p className="text-base font-medium text-plum">
+                    <p className="text-base font-medium" style={{ color: theme.text }}>
                       {entry.school}
                       {entry.degree ? ` — ${entry.degree}` : ""}
                     </p>
-                    <p className="shrink-0 text-sm text-plum-soft">
+                    <p className="shrink-0 text-sm" style={{ color: theme.textSoft }}>
                       {entry.startDate} — {entry.endDate}
                     </p>
                   </div>
                   {entry.location && (
-                    <p className="text-xs italic text-plum-soft">{entry.location}</p>
+                    <p className="text-xs italic" style={{ color: theme.textSoft }}>
+                      {entry.location}
+                    </p>
                   )}
                   {entry.notes && (
-                    <p className="mt-1 text-sm leading-relaxed text-plum-soft">{entry.notes}</p>
+                    <p
+                      className="mt-1 text-sm leading-relaxed"
+                      style={{ color: theme.textSoft }}
+                    >
+                      {entry.notes}
+                    </p>
                   )}
                 </div>
               ))}
@@ -147,32 +201,42 @@ export function ClassicSerif({ data }: { data: CVData }) {
 
       {skills.length > 0 && (
         <>
-          <Divider />
+          <Divider style={dividerStyle} />
           <section>
-            <SectionHeading>SKILLS</SectionHeading>
-            <p className="text-sm leading-relaxed text-plum-soft">{skills.join(" · ")}</p>
+            <SectionHeading style={headingStyle}>SKILLS</SectionHeading>
+            <p className="text-sm leading-relaxed" style={{ color: theme.textSoft }}>
+              {skills.join(" · ")}
+            </p>
           </section>
         </>
       )}
 
       {projects.length > 0 && (
         <>
-          <Divider />
+          <Divider style={dividerStyle} />
           <section>
-            <SectionHeading>PROJECTS</SectionHeading>
+            <SectionHeading style={headingStyle}>PROJECTS</SectionHeading>
             <div className="space-y-3">
               {projects.map((project, i) => (
                 <div key={`${project.name}-${i}`}>
-                  <p className="text-base font-medium text-plum">{project.name}</p>
+                  <p className="text-base font-medium" style={{ color: theme.text }}>
+                    {project.name}
+                  </p>
                   {project.description && (
-                    <p className="text-sm leading-relaxed text-plum-soft">{project.description}</p>
+                    <p
+                      className="text-sm leading-relaxed"
+                      style={{ color: theme.textSoft }}
+                    >
+                      {project.description}
+                    </p>
                   )}
                   {project.url && (
                     <a
                       href={`https://${project.url}`}
-                      className="text-xs text-coral underline"
+                      className="text-xs underline"
                       target="_blank"
                       rel="noopener noreferrer"
+                      style={{ color: theme.accent }}
                     >
                       {project.url}
                     </a>
@@ -186,10 +250,10 @@ export function ClassicSerif({ data }: { data: CVData }) {
 
       {languages.length > 0 && (
         <>
-          <Divider />
+          <Divider style={dividerStyle} />
           <section>
-            <SectionHeading>LANGUAGES</SectionHeading>
-            <p className="text-sm leading-relaxed text-plum-soft">
+            <SectionHeading style={headingStyle}>LANGUAGES</SectionHeading>
+            <p className="text-sm leading-relaxed" style={{ color: theme.textSoft }}>
               {languages.map((l) => `${l.name} (${l.level})`).join(" · ")}
             </p>
           </section>
@@ -198,10 +262,13 @@ export function ClassicSerif({ data }: { data: CVData }) {
 
       {awards.length > 0 && (
         <>
-          <Divider />
+          <Divider style={dividerStyle} />
           <section>
-            <SectionHeading>AWARDS &amp; RECOGNITION</SectionHeading>
-            <ul className="space-y-1 text-sm leading-relaxed text-plum-soft">
+            <SectionHeading style={headingStyle}>AWARDS &amp; RECOGNITION</SectionHeading>
+            <ul
+              className="space-y-1 text-sm leading-relaxed"
+              style={{ color: theme.textSoft }}
+            >
               {awards.map((award, i) => (
                 <li key={i}>
                   {award.title}
@@ -216,10 +283,13 @@ export function ClassicSerif({ data }: { data: CVData }) {
 
       {certifications.length > 0 && (
         <>
-          <Divider />
+          <Divider style={dividerStyle} />
           <section>
-            <SectionHeading>CERTIFICATIONS</SectionHeading>
-            <ul className="space-y-1 text-sm leading-relaxed text-plum-soft">
+            <SectionHeading style={headingStyle}>CERTIFICATIONS</SectionHeading>
+            <ul
+              className="space-y-1 text-sm leading-relaxed"
+              style={{ color: theme.textSoft }}
+            >
               {certifications.map((cert, i) => (
                 <li key={i}>
                   {cert.name}
@@ -234,10 +304,12 @@ export function ClassicSerif({ data }: { data: CVData }) {
 
       {interests.length > 0 && (
         <>
-          <Divider />
+          <Divider style={dividerStyle} />
           <section>
-            <SectionHeading>INTERESTS</SectionHeading>
-            <p className="text-sm leading-relaxed text-plum-soft">{interests.join(" · ")}</p>
+            <SectionHeading style={headingStyle}>INTERESTS</SectionHeading>
+            <p className="text-sm leading-relaxed" style={{ color: theme.textSoft }}>
+              {interests.join(" · ")}
+            </p>
           </section>
         </>
       )}
@@ -245,12 +317,20 @@ export function ClassicSerif({ data }: { data: CVData }) {
   );
 }
 
-function SectionHeading({ children }: { children: React.ReactNode }) {
+function SectionHeading({
+  children,
+  style,
+}: {
+  children: React.ReactNode;
+  style?: CSSProperties;
+}) {
   return (
-    <h2 className="mb-2 font-display text-xs tracking-[0.25em] text-plum">{children}</h2>
+    <h2 className="mb-2 text-xs tracking-[0.25em]" style={style}>
+      {children}
+    </h2>
   );
 }
 
-function Divider() {
-  return <div className="my-6 border-b border-plum/15" />;
+function Divider({ style }: { style?: CSSProperties }) {
+  return <div className="my-6 border-b" style={style} />;
 }
