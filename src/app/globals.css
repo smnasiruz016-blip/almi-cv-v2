@@ -104,6 +104,21 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @layer components {
+  .spacious section { margin-top: 2rem; margin-bottom: 2rem; }
+  .spacious .space-y-5 > * + * { margin-top: 1.75rem !important; }
+  .spacious .space-y-4 > * + * { margin-top: 1.5rem !important; }
+  .spacious .space-y-3 > * + * { margin-top: 1.125rem !important; }
+  .spacious .space-y-2 > * + * { margin-top: 0.875rem !important; }
+  .spacious .gap-5 { gap: 1.75rem !important; }
+  .spacious .my-5 { margin-top: 2rem !important; margin-bottom: 2rem !important; }
+  .spacious .my-6 { margin-top: 2.25rem !important; margin-bottom: 2.25rem !important; }
+  .spacious .mb-8 { margin-bottom: 2rem !important; }
+  .spacious .mb-3 { margin-bottom: 1.25rem !important; }
+  .spacious .mb-2\.5 { margin-bottom: 1.125rem !important; }
+  .spacious .mb-2 { margin-bottom: 1rem !important; }
+  .spacious .pt-10 { padding-top: 3rem !important; }
+  .spacious .pb-8 { padding-bottom: 2.5rem !important; }
+
   .compact section { margin-top: 0.5rem; margin-bottom: 0.5rem; }
   .compact .space-y-5 > * + * { margin-top: 0.625rem !important; }
   .compact .space-y-4 > * + * { margin-top: 0.5rem !important; }

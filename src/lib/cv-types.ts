@@ -51,10 +51,47 @@ export type CVData = {
     themeKey?: ThemeKey;
     headingFont?: HeadingFontKey;
     bodyFont?: BodyFontKey;
-    density?: "comfortable" | "compact";
+    accent?: AccentKey;
+    sectionStyle?: SectionStyleKey;
+    photoStyle?: PhotoStyleKey;
+    density?: DensityKey;
   };
 };
 
-export type ThemeKey = "plum" | "navy" | "forest" | "wine" | "charcoal" | "coral";
-export type HeadingFontKey = "fraunces" | "playfair" | "inter" | "jakarta";
-export type BodyFontKey = "inter" | "plex" | "source";
+export type ThemeKey =
+  | "plum"
+  | "navy"
+  | "forest"
+  | "wine"
+  | "charcoal"
+  | "coral"
+  | "sky"
+  | "slate"
+  | "terracotta"
+  | "midnight"
+  | "ivory"
+  | "linen"
+  | "pearl"
+  | "sand";
+export type HeadingFontKey =
+  | "fraunces"
+  | "playfair"
+  | "inter"
+  | "jakarta"
+  | "crimson"
+  | "manrope"
+  | "dmserif"
+  | "lora";
+
+export type BodyFontKey =
+  | "inter"
+  | "plex"
+  | "source"
+  | "dmsans"
+  | "worksans"
+  | "nunito";
+
+export type AccentKey = "mint" | "gold" | "coral" | "lavender" | "sage" | "sky";
+export type SectionStyleKey = "uppercase" | "titlecase" | "underlined" | "boxed";
+export type PhotoStyleKey = "round" | "square" | "none";
+export type DensityKey = "spacious" | "comfortable" | "compact";

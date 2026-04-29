@@ -4,12 +4,16 @@ import { useEffect, useRef, useState } from "react";
 import { ChevronDown, Loader2, Plus, Trash2, Upload } from "lucide-react";
 import { uploadPhoto } from "@/lib/photo-upload";
 import type {
+  AccentKey,
   BodyFontKey,
   CVData,
+  DensityKey,
   HeadingFontKey,
+  PhotoStyleKey,
+  SectionStyleKey,
   ThemeKey,
 } from "@/lib/cv-types";
-import { BODY_FONTS, HEADING_FONTS, THEMES } from "@/lib/cv-themes";
+import { ACCENTS, BODY_FONTS, HEADING_FONTS, THEMES } from "@/lib/cv-themes";
 
 const inputClass =
   "w-full rounded-md border border-plum/15 bg-cream-soft px-3 py-2 text-sm text-plum focus:border-coral focus:outline-none focus:ring-2 focus:ring-coral/20";
@@ -212,119 +216,270 @@ export function CVEditorSidebar({
 
   const updateStyle = <K extends keyof NonNullable<CVData["style"]>>(
     key: K,
-    value: NonNullable<CVData["style"]>[K],
+    value: NonNullable<CVData["style"]>[K] | undefined,
   ) => {
-    onChange({ ...data, style: { ...(data.style ?? {}), [key]: value } });
+    if (value === undefined) {
+      const next = { ...(data.style ?? {}) };
+      delete next[key];
+      onChange({ ...data, style: next });
+    } else {
+      onChange({ ...data, style: { ...(data.style ?? {}), [key]: value } });
+    }
   };
 
-  const currentTheme = (data.style?.themeKey ?? "plum") as ThemeKey;
+  const currentThemeKey = (data.style?.themeKey ?? "plum") as ThemeKey;
   const currentHeadingFont = (data.style?.headingFont ?? "fraunces") as HeadingFontKey;
   const currentBodyFont = (data.style?.bodyFont ?? "inter") as BodyFontKey;
-  const currentDensity = data.style?.density ?? "comfortable";
+  const currentSectionStyle = (data.style?.sectionStyle ?? "uppercase") as SectionStyleKey;
+  const currentPhotoStyle = (data.style?.photoStyle ?? "round") as PhotoStyleKey;
+  const currentDensity = (data.style?.density ?? "comfortable") as DensityKey;
+  const currentAccent = data.style?.accent;
+
+  const sectionStyleOptions: { key: SectionStyleKey; label: string }[] = [
+    { key: "uppercase", label: "UPPERCASE" },
+    { key: "titlecase", label: "Title Case" },
+    { key: "underlined", label: "Underlined" },
+    { key: "boxed", label: "Boxed" },
+  ];
+  const photoStyleOptions: { key: PhotoStyleKey; label: string }[] = [
+    { key: "round", label: "Round" },
+    { key: "square", label: "Square" },
+    { key: "none", label: "Hide" },
+  ];
+  const densityOptions: { key: DensityKey; label: string }[] = [
+    { key: "spacious", label: "Spacious" },
+    { key: "comfortable", label: "Comfortable" },
+    { key: "compact", label: "Compact" },
+  ];
+
+  const darkThemes = (Object.entries(THEMES) as [ThemeKey, (typeof THEMES)[ThemeKey]][])
+    .filter(([, t]) => t.category === "dark");
+  const lightThemes = (Object.entries(THEMES) as [ThemeKey, (typeof THEMES)[ThemeKey]][])
+    .filter(([, t]) => t.category === "light");
+
+  const swatchClass = "h-7 w-7 rounded-full transition-transform hover:scale-110";
+  const ringSelected = "0 0 0 2px #FF7A6B66";
+
+  const segmentBtnClass = (active: boolean) =>
+    `rounded-md border px-3 py-2 text-xs font-medium transition-colors ${
+      active
+        ? "border-coral/40 bg-coral/15 text-coral"
+        : "border-plum/15 bg-cream-soft text-plum-soft hover:border-plum/30"
+    }`;
 
   return (
     <div className="space-y-1">
       {/* STYLE */}
-      <SectionAccordion title="Style" defaultOpen>
-        <Field label="Theme color">
-          <div className="grid grid-cols-6 gap-2">
-            {(Object.entries(THEMES) as [ThemeKey, (typeof THEMES)[ThemeKey]][]).map(
-              ([key, t]) => {
-                const selected = key === currentTheme;
-                return (
-                  <button
-                    key={key}
-                    type="button"
-                    onClick={() => updateStyle("themeKey", key)}
-                    aria-label={t.name}
-                    title={t.name}
-                    className={`h-9 w-9 rounded-full border-2 transition-shadow ${
-                      selected
-                        ? "ring-2 ring-coral/30 ring-offset-2"
-                        : ""
-                    }`}
-                    style={{
-                      backgroundColor: t.colors.primary,
-                      borderColor: selected
-                        ? t.colors.accent
-                        : "rgba(45, 27, 61, 0.15)",
-                    }}
-                  />
-                );
-              },
-            )}
-          </div>
-        </Field>
+      <SectionAccordion title="Style">
+        <div className="mb-5">
+          <Field label="Theme">
+            <div className="mb-2">
+              <p className="mb-1.5 text-[10px] uppercase tracking-widest text-plum-faint">
+                Dark
+              </p>
+              <div className="grid grid-cols-7 gap-1.5">
+                {darkThemes.map(([key, t]) => {
+                  const isSelected = currentThemeKey === key;
+                  return (
+                    <button
+                      key={key}
+                      type="button"
+                      aria-label={t.name}
+                      title={t.name}
+                      onClick={() => updateStyle("themeKey", key)}
+                      className={swatchClass}
+                      style={{
+                        backgroundColor: t.colors.primary,
+                        border: isSelected
+                          ? `2px solid ${t.colors.accent}`
+                          : "2px solid rgba(15,27,61,0.1)",
+                        boxShadow: isSelected ? ringSelected : "none",
+                      }}
+                    />
+                  );
+                })}
+              </div>
+            </div>
+            <div>
+              <p className="mb-1.5 text-[10px] uppercase tracking-widest text-plum-faint">
+                Light
+              </p>
+              <div className="grid grid-cols-7 gap-1.5">
+                {lightThemes.map(([key, t]) => {
+                  const isSelected = currentThemeKey === key;
+                  return (
+                    <button
+                      key={key}
+                      type="button"
+                      aria-label={t.name}
+                      title={t.name}
+                      onClick={() => updateStyle("themeKey", key)}
+                      className={swatchClass}
+                      style={{
+                        backgroundColor: t.colors.primary,
+                        border: isSelected
+                          ? `2px solid ${t.colors.accent}`
+                          : "2px solid rgba(15,27,61,0.15)",
+                        boxShadow: isSelected ? ringSelected : "none",
+                      }}
+                    />
+                  );
+                })}
+              </div>
+            </div>
+          </Field>
+        </div>
 
-        <Field label="Heading font">
-          <select
-            className={inputClass}
-            value={currentHeadingFont}
-            onChange={(e) => updateStyle("headingFont", e.target.value as HeadingFontKey)}
-          >
-            {(Object.entries(HEADING_FONTS) as [HeadingFontKey, (typeof HEADING_FONTS)[HeadingFontKey]][]).map(
-              ([key, f]) => (
+        <div className="mb-5">
+          <Field label="Accent (overrides theme)">
+            <div className="grid grid-cols-7 gap-1.5">
+              <button
+                type="button"
+                aria-label="Default"
+                title="Use theme's built-in accent"
+                onClick={() => updateStyle("accent", undefined)}
+                className={`${swatchClass} flex items-center justify-center`}
+                style={{
+                  background:
+                    "conic-gradient(from 0deg, #5EEAD4, #D4A24C, #FF7A6B, #C9B8E8, #A8D5BA, #7DB3D8, #5EEAD4)",
+                  border: !currentAccent
+                    ? "2px solid #2D1B3D"
+                    : "2px solid rgba(15,27,61,0.15)",
+                  boxShadow: !currentAccent ? ringSelected : "none",
+                }}
+              />
+              {(Object.entries(ACCENTS) as [AccentKey, (typeof ACCENTS)[AccentKey]][]).map(
+                ([key, a]) => {
+                  const isSelected = currentAccent === key;
+                  return (
+                    <button
+                      key={key}
+                      type="button"
+                      aria-label={a.name}
+                      title={a.name}
+                      onClick={() => updateStyle("accent", key)}
+                      className={swatchClass}
+                      style={{
+                        backgroundColor: a.color,
+                        border: isSelected
+                          ? "2px solid #2D1B3D"
+                          : "2px solid rgba(15,27,61,0.15)",
+                        boxShadow: isSelected ? ringSelected : "none",
+                      }}
+                    />
+                  );
+                },
+              )}
+            </div>
+          </Field>
+        </div>
+
+        <div className="mb-5">
+          <Field label="Heading font">
+            <select
+              className={inputClass}
+              value={currentHeadingFont}
+              onChange={(e) =>
+                updateStyle("headingFont", e.target.value as HeadingFontKey)
+              }
+            >
+              {(Object.entries(HEADING_FONTS) as [
+                HeadingFontKey,
+                (typeof HEADING_FONTS)[HeadingFontKey],
+              ][]).map(([key, f]) => (
                 <option key={key} value={key}>
                   {f.name}
                 </option>
-              ),
-            )}
-          </select>
-          <p
-            className="mt-2 text-2xl text-plum"
-            style={{
-              fontFamily: `${HEADING_FONTS[currentHeadingFont].cssVar}, ${HEADING_FONTS[currentHeadingFont].fallback}`,
-            }}
-          >
-            Aa Sample
-          </p>
-        </Field>
+              ))}
+            </select>
+            <p
+              className="mt-2 text-2xl text-plum"
+              style={{
+                fontFamily: `${HEADING_FONTS[currentHeadingFont].cssVar}, ${HEADING_FONTS[currentHeadingFont].fallback}`,
+              }}
+            >
+              Aa — Sample heading
+            </p>
+          </Field>
+        </div>
 
-        <Field label="Body font">
-          <select
-            className={inputClass}
-            value={currentBodyFont}
-            onChange={(e) => updateStyle("bodyFont", e.target.value as BodyFontKey)}
-          >
-            {(Object.entries(BODY_FONTS) as [BodyFontKey, (typeof BODY_FONTS)[BodyFontKey]][]).map(
-              ([key, f]) => (
+        <div className="mb-5">
+          <Field label="Body font">
+            <select
+              className={inputClass}
+              value={currentBodyFont}
+              onChange={(e) => updateStyle("bodyFont", e.target.value as BodyFontKey)}
+            >
+              {(Object.entries(BODY_FONTS) as [
+                BodyFontKey,
+                (typeof BODY_FONTS)[BodyFontKey],
+              ][]).map(([key, f]) => (
                 <option key={key} value={key}>
                   {f.name}
                 </option>
-              ),
-            )}
-          </select>
-          <p
-            className="mt-2 text-sm text-plum"
-            style={{
-              fontFamily: `${BODY_FONTS[currentBodyFont].cssVar}, ${BODY_FONTS[currentBodyFont].fallback}`,
-            }}
-          >
-            The quick brown fox jumps over the lazy dog
-          </p>
-        </Field>
+              ))}
+            </select>
+            <p
+              className="mt-2 text-sm text-plum-soft"
+              style={{
+                fontFamily: `${BODY_FONTS[currentBodyFont].cssVar}, ${BODY_FONTS[currentBodyFont].fallback}`,
+              }}
+            >
+              The quick brown fox jumps over the lazy dog.
+            </p>
+          </Field>
+        </div>
 
-        <Field label="Density">
-          <div className="flex gap-2">
-            {(["comfortable", "compact"] as const).map((option) => {
-              const active = currentDensity === option;
-              return (
+        <div className="mb-5">
+          <Field label="Section titles">
+            <div className="grid grid-cols-2 gap-1.5">
+              {sectionStyleOptions.map((opt) => (
                 <button
-                  key={option}
+                  key={opt.key}
                   type="button"
-                  onClick={() => updateStyle("density", option)}
-                  className={`rounded-pill border px-4 py-2 text-sm transition-colors ${
-                    active
-                      ? "border-coral/40 bg-coral/15 text-coral"
-                      : "border-plum/15 bg-cream-soft text-plum-soft hover:text-plum"
-                  }`}
+                  onClick={() => updateStyle("sectionStyle", opt.key)}
+                  className={segmentBtnClass(currentSectionStyle === opt.key)}
                 >
-                  {option === "comfortable" ? "Comfortable" : "Compact"}
+                  {opt.label}
                 </button>
-              );
-            })}
-          </div>
-        </Field>
+              ))}
+            </div>
+          </Field>
+        </div>
+
+        <div className="mb-5">
+          <Field label="Photo style">
+            <div className="grid grid-cols-3 gap-1.5">
+              {photoStyleOptions.map((opt) => (
+                <button
+                  key={opt.key}
+                  type="button"
+                  onClick={() => updateStyle("photoStyle", opt.key)}
+                  className={segmentBtnClass(currentPhotoStyle === opt.key)}
+                >
+                  {opt.label}
+                </button>
+              ))}
+            </div>
+          </Field>
+        </div>
+
+        <div>
+          <Field label="Density">
+            <div className="grid grid-cols-3 gap-1.5">
+              {densityOptions.map((opt) => (
+                <button
+                  key={opt.key}
+                  type="button"
+                  onClick={() => updateStyle("density", opt.key)}
+                  className={segmentBtnClass(currentDensity === opt.key)}
+                >
+                  {opt.label}
+                </button>
+              ))}
+            </div>
+          </Field>
+        </div>
       </SectionAccordion>
 
       {/* BASICS */}

@@ -1,7 +1,12 @@
 import type { CSSProperties } from "react";
 import { Globe, Link2, Mail, MapPin, Phone } from "lucide-react";
 import type { CVData } from "@/lib/cv-types";
-import { resolveStyle, withAlpha } from "@/lib/cv-themes";
+import {
+  formatSectionTitle,
+  resolveStyle,
+  sectionVariantStyle,
+  withAlpha,
+} from "@/lib/cv-themes";
 
 export function ClassicSerif({ data }: { data: CVData }) {
   const basics = data?.basics ?? { fullName: "", role: "", email: "" };
@@ -14,8 +19,17 @@ export function ClassicSerif({ data }: { data: CVData }) {
   const certifications = data?.certifications ?? [];
   const interests = data?.interests ?? [];
 
-  const { theme, headingFont, bodyFont, density } = resolveStyle(data?.style);
-  const densityClass = density === "compact" ? "compact" : "";
+  const {
+    theme,
+    themeCategory,
+    headingFont,
+    bodyFont,
+    density,
+    sectionStyle,
+    photoStyle,
+  } = resolveStyle(data?.style);
+  const densityClass =
+    density === "compact" ? "compact" : density === "spacious" ? "spacious" : "";
 
   const displayName = basics.fullName?.trim() ? basics.fullName : "Untitled";
 
@@ -31,6 +45,23 @@ export function ClassicSerif({ data }: { data: CVData }) {
     borderColor: withAlpha(theme.text, 0.15),
   };
   const onPrimary = theme.primaryText;
+  const showPhoto = photoStyle !== "none";
+  const photoRadiusClass = photoStyle === "square" ? "rounded-md" : "rounded-full";
+
+  const renderSectionTitle = (title: string) => (
+    <SectionHeading
+      style={{ ...headingStyle, ...sectionVariantStyle(sectionStyle, theme) }}
+    >
+      {formatSectionTitle(title, sectionStyle)}
+    </SectionHeading>
+  );
+
+  const headerStyle: CSSProperties = {
+    backgroundColor: theme.primary,
+    ...(themeCategory === "light"
+      ? { borderBottom: `1px solid ${withAlpha(theme.text, 0.15)}` }
+      : {}),
+  };
 
   return (
     <article
@@ -39,15 +70,15 @@ export function ClassicSerif({ data }: { data: CVData }) {
     >
       <header
         className="-mx-12 -mt-12 mb-8 px-12 pb-8 pt-10"
-        style={{ backgroundColor: theme.primary }}
+        style={headerStyle}
       >
         <div className="flex items-center gap-6">
-          {basics.photoUrl && (
+          {showPhoto && basics.photoUrl && (
             // eslint-disable-next-line @next/next/no-img-element
             <img
               src={basics.photoUrl}
               alt={displayName}
-              className="h-20 w-20 shrink-0 rounded-full border-2 object-cover"
+              className={`h-20 w-20 shrink-0 border-2 object-cover ${photoRadiusClass}`}
               style={{ borderColor: onPrimary }}
             />
           )}
@@ -110,7 +141,7 @@ export function ClassicSerif({ data }: { data: CVData }) {
 
       {basics.summary && (
         <section>
-          <SectionHeading style={headingStyle}>PROFILE</SectionHeading>
+          {renderSectionTitle("PROFILE")}
           <p className="text-sm leading-relaxed" style={{ color: theme.textSoft }}>
             {basics.summary}
           </p>
@@ -121,7 +152,7 @@ export function ClassicSerif({ data }: { data: CVData }) {
         <>
           {basics.summary && <Divider style={dividerStyle} />}
           <section>
-            <SectionHeading style={headingStyle}>EXPERIENCE</SectionHeading>
+            {renderSectionTitle("EXPERIENCE")}
             <div className="space-y-5">
               {experience.map((job, i) => (
                 <div key={`${job.company}-${job.startDate}-${i}`}>
@@ -166,7 +197,7 @@ export function ClassicSerif({ data }: { data: CVData }) {
         <>
           <Divider style={dividerStyle} />
           <section>
-            <SectionHeading style={headingStyle}>EDUCATION</SectionHeading>
+            {renderSectionTitle("EDUCATION")}
             <div className="space-y-3">
               {education.map((entry, i) => (
                 <div key={`${entry.school}-${entry.startDate}-${i}`}>
@@ -203,7 +234,7 @@ export function ClassicSerif({ data }: { data: CVData }) {
         <>
           <Divider style={dividerStyle} />
           <section>
-            <SectionHeading style={headingStyle}>SKILLS</SectionHeading>
+            {renderSectionTitle("SKILLS")}
             <p className="text-sm leading-relaxed" style={{ color: theme.textSoft }}>
               {skills.join(" · ")}
             </p>
@@ -215,7 +246,7 @@ export function ClassicSerif({ data }: { data: CVData }) {
         <>
           <Divider style={dividerStyle} />
           <section>
-            <SectionHeading style={headingStyle}>PROJECTS</SectionHeading>
+            {renderSectionTitle("PROJECTS")}
             <div className="space-y-3">
               {projects.map((project, i) => (
                 <div key={`${project.name}-${i}`}>
@@ -252,7 +283,7 @@ export function ClassicSerif({ data }: { data: CVData }) {
         <>
           <Divider style={dividerStyle} />
           <section>
-            <SectionHeading style={headingStyle}>LANGUAGES</SectionHeading>
+            {renderSectionTitle("LANGUAGES")}
             <p className="text-sm leading-relaxed" style={{ color: theme.textSoft }}>
               {languages.map((l) => `${l.name} (${l.level})`).join(" · ")}
             </p>
@@ -264,7 +295,7 @@ export function ClassicSerif({ data }: { data: CVData }) {
         <>
           <Divider style={dividerStyle} />
           <section>
-            <SectionHeading style={headingStyle}>AWARDS &amp; RECOGNITION</SectionHeading>
+            {renderSectionTitle("AWARDS")}
             <ul
               className="space-y-1 text-sm leading-relaxed"
               style={{ color: theme.textSoft }}
@@ -285,7 +316,7 @@ export function ClassicSerif({ data }: { data: CVData }) {
         <>
           <Divider style={dividerStyle} />
           <section>
-            <SectionHeading style={headingStyle}>CERTIFICATIONS</SectionHeading>
+            {renderSectionTitle("CERTIFICATIONS")}
             <ul
               className="space-y-1 text-sm leading-relaxed"
               style={{ color: theme.textSoft }}
@@ -306,7 +337,7 @@ export function ClassicSerif({ data }: { data: CVData }) {
         <>
           <Divider style={dividerStyle} />
           <section>
-            <SectionHeading style={headingStyle}>INTERESTS</SectionHeading>
+            {renderSectionTitle("INTERESTS")}
             <p className="text-sm leading-relaxed" style={{ color: theme.textSoft }}>
               {interests.join(" · ")}
             </p>

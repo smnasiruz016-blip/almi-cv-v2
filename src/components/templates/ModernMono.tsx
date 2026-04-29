@@ -1,7 +1,12 @@
 import type { CSSProperties } from "react";
 import { Globe, Link2, Mail, MapPin, Phone } from "lucide-react";
 import type { CVData } from "@/lib/cv-types";
-import { resolveStyle, withAlpha } from "@/lib/cv-themes";
+import {
+  formatSectionTitle,
+  resolveStyle,
+  sectionVariantStyle,
+  withAlpha,
+} from "@/lib/cv-themes";
 
 export function ModernMono({ data }: { data: CVData }) {
   const basics = data?.basics ?? { fullName: "", role: "", email: "" };
@@ -14,8 +19,16 @@ export function ModernMono({ data }: { data: CVData }) {
   const certifications = data?.certifications ?? [];
   const interests = data?.interests ?? [];
 
-  const { theme, headingFont, bodyFont, density } = resolveStyle(data?.style);
-  const densityClass = density === "compact" ? "compact" : "";
+  const {
+    theme,
+    headingFont,
+    bodyFont,
+    density,
+    sectionStyle,
+    photoStyle,
+  } = resolveStyle(data?.style);
+  const densityClass =
+    density === "compact" ? "compact" : density === "spacious" ? "spacious" : "";
 
   const displayName = basics.fullName || "Untitled";
 
@@ -38,6 +51,26 @@ export function ModernMono({ data }: { data: CVData }) {
     borderColor: withAlpha(theme.text, 0.15),
   };
   const iconStyle: CSSProperties = { color: theme.textSoft };
+  const showPhoto = photoStyle !== "none";
+  const photoRadiusClass = photoStyle === "square" ? "rounded-md" : "rounded-full";
+
+  const renderSidebarTitle = (title: string) => (
+    <h2
+      className="mb-2.5 text-[10px] tracking-[0.25em]"
+      style={{ ...headingStyle, ...sectionVariantStyle(sectionStyle, theme) }}
+    >
+      {formatSectionTitle(title, sectionStyle)}
+    </h2>
+  );
+
+  const renderContentTitle = (title: string) => (
+    <h2
+      className="mb-3 text-[10px] tracking-[0.25em]"
+      style={{ ...headingStyle, ...sectionVariantStyle(sectionStyle, theme) }}
+    >
+      {formatSectionTitle(title, sectionStyle)}
+    </h2>
+  );
 
   return (
     <article
@@ -48,20 +81,22 @@ export function ModernMono({ data }: { data: CVData }) {
         className="flex w-[35%] flex-col gap-5 overflow-hidden p-7"
         style={{ backgroundColor: theme.primarySoft }}
       >
-        {basics.photoUrl ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={basics.photoUrl}
-            alt={displayName}
-            className="mx-auto h-28 w-28 rounded-full border-4 border-white object-cover shadow-sm"
-          />
-        ) : (
-          <div
-            className="mx-auto flex h-28 w-28 items-center justify-center rounded-full border-4 border-white bg-white/70 text-3xl font-medium shadow-sm"
-            style={headingStyle}
-          >
-            {displayName.charAt(0).toUpperCase()}
-          </div>
+        {showPhoto && (
+          basics.photoUrl ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={basics.photoUrl}
+              alt={displayName}
+              className={`mx-auto h-28 w-28 border-4 border-white object-cover shadow-sm ${photoRadiusClass}`}
+            />
+          ) : (
+            <div
+              className={`mx-auto flex h-28 w-28 items-center justify-center border-4 border-white bg-white/70 text-3xl font-medium shadow-sm ${photoRadiusClass}`}
+              style={headingStyle}
+            >
+              {displayName.charAt(0).toUpperCase()}
+            </div>
+          )
         )}
 
         <div>
@@ -85,12 +120,7 @@ export function ModernMono({ data }: { data: CVData }) {
           <>
             <hr style={sidebarDividerStyle} />
             <div>
-              <h2
-                className="mb-2.5 text-[10px] tracking-[0.25em]"
-                style={headingStyle}
-              >
-                CONTACT
-              </h2>
+              {renderSidebarTitle("CONTACT")}
               <ul className="space-y-1.5">
                 {basics.email && (
                   <li
@@ -146,12 +176,7 @@ export function ModernMono({ data }: { data: CVData }) {
           <>
             <hr style={sidebarDividerStyle} />
             <div>
-              <h2
-                className="mb-2.5 text-[10px] tracking-[0.25em]"
-                style={headingStyle}
-              >
-                SKILLS
-              </h2>
+              {renderSidebarTitle("SKILLS")}
               <div className="flex flex-wrap gap-1.5">
                 {skills.map((skill, i) => (
                   <span
@@ -174,12 +199,7 @@ export function ModernMono({ data }: { data: CVData }) {
           <>
             <hr style={sidebarDividerStyle} />
             <div>
-              <h2
-                className="mb-2.5 text-[10px] tracking-[0.25em]"
-                style={headingStyle}
-              >
-                LANGUAGES
-              </h2>
+              {renderSidebarTitle("LANGUAGES")}
               <ul className="space-y-1">
                 {languages.map((lang, i) => (
                   <li
@@ -200,12 +220,7 @@ export function ModernMono({ data }: { data: CVData }) {
       <div className="flex-1 overflow-hidden p-9">
         {basics.summary && (
           <section>
-            <h2
-              className="mb-2.5 text-[10px] tracking-[0.25em]"
-              style={headingStyle}
-            >
-              PROFILE
-            </h2>
+            {renderContentTitle("PROFILE")}
             <p
               className="text-sm leading-relaxed"
               style={{ color: theme.textSoft }}
@@ -221,12 +236,7 @@ export function ModernMono({ data }: { data: CVData }) {
 
         {experience.length > 0 && (
           <section>
-            <h2
-              className="mb-3 text-[10px] tracking-[0.25em]"
-              style={headingStyle}
-            >
-              EXPERIENCE
-            </h2>
+            {renderContentTitle("EXPERIENCE")}
             <div className="space-y-4">
               {experience.map((job, idx) => (
                 <div key={idx}>
@@ -281,12 +291,7 @@ export function ModernMono({ data }: { data: CVData }) {
 
         {education.length > 0 && (
           <section>
-            <h2
-              className="mb-3 text-[10px] tracking-[0.25em]"
-              style={headingStyle}
-            >
-              EDUCATION
-            </h2>
+            {renderContentTitle("EDUCATION")}
             <div className="space-y-3">
               {education.map((edu, idx) => (
                 <div key={idx}>
@@ -335,12 +340,7 @@ export function ModernMono({ data }: { data: CVData }) {
 
         {projects.length > 0 && (
           <section>
-            <h2
-              className="mb-3 text-[10px] tracking-[0.25em]"
-              style={headingStyle}
-            >
-              PROJECTS
-            </h2>
+            {renderContentTitle("PROJECTS")}
             <div className="space-y-2">
               {projects.map((p, idx) => (
                 <div key={idx}>
@@ -378,12 +378,7 @@ export function ModernMono({ data }: { data: CVData }) {
 
         {awards.length > 0 && (
           <section>
-            <h2
-              className="mb-3 text-[10px] tracking-[0.25em]"
-              style={headingStyle}
-            >
-              AWARDS
-            </h2>
+            {renderContentTitle("AWARDS")}
             <ul className="space-y-1">
               {awards.map((a, idx) => (
                 <li key={idx} className="text-xs" style={{ color: theme.textSoft }}>
@@ -404,12 +399,7 @@ export function ModernMono({ data }: { data: CVData }) {
 
         {certifications.length > 0 && (
           <section>
-            <h2
-              className="mb-3 text-[10px] tracking-[0.25em]"
-              style={headingStyle}
-            >
-              CERTIFICATIONS
-            </h2>
+            {renderContentTitle("CERTIFICATIONS")}
             <ul className="space-y-1">
               {certifications.map((c, idx) => (
                 <li key={idx} className="text-xs" style={{ color: theme.textSoft }}>
@@ -430,12 +420,7 @@ export function ModernMono({ data }: { data: CVData }) {
 
         {interests.length > 0 && (
           <section>
-            <h2
-              className="mb-3 text-[10px] tracking-[0.25em]"
-              style={headingStyle}
-            >
-              INTERESTS
-            </h2>
+            {renderContentTitle("INTERESTS")}
             <p
               className="text-xs leading-relaxed"
               style={{ color: theme.textSoft }}
