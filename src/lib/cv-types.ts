@@ -41,4 +41,10 @@ export type CVData = {
     issuer?: string;
     year: string;
   }>;
+  certifications?: Array<{
+    name: string;
+    issuer?: string;
+    year?: string;
+  }>;
+  interests?: string[];
 };

@@ -117,4 +117,17 @@ export const mayaRodriguez: CVData = {
       year: "2022",
     },
   ],
+  certifications: [
+    {
+      name: "Certified Scrum Product Owner",
+      issuer: "Scrum Alliance",
+      year: "2022",
+    },
+    {
+      name: "Nielsen Norman UX Certification",
+      issuer: "NN/g",
+      year: "2020",
+    },
+  ],
+  interests: ["Sustainable design", "Mentoring", "Trail running", "Specialty coffee"],
 };

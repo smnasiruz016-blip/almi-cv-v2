@@ -1,20 +1,18 @@
-import Image from "next/image";
 import { Globe, Link2, Mail, MapPin, Phone } from "lucide-react";
 import type { CVData } from "@/lib/cv-types";
 
 export function ClassicSerif({ data }: { data: CVData }) {
-  const { basics, experience, education, skills, projects, languages, awards } = data;
+  const { basics, experience, education, skills, projects, languages, awards, certifications, interests } = data;
 
   return (
     <article className="mx-auto aspect-[210/297] w-full max-w-[800px] overflow-hidden rounded-lg bg-white p-12 shadow-warm-card-hover">
       <header className="-mx-12 -mt-12 mb-8 bg-plum px-12 pb-8 pt-10">
         <div className="flex items-center gap-6">
           {basics.photoUrl && (
-            <Image
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
               src={basics.photoUrl}
               alt={basics.fullName}
-              width={80}
-              height={80}
               className="h-20 w-20 shrink-0 rounded-full border-2 border-cream object-cover"
             />
           )}
@@ -178,6 +176,34 @@ export function ClassicSerif({ data }: { data: CVData }) {
                 </li>
               ))}
             </ul>
+          </section>
+        </>
+      )}
+
+      {certifications && certifications.length > 0 && (
+        <>
+          <Divider />
+          <section>
+            <SectionHeading>CERTIFICATIONS</SectionHeading>
+            <ul className="space-y-1 text-sm leading-relaxed text-plum-soft">
+              {certifications.map((cert, i) => (
+                <li key={i}>
+                  {cert.name}
+                  {cert.issuer ? ` · ${cert.issuer}` : ""}
+                  {cert.year ? ` · ${cert.year}` : ""}
+                </li>
+              ))}
+            </ul>
+          </section>
+        </>
+      )}
+
+      {interests && interests.length > 0 && (
+        <>
+          <Divider />
+          <section>
+            <SectionHeading>INTERESTS</SectionHeading>
+            <p className="text-sm leading-relaxed text-plum-soft">{interests.join(" · ")}</p>
           </section>
         </>
       )}
