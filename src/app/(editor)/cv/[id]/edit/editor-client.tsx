@@ -100,7 +100,7 @@ export function EditorClient({
             Live preview · A4
           </p>
           <div className="print-target w-full max-w-[600px]">
-            <TemplateComponent data={cvData} />
+            <TemplateComponent data={cvData} paginated />
           </div>
         </main>
       </div>

@@ -18,7 +18,7 @@ export type TemplateMeta = {
   tier: "free" | "premium";
   tagline: string;
   description: string;
-  Component: ComponentType<{ data: CVData }>;
+  Component: ComponentType<{ data: CVData; paginated?: boolean }>;
   sampleData?: CVData;
 };
 

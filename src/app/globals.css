@@ -180,12 +180,30 @@ h1, h2, h3, h4, h5, h6 {
     box-shadow: none !important;
     border-radius: 0 !important;
     background: white !important;
+    page-break-after: always;
+    break-after: page;
+  }
+
+  .print-target article:last-of-type {
+    page-break-after: auto;
+    break-after: auto;
   }
 
   body,
   html,
   .print-target {
     background: white !important;
+  }
+
+  .cv-preview-wrapper {
+    width: auto !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  .cv-preview-wrapper > div {
+    transform: none !important;
+    width: auto !important;
   }
 
   @page {
