@@ -12,11 +12,19 @@ type ImproveButtonProps = {
   disabled?: boolean;
 };
 
+const FALLBACK_ERROR = "Couldn't improve right now — try again";
+
+function escapeHtml(text: string): string {
+  return text
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
 function wrapAsParagraph(text: string): string {
   const trimmed = text.trim();
   if (!trimmed) return "";
-  if (/^<p[\s>]/i.test(trimmed)) return trimmed;
-  return `<p>${trimmed}</p>`;
+  return `<p>${escapeHtml(trimmed)}</p>`;
 }
 
 export function ImproveButton({
@@ -39,6 +47,12 @@ export function ImproveButton({
     };
   }, []);
 
+  const showError = (msg: string) => {
+    setError(msg);
+    if (errorTimer.current) clearTimeout(errorTimer.current);
+    errorTimer.current = setTimeout(() => setError(null), 3000);
+  };
+
   const isDisabled = disabled || loading;
 
   const handleClick = async () => {
@@ -52,31 +66,48 @@ export function ImproveButton({
         role,
         company,
       });
-      onImproved(wrapAsParagraph(result.improved));
+
+      if (!result || typeof result !== "object" || !("ok" in result)) {
+        showError(FALLBACK_ERROR);
+        return;
+      }
+
+      if (!result.ok) {
+        const msg =
+          typeof result.error === "string" && result.error.trim()
+            ? result.error
+            : FALLBACK_ERROR;
+        showError(msg);
+        return;
+      }
+
+      const improved = result.improved;
+      if (typeof improved !== "string" || !improved.trim()) {
+        showError(FALLBACK_ERROR);
+        return;
+      }
+
+      onImproved(wrapAsParagraph(improved));
       setFlash(true);
       if (flashTimer.current) clearTimeout(flashTimer.current);
       flashTimer.current = setTimeout(() => setFlash(false), 800);
     } catch (err) {
-      const msg =
-        err instanceof Error
-          ? err.message
-          : "Couldn't improve right now — please try again in a moment";
-      setError(msg);
-      errorTimer.current = setTimeout(() => setError(null), 3000);
+      console.error("[ImproveButton] failed:", err);
+      showError(FALLBACK_ERROR);
     } finally {
       setLoading(false);
     }
   };
 
   const baseClass =
-    "relative inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-md transition-colors";
+    "inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-md transition-colors";
   const stateClass = flash
     ? "bg-mint/40 text-plum"
     : "text-coral hover:bg-cream-soft hover:text-coral-deep";
   const disabledClass = isDisabled ? "cursor-not-allowed opacity-50" : "";
 
   return (
-    <div className="relative inline-flex shrink-0 flex-col items-end">
+    <div className="relative shrink-0">
       <button
         type="button"
         onClick={handleClick}
@@ -92,9 +123,13 @@ export function ImproveButton({
         )}
       </button>
       {error && (
-        <span className="mt-1 whitespace-nowrap text-xs text-coral-deep">
+        <div
+          role="alert"
+          className="pointer-events-none absolute right-0 top-full z-20 mt-1 max-w-[220px] whitespace-normal break-words rounded-md border border-coral/30 bg-cream-soft px-2 py-1 text-xs text-coral-deep shadow-md"
+          style={{ width: "max-content" }}
+        >
           {error}
-        </span>
+        </div>
       )}
     </div>
   );
