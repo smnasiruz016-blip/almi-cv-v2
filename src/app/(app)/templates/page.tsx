@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { ArrowRight, Lock } from "lucide-react";
+import { Crown } from "lucide-react";
 import { requireUser } from "@/lib/auth";
 import {
   AtelierProThumb,
@@ -35,9 +35,10 @@ export default async function TemplatesPage() {
 
       <section className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {TEMPLATE_LIST.map((template) => (
-          <article
+          <Link
             key={template.slug}
-            className="group relative overflow-hidden rounded-2xl border border-peach/40 bg-white p-6 shadow-warm-card transition hover:shadow-warm-card-hover"
+            href={`/templates/${template.slug}`}
+            className="group relative block cursor-pointer overflow-hidden rounded-2xl border border-peach/40 bg-white p-6 shadow-warm-card transition duration-200 hover:-translate-y-0.5 hover:shadow-warm-card-hover focus:outline-none focus-visible:ring-4 focus-visible:ring-coral/30"
           >
             <div className="pointer-events-none absolute -right-12 -top-12 h-32 w-32 rounded-full bg-coral/10 blur-3xl transition group-hover:bg-coral/20" />
 
@@ -58,21 +59,13 @@ export default async function TemplatesPage() {
                   </span>
                 ) : (
                   <span className="inline-flex shrink-0 items-center gap-1 rounded-pill bg-gold/20 px-3 py-1 text-xs font-medium text-[#8A5F1F]">
-                    <Lock className="h-2.5 w-2.5" />
+                    <Crown className="h-2.5 w-2.5" />
                     Premium
                   </span>
                 )}
               </div>
-
-              <Link
-                href={`/templates/${template.slug}`}
-                className="mt-5 inline-flex w-full min-h-[44px] items-center justify-center gap-2 rounded-pill bg-coral px-5 py-3 text-sm font-medium text-white shadow-warm-card transition-colors hover:bg-coral-deep focus:outline-none focus:ring-4 focus:ring-coral/30"
-              >
-                Preview template
-                <ArrowRight className="h-4 w-4" />
-              </Link>
             </div>
-          </article>
+          </Link>
         ))}
       </section>
     </div>
