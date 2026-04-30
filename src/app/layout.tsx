@@ -16,6 +16,7 @@ const displayFont = Fraunces({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://almicv.almiworld.com"),
   title: "AlmiCV — Beautiful CVs, Built Right",
   description:
     "Premium-grade resume templates, live editor, AI writing helper, and ATS scoring. Build a polished CV in minutes.",

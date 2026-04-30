@@ -7,11 +7,11 @@ export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 export default async function OpenGraphImage() {
-  const [fraunces, logoBuffer] = await Promise.all([
-    fetch(
-      "https://fonts.gstatic.com/s/fraunces/v37/6NUh8FyLNQOQZAnv9bYBvHvHrqLV2ynA1ttsQyiBOCjL5L4kpA.ttf"
-    ).then((r) => r.arrayBuffer()),
-    readFile(path.join(process.cwd(), "public", "almiworld-logo.png")),
+  const publicDir = path.join(process.cwd(), "public");
+  const [regular, bold, logoBuffer] = await Promise.all([
+    readFile(path.join(publicDir, "fonts", "fraunces-regular.ttf")),
+    readFile(path.join(publicDir, "fonts", "fraunces-bold.ttf")),
+    readFile(path.join(publicDir, "almiworld-logo.png")),
   ]);
 
   const logoSrc = `data:image/png;base64,${Buffer.from(logoBuffer).toString("base64")}`;
@@ -69,8 +69,8 @@ export default async function OpenGraphImage() {
           <div
             style={{
               fontFamily: "Fraunces",
+              fontWeight: 700,
               fontSize: 180,
-              fontWeight: 500,
               color: "#2D1B3D",
               letterSpacing: "-0.04em",
               lineHeight: 1,
@@ -82,6 +82,7 @@ export default async function OpenGraphImage() {
           <div
             style={{
               fontFamily: "Fraunces",
+              fontWeight: 400,
               fontSize: 36,
               color: "#6B5B7A",
               letterSpacing: "-0.01em",
@@ -114,12 +115,8 @@ export default async function OpenGraphImage() {
     {
       ...size,
       fonts: [
-        {
-          name: "Fraunces",
-          data: fraunces,
-          style: "normal",
-          weight: 500,
-        },
+        { name: "Fraunces", data: regular, style: "normal", weight: 400 },
+        { name: "Fraunces", data: bold, style: "normal", weight: 700 },
       ],
     }
   );

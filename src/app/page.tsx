@@ -14,7 +14,7 @@ const TRUST_STATS = [
   { value: "942 sources", label: "Trusted job boards" },
   { value: "60+ designs", label: "Coming soon" },
   { value: "$10 once", label: "Lifetime premium" },
-  { value: "5 languages", label: "EN · UR · DE · DA · IS" },
+  { value: "Multilingual", label: "Built-in translation" },
 ];
 
 const STEPS = [
@@ -136,7 +136,7 @@ function TrustSection() {
     <Section className="bg-cream-soft py-18">
       <Container>
         <p className="text-center text-sm uppercase tracking-widest text-plum-faint">
-          Built for job-seekers in Iceland · UK · Germany · Pakistan · and beyond
+          Built for the world
         </p>
         <div className="mt-10 grid grid-cols-2 gap-8 md:grid-cols-4">
           {TRUST_STATS.map((stat) => (
