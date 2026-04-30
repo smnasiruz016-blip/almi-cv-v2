@@ -12,7 +12,7 @@ export const mayaRodriguez: CVData = {
     photoUrl:
       "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop&crop=faces",
     summary:
-      "Senior Product Designer with 8 years building consumer fintech and SaaS at Acme, Globex, and earlier at Stripe. I lead design systems, run user research, and ship cohesive cross-platform experiences.",
+      "Senior Product Designer with <strong>8 years</strong> building consumer fintech and SaaS at Acme, Globex, and earlier at Stripe. I lead <em>design systems</em>, run user research, and ship cohesive cross-platform experiences.",
   },
   experience: [
     {

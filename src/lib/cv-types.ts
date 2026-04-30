@@ -1,3 +1,11 @@
+/**
+ * RichText is an HTML-string alias. Stored as a string so existing code paths
+ * keep working; the alias signals that the value may contain inline tags
+ * (<strong>, <em>, <u>, <br>, <p>) and must be passed through sanitizeRichText
+ * before rendering. Use stripRichText for plain-text fallbacks.
+ */
+export type RichText = string;
+
 export type CVData = {
   basics: {
     fullName: string;
@@ -8,7 +16,7 @@ export type CVData = {
     website?: string;
     linkedIn?: string;
     photoUrl?: string;
-    summary?: string;
+    summary?: RichText;
   };
   experience: Array<{
     company: string;
@@ -16,7 +24,7 @@ export type CVData = {
     location?: string;
     startDate: string;
     endDate?: string;
-    bullets: string[];
+    bullets: RichText[];
   }>;
   education: Array<{
     school: string;
