@@ -126,14 +126,14 @@ function HeroSection({ isLoggedIn }: { isLoggedIn: boolean }) {
             <div className="mt-10 flex flex-wrap items-center gap-3">
               <Link
                 href={href}
-                className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-pill bg-coral px-5 py-3 text-sm font-semibold text-white shadow-warm-card transition hover:bg-coral-deep focus:outline-none focus:ring-4 focus:ring-coral/30"
+                className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-pill bg-coral px-5 py-3 text-sm font-semibold text-white shadow-warm-card transition hover:-translate-y-0.5 hover:bg-coral-deep focus:outline-none focus:ring-4 focus:ring-coral/30"
               >
                 {label}
                 <ArrowRight className="h-4 w-4" />
               </Link>
               <Link
                 href="/templates"
-                className="inline-flex min-h-[44px] items-center justify-center rounded-pill border border-plum/20 bg-transparent px-5 py-3 text-sm font-semibold text-plum transition hover:bg-plum/5 focus:outline-none focus:ring-4 focus:ring-plum/15"
+                className="inline-flex min-h-[44px] items-center justify-center rounded-pill border border-plum/20 bg-transparent px-5 py-3 text-sm font-semibold text-plum transition hover:border-plum/40 hover:bg-plum/5 focus:outline-none focus:ring-4 focus:ring-plum/15"
               >
                 See templates
               </Link>
@@ -274,7 +274,7 @@ function FinalCTASection({ isLoggedIn }: { isLoggedIn: boolean }) {
           <div className="mt-10 flex justify-center">
             <Link
               href={href}
-              className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-pill bg-coral px-5 py-3 text-sm font-semibold text-white shadow-warm-card transition hover:bg-coral-deep focus:outline-none focus:ring-4 focus:ring-coral/30"
+              className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-pill bg-coral px-5 py-3 text-sm font-semibold text-white shadow-warm-card transition hover:-translate-y-0.5 hover:bg-coral-deep focus:outline-none focus:ring-4 focus:ring-coral/30"
             >
               {label}
               <ArrowRight className="h-4 w-4" />
