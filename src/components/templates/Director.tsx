@@ -107,12 +107,13 @@ function DirectorLeftBlock({
     >
       {isFirstPage ? (
         <>
-          <div>
+          <div className="max-w-full">
             <h1
+              className="max-w-full break-words hyphens-auto"
               style={{
                 color: onPrimary,
                 fontFamily: `${headingFont.cssVar}, ${headingFont.fallback}`,
-                fontSize: "56px",
+                fontSize: "clamp(36px, 5.5vw, 48px)",
                 lineHeight: 0.95,
                 letterSpacing: "-0.02em",
                 fontWeight: 700,
