@@ -5,15 +5,9 @@ import { HeroPreview } from "@/components/hero-preview";
 import { Container } from "@/components/ui/container";
 import { Section } from "@/components/ui/section";
 import { Badge } from "@/components/ui/badge";
-import {
-  AtelierProThumb,
-  AtelierThumb,
-  ClassicSerifThumb,
-  DirectorThumb,
-  EditorialBoldThumb,
-  ModernMonoThumb,
-  TemplateCard,
-} from "@/components/templates/TemplateThumbnails";
+import { Crown } from "lucide-react";
+import { TemplateThumbnail } from "@/components/templates/TemplateThumbnail";
+import { TEMPLATE_LIST } from "@/lib/templates";
 import { getCurrentUser } from "@/lib/auth";
 
 const TRUST_STATS = [
@@ -177,36 +171,30 @@ function TemplatesSection() {
           6 designs · 3 free · 3 unlock with $10
         </p>
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 lg:gap-4">
-          <Link href="/templates/classic-serif" className="block">
-            <TemplateCard name="Classic Serif" tier="FREE">
-              <ClassicSerifThumb />
-            </TemplateCard>
-          </Link>
-          <Link href="/templates/modern-mono" className="block">
-            <TemplateCard name="Modern Mono" tier="FREE">
-              <ModernMonoThumb />
-            </TemplateCard>
-          </Link>
-          <Link href="/templates/editorial-bold" className="block">
-            <TemplateCard name="Editorial Bold" tier="FREE">
-              <EditorialBoldThumb />
-            </TemplateCard>
-          </Link>
-          <Link href="/templates/atelier" className="block">
-            <TemplateCard name="Atelier" tier="PREMIUM">
-              <AtelierThumb />
-            </TemplateCard>
-          </Link>
-          <Link href="/templates/director" className="block">
-            <TemplateCard name="Director" tier="PREMIUM">
-              <DirectorThumb />
-            </TemplateCard>
-          </Link>
-          <Link href="/templates/atelier-pro" className="block">
-            <TemplateCard name="Atelier Pro" tier="PREMIUM">
-              <AtelierProThumb />
-            </TemplateCard>
-          </Link>
+          {TEMPLATE_LIST.map((tpl) => (
+            <Link
+              key={tpl.slug}
+              href={`/templates/${tpl.slug}`}
+              className="group relative block rounded-2xl border border-peach/40 bg-white p-2 shadow-warm-card transition-all hover:-translate-y-0.5 hover:shadow-warm-card-hover"
+            >
+              <TemplateThumbnail template={tpl} scale={0.2} />
+              <div className="mt-2 flex items-start justify-between gap-2">
+                <h3 className="font-display text-sm text-plum">{tpl.name}</h3>
+                {tpl.tier === "premium" ? (
+                  <Crown className="mt-0.5 h-3 w-3 shrink-0 text-gold" />
+                ) : null}
+              </div>
+              <p
+                className={
+                  tpl.tier === "free"
+                    ? "text-[10px] text-sage"
+                    : "text-[10px] text-coral"
+                }
+              >
+                {tpl.tier === "free" ? "Free" : "Premium"}
+              </p>
+            </Link>
+          ))}
         </div>
 
         <div className="mt-10 flex justify-center">

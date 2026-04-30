@@ -1,25 +1,8 @@
 import Link from "next/link";
-import type { ReactNode } from "react";
 import { Crown } from "lucide-react";
 import { requireUser } from "@/lib/auth";
-import {
-  AtelierProThumb,
-  AtelierThumb,
-  ClassicSerifThumb,
-  DirectorThumb,
-  EditorialBoldThumb,
-  ModernMonoThumb,
-} from "@/components/templates/TemplateThumbnails";
-import { TEMPLATE_LIST, type TemplateSlug } from "@/lib/templates";
-
-const THUMBS: Record<TemplateSlug, ReactNode> = {
-  "classic-serif": <ClassicSerifThumb />,
-  "modern-mono": <ModernMonoThumb />,
-  "editorial-bold": <EditorialBoldThumb />,
-  atelier: <AtelierThumb />,
-  director: <DirectorThumb />,
-  "atelier-pro": <AtelierProThumb />,
-};
+import { TemplateThumbnail } from "@/components/templates/TemplateThumbnail";
+import { TEMPLATE_LIST } from "@/lib/templates";
 
 export default async function TemplatesPage() {
   await requireUser();
@@ -43,9 +26,7 @@ export default async function TemplatesPage() {
             <div className="pointer-events-none absolute -right-12 -top-12 h-32 w-32 rounded-full bg-coral/10 blur-3xl transition group-hover:bg-coral/20" />
 
             <div className="relative">
-              <div className="aspect-[3/4] overflow-hidden rounded-2xl border border-plum/5 bg-white shadow-inner">
-                {THUMBS[template.slug]}
-              </div>
+              <TemplateThumbnail template={template} scale={0.42} />
 
               <div className="mt-5 flex items-start justify-between gap-3">
                 <div className="min-w-0">

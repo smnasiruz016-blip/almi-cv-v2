@@ -1,21 +1,13 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight, Check } from "lucide-react";
-import {
-  AtelierProThumb,
-  AtelierThumb,
-  ClassicSerifThumb,
-  DirectorThumb,
-  EditorialBoldThumb,
-  ModernMonoThumb,
-  TemplateCard,
-} from "@/components/templates/TemplateThumbnails";
+import { Crown } from "lucide-react";
+import { TemplateThumbnail } from "@/components/templates/TemplateThumbnail";
 import { mayaRodriguez } from "@/lib/sample-cv-data";
 import {
   TEMPLATE_LIST,
   getTemplate,
   isKnownTemplate,
-  type TemplateSlug,
 } from "@/lib/templates";
 
 const INCLUDES = [
@@ -26,15 +18,6 @@ const INCLUDES = [
   "PDF export",
   "Free forever — no subscription",
 ];
-
-const THUMBS: Record<TemplateSlug, React.ReactNode> = {
-  "classic-serif": <ClassicSerifThumb />,
-  "modern-mono": <ModernMonoThumb />,
-  "editorial-bold": <EditorialBoldThumb />,
-  atelier: <AtelierThumb />,
-  director: <DirectorThumb />,
-  "atelier-pro": <AtelierProThumb />,
-};
 
 export function generateStaticParams() {
   return TEMPLATE_LIST.map((t) => ({ slug: t.slug }));
@@ -130,13 +113,27 @@ export default async function TemplatePreviewPage({
           <h2 className="mb-6 font-display text-2xl text-plum">More templates</h2>
           <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-5 lg:gap-4">
             {otherTemplates.map((tpl) => (
-              <Link key={tpl.slug} href={`/templates/${tpl.slug}`} className="block">
-                <TemplateCard
-                  name={tpl.name}
-                  tier={tpl.tier === "premium" ? "PREMIUM" : "FREE"}
+              <Link
+                key={tpl.slug}
+                href={`/templates/${tpl.slug}`}
+                className="group relative block rounded-2xl border border-peach/40 bg-white p-2 shadow-warm-card transition-all hover:-translate-y-0.5 hover:shadow-warm-card-hover"
+              >
+                <TemplateThumbnail template={tpl} scale={0.25} />
+                <div className="mt-2 flex items-start justify-between gap-2">
+                  <h3 className="font-display text-sm text-plum">{tpl.name}</h3>
+                  {tpl.tier === "premium" ? (
+                    <Crown className="mt-0.5 h-3 w-3 shrink-0 text-gold" />
+                  ) : null}
+                </div>
+                <p
+                  className={
+                    tpl.tier === "free"
+                      ? "text-[10px] text-sage"
+                      : "text-[10px] text-coral"
+                  }
                 >
-                  {THUMBS[tpl.slug]}
-                </TemplateCard>
+                  {tpl.tier === "free" ? "Free" : "Premium"}
+                </p>
               </Link>
             ))}
           </div>
