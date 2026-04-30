@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { ArrowRight, Lock, Sparkles } from "lucide-react";
+import { ArrowRight, Lock } from "lucide-react";
 import { requireUser } from "@/lib/auth";
 import {
   AtelierProThumb,
@@ -27,14 +27,9 @@ export default async function TemplatesPage() {
   return (
     <div className="space-y-8">
       <section>
-        <span className="inline-flex items-center gap-2 rounded-full bg-coral/15 px-3 py-1 text-xs font-medium text-coral-deep">
-          <Sparkles className="h-3.5 w-3.5" />
-          {TEMPLATE_LIST.length} templates available
-        </span>
-        <h1 className="mt-4 text-4xl text-plum md:text-5xl">Templates</h1>
+        <h1 className="text-4xl text-plum md:text-5xl">Templates</h1>
         <p className="mt-3 max-w-2xl text-base leading-7 text-plum-soft">
-          Pick a layout, customize the theme, and ship a polished CV in minutes. Free templates are always free; premium
-          unlocks the senior-creative tier.
+          Six designs ready to use. Pick yours and start editing.
         </p>
       </section>
 
