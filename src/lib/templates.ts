@@ -8,6 +8,7 @@ import { MinimalistMono } from "@/components/templates/MinimalistMono";
 import { Atelier } from "@/components/templates/Atelier";
 import { Director } from "@/components/templates/Director";
 import { AtelierPro } from "@/components/templates/AtelierPro";
+import { BoldColorBlock } from "@/components/templates/BoldColorBlock";
 import {
   alexChen,
   ayeshaKhan,
@@ -17,6 +18,7 @@ import {
   mayaRodriguez,
   priyaPatel,
   sofiaMarchetti,
+  zaraOkonkwo,
 } from "@/lib/sample-cv-data";
 
 export type TemplateSlug =
@@ -27,7 +29,8 @@ export type TemplateSlug =
   | "minimalist-mono"
   | "atelier"
   | "director"
-  | "atelier-pro";
+  | "atelier-pro"
+  | "bold-color-block";
 
 export type TemplateMeta = {
   slug: TemplateSlug;
@@ -119,6 +122,16 @@ export const TEMPLATES: Record<TemplateSlug, TemplateMeta> = {
       "Cream content with a gold premium sidebar. Logros, Software, Competencias style. For multilingual professionals and senior creatives.",
     Component: AtelierPro,
     sampleData: juliaCortazar,
+  },
+  "bold-color-block": {
+    slug: "bold-color-block",
+    name: "Bold Color Block",
+    tier: "premium",
+    tagline: "Geometric · Vibrant · Agency",
+    description:
+      "Geometric color shapes, confident type, agency-grade visual energy. For creative directors, designers, and marketers whose work is visual.",
+    Component: BoldColorBlock,
+    sampleData: zaraOkonkwo,
   },
 };
 

@@ -897,3 +897,91 @@ export const edwardLindqvist: CVData = {
     { title: "Stockholm School of Economics Academic Excellence", year: "2009" },
   ],
 };
+
+export const zaraOkonkwo: CVData = {
+  basics: {
+    fullName: "Zara Okonkwo",
+    role: "Creative Director",
+    email: "zara@okonkwo.studio",
+    phone: "+44 7700 912 348",
+    location: "London, UK",
+    website: "zaraokonkwo.com",
+    photoUrl:
+      "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=400&h=400&fit=crop",
+    summary:
+      "Creative Director shaping brand identities for music labels, fashion houses, and cultural institutions. 7 years across Lagos and London. Currently leading creative at independent agency Kindred & Co. Recent work for Boiler Room, Skepta, and the V&A Africa Fashion exhibition. Believes great brand work happens at the intersection of subculture and craft.",
+  },
+  experience: [
+    {
+      role: "Creative Director",
+      company: "Kindred & Co",
+      location: "London, UK",
+      startDate: "Apr 2022",
+      endDate: "Present",
+      bullets: [
+        "Lead creative across 25+ projects annually with team of 6 designers and 3 strategists, billing average £35k per engagement",
+        "Directed identity system for V&A Africa Fashion exhibition — winner of D&AD Wood Pencil 2023 and Brand Impact Award",
+        "Built agency reputation in music + culture vertical — clients now include Boiler Room, NTS Radio, Skepta's SK Music, and three Universal Music sub-labels",
+      ],
+    },
+    {
+      role: "Senior Designer",
+      company: "Pentagram London",
+      location: "London, UK",
+      startDate: "Aug 2019",
+      endDate: "Mar 2022",
+      bullets: [
+        "Worked on Daniel Weil's team across cultural institution rebrands including Tate Modern wayfinding refresh and Royal Opera House digital identity",
+        "Selected for Pentagram's emerging talent showcase 2021 — featured in Eye Magazine and It's Nice That",
+        "Mentored 2 junior designers through to associate level",
+      ],
+    },
+    {
+      role: "Brand Designer",
+      company: "Studio Lagos",
+      location: "Lagos, Nigeria",
+      startDate: "Jul 2017",
+      endDate: "Jul 2019",
+      bullets: [
+        "Co-founded studio with 2 partners — built portfolio across Nigerian fashion brands (Kenneth Ize, Orange Culture) and Lagos cultural events",
+        "Selected for Lagos Design Week 2018 emerging studios cohort",
+        "Designed identity for Lagos Photo Festival 2019 — used across all festival surfaces",
+      ],
+    },
+  ],
+  education: [
+    {
+      school: "Royal College of Art",
+      degree: "MA Communication Design",
+      location: "London, UK",
+      startDate: "2015",
+      endDate: "2017",
+    },
+    {
+      school: "Yaba College of Technology",
+      degree: "BA Graphic Design",
+      location: "Lagos, Nigeria",
+      startDate: "2011",
+      endDate: "2015",
+    },
+  ],
+  skills: [
+    "Brand Identity",
+    "Art Direction",
+    "Type Design",
+    "Creative Strategy",
+    "Team Leadership",
+    "Cultural Insight",
+  ],
+  languages: [
+    { name: "English", level: "Native" },
+    { name: "Yorùbá", level: "Native" },
+    { name: "French", level: "Conversational" },
+  ],
+  awards: [
+    { title: "D&AD Wood Pencil — Brand Identity", year: "2023" },
+    { title: "Brand Impact Award — Cultural Sector", year: "2023" },
+    { title: "Pentagram Emerging Talent", year: "2021" },
+    { title: "Lagos Design Week Selected Studio", year: "2018" },
+  ],
+};
