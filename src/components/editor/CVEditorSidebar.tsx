@@ -15,6 +15,190 @@ import type {
 } from "@/lib/cv-types";
 import { ACCENTS, BODY_FONTS, HEADING_FONTS, THEMES } from "@/lib/cv-themes";
 import { RichTextEditor } from "./RichTextEditor";
+import { ImproveButton } from "./ImproveButton";
+
+const UNDO_TIMEOUT_MS = 10000;
+
+function BulletRow({
+  value,
+  onChange,
+  onRemove,
+  role,
+  company,
+  ariaLabel,
+}: {
+  value: string;
+  onChange: (html: string) => void;
+  onRemove: () => void;
+  role?: string;
+  company?: string;
+  ariaLabel: string;
+}) {
+  const [previousValue, setPreviousValue] = useState<string | null>(null);
+  const improvedRef = useRef<string | null>(null);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (timerRef.current) clearTimeout(timerRef.current);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (
+      previousValue !== null &&
+      improvedRef.current !== null &&
+      value !== improvedRef.current
+    ) {
+      setPreviousValue(null);
+      improvedRef.current = null;
+      if (timerRef.current) clearTimeout(timerRef.current);
+    }
+  }, [value, previousValue]);
+
+  const handleImproved = (newHtml: string) => {
+    setPreviousValue(value);
+    improvedRef.current = newHtml;
+    onChange(newHtml);
+    if (timerRef.current) clearTimeout(timerRef.current);
+    timerRef.current = setTimeout(() => {
+      setPreviousValue(null);
+      improvedRef.current = null;
+    }, UNDO_TIMEOUT_MS);
+  };
+
+  const handleUndo = () => {
+    if (previousValue === null) return;
+    onChange(previousValue);
+    setPreviousValue(null);
+    improvedRef.current = null;
+    if (timerRef.current) clearTimeout(timerRef.current);
+  };
+
+  return (
+    <div className="space-y-1">
+      <div className="flex items-start gap-2">
+        <div className="flex-1 min-w-0">
+          <RichTextEditor
+            value={value}
+            onChange={onChange}
+            placeholder="Describe your impact..."
+            minHeight={60}
+            ariaLabel={ariaLabel}
+          />
+        </div>
+        <div className="mt-1 flex items-start gap-1">
+          <ImproveButton
+            bulletText={value}
+            onImproved={handleImproved}
+            role={role}
+            company={company}
+          />
+          <button
+            type="button"
+            aria-label={`Remove ${ariaLabel}`}
+            onClick={onRemove}
+            className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-md text-plum-soft transition-colors hover:bg-coral/10 hover:text-coral"
+          >
+            <Trash2 className="h-3.5 w-3.5" />
+          </button>
+        </div>
+      </div>
+      {previousValue !== null && (
+        <button
+          type="button"
+          onClick={handleUndo}
+          className="ml-1 text-xs text-coral underline-offset-2 hover:text-coral-deep hover:underline"
+        >
+          Undo improvement
+        </button>
+      )}
+    </div>
+  );
+}
+
+function SummaryRow({
+  value,
+  onChange,
+  role,
+}: {
+  value: string;
+  onChange: (html: string) => void;
+  role?: string;
+}) {
+  const [previousValue, setPreviousValue] = useState<string | null>(null);
+  const improvedRef = useRef<string | null>(null);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (timerRef.current) clearTimeout(timerRef.current);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (
+      previousValue !== null &&
+      improvedRef.current !== null &&
+      value !== improvedRef.current
+    ) {
+      setPreviousValue(null);
+      improvedRef.current = null;
+      if (timerRef.current) clearTimeout(timerRef.current);
+    }
+  }, [value, previousValue]);
+
+  const handleImproved = (newHtml: string) => {
+    setPreviousValue(value);
+    improvedRef.current = newHtml;
+    onChange(newHtml);
+    if (timerRef.current) clearTimeout(timerRef.current);
+    timerRef.current = setTimeout(() => {
+      setPreviousValue(null);
+      improvedRef.current = null;
+    }, UNDO_TIMEOUT_MS);
+  };
+
+  const handleUndo = () => {
+    if (previousValue === null) return;
+    onChange(previousValue);
+    setPreviousValue(null);
+    improvedRef.current = null;
+    if (timerRef.current) clearTimeout(timerRef.current);
+  };
+
+  return (
+    <div className="space-y-1">
+      <div className="flex items-start gap-2">
+        <div className="flex-1 min-w-0">
+          <RichTextEditor
+            value={value}
+            onChange={onChange}
+            placeholder="A short professional summary..."
+            minHeight={120}
+            ariaLabel="Professional summary"
+          />
+        </div>
+        <div className="mt-1">
+          <ImproveButton
+            bulletText={value}
+            onImproved={handleImproved}
+            role={role}
+          />
+        </div>
+      </div>
+      {previousValue !== null && (
+        <button
+          type="button"
+          onClick={handleUndo}
+          className="ml-1 text-xs text-coral underline-offset-2 hover:text-coral-deep hover:underline"
+        >
+          Undo improvement
+        </button>
+      )}
+    </div>
+  );
+}
 
 const inputClass =
   "w-full rounded-md border border-plum/15 bg-cream-soft px-3 py-2 text-sm text-plum focus:border-coral focus:outline-none focus:ring-2 focus:ring-coral/20";
@@ -542,12 +726,10 @@ export function CVEditorSidebar({
           />
         </Field>
         <Field label="Summary">
-          <RichTextEditor
+          <SummaryRow
             value={data.basics.summary ?? ""}
             onChange={(html) => updateBasics("summary", html)}
-            placeholder="A short professional summary..."
-            minHeight={120}
-            ariaLabel="Professional summary"
+            role={data.basics.role}
           />
         </Field>
       </SectionAccordion>
@@ -612,34 +794,24 @@ export function CVEditorSidebar({
               <Field label="Bullets">
                 <div className="space-y-2">
                   {(job.bullets ?? []).map((bullet, bi) => (
-                    <div key={bi} className="flex items-start gap-2">
-                      <div className="flex-1 min-w-0">
-                        <RichTextEditor
-                          value={bullet}
-                          onChange={(html) => {
-                            const next = [...(job.bullets ?? [])];
-                            next[bi] = html;
-                            update("bullets", next);
-                          }}
-                          placeholder="Describe your impact..."
-                          minHeight={60}
-                          ariaLabel={`Bullet ${bi + 1}`}
-                        />
-                      </div>
-                      <button
-                        type="button"
-                        aria-label={`Remove bullet ${bi + 1}`}
-                        onClick={() => {
-                          const next = (job.bullets ?? []).filter(
-                            (_, i) => i !== bi,
-                          );
-                          update("bullets", next);
-                        }}
-                        className="mt-1 inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-md text-plum-soft transition-colors hover:bg-coral/10 hover:text-coral"
-                      >
-                        <Trash2 className="h-3.5 w-3.5" />
-                      </button>
-                    </div>
+                    <BulletRow
+                      key={bi}
+                      value={bullet}
+                      onChange={(html) => {
+                        const next = [...(job.bullets ?? [])];
+                        next[bi] = html;
+                        update("bullets", next);
+                      }}
+                      onRemove={() => {
+                        const next = (job.bullets ?? []).filter(
+                          (_, i) => i !== bi,
+                        );
+                        update("bullets", next);
+                      }}
+                      role={job.role}
+                      company={job.company}
+                      ariaLabel={`Bullet ${bi + 1}`}
+                    />
                   ))}
                   <button
                     type="button"
