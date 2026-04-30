@@ -3,6 +3,7 @@ import type { CVData } from "@/lib/cv-types";
 import { ClassicSerif } from "@/components/templates/ClassicSerif";
 import { ModernMono } from "@/components/templates/ModernMono";
 import { EditorialBold } from "@/components/templates/EditorialBold";
+import { PhotoForward } from "@/components/templates/PhotoForward";
 import { Atelier } from "@/components/templates/Atelier";
 import { Director } from "@/components/templates/Director";
 import { AtelierPro } from "@/components/templates/AtelierPro";
@@ -13,12 +14,14 @@ import {
   marcusWebb,
   mayaRodriguez,
   priyaPatel,
+  sofiaMarchetti,
 } from "@/lib/sample-cv-data";
 
 export type TemplateSlug =
   | "classic-serif"
   | "modern-mono"
   | "editorial-bold"
+  | "photo-forward"
   | "atelier"
   | "director"
   | "atelier-pro";
@@ -63,6 +66,16 @@ export const TEMPLATES: Record<TemplateSlug, TemplateMeta> = {
       "A magazine-style CV with a gold banner header and 2-column body. Perfect for marketing, brand, and creative roles.",
     Component: EditorialBold,
     sampleData: priyaPatel,
+  },
+  "photo-forward": {
+    slug: "photo-forward",
+    name: "Photo Forward",
+    tier: "free",
+    tagline: "Editorial · Photo-Led · Confident",
+    description:
+      "Big-photo editorial layout for photographers, designers, and visual creatives. Vogue-spread feel with restrained typography.",
+    Component: PhotoForward,
+    sampleData: sofiaMarchetti,
   },
   atelier: {
     slug: "atelier",

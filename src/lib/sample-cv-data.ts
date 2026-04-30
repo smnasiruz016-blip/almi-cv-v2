@@ -723,3 +723,90 @@ export const juliaCortazar: CVData = {
     { title: "Premio Nacional Diseño Joven", year: "2019" },
   ],
 };
+
+export const sofiaMarchetti: CVData = {
+  basics: {
+    fullName: "Sofia Marchetti",
+    role: "Brand Photographer & Visual Storyteller",
+    email: "hello@sofiamarchetti.com",
+    phone: "+39 333 142 8855",
+    location: "Milano, Italia",
+    website: "sofiamarchetti.com",
+    photoUrl:
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop",
+    summary:
+      "Independent brand photographer with 9 years documenting fashion houses, hospitality groups, and emerging luxury brands across Europe. Selected for Vogue Italia Fresh Eyes 2024. Currently splitting time between editorial commissions and a permanent gallery residency at Fondazione Sozzani.",
+  },
+  experience: [
+    {
+      role: "Lead Brand Photographer",
+      company: "Studio Marchetti",
+      location: "Milano, IT",
+      startDate: "Jan 2021",
+      endDate: "Present",
+      bullets: [
+        "Built independent studio servicing 40+ brands including Brunello Cucinelli, Aesop Italia, and Six Senses hotels with average project value €18k",
+        "Lead photographer for Vogue Italia \"Sustainable Style\" editorial series 2023-2024 — 14 commissioned features published",
+        "Manage team of 3 (assistant photographer, retoucher, production coordinator) across 60+ shoots annually",
+      ],
+    },
+    {
+      role: "Senior Photographer",
+      company: "Condé Nast Italia",
+      location: "Milano, IT",
+      startDate: "Mar 2018",
+      endDate: "Dec 2020",
+      bullets: [
+        "Staff photographer covering Vogue Italia, GQ Italia, and AD Italia campaigns and editorial spreads",
+        "Shot covers for 8 issues across the three publications, including Vogue Italia's centennial relaunch",
+        "Mentored 4 junior photographers through Condé Nast's emerging-talent program",
+      ],
+    },
+    {
+      role: "Freelance Photographer",
+      company: "Independent",
+      location: "Roma → Milano",
+      startDate: "Jun 2015",
+      endDate: "Feb 2018",
+      bullets: [
+        "Built portfolio with editorial commissions for Marie Claire Italia, L'Officiel, and Numéro Berlin",
+        "Selected for Foam Talent 2017 — exhibited at Foam Amsterdam and Photo London",
+      ],
+    },
+  ],
+  education: [
+    {
+      school: "Istituto Europeo di Design (IED)",
+      degree: "MA Photography",
+      location: "Milano, IT",
+      startDate: "2013",
+      endDate: "2015",
+    },
+    {
+      school: "Università IUAV di Venezia",
+      degree: "BA Visual Arts",
+      location: "Venezia, IT",
+      startDate: "2009",
+      endDate: "2013",
+    },
+  ],
+  skills: [
+    "Editorial Photography",
+    "Brand Storytelling",
+    "Studio Lighting",
+    "Fashion Direction",
+    "Color Grading",
+    "Team Leadership",
+  ],
+  languages: [
+    { name: "Italiano", level: "Native" },
+    { name: "English", level: "Fluent" },
+    { name: "Français", level: "Professional" },
+  ],
+  awards: [
+    { title: "Vogue Italia Fresh Eyes", year: "2024" },
+    { title: "Hasselblad Masters Finalist", year: "2022" },
+    { title: "Italian Photography Award Editorial", year: "2021" },
+    { title: "Foam Talent Selected", year: "2017" },
+  ],
+};
