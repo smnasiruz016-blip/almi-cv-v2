@@ -3,6 +3,8 @@ import { ArrowRight, FileText, MoreVertical, Plus, Sparkles } from "lucide-react
 import { requireUser } from "@/lib/auth";
 import { listResumes } from "@/lib/resume-actions";
 import { getTemplate } from "@/lib/templates";
+import { TemplateThumbnail } from "@/components/templates/TemplateThumbnail";
+import type { CVData } from "@/lib/cv-types";
 
 const RTF = new Intl.RelativeTimeFormat("en", { numeric: "auto" });
 
@@ -102,8 +104,12 @@ export default async function DashboardPage() {
                   </p>
                 </div>
                 <p className="mt-2 font-display text-lg text-plum">{resume.title}</p>
-                <div className="mt-3 flex aspect-[3/4] items-center justify-center rounded-md bg-cream-soft text-xs italic text-plum-faint">
-                  Preview coming
+                <div className="mt-3">
+                  <TemplateThumbnail
+                    template={getTemplate(resume.template)}
+                    data={(resume.data ?? {}) as CVData}
+                    scale={0.3}
+                  />
                 </div>
                 <div className="mt-4 flex items-center justify-between">
                   <span className="text-sm font-medium text-coral">Open editor →</span>

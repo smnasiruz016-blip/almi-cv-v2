@@ -1,15 +1,18 @@
+import type { CVData } from "@/lib/cv-types";
 import type { TemplateMeta } from "@/lib/templates";
 import { mayaRodriguez } from "@/lib/sample-cv-data";
 
 export function TemplateThumbnail({
   template,
+  data,
   scale = 0.35,
 }: {
   template: TemplateMeta;
+  data?: CVData;
   scale?: number;
 }) {
   const Component = template.Component;
-  const data = template.sampleData ?? mayaRodriguez;
+  const renderData = data ?? template.sampleData ?? mayaRodriguez;
 
   return (
     <div
@@ -25,7 +28,7 @@ export function TemplateThumbnail({
           transformOrigin: "top left",
         }}
       >
-        <Component data={data} paginated={false} />
+        <Component data={renderData} paginated={false} />
       </div>
     </div>
   );
