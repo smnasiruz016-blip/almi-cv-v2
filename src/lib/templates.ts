@@ -9,8 +9,10 @@ import { Atelier } from "@/components/templates/Atelier";
 import { Director } from "@/components/templates/Director";
 import { AtelierPro } from "@/components/templates/AtelierPro";
 import { BoldColorBlock } from "@/components/templates/BoldColorBlock";
+import { SoftPastelRomantic } from "@/components/templates/SoftPastelRomantic";
 import {
   alexChen,
+  amaraHassan,
   ayeshaKhan,
   edwardLindqvist,
   juliaCortazar,
@@ -30,7 +32,8 @@ export type TemplateSlug =
   | "atelier"
   | "director"
   | "atelier-pro"
-  | "bold-color-block";
+  | "bold-color-block"
+  | "soft-pastel-romantic";
 
 export type TemplateMeta = {
   slug: TemplateSlug;
@@ -132,6 +135,16 @@ export const TEMPLATES: Record<TemplateSlug, TemplateMeta> = {
       "Geometric color shapes, confident type, agency-grade visual energy. For creative directors, designers, and marketers whose work is visual.",
     Component: BoldColorBlock,
     sampleData: zaraOkonkwo,
+  },
+  "soft-pastel-romantic": {
+    slug: "soft-pastel-romantic",
+    name: "Soft Pastel",
+    tier: "free",
+    tagline: "Warm · Organic · Hand-Crafted Feel",
+    description:
+      "Soft pastels, organic shapes, and gentle typography. For wellness practitioners, educators, hospitality professionals, and anyone whose work is rooted in care.",
+    Component: SoftPastelRomantic,
+    sampleData: amaraHassan,
   },
 };
 

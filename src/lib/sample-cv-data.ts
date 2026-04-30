@@ -985,3 +985,91 @@ export const zaraOkonkwo: CVData = {
     { title: "Lagos Design Week Selected Studio", year: "2018" },
   ],
 };
+
+export const amaraHassan: CVData = {
+  basics: {
+    fullName: "Amara Hassan",
+    role: "Wellness Coach & Yoga Instructor",
+    email: "amara@stillbreath.co",
+    phone: "+212 661 487 209",
+    location: "Marrakech, Morocco",
+    website: "stillbreath.co",
+    photoUrl:
+      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop",
+    summary:
+      "Wellness coach blending traditional Moroccan healing practices with modern somatic therapy. 8 years guiding individuals and small groups through breath work, movement, and quiet ritual. Founder of Still Breath retreat in the Atlas Mountains. Trained at the Esalen Institute and certified in Somatic Experiencing.",
+  },
+  experience: [
+    {
+      role: "Founder & Lead Practitioner",
+      company: "Still Breath Retreats",
+      location: "Atlas Mountains, Morocco",
+      startDate: "Jan 2021",
+      endDate: "Present",
+      bullets: [
+        "Founded boutique wellness retreat hosting 6-day intensives for groups of 8-12 — 92% repeat or referral booking rate across 3 years",
+        "Designed proprietary curriculum blending Moroccan hammam traditions, somatic experiencing, and contemplative practice",
+        "Built sustainable operation employing 6 local women year-round, with all profits above operating costs reinvested in community wellness programs",
+      ],
+    },
+    {
+      role: "Senior Yoga Instructor",
+      company: "Soulshine Studios",
+      location: "Bali, Indonesia",
+      startDate: "Jun 2017",
+      endDate: "Dec 2020",
+      bullets: [
+        "Lead teacher across 200-hour and 500-hour yoga teacher training programs — graduated 180+ certified instructors",
+        "Curated weekly workshop series on breath, embodiment, and trauma-aware practice — consistently sold out",
+        "Mentored 24 junior teachers through Soulshine's apprenticeship program",
+      ],
+    },
+    {
+      role: "Movement Therapy Apprentice",
+      company: "Esalen Institute",
+      location: "Big Sur, California",
+      startDate: "Sep 2015",
+      endDate: "May 2017",
+      bullets: [
+        "Selected for two-year residency studying somatic practice under Esalen's senior faculty",
+        "Co-led weekly community classes in gentle movement and contemplative inquiry",
+      ],
+    },
+  ],
+  education: [
+    {
+      school: "Somatic Experiencing International",
+      degree: "Certification in Somatic Experiencing",
+      location: "Boulder, USA",
+      startDate: "2018",
+      endDate: "2020",
+    },
+    {
+      school: "American University in Cairo",
+      degree: "BA Comparative Religion",
+      location: "Cairo, Egypt",
+      startDate: "2010",
+      endDate: "2014",
+    },
+  ],
+  skills: [
+    "Somatic Practice",
+    "Breathwork",
+    "Yoga Instruction",
+    "Group Facilitation",
+    "Trauma-Aware Coaching",
+    "Retreat Design",
+  ],
+  languages: [
+    { name: "العربية", level: "Native" },
+    { name: "English", level: "Fluent" },
+    { name: "Français", level: "Fluent" },
+    { name: "Bahasa Indonesia", level: "Conversational" },
+  ],
+  awards: [
+    { title: "Conde Nast Traveller Top 50 Wellness Retreats", year: "2024" },
+    { title: "Yoga Journal Featured Practitioner", year: "2023" },
+    { title: "Esalen Institute Resident Fellowship", year: "2017" },
+    { title: "AUC Distinguished Graduate", year: "2014" },
+  ],
+};
