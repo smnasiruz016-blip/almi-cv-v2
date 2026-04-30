@@ -3,6 +3,7 @@
 import { Fragment, type CSSProperties, type ReactNode } from "react";
 import type { CVData } from "@/lib/cv-types";
 import { resolveStyle, withAlpha } from "@/lib/cv-themes";
+import { RichTextRender, isRichTextEmpty } from "@/lib/rich-text";
 import { PaginatedCV, type PaginatedSection } from "./PaginatedCV";
 
 const GOLD = "#C9A961";
@@ -348,13 +349,13 @@ function AtelierProPage({
           {isFirstPage && (
             <>
               <AtelierProHeader ctx={ctx} data={data} />
-              {summary && (
-                <p
+              {!isRichTextEmpty(summary) && (
+                <RichTextRender
+                  html={summary ?? ""}
+                  as="p"
                   className="mt-6 text-sm leading-relaxed"
                   style={{ color: ctx.theme.textSoft }}
-                >
-                  {summary}
-                </p>
+                />
               )}
               <div className="mt-8">{children}</div>
             </>
@@ -427,23 +428,25 @@ function buildAtelierProSections(
                     {job.startDate} — {job.endDate ?? "Present"}
                   </p>
                 </div>
-                {job.bullets && job.bullets.length > 0 && (
+                {job.bullets && job.bullets.some((b) => !isRichTextEmpty(b)) && (
                   <ul
                     className="mt-2 space-y-1 text-sm leading-relaxed"
                     style={{ color: ctx.theme.textSoft }}
                   >
-                    {job.bullets.map((bullet, bi) => (
-                      <li key={bi} className="flex gap-2">
-                        <span
-                          aria-hidden
-                          className="shrink-0"
-                          style={{ color: ctx.theme.textFaint }}
-                        >
-                          •
-                        </span>
-                        <span>{bullet}</span>
-                      </li>
-                    ))}
+                    {job.bullets
+                      .filter((b) => !isRichTextEmpty(b))
+                      .map((bullet, bi) => (
+                        <li key={bi} className="flex gap-2">
+                          <span
+                            aria-hidden
+                            className="shrink-0"
+                            style={{ color: ctx.theme.textFaint }}
+                          >
+                            •
+                          </span>
+                          <RichTextRender html={bullet} as="span" />
+                        </li>
+                      ))}
                   </ul>
                 )}
               </div>

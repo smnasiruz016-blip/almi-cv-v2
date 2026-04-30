@@ -9,6 +9,7 @@ import {
   sectionVariantStyle,
   withAlpha,
 } from "@/lib/cv-themes";
+import { RichTextRender, isRichTextEmpty } from "@/lib/rich-text";
 import { PaginatedCV, type PaginatedSection } from "./PaginatedCV";
 
 type DirectorCtx = {
@@ -263,18 +264,18 @@ function buildDirectorSections(
 
   const out: PaginatedSection[] = [];
 
-  if (basics.summary) {
+  if (!isRichTextEmpty(basics.summary)) {
     out.push({
       key: "profile",
       node: (
         <section className="mb-6">
           <SectionTitle title="PROFILE" ctx={ctx} />
-          <p
+          <RichTextRender
+            html={basics.summary ?? ""}
+            as="p"
             className="text-sm leading-relaxed"
             style={{ color: ctx.theme.textSoft }}
-          >
-            {basics.summary}
-          </p>
+          />
         </section>
       ),
     });
@@ -376,17 +377,19 @@ function buildDirectorSections(
                   {job.role ? job.company : ""}
                   {job.location ? ` · ${job.location}` : ""}
                 </p>
-                {job.bullets && job.bullets.length > 0 && (
+                {job.bullets && job.bullets.some((b) => !isRichTextEmpty(b)) && (
                   <ul
                     className="space-y-1 text-sm leading-relaxed"
                     style={{ color: ctx.theme.textSoft }}
                   >
-                    {job.bullets.map((bullet, bi) => (
-                      <li key={bi} className="flex gap-2">
-                        <span aria-hidden>—</span>
-                        <span>{bullet}</span>
-                      </li>
-                    ))}
+                    {job.bullets
+                      .filter((b) => !isRichTextEmpty(b))
+                      .map((bullet, bi) => (
+                        <li key={bi} className="flex gap-2">
+                          <span aria-hidden>—</span>
+                          <RichTextRender html={bullet} as="span" />
+                        </li>
+                      ))}
                   </ul>
                 )}
               </div>

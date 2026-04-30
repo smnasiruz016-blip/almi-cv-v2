@@ -9,6 +9,7 @@ import {
   sectionVariantStyle,
   withAlpha,
 } from "@/lib/cv-themes";
+import { RichTextRender, isRichTextEmpty } from "@/lib/rich-text";
 import { PaginatedCV, type PaginatedSection } from "./PaginatedCV";
 
 type ModernMonoCtx = {
@@ -328,18 +329,18 @@ function buildModernMonoRightSections(
 
   const out: PaginatedSection[] = [];
 
-  if (basics.summary) {
+  if (!isRichTextEmpty(basics.summary)) {
     out.push({
       key: "profile",
       node: (
         <section>
           {renderContentTitle("PROFILE", ctx)}
-          <p
+          <RichTextRender
+            html={basics.summary ?? ""}
+            as="p"
             className="text-sm leading-relaxed"
             style={{ color: ctx.theme.textSoft }}
-          >
-            {basics.summary}
-          </p>
+          />
         </section>
       ),
     });
@@ -380,17 +381,23 @@ function buildModernMonoRightSections(
                     {job.location}
                   </p>
                 )}
-                {job.bullets && job.bullets.length > 0 && (
+                {job.bullets && job.bullets.some((b) => !isRichTextEmpty(b)) && (
                   <ul className="mt-1.5 space-y-1">
-                    {job.bullets.map((bullet, bi) => (
-                      <li
-                        key={bi}
-                        className="flex gap-2 text-xs leading-relaxed"
-                      >
-                        <span style={{ color: ctx.theme.accent }}>•</span>
-                        <span style={{ color: ctx.theme.textSoft }}>{bullet}</span>
-                      </li>
-                    ))}
+                    {job.bullets
+                      .filter((b) => !isRichTextEmpty(b))
+                      .map((bullet, bi) => (
+                        <li
+                          key={bi}
+                          className="flex gap-2 text-xs leading-relaxed"
+                        >
+                          <span style={{ color: ctx.theme.accent }}>•</span>
+                          <RichTextRender
+                            html={bullet}
+                            as="span"
+                            style={{ color: ctx.theme.textSoft }}
+                          />
+                        </li>
+                      ))}
                   </ul>
                 )}
               </div>

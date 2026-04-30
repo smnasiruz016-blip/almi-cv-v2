@@ -124,6 +124,18 @@ h1, h2, h3, h4, h5, h6 {
   height: 0;
 }
 
+.cv-page p > p {
+  margin: 0;
+}
+.cv-page p > p + p {
+  margin-top: 0.5rem;
+}
+.cv-page li p,
+.cv-page li span > p {
+  margin: 0;
+  display: inline;
+}
+
 @layer components {
   .spacious section { margin-top: 2rem; margin-bottom: 2rem; }
   .spacious .space-y-5 > * + * { margin-top: 1.75rem !important; }
@@ -166,6 +178,11 @@ h1, h2, h3, h4, h5, h6 {
     print-color-adjust: exact !important;
     color-adjust: exact !important;
   }
+
+  strong, b { font-weight: 700; }
+  em, i { font-style: italic; }
+  u { text-decoration: underline; }
+  strong, em, u { page-break-inside: avoid; }
 
   .print-hide {
     display: none !important;

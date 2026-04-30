@@ -9,6 +9,7 @@ import {
   sectionVariantStyle,
   withAlpha,
 } from "@/lib/cv-themes";
+import { RichTextRender, isRichTextEmpty } from "@/lib/rich-text";
 import { PaginatedCV, type PaginatedSection } from "./PaginatedCV";
 
 type EditorialBoldCtx = {
@@ -207,17 +208,17 @@ function EditorialBoldPage({
       }
     >
       {isFirstPage && <EditorialBoldHeader ctx={ctx} data={data} />}
-      {isFirstPage && summary && (
+      {isFirstPage && !isRichTextEmpty(summary) && (
         <>
-          <p
+          <RichTextRender
+            html={summary ?? ""}
+            as="p"
             className="px-12 pb-2 pt-6 text-base italic leading-relaxed"
             style={{
               fontFamily: `${ctx.headingFont.cssVar}, ${ctx.headingFont.fallback}`,
               color: ctx.theme.textSoft,
             }}
-          >
-            {summary}
-          </p>
+          />
           <div
             className="mx-12 border-t"
             style={{ borderColor: withAlpha(ctx.theme.text, 0.15) }}
@@ -292,19 +293,21 @@ function buildEditorialBoldSections(
                 >
                   {job.startDate} — {job.endDate ?? "Present"}
                 </p>
-                {job.bullets && job.bullets.length > 0 && (
+                {job.bullets && job.bullets.some((b) => !isRichTextEmpty(b)) && (
                   <ul
                     className="space-y-1 text-sm leading-relaxed"
                     style={{ color: ctx.theme.textSoft }}
                   >
-                    {job.bullets.map((bullet, bi) => (
-                      <li key={bi} className="flex gap-2">
-                        <span aria-hidden style={{ color: ctx.theme.accent }}>
-                          ▸
-                        </span>
-                        <span>{bullet}</span>
-                      </li>
-                    ))}
+                    {job.bullets
+                      .filter((b) => !isRichTextEmpty(b))
+                      .map((bullet, bi) => (
+                        <li key={bi} className="flex gap-2">
+                          <span aria-hidden style={{ color: ctx.theme.accent }}>
+                            ▸
+                          </span>
+                          <RichTextRender html={bullet} as="span" />
+                        </li>
+                      ))}
                   </ul>
                 )}
               </div>
