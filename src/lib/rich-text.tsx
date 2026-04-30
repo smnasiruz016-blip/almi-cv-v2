@@ -1,21 +1,21 @@
-import DOMPurify from "isomorphic-dompurify";
+import sanitizeHtml from "sanitize-html";
 import type { ElementType, HTMLAttributes } from "react";
 
 const ALLOWED_TAGS = ["strong", "b", "em", "i", "u", "br", "p"];
-const ALLOWED_ATTR: string[] = [];
 
 export function sanitizeRichText(html: string): string {
   if (!html) return "";
-  return DOMPurify.sanitize(html, {
-    ALLOWED_TAGS,
-    ALLOWED_ATTR,
-    KEEP_CONTENT: true,
+  return sanitizeHtml(html, {
+    allowedTags: ALLOWED_TAGS,
+    allowedAttributes: {},
+    allowedSchemes: [],
+    disallowedTagsMode: "discard",
   });
 }
 
 export function stripRichText(html: string): string {
   if (!html) return "";
-  return DOMPurify.sanitize(html, { ALLOWED_TAGS: [], KEEP_CONTENT: true });
+  return sanitizeHtml(html, { allowedTags: [], allowedAttributes: {} });
 }
 
 export function isRichTextEmpty(html: string | undefined | null): boolean {
