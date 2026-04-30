@@ -14,6 +14,7 @@ import type {
   ThemeKey,
 } from "@/lib/cv-types";
 import { ACCENTS, BODY_FONTS, HEADING_FONTS, THEMES } from "@/lib/cv-themes";
+import { RichTextEditor } from "./RichTextEditor";
 
 const inputClass =
   "w-full rounded-md border border-plum/15 bg-cream-soft px-3 py-2 text-sm text-plum focus:border-coral focus:outline-none focus:ring-2 focus:ring-coral/20";
@@ -541,11 +542,12 @@ export function CVEditorSidebar({
           />
         </Field>
         <Field label="Summary">
-          <textarea
-            className={textareaClass}
+          <RichTextEditor
             value={data.basics.summary ?? ""}
-            onChange={(e) => updateBasics("summary", e.target.value)}
-            rows={4}
+            onChange={(html) => updateBasics("summary", html)}
+            placeholder="A short professional summary..."
+            minHeight={120}
+            ariaLabel="Professional summary"
           />
         </Field>
       </SectionAccordion>
@@ -607,12 +609,48 @@ export function CVEditorSidebar({
                   />
                 </Field>
               </div>
-              <Field label="Bullets (one per line)">
-                <MultilineList
-                  value={job.bullets ?? []}
-                  onChange={(next) => update("bullets", next)}
-                  rows={4}
-                />
+              <Field label="Bullets">
+                <div className="space-y-2">
+                  {(job.bullets ?? []).map((bullet, bi) => (
+                    <div key={bi} className="flex items-start gap-2">
+                      <div className="flex-1 min-w-0">
+                        <RichTextEditor
+                          value={bullet}
+                          onChange={(html) => {
+                            const next = [...(job.bullets ?? [])];
+                            next[bi] = html;
+                            update("bullets", next);
+                          }}
+                          placeholder="Describe your impact..."
+                          minHeight={60}
+                          ariaLabel={`Bullet ${bi + 1}`}
+                        />
+                      </div>
+                      <button
+                        type="button"
+                        aria-label={`Remove bullet ${bi + 1}`}
+                        onClick={() => {
+                          const next = (job.bullets ?? []).filter(
+                            (_, i) => i !== bi,
+                          );
+                          update("bullets", next);
+                        }}
+                        className="mt-1 inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-md text-plum-soft transition-colors hover:bg-coral/10 hover:text-coral"
+                      >
+                        <Trash2 className="h-3.5 w-3.5" />
+                      </button>
+                    </div>
+                  ))}
+                  <button
+                    type="button"
+                    onClick={() =>
+                      update("bullets", [...(job.bullets ?? []), ""])
+                    }
+                    className={addButtonClass}
+                  >
+                    <Plus className="h-3.5 w-3.5" /> Add bullet
+                  </button>
+                </div>
               </Field>
             </ArrayEntry>
           );

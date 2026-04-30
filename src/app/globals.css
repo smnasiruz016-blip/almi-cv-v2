@@ -103,6 +103,27 @@ h1, h2, h3, h4, h5, h6 {
   text-wrap: balance;
 }
 
+.rich-editor-content {
+  outline: none;
+  min-height: var(--min-height, 80px);
+}
+.rich-editor-content p {
+  margin: 0;
+}
+.rich-editor-content p + p {
+  margin-top: 0.5rem;
+}
+.rich-editor-content strong { font-weight: 700; }
+.rich-editor-content em { font-style: italic; }
+.rich-editor-content u { text-decoration: underline; }
+.rich-editor-content p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  float: left;
+  color: var(--color-plum-faint);
+  pointer-events: none;
+  height: 0;
+}
+
 @layer components {
   .spacious section { margin-top: 2rem; margin-bottom: 2rem; }
   .spacious .space-y-5 > * + * { margin-top: 1.75rem !important; }
