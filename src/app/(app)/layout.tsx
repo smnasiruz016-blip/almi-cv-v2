@@ -2,6 +2,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { FileText, LayoutTemplate, LogOut } from "lucide-react";
 import { destroySession, requireUser } from "@/lib/auth";
+import { cvFontVariables } from "@/lib/cv-fonts";
 
 async function logoutAction() {
   "use server";
@@ -15,7 +16,7 @@ export default async function AppLayout({
   const user = await requireUser();
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-cream to-cream-soft">
+    <div className={`min-h-screen bg-gradient-to-b from-cream to-cream-soft ${cvFontVariables}`}>
       <header className="sticky top-0 z-50 border-b border-plum/10 bg-cream/80 backdrop-blur-md">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-6 py-4">
           <Link href="/dashboard" className="flex items-center gap-2.5">

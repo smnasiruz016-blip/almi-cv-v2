@@ -12,8 +12,20 @@ export function Footer() {
   return (
     <footer className="bg-cream-soft">
       <div className="mx-auto flex max-w-6xl flex-col items-center gap-6 px-6 py-12 md:flex-row md:justify-between">
-        <Link href="/" className="flex items-center">
-          <Image src="/logo-dark.svg" alt="AlmiWorld" width={180} height={60} />
+        <Link
+          href="https://almiworld.com"
+          target="_blank"
+          rel="noopener"
+          className="flex items-center self-center opacity-90 transition-opacity hover:opacity-100"
+        >
+          <Image
+            src="/almiworld-logo.png"
+            alt="AlmiWorld — live beautifully"
+            width={240}
+            height={80}
+            className="h-12 w-auto md:h-[60px]"
+            priority={false}
+          />
         </Link>
         <nav className="flex flex-wrap items-center justify-center gap-6">
           {FOOTER_LINKS.map((link) => (
