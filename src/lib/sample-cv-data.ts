@@ -637,3 +637,89 @@ export const marcusWebb: CVData = {
     "Independent record stores",
   ],
 };
+
+export const juliaCortazar: CVData = {
+  basics: {
+    fullName: "Julia Cortázar",
+    role: "Multimedia Artist & Creative Director",
+    email: "julia.cortazar@studio.es",
+    phone: "+34 612 458 901",
+    location: "Barcelona, España",
+    website: "juliacortazar.art",
+    photoUrl:
+      "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop",
+    summary:
+      "Multimedia artist with 10+ years bridging fine art, motion design, and immersive installations. Featured in Ars Electronica, Sónar+D, and ZKM Karlsruhe. Currently directing creative at independent studio focused on cultural institutions and public art commissions.",
+  },
+  experience: [
+    {
+      role: "Creative Director",
+      company: "Estudio Lumen",
+      location: "Barcelona, ES",
+      startDate: "Mar 2022",
+      endDate: "Present",
+      bullets: [
+        "Direct multidisciplinary team of 8 across motion, 3D, and installation projects for clients including MACBA, CCCB, and Sónar Festival",
+        "Led signature installation 'Mareas Digitales' — 12-meter projection commissioned by Barcelona City Council, viewed by 180k+ visitors",
+        "Grew studio revenue 240% over 3 years while maintaining 100% creative-led project selection",
+      ],
+    },
+    {
+      role: "Senior Motion Designer",
+      company: "Domestic Data Streamers",
+      location: "Barcelona, ES",
+      startDate: "Jun 2018",
+      endDate: "Feb 2022",
+      bullets: [
+        "Designed motion identity systems for 30+ data-driven exhibitions across Europe and Latin America",
+        "Co-authored visual language for permanent installation at Museu del Disseny (still on display since 2020)",
+      ],
+    },
+    {
+      role: "Freelance Multimedia Artist",
+      company: "Independent",
+      location: "Madrid → Barcelona",
+      startDate: "Sep 2015",
+      endDate: "May 2018",
+      bullets: [
+        "Selected for Ars Electronica Campus 2017 with generative piece 'Ecos del Bosque'",
+        "Commissioned by Fundación Telefónica for 6-month digital residency",
+      ],
+    },
+  ],
+  education: [
+    {
+      school: "Universitat Pompeu Fabra",
+      degree: "MFA Digital Arts",
+      location: "Barcelona, ES",
+      startDate: "2013",
+      endDate: "2015",
+    },
+    {
+      school: "Universidad Complutense de Madrid",
+      degree: "BA Fine Arts",
+      location: "Madrid, ES",
+      startDate: "2009",
+      endDate: "2013",
+    },
+  ],
+  skills: [
+    "Creative Direction",
+    "Motion Design",
+    "Generative Art",
+    "Projection Mapping",
+    "Installation Design",
+    "Team Leadership",
+  ],
+  languages: [
+    { name: "Español", level: "Native" },
+    { name: "Català", level: "Fluent" },
+    { name: "English", level: "Professional" },
+  ],
+  awards: [
+    { title: "Ars Electronica Honorary Mention", year: "2023" },
+    { title: "Laus Award Gold — Motion Design", year: "2021" },
+    { title: "Sónar+D Featured Artist", year: "2020" },
+    { title: "Premio Nacional Diseño Joven", year: "2019" },
+  ],
+};

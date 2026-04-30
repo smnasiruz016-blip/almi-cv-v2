@@ -5,9 +5,11 @@ import { ModernMono } from "@/components/templates/ModernMono";
 import { EditorialBold } from "@/components/templates/EditorialBold";
 import { Atelier } from "@/components/templates/Atelier";
 import { Director } from "@/components/templates/Director";
+import { AtelierPro } from "@/components/templates/AtelierPro";
 import {
   alexChen,
   ayeshaKhan,
+  juliaCortazar,
   marcusWebb,
   mayaRodriguez,
   priyaPatel,
@@ -89,7 +91,8 @@ export const TEMPLATES: Record<TemplateSlug, TemplateMeta> = {
     tagline: "Sidebar · Multilingual · Premium",
     description:
       "Cream content with a gold premium sidebar. Logros, Software, Competencias style. For multilingual professionals and senior creatives.",
-    Component: ClassicSerif,
+    Component: AtelierPro,
+    sampleData: juliaCortazar,
   },
 };
 
