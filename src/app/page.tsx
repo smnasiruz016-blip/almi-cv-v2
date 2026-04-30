@@ -65,12 +65,30 @@ function SiteHeader({ isLoggedIn }: { isLoggedIn: boolean }) {
               AlmiCV
             </span>
           </Link>
-          <Link
-            href={isLoggedIn ? "/dashboard" : "/login"}
-            className="text-sm font-medium text-plum-soft transition hover:text-coral"
-          >
-            {isLoggedIn ? "Dashboard" : "Log in"}
-          </Link>
+          {isLoggedIn ? (
+            <Link
+              href="/dashboard"
+              className="text-sm font-medium text-plum-soft transition hover:text-coral"
+            >
+              Dashboard
+            </Link>
+          ) : (
+            <div className="flex items-center gap-3">
+              <Link
+                href="/login"
+                className="hidden text-sm font-medium text-plum-soft transition hover:text-coral sm:inline-flex"
+              >
+                Log in
+              </Link>
+              <Link
+                href="/signup"
+                className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-pill bg-coral px-5 py-3 text-sm font-semibold text-white shadow-warm-card transition hover:-translate-y-0.5 hover:bg-coral-deep focus:outline-none focus:ring-4 focus:ring-coral/30"
+              >
+                Get started — free
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
+          )}
         </div>
       </Container>
     </header>
