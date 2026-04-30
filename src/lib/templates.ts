@@ -4,12 +4,14 @@ import { ClassicSerif } from "@/components/templates/ClassicSerif";
 import { ModernMono } from "@/components/templates/ModernMono";
 import { EditorialBold } from "@/components/templates/EditorialBold";
 import { PhotoForward } from "@/components/templates/PhotoForward";
+import { MinimalistMono } from "@/components/templates/MinimalistMono";
 import { Atelier } from "@/components/templates/Atelier";
 import { Director } from "@/components/templates/Director";
 import { AtelierPro } from "@/components/templates/AtelierPro";
 import {
   alexChen,
   ayeshaKhan,
+  edwardLindqvist,
   juliaCortazar,
   marcusWebb,
   mayaRodriguez,
@@ -22,6 +24,7 @@ export type TemplateSlug =
   | "modern-mono"
   | "editorial-bold"
   | "photo-forward"
+  | "minimalist-mono"
   | "atelier"
   | "director"
   | "atelier-pro";
@@ -76,6 +79,16 @@ export const TEMPLATES: Record<TemplateSlug, TemplateMeta> = {
       "Big-photo editorial layout for photographers, designers, and visual creatives. Vogue-spread feel with restrained typography.",
     Component: PhotoForward,
     sampleData: sofiaMarchetti,
+  },
+  "minimalist-mono": {
+    slug: "minimalist-mono",
+    name: "Minimalist Mono",
+    tier: "free",
+    tagline: "Executive · Pure Typography · Restrained",
+    description:
+      "For senior executives, consultants, and advisors. Zero color, generous whitespace, confident typographic restraint. The black suit of CV templates.",
+    Component: MinimalistMono,
+    sampleData: edwardLindqvist,
   },
   atelier: {
     slug: "atelier",

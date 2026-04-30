@@ -810,3 +810,90 @@ export const sofiaMarchetti: CVData = {
     { title: "Foam Talent Selected", year: "2017" },
   ],
 };
+
+export const edwardLindqvist: CVData = {
+  basics: {
+    fullName: "Edward Lindqvist",
+    role: "Senior Strategy Consultant",
+    email: "edward.lindqvist@consulting.se",
+    phone: "+46 70 458 1290",
+    location: "Stockholm, Sweden",
+    website: "edwardlindqvist.com",
+    photoUrl: "",
+    summary:
+      "Senior consultant with 14 years advising Nordic financial institutions, energy companies, and family offices on strategic transformation. Former Bain & Company engagement manager. Currently leading the Nordic strategy practice at an independent advisory firm with €40M+ in mandates over the past three years.",
+  },
+  experience: [
+    {
+      role: "Partner",
+      company: "Lindqvist Strategic Advisors",
+      location: "Stockholm, SE",
+      startDate: "Sep 2020",
+      endDate: "Present",
+      bullets: [
+        "Founded boutique advisory firm focused on Nordic mid-market — grew to 12 consultants and €40M+ in cumulative mandates over 3 years",
+        "Led strategic transformation engagements for clients including Nordea, Vattenfall, and three Wallenberg-controlled industrial groups",
+        "Authored quarterly Nordic Strategy Outlook — 8,000+ subscribers across regional executive readership",
+      ],
+    },
+    {
+      role: "Engagement Manager",
+      company: "Bain & Company",
+      location: "Stockholm, SE",
+      startDate: "Mar 2015",
+      endDate: "Aug 2020",
+      bullets: [
+        "Managed 18 engagements across financial services, energy, and industrials with average team size of 6 consultants",
+        "Promoted from Senior Consultant in 2.5 years (top quartile of cohort)",
+        "Co-led Bain Stockholm's recruitment program at SSE and KTH — interviewed 200+ candidates annually",
+      ],
+    },
+    {
+      role: "Senior Analyst",
+      company: "McKinsey & Company",
+      location: "London, UK → Stockholm, SE",
+      startDate: "Jul 2011",
+      endDate: "Feb 2015",
+      bullets: [
+        "Joined out of LSE graduate program, transferred to Stockholm office after 18 months",
+        "Specialized in financial services strategy across Northern European banking sector",
+      ],
+    },
+  ],
+  education: [
+    {
+      school: "London School of Economics",
+      degree: "MSc Finance",
+      location: "London, UK",
+      startDate: "2009",
+      endDate: "2011",
+    },
+    {
+      school: "Stockholm School of Economics",
+      degree: "BSc Business Administration",
+      location: "Stockholm, SE",
+      startDate: "2006",
+      endDate: "2009",
+    },
+  ],
+  skills: [
+    "Strategic Planning",
+    "Financial Analysis",
+    "M&A Advisory",
+    "Operating Model Design",
+    "Board Communication",
+    "Team Leadership",
+  ],
+  languages: [
+    { name: "Svenska", level: "Native" },
+    { name: "English", level: "Fluent" },
+    { name: "Deutsch", level: "Professional" },
+    { name: "Norsk", level: "Conversational" },
+  ],
+  awards: [
+    { title: "Consulting Magazine Top 25 Under 35", year: "2022" },
+    { title: "Bain Stockholm MVP Award", year: "2019" },
+    { title: "LSE Distinguished Graduate", year: "2011" },
+    { title: "Stockholm School of Economics Academic Excellence", year: "2009" },
+  ],
+};
