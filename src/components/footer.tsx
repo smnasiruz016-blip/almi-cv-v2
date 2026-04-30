@@ -23,7 +23,7 @@ export function Footer() {
             alt="AlmiWorld — live beautifully"
             width={240}
             height={80}
-            className="h-12 w-auto md:h-[60px]"
+            className="h-14 w-auto mix-blend-multiply md:h-[72px]"
             priority={false}
           />
         </Link>
