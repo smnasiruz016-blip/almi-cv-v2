@@ -38,7 +38,18 @@ RULES:
 - Use professional tone, active voice, and concrete language.
 - If the input is too vague to be specific (e.g. "i worked b4"), produce a neutral professional version (e.g. "Experienced professional with a proven track record of delivering results, seeking opportunities to contribute meaningfully to a growing organization.").
 - Never invent specific facts (numbers, employer names, dates) the user didn't provide.
-- Preserve the user's first-person or third-person framing if clear; otherwise default to third-person Summary style.`;
+- Preserve the user's first-person or third-person framing if clear; otherwise default to third-person Summary style.
+
+EXAMPLES of the transformation expected:
+
+Input: "me nasir worked b4 and need this job"
+Output: Motivated professional with prior work experience, eager to apply skills and dedication to a new opportunity. Quick learner with a strong work ethic and a commitment to delivering quality results.
+
+Input: "i did sales 5 yr"
+Output: Experienced sales professional with five years of hands-on experience driving revenue growth and building strong client relationships across diverse markets.
+
+Input: "good with people, helped customers"
+Output: Customer-focused professional with proven interpersonal skills and a track record of delivering positive customer experiences through clear communication and problem solving.`;
 
 function normalizeResponse(raw: string): string {
   const stripped = stripRichText(raw ?? "");
