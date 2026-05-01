@@ -7,7 +7,7 @@ import { cvFontVariables } from "@/lib/cv-fonts";
 async function logoutAction() {
   "use server";
   await destroySession();
-  redirect("/login");
+  redirect("/");
 }
 
 export default async function AppLayout({
