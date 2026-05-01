@@ -27,6 +27,8 @@ function wrapAsParagraph(text: string): string {
   return `<p>${escapeHtml(trimmed)}</p>`;
 }
 
+const stripHtml = (s: string) => s.replace(/<[^>]*>/g, "").trim();
+
 export function ImproveButton({
   bulletText,
   onImproved,
@@ -67,13 +69,19 @@ export function ImproveButton({
         company,
       });
 
+      const originalPlain = stripHtml(bulletText);
+      const improvedPlain =
+        result && "ok" in result && result.ok ? stripHtml(result.improved) : "";
+      const actuallyChanged =
+        improvedPlain !== originalPlain && improvedPlain.length > 0;
+
       // TODO(diag): temporary — remove once we've captured the failure mode
       console.log("[ImproveButton] applying improved", {
         ts: new Date().toISOString(),
         apiStatus: result?.ok ? "ok" : "error",
         improved: result?.ok ? result.improved : null,
         original: bulletText,
-        changed: result?.ok ? result.improved !== bulletText : false,
+        changed: actuallyChanged,
       });
 
       if (!result || typeof result !== "object" || !("ok" in result)) {
@@ -93,6 +101,11 @@ export function ImproveButton({
       const improved = result.improved;
       if (typeof improved !== "string" || !improved.trim()) {
         showError(FALLBACK_ERROR);
+        return;
+      }
+
+      if (!actuallyChanged) {
+        showError("No change suggested — try adding more detail.");
         return;
       }
 
