@@ -87,12 +87,6 @@ export function EditorClient({
             <SaveIndicator status={saveStatus} />
           </div>
           <div className="flex items-center gap-2">
-            <Link
-              href={`/cv/${resumeId}/preview`}
-              className="rounded-pill border border-plum/15 px-4 py-2 text-sm font-medium text-plum transition-colors hover:bg-plum/5"
-            >
-              Preview
-            </Link>
             <button
               type="button"
               disabled={downloading}
