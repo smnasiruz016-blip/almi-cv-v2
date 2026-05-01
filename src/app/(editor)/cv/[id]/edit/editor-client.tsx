@@ -51,6 +51,17 @@ export function EditorClient({
     document.title = cvName ? `${cvName} - AlmiCV` : "AlmiCV";
   }, [cvName]);
 
+  // Auto-rename: when the CV is still using the placeholder title and the
+  // user has filled in their name, promote the name into the title. Only
+  // fires while the title is the untouched default — once the user edits
+  // the title themselves, this stops interfering.
+  useEffect(() => {
+    if (cvName !== "Untitled CV") return;
+    const fullName = cvData.basics?.fullName?.trim();
+    if (!fullName) return;
+    setCvName(`${fullName} - CV`);
+  }, [cvData, cvName]);
+
   return (
     <div className="flex min-h-screen flex-col bg-cream-soft">
       <div className="print-hide sticky top-0 z-30 border-b border-plum/10 bg-white/95 backdrop-blur-md">

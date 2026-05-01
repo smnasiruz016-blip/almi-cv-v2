@@ -60,6 +60,26 @@ export async function updateResume(
   return resume;
 }
 
+export async function duplicateResume(id: string): Promise<string> {
+  const user = await requireUser();
+  const source = await prisma.resume.findFirst({
+    where: { id, userId: user.id },
+  });
+  if (!source) throw new Error("Resume not found");
+  const copy = await prisma.resume.create({
+    data: {
+      userId: user.id,
+      title: `${source.title} (copy)`,
+      template: source.template,
+      templateKey: source.templateKey,
+      isDraft: false,
+      data: source.data as unknown as Prisma.InputJsonValue,
+    },
+  });
+  revalidatePath("/dashboard");
+  return copy.id;
+}
+
 export async function listResumes() {
   const user = await requireUser();
   return await prisma.resume.findMany({

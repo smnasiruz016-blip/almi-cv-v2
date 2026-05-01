@@ -1,9 +1,8 @@
 import Link from "next/link";
-import { ArrowRight, FileText, MoreVertical, Plus, Sparkles } from "lucide-react";
+import { ArrowRight, FileText, Plus, Sparkles } from "lucide-react";
 import { requireUser } from "@/lib/auth";
 import { listResumes } from "@/lib/resume-actions";
-import { getTemplate } from "@/lib/templates";
-import { TemplateThumbnail } from "@/components/templates/TemplateThumbnail";
+import { DashboardCard } from "@/components/dashboard/DashboardCard";
 import type { CVData } from "@/lib/cv-types";
 
 const RTF = new Intl.RelativeTimeFormat("en", { numeric: "auto" });
@@ -90,34 +89,14 @@ export default async function DashboardPage() {
         ) : (
           <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
             {resumes.map((resume) => (
-              <Link
+              <DashboardCard
                 key={resume.id}
-                href={`/cv/${resume.id}/edit`}
-                className="group relative block rounded-2xl border border-peach/40 bg-white p-5 shadow-warm-card transition-all hover:shadow-warm-card-hover"
-              >
-                <div className="flex items-start justify-between gap-2">
-                  <p className="text-xs font-medium uppercase tracking-widest text-coral">
-                    {getTemplate(resume.template).name}
-                  </p>
-                  <p className="shrink-0 text-xs text-plum-faint">
-                    Edited {relativeTime(resume.updatedAt)}
-                  </p>
-                </div>
-                <p className="mt-2 font-display text-lg text-plum">{resume.title}</p>
-                <div className="mt-3">
-                  <TemplateThumbnail
-                    template={getTemplate(resume.template)}
-                    data={(resume.data ?? {}) as CVData}
-                    scale={0.3}
-                  />
-                </div>
-                <div className="mt-4 flex items-center justify-between">
-                  <span className="text-sm font-medium text-coral">Open editor →</span>
-                  <span className="text-plum-faint transition-colors group-hover:text-plum">
-                    <MoreVertical className="h-4 w-4" />
-                  </span>
-                </div>
-              </Link>
+                resumeId={resume.id}
+                title={resume.title}
+                templateSlug={resume.template ?? "classic-serif"}
+                data={(resume.data ?? {}) as CVData}
+                editedLabel={`Edited ${relativeTime(resume.updatedAt)}`}
+              />
             ))}
           </div>
         )}
