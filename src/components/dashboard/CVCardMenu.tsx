@@ -2,8 +2,10 @@
 
 import { useEffect, useLayoutEffect, useRef, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
-import { Download, Loader2, MoreVertical, Pencil, Trash2 } from "lucide-react";
+import { Download, Loader2, MoreVertical, Pencil, Printer, Trash2 } from "lucide-react";
 import { duplicateResume, deleteResume } from "@/lib/resume-actions";
+import { downloadCvPdf } from "@/lib/download-pdf";
+import { useToast } from "@/components/ui/Toast";
 
 const MENU_HEIGHT_ESTIMATE = 220;
 
@@ -22,9 +24,11 @@ export function CVCardMenu({
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [position, setPosition] = useState<Position>("below");
   const [pending, startTransition] = useTransition();
+  const [downloading, setDownloading] = useState(false);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
+  const showToast = useToast();
 
   useLayoutEffect(() => {
     if (!open || !triggerRef.current) return;
@@ -90,6 +94,21 @@ export function CVCardMenu({
     });
   };
 
+  const handleDownload = async () => {
+    if (downloading) return;
+    setDownloading(true);
+    setOpen(false);
+    try {
+      await downloadCvPdf(resumeId);
+      showToast("PDF downloaded", "success");
+    } catch (err) {
+      console.error("PDF download failed", err);
+      showToast("Couldn't generate PDF, please try again", "error");
+    } finally {
+      setDownloading(false);
+    }
+  };
+
   return (
     <>
       <div className="relative">
@@ -106,7 +125,11 @@ export function CVCardMenu({
           }}
           className="inline-flex h-8 w-8 items-center justify-center rounded-full text-plum-faint transition-colors hover:bg-peach/30 hover:text-plum focus:outline-none focus:ring-2 focus:ring-coral/30"
         >
-          <MoreVertical className="h-4 w-4" />
+          {downloading ? (
+            <Loader2 className="h-4 w-4 animate-spin text-coral" />
+          ) : (
+            <MoreVertical className="h-4 w-4" />
+          )}
         </button>
 
         {open && (
@@ -149,6 +172,20 @@ export function CVCardMenu({
               )}
               Duplicate
             </button>
+            <button
+              role="menuitem"
+              type="button"
+              onClick={handleDownload}
+              disabled={downloading}
+              className="flex w-full items-center gap-3 px-4 py-2.5 text-left text-sm text-plum transition-colors hover:bg-coral/10 disabled:opacity-50"
+            >
+              {downloading ? (
+                <Loader2 className="h-4 w-4 animate-spin" />
+              ) : (
+                <Download className="h-4 w-4" />
+              )}
+              Download PDF
+            </button>
             <a
               role="menuitem"
               href={`/cv/${resumeId}/print`}
@@ -157,8 +194,8 @@ export function CVCardMenu({
               className="flex items-center gap-3 px-4 py-2.5 text-sm text-plum transition-colors hover:bg-coral/10"
               onClick={() => setOpen(false)}
             >
-              <Download className="h-4 w-4" />
-              Download PDF
+              <Printer className="h-4 w-4" />
+              Print
             </a>
             <div className="border-t border-peach/40" />
             <button

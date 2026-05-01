@@ -2,9 +2,11 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { ArrowLeft, Check } from "lucide-react";
+import { ArrowLeft, Check, Download, Loader2, Printer } from "lucide-react";
 import { CVEditorSidebar } from "@/components/editor/CVEditorSidebar";
 import { updateResume } from "@/lib/resume-actions";
+import { downloadCvPdf } from "@/lib/download-pdf";
+import { useToast } from "@/components/ui/Toast";
 import type { CVData } from "@/lib/cv-types";
 import { getTemplate } from "@/lib/templates";
 
@@ -26,7 +28,9 @@ export function EditorClient({
   const [cvData, setCvData] = useState<CVData>(initialData);
   const [cvName, setCvName] = useState(initialTitle);
   const [saveStatus, setSaveStatus] = useState<SaveStatus>("saved");
+  const [downloading, setDownloading] = useState(false);
   const isInitialMount = useRef(true);
+  const showToast = useToast();
 
   useEffect(() => {
     if (isInitialMount.current) {
@@ -91,11 +95,43 @@ export function EditorClient({
             </Link>
             <button
               type="button"
-              onClick={() => window.print()}
-              className="inline-flex items-center gap-2 rounded-pill bg-coral px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-coral-deep focus:outline-none focus:ring-4 focus:ring-coral/30"
+              disabled={downloading}
+              onClick={async () => {
+                if (downloading) return;
+                setDownloading(true);
+                try {
+                  // Flush any in-flight edits so puppeteer reads the latest
+                  // version from the DB, not a stale snapshot.
+                  setSaveStatus("saving");
+                  await updateResume(resumeId, { title: cvName, data: cvData });
+                  setSaveStatus("saved");
+                  await downloadCvPdf(resumeId);
+                  showToast("PDF downloaded", "success");
+                } catch (err) {
+                  console.error("PDF download failed", err);
+                  showToast("Couldn't generate PDF, please try again", "error");
+                } finally {
+                  setDownloading(false);
+                }
+              }}
+              className="inline-flex items-center gap-2 rounded-pill bg-coral px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-coral-deep focus:outline-none focus:ring-4 focus:ring-coral/30 disabled:opacity-70"
             >
-              Download PDF
+              {downloading ? (
+                <Loader2 className="h-4 w-4 animate-spin" />
+              ) : (
+                <Download className="h-4 w-4" />
+              )}
+              {downloading ? "Generating…" : "Download PDF"}
             </button>
+            <a
+              href={`/cv/${resumeId}/print`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-pill border border-plum/15 px-4 py-2 text-sm font-medium text-plum transition-colors hover:bg-plum/5"
+            >
+              <Printer className="h-4 w-4" />
+              Print
+            </a>
           </div>
         </div>
       </div>

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Fraunces, Inter } from "next/font/google";
+import { ToastProvider } from "@/components/ui/Toast";
 import "./globals.css";
 
 const sansFont = Inter({
@@ -39,7 +40,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${sansFont.variable} ${displayFont.variable}`}>
       <body className="min-h-screen bg-cream text-plum antialiased">
-        {children}
+        <ToastProvider>{children}</ToastProvider>
       </body>
     </html>
   );
