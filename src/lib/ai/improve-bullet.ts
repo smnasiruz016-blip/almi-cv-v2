@@ -3,6 +3,7 @@
 import Anthropic from "@anthropic-ai/sdk";
 import { requireUser } from "@/lib/auth";
 import { stripRichText } from "@/lib/rich-text";
+import { MODELS } from "@/lib/ai/models";
 
 const MAX_INPUT_CHARS = 1000;
 const RATE_LIMIT_PER_HOUR = 30;
@@ -47,7 +48,7 @@ function normalizeResponse(raw: string): string {
     .trim();
 }
 
-const MODEL_ID = "claude-3-5-sonnet-20241022";
+const MODEL_ID = MODELS.SONNET;
 
 export async function improveBullet(input: {
   bullet: string;
