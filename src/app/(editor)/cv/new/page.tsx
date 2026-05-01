@@ -3,20 +3,23 @@ import { prisma } from "@/lib/db";
 import { requireUser } from "@/lib/auth";
 import { createResume } from "@/lib/resume-actions";
 
-// updatedAt-createdAt under this delta means the row was never edited.
-// Prisma @updatedAt only advances on .update(), and auto-save debounces
-// at 1500ms, so any real edit pushes updatedAt well past this window.
-const UNTOUCHED_WINDOW_MS = 1000;
-
-// Older drafts are probably abandoned; creating a fresh one feels less stale.
-const RECENT_WINDOW_MS = 24 * 60 * 60 * 1000;
-
 /**
  * Idempotency guard. GETs that mutate state are dangerous — every visit to
- * /cv/new (back-button, refresh, bookmark, double-click on "New CV") would
- * otherwise create a duplicate empty CV. We reuse the user's most-recent
- * untouched draft when one exists, falling back to creation only when there
- * is nothing to resume. Removing this check brings the duplicate trail back.
+ * /cv/new (back-button, refresh, bookmark, double-click on "New CV", and
+ * Next.js <Link> prefetch on hover/viewport entry) would otherwise create
+ * a duplicate empty CV.
+ *
+ * Reuse signal: an explicit isDraft Boolean column on Resume.
+ *   - createResume() seeds isDraft=true
+ *   - updateResume() flips isDraft=false on the first edit
+ *   - /cv/new findFirst({ where: { isDraft: true } }) is the entire check
+ *
+ * The previous heuristic (updatedAt - createdAt < 1s) silently failed in
+ * production because Prisma @updatedAt populates from JS new Date() on
+ * create while createdAt populates from SQL now() — two clocks. On Vercel
+ * Fluid Compute calling Neon Postgres the delta routinely exceeded 1s due
+ * to network + pooler queueing time, so even brand-new untouched rows
+ * looked "edited" and the guard skipped them. Don't go back to that.
  */
 export default async function NewCVPage({
   searchParams,
@@ -27,24 +30,19 @@ export default async function NewCVPage({
   const params = await searchParams;
   const requestedTemplate = params.template;
   const template = requestedTemplate ?? "classic-serif";
-  const recentSince = new Date(Date.now() - RECENT_WINDOW_MS);
 
   // If the user specified a template, only reuse a draft of that exact
-  // template — don't drop them into the wrong design. If no template was
-  // specified, any recent untouched draft is fair game.
-  const candidates = await prisma.resume.findMany({
+  // template — don't drop them into a design they didn't ask for. If no
+  // template was specified, any untouched draft is fair game.
+  const reusable = await prisma.resume.findFirst({
     where: {
       userId: user.id,
-      createdAt: { gte: recentSince },
+      isDraft: true,
       ...(requestedTemplate !== undefined && { template: requestedTemplate }),
     },
     orderBy: { createdAt: "desc" },
-    select: { id: true, createdAt: true, updatedAt: true },
+    select: { id: true },
   });
-
-  const reusable = candidates.find(
-    (r) => r.updatedAt.getTime() - r.createdAt.getTime() < UNTOUCHED_WINDOW_MS,
-  );
 
   if (reusable) {
     redirect(`/cv/${reusable.id}/edit`);

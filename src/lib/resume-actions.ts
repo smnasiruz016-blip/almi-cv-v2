@@ -15,6 +15,7 @@ export async function createResume(template: string = "classic-serif"): Promise<
       title: "Untitled CV",
       template,
       templateKey: template,
+      isDraft: true,
       data: mayaRodriguez as unknown as Prisma.InputJsonValue,
     },
   });
@@ -41,6 +42,9 @@ export async function updateResume(
   if (!owned) {
     throw new Error("Resume not found");
   }
+  // Any save means the user has edited — flip isDraft so /cv/new no longer
+  // reuses this row. Always writing false is idempotent (Postgres no-ops
+  // when the value is unchanged at storage level).
   const resume = await prisma.resume.update({
     where: { id },
     data: {
@@ -48,6 +52,7 @@ export async function updateResume(
       ...(updates.data !== undefined && {
         data: updates.data as unknown as Prisma.InputJsonValue,
       }),
+      isDraft: false,
     },
   });
   revalidatePath(`/cv/${id}/edit`);
