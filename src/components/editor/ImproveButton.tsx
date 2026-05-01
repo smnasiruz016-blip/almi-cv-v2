@@ -67,6 +67,15 @@ export function ImproveButton({
         company,
       });
 
+      // TODO(diag): temporary — remove once we've captured the failure mode
+      console.log("[ImproveButton] applying improved", {
+        ts: new Date().toISOString(),
+        apiStatus: result?.ok ? "ok" : "error",
+        improved: result?.ok ? result.improved : null,
+        original: bulletText,
+        changed: result?.ok ? result.improved !== bulletText : false,
+      });
+
       if (!result || typeof result !== "object" || !("ok" in result)) {
         showError(FALLBACK_ERROR);
         return;
