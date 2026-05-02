@@ -1,7 +1,15 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { ChevronDown, Loader2, Plus, Trash2, Upload } from "lucide-react";
+import {
+  ChevronDown,
+  Loader2,
+  Plus,
+  Sparkles,
+  Trash2,
+  Upload,
+  WandSparkles,
+} from "lucide-react";
 import { uploadPhoto } from "@/lib/photo-upload";
 import type {
   AccentKey,
@@ -14,8 +22,10 @@ import type {
   ThemeKey,
 } from "@/lib/cv-types";
 import { ACCENTS, BODY_FONTS, HEADING_FONTS, THEMES } from "@/lib/cv-themes";
+import { isRichTextEmpty } from "@/lib/rich-text";
 import { RichTextEditor } from "./RichTextEditor";
 import { ImproveButton } from "./ImproveButton";
+import { GenerateSummaryModal } from "./GenerateSummaryModal";
 
 const UNDO_TIMEOUT_MS = 10000;
 
@@ -129,6 +139,7 @@ function SummaryRow({
   const [previousValue, setPreviousValue] = useState<string | null>(null);
   const improvedRef = useRef<string | null>(null);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [generateOpen, setGenerateOpen] = useState(false);
 
   useEffect(() => {
     return () => {
@@ -167,8 +178,35 @@ function SummaryRow({
     if (timerRef.current) clearTimeout(timerRef.current);
   };
 
+  const handleGenerated = (summary: string) => {
+    const trimmed = summary.trim();
+    if (!trimmed) return;
+    const escaped = trimmed
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;");
+    onChange(`<p>${escaped}</p>`);
+  };
+
+  const isEmpty = isRichTextEmpty(value);
+
   return (
     <div className="space-y-1">
+      {isEmpty && (
+        <button
+          type="button"
+          onClick={() => setGenerateOpen(true)}
+          className="flex w-full flex-col items-start gap-0.5 rounded-md border border-coral/30 bg-coral/10 px-3 py-2.5 text-left transition-colors hover:bg-coral/15 focus:outline-none focus:ring-2 focus:ring-coral/30"
+        >
+          <span className="inline-flex items-center gap-1.5 text-sm font-medium text-coral-deep">
+            <Sparkles className="h-3.5 w-3.5" />
+            Generate your Summary with AI
+          </span>
+          <span className="text-xs text-plum-soft">
+            Answer a few quick questions and we&apos;ll write it for you.
+          </span>
+        </button>
+      )}
       <div className="flex items-start gap-2">
         <div className="flex-1 min-w-0">
           <RichTextEditor
@@ -179,7 +217,16 @@ function SummaryRow({
             ariaLabel="Professional summary"
           />
         </div>
-        <div className="mt-1">
+        <div className="mt-1 flex items-start gap-1">
+          <button
+            type="button"
+            onClick={() => setGenerateOpen(true)}
+            aria-label="Generate Summary with AI"
+            title="Generate Summary with AI"
+            className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-md text-coral transition-colors hover:bg-cream-soft hover:text-coral-deep"
+          >
+            <WandSparkles className="h-4 w-4" />
+          </button>
           <ImproveButton
             bulletText={value}
             onImproved={handleImproved}
@@ -196,6 +243,12 @@ function SummaryRow({
           Undo improvement
         </button>
       )}
+      <GenerateSummaryModal
+        open={generateOpen}
+        onClose={() => setGenerateOpen(false)}
+        defaultRole={role}
+        onAccept={handleGenerated}
+      />
     </div>
   );
 }
