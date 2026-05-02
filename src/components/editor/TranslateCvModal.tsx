@@ -236,7 +236,10 @@ export function TranslateCvModal({ open, onClose, cvId }: Props) {
             </div>
           )}
 
-          <div className="flex flex-col gap-2 border-t border-plum/10 pt-4 sm:flex-row sm:items-center sm:justify-end">
+          <div className="flex flex-col gap-2 border-t border-plum/10 pt-4 sm:flex-row sm:items-center sm:justify-between">
+            <p className="text-xs italic text-plum-soft sm:mr-auto">
+              💡 Keep trying till you get the best translation
+            </p>
             <button
               type="button"
               onClick={() => void handleTranslate()}
