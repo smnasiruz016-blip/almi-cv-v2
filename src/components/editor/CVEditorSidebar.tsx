@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   ChevronDown,
   Loader2,
@@ -23,11 +23,12 @@ import type {
   ThemeKey,
 } from "@/lib/cv-types";
 import { ACCENTS, BODY_FONTS, HEADING_FONTS, THEMES } from "@/lib/cv-themes";
-import { isRichTextEmpty } from "@/lib/rich-text";
+import { isRichTextEmpty, stripRichText } from "@/lib/rich-text";
 import { RichTextEditor } from "./RichTextEditor";
 import { ImproveButton } from "./ImproveButton";
 import { GenerateSummaryModal } from "./GenerateSummaryModal";
 import { GenerateBulletsModal } from "./GenerateBulletsModal";
+import { ExtractSkillsModal } from "./ExtractSkillsModal";
 
 const UNDO_TIMEOUT_MS = 10000;
 
@@ -562,6 +563,28 @@ export function CVEditorSidebar({
     }
   };
 
+  const [skillsModalOpen, setSkillsModalOpen] = useState(false);
+
+  const skillsExperienceText = useMemo(() => {
+    const entries = data.experience ?? [];
+    if (entries.length === 0) return "";
+    return entries
+      .map((e) => {
+        const dates = `${e.startDate ?? ""}${
+          e.endDate ? ` – ${e.endDate}` : " – present"
+        }`;
+        const bullets = (e.bullets ?? [])
+          .map((b) => `- ${stripRichText(b ?? "").trim()}`)
+          .filter((line) => line.length > 2)
+          .join("\n");
+        const head = `${e.role || "(role)"} at ${
+          e.company || "(company)"
+        } (${dates}):`;
+        return bullets ? `${head}\n${bullets}` : head;
+      })
+      .join("\n\n");
+  }, [data.experience]);
+
   const currentThemeKey = (data.style?.themeKey ?? "plum") as ThemeKey;
   const currentHeadingFont = (data.style?.headingFont ?? "fraunces") as HeadingFontKey;
   const currentBodyFont = (data.style?.bodyFont ?? "inter") as BodyFontKey;
@@ -1054,13 +1077,45 @@ export function CVEditorSidebar({
 
       {/* SKILLS */}
       <SectionAccordion title="Skills">
-        <Field label="Skills (one per line)">
-          <MultilineList
-            value={data.skills ?? []}
-            onChange={(next) => onChange({ ...data, skills: next })}
-            rows={6}
-          />
-        </Field>
+        {(data.skills ?? []).length === 0 && (
+          <button
+            type="button"
+            onClick={() => setSkillsModalOpen(true)}
+            disabled={skillsExperienceText.trim().length < 50}
+            className="flex w-full flex-col items-start gap-0.5 rounded-md border border-coral/30 bg-coral/10 px-3 py-2.5 text-left transition-colors hover:bg-coral/15 focus:outline-none focus:ring-2 focus:ring-coral/30 disabled:cursor-not-allowed disabled:opacity-60"
+          >
+            <span className="inline-flex items-center gap-1.5 text-sm font-medium text-coral-deep">
+              <Sparkles className="h-3.5 w-3.5" />
+              Let AI suggest skills you might have missed
+            </span>
+            <span className="text-xs text-plum-soft">
+              {skillsExperienceText.trim().length < 50
+                ? "Add some Experience details first — we need something to read"
+                : "We'll read your Experience and suggest skills based on what you've done"}
+            </span>
+          </button>
+        )}
+
+        <div className="flex items-center justify-between gap-2">
+          <span className="text-xs font-medium text-plum-soft">
+            Skills (one per line)
+          </span>
+          <button
+            type="button"
+            onClick={() => setSkillsModalOpen(true)}
+            disabled={skillsExperienceText.trim().length < 50}
+            aria-label="Suggest skills with AI"
+            title="Suggest skills with AI"
+            className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-md text-coral transition-colors hover:bg-cream-soft hover:text-coral-deep disabled:cursor-not-allowed disabled:opacity-50"
+          >
+            <Sparkles className="h-4 w-4" />
+          </button>
+        </div>
+        <MultilineList
+          value={data.skills ?? []}
+          onChange={(next) => onChange({ ...data, skills: next })}
+          rows={6}
+        />
       </SectionAccordion>
 
       {/* PROJECTS */}
@@ -1291,6 +1346,31 @@ export function CVEditorSidebar({
           />
         </Field>
       </SectionAccordion>
+
+      <ExtractSkillsModal
+        open={skillsModalOpen}
+        onClose={() => setSkillsModalOpen(false)}
+        summary={data.basics?.summary}
+        experienceText={skillsExperienceText}
+        existingSkills={data.skills ?? []}
+        onAccept={(picked) => {
+          const existing = data.skills ?? [];
+          const existingLower = new Set(
+            existing.map((s) => s.trim().toLowerCase()),
+          );
+          const additions: string[] = [];
+          for (const raw of picked) {
+            const trimmed = raw.trim();
+            if (!trimmed) continue;
+            const key = trimmed.toLowerCase();
+            if (existingLower.has(key)) continue;
+            existingLower.add(key);
+            additions.push(trimmed);
+          }
+          if (additions.length === 0) return;
+          onChange({ ...data, skills: [...existing, ...additions] });
+        }}
+      />
     </div>
   );
 }
