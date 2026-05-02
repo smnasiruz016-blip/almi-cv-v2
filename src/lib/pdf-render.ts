@@ -4,7 +4,7 @@ import type { Browser } from "puppeteer-core";
 const SPARTICUZ_VERSION = "148.0.0";
 const REMOTE_TAR = `https://github.com/Sparticuz/chromium/releases/download/v${SPARTICUZ_VERSION}/chromium-v${SPARTICUZ_VERSION}-pack.x64.tar`;
 
-async function launchBrowser(): Promise<Browser> {
+export async function launchBrowser(): Promise<Browser> {
   if (process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_VERSION) {
     // Serverless: use puppeteer-core + remote chromium binary.
     const [{ default: chromium }, { default: puppeteer }] = await Promise.all([

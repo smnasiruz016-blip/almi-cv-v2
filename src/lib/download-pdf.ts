@@ -1,5 +1,8 @@
-export async function downloadCvPdf(resumeId: string): Promise<void> {
-  const res = await fetch(`/api/pdf/${resumeId}`, {
+async function downloadFromEndpoint(
+  endpoint: string,
+  fallbackName: string,
+): Promise<void> {
+  const res = await fetch(endpoint, {
     method: "POST",
     credentials: "same-origin",
   });
@@ -16,7 +19,7 @@ export async function downloadCvPdf(resumeId: string): Promise<void> {
 
   const disposition = res.headers.get("content-disposition") ?? "";
   const match = /filename="([^"]+)"/.exec(disposition);
-  const filename = match?.[1] ?? "cv.pdf";
+  const filename = match?.[1] ?? fallbackName;
 
   const blob = await res.blob();
   const url = URL.createObjectURL(blob);
@@ -27,4 +30,17 @@ export async function downloadCvPdf(resumeId: string): Promise<void> {
   a.click();
   a.remove();
   setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
+export async function downloadCvPdf(resumeId: string): Promise<void> {
+  return downloadFromEndpoint(`/api/pdf/${resumeId}`, "cv.pdf");
+}
+
+export async function downloadCoverLetterPdf(
+  coverLetterId: string,
+): Promise<void> {
+  return downloadFromEndpoint(
+    `/api/cover-letters/${coverLetterId}/pdf`,
+    "cover-letter.pdf",
+  );
 }

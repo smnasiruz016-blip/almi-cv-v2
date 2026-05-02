@@ -2,7 +2,15 @@
 
 import { useCallback, useState, useTransition } from "react";
 import Link from "next/link";
-import { ArrowLeft, Loader2, Mail, Plus, Sparkles, Trash2 } from "lucide-react";
+import {
+  ArrowLeft,
+  Download,
+  Loader2,
+  Mail,
+  Plus,
+  Sparkles,
+  Trash2,
+} from "lucide-react";
 import { Modal } from "@/components/ui/modal";
 import { useToast } from "@/components/ui/Toast";
 import { GenerateCoverLetterModal } from "@/components/editor/GenerateCoverLetterModal";
@@ -10,6 +18,7 @@ import {
   deleteCoverLetter,
   listCoverLetters,
 } from "@/lib/cv/cover-letters";
+import { downloadCoverLetterPdf } from "@/lib/download-pdf";
 
 const RTF = new Intl.RelativeTimeFormat("en", { numeric: "auto" });
 
@@ -71,6 +80,7 @@ export function CoverLettersClient({
     null,
   );
   const [deletingId, setDeletingId] = useState<string | null>(null);
+  const [downloadingId, setDownloadingId] = useState<string | null>(null);
   const [, startRefresh] = useTransition();
 
   const refresh = useCallback(() => {
@@ -104,6 +114,25 @@ export function CoverLettersClient({
   const handleSaved = () => {
     showToast(editingId ? "Cover letter updated" : "✨ Cover letter saved", "success");
     refresh();
+  };
+
+  const handleDownload = async (id: string) => {
+    if (downloadingId) return;
+    setDownloadingId(id);
+    try {
+      await downloadCoverLetterPdf(id);
+      showToast("PDF downloaded", "success");
+    } catch (err) {
+      console.error("[CoverLettersClient] download failed:", err);
+      showToast(
+        err instanceof Error && err.message
+          ? err.message
+          : "Couldn't generate PDF — try again",
+        "error",
+      );
+    } finally {
+      setDownloadingId(null);
+    }
   };
 
   const handleDelete = async () => {
@@ -212,13 +241,27 @@ export function CoverLettersClient({
                           {snippet}
                         </p>
                       </div>
-                      <div className="pointer-events-auto flex shrink-0 items-center gap-2 self-end sm:self-start">
+                      <div className="pointer-events-auto flex shrink-0 flex-wrap items-center gap-2 self-end sm:self-start">
                         <button
                           type="button"
                           onClick={() => openEdit(item.id)}
                           className="inline-flex items-center gap-1.5 rounded-pill border border-plum/15 bg-white px-3 py-1.5 text-xs font-medium text-plum transition-colors hover:bg-cream-soft focus:outline-none focus:ring-2 focus:ring-plum/15"
                         >
                           Edit
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => void handleDownload(item.id)}
+                          disabled={downloadingId === item.id}
+                          aria-label={`Download ${item.title} as PDF`}
+                          className="inline-flex items-center gap-1.5 rounded-pill border border-plum/15 bg-white px-3 py-1.5 text-xs font-medium text-plum transition-colors hover:bg-cream-soft focus:outline-none focus:ring-2 focus:ring-plum/15 disabled:cursor-not-allowed disabled:opacity-60"
+                        >
+                          {downloadingId === item.id ? (
+                            <Loader2 className="h-3.5 w-3.5 animate-spin" />
+                          ) : (
+                            <Download className="h-3.5 w-3.5" />
+                          )}
+                          {downloadingId === item.id ? "Generating…" : "PDF"}
                         </button>
                         <button
                           type="button"

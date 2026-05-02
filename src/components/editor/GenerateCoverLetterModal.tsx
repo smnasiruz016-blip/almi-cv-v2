@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import {
   Copy as CopyIcon,
+  Download,
   Loader2,
   RefreshCw,
   Save,
@@ -18,6 +19,7 @@ import {
   getCoverLetter,
   updateCoverLetter,
 } from "@/lib/cv/cover-letters";
+import { downloadCoverLetterPdf } from "@/lib/download-pdf";
 
 const MIN_JD = 50;
 const MAX_JD = 5000;
@@ -83,6 +85,7 @@ export function GenerateCoverLetterModal({
   const [generating, setGenerating] = useState(false);
   const [saving, setSaving] = useState(false);
   const [loadingExisting, setLoadingExisting] = useState(false);
+  const [downloading, setDownloading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [saveError, setSaveError] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
@@ -111,6 +114,7 @@ export function GenerateCoverLetterModal({
     setGenerating(false);
     setSaving(false);
     setLoadingExisting(false);
+    setDownloading(false);
     setError(null);
     setSaveError(null);
     setCopied(false);
@@ -216,6 +220,23 @@ export function GenerateCoverLetterModal({
       showError(FALLBACK_ERROR);
     } finally {
       if (myId === requestId.current) setGenerating(false);
+    }
+  };
+
+  const handleDownload = async () => {
+    if (!editingId || downloading) return;
+    setDownloading(true);
+    try {
+      await downloadCoverLetterPdf(editingId);
+    } catch (err) {
+      console.error("[GenerateCoverLetterModal] download failed:", err);
+      showError(
+        err instanceof Error && err.message
+          ? err.message
+          : "Couldn't generate PDF — try again",
+      );
+    } finally {
+      setDownloading(false);
     }
   };
 
@@ -497,7 +518,7 @@ export function GenerateCoverLetterModal({
             <button
               type="button"
               onClick={() => void handleCopy()}
-              disabled={generating || saving}
+              disabled={generating || saving || downloading}
               className="inline-flex items-center justify-center gap-2 rounded-pill border border-plum/15 px-4 py-2 text-sm font-medium text-plum transition-colors hover:bg-cream-soft focus:outline-none focus:ring-2 focus:ring-plum/15 disabled:cursor-not-allowed disabled:opacity-60"
             >
               <CopyIcon className="h-4 w-4" />
@@ -508,10 +529,31 @@ export function GenerateCoverLetterModal({
                 Copied to clipboard
               </span>
             )}
+            {editingId && (
+              <button
+                type="button"
+                onClick={() => void handleDownload()}
+                disabled={generating || saving || downloading}
+                aria-label="Download cover letter as PDF"
+                className="inline-flex items-center justify-center gap-2 rounded-pill border border-plum/15 px-4 py-2 text-sm font-medium text-plum transition-colors hover:bg-cream-soft focus:outline-none focus:ring-2 focus:ring-plum/15 disabled:cursor-not-allowed disabled:opacity-60"
+              >
+                {downloading ? (
+                  <>
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                    Generating…
+                  </>
+                ) : (
+                  <>
+                    <Download className="h-4 w-4" />
+                    Download PDF
+                  </>
+                )}
+              </button>
+            )}
             <button
               type="button"
               onClick={() => void handleSave()}
-              disabled={generating || saving}
+              disabled={generating || saving || downloading}
               className="inline-flex items-center justify-center gap-2 rounded-pill bg-coral px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-coral-deep focus:outline-none focus:ring-4 focus:ring-coral/30 disabled:cursor-not-allowed disabled:opacity-60"
             >
               {saving ? (
