@@ -7,11 +7,13 @@ import {
   Check,
   Download,
   Loader2,
+  Mail,
   Printer,
   RotateCcw,
   Sparkles,
 } from "lucide-react";
 import { CVEditorSidebar } from "@/components/editor/CVEditorSidebar";
+import { GenerateCoverLetterModal } from "@/components/editor/GenerateCoverLetterModal";
 import { updateResume } from "@/lib/resume-actions";
 import { downloadCvPdf } from "@/lib/download-pdf";
 import { useToast } from "@/components/ui/Toast";
@@ -42,6 +44,7 @@ export function EditorClient({
   const [saveStatus, setSaveStatus] = useState<SaveStatus>("saved");
   const [downloading, setDownloading] = useState(false);
   const [restoreOpen, setRestoreOpen] = useState(false);
+  const [coverLetterOpen, setCoverLetterOpen] = useState(false);
   const isInitialMount = useRef(true);
   const showToast = useToast();
 
@@ -107,6 +110,14 @@ export function EditorClient({
               <Sparkles className="h-4 w-4" />
               <span className="hidden sm:inline">Tailor for Job</span>
             </Link>
+            <button
+              type="button"
+              onClick={() => setCoverLetterOpen(true)}
+              className="inline-flex items-center gap-2 rounded-pill bg-coral px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-coral-deep focus:outline-none focus:ring-4 focus:ring-coral/30"
+            >
+              <Mail className="h-4 w-4" />
+              <span className="hidden sm:inline">Cover Letter</span>
+            </button>
             {hasSnapshot && (
               <button
                 type="button"
@@ -187,6 +198,18 @@ export function EditorClient({
         open={restoreOpen}
         resumeId={resumeId}
         onClose={() => setRestoreOpen(false)}
+      />
+
+      <GenerateCoverLetterModal
+        open={coverLetterOpen}
+        onClose={() => setCoverLetterOpen(false)}
+        cvId={resumeId}
+        onSaved={() =>
+          showToast(
+            "✨ Cover letter saved — view all in Cover Letters page",
+            "success",
+          )
+        }
       />
     </div>
   );
