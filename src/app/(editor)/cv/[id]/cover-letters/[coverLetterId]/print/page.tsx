@@ -91,27 +91,29 @@ export default async function CoverLetterPrintPage({
     <>
       <AutoPrint />
       <style>{PRINT_CSS}</style>
-      <div className="cl-page">
-        <header className="cl-letterhead">
-          {fullName && <h1 className="cl-name">{fullName}</h1>}
-          {contactLine && <p className="cl-contact">{contactLine}</p>}
-        </header>
+      <div className="print-target">
+        <div className="cl-page">
+          <header className="cl-letterhead">
+            {fullName && <h1 className="cl-name">{fullName}</h1>}
+            {contactLine && <p className="cl-contact">{contactLine}</p>}
+          </header>
 
-        <p className="cl-date">{today}</p>
+          <p className="cl-date">{today}</p>
 
-        <p className="cl-salutation">{salutation}</p>
+          <p className="cl-salutation">{salutation}</p>
 
-        <div className="cl-body">
-          {paragraphs.length > 0 ? (
-            paragraphs.map((p, i) => <p key={i}>{p}</p>)
-          ) : (
-            <p>{cleaned || bodyText}</p>
-          )}
-        </div>
+          <div className="cl-body">
+            {paragraphs.length > 0 ? (
+              paragraphs.map((p, i) => <p key={i}>{p}</p>)
+            ) : (
+              <p>{cleaned || bodyText}</p>
+            )}
+          </div>
 
-        <div className="cl-signoff">
-          <p>{signOff}</p>
-          {fullName && <p className="cl-signature">{fullName}</p>}
+          <div className="cl-signoff">
+            <p>{signOff}</p>
+            {fullName && <p className="cl-signature">{fullName}</p>}
+          </div>
         </div>
       </div>
     </>
