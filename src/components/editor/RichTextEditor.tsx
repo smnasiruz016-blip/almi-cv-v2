@@ -58,12 +58,6 @@ export function RichTextEditor({
     const current = editor.getHTML();
     const incoming = sanitizeRichText(value ?? "");
     const incomingNormalized = incoming === "" ? "<p></p>" : incoming;
-    // TODO(diag): temporary — remove once we've captured the failure mode
-    console.log("[RTE] sync", {
-      current,
-      incoming: incomingNormalized,
-      willUpdate: current !== incomingNormalized,
-    });
     if (current !== incomingNormalized) {
       editor.commands.setContent(incoming, { emitUpdate: false });
     }

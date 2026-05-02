@@ -75,15 +75,6 @@ export function ImproveButton({
       const actuallyChanged =
         improvedPlain !== originalPlain && improvedPlain.length > 0;
 
-      // TODO(diag): temporary — remove once we've captured the failure mode
-      console.log("[ImproveButton] applying improved", {
-        ts: new Date().toISOString(),
-        apiStatus: result?.ok ? "ok" : "error",
-        improved: result?.ok ? result.improved : null,
-        original: bulletText,
-        changed: actuallyChanged,
-      });
-
       if (!result || typeof result !== "object" || !("ok" in result)) {
         showError(FALLBACK_ERROR);
         return;
