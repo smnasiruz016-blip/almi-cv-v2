@@ -10,6 +10,7 @@ import {
   Upload,
   WandSparkles,
 } from "lucide-react";
+import { LinkedInIcon } from "@/components/icons/LinkedInIcon";
 import { uploadPhoto } from "@/lib/photo-upload";
 import type {
   AccentKey,
@@ -27,6 +28,7 @@ import { isRichTextEmpty, stripRichText } from "@/lib/rich-text";
 import { RichTextEditor } from "./RichTextEditor";
 import { ImproveButton } from "./ImproveButton";
 import { GenerateSummaryModal } from "./GenerateSummaryModal";
+import { GenerateLinkedInAboutModal } from "./GenerateLinkedInAboutModal";
 import { GenerateBulletsModal } from "./GenerateBulletsModal";
 import { ExtractSkillsModal } from "./ExtractSkillsModal";
 
@@ -143,6 +145,7 @@ function SummaryRow({
   const improvedRef = useRef<string | null>(null);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [generateOpen, setGenerateOpen] = useState(false);
+  const [linkedInOpen, setLinkedInOpen] = useState(false);
 
   useEffect(() => {
     return () => {
@@ -230,6 +233,15 @@ function SummaryRow({
           >
             <WandSparkles className="h-4 w-4" />
           </button>
+          <button
+            type="button"
+            onClick={() => setLinkedInOpen(true)}
+            aria-label="Generate LinkedIn About with AI"
+            title="Generate LinkedIn About with AI"
+            className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-md text-coral transition-colors hover:bg-cream-soft hover:text-coral-deep"
+          >
+            <LinkedInIcon className="h-4 w-4" />
+          </button>
           <ImproveButton
             bulletText={value}
             onImproved={handleImproved}
@@ -251,6 +263,11 @@ function SummaryRow({
         onClose={() => setGenerateOpen(false)}
         defaultRole={role}
         onAccept={handleGenerated}
+      />
+      <GenerateLinkedInAboutModal
+        open={linkedInOpen}
+        onClose={() => setLinkedInOpen(false)}
+        defaultRole={role}
       />
     </div>
   );
