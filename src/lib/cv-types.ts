@@ -64,6 +64,35 @@ export type CVData = {
     photoStyle?: PhotoStyleKey;
     density?: DensityKey;
   };
+  // Translated CV metadata. Set by the AI translator; absent on
+  // English/original CVs.
+  language?: LanguageCode;
+  // Translated section labels. Templates read these with English fallback,
+  // so existing CVs without sectionLabels render unchanged.
+  sectionLabels?: SectionLabels;
+};
+
+export type LanguageCode =
+  | "en"
+  | "ur"
+  | "ar"
+  | "de"
+  | "es"
+  | "fr"
+  | "it"
+  | "pt"
+  | "zh";
+
+export type SectionLabels = {
+  profile?: string;
+  experience?: string;
+  education?: string;
+  skills?: string;
+  projects?: string;
+  languages?: string;
+  awards?: string;
+  certifications?: string;
+  interests?: string;
 };
 
 export type ThemeKey =
