@@ -118,6 +118,13 @@ export function EditorClient({
               <Mail className="h-4 w-4" />
               <span className="hidden sm:inline">Cover Letter</span>
             </button>
+            <Link
+              href={`/cv/${resumeId}/cover-letters`}
+              className="inline-flex items-center gap-2 rounded-pill border border-plum/15 px-3 py-1.5 text-xs font-medium text-plum transition-colors hover:bg-cream-soft focus:outline-none focus:ring-2 focus:ring-plum/15"
+            >
+              <span className="hidden sm:inline">Cover Letters</span>
+              <span className="sm:hidden">All</span>
+            </Link>
             {hasSnapshot && (
               <button
                 type="button"
@@ -205,10 +212,10 @@ export function EditorClient({
         onClose={() => setCoverLetterOpen(false)}
         cvId={resumeId}
         onSaved={() =>
-          showToast(
-            "✨ Cover letter saved — view all in Cover Letters page",
-            "success",
-          )
+          showToast("✨ Cover letter saved", "success", {
+            label: "View all →",
+            href: `/cv/${resumeId}/cover-letters`,
+          })
         }
       />
     </div>

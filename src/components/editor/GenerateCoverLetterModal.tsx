@@ -13,7 +13,11 @@ import {
   generateCoverLetter,
   type CoverLetterTone,
 } from "@/lib/ai/generate-cover-letter";
-import { createCoverLetter } from "@/lib/cv/cover-letters";
+import {
+  createCoverLetter,
+  getCoverLetter,
+  updateCoverLetter,
+} from "@/lib/cv/cover-letters";
 
 const MIN_JD = 50;
 const MAX_JD = 5000;
@@ -58,6 +62,7 @@ type Props = {
   onClose: () => void;
   cvId: string;
   onSaved: () => void;
+  editingId?: string;
 };
 
 export function GenerateCoverLetterModal({
@@ -65,6 +70,7 @@ export function GenerateCoverLetterModal({
   onClose,
   cvId,
   onSaved,
+  editingId,
 }: Props) {
   const [jd, setJd] = useState("");
   const [hiringManager, setHiringManager] = useState("");
@@ -76,6 +82,7 @@ export function GenerateCoverLetterModal({
 
   const [generating, setGenerating] = useState(false);
   const [saving, setSaving] = useState(false);
+  const [loadingExisting, setLoadingExisting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [saveError, setSaveError] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
@@ -83,6 +90,12 @@ export function GenerateCoverLetterModal({
   const errorTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const copyTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const requestId = useRef(0);
+
+  const showError = (msg: string) => {
+    setError(msg);
+    if (errorTimer.current) clearTimeout(errorTimer.current);
+    errorTimer.current = setTimeout(() => setError(null), 4000);
+  };
 
   // Reset everything on close. Bump the request id so any in-flight
   // generate response that arrives after close is dropped silently.
@@ -97,6 +110,7 @@ export function GenerateCoverLetterModal({
     titleAutoSetOnce.current = false;
     setGenerating(false);
     setSaving(false);
+    setLoadingExisting(false);
     setError(null);
     setSaveError(null);
     setCopied(false);
@@ -110,18 +124,48 @@ export function GenerateCoverLetterModal({
     }
   }, [open]);
 
+  // Edit mode: prefill from the existing cover letter when modal opens.
+  useEffect(() => {
+    if (!open || !editingId) return;
+    const myId = ++requestId.current;
+    setLoadingExisting(true);
+    setError(null);
+    void (async () => {
+      try {
+        const result = await getCoverLetter(editingId);
+        if (myId !== requestId.current) return;
+        if (!result.ok) {
+          showError(result.error || "Couldn't load cover letter");
+          return;
+        }
+        const cl = result.data;
+        setJd(cl.jobDescription ?? "");
+        setHiringManager(cl.hiringManager ?? "");
+        setTone(
+          cl.tone === "formal" || cl.tone === "conversational"
+            ? cl.tone
+            : "confident",
+        );
+        setTitle(cl.title ?? "");
+        setBody(cl.body ?? "");
+        titleAutoSetOnce.current = true;
+      } catch (err) {
+        if (myId !== requestId.current) return;
+        console.error("[GenerateCoverLetterModal] load failed:", err);
+        showError("Couldn't load cover letter");
+      } finally {
+        if (myId === requestId.current) setLoadingExisting(false);
+      }
+    })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open, editingId]);
+
   useEffect(() => {
     return () => {
       if (errorTimer.current) clearTimeout(errorTimer.current);
       if (copyTimer.current) clearTimeout(copyTimer.current);
     };
   }, []);
-
-  const showError = (msg: string) => {
-    setError(msg);
-    if (errorTimer.current) clearTimeout(errorTimer.current);
-    errorTimer.current = setTimeout(() => setError(null), 4000);
-  };
 
   const trimmedJdLen = jd.trim().length;
   const validJd = trimmedJdLen >= MIN_JD && trimmedJdLen <= MAX_JD;
@@ -201,14 +245,20 @@ export function GenerateCoverLetterModal({
     setSaving(true);
     setSaveError(null);
     try {
-      const result = await createCoverLetter({
-        cvId,
-        title: t,
-        jobDescription: jd.trim(),
-        hiringManager: hiringManager.trim() || undefined,
-        tone,
-        body: b,
-      });
+      const result = editingId
+        ? await updateCoverLetter(editingId, {
+            title: t,
+            body: b,
+            hiringManager: hiringManager.trim() || null,
+          })
+        : await createCoverLetter({
+            cvId,
+            title: t,
+            jobDescription: jd.trim(),
+            hiringManager: hiringManager.trim() || undefined,
+            tone,
+            body: b,
+          });
       if (!result.ok) {
         setSaveError(result.error || "Couldn't save right now — try again");
         return;
@@ -223,13 +273,26 @@ export function GenerateCoverLetterModal({
     }
   };
 
-  const titleStr = inPreview
-    ? "Cover Letter"
-    : "Generate Cover Letter with AI";
+  const titleStr = editingId
+    ? "Edit Cover Letter"
+    : inPreview
+      ? "Cover Letter"
+      : "Generate Cover Letter with AI";
+
+  const showPreview = inPreview || (!!editingId && !loadingExisting);
 
   return (
     <Modal open={open} onClose={onClose} title={titleStr} size="lg">
-      {!inPreview ? (
+      {editingId && loadingExisting ? (
+        <div
+          role="status"
+          aria-live="polite"
+          className="flex items-center justify-center gap-3 py-12 text-sm text-plum-soft"
+        >
+          <Loader2 className="h-5 w-5 animate-spin text-coral" />
+          Loading cover letter...
+        </div>
+      ) : !showPreview ? (
         <form
           onSubmit={(e) => {
             e.preventDefault();

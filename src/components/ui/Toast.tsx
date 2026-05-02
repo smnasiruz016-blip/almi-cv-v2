@@ -8,12 +8,23 @@ import {
   useRef,
   useState,
 } from "react";
+import Link from "next/link";
 import { CheckCircle2, XCircle } from "lucide-react";
 
 type ToastKind = "success" | "error";
-type ToastEntry = { id: number; kind: ToastKind; message: string };
+type ToastAction = { label: string; href: string };
+type ToastEntry = {
+  id: number;
+  kind: ToastKind;
+  message: string;
+  action?: ToastAction;
+};
 
-type ToastCtx = (message: string, kind?: ToastKind) => void;
+type ToastCtx = (
+  message: string,
+  kind?: ToastKind,
+  action?: ToastAction,
+) => void;
 
 const Ctx = createContext<ToastCtx | null>(null);
 
@@ -21,13 +32,16 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
   const [toasts, setToasts] = useState<ToastEntry[]>([]);
   const counter = useRef(0);
 
-  const showToast = useCallback<ToastCtx>((message, kind = "success") => {
-    const id = ++counter.current;
-    setToasts((prev) => [...prev, { id, kind, message }]);
-    setTimeout(() => {
-      setToasts((prev) => prev.filter((t) => t.id !== id));
-    }, 3500);
-  }, []);
+  const showToast = useCallback<ToastCtx>(
+    (message, kind = "success", action) => {
+      const id = ++counter.current;
+      setToasts((prev) => [...prev, { id, kind, message, action }]);
+      setTimeout(() => {
+        setToasts((prev) => prev.filter((t) => t.id !== id));
+      }, 3500);
+    },
+    [],
+  );
 
   return (
     <Ctx.Provider value={showToast}>
@@ -66,6 +80,14 @@ function ToastItem({ entry }: { entry: ToastEntry }) {
         <XCircle className="h-4 w-4 text-coral-deep" />
       )}
       <span className="font-medium">{entry.message}</span>
+      {entry.action && (
+        <Link
+          href={entry.action.href}
+          className="ml-1 text-xs font-semibold text-coral-deep underline-offset-2 hover:underline focus:outline-none focus:ring-2 focus:ring-coral/30 rounded"
+        >
+          {entry.action.label}
+        </Link>
+      )}
     </div>
   );
 }
