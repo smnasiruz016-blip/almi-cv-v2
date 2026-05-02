@@ -2,7 +2,7 @@
 
 import { Fragment, type CSSProperties, type ReactNode } from "react";
 import type { CVData } from "@/lib/cv-types";
-import { resolveStyle, withAlpha } from "@/lib/cv-themes";
+import { resolveStyle, sectionLabel, withAlpha } from "@/lib/cv-themes";
 import { RichTextRender, isRichTextEmpty } from "@/lib/rich-text";
 import { PaginatedCV, type PaginatedSection } from "./PaginatedCV";
 
@@ -186,7 +186,7 @@ function PhotoForwardBody({
     <div className="px-12 pb-10 pt-2">
       {!isRichTextEmpty(basics.summary) && (
         <section className="mb-8">
-          <SectionTitle ctx={ctx}>PROFILE</SectionTitle>
+          <SectionTitle ctx={ctx}>{sectionLabel(data, "profile", "PROFILE")}</SectionTitle>
           <RichTextRender
             html={basics.summary ?? ""}
             as="p"
@@ -200,7 +200,7 @@ function PhotoForwardBody({
         <div className="col-span-2 space-y-6">
           {experience.length > 0 && (
             <section>
-              <SectionTitle ctx={ctx}>EXPERIENCE</SectionTitle>
+              <SectionTitle ctx={ctx}>{sectionLabel(data, "experience", "EXPERIENCE")}</SectionTitle>
               <div className="space-y-6">
                 {experience.map((job, i) => (
                   <div key={`${job.company}-${job.startDate}-${i}`}>
@@ -253,7 +253,7 @@ function PhotoForwardBody({
 
           {education.length > 0 && (
             <section className="mt-6">
-              <SectionTitle ctx={ctx}>EDUCATION</SectionTitle>
+              <SectionTitle ctx={ctx}>{sectionLabel(data, "education", "EDUCATION")}</SectionTitle>
               <div className="space-y-3">
                 {education.map((entry, i) => (
                   <div
@@ -291,7 +291,7 @@ function PhotoForwardBody({
         <div className="col-span-1 space-y-8">
           {skills.length > 0 && (
             <section>
-              <SectionTitle ctx={ctx}>SKILLS</SectionTitle>
+              <SectionTitle ctx={ctx}>{sectionLabel(data, "skills", "SKILLS")}</SectionTitle>
               <ul style={{ color: ctx.theme.text }}>
                 {skills.map((skill, i) => (
                   <li key={i} className="mb-1.5 text-xs">
@@ -304,7 +304,7 @@ function PhotoForwardBody({
 
           {languages.length > 0 && (
             <section>
-              <SectionTitle ctx={ctx}>LANGUAGES</SectionTitle>
+              <SectionTitle ctx={ctx}>{sectionLabel(data, "languages", "LANGUAGES")}</SectionTitle>
               <ul>
                 {languages.map((lang, i) => (
                   <li
@@ -330,7 +330,7 @@ function PhotoForwardBody({
 
           {awards.length > 0 && (
             <section>
-              <SectionTitle ctx={ctx}>AWARDS</SectionTitle>
+              <SectionTitle ctx={ctx}>{sectionLabel(data, "awards", "AWARDS")}</SectionTitle>
               <ul>
                 {awards.map((award, i) => (
                   <li key={i} className="mb-2 text-xs">

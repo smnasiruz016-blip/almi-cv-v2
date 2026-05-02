@@ -6,6 +6,7 @@ import type { CVData } from "@/lib/cv-types";
 import {
   formatSectionTitle,
   resolveStyle,
+  sectionLabel,
   sectionVariantStyle,
   withAlpha,
 } from "@/lib/cv-themes";
@@ -273,7 +274,7 @@ function buildEditorialBoldSections(
       column: "left",
       node: (
         <section>
-          <SectionTitle title="EXPERIENCE" ctx={ctx} />
+          <SectionTitle title={sectionLabel(data, "experience", "EXPERIENCE")} ctx={ctx} />
           <div className="space-y-5">
             {experience.map((job, i) => (
               <div key={`${job.company}-${job.startDate}-${i}`}>
@@ -324,7 +325,7 @@ function buildEditorialBoldSections(
       column: "left",
       node: (
         <section>
-          <SectionTitle title="EDUCATION" ctx={ctx} />
+          <SectionTitle title={sectionLabel(data, "education", "EDUCATION")} ctx={ctx} />
           <div className="space-y-3">
             {education.map((entry, i) => (
               <div key={`${entry.school}-${entry.startDate}-${i}`}>
@@ -363,7 +364,7 @@ function buildEditorialBoldSections(
       column: "left",
       node: (
         <section>
-          <SectionTitle title="PROJECTS" ctx={ctx} />
+          <SectionTitle title={sectionLabel(data, "projects", "PROJECTS")} ctx={ctx} />
           <div className="space-y-3">
             {projects.map((project, i) => (
               <div key={`${project.name}-${i}`}>
@@ -403,7 +404,7 @@ function buildEditorialBoldSections(
       column: "right",
       node: (
         <section>
-          <SectionTitle title="SKILLS" ctx={ctx} />
+          <SectionTitle title={sectionLabel(data, "skills", "SKILLS")} ctx={ctx} />
           <ul
             className="space-y-1 text-sm"
             style={{ color: ctx.theme.textSoft }}
@@ -428,7 +429,7 @@ function buildEditorialBoldSections(
       column: "right",
       node: (
         <section>
-          <SectionTitle title="LANGUAGES" ctx={ctx} />
+          <SectionTitle title={sectionLabel(data, "languages", "LANGUAGES")} ctx={ctx} />
           <ul
             className="space-y-1 text-sm"
             style={{ color: ctx.theme.textSoft }}
@@ -456,7 +457,7 @@ function buildEditorialBoldSections(
       column: "right",
       node: (
         <section>
-          <SectionTitle title="AWARDS" ctx={ctx} />
+          <SectionTitle title={sectionLabel(data, "awards", "AWARDS")} ctx={ctx} />
           <ul
             className="space-y-2 text-sm leading-relaxed"
             style={{ color: ctx.theme.textSoft }}
@@ -490,7 +491,7 @@ function buildEditorialBoldSections(
       column: "right",
       node: (
         <section>
-          <SectionTitle title="CERTIFICATIONS" ctx={ctx} />
+          <SectionTitle title={sectionLabel(data, "certifications", "CERTIFICATIONS")} ctx={ctx} />
           <ul
             className="space-y-2 text-sm leading-relaxed"
             style={{ color: ctx.theme.textSoft }}
@@ -524,7 +525,7 @@ function buildEditorialBoldSections(
       column: "right",
       node: (
         <section>
-          <SectionTitle title="INTERESTS" ctx={ctx} />
+          <SectionTitle title={sectionLabel(data, "interests", "INTERESTS")} ctx={ctx} />
           <p
             className="text-sm leading-relaxed"
             style={{ color: ctx.theme.textSoft }}

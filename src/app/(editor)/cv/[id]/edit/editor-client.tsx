@@ -6,6 +6,7 @@ import {
   ArrowLeft,
   Check,
   Download,
+  Languages,
   Loader2,
   Mail,
   Printer,
@@ -14,6 +15,7 @@ import {
 } from "lucide-react";
 import { CVEditorSidebar } from "@/components/editor/CVEditorSidebar";
 import { GenerateCoverLetterModal } from "@/components/editor/GenerateCoverLetterModal";
+import { TranslateCvModal } from "@/components/editor/TranslateCvModal";
 import { updateResume } from "@/lib/resume-actions";
 import { downloadCvPdf } from "@/lib/download-pdf";
 import { useToast } from "@/components/ui/Toast";
@@ -45,6 +47,7 @@ export function EditorClient({
   const [downloading, setDownloading] = useState(false);
   const [restoreOpen, setRestoreOpen] = useState(false);
   const [coverLetterOpen, setCoverLetterOpen] = useState(false);
+  const [translateOpen, setTranslateOpen] = useState(false);
   const isInitialMount = useRef(true);
   const showToast = useToast();
 
@@ -117,6 +120,14 @@ export function EditorClient({
             >
               <Mail className="h-4 w-4" />
               <span className="hidden sm:inline">Cover Letter</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => setTranslateOpen(true)}
+              className="inline-flex items-center gap-2 rounded-pill bg-coral px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-coral-deep focus:outline-none focus:ring-4 focus:ring-coral/30"
+            >
+              <Languages className="h-4 w-4" />
+              <span className="hidden sm:inline">Translate</span>
             </button>
             <Link
               href={`/cv/${resumeId}/cover-letters`}
@@ -217,6 +228,12 @@ export function EditorClient({
             href: `/cv/${resumeId}/cover-letters`,
           })
         }
+      />
+
+      <TranslateCvModal
+        open={translateOpen}
+        onClose={() => setTranslateOpen(false)}
+        cvId={resumeId}
       />
     </div>
   );

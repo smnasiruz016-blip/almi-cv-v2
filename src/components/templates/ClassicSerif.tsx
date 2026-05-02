@@ -6,6 +6,7 @@ import type { CVData } from "@/lib/cv-types";
 import {
   formatSectionTitle,
   resolveStyle,
+  sectionLabel,
   sectionVariantStyle,
   withAlpha,
 } from "@/lib/cv-themes";
@@ -250,7 +251,7 @@ function buildClassicSerifSections(
       key: "profile",
       node: (
         <section>
-          {renderSectionTitle("PROFILE", ctx)}
+          {renderSectionTitle(sectionLabel(data, "profile", "PROFILE"), ctx)}
           <RichTextRender
             html={basics.summary ?? ""}
             as="p"
@@ -267,7 +268,7 @@ function buildClassicSerifSections(
       key: "experience",
       node: (
         <section>
-          {renderSectionTitle("EXPERIENCE", ctx)}
+          {renderSectionTitle(sectionLabel(data, "experience", "EXPERIENCE"), ctx)}
           <div className="space-y-5">
             {experience.map((job, i) => (
               <div key={`${job.company}-${job.startDate}-${i}`}>
@@ -316,7 +317,7 @@ function buildClassicSerifSections(
       key: "education",
       node: (
         <section>
-          {renderSectionTitle("EDUCATION", ctx)}
+          {renderSectionTitle(sectionLabel(data, "education", "EDUCATION"), ctx)}
           <div className="space-y-3">
             {education.map((entry, i) => (
               <div key={`${entry.school}-${entry.startDate}-${i}`}>
@@ -355,7 +356,7 @@ function buildClassicSerifSections(
       key: "skills",
       node: (
         <section>
-          {renderSectionTitle("SKILLS", ctx)}
+          {renderSectionTitle(sectionLabel(data, "skills", "SKILLS"), ctx)}
           <p
             className="text-sm leading-relaxed"
             style={{ color: ctx.theme.textSoft }}
@@ -372,7 +373,7 @@ function buildClassicSerifSections(
       key: "projects",
       node: (
         <section>
-          {renderSectionTitle("PROJECTS", ctx)}
+          {renderSectionTitle(sectionLabel(data, "projects", "PROJECTS"), ctx)}
           <div className="space-y-3">
             {projects.map((project, i) => (
               <div key={`${project.name}-${i}`}>
@@ -411,7 +412,7 @@ function buildClassicSerifSections(
       key: "languages",
       node: (
         <section>
-          {renderSectionTitle("LANGUAGES", ctx)}
+          {renderSectionTitle(sectionLabel(data, "languages", "LANGUAGES"), ctx)}
           <p
             className="text-sm leading-relaxed"
             style={{ color: ctx.theme.textSoft }}
@@ -428,7 +429,7 @@ function buildClassicSerifSections(
       key: "awards",
       node: (
         <section>
-          {renderSectionTitle("AWARDS", ctx)}
+          {renderSectionTitle(sectionLabel(data, "awards", "AWARDS"), ctx)}
           <ul
             className="space-y-1 text-sm leading-relaxed"
             style={{ color: ctx.theme.textSoft }}
@@ -451,7 +452,7 @@ function buildClassicSerifSections(
       key: "certifications",
       node: (
         <section>
-          {renderSectionTitle("CERTIFICATIONS", ctx)}
+          {renderSectionTitle(sectionLabel(data, "certifications", "CERTIFICATIONS"), ctx)}
           <ul
             className="space-y-1 text-sm leading-relaxed"
             style={{ color: ctx.theme.textSoft }}
@@ -474,7 +475,7 @@ function buildClassicSerifSections(
       key: "interests",
       node: (
         <section>
-          {renderSectionTitle("INTERESTS", ctx)}
+          {renderSectionTitle(sectionLabel(data, "interests", "INTERESTS"), ctx)}
           <p
             className="text-sm leading-relaxed"
             style={{ color: ctx.theme.textSoft }}

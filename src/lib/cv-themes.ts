@@ -2,9 +2,11 @@ import type { CSSProperties } from "react";
 import type {
   AccentKey,
   BodyFontKey,
+  CVData,
   DensityKey,
   HeadingFontKey,
   PhotoStyleKey,
+  SectionLabels,
   SectionStyleKey,
   ThemeKey,
 } from "./cv-types";
@@ -356,6 +358,21 @@ export function formatSectionTitle(
 ): string {
   if (sectionStyle === "uppercase") return title.toUpperCase();
   return title.charAt(0).toUpperCase() + title.slice(1).toLowerCase();
+}
+
+/**
+ * Resolves a section heading. If the CV carries translated sectionLabels
+ * (set by the AI translator), the translated value wins. Otherwise we use
+ * the template's English fallback. Existing CVs without sectionLabels render
+ * unchanged.
+ */
+export function sectionLabel(
+  data: CVData | undefined,
+  key: keyof SectionLabels,
+  fallback: string,
+): string {
+  const v = data?.sectionLabels?.[key]?.trim();
+  return v && v.length > 0 ? v : fallback;
 }
 
 export function sectionVariantStyle(

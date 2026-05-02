@@ -6,6 +6,7 @@ import type { CVData } from "@/lib/cv-types";
 import {
   formatSectionTitle,
   resolveStyle,
+  sectionLabel,
   sectionVariantStyle,
   withAlpha,
 } from "@/lib/cv-themes";
@@ -269,7 +270,7 @@ function buildDirectorSections(
       key: "profile",
       node: (
         <section className="mb-6">
-          <SectionTitle title="PROFILE" ctx={ctx} />
+          <SectionTitle title={sectionLabel(data, "profile", "PROFILE")} ctx={ctx} />
           <RichTextRender
             html={basics.summary ?? ""}
             as="p"
@@ -352,7 +353,7 @@ function buildDirectorSections(
       key: "experience",
       node: (
         <section className="mb-6">
-          <SectionTitle title="EXPERIENCE" ctx={ctx} />
+          <SectionTitle title={sectionLabel(data, "experience", "EXPERIENCE")} ctx={ctx} />
           <div className="space-y-5">
             {experience.map((job, i) => (
               <div key={`${job.company}-${job.startDate}-${i}`}>
@@ -405,7 +406,7 @@ function buildDirectorSections(
       key: "education",
       node: (
         <section className="mb-6">
-          <SectionTitle title="EDUCATION" ctx={ctx} />
+          <SectionTitle title={sectionLabel(data, "education", "EDUCATION")} ctx={ctx} />
           <div className="space-y-3">
             {education.map((entry, i) => (
               <div key={`${entry.school}-${entry.startDate}-${i}`}>
@@ -448,7 +449,7 @@ function buildDirectorSections(
       key: "projects",
       node: (
         <section className="mb-6">
-          <SectionTitle title="PROJECTS" ctx={ctx} />
+          <SectionTitle title={sectionLabel(data, "projects", "PROJECTS")} ctx={ctx} />
           <div className="space-y-3">
             {projects.map((project, i) => (
               <div key={`${project.name}-${i}`}>
@@ -490,7 +491,7 @@ function buildDirectorSections(
       key: "skills",
       node: (
         <section className="mb-6">
-          <SectionTitle title="SKILLS" ctx={ctx} />
+          <SectionTitle title={sectionLabel(data, "skills", "SKILLS")} ctx={ctx} />
           <p
             className="text-sm leading-relaxed"
             style={{ color: ctx.theme.textSoft }}
@@ -507,7 +508,7 @@ function buildDirectorSections(
       key: "languages",
       node: (
         <section className="mb-6">
-          <SectionTitle title="LANGUAGES" ctx={ctx} />
+          <SectionTitle title={sectionLabel(data, "languages", "LANGUAGES")} ctx={ctx} />
           <p
             className="text-sm leading-relaxed"
             style={{ color: ctx.theme.textSoft }}
@@ -524,7 +525,7 @@ function buildDirectorSections(
       key: "awards",
       node: (
         <section className="mb-6">
-          <SectionTitle title="AWARDS" ctx={ctx} />
+          <SectionTitle title={sectionLabel(data, "awards", "AWARDS")} ctx={ctx} />
           <ul
             className="space-y-1 text-sm leading-relaxed"
             style={{ color: ctx.theme.textSoft }}
@@ -554,7 +555,7 @@ function buildDirectorSections(
       key: "certifications",
       node: (
         <section className="mb-6">
-          <SectionTitle title="CERTIFICATIONS" ctx={ctx} />
+          <SectionTitle title={sectionLabel(data, "certifications", "CERTIFICATIONS")} ctx={ctx} />
           <ul
             className="space-y-1 text-sm leading-relaxed"
             style={{ color: ctx.theme.textSoft }}
@@ -586,7 +587,7 @@ function buildDirectorSections(
       key: "interests",
       node: (
         <section className="mb-6">
-          <SectionTitle title="INTERESTS" ctx={ctx} />
+          <SectionTitle title={sectionLabel(data, "interests", "INTERESTS")} ctx={ctx} />
           <p
             className="text-sm leading-relaxed"
             style={{ color: ctx.theme.textSoft }}

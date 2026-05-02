@@ -6,6 +6,7 @@ import type { CVData } from "@/lib/cv-types";
 import {
   formatSectionTitle,
   resolveStyle,
+  sectionLabel,
   sectionVariantStyle,
   withAlpha,
 } from "@/lib/cv-themes";
@@ -288,7 +289,7 @@ function buildAtelierSections(
       key: "profile",
       node: (
         <MiniCard>
-          <CardLabel title="PROFILE" ctx={ctx} />
+          <CardLabel title={sectionLabel(data, "profile", "PROFILE")} ctx={ctx} />
           <RichTextRender
             html={basics.summary ?? ""}
             as="p"
@@ -305,7 +306,7 @@ function buildAtelierSections(
       key: "experience",
       node: (
         <MiniCard>
-          <CardLabel title="EXPERIENCE" ctx={ctx} />
+          <CardLabel title={sectionLabel(data, "experience", "EXPERIENCE")} ctx={ctx} />
           <div className="space-y-4">
             {experience.map((job, i) => (
               <div key={`${job.company}-${job.startDate}-${i}`}>
@@ -360,7 +361,7 @@ function buildAtelierSections(
       key: "education",
       node: (
         <MiniCard>
-          <CardLabel title="EDUCATION" ctx={ctx} />
+          <CardLabel title={sectionLabel(data, "education", "EDUCATION")} ctx={ctx} />
           <div className="space-y-2">
             {education.map((entry, i) => (
               <div key={`${entry.school}-${entry.startDate}-${i}`}>
@@ -403,7 +404,7 @@ function buildAtelierSections(
       key: "skills",
       node: (
         <MiniCard>
-          <CardLabel title="SKILLS" ctx={ctx} />
+          <CardLabel title={sectionLabel(data, "skills", "SKILLS")} ctx={ctx} />
           <div className="flex flex-wrap gap-1.5">
             {skills.map((skill, i) => (
               <span
@@ -428,7 +429,7 @@ function buildAtelierSections(
       key: "projects",
       node: (
         <MiniCard>
-          <CardLabel title="PROJECTS" ctx={ctx} />
+          <CardLabel title={sectionLabel(data, "projects", "PROJECTS")} ctx={ctx} />
           <div className="space-y-2">
             {projects.map((project, i) => (
               <div key={`${project.name}-${i}`}>
@@ -470,7 +471,7 @@ function buildAtelierSections(
       key: "languages",
       node: (
         <MiniCard>
-          <CardLabel title="LANGUAGES" ctx={ctx} />
+          <CardLabel title={sectionLabel(data, "languages", "LANGUAGES")} ctx={ctx} />
           <div className="flex flex-wrap gap-1.5">
             {languages.map((lang, i) => (
               <span
@@ -498,7 +499,7 @@ function buildAtelierSections(
       key: "awards",
       node: (
         <MiniCard>
-          <CardLabel title="AWARDS" ctx={ctx} />
+          <CardLabel title={sectionLabel(data, "awards", "AWARDS")} ctx={ctx} />
           <ul
             className="space-y-1 text-sm leading-relaxed"
             style={{ color: ctx.theme.textSoft }}
@@ -528,7 +529,7 @@ function buildAtelierSections(
       key: "certifications",
       node: (
         <MiniCard>
-          <CardLabel title="CERTIFICATIONS" ctx={ctx} />
+          <CardLabel title={sectionLabel(data, "certifications", "CERTIFICATIONS")} ctx={ctx} />
           <ul
             className="space-y-1 text-sm leading-relaxed"
             style={{ color: ctx.theme.textSoft }}
@@ -560,7 +561,7 @@ function buildAtelierSections(
       key: "interests",
       node: (
         <MiniCard>
-          <CardLabel title="INTERESTS" ctx={ctx} />
+          <CardLabel title={sectionLabel(data, "interests", "INTERESTS")} ctx={ctx} />
           <p
             className="text-sm italic leading-relaxed"
             style={{ color: ctx.theme.textSoft }}

@@ -2,7 +2,7 @@
 
 import { Fragment, type CSSProperties, type ReactNode } from "react";
 import type { CVData } from "@/lib/cv-types";
-import { resolveStyle } from "@/lib/cv-themes";
+import { resolveStyle, sectionLabel } from "@/lib/cv-themes";
 import { RichTextRender, isRichTextEmpty } from "@/lib/rich-text";
 import { PaginatedCV, type PaginatedSection } from "./PaginatedCV";
 
@@ -188,7 +188,7 @@ function buildMinimalistMonoSections(
       key: "profile",
       node: (
         <section>
-          <SectionTitle ctx={ctx}>PROFILE</SectionTitle>
+          <SectionTitle ctx={ctx}>{sectionLabel(data, "profile", "PROFILE")}</SectionTitle>
           <RichTextRender
             html={basics.summary ?? ""}
             as="p"
@@ -204,7 +204,7 @@ function buildMinimalistMonoSections(
       key: "experience",
       node: (
         <section className="mt-12">
-          <SectionTitle ctx={ctx}>EXPERIENCE</SectionTitle>
+          <SectionTitle ctx={ctx}>{sectionLabel(data, "experience", "EXPERIENCE")}</SectionTitle>
           <div className="space-y-7">
             {experience.map((job, i) => (
               <div key={`${job.company}-${job.startDate}-${i}`}>
@@ -259,7 +259,7 @@ function buildMinimalistMonoSections(
       key: "education",
       node: (
         <section className="mt-12">
-          <SectionTitle ctx={ctx}>EDUCATION</SectionTitle>
+          <SectionTitle ctx={ctx}>{sectionLabel(data, "education", "EDUCATION")}</SectionTitle>
           <div className="space-y-4">
             {education.map((entry, i) => (
               <div
@@ -312,7 +312,7 @@ function buildMinimalistMonoSections(
       key: "languages",
       node: (
         <section className="mt-12">
-          <SectionTitle ctx={ctx}>LANGUAGES</SectionTitle>
+          <SectionTitle ctx={ctx}>{sectionLabel(data, "languages", "LANGUAGES")}</SectionTitle>
           <p className="text-sm leading-relaxed text-gray-800">
             {languages
               .map((l) => `${l.name} (${l.level.toLowerCase()})`)

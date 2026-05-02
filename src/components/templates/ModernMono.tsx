@@ -6,6 +6,7 @@ import type { CVData } from "@/lib/cv-types";
 import {
   formatSectionTitle,
   resolveStyle,
+  sectionLabel,
   sectionVariantStyle,
   withAlpha,
 } from "@/lib/cv-themes";
@@ -215,7 +216,7 @@ function ModernMonoSidebar({ ctx, data }: { ctx: ModernMonoCtx; data: CVData }) 
         <>
           <hr style={ctx.sidebarDividerStyle} />
           <div>
-            {renderSidebarTitle("SKILLS", ctx)}
+            {renderSidebarTitle(sectionLabel(data, "skills", "SKILLS"), ctx)}
             <div className="flex flex-wrap gap-1.5">
               {skills.map((skill, i) => (
                 <span
@@ -238,7 +239,7 @@ function ModernMonoSidebar({ ctx, data }: { ctx: ModernMonoCtx; data: CVData }) 
         <>
           <hr style={ctx.sidebarDividerStyle} />
           <div>
-            {renderSidebarTitle("LANGUAGES", ctx)}
+            {renderSidebarTitle(sectionLabel(data, "languages", "LANGUAGES"), ctx)}
             <ul className="space-y-1">
               {languages.map((lang, i) => (
                 <li
@@ -334,7 +335,7 @@ function buildModernMonoRightSections(
       key: "profile",
       node: (
         <section>
-          {renderContentTitle("PROFILE", ctx)}
+          {renderContentTitle(sectionLabel(data, "profile", "PROFILE"), ctx)}
           <RichTextRender
             html={basics.summary ?? ""}
             as="p"
@@ -351,7 +352,7 @@ function buildModernMonoRightSections(
       key: "experience",
       node: (
         <section>
-          {renderContentTitle("EXPERIENCE", ctx)}
+          {renderContentTitle(sectionLabel(data, "experience", "EXPERIENCE"), ctx)}
           <div className="space-y-4">
             {experience.map((job, idx) => (
               <div key={idx}>
@@ -413,7 +414,7 @@ function buildModernMonoRightSections(
       key: "education",
       node: (
         <section>
-          {renderContentTitle("EDUCATION", ctx)}
+          {renderContentTitle(sectionLabel(data, "education", "EDUCATION"), ctx)}
           <div className="space-y-3">
             {education.map((edu, idx) => (
               <div key={idx}>
@@ -463,7 +464,7 @@ function buildModernMonoRightSections(
       key: "projects",
       node: (
         <section>
-          {renderContentTitle("PROJECTS", ctx)}
+          {renderContentTitle(sectionLabel(data, "projects", "PROJECTS"), ctx)}
           <div className="space-y-2">
             {projects.map((p, idx) => (
               <div key={idx}>
@@ -502,7 +503,7 @@ function buildModernMonoRightSections(
       key: "awards",
       node: (
         <section>
-          {renderContentTitle("AWARDS", ctx)}
+          {renderContentTitle(sectionLabel(data, "awards", "AWARDS"), ctx)}
           <ul className="space-y-1">
             {awards.map((a, idx) => (
               <li key={idx} className="text-xs" style={{ color: ctx.theme.textSoft }}>
@@ -524,7 +525,7 @@ function buildModernMonoRightSections(
       key: "certifications",
       node: (
         <section>
-          {renderContentTitle("CERTIFICATIONS", ctx)}
+          {renderContentTitle(sectionLabel(data, "certifications", "CERTIFICATIONS"), ctx)}
           <ul className="space-y-1">
             {certifications.map((c, idx) => (
               <li key={idx} className="text-xs" style={{ color: ctx.theme.textSoft }}>
@@ -546,7 +547,7 @@ function buildModernMonoRightSections(
       key: "interests",
       node: (
         <section>
-          {renderContentTitle("INTERESTS", ctx)}
+          {renderContentTitle(sectionLabel(data, "interests", "INTERESTS"), ctx)}
           <p
             className="text-xs leading-relaxed"
             style={{ color: ctx.theme.textSoft }}

@@ -3,7 +3,7 @@
 import { Fragment, type CSSProperties, type ReactNode } from "react";
 import { Globe, Mail, MapPin, Phone } from "lucide-react";
 import type { CVData } from "@/lib/cv-types";
-import { resolveStyle, withAlpha } from "@/lib/cv-themes";
+import { resolveStyle, sectionLabel, withAlpha } from "@/lib/cv-themes";
 import { RichTextRender, isRichTextEmpty } from "@/lib/rich-text";
 import { PaginatedCV, type PaginatedSection } from "./PaginatedCV";
 
@@ -279,7 +279,7 @@ function BoldColorBlockPage({
       {isFirstPage && <BoldColorBlockHeader ctx={ctx} data={data} />}
       {isFirstPage && !isRichTextEmpty(summary) && (
         <section className="relative z-10 mb-2 px-12 pt-2">
-          <SectionTitle ctx={ctx}>PROFILE</SectionTitle>
+          <SectionTitle ctx={ctx}>{sectionLabel(data, "profile", "PROFILE")}</SectionTitle>
           <RichTextRender
             html={summary ?? ""}
             as="p"
@@ -334,7 +334,7 @@ function buildBoldColorBlockSections(
       column: "left",
       node: (
         <section>
-          <SectionTitle ctx={ctx}>EXPERIENCE</SectionTitle>
+          <SectionTitle ctx={ctx}>{sectionLabel(data, "experience", "EXPERIENCE")}</SectionTitle>
           <div className="space-y-6">
             {experience.map((job, i) => (
               <div key={`${job.company}-${job.startDate}-${i}`}>
@@ -388,7 +388,7 @@ function buildBoldColorBlockSections(
       column: "left",
       node: (
         <section>
-          <SectionTitle ctx={ctx}>EDUCATION</SectionTitle>
+          <SectionTitle ctx={ctx}>{sectionLabel(data, "education", "EDUCATION")}</SectionTitle>
           <div className="space-y-3">
             {education.map((entry, i) => (
               <div key={`${entry.school}-${entry.startDate}-${i}`}>
@@ -419,7 +419,7 @@ function buildBoldColorBlockSections(
       column: "right",
       node: (
         <section>
-          <SectionTitle ctx={ctx}>SKILLS</SectionTitle>
+          <SectionTitle ctx={ctx}>{sectionLabel(data, "skills", "SKILLS")}</SectionTitle>
           <div className="flex flex-wrap gap-2">
             {skills.map((skill, i) => (
               <span
@@ -447,7 +447,7 @@ function buildBoldColorBlockSections(
       column: "right",
       node: (
         <section>
-          <SectionTitle ctx={ctx}>LANGUAGES</SectionTitle>
+          <SectionTitle ctx={ctx}>{sectionLabel(data, "languages", "LANGUAGES")}</SectionTitle>
           <ul className="space-y-2">
             {languages.map((lang, i) => (
               <li key={i}>
@@ -472,7 +472,7 @@ function buildBoldColorBlockSections(
       column: "right",
       node: (
         <section>
-          <SectionTitle ctx={ctx}>AWARDS</SectionTitle>
+          <SectionTitle ctx={ctx}>{sectionLabel(data, "awards", "AWARDS")}</SectionTitle>
           <ul className="space-y-3">
             {awards.map((award, i) => (
               <li key={i}>

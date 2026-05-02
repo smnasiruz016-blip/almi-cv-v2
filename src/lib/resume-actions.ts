@@ -4,7 +4,8 @@ import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/db";
 import { requireUser } from "@/lib/auth";
 import { mayaRodriguez } from "@/lib/sample-cv-data";
-import type { CVData } from "@/lib/cv-types";
+import type { CVData, LanguageCode } from "@/lib/cv-types";
+import type { TranslatedCV } from "@/lib/ai/translate-cv-shared";
 import type { Prisma } from "@prisma/client";
 
 export async function createResume(template: string = "classic-serif"): Promise<string> {
@@ -58,6 +59,134 @@ export async function updateResume(
   revalidatePath(`/cv/${id}/edit`);
   revalidatePath("/dashboard");
   return resume;
+}
+
+/**
+ * Merge a translated payload into a clone of the source CV. Identity-only
+ * fields (name, email, phone, dates, company/school names, URLs) are copied
+ * as-is from the source. Translated fields (summary, role/location/bullets,
+ * skills, etc.) and sectionLabels overwrite per-index. The new CV gets
+ * `data.language` set so the editor and PDF can adapt later (RTL, etc.).
+ */
+export async function createTranslatedResume(input: {
+  sourceId: string;
+  translated: TranslatedCV;
+  languageCode: LanguageCode;
+  languageName: string;
+}): Promise<{ ok: true; id: string } | { ok: false; error: string }> {
+  try {
+    const user = await requireUser();
+    const source = await prisma.resume.findFirst({
+      where: { id: input.sourceId, userId: user.id },
+    });
+    if (!source) return { ok: false, error: "Resume not found" };
+
+    const sourceData = source.data as unknown as CVData;
+    const t = input.translated;
+
+    const mergedData: CVData = {
+      ...sourceData,
+      basics: {
+        ...sourceData.basics,
+        role: t.basics.role?.trim() || sourceData.basics?.role || "",
+        location:
+          t.basics.location?.trim() || sourceData.basics?.location || "",
+        summary:
+          t.basics.summary?.trim() || sourceData.basics?.summary || "",
+      },
+      experience: (sourceData.experience ?? []).map((entry, idx) => {
+        const tr = t.experience[idx];
+        if (!tr) return entry;
+        return {
+          ...entry,
+          role: tr.role?.trim() || entry.role,
+          location: tr.location?.trim() || entry.location,
+          bullets:
+            tr.bullets && tr.bullets.length === (entry.bullets ?? []).length
+              ? tr.bullets
+              : entry.bullets,
+        };
+      }),
+      education: (sourceData.education ?? []).map((entry, idx) => {
+        const tr = t.education[idx];
+        if (!tr) return entry;
+        return {
+          ...entry,
+          degree: tr.degree?.trim() || entry.degree,
+          location: tr.location?.trim() || entry.location,
+          notes: tr.notes?.trim() || entry.notes,
+        };
+      }),
+      skills:
+        t.skills.length === (sourceData.skills ?? []).length
+          ? t.skills
+          : sourceData.skills ?? [],
+      projects: sourceData.projects?.map((entry, idx) => {
+        const tr = t.projects?.[idx];
+        if (!tr) return entry;
+        return {
+          ...entry,
+          description: tr.description?.trim() || entry.description,
+        };
+      }),
+      languages: sourceData.languages?.map((entry, idx) => {
+        const tr = t.languages?.[idx];
+        if (!tr) return entry;
+        return {
+          ...entry,
+          name: tr.name?.trim() || entry.name,
+          level: tr.level?.trim() || entry.level,
+        };
+      }),
+      awards: sourceData.awards?.map((entry, idx) => {
+        const tr = t.awards?.[idx];
+        if (!tr) return entry;
+        return { ...entry, title: tr.title?.trim() || entry.title };
+      }),
+      certifications: sourceData.certifications?.map((entry, idx) => {
+        const tr = t.certifications?.[idx];
+        if (!tr) return entry;
+        return { ...entry, name: tr.name?.trim() || entry.name };
+      }),
+      interests:
+        t.interests &&
+        t.interests.length === (sourceData.interests ?? []).length
+          ? t.interests
+          : sourceData.interests,
+      language: input.languageCode,
+      sectionLabels: {
+        profile: t.sectionLabels.profile,
+        experience: t.sectionLabels.experience,
+        education: t.sectionLabels.education,
+        skills: t.sectionLabels.skills,
+        projects: t.sectionLabels.projects,
+        languages: t.sectionLabels.languages,
+        awards: t.sectionLabels.awards,
+        certifications: t.sectionLabels.certifications,
+        interests: t.sectionLabels.interests,
+      },
+    };
+
+    const copy = await prisma.resume.create({
+      data: {
+        userId: user.id,
+        title: `${source.title} (${input.languageName})`,
+        template: source.template,
+        templateKey: source.templateKey,
+        isDraft: false,
+        data: mergedData as unknown as Prisma.InputJsonValue,
+      },
+    });
+
+    revalidatePath("/dashboard");
+    return { ok: true, id: copy.id };
+  } catch (err) {
+    console.error("[createTranslatedResume] FAILED:", {
+      message: err instanceof Error ? err.message : String(err),
+      sourceId: input.sourceId,
+    });
+    return { ok: false, error: "Couldn't save translated CV — try again" };
+  }
 }
 
 export async function duplicateResume(id: string): Promise<string> {
