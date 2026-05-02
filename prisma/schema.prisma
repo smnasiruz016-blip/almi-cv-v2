@@ -64,6 +64,8 @@ model Resume {
   template     String         @default("classic-serif")
   data         Json           @default("{}")
   isDraft      Boolean        @default(true)
+  lastSnapshot   Json?
+  lastSnapshotAt DateTime?
   user         User           @relation(fields: [userId], references: [id], onDelete: Cascade)
   createdAt    DateTime       @default(now())
   updatedAt    DateTime       @default(now()) @updatedAt
