@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import {
@@ -13,10 +13,12 @@ import {
 } from "lucide-react";
 import { tailorCV, type TailorProposal } from "@/lib/ai/tailor-cv";
 import { applyTailor } from "@/lib/cv/apply-tailor";
+import { computeATSScore } from "@/lib/cv/ats-score";
 import type { CVData } from "@/lib/cv-types";
 import { SectionDiffCard } from "./components/SectionDiffCard";
 import { ActionBar } from "./components/ActionBar";
 import { ApplyConfirmModal } from "./components/ApplyConfirmModal";
+import { ATSScoreCard } from "./components/ATSScoreCard";
 
 const MIN_JD = 50;
 const MAX_JD = 5000;
@@ -48,6 +50,7 @@ export function TailorClient({
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [proposal, setProposal] = useState<TailorProposal | null>(null);
+  const [submittedJd, setSubmittedJd] = useState("");
   const [accepted, setAccepted] = useState<AcceptedSections>(ALL_ACCEPTED);
 
   const [confirmOpen, setConfirmOpen] = useState(false);
@@ -90,15 +93,17 @@ export function TailorClient({
     setProposal(null);
     setAccepted(ALL_ACCEPTED);
     try {
+      const submitted = jd.trim();
       const result = await tailorCV({
         cvId: resumeId,
-        jobDescription: jd.trim(),
+        jobDescription: submitted,
       });
       if (!result.ok) {
         showError(result.error);
         return;
       }
       setProposal(result.proposal);
+      setSubmittedJd(submitted);
     } catch (err) {
       console.error("[TailorClient] submit failed:", err);
       showError("Couldn't tailor your CV right now — try again");
@@ -111,6 +116,26 @@ export function TailorClient({
     (accepted.summary ? 1 : 0) +
     (accepted.experience ? 1 : 0) +
     (accepted.skills ? 1 : 0);
+
+  const atsScore = useMemo(() => {
+    if (!proposal) return null;
+    return computeATSScore({
+      cvData: initialData,
+      jobDescription: submittedJd,
+      tailored: proposal,
+      accepted,
+    });
+  }, [proposal, submittedJd, initialData, accepted]);
+
+  const baselineScore = useMemo(() => {
+    if (!proposal) return null;
+    return computeATSScore({
+      cvData: initialData,
+      jobDescription: submittedJd,
+      tailored: proposal,
+      accepted: { summary: false, experience: false, skills: false },
+    });
+  }, [proposal, submittedJd, initialData]);
 
   const onDiscard = () => {
     router.push(`/cv/${resumeId}/edit`);
@@ -262,7 +287,12 @@ export function TailorClient({
 
           {proposal && (
             <section className="mt-8 space-y-4">
-              {/* ATS score in Commit 2 */}
+              {atsScore && baselineScore && (
+                <ATSScoreCard
+                  score={atsScore}
+                  baseline={baselineScore.total}
+                />
+              )}
 
               <SectionDiffCard
                 sectionType="summary"
