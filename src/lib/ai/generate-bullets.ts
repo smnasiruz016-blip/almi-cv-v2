@@ -4,6 +4,7 @@ import Anthropic from "@anthropic-ai/sdk";
 import { requireUser } from "@/lib/auth";
 import { stripRichText } from "@/lib/rich-text";
 import { MODELS } from "@/lib/ai/models";
+import { requireAIAccess } from "@/lib/ai/access";
 
 const MAX_FIELD_CHARS = 500;
 const MAX_BULLETS = 5;
@@ -123,6 +124,9 @@ export async function generateBullets(input: {
     }
 
     const user = await requireUser();
+
+    const access = await requireAIAccess(user.id);
+    if (!access.ok) return { ok: false, error: access.error };
 
     const jobTitle = (input.jobTitle ?? "").trim();
     const company = (input.company ?? "").trim();

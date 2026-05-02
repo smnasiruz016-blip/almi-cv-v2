@@ -4,6 +4,7 @@ import Anthropic from "@anthropic-ai/sdk";
 import { requireUser } from "@/lib/auth";
 import { stripRichText } from "@/lib/rich-text";
 import { MODELS } from "@/lib/ai/models";
+import { requireAIAccess } from "@/lib/ai/access";
 
 const MAX_FIELD_CHARS = 500;
 const RATE_LIMIT_PER_HOUR = 30;
@@ -95,6 +96,9 @@ export async function generateSummary(input: {
     }
 
     const user = await requireUser();
+
+    const access = await requireAIAccess(user.id);
+    if (!access.ok) return { ok: false, error: access.error };
 
     const role = (input.role ?? "").trim();
     const topSkills = (input.topSkills ?? "").trim();
