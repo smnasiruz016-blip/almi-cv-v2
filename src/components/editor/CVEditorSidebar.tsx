@@ -18,6 +18,7 @@ import type {
   DensityKey,
   HeadingFontKey,
   PhotoStyleKey,
+  RichText,
   SectionStyleKey,
   ThemeKey,
 } from "@/lib/cv-types";
@@ -26,6 +27,7 @@ import { isRichTextEmpty } from "@/lib/rich-text";
 import { RichTextEditor } from "./RichTextEditor";
 import { ImproveButton } from "./ImproveButton";
 import { GenerateSummaryModal } from "./GenerateSummaryModal";
+import { GenerateBulletsModal } from "./GenerateBulletsModal";
 
 const UNDO_TIMEOUT_MS = 10000;
 
@@ -264,6 +266,101 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
     <div>
       <label className="mb-1 block text-xs font-medium text-plum-soft">{label}</label>
       {children}
+    </div>
+  );
+}
+
+function ExperienceBulletsField({
+  bullets,
+  setBullets,
+  role,
+  company,
+}: {
+  bullets: RichText[];
+  setBullets: (next: RichText[]) => void;
+  role: string;
+  company: string;
+}) {
+  const [generateOpen, setGenerateOpen] = useState(false);
+
+  const handleAccept = (selected: string[]) => {
+    const wrapped = selected
+      .map((s) => s.trim())
+      .filter((s) => s.length > 0)
+      .map((s) => {
+        const escaped = s
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;");
+        return `<p>${escaped}</p>`;
+      });
+    if (wrapped.length === 0) return;
+    setBullets([...bullets, ...wrapped]);
+  };
+
+  const isEmpty = bullets.length === 0;
+
+  return (
+    <div className="space-y-2">
+      {isEmpty && (
+        <button
+          type="button"
+          onClick={() => setGenerateOpen(true)}
+          className="flex w-full flex-col items-start gap-0.5 rounded-md border border-coral/30 bg-coral/10 px-3 py-2.5 text-left transition-colors hover:bg-coral/15 focus:outline-none focus:ring-2 focus:ring-coral/30"
+        >
+          <span className="inline-flex items-center gap-1.5 text-sm font-medium text-coral-deep">
+            <Sparkles className="h-3.5 w-3.5" />
+            Let AI suggest 5 strong bullets for this role
+          </span>
+          <span className="text-xs text-plum-soft">
+            Answer a few quick questions and we&apos;ll generate them.
+          </span>
+        </button>
+      )}
+      {bullets.map((bullet, bi) => (
+        <BulletRow
+          key={bi}
+          value={bullet}
+          onChange={(html) => {
+            const next = [...bullets];
+            next[bi] = html;
+            setBullets(next);
+          }}
+          onRemove={() => {
+            const next = bullets.filter((_, i) => i !== bi);
+            setBullets(next);
+          }}
+          role={role}
+          company={company}
+          ariaLabel={`Bullet ${bi + 1}`}
+        />
+      ))}
+      <div className="flex items-stretch gap-2">
+        <button
+          type="button"
+          onClick={() => setBullets([...bullets, ""])}
+          className="inline-flex flex-1 items-center justify-center gap-1 rounded-md border border-coral/30 px-3 py-2 text-sm font-medium text-coral transition-colors hover:bg-coral/10"
+        >
+          <Plus className="h-3.5 w-3.5" /> Add bullet
+        </button>
+        <button
+          type="button"
+          onClick={() => setGenerateOpen(true)}
+          aria-label="Generate Bullets with AI"
+          title="Generate Bullets with AI"
+          className="inline-flex items-center justify-center gap-1.5 rounded-md border border-coral/30 px-3 py-2 text-sm font-medium text-coral-deep transition-colors hover:bg-coral/10"
+        >
+          <WandSparkles className="h-3.5 w-3.5" />
+          Generate
+        </button>
+      </div>
+      <GenerateBulletsModal
+        open={generateOpen}
+        onClose={() => setGenerateOpen(false)}
+        defaultJobTitle={role}
+        defaultCompany={company}
+        onAccept={handleAccept}
+      />
     </div>
   );
 }
@@ -845,37 +942,12 @@ export function CVEditorSidebar({
                 </Field>
               </div>
               <Field label="Bullets">
-                <div className="space-y-2">
-                  {(job.bullets ?? []).map((bullet, bi) => (
-                    <BulletRow
-                      key={bi}
-                      value={bullet}
-                      onChange={(html) => {
-                        const next = [...(job.bullets ?? [])];
-                        next[bi] = html;
-                        update("bullets", next);
-                      }}
-                      onRemove={() => {
-                        const next = (job.bullets ?? []).filter(
-                          (_, i) => i !== bi,
-                        );
-                        update("bullets", next);
-                      }}
-                      role={job.role}
-                      company={job.company}
-                      ariaLabel={`Bullet ${bi + 1}`}
-                    />
-                  ))}
-                  <button
-                    type="button"
-                    onClick={() =>
-                      update("bullets", [...(job.bullets ?? []), ""])
-                    }
-                    className={addButtonClass}
-                  >
-                    <Plus className="h-3.5 w-3.5" /> Add bullet
-                  </button>
-                </div>
+                <ExperienceBulletsField
+                  bullets={job.bullets ?? []}
+                  setBullets={(next) => update("bullets", next)}
+                  role={job.role}
+                  company={job.company}
+                />
               </Field>
             </ArrayEntry>
           );
