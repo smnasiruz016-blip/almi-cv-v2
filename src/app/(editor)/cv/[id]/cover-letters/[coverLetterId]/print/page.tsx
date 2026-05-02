@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { getResume } from "@/lib/resume-actions";
 import { getCoverLetter } from "@/lib/cv/cover-letters";
 import type { CVData } from "@/lib/cv-types";
+import { resolveStyle, withAlpha } from "@/lib/cv-themes";
 import { AutoPrint } from "../../../print/auto-print";
 
 const DATE_FMT = new Intl.DateTimeFormat("en-US", { dateStyle: "long" });
@@ -24,7 +25,13 @@ export default async function CoverLetterPrintPage({
   if (cl.resumeId !== resume.id) notFound();
 
   const cv = resume.data as unknown as CVData;
+  const { theme, headingFont, bodyFont } = resolveStyle(cv.style);
+  const headingStack = `${headingFont.cssVar}, ${headingFont.fallback}`;
+  const bodyStack = `${bodyFont.cssVar}, ${bodyFont.fallback}`;
+  const dividerColor = withAlpha(theme.text, 0.15);
+
   const fullName = (cv.basics?.fullName ?? "").trim();
+  const role = (cv.basics?.role ?? "").trim();
   const email = (cv.basics?.email ?? "").trim();
   const phone = (cv.basics?.phone ?? "").trim();
   const location = (cv.basics?.location ?? "").trim();
@@ -36,11 +43,9 @@ export default async function CoverLetterPrintPage({
 
   const today = DATE_FMT.format(new Date());
 
-  // The model is instructed to produce salutation + paragraphs + sign-off in
-  // the body itself. Strip a leading "Dear ..." line if present (we render
-  // our own salutation just above the body) and strip any trailing sign-off
-  // block (we render a clean one below). Whatever is left becomes the
-  // body paragraphs.
+  // Strip a leading "Dear ..." line if present (we render our own salutation)
+  // and strip any trailing sign-off block + name line. Whatever is left
+  // becomes the body paragraphs.
   const bodyText = (cl.body ?? "").trim();
   const lines = bodyText.split(/\r?\n/);
 
@@ -53,8 +58,6 @@ export default async function CoverLetterPrintPage({
   }
 
   let lastIdx = lines.length - 1;
-  // Walk backwards: drop trailing empties and a trailing name line, then a
-  // sign-off line ("Sincerely,", "Best regards,", "Thank you,") if present.
   while (lastIdx >= firstIdx && lines[lastIdx]?.trim() === "") lastIdx--;
   if (
     lastIdx >= firstIdx &&
@@ -64,7 +67,8 @@ export default async function CoverLetterPrintPage({
     lastIdx--;
     while (lastIdx >= firstIdx && lines[lastIdx]?.trim() === "") lastIdx--;
   }
-  const SIGN_OFF_RE = /^(sincerely|best regards|thank you|kind regards|warm regards|regards|respectfully)\s*[,!.]?\s*$/i;
+  const SIGN_OFF_RE =
+    /^(sincerely|best regards|thank you|kind regards|warm regards|regards|respectfully)\s*[,!.]?\s*$/i;
   if (lastIdx >= firstIdx && SIGN_OFF_RE.test(lines[lastIdx]?.trim() ?? "")) {
     lastIdx--;
     while (lastIdx >= firstIdx && lines[lastIdx]?.trim() === "") lastIdx--;
@@ -87,14 +91,25 @@ export default async function CoverLetterPrintPage({
         ? "Thank you,"
         : "Best regards,";
 
+  const css = buildPrintCss({
+    headingStack,
+    bodyStack,
+    text: theme.text,
+    textSoft: theme.textSoft,
+    accent: theme.accent,
+    divider: dividerColor,
+  });
+
   return (
     <>
       <AutoPrint />
-      <style>{PRINT_CSS}</style>
+      <style>{css}</style>
       <div className="print-target">
         <div className="cl-page">
+          <div className="cl-accent" aria-hidden="true" />
           <header className="cl-letterhead">
             {fullName && <h1 className="cl-name">{fullName}</h1>}
+            {role && <p className="cl-role">{role}</p>}
             {contactLine && <p className="cl-contact">{contactLine}</p>}
           </header>
 
@@ -120,67 +135,114 @@ export default async function CoverLetterPrintPage({
   );
 }
 
-const PRINT_CSS = `
-  @page { size: A4; margin: 0; }
-  html, body { margin: 0; padding: 0; background: #ffffff; }
-  body {
-    font-family: Georgia, "Times New Roman", serif;
-    color: #1f1d2b;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
-  }
-  .cl-page {
-    box-sizing: border-box;
-    width: 210mm;
-    min-height: 297mm;
-    padding: 22mm 24mm 24mm 24mm;
-    background: #ffffff;
-  }
-  .cl-letterhead {
-    border-bottom: 1px solid #d8d3cc;
-    padding-bottom: 10mm;
-    margin-bottom: 10mm;
-  }
-  .cl-name {
-    font-size: 22pt;
-    font-weight: 600;
-    letter-spacing: 0.02em;
-    margin: 0 0 4mm 0;
-    color: #1f1d2b;
-  }
-  .cl-contact {
-    font-size: 9.5pt;
-    color: #4b4658;
-    margin: 0;
-    letter-spacing: 0.01em;
-  }
-  .cl-date {
-    text-align: right;
-    margin: 0 0 8mm 0;
-    font-size: 10pt;
-    color: #4b4658;
-  }
-  .cl-salutation {
-    margin: 0 0 6mm 0;
-    font-size: 11pt;
-  }
-  .cl-body p {
-    font-size: 11pt;
-    line-height: 1.6;
-    margin: 0 0 5mm 0;
-    text-align: left;
-    orphans: 3;
-    widows: 3;
-  }
-  .cl-signoff {
-    margin-top: 8mm;
-  }
-  .cl-signoff p {
-    font-size: 11pt;
-    margin: 0 0 2mm 0;
-  }
-  .cl-signature {
-    font-weight: 600;
-    margin-top: 2mm !important;
-  }
-`;
+function buildPrintCss({
+  headingStack,
+  bodyStack,
+  text,
+  textSoft,
+  accent,
+  divider,
+}: {
+  headingStack: string;
+  bodyStack: string;
+  text: string;
+  textSoft: string;
+  accent: string;
+  divider: string;
+}): string {
+  return `
+    @page { size: A4; margin: 0; }
+    html, body { margin: 0; padding: 0; background: #ffffff; }
+    body {
+      font-family: ${bodyStack};
+      color: ${text};
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .cl-page {
+      box-sizing: border-box;
+      position: relative;
+      width: 210mm;
+      min-height: 297mm;
+      padding: 24mm 26mm 24mm 26mm;
+      background: #ffffff;
+    }
+    .cl-accent {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4mm;
+      background: ${accent};
+    }
+    .cl-letterhead {
+      padding-bottom: 7mm;
+      border-bottom: 1px solid ${divider};
+      margin-bottom: 9mm;
+    }
+    .cl-name {
+      font-family: ${headingStack};
+      font-size: 26pt;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin: 0 0 3mm 0;
+      color: ${text};
+    }
+    .cl-role {
+      font-family: ${bodyStack};
+      font-size: 10.5pt;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: ${textSoft};
+      margin: 0 0 4mm 0;
+    }
+    .cl-contact {
+      font-family: ${bodyStack};
+      font-size: 9.5pt;
+      color: ${textSoft};
+      margin: 0;
+      letter-spacing: 0.01em;
+    }
+    .cl-date {
+      text-align: right;
+      margin: 0 0 8mm 0;
+      font-size: 10pt;
+      color: ${textSoft};
+      font-family: ${bodyStack};
+    }
+    .cl-salutation {
+      margin: 0 0 5mm 0;
+      font-size: 11pt;
+      color: ${text};
+      font-family: ${bodyStack};
+    }
+    .cl-body p {
+      font-size: 11pt;
+      line-height: 1.6;
+      margin: 0 0 5mm 0;
+      text-align: left;
+      color: ${text};
+      font-family: ${bodyStack};
+      orphans: 3;
+      widows: 3;
+    }
+    .cl-signoff {
+      margin-top: 8mm;
+    }
+    .cl-signoff p {
+      font-size: 11pt;
+      margin: 0 0 1.5mm 0;
+      color: ${text};
+      font-family: ${bodyStack};
+    }
+    .cl-signature {
+      font-family: ${headingStack} !important;
+      font-weight: 500 !important;
+      font-size: 13pt !important;
+      margin-top: 5mm !important;
+      letter-spacing: -0.01em;
+    }
+  `;
+}
