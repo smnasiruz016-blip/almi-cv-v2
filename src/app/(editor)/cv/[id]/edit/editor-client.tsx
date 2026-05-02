@@ -2,13 +2,23 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { ArrowLeft, Check, Download, Loader2, Printer } from "lucide-react";
+import {
+  ArrowLeft,
+  Check,
+  Download,
+  Loader2,
+  Printer,
+  RotateCcw,
+  Sparkles,
+} from "lucide-react";
 import { CVEditorSidebar } from "@/components/editor/CVEditorSidebar";
 import { updateResume } from "@/lib/resume-actions";
 import { downloadCvPdf } from "@/lib/download-pdf";
 import { useToast } from "@/components/ui/Toast";
 import type { CVData } from "@/lib/cv-types";
 import { getTemplate } from "@/lib/templates";
+import { RestoreCVModal } from "./restore-modal";
+import { TailoredBanner } from "./tailored-banner";
 
 type SaveStatus = "idle" | "saving" | "saved" | "error";
 
@@ -17,11 +27,13 @@ export function EditorClient({
   initialTitle,
   initialData,
   templateSlug,
+  hasSnapshot,
 }: {
   resumeId: string;
   initialTitle: string;
   initialData: CVData;
   templateSlug: string;
+  hasSnapshot: boolean;
 }) {
   const template = getTemplate(templateSlug);
   const TemplateComponent = template.Component;
@@ -29,6 +41,7 @@ export function EditorClient({
   const [cvName, setCvName] = useState(initialTitle);
   const [saveStatus, setSaveStatus] = useState<SaveStatus>("saved");
   const [downloading, setDownloading] = useState(false);
+  const [restoreOpen, setRestoreOpen] = useState(false);
   const isInitialMount = useRef(true);
   const showToast = useToast();
 
@@ -87,6 +100,23 @@ export function EditorClient({
             <SaveIndicator status={saveStatus} />
           </div>
           <div className="flex items-center gap-2">
+            <Link
+              href={`/cv/${resumeId}/tailor`}
+              className="inline-flex items-center gap-2 rounded-pill bg-coral px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-coral-deep focus:outline-none focus:ring-4 focus:ring-coral/30"
+            >
+              <Sparkles className="h-4 w-4" />
+              <span className="hidden sm:inline">Tailor for Job</span>
+            </Link>
+            {hasSnapshot && (
+              <button
+                type="button"
+                onClick={() => setRestoreOpen(true)}
+                className="inline-flex items-center gap-2 rounded-pill border border-plum/15 px-4 py-2 text-sm font-medium text-plum transition-colors hover:bg-cream-soft focus:outline-none focus:ring-2 focus:ring-plum/15"
+              >
+                <RotateCcw className="h-4 w-4" />
+                <span className="hidden sm:inline">Restore previous</span>
+              </button>
+            )}
             <button
               type="button"
               disabled={downloading}
@@ -145,6 +175,19 @@ export function EditorClient({
           </div>
         </main>
       </div>
+
+      {hasSnapshot && (
+        <TailoredBanner
+          resumeId={resumeId}
+          onRestoreClick={() => setRestoreOpen(true)}
+        />
+      )}
+
+      <RestoreCVModal
+        open={restoreOpen}
+        resumeId={resumeId}
+        onClose={() => setRestoreOpen(false)}
+      />
     </div>
   );
 }

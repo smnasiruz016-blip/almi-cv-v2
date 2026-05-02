@@ -2,12 +2,20 @@
 
 import { useEffect, useLayoutEffect, useRef, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
-import { Download, Loader2, MoreVertical, Pencil, Printer, Trash2 } from "lucide-react";
+import {
+  Download,
+  Loader2,
+  MoreVertical,
+  Pencil,
+  Printer,
+  Sparkles,
+  Trash2,
+} from "lucide-react";
 import { duplicateResume, deleteResume } from "@/lib/resume-actions";
 import { downloadCvPdf } from "@/lib/download-pdf";
 import { useToast } from "@/components/ui/Toast";
 
-const MENU_HEIGHT_ESTIMATE = 220;
+const MENU_HEIGHT_ESTIMATE = 265;
 
 type Position = "below" | "above";
 
@@ -148,6 +156,15 @@ export function CVCardMenu({
             >
               <Pencil className="h-4 w-4" />
               Open editor
+            </a>
+            <a
+              role="menuitem"
+              href={`/cv/${resumeId}/tailor`}
+              className="flex items-center gap-3 px-4 py-2.5 text-sm text-plum transition-colors hover:bg-coral/10"
+              onClick={() => setOpen(false)}
+            >
+              <Sparkles className="h-4 w-4 text-coral" />
+              Tailor for job
             </a>
             <button
               role="menuitem"
