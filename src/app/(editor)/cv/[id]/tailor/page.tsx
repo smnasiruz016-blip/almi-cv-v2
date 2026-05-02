@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { getResume } from "@/lib/resume-actions";
 import { TailorClient } from "./tailor-client";
+import type { CVData } from "@/lib/cv-types";
 
 export default async function TailorPage({
   params,
@@ -11,5 +12,11 @@ export default async function TailorPage({
   const resume = await getResume(id);
   if (!resume) notFound();
 
-  return <TailorClient resumeId={resume.id} cvTitle={resume.title} />;
+  return (
+    <TailorClient
+      resumeId={resume.id}
+      cvTitle={resume.title}
+      initialData={resume.data as unknown as CVData}
+    />
+  );
 }
