@@ -9,6 +9,7 @@ import {
   Languages,
   Loader2,
   Mail,
+  MessageCircleQuestion,
   Printer,
   RotateCcw,
   Sparkles,
@@ -129,6 +130,13 @@ export function EditorClient({
               <Languages className="h-4 w-4" />
               <span className="hidden sm:inline">Translate</span>
             </button>
+            <Link
+              href="/interview-prep"
+              className="inline-flex items-center gap-2 rounded-pill bg-coral px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-coral-deep focus:outline-none focus:ring-4 focus:ring-coral/30"
+            >
+              <MessageCircleQuestion className="h-4 w-4" />
+              <span className="hidden sm:inline">Interview Prep</span>
+            </Link>
             <Link
               href={`/cv/${resumeId}/cover-letters`}
               className="inline-flex items-center gap-2 rounded-pill border border-plum/15 px-3 py-1.5 text-xs font-medium text-plum transition-colors hover:bg-cream-soft focus:outline-none focus:ring-2 focus:ring-plum/15"

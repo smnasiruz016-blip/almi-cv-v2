@@ -1,5 +1,11 @@
 import Link from "next/link";
-import { ArrowRight, FileText, Plus, Sparkles } from "lucide-react";
+import {
+  ArrowRight,
+  FileText,
+  MessageCircleQuestion,
+  Plus,
+  Sparkles,
+} from "lucide-react";
 import { requireUser } from "@/lib/auth";
 import { listResumes } from "@/lib/resume-actions";
 import { DashboardCard } from "@/components/dashboard/DashboardCard";
@@ -48,10 +54,22 @@ export default async function DashboardPage() {
             {user.subscriptionTier === "PREMIUM" ? "Premium" : "Free"}
           </p>
         </div>
-        <div className="rounded-2xl border border-lavender/40 bg-lavender-soft p-6 shadow-warm-card">
-          <p className="text-xs font-medium uppercase tracking-widest text-coral">Coming next</p>
-          <p className="mt-3 font-display text-2xl font-medium text-plum">Editor + AI</p>
-        </div>
+        <Link
+          href="/interview-prep"
+          className="group flex flex-col rounded-2xl border border-lavender/40 bg-lavender-soft p-6 shadow-warm-card transition-colors hover:border-coral/40"
+        >
+          <p className="inline-flex items-center gap-1.5 text-xs font-medium uppercase tracking-widest text-coral">
+            <MessageCircleQuestion className="h-3.5 w-3.5" />
+            Interview Prep
+          </p>
+          <p className="mt-3 font-display text-2xl font-medium text-plum">
+            12 Qs, tailored
+          </p>
+          <p className="mt-1 inline-flex items-center gap-1 text-xs text-plum-soft transition-colors group-hover:text-coral-deep">
+            Practice with AI
+            <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
+          </p>
+        </Link>
       </section>
 
       <section className="rounded-2xl border border-peach/40 bg-white p-8 shadow-warm-card">
