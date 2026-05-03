@@ -9,6 +9,7 @@ import {
   revokeCompPro,
   extendCompPro,
 } from "@/lib/billing/comp-accounts";
+import { AdminSubnav } from "../_components/AdminSubnav";
 import { CompAccountsClient } from "./comp-accounts-client";
 
 const FOUNDER_DOGFOOD_DAYS = 90;
@@ -66,12 +67,15 @@ export default async function CompAccountsAdminPage() {
   const loadError = result.ok ? null : result.error;
 
   return (
-    <CompAccountsClient
-      accounts={accounts}
-      loadError={loadError}
-      grantAction={grantCompPro}
-      revokeAction={revokeCompPro}
-      extendAction={extendCompPro}
-    />
+    <div className="space-y-6">
+      <AdminSubnav active="comp-accounts" />
+      <CompAccountsClient
+        accounts={accounts}
+        loadError={loadError}
+        grantAction={grantCompPro}
+        revokeAction={revokeCompPro}
+        extendAction={extendCompPro}
+      />
+    </div>
   );
 }

@@ -11,6 +11,7 @@ import {
   RefreshCw,
   Sparkles,
 } from "lucide-react";
+import { SubmitReviewCard } from "@/components/reviews/SubmitReviewCard";
 
 type PlanKey = "FREE" | "PRO_MONTHLY" | "PRO_YEARLY";
 
@@ -360,6 +361,8 @@ export function AccountClient({
           </div>
         </div>
       </section>
+
+      <SubmitReviewCard />
     </>
   );
 }

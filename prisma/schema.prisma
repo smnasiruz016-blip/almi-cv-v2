@@ -61,6 +61,13 @@ model User {
   compGrantedBy String?
   compReason    String?
 
+  // Marketing opt-in — set explicitly via the review form's checkbox or any
+  // future newsletter widget. Audit trail via marketingOptInAt.
+  marketingOptIn   Boolean   @default(false)
+  marketingOptInAt DateTime?
+
+  reviews   Review[]
+
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt
 
@@ -140,4 +147,20 @@ model ProcessedWebhook {
   processedAt DateTime @default(now())
 
   @@index([processedAt])
+}
+
+model Review {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  rating      Int
+  comment     String   @db.Text
+  improvement String?  @db.Text
+  displayName String?
+  showOnSite  Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([showOnSite, createdAt])
+  @@index([userId])
 }
