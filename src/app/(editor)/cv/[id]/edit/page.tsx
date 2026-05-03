@@ -1,6 +1,8 @@
 import { notFound } from "next/navigation";
+import { requireUser } from "@/lib/auth";
 import { getResume } from "@/lib/resume-actions";
 import { getSnapshot } from "@/lib/cv/snapshots";
+import { isProActive } from "@/lib/billing/plans";
 import { EditorClient } from "./editor-client";
 import type { CVData } from "@/lib/cv-types";
 
@@ -10,6 +12,7 @@ export default async function EditCVPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
+  const user = await requireUser();
   const resume = await getResume(id);
   if (!resume) notFound();
 
@@ -23,6 +26,7 @@ export default async function EditCVPage({
       initialData={resume.data as unknown as CVData}
       templateSlug={resume.template ?? "classic-serif"}
       hasSnapshot={hasSnapshot}
+      isPro={isProActive(user)}
     />
   );
 }

@@ -34,12 +34,14 @@ export function EditorClient({
   initialData,
   templateSlug,
   hasSnapshot,
+  isPro,
 }: {
   resumeId: string;
   initialTitle: string;
   initialData: CVData;
   templateSlug: string;
   hasSnapshot: boolean;
+  isPro: boolean;
 }) {
   const template = getTemplate(templateSlug);
   const TemplateComponent = template.Component;
@@ -108,6 +110,15 @@ export function EditorClient({
             <SaveIndicator status={saveStatus} />
           </div>
           <div className="flex items-center gap-2">
+            {!isPro && (
+              <Link
+                href="/pricing"
+                className="inline-flex items-center gap-2 rounded-pill border border-coral/40 bg-coral-soft/40 px-4 py-2 text-sm font-semibold text-coral-deep transition-colors hover:border-coral hover:bg-coral-soft/60 focus:outline-none focus:ring-4 focus:ring-coral/30"
+              >
+                <Sparkles className="h-4 w-4" />
+                <span className="hidden sm:inline">Upgrade to Pro</span>
+              </Link>
+            )}
             <Link
               href={`/cv/${resumeId}/tailor`}
               className="inline-flex items-center gap-2 rounded-pill bg-coral px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-coral-deep focus:outline-none focus:ring-4 focus:ring-coral/30"

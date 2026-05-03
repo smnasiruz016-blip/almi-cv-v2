@@ -12,6 +12,11 @@ import { listResumes } from "@/lib/resume-actions";
 import { DashboardCard } from "@/components/dashboard/DashboardCard";
 import { ChatLauncher } from "@/components/chat/ChatLauncher";
 import { LimitWatcher } from "@/components/billing/LimitWatcher";
+import {
+  getUserPlan,
+  isProActive,
+  PLAN_DISPLAY_NAME,
+} from "@/lib/billing/plans";
 import type { CVData } from "@/lib/cv-types";
 
 const RTF = new Intl.RelativeTimeFormat("en", { numeric: "auto" });
@@ -30,14 +35,34 @@ function relativeTime(date: Date) {
 export default async function DashboardPage() {
   const user = await requireUser();
   const resumes = await listResumes();
+  const isPro = isProActive(user);
+  const planLabel = PLAN_DISPLAY_NAME[getUserPlan(user)];
 
   return (
     <div className="space-y-8">
       <section>
-        <span className="inline-flex items-center gap-2 rounded-full bg-mint/20 px-3 py-1 text-xs font-medium text-[#0F4A42]">
-          <Sparkles className="h-3.5 w-3.5" />
-          {user.subscriptionTier === "PREMIUM" ? "Premium" : "Free plan"}
-        </span>
+        <div className="flex flex-wrap items-center gap-3">
+          <span
+            className={`inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-medium ${
+              isPro
+                ? "bg-coral/15 text-coral-deep"
+                : "bg-mint/20 text-[#0F4A42]"
+            }`}
+          >
+            <Sparkles className="h-3.5 w-3.5" />
+            {isPro ? "Pro plan" : "Free plan"}
+          </span>
+          {!isPro && (
+            <Link
+              href="/pricing"
+              className="inline-flex items-center gap-1.5 rounded-pill bg-coral px-4 py-1.5 text-xs font-semibold text-white transition-colors hover:bg-coral-deep focus:outline-none focus:ring-4 focus:ring-coral/30"
+            >
+              <Sparkles className="h-3.5 w-3.5" />
+              Upgrade to Pro
+              <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
+          )}
+        </div>
         <h1 className="mt-4 text-4xl text-plum md:text-5xl">
           Welcome back, {user.name.split(" ")[0]}.
         </h1>
@@ -51,12 +76,28 @@ export default async function DashboardPage() {
           <p className="text-xs font-medium uppercase tracking-widest text-coral">Your CVs</p>
           <p className="mt-3 font-display text-4xl font-medium text-plum">{resumes.length}</p>
         </div>
-        <div className="rounded-2xl border border-peach/40 bg-white p-6 shadow-warm-card">
-          <p className="text-xs font-medium uppercase tracking-widest text-coral">Plan</p>
-          <p className="mt-3 font-display text-4xl font-medium text-plum">
-            {user.subscriptionTier === "PREMIUM" ? "Premium" : "Free"}
-          </p>
-        </div>
+        {isPro ? (
+          <div className="rounded-2xl border border-peach/40 bg-white p-6 shadow-warm-card">
+            <p className="text-xs font-medium uppercase tracking-widest text-coral">Plan</p>
+            <p className="mt-3 font-display text-4xl font-medium text-plum">
+              {planLabel}
+            </p>
+          </div>
+        ) : (
+          <Link
+            href="/pricing"
+            className="group flex flex-col rounded-2xl border border-peach/40 bg-white p-6 shadow-warm-card transition-colors hover:border-coral/40"
+          >
+            <p className="text-xs font-medium uppercase tracking-widest text-coral">Plan</p>
+            <p className="mt-3 font-display text-4xl font-medium text-plum">
+              Free
+            </p>
+            <p className="mt-1 inline-flex items-center gap-1 text-xs font-medium text-coral transition-colors group-hover:text-coral-deep">
+              Upgrade
+              <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
+            </p>
+          </Link>
+        )}
         <Link
           href="/interview-prep"
           className="group flex flex-col rounded-2xl border border-lavender/40 bg-lavender-soft p-6 shadow-warm-card transition-colors hover:border-coral/40"
