@@ -164,3 +164,16 @@ model Review {
   @@index([showOnSite, createdAt])
   @@index([userId])
 }
+
+model Subscriber {
+  id             String    @id @default(cuid())
+  email          String    @unique
+  source         String    @default("homepage")
+  subscribedAt   DateTime  @default(now())
+  unsubscribedAt DateTime?
+  ipAddress      String?
+  userAgent      String?
+
+  @@index([email])
+  @@index([subscribedAt])
+}

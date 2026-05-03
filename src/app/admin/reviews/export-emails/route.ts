@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { requireUser } from "@/lib/auth";
 import { isOwner } from "@/lib/owner";
-import { exportMarketingEmailsCSV } from "@/lib/reviews";
+import { exportUnifiedEmailListCSV } from "@/lib/subscribers";
 
 // CSV escape: quote any field containing a comma, double quote, CR, or LF;
 // double up internal double quotes per RFC 4180.
@@ -27,14 +27,19 @@ export async function GET() {
     return new NextResponse("Forbidden", { status: 403 });
   }
 
-  const result = await exportMarketingEmailsCSV();
+  const result = await exportUnifiedEmailListCSV();
   if (!result.ok) {
     return new NextResponse(result.error, { status: 500 });
   }
 
-  const header = "Email,Name,Opted In Date";
+  const header = "Email,Name,Opted In Date,Source";
   const lines = result.rows.map((r) =>
-    [escapeCsv(r.email), escapeCsv(r.name), escapeCsv(r.optedInAt)].join(","),
+    [
+      escapeCsv(r.email),
+      escapeCsv(r.name),
+      escapeCsv(r.optedInAt),
+      escapeCsv(r.source),
+    ].join(","),
   );
   // UTF-8 BOM so Excel renders accented and non-Latin names correctly on
   // Windows. Linux/Mac CSV viewers strip or ignore the BOM gracefully.

@@ -1,23 +1,34 @@
 "use client";
 
 import { useState, useTransition } from "react";
-import { Download, Loader2, Mail, Star, Trash2 } from "lucide-react";
+import { Download, Loader2, Mail, Star, Trash2, Users } from "lucide-react";
 import { Modal } from "@/components/ui/modal";
 import { useToast } from "@/components/ui/Toast";
 import type { AdminReviewRow } from "@/lib/reviews";
+import type { SubscriberRow } from "@/lib/subscribers";
 
 type ToggleResult =
   | { ok: true; showOnSite: boolean }
   | { ok: false; error: string };
 type DeleteResult = { ok: true } | { ok: false; error: string };
 
+type UnifiedStats = {
+  usersOptedIn: number;
+  subscribers: number;
+  overlap: number;
+  unique: number;
+};
+
 type Props = {
   reviews: AdminReviewRow[];
-  totalOptedIn: number;
-  totalUsers: number;
+  stats: UnifiedStats;
+  subscribers: SubscriberRow[];
   loadError: string | null;
   toggleAction: (input: { reviewId: string }) => Promise<ToggleResult>;
   deleteAction: (input: { reviewId: string }) => Promise<DeleteResult>;
+  deleteSubscriberAction: (input: {
+    subscriberId: string;
+  }) => Promise<DeleteResult>;
 };
 
 function formatDate(iso: string): string {
@@ -47,16 +58,34 @@ function StarRow({ value }: { value: number }) {
 
 export function ReviewsClient({
   reviews: initialReviews,
-  totalOptedIn,
-  totalUsers,
+  stats,
+  subscribers: initialSubscribers,
   loadError,
   toggleAction,
   deleteAction,
+  deleteSubscriberAction,
 }: Props) {
   const showToast = useToast();
   const [pending, startTransition] = useTransition();
   const [reviews, setReviews] = useState(initialReviews);
+  const [subscribers, setSubscribers] = useState(initialSubscribers);
   const [deleteTarget, setDeleteTarget] = useState<AdminReviewRow | null>(null);
+  const [deleteSubTarget, setDeleteSubTarget] = useState<SubscriberRow | null>(
+    null,
+  );
+
+  const handleDeleteSubscriber = (row: SubscriberRow) => {
+    startTransition(async () => {
+      const r = await deleteSubscriberAction({ subscriberId: row.id });
+      if (r.ok) {
+        setSubscribers((prev) => prev.filter((s) => s.id !== row.id));
+        setDeleteSubTarget(null);
+        showToast(`Deleted ${row.email}`);
+      } else {
+        showToast(r.error, "error");
+      }
+    });
+  };
 
   const handleToggle = (row: AdminReviewRow) => {
     startTransition(async () => {
@@ -105,7 +134,7 @@ export function ReviewsClient({
         </div>
       )}
 
-      {/* SECTION A — Email list */}
+      {/* SECTION A — Unified email list */}
       <section className="rounded-2xl border border-plum/10 bg-white p-6 shadow-warm-card">
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div>
@@ -113,22 +142,26 @@ export function ReviewsClient({
               <Mail className="h-4 w-4 text-coral" />
               Marketing Email List
             </h2>
-            <p className="mt-2 text-sm text-plum">
-              <span className="font-display text-2xl font-medium">
-                {totalOptedIn}
+            <p className="mt-3 text-plum">
+              <span className="font-display text-3xl font-medium">
+                {stats.unique}
               </span>{" "}
-              <span className="text-plum-soft">
-                {totalOptedIn === 1 ? "user" : "users"} opted in to product
-                updates
-                {totalUsers > 0 && (
-                  <> · {Math.round((totalOptedIn / totalUsers) * 100)}% of {totalUsers} total users</>
-                )}
+              <span className="text-sm text-plum-soft">
+                total subscriber{stats.unique === 1 ? "" : "s"} (deduplicated)
               </span>
             </p>
-            <p className="mt-2 text-xs text-plum-faint">
-              Use this list for launch announcements and product updates.
-              Re-export anytime — the file always reflects the current opted-in
-              set.
+            <ul className="mt-2 space-y-0.5 text-xs text-plum-soft">
+              <li>· {stats.usersOptedIn} from user accounts</li>
+              <li>· {stats.subscribers} from public newsletter widget</li>
+              <li>
+                · {stats.overlap} overlap{" "}
+                <span className="text-plum-faint">(counted once above)</span>
+              </li>
+            </ul>
+            <p className="mt-3 text-xs text-plum-faint">
+              CSV export merges both sources, dedupes by email, and includes a
+              Source column. Re-export anytime — the file always reflects
+              current state.
             </p>
           </div>
           <a
@@ -139,6 +172,62 @@ export function ReviewsClient({
             Download CSV
           </a>
         </div>
+      </section>
+
+      {/* SECTION A.2 — Recent public subscribers */}
+      <section className="rounded-2xl border border-plum/10 bg-white p-6 shadow-warm-card">
+        <h2 className="inline-flex items-center gap-2 text-base font-semibold text-plum">
+          <Users className="h-4 w-4 text-coral" />
+          Recent public subscribers
+          <span className="text-xs font-normal text-plum-faint">
+            (most recent 20)
+          </span>
+        </h2>
+        {subscribers.length === 0 ? (
+          <p className="mt-4 text-sm text-plum-soft">
+            No public subscribers yet. They&apos;ll appear here when visitors
+            use the homepage newsletter widget.
+          </p>
+        ) : (
+          <div className="mt-4 overflow-x-auto">
+            <table className="w-full text-left text-sm">
+              <thead>
+                <tr className="border-b border-plum/10 text-xs uppercase tracking-wide text-plum-faint">
+                  <th className="py-2 pr-3 font-medium">Email</th>
+                  <th className="py-2 pr-3 font-medium">Subscribed</th>
+                  <th className="py-2 pr-3 font-medium">Source</th>
+                  <th className="py-2 pr-0 text-right font-medium">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {subscribers.map((row) => (
+                  <tr key={row.id} className="border-b border-plum/5">
+                    <td className="py-2 pr-3 font-medium text-plum">
+                      {row.email}
+                    </td>
+                    <td className="py-2 pr-3 text-xs text-plum-soft">
+                      {formatDate(row.subscribedAt)}
+                    </td>
+                    <td className="py-2 pr-3 text-xs text-plum-soft">
+                      {row.source}
+                    </td>
+                    <td className="py-2 pr-0 text-right">
+                      <button
+                        type="button"
+                        onClick={() => setDeleteSubTarget(row)}
+                        disabled={pending}
+                        className="inline-flex items-center gap-1 rounded-md border border-plum/15 px-2 py-1 text-xs font-medium text-plum-soft transition-colors hover:border-coral-deep/40 hover:text-coral-deep disabled:cursor-not-allowed disabled:opacity-60"
+                      >
+                        <Trash2 className="h-3 w-3" />
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
       </section>
 
       {/* SECTION B — Reviews */}
@@ -268,6 +357,42 @@ export function ReviewsClient({
             >
               {pending && <Loader2 className="h-4 w-4 animate-spin" />}
               Delete review
+            </button>
+          </div>
+        </div>
+      </Modal>
+
+      <Modal
+        open={deleteSubTarget !== null}
+        onClose={() => setDeleteSubTarget(null)}
+        title="Delete this subscriber?"
+        size="sm"
+      >
+        <div className="space-y-4">
+          <p className="text-sm text-plum">
+            Permanently removes{" "}
+            <span className="font-semibold">{deleteSubTarget?.email}</span>{" "}
+            from the public subscriber list. They can re-subscribe via the
+            homepage widget. Use this for spam or invalid entries.
+          </p>
+          <div className="flex justify-end gap-2">
+            <button
+              type="button"
+              onClick={() => setDeleteSubTarget(null)}
+              className="rounded-pill border border-plum/15 bg-white px-4 py-2 text-sm font-medium text-plum-soft transition-colors hover:bg-cream-soft"
+            >
+              Cancel
+            </button>
+            <button
+              type="button"
+              onClick={() =>
+                deleteSubTarget && handleDeleteSubscriber(deleteSubTarget)
+              }
+              disabled={pending}
+              className="inline-flex items-center gap-2 rounded-pill bg-coral-deep px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-coral disabled:cursor-not-allowed disabled:opacity-60"
+            >
+              {pending && <Loader2 className="h-4 w-4 animate-spin" />}
+              Delete subscriber
             </button>
           </div>
         </div>

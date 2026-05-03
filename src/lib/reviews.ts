@@ -260,33 +260,6 @@ export async function getMarketingOptInStats(): Promise<
   return { ok: true, totalOptedIn, totalUsers };
 }
 
-export type MarketingExportRow = {
-  email: string;
-  name: string;
-  optedInAt: string | null;
-};
-
-export async function exportMarketingEmailsCSV(): Promise<
-  Result<{ rows: MarketingExportRow[] }>
-> {
-  const gate = await ownerGate();
-  if (!gate.ok) return gate;
-
-  const users = await prisma.user.findMany({
-    where: { marketingOptIn: true },
-    select: { email: true, name: true, marketingOptInAt: true },
-    orderBy: { marketingOptInAt: "desc" },
-  });
-
-  const rows: MarketingExportRow[] = users.map((u) => ({
-    email: u.email,
-    name: u.name,
-    optedInAt: u.marketingOptInAt?.toISOString() ?? null,
-  }));
-
-  return { ok: true, rows };
-}
-
 export type PublicReview = {
   id: string;
   rating: number;

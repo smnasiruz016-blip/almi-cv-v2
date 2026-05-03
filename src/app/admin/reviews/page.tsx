@@ -3,10 +3,14 @@ import { requireUser } from "@/lib/auth";
 import { isOwner } from "@/lib/owner";
 import {
   deleteReview,
-  getMarketingOptInStats,
   listAllReviewsForAdmin,
   toggleReviewVisibility,
 } from "@/lib/reviews";
+import {
+  deleteSubscriber,
+  getUnifiedEmailListStats,
+  listAllSubscribersForAdmin,
+} from "@/lib/subscribers";
 import { AdminSubnav } from "../_components/AdminSubnav";
 import { ReviewsClient } from "./reviews-client";
 
@@ -18,30 +22,41 @@ export default async function ReviewsAdminPage() {
   const user = await requireUser();
   if (!isOwner(user.email)) redirect("/dashboard");
 
-  const [reviewsResult, statsResult] = await Promise.all([
+  const [reviewsResult, statsResult, subsResult] = await Promise.all([
     listAllReviewsForAdmin(),
-    getMarketingOptInStats(),
+    getUnifiedEmailListStats(),
+    listAllSubscribersForAdmin(),
   ]);
 
   const reviews = reviewsResult.ok ? reviewsResult.reviews : [];
-  const totalOptedIn = statsResult.ok ? statsResult.totalOptedIn : 0;
-  const totalUsers = statsResult.ok ? statsResult.totalUsers : 0;
+  const stats = statsResult.ok
+    ? {
+        usersOptedIn: statsResult.usersOptedIn,
+        subscribers: statsResult.subscribers,
+        overlap: statsResult.overlap,
+        unique: statsResult.unique,
+      }
+    : { usersOptedIn: 0, subscribers: 0, overlap: 0, unique: 0 };
+  const subscribers = subsResult.ok ? subsResult.subscribers.slice(0, 20) : [];
   const loadError = !reviewsResult.ok
     ? reviewsResult.error
     : !statsResult.ok
       ? statsResult.error
-      : null;
+      : !subsResult.ok
+        ? subsResult.error
+        : null;
 
   return (
     <div className="space-y-6">
       <AdminSubnav active="reviews" />
       <ReviewsClient
         reviews={reviews}
-        totalOptedIn={totalOptedIn}
-        totalUsers={totalUsers}
+        stats={stats}
+        subscribers={subscribers}
         loadError={loadError}
         toggleAction={toggleReviewVisibility}
         deleteAction={deleteReview}
+        deleteSubscriberAction={deleteSubscriber}
       />
     </div>
   );

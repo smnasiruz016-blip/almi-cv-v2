@@ -9,6 +9,7 @@ import { Crown } from "lucide-react";
 import { TemplateThumbnail } from "@/components/templates/TemplateThumbnail";
 import { TEMPLATE_LIST } from "@/lib/templates";
 import { getCurrentUser } from "@/lib/auth";
+import { NewsletterCard } from "@/components/newsletter/NewsletterCard";
 
 type TrustStat = {
   value: string;
@@ -53,8 +54,19 @@ export default async function HomePage() {
       <TemplatesSection />
       <HowItWorksSection />
       <FinalCTASection isLoggedIn={isLoggedIn} />
+      <NewsletterSection />
       <Footer />
     </main>
+  );
+}
+
+function NewsletterSection() {
+  return (
+    <Section className="bg-cream-soft py-16">
+      <Container>
+        <NewsletterCard />
+      </Container>
+    </Section>
   );
 }
 
