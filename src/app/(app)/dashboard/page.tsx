@@ -9,6 +9,7 @@ import {
 import { requireUser } from "@/lib/auth";
 import { listResumes } from "@/lib/resume-actions";
 import { DashboardCard } from "@/components/dashboard/DashboardCard";
+import { ChatLauncher } from "@/components/chat/ChatLauncher";
 import type { CVData } from "@/lib/cv-types";
 
 const RTF = new Intl.RelativeTimeFormat("en", { numeric: "auto" });
@@ -119,6 +120,8 @@ export default async function DashboardPage() {
           </div>
         )}
       </section>
+
+      <ChatLauncher />
     </div>
   );
 }

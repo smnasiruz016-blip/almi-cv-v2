@@ -38,6 +38,7 @@ model User {
   subscriptionTier SubscriptionTier @default(FREE)
   sessions         Session[]
   resumes          Resume[]
+  chatMessages     ChatMessage[]
   createdAt        DateTime         @default(now())
   updatedAt        DateTime         @default(now()) @updatedAt
 }
@@ -68,6 +69,7 @@ model Resume {
   lastSnapshotAt DateTime?
   user         User           @relation(fields: [userId], references: [id], onDelete: Cascade)
   coverLetters CoverLetter[]
+  chatMessages ChatMessage[]
   createdAt    DateTime       @default(now())
   updatedAt    DateTime       @default(now()) @updatedAt
 
@@ -88,4 +90,18 @@ model CoverLetter {
   updatedAt      DateTime @default(now()) @updatedAt
 
   @@index([resumeId, updatedAt])
+}
+
+model ChatMessage {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  cvId      String?
+  resume    Resume?  @relation(fields: [cvId], references: [id], onDelete: SetNull)
+  role      String
+  content   String
+  createdAt DateTime @default(now())
+
+  @@index([userId, createdAt])
+  @@index([cvId])
 }

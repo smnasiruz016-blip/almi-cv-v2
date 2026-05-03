@@ -17,6 +17,7 @@ import {
 import { CVEditorSidebar } from "@/components/editor/CVEditorSidebar";
 import { GenerateCoverLetterModal } from "@/components/editor/GenerateCoverLetterModal";
 import { TranslateCvModal } from "@/components/editor/TranslateCvModal";
+import { ChatLauncher } from "@/components/chat/ChatLauncher";
 import { updateResume } from "@/lib/resume-actions";
 import { downloadCvPdf } from "@/lib/download-pdf";
 import { useToast } from "@/components/ui/Toast";
@@ -243,6 +244,8 @@ export function EditorClient({
         onClose={() => setTranslateOpen(false)}
         cvId={resumeId}
       />
+
+      <ChatLauncher cvId={resumeId} />
     </div>
   );
 }
