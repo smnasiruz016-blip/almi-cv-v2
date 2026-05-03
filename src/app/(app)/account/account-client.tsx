@@ -11,7 +11,7 @@ import {
   RefreshCw,
   Sparkles,
 } from "lucide-react";
-import { SubmitReviewCard } from "@/components/reviews/SubmitReviewCard";
+import { ReviewCard } from "@/components/reviews/ReviewCard";
 
 type PlanKey = "FREE" | "PRO_MONTHLY" | "PRO_YEARLY";
 
@@ -209,6 +209,8 @@ export function AccountClient({
         </div>
       )}
 
+      <ReviewCard />
+
       {/* Plan card */}
       <section className="rounded-2xl border border-plum/10 bg-white p-6 shadow-warm-card">
         <div className="flex flex-wrap items-start justify-between gap-3">
@@ -361,8 +363,6 @@ export function AccountClient({
           </div>
         </div>
       </section>
-
-      <SubmitReviewCard />
     </>
   );
 }

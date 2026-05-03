@@ -2,7 +2,8 @@ import { ImageResponse } from "next/og";
 import { readFile } from "fs/promises";
 import path from "path";
 
-export const alt = "AlmiCV — Honest career toolkit. $10 once. Forever.";
+export const alt =
+  "AlmiCV — AI-powered CV builder. Premium templates, ATS scoring, $7/month with a 7-day free trial.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -89,7 +90,7 @@ export default async function OpenGraphImage() {
               display: "flex",
             }}
           >
-            Honest career toolkit. $10 once. Forever.
+            AI-powered CV builder · Free to start · 7-day Pro trial
           </div>
         </div>
 

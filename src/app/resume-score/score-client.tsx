@@ -182,7 +182,8 @@ export function ScoreClient() {
           </h2>
           <p className="mx-auto mt-2 max-w-md text-sm text-plum-soft">
             Build a polished, tailored CV with AlmiCV — premium templates, AI
-            writing helper, live ATS scoring, $10 once.
+            writing helper, and live ATS scoring. Free to start, $7/month for
+            unlimited AI with a 7-day free trial.
           </p>
           <Link
             href="/signup"

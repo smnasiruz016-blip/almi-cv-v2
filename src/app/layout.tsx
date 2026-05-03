@@ -23,14 +23,16 @@ export const metadata: Metadata = {
     "Premium-grade resume templates, live editor, AI writing helper, and ATS scoring. Build a polished CV in minutes.",
   openGraph: {
     title: "AlmiCV — Beautiful CVs, Built Right",
-    description: "Honest career toolkit. $10 once. Forever.",
+    description:
+      "AI-powered CV builder with premium templates, ATS scoring, and tailoring. Free to start, $7/month for unlimited AI — 7-day free trial.",
     siteName: "AlmiCV",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
     title: "AlmiCV — Beautiful CVs, Built Right",
-    description: "Honest career toolkit. $10 once. Forever.",
+    description:
+      "AI-powered CV builder with premium templates, ATS scoring, and tailoring. Free to start, $7/month for unlimited AI — 7-day free trial.",
   },
 };
 

@@ -12,6 +12,7 @@ import { listResumes } from "@/lib/resume-actions";
 import { DashboardCard } from "@/components/dashboard/DashboardCard";
 import { ChatLauncher } from "@/components/chat/ChatLauncher";
 import { LimitWatcher } from "@/components/billing/LimitWatcher";
+import { ReviewCard } from "@/components/reviews/ReviewCard";
 import {
   getUserPlan,
   isProActive,
@@ -163,6 +164,8 @@ export default async function DashboardPage() {
           </div>
         )}
       </section>
+
+      <ReviewCard />
 
       <ChatLauncher />
 

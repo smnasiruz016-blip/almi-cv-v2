@@ -10,10 +10,16 @@ import { TemplateThumbnail } from "@/components/templates/TemplateThumbnail";
 import { TEMPLATE_LIST } from "@/lib/templates";
 import { getCurrentUser } from "@/lib/auth";
 
-const TRUST_STATS = [
+type TrustStat = {
+  value: string;
+  label: string;
+  href?: string;
+};
+
+const TRUST_STATS: TrustStat[] = [
   { value: "942 sources", label: "Trusted job boards" },
   { value: "60+ designs", label: "Coming soon" },
-  { value: "$10 once", label: "Lifetime premium" },
+  { value: "From $7/month", label: "7-day free trial", href: "/pricing" },
   { value: "Multilingual", label: "Built-in translation" },
 ];
 
@@ -163,14 +169,31 @@ function TrustSection() {
           Built for the world
         </p>
         <div className="mt-10 grid grid-cols-2 gap-8 md:grid-cols-4">
-          {TRUST_STATS.map((stat) => (
-            <div key={stat.value} className="text-center">
-              <p className="font-display text-3xl text-coral">{stat.value}</p>
-              <p className="mt-2 text-xs uppercase tracking-widest text-plum-soft">
-                {stat.label}
-              </p>
-            </div>
-          ))}
+          {TRUST_STATS.map((stat) => {
+            const inner = (
+              <>
+                <p className="font-display text-3xl text-coral">
+                  {stat.value}
+                </p>
+                <p className="mt-2 text-xs uppercase tracking-widest text-plum-soft">
+                  {stat.label}
+                </p>
+              </>
+            );
+            return stat.href ? (
+              <Link
+                key={stat.value}
+                href={stat.href}
+                className="block rounded-xl text-center transition-transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-coral/30"
+              >
+                {inner}
+              </Link>
+            ) : (
+              <div key={stat.value} className="text-center">
+                {inner}
+              </div>
+            );
+          })}
         </div>
       </Container>
     </Section>
@@ -192,7 +215,7 @@ function TemplatesSection() {
         </div>
 
         <p className="mt-8 mb-8 text-center text-sm text-plum-soft">
-          6 designs · 3 free · 3 unlock with $10
+          6 designs · 3 free · 3 unlock with Pro
         </p>
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 lg:gap-4">
           {TEMPLATE_LIST.map((tpl) => (
@@ -275,7 +298,7 @@ function FinalCTASection({ isLoggedIn }: { isLoggedIn: boolean }) {
             Your next chapter starts with a better CV.
           </h2>
           <p className="mx-auto mt-6 max-w-2xl text-lg text-cream/70">
-            Free to start. Three CVs included. Upgrade once for $10 and unlock everything — for life.
+            Free to start. Three CVs included. Upgrade to Pro for unlimited AI and every premium template — $7/month with a 7-day free trial.
           </p>
           <div className="mt-10 flex justify-center">
             <Link

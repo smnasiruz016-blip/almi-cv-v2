@@ -92,8 +92,8 @@ export function EditorClient({
   return (
     <div className="flex min-h-screen flex-col bg-cream-soft">
       <div className="print-hide sticky top-0 z-30 border-b border-plum/10 bg-white/95 backdrop-blur-md">
-        <div className="flex w-full items-center justify-between px-6 py-3">
-          <div className="flex items-center gap-3">
+        <div className="flex w-full flex-wrap items-center justify-between gap-x-4 gap-y-2 px-6 py-3">
+          <div className="flex min-w-0 flex-1 items-center gap-3">
             <Link
               href="/dashboard"
               className="text-plum-soft transition-colors hover:text-plum"
@@ -105,11 +105,11 @@ export function EditorClient({
               value={cvName}
               onChange={(e) => setCvName(e.target.value)}
               placeholder="Untitled CV"
-              className="min-w-[200px] rounded border-0 bg-transparent px-2 py-1 text-base font-medium text-plum focus:outline-none focus:ring-2 focus:ring-coral/30"
+              className="min-w-0 flex-1 rounded border-0 bg-transparent px-2 py-1 text-base font-medium text-plum focus:outline-none focus:ring-2 focus:ring-coral/30 sm:max-w-[280px]"
             />
             <SaveIndicator status={saveStatus} />
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             {!isPro && (
               <Link
                 href="/pricing"
