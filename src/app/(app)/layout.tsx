@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { FileText, LayoutTemplate, LogOut } from "lucide-react";
+import { CircleUserRound, FileText, LayoutTemplate, LogOut } from "lucide-react";
 import { destroySession, requireUser } from "@/lib/auth";
 import { cvFontVariables } from "@/lib/cv-fonts";
 
@@ -40,6 +40,13 @@ export default async function AppLayout({
             >
               <LayoutTemplate className="h-4 w-4" />
               Templates
+            </Link>
+            <Link
+              href="/account"
+              className="hidden items-center gap-2 rounded-xl px-3 py-2 text-sm font-medium text-plum-soft transition hover:bg-plum/5 hover:text-coral md:flex"
+            >
+              <CircleUserRound className="h-4 w-4" />
+              Account
             </Link>
             <span className="hidden text-sm text-plum-faint lg:inline">{user.email}</span>
             <form action={logoutAction}>

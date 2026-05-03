@@ -4,12 +4,51 @@ import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/db";
 import { requireUser } from "@/lib/auth";
 import { mayaRodriguez } from "@/lib/sample-cv-data";
+import {
+  getUserPlan,
+  isBillingEnabled,
+  PLAN_DISPLAY_NAME,
+  PLANS,
+} from "@/lib/billing/plans";
 import type { CVData, LanguageCode } from "@/lib/cv-types";
 import type { TranslatedCV } from "@/lib/ai/translate-cv-shared";
 import type { Prisma } from "@prisma/client";
 
-export async function createResume(template: string = "classic-serif"): Promise<string> {
+export type CreateResumeResult =
+  | { ok: true; id: string }
+  | { ok: false; error: string; code: "CV_LIMIT_REACHED" };
+
+export async function createResume(
+  template: string = "classic-serif",
+): Promise<CreateResumeResult> {
   const user = await requireUser();
+
+  // Enforce CV cap unless billing is in dry-run mode (see plans.ts for
+  // why caps are disabled until launch flag flips).
+  if (isBillingEnabled()) {
+    const planUser = await prisma.user.findUnique({
+      where: { id: user.id },
+      select: {
+        subscriptionStatus: true,
+        subscriptionCurrentPeriodEnd: true,
+        subscriptionPlan: true,
+      },
+    });
+    const plan = planUser ? getUserPlan(planUser) : "FREE";
+    const limit = PLANS[plan].cvLimit;
+    const count = await prisma.resume.count({ where: { userId: user.id } });
+    if (count >= limit) {
+      const isFree = plan === "FREE";
+      return {
+        ok: false,
+        code: "CV_LIMIT_REACHED",
+        error: isFree
+          ? `Free plan is limited to ${limit} CVs. Upgrade to Pro to create up to ${PLANS.PRO_MONTHLY.cvLimit}.`
+          : `${PLAN_DISPLAY_NAME[plan]} is limited to ${limit} CVs. Please delete an existing CV to create a new one.`,
+      };
+    }
+  }
+
   const resume = await prisma.resume.create({
     data: {
       userId: user.id,
@@ -20,7 +59,7 @@ export async function createResume(template: string = "classic-serif"): Promise<
       data: mayaRodriguez as unknown as Prisma.InputJsonValue,
     },
   });
-  return resume.id;
+  return { ok: true, id: resume.id };
 }
 
 export async function getResume(id: string) {

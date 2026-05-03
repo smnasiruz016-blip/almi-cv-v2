@@ -6,10 +6,12 @@ import {
   Plus,
   Sparkles,
 } from "lucide-react";
+import { Suspense } from "react";
 import { requireUser } from "@/lib/auth";
 import { listResumes } from "@/lib/resume-actions";
 import { DashboardCard } from "@/components/dashboard/DashboardCard";
 import { ChatLauncher } from "@/components/chat/ChatLauncher";
+import { LimitWatcher } from "@/components/billing/LimitWatcher";
 import type { CVData } from "@/lib/cv-types";
 
 const RTF = new Intl.RelativeTimeFormat("en", { numeric: "auto" });
@@ -122,6 +124,10 @@ export default async function DashboardPage() {
       </section>
 
       <ChatLauncher />
+
+      <Suspense fallback={null}>
+        <LimitWatcher />
+      </Suspense>
     </div>
   );
 }

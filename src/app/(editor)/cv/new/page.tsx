@@ -48,6 +48,12 @@ export default async function NewCVPage({
     redirect(`/cv/${reusable.id}/edit`);
   }
 
-  const id = await createResume(template);
-  redirect(`/cv/${id}/edit`);
+  const result = await createResume(template);
+  if (!result.ok) {
+    // CV cap hit — bounce to dashboard with a query flag so the dashboard
+    // surfaces the upgrade modal client-side.
+    const reason = encodeURIComponent(result.code);
+    redirect(`/dashboard?limit=${reason}`);
+  }
+  redirect(`/cv/${result.id}/edit`);
 }

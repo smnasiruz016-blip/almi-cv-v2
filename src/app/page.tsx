@@ -75,6 +75,12 @@ function SiteHeader({ isLoggedIn }: { isLoggedIn: boolean }) {
           ) : (
             <div className="flex items-center gap-3">
               <Link
+                href="/pricing"
+                className="hidden text-sm font-medium text-plum-soft transition hover:text-coral sm:inline-flex"
+              >
+                Pricing
+              </Link>
+              <Link
                 href="/login"
                 className="hidden text-sm font-medium text-plum-soft transition hover:text-coral sm:inline-flex"
               >
