@@ -21,6 +21,7 @@ export default async function PricingPage() {
         subscriptionStatus: true,
         subscriptionCurrentPeriodEnd: true,
         subscriptionPlan: true,
+        compProUntil: true,
       },
     });
     if (u) currentPlan = getUserPlan(u);

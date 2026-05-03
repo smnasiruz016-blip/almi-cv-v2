@@ -2,8 +2,10 @@ import type { Metadata } from "next";
 import { requireUser } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 import {
+  getCompProDaysRemaining,
   getUserPlan,
   isBillingEnabled,
+  isComped,
   isProActive,
   PLAN_DISPLAY_NAME,
   PLANS,
@@ -35,6 +37,7 @@ export default async function AccountPage({
       stripeCustomerId: true,
       aiCallsThisMonth: true,
       aiCallsResetAt: true,
+      compProUntil: true,
     },
   });
 
@@ -42,6 +45,8 @@ export default async function AccountPage({
 
   const plan = dbUser ? getUserPlan(dbUser) : "FREE";
   const proActive = dbUser ? isProActive(dbUser) : false;
+  const comped = dbUser ? isComped(dbUser) : false;
+  const compDaysRemaining = dbUser ? getCompProDaysRemaining(dbUser) : null;
   const billingEnabled = isBillingEnabled();
 
   const limits = PLANS[plan];
@@ -65,6 +70,8 @@ export default async function AccountPage({
         plan={plan}
         planDisplayName={PLAN_DISPLAY_NAME[plan]}
         proActive={proActive}
+        comped={comped}
+        compDaysRemaining={compDaysRemaining}
         status={dbUser?.subscriptionStatus ?? null}
         cancelAtPeriodEnd={dbUser?.subscriptionCancelAtPeriodEnd ?? false}
         currentPeriodEndIso={

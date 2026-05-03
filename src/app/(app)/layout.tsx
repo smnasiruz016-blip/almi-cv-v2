@@ -1,7 +1,14 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { CircleUserRound, FileText, LayoutTemplate, LogOut } from "lucide-react";
+import {
+  CircleUserRound,
+  FileText,
+  Gift,
+  LayoutTemplate,
+  LogOut,
+} from "lucide-react";
 import { destroySession, requireUser } from "@/lib/auth";
+import { isOwner } from "@/lib/owner";
 import { cvFontVariables } from "@/lib/cv-fonts";
 
 async function logoutAction() {
@@ -14,6 +21,7 @@ export default async function AppLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   const user = await requireUser();
+  const showAdmin = isOwner(user.email);
 
   return (
     <div className={`min-h-screen bg-gradient-to-b from-cream to-cream-soft ${cvFontVariables}`}>
@@ -48,6 +56,15 @@ export default async function AppLayout({
               <CircleUserRound className="h-4 w-4" />
               Account
             </Link>
+            {showAdmin && (
+              <Link
+                href="/admin/comp-accounts"
+                className="hidden items-center gap-2 rounded-xl px-3 py-2 text-sm font-medium text-coral transition hover:bg-coral/10 md:flex"
+              >
+                <Gift className="h-4 w-4" />
+                Admin
+              </Link>
+            )}
             <span className="hidden text-sm text-plum-faint lg:inline">{user.email}</span>
             <form action={logoutAction}>
               <button

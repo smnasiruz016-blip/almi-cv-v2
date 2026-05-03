@@ -24,6 +24,8 @@ type Props = {
   plan: PlanKey;
   planDisplayName: string;
   proActive: boolean;
+  comped: boolean;
+  compDaysRemaining: number | null;
   status: string | null;
   cancelAtPeriodEnd: boolean;
   currentPeriodEndIso: string | null;
@@ -93,6 +95,8 @@ export function AccountClient({
   plan,
   planDisplayName,
   proActive,
+  comped,
+  compDaysRemaining,
   status,
   cancelAtPeriodEnd,
   currentPeriodEndIso,
@@ -110,7 +114,18 @@ export function AccountClient({
   const [error, setError] = useState<string | null>(null);
   const [syncMsg, setSyncMsg] = useState<string | null>(null);
 
-  const badge = statusBadge(status, proActive);
+  // A user counts as "comp-only" Pro when their compProUntil is active AND
+  // they have no real subscription. If both are present (paid Pro who also
+  // got a comp), we show the normal subscription UI — the comp is a bonus
+  // but doesn't change billing surface.
+  const compOnly = comped && !status;
+
+  const badge = compOnly
+    ? {
+        label: "Beta Tester",
+        className: "bg-coral/15 text-coral-deep",
+      }
+    : statusBadge(status, proActive);
 
   const handlePortal = async () => {
     setError(null);
@@ -220,7 +235,23 @@ export function AccountClient({
           ) : null}
         </div>
 
-        {proActive && (
+        {compOnly && (
+          <div className="mt-5 rounded-xl border border-coral/30 bg-coral-soft/30 px-4 py-3">
+            <p className="inline-flex items-center gap-1.5 text-sm font-semibold text-coral-deep">
+              <span aria-hidden>🎁</span>
+              Beta Tester Pro Access
+            </p>
+            <p className="mt-1 text-xs text-plum-soft">
+              {compDaysRemaining !== null
+                ? `Expires in ${compDaysRemaining} day${compDaysRemaining === 1 ? "" : "s"}.`
+                : "Expired."}{" "}
+              Comp grants include unlimited AI, all premium templates, and the
+              full 10-CV slot count — no payment required.
+            </p>
+          </div>
+        )}
+
+        {proActive && !compOnly && (
           <div className="mt-5 grid gap-3 text-sm sm:grid-cols-2">
             <div className="rounded-xl bg-cream-soft px-4 py-3">
               <p className="text-[11px] uppercase tracking-wide text-plum-faint">
@@ -246,7 +277,7 @@ export function AccountClient({
         )}
 
         <div className="mt-6 flex flex-wrap gap-2">
-          {plan === "FREE" ? (
+          {compOnly ? null : plan === "FREE" ? (
             !billingEnabled ? (
               <button
                 type="button"

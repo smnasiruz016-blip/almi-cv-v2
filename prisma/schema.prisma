@@ -53,11 +53,20 @@ model User {
   aiCallsThisMonth Int       @default(0)
   aiCallsResetAt   DateTime?
 
+  // Comp Pro access — granted by owner for beta testers / dogfooding.
+  // Independent of Stripe state; isProActive() short-circuits true when
+  // compProUntil is in the future, even if subscriptionStatus is null.
+  compProUntil  DateTime?
+  compGrantedAt DateTime?
+  compGrantedBy String?
+  compReason    String?
+
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt
 
   @@index([stripeCustomerId])
   @@index([stripeSubscriptionId])
+  @@index([compProUntil])
 }
 
 model Session {

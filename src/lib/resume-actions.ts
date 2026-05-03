@@ -32,6 +32,7 @@ export async function createResume(
         subscriptionStatus: true,
         subscriptionCurrentPeriodEnd: true,
         subscriptionPlan: true,
+        compProUntil: true,
       },
     });
     const plan = planUser ? getUserPlan(planUser) : "FREE";

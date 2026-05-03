@@ -44,29 +44,58 @@ export const PLAN_DISPLAY_NAME: Record<PlanKey, string> = {
 
 const ACTIVE_STATUSES = new Set(["trialing", "active"]);
 
-/**
- * Returns true when the user has a paid (or trialing) subscription that is
- * still inside its current period. Past-due / canceled / incomplete fall
- * through to false even if subscriptionPlan is set.
- */
-export function isProActive(user: Pick<
+type ProUserShape = Pick<
   User,
-  "subscriptionStatus" | "subscriptionCurrentPeriodEnd"
->): boolean {
+  "subscriptionStatus" | "subscriptionCurrentPeriodEnd" | "compProUntil"
+>;
+
+/**
+ * True when the user has Pro access right now via either path:
+ *   1. An owner-granted comp window (compProUntil > now), OR
+ *   2. A paid/trialing Stripe subscription still inside its period.
+ *
+ * Comp short-circuits first so beta testers don't depend on Stripe state.
+ * Past-due / canceled / incomplete subscriptions fall through to false.
+ */
+export function isProActive(user: ProUserShape): boolean {
+  if (isComped(user)) return true;
   if (!user.subscriptionStatus) return false;
   if (!ACTIVE_STATUSES.has(user.subscriptionStatus)) return false;
   if (!user.subscriptionCurrentPeriodEnd) return false;
   return user.subscriptionCurrentPeriodEnd.getTime() > Date.now();
 }
 
+/**
+ * True when the user is on an active comp grant (compProUntil in the future).
+ * Use this in the UI to distinguish comp users from real subscribers.
+ */
+export function isComped(user: Pick<User, "compProUntil">): boolean {
+  if (!user.compProUntil) return false;
+  return user.compProUntil.getTime() > Date.now();
+}
+
+/**
+ * Whole days remaining on an active comp grant, or null if no active comp.
+ * Rounds up so a window with <24h left still reads "1 day remaining".
+ */
+export function getCompProDaysRemaining(
+  user: Pick<User, "compProUntil">,
+): number | null {
+  if (!user.compProUntil) return null;
+  const ms = user.compProUntil.getTime() - Date.now();
+  if (ms <= 0) return null;
+  return Math.ceil(ms / (24 * 60 * 60 * 1000));
+}
+
 export function getUserPlan(user: Pick<
   User,
-  "subscriptionStatus" | "subscriptionCurrentPeriodEnd" | "subscriptionPlan"
+  "subscriptionStatus" | "subscriptionCurrentPeriodEnd" | "subscriptionPlan" | "compProUntil"
 >): PlanKey {
   if (!isProActive(user)) return "FREE";
   if (user.subscriptionPlan === "pro_yearly") return "PRO_YEARLY";
   if (user.subscriptionPlan === "pro_monthly") return "PRO_MONTHLY";
-  // Defensive default — if status says active but plan is unknown, treat as monthly.
+  // Defensive default — if status says active but plan is unknown, OR the
+  // user is comped (no subscriptionPlan), treat as monthly.
   return "PRO_MONTHLY";
 }
 

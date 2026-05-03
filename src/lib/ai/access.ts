@@ -42,6 +42,7 @@ export async function requireAIAccess(
       subscriptionStatus: true,
       subscriptionCurrentPeriodEnd: true,
       subscriptionPlan: true,
+      compProUntil: true,
       aiCallsThisMonth: true,
       aiCallsResetAt: true,
     },
@@ -115,6 +116,7 @@ export async function requireProAccess(
       subscriptionStatus: true,
       subscriptionCurrentPeriodEnd: true,
       subscriptionPlan: true,
+      compProUntil: true,
     },
   });
 
