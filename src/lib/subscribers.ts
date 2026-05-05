@@ -5,14 +5,11 @@ import { revalidatePath } from "next/cache";
 import { requireUser } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 import { isOwner } from "@/lib/owner";
+import { EMAIL_RE, RATE_LIMIT_PER_IP, RATE_WINDOW_MS } from "@/lib/subscribers-shared";
 
 type Result<T = undefined> =
   | (T extends undefined ? { ok: true } : { ok: true } & T)
   | { ok: false; error: string };
-
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const RATE_WINDOW_MS = 60 * 60 * 1000; // 1h
-const RATE_LIMIT_PER_IP = 5;
 
 // In-memory rate limit map. NOTE: per-Vercel-function-instance, not global.
 // With N warm instances, an attacker can theoretically get ~N×5 hits/hour

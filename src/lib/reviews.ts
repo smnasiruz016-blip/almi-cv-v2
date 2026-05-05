@@ -4,15 +4,16 @@ import { revalidatePath } from "next/cache";
 import { requireUser } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 import { isOwner } from "@/lib/owner";
+import {
+  COMMENT_MAX,
+  COMMENT_MIN,
+  DISPLAY_NAME_MAX,
+  IMPROVEMENT_MAX,
+} from "@/lib/reviews-shared";
 
 type Result<T = undefined> =
   | (T extends undefined ? { ok: true } : { ok: true } & T)
   | { ok: false; error: string };
-
-const COMMENT_MIN = 10;
-const COMMENT_MAX = 2000;
-const IMPROVEMENT_MAX = 2000;
-const DISPLAY_NAME_MAX = 80;
 
 async function ownerGate(): Promise<{ ok: true } | { ok: false; error: string }> {
   const user = await requireUser();
@@ -81,6 +82,7 @@ export async function submitOrUpdateReview(input: {
     const created = await prisma.review.create({
       data: {
         userId: user.id,
+        source: "almicv",
         rating,
         comment,
         improvement,
@@ -167,6 +169,8 @@ export type AdminReviewRow = {
   comment: string;
   improvement: string | null;
   displayName: string | null;
+  source: string;
+  submitterEmail: string | null;
   showOnSite: boolean;
   createdAt: string;
   updatedAt: string;
@@ -175,7 +179,7 @@ export type AdminReviewRow = {
     email: string;
     name: string;
     marketingOptIn: boolean;
-  };
+  } | null;
 };
 
 export async function listAllReviewsForAdmin(): Promise<
@@ -199,15 +203,19 @@ export async function listAllReviewsForAdmin(): Promise<
     comment: r.comment,
     improvement: r.improvement,
     displayName: r.displayName,
+    source: r.source,
+    submitterEmail: r.submitterEmail,
     showOnSite: r.showOnSite,
     createdAt: r.createdAt.toISOString(),
     updatedAt: r.updatedAt.toISOString(),
-    user: {
-      id: r.user.id,
-      email: r.user.email,
-      name: r.user.name,
-      marketingOptIn: r.user.marketingOptIn,
-    },
+    user: r.user
+      ? {
+          id: r.user.id,
+          email: r.user.email,
+          name: r.user.name,
+          marketingOptIn: r.user.marketingOptIn,
+        }
+      : null,
   }));
 
   return { ok: true, reviews };
@@ -286,7 +294,9 @@ export async function getPublicReviews(): Promise<
     id: r.id,
     rating: r.rating,
     comment: r.comment,
-    displayName: r.displayName ?? r.user.name,
+    // Anonymous public-route reviews always have a non-null displayName by
+    // schema (route validation); AlmiCV reviews fall back to the user's name.
+    displayName: r.displayName ?? r.user?.name ?? "Anonymous",
     createdAt: r.createdAt.toISOString(),
   }));
 

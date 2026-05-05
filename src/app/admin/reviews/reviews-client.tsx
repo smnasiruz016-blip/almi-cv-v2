@@ -111,7 +111,9 @@ export function ReviewsClient({
       if (r.ok) {
         setReviews((prev) => prev.filter((p) => p.id !== row.id));
         setDeleteTarget(null);
-        showToast(`Deleted review from ${row.user.email}`);
+        showToast(
+          `Deleted review from ${row.user?.email ?? row.displayName ?? "anonymous submitter"}`,
+        );
       } else {
         showToast(r.error, "error");
       }
@@ -253,7 +255,12 @@ export function ReviewsClient({
               </thead>
               <tbody>
                 {reviews.map((row) => {
-                  const display = row.displayName ?? row.user.name;
+                  const display =
+                    row.displayName ?? row.user?.name ?? "Anonymous";
+                  const contact =
+                    row.user?.email ??
+                    row.submitterEmail ??
+                    "(no contact captured)";
                   return (
                     <tr
                       key={row.id}
@@ -268,9 +275,19 @@ export function ReviewsClient({
                       <td className="py-3 pr-3">
                         <div className="font-medium text-plum">{display}</div>
                         <div className="inline-flex items-center gap-1 text-xs text-plum-soft">
-                          {row.user.email}
-                          {row.user.marketingOptIn && (
+                          {contact}
+                          {row.user?.marketingOptIn && (
                             <span title="Opted in to marketing">📧</span>
+                          )}
+                        </div>
+                        <div className="mt-1 inline-flex items-center gap-1 text-[10px] uppercase tracking-wider text-plum-faint">
+                          <span className="rounded bg-plum/5 px-1.5 py-0.5">
+                            {row.source}
+                          </span>
+                          {row.user === null && (
+                            <span className="rounded bg-coral/10 px-1.5 py-0.5 text-coral-deep">
+                              anonymous
+                            </span>
                           )}
                         </div>
                       </td>
@@ -337,8 +354,13 @@ export function ReviewsClient({
         <div className="space-y-4">
           <p className="text-sm text-plum">
             This permanently removes the review from{" "}
-            <span className="font-semibold">{deleteTarget?.user.email}</span>.
-            They can submit a new review afterwards. The user&apos;s account
+            <span className="font-semibold">
+              {deleteTarget?.user?.email ??
+                deleteTarget?.submitterEmail ??
+                deleteTarget?.displayName ??
+                "this anonymous submitter"}
+            </span>
+            . They can submit a new review afterwards. The user&apos;s account
             and marketing opt-in are not affected.
           </p>
           <div className="flex justify-end gap-2">
