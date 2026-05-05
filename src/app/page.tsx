@@ -10,6 +10,7 @@ import { TemplateThumbnail } from "@/components/templates/TemplateThumbnail";
 import { TEMPLATE_LIST } from "@/lib/templates";
 import { getCurrentUser } from "@/lib/auth";
 import { NewsletterCard } from "@/components/newsletter/NewsletterCard";
+import { SiteHeader } from "@/components/site-header";
 
 type TrustStat = {
   value: string;
@@ -67,55 +68,6 @@ function NewsletterSection() {
         <NewsletterCard />
       </Container>
     </Section>
-  );
-}
-
-function SiteHeader({ isLoggedIn }: { isLoggedIn: boolean }) {
-  return (
-    <header className="sticky top-0 z-50 bg-cream/80 backdrop-blur-md">
-      <Container>
-        <div className="flex items-center justify-between py-6">
-          <Link href="/" className="flex items-center gap-2">
-            <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-coral text-lg font-bold text-white">
-              A
-            </span>
-            <span className="text-xl font-semibold tracking-tight text-plum">
-              AlmiCV
-            </span>
-          </Link>
-          {isLoggedIn ? (
-            <Link
-              href="/dashboard"
-              className="text-sm font-medium text-plum-soft transition hover:text-coral"
-            >
-              Dashboard
-            </Link>
-          ) : (
-            <div className="flex items-center gap-3">
-              <Link
-                href="/pricing"
-                className="hidden text-sm font-medium text-plum-soft transition hover:text-coral sm:inline-flex"
-              >
-                Pricing
-              </Link>
-              <Link
-                href="/login"
-                className="hidden text-sm font-medium text-plum-soft transition hover:text-coral sm:inline-flex"
-              >
-                Log in
-              </Link>
-              <Link
-                href="/signup"
-                className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-pill bg-coral px-5 py-3 text-sm font-semibold text-white shadow-warm-card transition hover:-translate-y-0.5 hover:bg-coral-deep focus:outline-none focus:ring-4 focus:ring-coral/30"
-              >
-                Get started — free
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-            </div>
-          )}
-        </div>
-      </Container>
-    </header>
   );
 }
 
