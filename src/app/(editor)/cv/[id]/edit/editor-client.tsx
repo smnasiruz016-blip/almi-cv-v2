@@ -52,6 +52,7 @@ export function EditorClient({
   const [restoreOpen, setRestoreOpen] = useState(false);
   const [coverLetterOpen, setCoverLetterOpen] = useState(false);
   const [translateOpen, setTranslateOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState<"edit" | "preview">("edit");
   const isInitialMount = useRef(true);
   const showToast = useToast();
 
@@ -207,15 +208,61 @@ export function EditorClient({
             </a>
           </div>
         </div>
+        <div
+          role="tablist"
+          aria-label="Editor view"
+          className="flex gap-2 border-t border-plum/10 px-4 py-2 md:hidden"
+        >
+          <button
+            type="button"
+            role="tab"
+            aria-selected={activeTab === "edit"}
+            aria-controls="edit-panel"
+            onClick={() => setActiveTab("edit")}
+            className={`min-h-[48px] flex-1 rounded-pill text-sm font-medium transition-colors ${
+              activeTab === "edit"
+                ? "bg-coral text-white"
+                : "bg-cream-soft text-plum hover:bg-cream"
+            }`}
+          >
+            Edit
+          </button>
+          <button
+            type="button"
+            role="tab"
+            aria-selected={activeTab === "preview"}
+            aria-controls="preview-panel"
+            onClick={() => setActiveTab("preview")}
+            className={`min-h-[48px] flex-1 rounded-pill text-sm font-medium transition-colors ${
+              activeTab === "preview"
+                ? "bg-coral text-white"
+                : "bg-cream-soft text-plum hover:bg-cream"
+            }`}
+          >
+            Preview
+          </button>
+        </div>
       </div>
 
       <div className="flex flex-1 overflow-hidden">
-        <aside className="print-hide w-[420px] overflow-y-auto border-r border-plum/10 bg-white">
+        <aside
+          id="edit-panel"
+          role="tabpanel"
+          className={`print-hide w-full overflow-y-auto border-r border-plum/10 bg-white md:w-[420px] md:block ${
+            activeTab === "edit" ? "block" : "hidden"
+          }`}
+        >
           <div className="p-6">
             <CVEditorSidebar data={cvData} onChange={setCvData} />
           </div>
         </aside>
-        <main className="flex flex-1 flex-col items-center overflow-y-auto bg-cream p-8">
+        <main
+          id="preview-panel"
+          role="tabpanel"
+          className={`flex-1 flex-col items-center overflow-y-auto bg-cream p-8 md:flex ${
+            activeTab === "preview" ? "flex" : "hidden"
+          }`}
+        >
           <p className="print-hide mb-3 text-xs uppercase tracking-widest text-plum-soft">
             Live preview · A4
           </p>
