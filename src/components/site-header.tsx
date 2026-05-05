@@ -77,6 +77,19 @@ export function SiteHeader({ isLoggedIn }: { isLoggedIn: boolean }) {
             </Link>
 
             <div className="flex items-center gap-3">
+              {ECOSYSTEM_LINKS.filter(
+                (link) => link.label !== "AlmiCV Home",
+              ).map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hidden text-sm font-medium text-plum-soft transition hover:text-coral md:inline-flex"
+                >
+                  {link.label}
+                </a>
+              ))}
               {isLoggedIn ? (
                 <Link
                   href="/dashboard"
