@@ -11,6 +11,7 @@ import { AtelierPro } from "@/components/templates/AtelierPro";
 import { BoldColorBlock } from "@/components/templates/BoldColorBlock";
 import { SoftPastelRomantic } from "@/components/templates/SoftPastelRomantic";
 import { TimelinePro } from "@/components/templates/TimelinePro";
+import { Pearl } from "@/components/templates/Pearl";
 import {
   alexChen,
   amaraHassan,
@@ -21,6 +22,7 @@ import {
   marcusWebb,
   mayaRodriguez,
   priyaPatel,
+  saraKhan,
   sofiaMarchetti,
   zaraOkonkwo,
 } from "@/lib/sample-cv-data";
@@ -36,7 +38,8 @@ export type TemplateSlug =
   | "atelier-pro"
   | "bold-color-block"
   | "soft-pastel-romantic"
-  | "timeline-pro";
+  | "timeline-pro"
+  | "pearl";
 
 export type TemplateMeta = {
   slug: TemplateSlug;
@@ -158,6 +161,16 @@ export const TEMPLATES: Record<TemplateSlug, TemplateMeta> = {
       "Vertical timeline layout with dated milestones for mid-senior professionals with a clear career arc. Coral rail and connectors highlight progression. Ideal for marketers, product managers, brand strategists, and consultants.",
     Component: TimelinePro,
     sampleData: laylaHassan,
+  },
+  pearl: {
+    slug: "pearl",
+    name: "Pearl",
+    tier: "premium",
+    tagline: "Elegant sidebar with pill labels",
+    description:
+      "Two-column premium template with peach sidebar, photo prominence, and pill-shaped section labels. Inspired by editorial CV design. Ideal for marketers, brand managers, and consumer-facing professionals who want warmth and elegance.",
+    Component: Pearl,
+    sampleData: saraKhan,
   },
 };
 

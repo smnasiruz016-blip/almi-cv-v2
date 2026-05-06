@@ -1153,3 +1153,80 @@ export const laylaHassan: CVData = {
     { title: "Effie Gold", year: "2021" },
   ],
 };
+
+export const saraKhan: CVData = {
+  basics: {
+    fullName: "Sara Khan",
+    role: "Senior Marketing Manager",
+    email: "sara@khan.marketing",
+    phone: "+44 20 7946 0958",
+    location: "Manchester, UK",
+    website: "sarakhan.marketing",
+    linkedIn: "linkedin.com/in/sarakhan",
+    summary:
+      "<p>Marketing manager with 9 years building consumer brands across UK and South Asia. Led campaigns for fintech, hospitality, and lifestyle brands. Specialty: turning audience insight into measurable growth.</p>",
+  },
+  experience: [
+    {
+      company: "Lloyds Bank",
+      role: "Senior Marketing Manager",
+      location: "Manchester, UK",
+      startDate: "2022",
+      bullets: [
+        "Led brand refresh campaign reaching 8M customers across UK retail banking",
+        "Owned £2.5M annual marketing budget; achieved 28% lift in brand consideration",
+        "Mentored team of 4 marketing specialists; promoted 2 to senior level",
+      ],
+    },
+    {
+      company: "Boots UK",
+      role: "Marketing Manager",
+      location: "London",
+      startDate: "2019",
+      endDate: "2022",
+      bullets: [
+        "Managed seasonal campaigns across health and beauty categories",
+        "Led customer research initiatives surfacing insights that drove £1.8M revenue lift",
+        "Coordinated cross-functional launches with merchandising and digital teams",
+      ],
+    },
+    {
+      company: "Unilever Pakistan",
+      role: "Marketing Executive",
+      location: "Karachi",
+      startDate: "2016",
+      endDate: "2019",
+      bullets: [
+        "Executed 360-degree campaigns for personal care brands across South Asia",
+        "Localized global campaigns for Pakistani market; improved engagement by 35%",
+        "Built influencer marketing program from zero to 50+ partnerships",
+      ],
+    },
+  ],
+  education: [
+    {
+      school: "University of Manchester",
+      degree: "BA Marketing & Communications",
+      location: "Manchester, UK",
+      startDate: "2012",
+      endDate: "2016",
+      notes:
+        "First-class honours; dissertation on cross-cultural brand storytelling",
+    },
+  ],
+  skills: [
+    "Brand Strategy",
+    "Campaign Management",
+    "Audience Research",
+    "Content Marketing",
+    "Stakeholder Engagement",
+    "Performance Analytics",
+    "Cross-cultural Marketing",
+    "Team Leadership",
+  ],
+  languages: [
+    { name: "English", level: "Native" },
+    { name: "Urdu", level: "Native" },
+    { name: "Punjabi", level: "Conversational" },
+  ],
+};
