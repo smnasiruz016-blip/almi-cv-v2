@@ -2,6 +2,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/db";
 import { createSession, hashPassword } from "@/lib/auth";
+import { SubmitButton } from "./SubmitButton";
 
 async function signupAction(formData: FormData) {
   "use server";
@@ -94,12 +95,7 @@ export default async function SignupPage({
           />
           <p className="mt-2 text-xs text-plum-faint">At least 8 characters.</p>
         </div>
-        <button
-          type="submit"
-          className="inline-flex w-full min-h-[44px] items-center justify-center gap-2 rounded-pill bg-coral px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-coral-deep focus:outline-none focus:ring-4 focus:ring-coral/30"
-        >
-          Create account
-        </button>
+        <SubmitButton idleLabel="Create account" pendingLabel="Creating account…" />
       </form>
 
       <p className="mt-6 text-center text-sm text-plum-soft">
