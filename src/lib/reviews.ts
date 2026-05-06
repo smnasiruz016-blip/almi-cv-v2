@@ -302,3 +302,36 @@ export async function getPublicReviews(): Promise<
 
   return { ok: true, reviews };
 }
+
+export async function getPublicReviewsForFeed(opts: {
+  source?: string;
+  limit?: number;
+}): Promise<
+  Array<{
+    id: string;
+    rating: number;
+    comment: string;
+    displayName: string | null;
+    source: string;
+    createdAt: Date;
+  }>
+> {
+  const limit = Math.min(Math.max(opts.limit ?? 6, 1), 20);
+  const where = {
+    showOnSite: true,
+    ...(opts.source ? { source: opts.source } : {}),
+  };
+  return prisma.review.findMany({
+    where,
+    select: {
+      id: true,
+      rating: true,
+      comment: true,
+      displayName: true,
+      source: true,
+      createdAt: true,
+    },
+    orderBy: [{ rating: "desc" }, { createdAt: "desc" }],
+    take: limit,
+  });
+}

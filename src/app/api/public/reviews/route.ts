@@ -8,6 +8,7 @@ import {
 } from "@/lib/reviews-shared";
 import { getIpHash } from "@/lib/ip-hash";
 import { corsHeaders, handleOptions } from "@/lib/cors";
+import { getPublicReviewsForFeed } from "@/lib/reviews";
 
 const RATE_WINDOW_MS = 60 * 60 * 1000;
 const MAX_PER_WINDOW = 3;
@@ -52,6 +53,37 @@ function jsonResponse(
 
 export async function OPTIONS(req: Request) {
   return handleOptions(req);
+}
+
+export async function GET(req: Request) {
+  const origin = req.headers.get("origin");
+  const headers = corsHeaders(origin);
+
+  const url = new URL(req.url);
+  const source = url.searchParams.get("source") ?? undefined;
+  const limitParam = url.searchParams.get("limit");
+  const limit = limitParam ? parseInt(limitParam, 10) : undefined;
+
+  const ALLOWED_SOURCES_FOR_FEED = (
+    REVIEW_SOURCE_WHITELIST as readonly string[]
+  ).filter((s) => s !== "smoketest");
+  if (source && !ALLOWED_SOURCES_FOR_FEED.includes(source)) {
+    return Response.json(
+      { error: "Invalid source" },
+      { status: 400, headers },
+    );
+  }
+
+  try {
+    const reviews = await getPublicReviewsForFeed({ source, limit });
+    return Response.json({ reviews }, { headers });
+  } catch (e) {
+    console.error("GET /api/public/reviews failed:", e);
+    return Response.json(
+      { error: "Internal server error" },
+      { status: 500, headers },
+    );
+  }
 }
 
 export async function POST(req: Request) {
