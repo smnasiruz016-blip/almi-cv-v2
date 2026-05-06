@@ -311,7 +311,7 @@ export async function getPublicReviewsForFeed(opts: {
     id: string;
     rating: number;
     comment: string;
-    displayName: string | null;
+    displayName: string;
     source: string;
     createdAt: Date;
   }>
@@ -321,7 +321,7 @@ export async function getPublicReviewsForFeed(opts: {
     showOnSite: true,
     ...(opts.source ? { source: opts.source } : {}),
   };
-  return prisma.review.findMany({
+  const rows = await prisma.review.findMany({
     where,
     select: {
       id: true,
@@ -334,4 +334,8 @@ export async function getPublicReviewsForFeed(opts: {
     orderBy: [{ rating: "desc" }, { createdAt: "desc" }],
     take: limit,
   });
+  return rows.map((r) => ({
+    ...r,
+    displayName: r.displayName ?? "Anonymous",
+  }));
 }
