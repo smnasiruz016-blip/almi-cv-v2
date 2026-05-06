@@ -1073,3 +1073,83 @@ export const amaraHassan: CVData = {
     { title: "AUC Distinguished Graduate", year: "2014" },
   ],
 };
+
+export const laylaHassan: CVData = {
+  basics: {
+    fullName: "Layla Hassan",
+    role: "Brand Strategy Director",
+    email: "layla@hassanstrategy.co",
+    phone: "+44 20 7946 0958",
+    location: "London, UK",
+    website: "laylahassan.co",
+    linkedIn: "linkedin.com/in/laylahassan",
+    summary:
+      "<p>Brand strategist with 8 years building consumer brands across MENA and Europe. Currently leading brand strategy at an independent firm focused on fintech and consumer apps. Specialty: turning cultural insight into commercial growth.</p>",
+  },
+  experience: [
+    {
+      company: "Acme Co",
+      role: "Brand Director",
+      location: "Dubai, UAE",
+      startDate: "2022",
+      bullets: [
+        "Led EMEA rebrand reaching 10M users across 14 markets",
+        "Built brand team from 2 to 8 specialists; promoted 3 to senior",
+        "Owned $4M annual brand budget; achieved 32% lift in unaided awareness",
+      ],
+    },
+    {
+      company: "Globex",
+      role: "Senior Brand Manager",
+      location: "London, UK",
+      startDate: "2019",
+      endDate: "2022",
+      bullets: [
+        "Owned EMEA campaigns across consumer fintech vertical",
+        "Ran weekly user research surfacing insight that drove $4.2M revenue lift",
+        "Mentored 4 junior brand managers; 2 promoted within 18 months",
+      ],
+    },
+    {
+      company: "Stripe",
+      role: "Brand Manager",
+      location: "San Francisco, CA",
+      startDate: "2017",
+      endDate: "2019",
+      bullets: [
+        "Designed merchant brand system used by 500K businesses across 40+ countries",
+        "Led rebrand of Stripe Atlas; activation rate climbed 22%",
+        "Collaborated with marketing on Sessions 2017 keynote visual narrative",
+      ],
+    },
+  ],
+  education: [
+    {
+      school: "Stanford University",
+      degree: "BA Marketing",
+      location: "Stanford, CA",
+      startDate: "2013",
+      endDate: "2017",
+      notes: "Concentration in Consumer Behavior",
+    },
+  ],
+  skills: [
+    "Brand Strategy",
+    "Consumer Insight",
+    "Campaign Leadership",
+    "Cross-functional Team Building",
+    "Cultural Storytelling",
+    "Brand Architecture",
+    "Performance Marketing",
+    "Stakeholder Management",
+  ],
+  languages: [
+    { name: "English", level: "Native" },
+    { name: "Arabic", level: "Native" },
+    { name: "French", level: "Conversational" },
+  ],
+  awards: [
+    { title: "Cannes Lion · Bronze", year: "2023" },
+    { title: "Effie Gold", year: "2021" },
+  ],
+};

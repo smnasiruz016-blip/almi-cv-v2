@@ -10,12 +10,14 @@ import { Director } from "@/components/templates/Director";
 import { AtelierPro } from "@/components/templates/AtelierPro";
 import { BoldColorBlock } from "@/components/templates/BoldColorBlock";
 import { SoftPastelRomantic } from "@/components/templates/SoftPastelRomantic";
+import { TimelinePro } from "@/components/templates/TimelinePro";
 import {
   alexChen,
   amaraHassan,
   ayeshaKhan,
   edwardLindqvist,
   juliaCortazar,
+  laylaHassan,
   marcusWebb,
   mayaRodriguez,
   priyaPatel,
@@ -33,7 +35,8 @@ export type TemplateSlug =
   | "director"
   | "atelier-pro"
   | "bold-color-block"
-  | "soft-pastel-romantic";
+  | "soft-pastel-romantic"
+  | "timeline-pro";
 
 export type TemplateMeta = {
   slug: TemplateSlug;
@@ -145,6 +148,16 @@ export const TEMPLATES: Record<TemplateSlug, TemplateMeta> = {
       "Soft pastels, organic shapes, and gentle typography. For wellness practitioners, educators, hospitality professionals, and anyone whose work is rooted in care.",
     Component: SoftPastelRomantic,
     sampleData: amaraHassan,
+  },
+  "timeline-pro": {
+    slug: "timeline-pro",
+    name: "Timeline Pro",
+    tier: "premium",
+    tagline: "Show your career trajectory",
+    description:
+      "Vertical timeline layout with dated milestones for mid-senior professionals with a clear career arc. Coral rail and connectors highlight progression. Ideal for marketers, product managers, brand strategists, and consultants.",
+    Component: TimelinePro,
+    sampleData: laylaHassan,
   },
 };
 
