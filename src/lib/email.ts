@@ -91,36 +91,15 @@ export async function sendPasswordResetEmail(input: {
   to: string;
   resetUrl: string;
 }): Promise<void> {
-  console.log(
-    "[email-send] starting send to:",
-    input.to,
-    "from:",
-    process.env.EMAIL_FROM,
-    "key_present:",
-    !!process.env.RESEND_API_KEY,
-    "key_length:",
-    process.env.RESEND_API_KEY?.length ?? 0,
-  );
   const client = getResendClient();
-  try {
-    const result = await client.emails.send({
-      from: getFromAddress(),
-      to: input.to,
-      subject: "Reset your AlmiCV password",
-      html: renderPasswordResetHtml(input.resetUrl),
-      text: renderPasswordResetText(input.resetUrl),
-    });
-    console.log("[email-send] resend response:", JSON.stringify(result));
-    if (result.error) {
-      throw new Error(`Resend send failed: ${result.error.message}`);
-    }
-  } catch (e) {
-    console.error(
-      "[email-send] resend threw:",
-      e instanceof Error
-        ? { message: e.message, name: e.name, stack: e.stack }
-        : e,
-    );
-    throw e;
+  const result = await client.emails.send({
+    from: getFromAddress(),
+    to: input.to,
+    subject: "Reset your AlmiCV password",
+    html: renderPasswordResetHtml(input.resetUrl),
+    text: renderPasswordResetText(input.resetUrl),
+  });
+  if (result.error) {
+    throw new Error(`Resend send failed: ${result.error.message}`);
   }
 }

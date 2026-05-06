@@ -49,12 +49,6 @@ export async function POST(req: Request) {
     return Response.json({ ok: false, error: "Invalid JSON" }, { status: 400 });
   }
 
-  // TEMPORARY DIAGNOSTIC: surface email send result via response header so we
-  // can see Resend errors that aren't appearing in Vercel runtime logs. Body
-  // is unchanged to preserve the generic-200 / no-enumeration contract.
-  // Revert in follow-up commit.
-  let emailDebug = "ok";
-
   // Generic-200 contract: any unhandled error past this point still returns
   // { ok: true } so the response shape never leaks user existence.
   try {
@@ -92,7 +86,6 @@ export async function POST(req: Request) {
           try {
             await sendPasswordResetEmail({ to: email, resetUrl });
           } catch (e) {
-            emailDebug = `email_failed: ${e instanceof Error ? e.message : String(e)}`;
             console.error("[forgot-password] email send failed:", e);
           }
         });
@@ -102,8 +95,5 @@ export async function POST(req: Request) {
     console.error("[forgot-password] handler error:", err);
   }
 
-  return Response.json(
-    { ok: true },
-    { headers: { "X-Email-Debug": emailDebug } },
-  );
+  return Response.json({ ok: true });
 }
