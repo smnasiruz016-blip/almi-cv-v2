@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/db";
-import { createSession, hashPassword } from "@/lib/auth";
+import { createSession, getCurrentUser, hashPassword } from "@/lib/auth";
 import { SubmitButton } from "./SubmitButton";
 
 async function signupAction(formData: FormData) {
@@ -32,6 +32,7 @@ export default async function SignupPage({
 }: {
   searchParams: Promise<{ error?: string }>;
 }) {
+  if (await getCurrentUser()) redirect("/dashboard");
   const params = await searchParams;
   const error = params.error;
 
