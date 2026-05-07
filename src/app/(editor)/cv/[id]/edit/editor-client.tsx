@@ -1,8 +1,10 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState, type MouseEvent } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import {
+  AlertCircle,
   ArrowLeft,
   Check,
   Download,
@@ -12,6 +14,7 @@ import {
   MessageCircleQuestion,
   Printer,
   RotateCcw,
+  Save,
   Sparkles,
 } from "lucide-react";
 import { CVEditorSidebar } from "@/components/editor/CVEditorSidebar";
@@ -48,13 +51,37 @@ export function EditorClient({
   const [cvData, setCvData] = useState<CVData>(initialData);
   const [cvName, setCvName] = useState(initialTitle);
   const [saveStatus, setSaveStatus] = useState<SaveStatus>("saved");
+  const [justSaved, setJustSaved] = useState(false);
   const [downloading, setDownloading] = useState(false);
   const [restoreOpen, setRestoreOpen] = useState(false);
   const [coverLetterOpen, setCoverLetterOpen] = useState(false);
   const [translateOpen, setTranslateOpen] = useState(false);
   const [activeTab, setActiveTab] = useState<"edit" | "preview">("edit");
   const isInitialMount = useRef(true);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const prevStatusRef = useRef<SaveStatus>("saved");
   const showToast = useToast();
+  const router = useRouter();
+
+  const saveNow = useCallback(async () => {
+    setSaveStatus("saving");
+    try {
+      await updateResume(resumeId, { title: cvName, data: cvData });
+      setSaveStatus("saved");
+    } catch (err) {
+      setSaveStatus("error");
+      console.error("Save failed", err);
+      throw err;
+    }
+  }, [resumeId, cvName, cvData]);
+
+  const flushSave = useCallback(async () => {
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+      timerRef.current = null;
+    }
+    await saveNow();
+  }, [saveNow]);
 
   useEffect(() => {
     if (isInitialMount.current) {
@@ -62,18 +89,43 @@ export function EditorClient({
       return;
     }
     setSaveStatus("idle");
-    const timer = setTimeout(async () => {
-      setSaveStatus("saving");
-      try {
-        await updateResume(resumeId, { title: cvName, data: cvData });
-        setSaveStatus("saved");
-      } catch (err) {
-        setSaveStatus("error");
-        console.error("Save failed", err);
-      }
+    if (timerRef.current) clearTimeout(timerRef.current);
+    timerRef.current = setTimeout(() => {
+      void saveNow().catch(() => {
+        // saveNow already sets status to "error" and console.errors; the
+        // re-throw is for callers of flushSave, not the autosave timer.
+      });
     }, 1500);
-    return () => clearTimeout(timer);
-  }, [cvData, cvName, resumeId]);
+    return () => {
+      if (timerRef.current) clearTimeout(timerRef.current);
+    };
+  }, [saveNow]);
+
+  // "Saved ✓" indicator on the Save button: only fire on a real
+  // saving→saved transition, never on initial mount or idle→saved no-ops.
+  useEffect(() => {
+    const wasInProgress = prevStatusRef.current === "saving";
+    prevStatusRef.current = saveStatus;
+    if (saveStatus === "saved" && wasInProgress) {
+      setJustSaved(true);
+      const t = setTimeout(() => setJustSaved(false), 2000);
+      return () => clearTimeout(t);
+    }
+  }, [saveStatus]);
+
+  const handleAllCvsClick = async (e: MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    try {
+      await flushSave();
+    } catch {
+      showToast(
+        "Couldn't save your changes — please try again",
+        "error",
+      );
+      return;
+    }
+    router.push("/dashboard");
+  };
 
   useEffect(() => {
     document.title = cvName ? `${cvName} - AlmiCV` : "AlmiCV";
@@ -97,7 +149,8 @@ export function EditorClient({
           <div className="flex min-w-0 flex-1 items-center gap-3">
             <Link
               href="/dashboard"
-              className="inline-flex items-center gap-1.5 text-sm font-medium text-plum transition-colors hover:text-coral"
+              onClick={handleAllCvsClick}
+              className="inline-flex items-center gap-2 rounded-pill border border-plum/15 px-4 py-2 text-sm font-medium text-plum transition-colors hover:bg-cream-soft focus:outline-none focus:ring-2 focus:ring-plum/15"
             >
               <ArrowLeft className="h-4 w-4" />
               <span className="hidden sm:inline">All my CVs</span>
@@ -121,6 +174,40 @@ export function EditorClient({
                 <span className="hidden sm:inline">Upgrade to Pro</span>
               </Link>
             )}
+            <button
+              type="button"
+              disabled={saveStatus === "saving"}
+              onClick={() => {
+                void flushSave().catch(() => {
+                  // saveNow already set status to "error" and the button
+                  // will re-render as "Retry" — no toast needed.
+                });
+              }}
+              className={`inline-flex items-center gap-2 rounded-pill px-4 py-2 text-sm font-medium text-white transition-colors focus:outline-none focus:ring-4 disabled:opacity-70 ${
+                saveStatus === "error"
+                  ? "bg-coral-deep hover:bg-coral-deep focus:ring-coral/30"
+                  : "bg-coral hover:bg-coral-deep focus:ring-coral/30"
+              }`}
+            >
+              {saveStatus === "saving" ? (
+                <Loader2 className="h-4 w-4 animate-spin" />
+              ) : justSaved ? (
+                <Check className="h-4 w-4" />
+              ) : saveStatus === "error" ? (
+                <AlertCircle className="h-4 w-4" />
+              ) : (
+                <Save className="h-4 w-4" />
+              )}
+              <span className="hidden sm:inline">
+                {saveStatus === "saving"
+                  ? "Saving…"
+                  : justSaved
+                    ? "Saved"
+                    : saveStatus === "error"
+                      ? "Retry"
+                      : "Save"}
+              </span>
+            </button>
             <Link
               href={`/cv/${resumeId}/tailor`}
               className="inline-flex items-center gap-2 rounded-pill bg-coral px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-coral-deep focus:outline-none focus:ring-4 focus:ring-coral/30"
@@ -150,13 +237,6 @@ export function EditorClient({
             >
               <MessageCircleQuestion className="h-4 w-4" />
               <span className="hidden sm:inline">Interview Prep</span>
-            </Link>
-            <Link
-              href={`/cv/${resumeId}/cover-letters`}
-              className="inline-flex items-center gap-2 rounded-pill border border-plum/15 px-3 py-1.5 text-xs font-medium text-plum transition-colors hover:bg-cream-soft focus:outline-none focus:ring-2 focus:ring-plum/15"
-            >
-              <span className="hidden sm:inline">Cover Letters</span>
-              <span className="sm:hidden">All</span>
             </Link>
             {hasSnapshot && (
               <button
