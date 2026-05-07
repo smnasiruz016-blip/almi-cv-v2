@@ -26,6 +26,14 @@ import {
 } from "@/lib/job-sites";
 import type { CVData } from "@/lib/cv-types";
 
+const ISO_TO_NAME: Record<string, string> = {
+  IS: "Iceland",
+  DK: "Denmark",
+  US: "United States",
+  GB: "United Kingdom",
+  PK: "Pakistan",
+};
+
 const RTF = new Intl.RelativeTimeFormat("en", { numeric: "auto" });
 
 function relativeTime(date: Date) {
@@ -47,11 +55,12 @@ export default async function DashboardPage() {
 
   const mostRecentLocation = (resumes[0]?.data as CVData | undefined)?.basics
     ?.location;
-  const country = extractCountry(mostRecentLocation);
+  const countryIso = extractCountry(mostRecentLocation);
+  const countryLabel = countryIso ? ISO_TO_NAME[countryIso] : undefined;
   let jobSites: JobSite[] = [];
-  if (country) {
+  if (countryIso) {
     try {
-      jobSites = await fetchJobSitesForCountry(country);
+      jobSites = await fetchJobSitesForCountry(countryIso);
     } catch (err) {
       console.warn("[dashboard] job-sites fetch threw:", err);
     }
@@ -183,7 +192,7 @@ export default async function DashboardPage() {
         )}
       </section>
 
-      <JobSitesPanel sites={jobSites} country={country} />
+      <JobSitesPanel sites={jobSites} country={countryLabel} />
 
       <ReviewCard />
 

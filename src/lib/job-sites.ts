@@ -1,7 +1,7 @@
 /**
- * Cross-product helper that maps a CV's free-text location to a country
- * AlmiJob recognises, then fetches the matching job-site cards from
- * AlmiJob's public source-directory endpoint.
+ * Cross-product helper that maps a CV's free-text location to an ISO
+ * alpha-2 country code AlmiJob recognises, then fetches the matching
+ * job-site cards from AlmiJob's deployed /api/sources endpoint.
  *
  * Server-side only: fetchJobSitesForCountry runs from RSC / route
  * handlers, so we don't need CORS on the AlmiJob side.
@@ -11,44 +11,35 @@ export type JobSite = {
   name: string;
   url: string;
   category: string;
-  note: string;
-  country?: string;
-  region?: string;
 };
 
+type CountryIso = "IS" | "DK" | "US" | "GB" | "PK";
+
 const COUNTRY_PATTERNS: ReadonlyArray<{
-  canonical: string;
+  iso: CountryIso;
   patterns: readonly RegExp[];
 }> = [
-  { canonical: "Iceland", patterns: [/\biceland\b/i] },
-  { canonical: "Denmark", patterns: [/\bdenmark\b/i] },
+  { iso: "IS", patterns: [/\biceland\b/i] },
+  { iso: "DK", patterns: [/\bdenmark\b/i] },
   {
-    canonical: "United States",
-    patterns: [
-      /\bunited states\b/i,
-      /\busa\b/i,
-      /(?:^|,\s*)us\s*$/i,
-    ],
+    iso: "US",
+    patterns: [/\bunited states\b/i, /\busa\b/i, /(?:^|,\s*)us\s*$/i],
   },
   {
-    canonical: "United Kingdom",
-    patterns: [
-      /\bunited kingdom\b/i,
-      /\bbritain\b/i,
-      /(?:^|,\s*)uk\s*$/i,
-    ],
+    iso: "GB",
+    patterns: [/\bunited kingdom\b/i, /\bbritain\b/i, /(?:^|,\s*)uk\s*$/i],
   },
-  { canonical: "Pakistan", patterns: [/\bpakistan\b/i] },
+  { iso: "PK", patterns: [/\bpakistan\b/i] },
 ];
 
 export function extractCountry(
   location: string | null | undefined,
-): string | undefined {
+): CountryIso | undefined {
   if (!location) return undefined;
   const trimmed = location.trim();
   if (!trimmed) return undefined;
-  for (const { canonical, patterns } of COUNTRY_PATTERNS) {
-    if (patterns.some((p) => p.test(trimmed))) return canonical;
+  for (const { iso, patterns } of COUNTRY_PATTERNS) {
+    if (patterns.some((p) => p.test(trimmed))) return iso;
   }
   return undefined;
 }
@@ -58,12 +49,40 @@ const ALMIJOB_BASE_URL =
 const FETCH_TIMEOUT_MS = 3000;
 const REVALIDATE_SECONDS = 3600;
 
+type RawSource = {
+  website?: unknown;
+  category?: unknown;
+  fallbackUrl?: unknown;
+};
+
+function parseSources(data: unknown): JobSite[] | null {
+  if (!data || typeof data !== "object") return null;
+  const sources = (data as { sources?: unknown }).sources;
+  if (!Array.isArray(sources)) return null;
+  const out: JobSite[] = [];
+  for (const raw of sources as RawSource[]) {
+    if (
+      typeof raw?.website !== "string" ||
+      typeof raw?.fallbackUrl !== "string" ||
+      typeof raw?.category !== "string"
+    ) {
+      return null;
+    }
+    out.push({
+      name: raw.website,
+      url: raw.fallbackUrl,
+      category: raw.category,
+    });
+  }
+  return out;
+}
+
 export async function fetchJobSitesForCountry(
   country: string | undefined,
 ): Promise<JobSite[]> {
   if (!country) return [];
 
-  const url = `${ALMIJOB_BASE_URL}/api/source-directory?country=${encodeURIComponent(country)}`;
+  const url = `${ALMIJOB_BASE_URL}/api/sources?country=${encodeURIComponent(country)}`;
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
 
@@ -78,9 +97,15 @@ export async function fetchJobSitesForCountry(
       );
       return [];
     }
-    const data = (await res.json()) as { sources?: unknown };
-    if (!Array.isArray(data.sources)) return [];
-    return data.sources as JobSite[];
+    const json = (await res.json()) as unknown;
+    const sites = parseSources(json);
+    if (sites === null) {
+      console.warn(
+        `[job-sites] response shape mismatch for country=${country}`,
+      );
+      return [];
+    }
+    return sites;
   } catch (err) {
     console.warn(
       `[job-sites] fetch error for country=${country}:`,

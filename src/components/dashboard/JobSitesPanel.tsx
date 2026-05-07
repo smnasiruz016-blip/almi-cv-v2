@@ -1,26 +1,6 @@
 import { ExternalLink } from "lucide-react";
 import type { JobSite } from "@/lib/job-sites";
 
-function titleCase(s: string): string {
-  if (!s) return s;
-  return s.charAt(0).toUpperCase() + s.slice(1);
-}
-
-function badgeLabel(site: JobSite, country: string): string {
-  if (site.category === "government") return "Government";
-  if (
-    site.country &&
-    site.country !== "Worldwide" &&
-    site.country === country
-  ) {
-    return `${country} local`;
-  }
-  if (!site.country || site.country === "Worldwide" || site.category === "general") {
-    return "Global";
-  }
-  return titleCase(site.category);
-}
-
 export function JobSitesPanel({
   sites,
   country,
@@ -55,13 +35,8 @@ export function JobSitesPanel({
               {site.name}
             </h3>
             <span className="mt-2 inline-flex w-fit items-center rounded-full bg-coral-soft/40 px-2 py-0.5 text-xs font-medium text-plum">
-              {badgeLabel(site, country)}
+              {site.category || "Job site"}
             </span>
-            {site.note && (
-              <p className="mt-3 line-clamp-1 text-sm text-plum-soft">
-                {site.note}
-              </p>
-            )}
           </a>
         ))}
       </div>
