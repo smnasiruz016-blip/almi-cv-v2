@@ -97,9 +97,10 @@ export function EditorClient({
           <div className="flex min-w-0 flex-1 items-center gap-3">
             <Link
               href="/dashboard"
-              className="text-plum-soft transition-colors hover:text-plum"
+              className="inline-flex items-center gap-1.5 text-sm font-medium text-plum transition-colors hover:text-coral"
             >
-              <ArrowLeft className="h-5 w-5" />
+              <ArrowLeft className="h-4 w-4" />
+              <span className="hidden sm:inline">All my CVs</span>
             </Link>
             <div className="h-6 w-px bg-plum/15" />
             <input

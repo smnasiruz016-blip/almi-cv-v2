@@ -10,6 +10,7 @@ import { Suspense } from "react";
 import { requireUser } from "@/lib/auth";
 import { listResumes } from "@/lib/resume-actions";
 import { DashboardCard } from "@/components/dashboard/DashboardCard";
+import { JobSitesPanel } from "@/components/dashboard/JobSitesPanel";
 import { ChatLauncher } from "@/components/chat/ChatLauncher";
 import { LimitWatcher } from "@/components/billing/LimitWatcher";
 import { ReviewCard } from "@/components/reviews/ReviewCard";
@@ -18,6 +19,11 @@ import {
   isProActive,
   PLAN_DISPLAY_NAME,
 } from "@/lib/billing/plans";
+import {
+  extractCountry,
+  fetchJobSitesForCountry,
+  type JobSite,
+} from "@/lib/job-sites";
 import type { CVData } from "@/lib/cv-types";
 
 const RTF = new Intl.RelativeTimeFormat("en", { numeric: "auto" });
@@ -38,6 +44,18 @@ export default async function DashboardPage() {
   const resumes = await listResumes();
   const isPro = isProActive(user);
   const planLabel = PLAN_DISPLAY_NAME[getUserPlan(user)];
+
+  const mostRecentLocation = (resumes[0]?.data as CVData | undefined)?.basics
+    ?.location;
+  const country = extractCountry(mostRecentLocation);
+  let jobSites: JobSite[] = [];
+  if (country) {
+    try {
+      jobSites = await fetchJobSitesForCountry(country);
+    } catch (err) {
+      console.warn("[dashboard] job-sites fetch threw:", err);
+    }
+  }
 
   return (
     <div className="space-y-8">
@@ -164,6 +182,8 @@ export default async function DashboardPage() {
           </div>
         )}
       </section>
+
+      <JobSitesPanel sites={jobSites} country={country} />
 
       <ReviewCard />
 
