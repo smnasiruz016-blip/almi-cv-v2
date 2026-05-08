@@ -196,3 +196,65 @@ model Subscriber {
   @@index([email])
   @@index([subscribedAt])
 }
+
+// =====================================================================
+// Studio (Phase 6 / Stage 3a) — founder-only Template Studio scaffolding.
+// Tables exist but are unused in this commit. Stage 3b wires Anthropic
+// generation + cost recording. Stage 3c wires the variant picker UI.
+// =====================================================================
+
+enum RecipeStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+// Studio-generated TemplateRecipe rows. Engineer-authored recipes live
+// in src/lib/recipes/ as TS modules (per Phase 5a recommendation) and
+// are NOT mirrored here. The unified registry in src/lib/templates.ts
+// will merge both sources at runtime in Stage 3c.
+model Recipe {
+  id               String       @id @default(cuid())
+  slug             String       @unique
+  name             String
+  description      String       @db.Text
+  tier             TemplateTier @default(PREMIUM)
+  // RecipeRole / RecipeMood are TS string unions, stored here as plain
+  // strings so adding a 6th role doesn't require a Postgres enum bump.
+  role             String?
+  mood             String?
+  culturalFit      String[]     @default([])
+  // The full TemplateRecipe object. Validated by validateRecipe() (Zod)
+  // before insert — see src/components/templates/engine/recipe-zod-schema.ts.
+  recipeJson       Json
+  previewPersonaId String
+  status           RecipeStatus @default(DRAFT)
+  createdAt        DateTime     @default(now())
+  createdBy        String       // owner email at time of creation
+  publishedAt      DateTime?
+
+  @@index([status, role, mood])
+  @@index([publishedAt])
+}
+
+// Append-only ledger of Anthropic API calls made by the Studio.
+// Cost protection is computed by summing rows where timestamp falls in
+// the current calendar month. See src/lib/studio-cost.ts.
+model StudioCostLedger {
+  id           String   @id @default(cuid())
+  timestamp    DateTime @default(now())
+  founderEmail String
+  // Groups multiple LLM calls produced by a single Studio "Generate
+  // variants" click (e.g. structured-output retries). Use UUID per click.
+  generationId String
+  model        String
+  inputTokens  Int
+  outputTokens Int
+  costUsd      Decimal  @db.Decimal(10, 6)
+  success      Boolean  @default(true)
+  errorMessage String?
+
+  @@index([timestamp(sort: Desc)])
+  @@index([generationId])
+  @@index([founderEmail, timestamp])
+}
