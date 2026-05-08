@@ -1,5 +1,4 @@
 import { requireUser } from "@/lib/auth";
-import { TEMPLATE_LIST } from "@/lib/templates";
 import { TemplatesListingClient } from "./templates-listing-client";
 import type {
   RecipeMood,
@@ -41,10 +40,5 @@ export default async function TemplatesPage({
   const tier: "all" | "free" | "premium" =
     sp.tier === "free" || sp.tier === "premium" ? sp.tier : "all";
 
-  return (
-    <TemplatesListingClient
-      templates={TEMPLATE_LIST}
-      initial={{ role, mood, tier }}
-    />
-  );
+  return <TemplatesListingClient initial={{ role, mood, tier }} />;
 }
