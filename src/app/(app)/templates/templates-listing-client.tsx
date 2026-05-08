@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import { Crown, X } from "lucide-react";
 import { TemplateThumbnail } from "@/components/templates/TemplateThumbnail";
-import type { TemplateMeta } from "@/lib/templates";
+import { TEMPLATE_LIST, type TemplateMeta } from "@/lib/templates";
 import type {
   RecipeMood,
   RecipeRole,
@@ -15,7 +15,6 @@ type RoleFacet = RecipeRole | "all";
 type MoodFacet = RecipeMood | "all";
 
 type Props = {
-  templates: TemplateMeta[];
   initial: { role: RoleFacet; mood: MoodFacet; tier: TierFacet };
 };
 
@@ -111,13 +110,13 @@ function TemplateCard({ template }: { template: TemplateMeta }) {
   );
 }
 
-export function TemplatesListingClient({ templates, initial }: Props) {
+export function TemplatesListingClient({ initial }: Props) {
   const [role, setRole] = useState<RoleFacet>(initial.role);
   const [mood, setMood] = useState<MoodFacet>(initial.mood);
   const [tier, setTier] = useState<TierFacet>(initial.tier);
 
   const filtered = useMemo(() => {
-    return templates.filter((t) => {
+    return TEMPLATE_LIST.filter((t) => {
       if (tier !== "all" && t.tier !== tier) return false;
       // Templates without role/mood (the 12 universal classics) only
       // pass the role filter when "all" is selected — they're not
@@ -127,7 +126,7 @@ export function TemplatesListingClient({ templates, initial }: Props) {
       if (mood !== "all" && t.mood !== mood) return false;
       return true;
     });
-  }, [templates, role, mood, tier]);
+  }, [role, mood, tier]);
 
   // Bucket: free first, premium grouped by role.
   const groups = useMemo(() => {
