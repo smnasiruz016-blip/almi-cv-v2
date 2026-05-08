@@ -26,33 +26,48 @@ import {
   sofiaMarchetti,
   zaraOkonkwo,
 } from "@/lib/sample-cv-data";
-
-export type TemplateSlug =
-  | "classic-serif"
-  | "modern-mono"
-  | "editorial-bold"
-  | "photo-forward"
-  | "minimalist-mono"
-  | "atelier"
-  | "director"
-  | "atelier-pro"
-  | "bold-color-block"
-  | "soft-pastel-romantic"
-  | "timeline-pro"
-  | "pearl";
+import { makeRecipeComponent } from "@/components/templates/engine";
+import type {
+  CulturalFitISO,
+  RecipeMood,
+  RecipeRole,
+} from "@/components/templates/engine/recipe-types";
+import { RECIPE_LIST } from "@/lib/recipes";
+import { PERSONAS, type PersonaId } from "@/lib/personas";
 
 export type TemplateMeta = {
-  slug: TemplateSlug;
+  slug: string;
   name: string;
   tier: "free" | "premium";
   tagline: string;
   description: string;
+  /**
+   * Component contract. `printSafe` is added in Stage 2 — recipe-driven
+   * templates honor it, hand-coded templates ignore it (extra props on
+   * a React component are harmless).
+   */
   Component: ComponentType<{ data: CVData; paginated?: boolean }>;
   sampleData?: CVData;
+  /** Stage 2 metadata. Hand-coded universal templates leave these
+   * unset; recipe-driven role × mood templates populate them. */
+  role?: RecipeRole;
+  mood?: RecipeMood;
+  /** ISO-3166 alpha-2. Internal-only — surfaced on /jobs/<country>
+   * recommendations, never exposed as a chip on /templates. */
+  culturalFit?: CulturalFitISO[];
+  /** "recipe" | "hand-coded". Dual-source registry; the eyeballs of
+   * the picker can't tell the difference, but the editor & paywall
+   * code paths can. */
+  source: "recipe" | "hand-coded";
 };
 
-export const TEMPLATES: Record<TemplateSlug, TemplateMeta> = {
-  "classic-serif": {
+/**
+ * Hand-coded universal templates. The 12 entries below are LOCKED — Stage
+ * 2 of the factory is additive only. Any visual changes here would
+ * silently re-style users' saved CVs. Don't touch.
+ */
+const HAND_CODED_TEMPLATES: TemplateMeta[] = [
+  {
     slug: "classic-serif",
     name: "Classic Serif",
     tier: "free",
@@ -61,8 +76,9 @@ export const TEMPLATES: Record<TemplateSlug, TemplateMeta> = {
       "A timeless, formal CV layout with a single-column structure. Designed for executives, consultants, and traditional industries.",
     Component: ClassicSerif,
     sampleData: mayaRodriguez,
+    source: "hand-coded",
   },
-  "modern-mono": {
+  {
     slug: "modern-mono",
     name: "Modern Mono",
     tier: "free",
@@ -71,8 +87,9 @@ export const TEMPLATES: Record<TemplateSlug, TemplateMeta> = {
       "A clean tech-focused layout with a mint sidebar for contact and skills, content on the right.",
     Component: ModernMono,
     sampleData: alexChen,
+    source: "hand-coded",
   },
-  "editorial-bold": {
+  {
     slug: "editorial-bold",
     name: "Editorial Bold",
     tier: "free",
@@ -81,8 +98,9 @@ export const TEMPLATES: Record<TemplateSlug, TemplateMeta> = {
       "A magazine-style CV with a gold banner header and 2-column body. Perfect for marketing, brand, and creative roles.",
     Component: EditorialBold,
     sampleData: priyaPatel,
+    source: "hand-coded",
   },
-  "photo-forward": {
+  {
     slug: "photo-forward",
     name: "Photo Forward",
     tier: "free",
@@ -91,8 +109,9 @@ export const TEMPLATES: Record<TemplateSlug, TemplateMeta> = {
       "Big-photo editorial layout for photographers, designers, and visual creatives. Vogue-spread feel with restrained typography.",
     Component: PhotoForward,
     sampleData: sofiaMarchetti,
+    source: "hand-coded",
   },
-  "minimalist-mono": {
+  {
     slug: "minimalist-mono",
     name: "Minimalist Mono",
     tier: "free",
@@ -101,8 +120,9 @@ export const TEMPLATES: Record<TemplateSlug, TemplateMeta> = {
       "For senior executives, consultants, and advisors. Zero color, generous whitespace, confident typographic restraint. The black suit of CV templates.",
     Component: MinimalistMono,
     sampleData: edwardLindqvist,
+    source: "hand-coded",
   },
-  atelier: {
+  {
     slug: "atelier",
     name: "Atelier",
     tier: "premium",
@@ -111,8 +131,9 @@ export const TEMPLATES: Record<TemplateSlug, TemplateMeta> = {
       "Soft peach-and-lavender card-based layout. Multilingual-friendly. Designed for designers, students, and creative professionals.",
     Component: Atelier,
     sampleData: ayeshaKhan,
+    source: "hand-coded",
   },
-  director: {
+  {
     slug: "director",
     name: "Director",
     tier: "premium",
@@ -121,8 +142,9 @@ export const TEMPLATES: Record<TemplateSlug, TemplateMeta> = {
       "Sage-and-cream split with bold typography. Built for art directors, creative leads, and design veterans.",
     Component: Director,
     sampleData: marcusWebb,
+    source: "hand-coded",
   },
-  "atelier-pro": {
+  {
     slug: "atelier-pro",
     name: "Atelier Pro",
     tier: "premium",
@@ -131,8 +153,9 @@ export const TEMPLATES: Record<TemplateSlug, TemplateMeta> = {
       "Cream content with a gold premium sidebar. Logros, Software, Competencias style. For multilingual professionals and senior creatives.",
     Component: AtelierPro,
     sampleData: juliaCortazar,
+    source: "hand-coded",
   },
-  "bold-color-block": {
+  {
     slug: "bold-color-block",
     name: "Bold Color Block",
     tier: "premium",
@@ -141,8 +164,9 @@ export const TEMPLATES: Record<TemplateSlug, TemplateMeta> = {
       "Geometric color shapes, confident type, agency-grade visual energy. For creative directors, designers, and marketers whose work is visual.",
     Component: BoldColorBlock,
     sampleData: zaraOkonkwo,
+    source: "hand-coded",
   },
-  "soft-pastel-romantic": {
+  {
     slug: "soft-pastel-romantic",
     name: "Soft Pastel",
     tier: "free",
@@ -151,8 +175,9 @@ export const TEMPLATES: Record<TemplateSlug, TemplateMeta> = {
       "Soft pastels, organic shapes, and gentle typography. For wellness practitioners, educators, hospitality professionals, and anyone whose work is rooted in care.",
     Component: SoftPastelRomantic,
     sampleData: amaraHassan,
+    source: "hand-coded",
   },
-  "timeline-pro": {
+  {
     slug: "timeline-pro",
     name: "Timeline Pro",
     tier: "premium",
@@ -161,8 +186,9 @@ export const TEMPLATES: Record<TemplateSlug, TemplateMeta> = {
       "Vertical timeline layout with dated milestones for mid-senior professionals with a clear career arc. Coral rail and connectors highlight progression. Ideal for marketers, product managers, brand strategists, and consultants.",
     Component: TimelinePro,
     sampleData: laylaHassan,
+    source: "hand-coded",
   },
-  pearl: {
+  {
     slug: "pearl",
     name: "Pearl",
     tier: "premium",
@@ -171,15 +197,44 @@ export const TEMPLATES: Record<TemplateSlug, TemplateMeta> = {
       "Two-column premium template with peach sidebar, photo prominence, and pill-shaped section labels. Inspired by editorial CV design. Ideal for marketers, brand managers, and consumer-facing professionals who want warmth and elegance.",
     Component: Pearl,
     sampleData: saraKhan,
+    source: "hand-coded",
   },
-};
+];
 
-export const TEMPLATE_LIST: TemplateMeta[] = Object.values(TEMPLATES);
+/**
+ * Recipe-driven templates — Stage 2. Built from TemplateRecipe objects
+ * via makeRecipeComponent(). Adding a new role × mood × variant means
+ * dropping a recipe file under src/lib/recipes/<role>/ and importing
+ * it from src/lib/recipes/index.ts; the registry picks it up here
+ * automatically.
+ */
+const RECIPE_TEMPLATES: TemplateMeta[] = RECIPE_LIST.map((recipe) => ({
+  slug: recipe.slug,
+  name: recipe.name,
+  tier: recipe.tier,
+  tagline: recipe.tagline,
+  description: recipe.description,
+  Component: makeRecipeComponent(recipe),
+  sampleData: PERSONAS[recipe.preview_persona_id as PersonaId],
+  role: recipe.role,
+  mood: recipe.mood,
+  culturalFit: recipe.cultural_fit,
+  source: "recipe",
+}));
+
+export const TEMPLATE_LIST: TemplateMeta[] = [
+  ...HAND_CODED_TEMPLATES,
+  ...RECIPE_TEMPLATES,
+];
+
+export const TEMPLATES: Record<string, TemplateMeta> = Object.fromEntries(
+  TEMPLATE_LIST.map((t) => [t.slug, t]),
+);
 
 export function getTemplate(slug: string): TemplateMeta {
-  return TEMPLATES[slug as TemplateSlug] ?? TEMPLATES["classic-serif"];
+  return TEMPLATES[slug] ?? TEMPLATES["classic-serif"];
 }
 
-export function isKnownTemplate(slug: string): slug is TemplateSlug {
+export function isKnownTemplate(slug: string): boolean {
   return slug in TEMPLATES;
 }

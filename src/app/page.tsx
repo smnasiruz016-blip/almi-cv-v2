@@ -29,7 +29,7 @@ const STEPS = [
   {
     n: 1,
     title: "Pick a template",
-    body: "Three free classics with color and layout options. Or unlock 60+ premium designs.",
+    body: "Six free classics with full color and layout control. Or unlock the Premium library — role-specific designs for healthcare, trades, hospitality, customer service, and tech.",
   },
   {
     n: 2,
@@ -42,6 +42,14 @@ const STEPS = [
     body: "Live ATS score tells you when you're ready. Export PDF. Send. Get the call.",
   },
 ];
+
+// Featured selection on the homepage tile grid: all six free templates,
+// plus a small curated set of premium designs that exemplify what Pro
+// unlocks. The full catalog lives at /templates.
+const HOMEPAGE_FEATURED_PREMIUM_SLUGS: ReadonlySet<string> = new Set([
+  "atelier",
+  "healthcare-bold-clinical-v1",
+]);
 
 export default async function HomePage() {
   const user = await getCurrentUser();
@@ -165,6 +173,12 @@ function TrustSection() {
 }
 
 function TemplatesSection() {
+  const freeCount = TEMPLATE_LIST.filter((t) => t.tier === "free").length;
+  const premiumCount = TEMPLATE_LIST.filter((t) => t.tier === "premium").length;
+  const featured = TEMPLATE_LIST.filter(
+    (t) => t.tier === "free" || HOMEPAGE_FEATURED_PREMIUM_SLUGS.has(t.slug),
+  );
+
   return (
     <Section className="bg-gradient-to-b from-cream-soft to-peach/40 py-30">
       <Container>
@@ -174,15 +188,16 @@ function TemplatesSection() {
           </Badge>
           <h2 className="mt-4 text-4xl text-plum">A look for every story.</h2>
           <p className="mt-4 text-plum-soft">
-            Start with one of three free classics. Unlock 60+ premium variations any time.
+            Start with one of six free classics. Unlock the role-specific
+            Premium library any time.
           </p>
         </div>
 
         <p className="mt-8 mb-8 text-center text-sm text-plum-soft">
-          6 designs · 3 free · 3 unlock with Pro
+          {freeCount} free · {premiumCount} with Pro · more landing every month
         </p>
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 lg:gap-4">
-          {TEMPLATE_LIST.map((tpl) => (
+          {featured.map((tpl) => (
             <Link
               key={tpl.slug}
               href={`/templates/${tpl.slug}`}

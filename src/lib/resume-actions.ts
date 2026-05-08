@@ -10,32 +10,60 @@ import {
   PLAN_DISPLAY_NAME,
   PLANS,
 } from "@/lib/billing/plans";
+import { userCanAccessTier } from "@/lib/billing/template-access";
+import { getTemplate, isKnownTemplate } from "@/lib/templates";
 import type { CVData, LanguageCode } from "@/lib/cv-types";
 import type { TranslatedCV } from "@/lib/ai/translate-cv-shared";
 import type { Prisma } from "@prisma/client";
 
 export type CreateResumeResult =
   | { ok: true; id: string }
-  | { ok: false; error: string; code: "CV_LIMIT_REACHED" };
+  | { ok: false; error: string; code: "CV_LIMIT_REACHED" }
+  | { ok: false; error: string; code: "TEMPLATE_REQUIRES_PRO" }
+  | { ok: false; error: string; code: "UNKNOWN_TEMPLATE" };
 
 export async function createResume(
   template: string = "classic-serif",
 ): Promise<CreateResumeResult> {
   const user = await requireUser();
 
+  // Reject unknown slugs early — defense against query-string fuzzing.
+  if (!isKnownTemplate(template)) {
+    return {
+      ok: false,
+      code: "UNKNOWN_TEMPLATE",
+      error: "That template doesn't exist. Pick another from the gallery.",
+    };
+  }
+
+  // Tier gate. We always read the user's plan to evaluate this — same
+  // flow as CV-cap below — but we apply the tier check unconditionally
+  // (independent of isBillingEnabled). Premium templates were a paywall
+  // hole pre-Stage-2: defined in PLANS but never enforced. Now they
+  // are. See @/lib/billing/template-access for the helper.
+  const planUser = await prisma.user.findUnique({
+    where: { id: user.id },
+    select: {
+      subscriptionStatus: true,
+      subscriptionCurrentPeriodEnd: true,
+      subscriptionPlan: true,
+      compProUntil: true,
+    },
+  });
+  const plan = planUser ? getUserPlan(planUser) : "FREE";
+  const tier = getTemplate(template).tier;
+  if (!userCanAccessTier(plan, tier)) {
+    return {
+      ok: false,
+      code: "TEMPLATE_REQUIRES_PRO",
+      error:
+        "That template is part of the Pro library. Upgrade to Pro to use it.",
+    };
+  }
+
   // Enforce CV cap unless billing is in dry-run mode (see plans.ts for
   // why caps are disabled until launch flag flips).
   if (isBillingEnabled()) {
-    const planUser = await prisma.user.findUnique({
-      where: { id: user.id },
-      select: {
-        subscriptionStatus: true,
-        subscriptionCurrentPeriodEnd: true,
-        subscriptionPlan: true,
-        compProUntil: true,
-      },
-    });
-    const plan = planUser ? getUserPlan(planUser) : "FREE";
     const limit = PLANS[plan].cvLimit;
     const count = await prisma.resume.count({ where: { userId: user.id } });
     if (count >= limit) {
@@ -56,6 +84,7 @@ export async function createResume(
       title: "Untitled CV",
       template,
       templateKey: template,
+      templateTier: tier === "premium" ? "PREMIUM" : "FREE",
       isDraft: true,
       data: mayaRodriguez as unknown as Prisma.InputJsonValue,
     },

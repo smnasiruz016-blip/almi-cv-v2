@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowRight, Check } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, Lock, Sparkles } from "lucide-react";
 import { Crown } from "lucide-react";
 import { TemplateThumbnail } from "@/components/templates/TemplateThumbnail";
 import { mayaRodriguez } from "@/lib/sample-cv-data";
@@ -9,14 +9,29 @@ import {
   getTemplate,
   isKnownTemplate,
 } from "@/lib/templates";
+import { getCurrentUser } from "@/lib/auth";
+import { prisma } from "@/lib/db";
+import {
+  anonCanAccessTier,
+  userCanAccessTier,
+} from "@/lib/billing/template-access";
+import { getUserPlan } from "@/lib/billing/plans";
 
-const INCLUDES = [
+const INCLUDES_FREE = [
   "All sections: experience, education, skills, projects, languages, awards",
   "Quantified bullet points support",
-  "Professional plum + cream color scheme",
   "ATS-friendly structure",
   "PDF export",
   "Free forever — no subscription",
+];
+
+const INCLUDES_PREMIUM = [
+  "All sections: experience, education, skills, projects, languages, awards",
+  "Quantified bullet points support",
+  "Premium decorators — accent rails, panels, organic shapes",
+  "ATS-friendly structure",
+  "Print-safe export pipeline",
+  "Included in Pro · $7/mo or $60/yr",
 ];
 
 export function generateStaticParams() {
@@ -35,6 +50,33 @@ export default async function TemplatePreviewPage({
   const TemplateComponent = template.Component;
   const sampleData = template.sampleData ?? mayaRodriguez;
   const otherTemplates = TEMPLATE_LIST.filter((t) => t.slug !== template.slug);
+
+  // Paywall CTA logic — route the user to the right next step based on
+  // their current plan and the template's tier.
+  const user = await getCurrentUser();
+  let canUse = anonCanAccessTier(template.tier);
+  if (user) {
+    const u = await prisma.user.findUnique({
+      where: { id: user.id },
+      select: {
+        subscriptionStatus: true,
+        subscriptionCurrentPeriodEnd: true,
+        subscriptionPlan: true,
+        compProUntil: true,
+      },
+    });
+    if (u) canUse = userCanAccessTier(getUserPlan(u), template.tier);
+  }
+  const isPremiumLocked = template.tier === "premium" && !canUse;
+  const includes =
+    template.tier === "premium" ? INCLUDES_PREMIUM : INCLUDES_FREE;
+  const ctaHref = isPremiumLocked
+    ? `/pricing?return=${encodeURIComponent(`/cv/new?template=${template.slug}`)}`
+    : `/cv/new?template=${template.slug}`;
+  const ctaLabel = isPremiumLocked
+    ? "Unlock with Pro"
+    : "Customize this template";
+  const ctaIcon = isPremiumLocked ? <Lock className="h-4 w-4" /> : <ArrowRight className="h-4 w-4" />;
 
   return (
     <div className="min-h-screen bg-cream-soft">
@@ -83,7 +125,7 @@ export default async function TemplatePreviewPage({
                 Includes
               </p>
               <ul className="space-y-2">
-                {INCLUDES.map((item) => (
+                {includes.map((item) => (
                   <li key={item} className="flex items-start gap-2 text-sm text-plum">
                     <Check className="mt-0.5 h-4 w-4 shrink-0 text-coral" />
                     <span>{item}</span>
@@ -93,12 +135,18 @@ export default async function TemplatePreviewPage({
             </div>
             <div className="border-t border-plum/10" />
             <Link
-              href={`/cv/new?template=${template.slug}`}
+              href={ctaHref}
               className="flex w-full items-center justify-center gap-2 rounded-pill bg-coral py-4 text-base font-medium text-white transition-colors hover:bg-coral-deep focus:outline-none focus:ring-4 focus:ring-coral/30"
             >
-              Customize this template
-              <ArrowRight className="h-4 w-4" />
+              {ctaLabel}
+              {ctaIcon}
             </Link>
+            {isPremiumLocked && (
+              <p className="flex items-center justify-center gap-1.5 text-center text-xs text-plum-soft">
+                <Sparkles className="h-3 w-3 text-coral" />
+                7-day free trial · cancel anytime · returns to this template
+              </p>
+            )}
             <p className="text-center text-xs text-plum-faint">
               {template.tier === "premium"
                 ? "Premium · Saved to your account · Download as PDF"
