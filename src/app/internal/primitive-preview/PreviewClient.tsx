@@ -2,10 +2,16 @@
 
 import type { CSSProperties, ReactNode } from "react";
 import {
+  AccentBlock,
   ContactList,
+  DecorativeShape,
   HeaderBlock,
+  HeroBanner,
   ICON_ALLOWLIST,
   LanguagesBlock,
+  OrganicDivider,
+  PatternStrip,
+  PhotoFrame,
   SectionHeading,
   SingleColumnLayout,
   SkillsBlock,
@@ -17,6 +23,9 @@ import {
   type ThemeColors,
   type TimelineEntry,
 } from "@/components/templates/primitives";
+import { renderRecipe } from "@/components/templates/engine";
+import { healthcareBoldClinicalV1 } from "@/lib/recipes";
+import { healthcareBold } from "@/lib/personas";
 
 const HEADING_FONT: FontDef = {
   cssVar: "var(--font-fraunces)",
@@ -807,6 +816,354 @@ export function PreviewClient() {
         />
       </PrimitiveSection>
 
+      <PrimitiveSection letter="I" name="DecorativeShape (Stage 2)">
+        <VariantBlock
+          title="Organic — blob, leaf, swirl, wave, arc"
+          propsLabel='shape="blob" | "leaf" | "swirl" | "wave" | "arc"'
+          light={
+            <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
+              <DecorativeShape shape="blob" color={LIGHT_WARM.accent} width={80} height={80} />
+              <DecorativeShape shape="leaf" color={LIGHT_WARM.primary} width={80} height={80} />
+              <DecorativeShape shape="swirl" color={LIGHT_WARM.accent} width={80} height={80} />
+              <DecorativeShape shape="wave" color={LIGHT_WARM.primary} width={80} height={80} />
+              <DecorativeShape shape="arc" color={LIGHT_WARM.accent} width={80} height={80} />
+            </div>
+          }
+          dark={
+            <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
+              <DecorativeShape shape="blob" color={DARK_COOL.accent} width={80} height={80} />
+              <DecorativeShape shape="leaf" color={DARK_COOL.primarySoft} width={80} height={80} />
+              <DecorativeShape shape="swirl" color={DARK_COOL.accent} width={80} height={80} />
+              <DecorativeShape shape="wave" color={DARK_COOL.primarySoft} width={80} height={80} />
+              <DecorativeShape shape="arc" color={DARK_COOL.accent} width={80} height={80} />
+            </div>
+          }
+        />
+        <VariantBlock
+          title="Geometric — circle, triangle, hexagon, diamond"
+          propsLabel='shape="circle" | "triangle" | "hexagon" | "diamond"'
+          light={
+            <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
+              <DecorativeShape shape="circle" color={LIGHT_WARM.primary} width={70} height={70} />
+              <DecorativeShape shape="triangle" color={LIGHT_WARM.accent} width={70} height={70} />
+              <DecorativeShape shape="hexagon" color={LIGHT_WARM.primary} width={70} height={70} />
+              <DecorativeShape shape="diamond" color={LIGHT_WARM.accent} width={70} height={70} />
+            </div>
+          }
+          dark={
+            <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
+              <DecorativeShape shape="circle" color={DARK_COOL.primarySoft} width={70} height={70} />
+              <DecorativeShape shape="triangle" color={DARK_COOL.accent} width={70} height={70} />
+              <DecorativeShape shape="hexagon" color={DARK_COOL.primarySoft} width={70} height={70} />
+              <DecorativeShape shape="diamond" color={DARK_COOL.accent} width={70} height={70} />
+            </div>
+          }
+        />
+        <VariantBlock
+          title="printSafe — organic shapes flatten to plain colored blocks"
+          propsLabel='printSafe={true}  // blob → rounded rectangle; geometric stays as-is'
+          light={
+            <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
+              <DecorativeShape shape="blob" color={LIGHT_WARM.accent} width={80} height={80} printSafe />
+              <DecorativeShape shape="leaf" color={LIGHT_WARM.primary} width={80} height={80} printSafe />
+              <DecorativeShape shape="hexagon" color={LIGHT_WARM.accent} width={80} height={80} printSafe />
+            </div>
+          }
+          dark={
+            <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
+              <DecorativeShape shape="blob" color={DARK_COOL.accent} width={80} height={80} printSafe />
+              <DecorativeShape shape="leaf" color={DARK_COOL.primarySoft} width={80} height={80} printSafe />
+              <DecorativeShape shape="hexagon" color={DARK_COOL.accent} width={80} height={80} printSafe />
+            </div>
+          }
+        />
+      </PrimitiveSection>
+
+      <PrimitiveSection letter="J" name="AccentBlock (Stage 2)">
+        <VariantBlock
+          title="Solid bars — page-edge rails and section accents"
+          propsLabel='color={theme.accent}  width=6  height={120}  rounded="full"'
+          light={
+            <div style={{ display: "flex", gap: "1rem", alignItems: "center" }}>
+              <AccentBlock color={LIGHT_WARM.accent} width={6} height={120} rounded="full" />
+              <AccentBlock color={LIGHT_WARM.primary} width={120} height={6} rounded="full" />
+              <AccentBlock color={LIGHT_WARM.accent} width={60} height={60} rounded="lg" />
+            </div>
+          }
+          dark={
+            <div style={{ display: "flex", gap: "1rem", alignItems: "center" }}>
+              <AccentBlock color={DARK_COOL.accent} width={6} height={120} rounded="full" />
+              <AccentBlock color={DARK_COOL.primarySoft} width={120} height={6} rounded="full" />
+              <AccentBlock color={DARK_COOL.accent} width={60} height={60} rounded="lg" />
+            </div>
+          }
+        />
+      </PrimitiveSection>
+
+      <PrimitiveSection letter="K" name="HeroBanner (Stage 2)">
+        <VariantBlock
+          title="Diagonal-bottom clip — confident header band"
+          propsLabel='clipPath="diagonal-bottom"'
+          light={
+            <HeroBanner
+              bg={LIGHT_WARM.primary}
+              fg={LIGHT_WARM.primaryText}
+              clipPath="diagonal-bottom"
+            >
+              <h2 style={{ margin: 0, fontFamily: HEADING_FONT.cssVar }}>Alex Rivera</h2>
+              <p style={{ margin: 0 }}>Senior Brand Designer</p>
+            </HeroBanner>
+          }
+          dark={
+            <HeroBanner
+              bg={DARK_COOL.primary}
+              fg={DARK_COOL.primaryText}
+              clipPath="diagonal-bottom"
+            >
+              <h2 style={{ margin: 0, fontFamily: HEADING_FONT.cssVar }}>Alex Rivera</h2>
+              <p style={{ margin: 0 }}>Senior Brand Designer</p>
+            </HeroBanner>
+          }
+        />
+        <VariantBlock
+          title="With a decoration overlay — organic blob behind copy"
+          propsLabel='decoration={<DecorativeShape shape="blob" ... />}'
+          light={
+            <HeroBanner
+              bg={LIGHT_WARM.primary}
+              fg={LIGHT_WARM.primaryText}
+              decoration={
+                <DecorativeShape
+                  shape="blob"
+                  color={LIGHT_WARM.accent}
+                  width={200}
+                  height={200}
+                  opacity={0.4}
+                  style={{ position: "absolute", top: -40, right: -40 }}
+                />
+              }
+            >
+              <h2 style={{ margin: 0, fontFamily: HEADING_FONT.cssVar }}>Alex Rivera</h2>
+              <p style={{ margin: 0 }}>Senior Brand Designer</p>
+            </HeroBanner>
+          }
+          dark={
+            <HeroBanner
+              bg={DARK_COOL.primary}
+              fg={DARK_COOL.primaryText}
+              decoration={
+                <DecorativeShape
+                  shape="blob"
+                  color={DARK_COOL.accent}
+                  width={200}
+                  height={200}
+                  opacity={0.4}
+                  style={{ position: "absolute", top: -40, right: -40 }}
+                />
+              }
+            >
+              <h2 style={{ margin: 0, fontFamily: HEADING_FONT.cssVar }}>Alex Rivera</h2>
+              <p style={{ margin: 0 }}>Senior Brand Designer</p>
+            </HeroBanner>
+          }
+        />
+      </PrimitiveSection>
+
+      <PrimitiveSection letter="L" name="PhotoFrame (Stage 2)">
+        <VariantBlock
+          title="All shapes — circle, square, rounded, hexagon, diamond, soft"
+          propsLabel='shape="circle" | "square" | "rounded" | "hexagon" | "diamond" | "soft"'
+          light={
+            <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
+              {(["circle", "square", "rounded", "hexagon", "diamond", "soft"] as const).map(
+                (s) => (
+                  <PhotoFrame
+                    key={s}
+                    src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=240&h=240&fit=crop&crop=faces"
+                    alt={`${s} sample`}
+                    shape={s}
+                    size={80}
+                    border={{ color: LIGHT_WARM.accent, width: 3 }}
+                  />
+                ),
+              )}
+            </div>
+          }
+          dark={
+            <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
+              {(["circle", "square", "rounded", "hexagon", "diamond", "soft"] as const).map(
+                (s) => (
+                  <PhotoFrame
+                    key={s}
+                    src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=240&h=240&fit=crop&crop=faces"
+                    alt={`${s} sample`}
+                    shape={s}
+                    size={80}
+                    border={{ color: DARK_COOL.accent, width: 3 }}
+                  />
+                ),
+              )}
+            </div>
+          }
+        />
+      </PrimitiveSection>
+
+      <PrimitiveSection letter="M" name="PatternStrip (Stage 2)">
+        <VariantBlock
+          title="All 6 patterns at medium density"
+          propsLabel='pattern="dots" | "lines-h" | "lines-v" | "grid" | "diagonal" | "chevron"'
+          light={
+            <div style={{ display: "grid", gap: "0.5rem", gridTemplateColumns: "1fr 1fr 1fr" }}>
+              {(["dots", "lines-h", "lines-v", "grid", "diagonal", "chevron"] as const).map(
+                (p) => (
+                  <div key={p}>
+                    <p style={{ fontSize: "10px", margin: "0 0 4px 0", color: LIGHT_WARM.textSoft }}>{p}</p>
+                    <PatternStrip
+                      pattern={p}
+                      color={LIGHT_WARM.primary}
+                      density="medium"
+                      width="100%"
+                      height={48}
+                      opacity={0.6}
+                    />
+                  </div>
+                ),
+              )}
+            </div>
+          }
+          dark={
+            <div style={{ display: "grid", gap: "0.5rem", gridTemplateColumns: "1fr 1fr 1fr" }}>
+              {(["dots", "lines-h", "lines-v", "grid", "diagonal", "chevron"] as const).map(
+                (p) => (
+                  <div key={p}>
+                    <p style={{ fontSize: "10px", margin: "0 0 4px 0", color: DARK_COOL.textSoft }}>{p}</p>
+                    <PatternStrip
+                      pattern={p}
+                      color={DARK_COOL.accent}
+                      density="medium"
+                      width="100%"
+                      height={48}
+                      opacity={0.6}
+                    />
+                  </div>
+                ),
+              )}
+            </div>
+          }
+        />
+        <VariantBlock
+          title="printSafe — patterns collapse to a flat tinted band"
+          propsLabel='printSafe={true}  // moiré-free in Chromium print pipeline'
+          light={
+            <PatternStrip
+              pattern="dots"
+              color={LIGHT_WARM.primary}
+              density="medium"
+              width="100%"
+              height={48}
+              opacity={0.6}
+              printSafe
+            />
+          }
+          dark={
+            <PatternStrip
+              pattern="dots"
+              color={DARK_COOL.accent}
+              density="medium"
+              width="100%"
+              height={48}
+              opacity={0.6}
+              printSafe
+            />
+          }
+        />
+      </PrimitiveSection>
+
+      <PrimitiveSection letter="N" name="OrganicDivider (Stage 2)">
+        <VariantBlock
+          title="All 5 variants"
+          propsLabel='variant="wave" | "scribble" | "dotted" | "soft-line" | "leaf-vine"'
+          light={
+            <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+              {(["wave", "scribble", "dotted", "soft-line", "leaf-vine"] as const).map((v) => (
+                <div key={v}>
+                  <p style={{ fontSize: "10px", margin: "0 0 4px 0", color: LIGHT_WARM.textSoft }}>{v}</p>
+                  <OrganicDivider variant={v} color={LIGHT_WARM.primary} thickness={2} />
+                </div>
+              ))}
+            </div>
+          }
+          dark={
+            <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+              {(["wave", "scribble", "dotted", "soft-line", "leaf-vine"] as const).map((v) => (
+                <div key={v}>
+                  <p style={{ fontSize: "10px", margin: "0 0 4px 0", color: DARK_COOL.textSoft }}>{v}</p>
+                  <OrganicDivider variant={v} color={DARK_COOL.accent} thickness={2} />
+                </div>
+              ))}
+            </div>
+          }
+        />
+      </PrimitiveSection>
+
+      <PrimitiveSection letter="O" name="Recipe Engine — live render">
+        <p
+          style={{
+            margin: "0 0 1rem 0",
+            color: "#4B5563",
+            fontSize: "0.95rem",
+            maxWidth: 720,
+          }}
+        >
+          The proof recipe (<code>healthcare-bold-clinical-v1</code>) rendered
+          via <code>renderRecipe()</code> with the bundled persona. The same
+          component is registered in the TEMPLATES catalog and is reachable
+          at <code>/templates/healthcare-bold-clinical-v1</code>.
+        </p>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            gap: "1rem",
+          }}
+        >
+          <div>
+            <p
+              style={{
+                fontSize: "11px",
+                letterSpacing: "0.18em",
+                textTransform: "uppercase",
+                color: "#6B7280",
+                margin: "0 0 0.5rem 0",
+              }}
+            >
+              SCREEN MODE
+            </p>
+            {renderRecipe(healthcareBoldClinicalV1, healthcareBold, {
+              paginated: false,
+              printSafe: false,
+            })}
+          </div>
+          <div>
+            <p
+              style={{
+                fontSize: "11px",
+                letterSpacing: "0.18em",
+                textTransform: "uppercase",
+                color: "#6B7280",
+                margin: "0 0 0.5rem 0",
+              }}
+            >
+              PRINT-SAFE MODE
+            </p>
+            {renderRecipe(healthcareBoldClinicalV1, healthcareBold, {
+              paginated: false,
+              printSafe: true,
+            })}
+          </div>
+        </div>
+      </PrimitiveSection>
+
       <footer
         style={{
           marginTop: "3rem",
@@ -818,8 +1175,10 @@ export function PreviewClient() {
       >
         <p style={{ margin: 0 }}>
           Icon allowlist exposes {Object.keys(ICON_ALLOWLIST).length} names —
-          recipes (Stage 2+) will reference them by string. Unknown names
-          render nothing.
+          recipes (Stage 2) reference them by string. Unknown names render
+          nothing. Stage 2 added 6 decorator primitives + the recipe engine;
+          all decorators honor a <code>printSafe</code> flag forwarded by
+          the Puppeteer print pipeline.
         </p>
       </footer>
     </main>

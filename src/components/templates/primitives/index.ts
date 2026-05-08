@@ -31,3 +31,31 @@ export type {
   FontDef,
   ThemeColors,
 } from "./types";
+
+// Decorator primitives — Stage 2. Graphical-richness layer that lives
+// alongside structural layout primitives. All decorators accept a
+// `printSafe` flag; the recipe engine forwards it from
+// renderRecipe(opts).
+export {
+  DecorativeShape,
+  AccentBlock,
+  HeroBanner,
+  PhotoFrame,
+  PatternStrip,
+  OrganicDivider,
+} from "./decorators";
+export type {
+  DecorativeShapeKind,
+  DecorativeShapeProps,
+  AccentBlockProps,
+  HeroBannerClipPath,
+  HeroBannerProps,
+  PhotoFrameProps,
+  PhotoFrameShape,
+  PatternStripDensity,
+  PatternStripPattern,
+  PatternStripProps,
+  OrganicDividerProps,
+  OrganicDividerVariant,
+  PrintSafeProp,
+} from "./decorators";

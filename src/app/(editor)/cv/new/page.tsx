@@ -50,6 +50,16 @@ export default async function NewCVPage({
 
   const result = await createResume(template);
   if (!result.ok) {
+    if (result.code === "TEMPLATE_REQUIRES_PRO") {
+      // Tier gate hit. Drop them on /pricing with this same /cv/new
+      // URL as the return target so a successful checkout brings them
+      // right back here and createResume() succeeds on retry.
+      const ret = encodeURIComponent(`/cv/new?template=${template}`);
+      redirect(`/pricing?return=${ret}`);
+    }
+    if (result.code === "UNKNOWN_TEMPLATE") {
+      redirect(`/templates`);
+    }
     // CV cap hit — bounce to dashboard with a query flag so the dashboard
     // surfaces the upgrade modal client-side.
     const reason = encodeURIComponent(result.code);

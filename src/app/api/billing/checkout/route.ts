@@ -26,9 +26,12 @@ export async function POST(request: Request): Promise<NextResponse> {
     );
   }
 
-  let body: { priceId?: string };
+  let body: { priceId?: string; returnTo?: string };
   try {
-    body = (await request.json()) as { priceId?: string };
+    body = (await request.json()) as {
+      priceId?: string;
+      returnTo?: string;
+    };
   } catch {
     return NextResponse.json({ error: "Invalid request" }, { status: 400 });
   }
@@ -41,12 +44,25 @@ export async function POST(request: Request): Promise<NextResponse> {
     );
   }
 
+  // returnTo must be a same-origin path (`/cv/new?...`, etc). Reject
+  // anything that could escape to another origin — protocol-relative
+  // URLs ("//evil.com"), schemes, and absolute URLs are dropped here
+  // before they reach Stripe's success_url.
+  const rawReturn = (body.returnTo ?? "").trim();
+  const safeReturn =
+    rawReturn.startsWith("/") &&
+    !rawReturn.startsWith("//") &&
+    !rawReturn.includes("://")
+      ? rawReturn
+      : undefined;
+
   try {
     const result = await createCheckoutSession({
       userId: user.id,
       email: user.email,
       name: user.name,
       priceId: priceId as StripePriceId,
+      returnTo: safeReturn,
     });
     return NextResponse.json({ url: result.url });
   } catch (err) {

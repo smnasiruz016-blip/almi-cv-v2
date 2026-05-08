@@ -73,6 +73,10 @@ export function PricingClient({
   const router = useRouter();
   const searchParams = useSearchParams();
   const cancelled = searchParams.get("cancelled") === "true";
+  // `return` carries the URL the caller wants Stripe to land on after
+  // checkout. Set by the /templates/[slug] paywall CTA. Validated as a
+  // same-origin path on the server side; we send it raw.
+  const returnTo = searchParams.get("return");
 
   const [loadingPlan, setLoadingPlan] = useState<
     "PRO_MONTHLY" | "PRO_YEARLY" | null
@@ -85,12 +89,17 @@ export function PricingClient({
   ) => {
     setError(null);
     if (!isLoggedIn) {
-      router.push("/signup?next=/pricing");
+      const next = returnTo
+        ? `/pricing?return=${encodeURIComponent(returnTo)}`
+        : "/pricing";
+      router.push(`/signup?next=${encodeURIComponent(next)}`);
       return;
     }
     if (!billingEnabled) return;
     if (currentPlan !== "FREE") {
-      router.push("/account");
+      // Already Pro: skip the upsell and go straight to whatever they
+      // were trying to do before /pricing intercepted them.
+      router.push(returnTo ?? "/account");
       return;
     }
     setLoadingPlan(plan);
@@ -98,7 +107,7 @@ export function PricingClient({
       const res = await fetch("/api/billing/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ priceId }),
+        body: JSON.stringify({ priceId, returnTo }),
       });
       const data = (await res.json().catch(() => ({}))) as {
         url?: string;

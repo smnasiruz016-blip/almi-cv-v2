@@ -61,6 +61,11 @@ export async function createCheckoutSession(input: {
   email: string;
   name: string;
   priceId: StripePriceId;
+  /** Optional same-origin path the user should land on after success.
+   * Validated upstream in the API route. When set, Stripe redirects
+   * here instead of /account?upgraded=true so the user lands right
+   * back where they came from (e.g., /cv/new?template=<slug>). */
+  returnTo?: string;
 }): Promise<{ url: string }> {
   const planLabel = priceIdToPlanLabel(input.priceId);
   if (!planLabel) {
@@ -75,6 +80,17 @@ export async function createCheckoutSession(input: {
   });
 
   const baseUrl = getPublicBaseUrl();
+  // returnTo lands directly. There's a small window where the Stripe
+  // webhook hasn't yet flipped the user to Pro by the time the
+  // browser redirects — in practice the webhook beats the redirect by
+  // a wide margin. If it doesn't, the destination route's tier check
+  // re-runs the gate and bounces back to /pricing, which is fine.
+  const successPath = input.returnTo
+    ? `${input.returnTo}${input.returnTo.includes("?") ? "&" : "?"}upgraded=true`
+    : `/account?upgraded=true`;
+  const cancelPath = input.returnTo
+    ? `/pricing?cancelled=true&return=${encodeURIComponent(input.returnTo)}`
+    : `/pricing?cancelled=true`;
 
   const stripe = getStripeClient();
   const session = await stripe.checkout.sessions.create({
@@ -87,8 +103,8 @@ export async function createCheckoutSession(input: {
     },
     metadata: { userId: input.userId, plan: planLabel },
     allow_promotion_codes: true,
-    success_url: `${baseUrl}/account?upgraded=true`,
-    cancel_url: `${baseUrl}/pricing?cancelled=true`,
+    success_url: `${baseUrl}${successPath}`,
+    cancel_url: `${baseUrl}${cancelPath}`,
   });
 
   if (!session.url) {
