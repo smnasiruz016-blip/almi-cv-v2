@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { requireFounder } from "@/lib/founder";
 import { getCurrentMonthSpend } from "@/lib/studio-cost";
 import { AdminSubnav } from "@/app/admin/_components/AdminSubnav";
+import { StudioTestButton } from "./_components/StudioTestButton";
 
 export const dynamic = "force-dynamic";
 
@@ -95,6 +96,8 @@ export default async function TemplateStudioPage() {
           </p>
         )}
       </section>
+
+      <StudioTestButton />
     </div>
   );
 }
