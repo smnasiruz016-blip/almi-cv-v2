@@ -145,32 +145,120 @@ const EXEMPLAR_RECIPE_JSON = `{
 }`;
 
 const SCHEMA_RULES = `
-Schema constraints (enforced by Zod validator — invalid output is rejected):
+SCHEMA — strict. Unrecognized fields cause validation failure. Use ONLY the listed fields and enum values.
 
-- id and slug: lowercase alphanumeric with hyphens, must match — e.g. "healthcare-modern-airy-v1"
-- version: positive integer, start at 1
-- tier: "free" | "premium" — for role-themed recipes always "premium"
-- role: one of "healthcare" | "trades" | "customer-service-bpo" | "hospitality-chef" | "tech"
-- mood: one of "bold" | "modern" | "refined"
-- cultural_fit: array of ISO-3166 alpha-2 codes (exactly 2 chars each, e.g. "US", "GB", "PK")
-- description: 1+ chars, recruiter-facing single sentence
-- tagline: short brand line, e.g. "Modern · Airy · Patient-first"
-- layout.type: "two-column" | "single-column" (use either; vary across moods)
-- header.layout: "sidebar-embedded" | "hero-banner" | "stacked"
-- sectionHeading.variant: "plain" | "underline" | "accent-bar" | "icon-prefix"
-- blocks: at least 1 block; each block is { slot: "sidebar"|"main", section, variant }
-  Sections: profile, experience, education, skills, projects, languages, awards, certifications, interests
-- decorators: array (can be empty, but visual richness REQUIRES at least 1 — see mood rules)
-- preview_persona_id: must be the role-mood pairing (e.g. "healthcare-modern" for healthcare+modern)
+TOP-LEVEL fields (all required unless marked ?):
+  id              string (lowercase, hyphens, alphanumeric)
+  slug            same shape as id, MUST match id
+  name            string, short brand name
+  version         positive integer (start at 1)
+  tier            "free" | "premium"   (use "premium" for any role-themed recipe)
+  role            "healthcare" | "trades" | "customer-service-bpo" | "hospitality-chef" | "tech"
+  mood            "bold" | "modern" | "refined"
+  cultural_fit?   array of ISO-3166 alpha-2 codes (exactly 2 chars: "US", "GB", "PK", etc.)
+  description     string, recruiter-facing single sentence
+  tagline         string, short brand line, e.g. "Airy · Modern · Patient-first"
+  tags?           array of strings
+  seoKeywords?    array of strings
+  layout          object — see LAYOUT below
+  header          object — see HEADER below
+  sectionHeading  object — see SECTION-HEADING below
+  blocks          array (≥1) of BLOCK objects — see BLOCKS below
+  decorators      array of DECORATOR objects — see DECORATORS below; mood rules require ≥1
+  recommended_palette_hint?   { themeKeys?, accentKeys?, note? }
+  preview_persona_id          string — must be the role-mood id given in the user prompt
 
-Color references (use these strings, NOT hex literals unless absolutely needed):
-  "theme.primary", "theme.primarySoft", "theme.primaryText", "theme.text",
-  "theme.textSoft", "theme.textFaint", "theme.accent", "theme.surface"
-  Or alpha form: { "kind": "alpha", "ref": "theme.accent", "alpha": 0.22 }
+LAYOUT — pick ONE shape, do not mix fields between shapes:
+  { "type": "single-column", "padding"?: string, "maxWidth"?: positive int }
+  OR
+  { "type": "two-column", "sidebarPosition": "left" | "right",
+    "sidebarWidthPercent": number 20-50,
+    "sidebarBg"?: ColorRef, "sidebarPadding"?: string, "mainPadding"?: string }
 
-Icons (only these names allowed in iconMap): user, briefcase, graduation-cap, wrench,
-award, languages, star, heart, layers, mail, phone, map-pin, globe, link,
-calendar, building, code, palette, hammer, utensils.
+HEADER — only these fields are valid:
+  layout                  "full-bleed" | "inset" | "sidebar-embedded" | "none"   (REQUIRED)
+  photoShape?             "circle" | "square" | "rounded" | "hexagon" | "diamond" | "soft"
+  photoPosition?          "left" | "center" | "right" | "sidebar"
+  align?                  "left" | "center" | "right"
+  bg?, fg?, fgSoftRef?    ColorRef
+  showContacts?           boolean
+  contactsOrientation?    "horizontal" | "vertical" | "grid-2col"
+  clipPath?               "none" | "diagonal-bottom" | "arch" | "corner-cut" | "wave-bottom"
+
+SECTION-HEADING — only these fields are valid:
+  variant                 "plain" | "underline" | "accent-bar" | "icon-prefix"   (REQUIRED)
+  size?                   "xs" | "sm" | "md"
+  iconMap?                object: { profile?: IconName, experience?: IconName, ... }
+  colorRef?, accentRef?   ColorRef
+  ⚠ DO NOT add "color", "underlineColor", or any other field — they don't exist.
+
+BLOCKS — array, each item is { section, slot, variant }:
+  section   "profile" | "experience" | "education" | "skills" | "projects"
+            | "languages" | "awards" | "certifications" | "interests"
+  slot      "main" | "sidebar"
+  variant   ONE of these strict shapes (discriminated by "type"):
+
+    { "type": "summary", "tone"?: "plain" | "dropcap" }
+        — used with section "profile"
+
+    { "type": "timeline",
+      "bulletStyle"?: "dot" | "dash" | "none",
+      "showDateBadge"?: boolean,
+      "dateBadgeBg"?: ColorRef }
+        — used with experience, education, projects
+
+    { "type": "skills",
+      "style": "plain-list" | "tags" | "bars" | "grouped",
+      "tagBg"?: ColorRef, "barAccent"?: ColorRef }
+        — used with section "skills"
+
+    { "type": "languages",
+      "style": "plain" | "tags" | "bars",
+      "accentRef"?: ColorRef }
+        — used with section "languages"
+
+    { "type": "list", "tone"?: "plain" | "divided" }
+        — used with awards, certifications, interests
+
+DECORATORS — array. Each item is ONE of these strict shapes (discriminated by "kind"):
+
+  { "kind": "accent-block", "slot": Slot, "color": ColorRef,
+    "width"?: string|number, "height"?: string|number,
+    "rounded"?: "none"|"sm"|"md"|"lg"|"full",
+    "opacity"?: 0..1, "offset"?: { top?, left?, right?, bottom? } }
+
+  { "kind": "shape", "slot": Slot, "shape": Shape, "color": ColorRef,
+    "width"?: positive number, "height"?: positive number,
+    "opacity"?: 0..1, "rotate"?: number,
+    "offset"?: { top?, left?, right?, bottom? } }
+
+  { "kind": "pattern", "slot": Slot, "pattern": Pattern, "color": ColorRef,
+    "density"?: "loose"|"medium"|"tight",
+    "opacity"?: 0..1, "width"?: string|number, "height"?: string|number,
+    "offset"?: { top?, left?, right?, bottom? } }
+
+  { "kind": "divider", "between": [section, section, ...] (≥2),
+    "slot": "main"|"sidebar", "variant": DividerVariant, "color": ColorRef,
+    "thickness"?: positive number, "opacity"?: 0..1 }
+
+  Slot:           "page-edge-left" | "page-edge-right" | "page-edge-top" | "page-edge-bottom"
+                  | "header-bg" | "header-corner" | "sidebar-bg" | "sidebar-corner" | "main-corner"
+  Shape:          "blob" | "leaf" | "swirl" | "wave" | "arc"
+                  | "circle" | "triangle" | "hexagon" | "diamond"
+  Pattern:        "dots" | "lines-h" | "lines-v" | "grid" | "diagonal" | "chevron"
+  DividerVariant: "wave" | "scribble" | "dotted" | "soft-line" | "leaf-vine"
+
+ColorRef — use one of these forms (NEVER raw hex unless unavoidable):
+  "theme.primary" | "theme.primarySoft" | "theme.primaryText"
+  | "theme.text" | "theme.textSoft" | "theme.textFaint"
+  | "theme.accent" | "theme.surface"
+  | { "kind": "alpha", "ref": <one of the above>, "alpha": 0..1 }
+  | { "kind": "literal", "hex": "#rrggbb" }
+
+IconName — only these names are valid in iconMap:
+  briefcase, graduation-cap, code, wrench, heart, star, award, mail,
+  phone, map-pin, globe, link, calendar, user, languages, lightbulb,
+  target, layers, book-open, users
 `;
 
 function buildSystemPrompt(role: RecipeRole, mood: RecipeMood): string {
@@ -193,7 +281,8 @@ OUTPUT FORMAT:
 - Output ONLY the JSON object. No prose, no markdown code fences, no preamble.
 - Start with { and end with }.
 - The slug should encode role-mood-style-version, e.g. "healthcare-modern-airy-v1".
-- Use unique style descriptors per generation (Airy, Steady, Crisp, Lattice, Calm, etc.) — don't reuse "Clinical" since that's the exemplar's style.`;
+- Use unique style descriptors per generation (Airy, Steady, Crisp, Lattice, Calm, etc.) — don't reuse "Clinical" since that's the exemplar's style.
+- ⚠ STRICT SCHEMA: Do not invent fields. If a property is not in the schema rules above, omit it. Unrecognized keys cause validation failure. When a field has a fixed enum, use one of the listed values verbatim — no near-misses.`;
 }
 
 function buildUserPrompt(role: RecipeRole, mood: RecipeMood): string {
