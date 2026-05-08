@@ -10,11 +10,14 @@
 // production with cost protection in place.
 
 import { useState } from "react";
+import { RecipeRenderer } from "@/components/templates/engine/render-recipe";
+import type { TemplateRecipe } from "@/components/templates/engine/recipe-types";
+import { PERSONAS, type PersonaId } from "@/lib/personas";
 
 type ApiResult =
   | {
       ok: true;
-      recipe: { slug: string; name: string; tagline: string };
+      recipe: TemplateRecipe;
       generationId: string;
       model: string;
       inputTokens: number;
@@ -34,6 +37,14 @@ type ApiResult =
       validationErrors?: string[];
       rawContent?: string;
     };
+
+function resolvePersonaId(recipeId: string): PersonaId {
+  // recipe.preview_persona_id is a free-form string in the schema; coerce
+  // to a known PersonaId, falling back so the preview renders even if the
+  // model picked an off-list value.
+  if (recipeId in PERSONAS) return recipeId as PersonaId;
+  return "healthcare-bold";
+}
 
 const ROLES = [
   "healthcare",
@@ -191,6 +202,32 @@ export function StudioTestButton() {
           )}
           <p className="mt-3 text-xs text-plum-soft">
             Refresh the page to see the cost dashboard tick up.
+          </p>
+        </div>
+      )}
+
+      {result && result.ok && (
+        <div className="mt-4">
+          <p className="mb-3 text-xs uppercase tracking-widest text-plum-soft">
+            Live preview · rendered with{" "}
+            <span className="font-mono normal-case tracking-normal">
+              {resolvePersonaId(result.recipe.preview_persona_id)}
+            </span>{" "}
+            persona
+          </p>
+          <div className="mx-auto aspect-[210/297] w-full max-w-[600px] overflow-hidden rounded-lg bg-white shadow-warm-card-hover">
+            <RecipeRenderer
+              recipe={result.recipe}
+              data={
+                PERSONAS[
+                  resolvePersonaId(result.recipe.preview_persona_id)
+                ]
+              }
+            />
+          </div>
+          <p className="mt-3 text-center text-xs text-plum-faint">
+            A4 Portrait · 21 × 29.7 cm · this template is NOT persisted
+            (Stage 3c adds the accept-and-save flow)
           </p>
         </div>
       )}
