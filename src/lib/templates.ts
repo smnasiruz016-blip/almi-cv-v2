@@ -12,6 +12,7 @@ import { BoldColorBlock } from "@/components/templates/BoldColorBlock";
 import { SoftPastelRomantic } from "@/components/templates/SoftPastelRomantic";
 import { TimelinePro } from "@/components/templates/TimelinePro";
 import { Pearl } from "@/components/templates/Pearl";
+import { HealthcareBoldICU } from "@/components/templates/HealthcareBoldICU";
 import {
   alexChen,
   amaraHassan,
@@ -33,7 +34,7 @@ import type {
   RecipeRole,
 } from "@/components/templates/engine/recipe-types";
 import { RECIPE_LIST } from "@/lib/recipes";
-import { PERSONAS, type PersonaId } from "@/lib/personas";
+import { PERSONAS, healthcareBoldIcu, type PersonaId } from "@/lib/personas";
 
 export type TemplateMeta = {
   slug: string;
@@ -59,6 +60,10 @@ export type TemplateMeta = {
    * the picker can't tell the difference, but the editor & paywall
    * code paths can. */
   source: "recipe" | "hand-coded";
+  /** Discovery tags. Mirrors `tags` on TemplateRecipe; surfaces in
+   * /jobs/<country> and search-style filters. Optional — universal
+   * hand-coded templates leave it unset. */
+  tags?: string[];
 };
 
 /**
@@ -198,6 +203,29 @@ const HAND_CODED_TEMPLATES: TemplateMeta[] = [
     Component: Pearl,
     sampleData: saraKhan,
     source: "hand-coded",
+  },
+  {
+    slug: "healthcare-bold-icu-handcoded",
+    name: "Trusted Critical Care",
+    tier: "premium",
+    tagline: "Clinical · Color-Blocked · ICU-Ready",
+    description:
+      "Hand-coded healthcare layout with cream-and-sage color blocking, tinted clinical photo, and a navy specialised-skills strip. Built for ICU, ER, and critical-care nurses — especially the Filipino nursing diaspora applying into the Gulf, UK, and Singapore.",
+    Component: HealthcareBoldICU,
+    sampleData: healthcareBoldIcu,
+    role: "healthcare",
+    mood: "bold",
+    culturalFit: ["PH", "AE", "SA", "KW", "QA", "SG", "GB", "IE"],
+    source: "hand-coded",
+    tags: [
+      "healthcare",
+      "nurse",
+      "icu",
+      "critical-care",
+      "bold",
+      "color-blocked",
+      "filipino-diaspora",
+    ],
   },
 ];
 
