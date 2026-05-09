@@ -21,22 +21,63 @@ import type { RecipeRole, RecipeMood } from "@/components/templates/engine/recip
 export type RecipeGender = "female" | "male";
 
 // Gender-specific aesthetic overlay — injected into the system prompt so
-// the model chooses palette, decorator shapes, and photo frame to match.
+// the model chooses decorator shapes, photo frame, and heading style.
+// Palette is separately controlled per-generation via PALETTE_FAMILIES.
 const GENDER_AESTHETIC: Record<RecipeGender, string> = {
   female:
-    "GENDER AESTHETIC — FEMININE: Palette should feel warm and inviting. " +
-    "Preferred accent colors: coral, rose, peach, mauve, sage, dusty lavender, warm terracotta. " +
+    "GENDER AESTHETIC — FEMININE: " +
     "Decorators should be organic — blobs, leaves, wave dividers, soft curves, petal shapes. " +
     "Photo frame: prefer 'rounded', 'soft', or 'circle'. " +
     "Section headings: prefer 'underline' or 'accent-bar' — refined, not aggressive. " +
     "Overall feel: warmth, approachability, human-centered confidence.",
   male:
-    "GENDER AESTHETIC — MASCULINE: Palette should feel structured and authoritative. " +
-    "Preferred accent colors: navy, steel blue, charcoal, deep forest green, slate, burnt amber. " +
+    "GENDER AESTHETIC — MASCULINE: " +
     "Decorators should be geometric — accent-blocks, triangles, hexagons, strong pattern rails. " +
     "Photo frame: prefer 'square', 'hexagon', or 'diamond'. " +
     "Section headings: prefer 'icon-prefix' or 'accent-bar' — structured and direct. " +
     "Overall feel: precision, confidence, technical authority.",
+};
+
+// Per-generation palette seed — one is picked randomly each call so
+// successive generations of the same role+mood+gender look visually
+// distinct rather than converging on the model's most common association.
+// 5 female + 5 male palettes → with 3 moods × 5 roles that's 150 unique
+// combinations before a repeat is even likely.
+const PALETTE_FAMILIES: Record<RecipeGender, string[]> = {
+  female: [
+    "PALETTE: warm coral family — use coral / terracotta as the dominant primary, " +
+      "peach or apricot as accent, ivory / warm white as surface. " +
+      "recommended_palette_hint themeKeys should reflect warm reds/oranges.",
+    "PALETTE: dusty rose family — use mauve / rose as the dominant primary, " +
+      "blush pink or dusty pink as accent, warm white as surface. " +
+      "recommended_palette_hint themeKeys should reflect pinks/mauves.",
+    "PALETTE: sage garden family — use sage green / forest sage as the dominant primary, " +
+      "warm peach or coral as accent, cream / linen as surface. " +
+      "recommended_palette_hint themeKeys should reflect greens.",
+    "PALETTE: lavender mist family — use soft purple / lavender as the dominant primary, " +
+      "coral or warm gold as accent, light gray / misty white as surface. " +
+      "recommended_palette_hint themeKeys should reflect purples/lavenders.",
+    "PALETTE: warm terracotta family — use burnt sienna / rust as the dominant primary, " +
+      "warm gold or mustard as accent, ivory as surface. " +
+      "recommended_palette_hint themeKeys should reflect warm earth tones.",
+  ],
+  male: [
+    "PALETTE: midnight navy family — use deep navy / midnight blue as the dominant primary, " +
+      "gold or amber as accent, cool light gray as surface. " +
+      "recommended_palette_hint themeKeys should reflect deep blues.",
+    "PALETTE: forest authority family — use deep forest green / hunter green as the dominant primary, " +
+      "brass / copper as accent, cream as surface. " +
+      "recommended_palette_hint themeKeys should reflect deep greens.",
+    "PALETTE: steel professional family — use dark charcoal / graphite as the dominant primary, " +
+      "electric blue or cyan as accent, white as surface. " +
+      "recommended_palette_hint themeKeys should reflect grays/charcoal.",
+    "PALETTE: slate modern family — use dark slate / cool gray as the dominant primary, " +
+      "burnt orange or amber as accent, light gray as surface. " +
+      "recommended_palette_hint themeKeys should reflect slates.",
+    "PALETTE: oxford blue family — use Oxford blue / prussian blue as the dominant primary, " +
+      "silver or mint as accent, off-white as surface. " +
+      "recommended_palette_hint themeKeys should reflect blues.",
+  ],
 };
 
 const ROLE_VISUAL_LANGUAGE: Record<RecipeRole, string> = {
@@ -402,11 +443,15 @@ function buildUserPrompt(
 ): string {
   const personaId = getPersonaIdForRoleMood(role, mood);
   const spec = MOOD_LAYOUT_SPEC[mood];
-  // Steer photoShape toward gender-appropriate defaults while allowing creative freedom.
   const photoShapeHint =
     gender === "female"
       ? "prefer: rounded | soft | circle"
       : "prefer: square | hexagon | diamond";
+  // Pick a random palette from the gender family so each call produces a
+  // visually distinct color scheme even for the same role+mood+gender.
+  const paletteFamilies = PALETTE_FAMILIES[gender];
+  const palette =
+    paletteFamilies[Math.floor(Math.random() * paletteFamilies.length)];
   return `Generate one TemplateRecipe for role="${role}" mood="${mood}" gender="${gender}".
 
 REQUIRED LAYOUT (use these exact values — do not deviate):
@@ -419,6 +464,10 @@ REQUIRED HEADER (set exactly):
   header.showContacts = true
 
 BLOCKS NOTE: ${spec.noteForBlocks}
+
+${palette}
+Apply this palette to theme.primary, theme.accent, and theme.surface ColorRefs throughout the recipe.
+Use the recommended_palette_hint to document the chosen theme and accent key names.
 
 Set preview_persona_id to "${personaId}".
 Set version to 1.
