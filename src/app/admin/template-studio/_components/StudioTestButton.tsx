@@ -311,7 +311,7 @@ export function StudioTestButton() {
               recipe={result.recipe}
               data={applyGenderPhoto(
                 PERSONAS[resolvePersonaId(result.recipe.preview_persona_id)],
-                result.recipe.role,
+                result.recipe.role ?? role,
                 gender,
               )}
             />
