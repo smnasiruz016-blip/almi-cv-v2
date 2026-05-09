@@ -38,8 +38,9 @@ import type {
   DecoratorSlot,
   DecoratorSpec,
   RecipeBlock,
+  RecipeFooter,
+  RecipeHeader,
   SectionKey,
-  SectionVariant,
   TemplateRecipe,
 } from "./recipe-types";
 
@@ -446,6 +447,120 @@ function renderBlock(
   }
 }
 
+/**
+ * Builds the photo element with optional backdrop block + tint wash.
+ * Returned element is positioned `relative` so the backdrop can sit
+ * absolutely behind it. Returns null when the recipe has no photo
+ * position OR the user has hidden their photo.
+ */
+function buildPhotoEl(
+  h: RecipeHeader,
+  data: CVData,
+  ctx: RecipeCtx,
+  printSafe: boolean,
+  photoSize: number,
+): { el: ReactNode; outerWidth: number; outerHeight: number } | null {
+  const basics = data?.basics ?? { fullName: "", role: "", email: "" };
+  const displayName = basics.fullName?.trim() || "Untitled";
+  const userPhoto = ctx.photoStyle;
+  const showPhoto =
+    h.photoPosition !== undefined &&
+    userPhoto !== "none" &&
+    Boolean(basics.photoUrl);
+  if (!showPhoto || !basics.photoUrl) return null;
+
+  const effectiveShape =
+    h.photoShape ?? (userPhoto === "square" ? "square" : "circle");
+  const fg = resolveColor(h.fg, ctx) ?? ctx.theme.primaryText;
+
+  const tintColor = h.photoTint
+    ? resolveColor(h.photoTint.color, ctx)
+    : undefined;
+  const tint =
+    h.photoTint && tintColor
+      ? {
+          color: tintColor,
+          mode: h.photoTint.mode,
+          alpha: h.photoTint.alpha,
+        }
+      : undefined;
+
+  const photo = (
+    <PhotoFrame
+      src={basics.photoUrl}
+      alt={displayName}
+      shape={effectiveShape}
+      size={photoSize}
+      border={{ color: fg, width: 2 }}
+      tint={tint}
+      printSafe={printSafe}
+    />
+  );
+
+  // No backdrop — return the photo directly.
+  if (!h.photoBackdrop) {
+    return { el: photo, outerWidth: photoSize, outerHeight: photoSize };
+  }
+
+  // Backdrop path. The backdrop is an absolutely-positioned color
+  // block sitting behind the photo. offsetX/offsetY are measured from
+  // the photo's top-left corner; negative values push the block above
+  // / left of the photo.
+  const bd = h.photoBackdrop;
+  const bdColor = resolveColor(bd.color, ctx) ?? ctx.theme.accent;
+  const bdW = bd.width ?? Math.round(photoSize * 0.85);
+  const bdH = bd.height ?? Math.round(photoSize * 1.1);
+  const offsetX = bd.offsetX ?? -16;
+  const offsetY = bd.offsetY ?? -16;
+
+  // The wrapper's outer dimensions span the union of photo + backdrop
+  // so flex/inline placement does not clip the backdrop.
+  const minLeft = Math.min(0, offsetX);
+  const minTop = Math.min(0, offsetY);
+  const maxRight = Math.max(photoSize, offsetX + bdW);
+  const maxBottom = Math.max(photoSize, offsetY + bdH);
+  const outerWidth = maxRight - minLeft;
+  const outerHeight = maxBottom - minTop;
+
+  return {
+    el: (
+      <span
+        style={{
+          position: "relative",
+          display: "inline-block",
+          width: outerWidth,
+          height: outerHeight,
+        }}
+      >
+        <span
+          aria-hidden
+          style={{
+            position: "absolute",
+            top: offsetY - minTop,
+            left: offsetX - minLeft,
+            width: bdW,
+            height: bdH,
+            backgroundColor: bdColor,
+            zIndex: 0,
+          }}
+        />
+        <span
+          style={{
+            position: "absolute",
+            top: -minTop,
+            left: -minLeft,
+            zIndex: 1,
+          }}
+        >
+          {photo}
+        </span>
+      </span>
+    ),
+    outerWidth,
+    outerHeight,
+  };
+}
+
 function renderHeader(
   recipe: TemplateRecipe,
   data: CVData,
@@ -454,6 +569,9 @@ function renderHeader(
 ): ReactNode {
   const h = recipe.header;
   if (h.layout === "none") return null;
+  // The split layout is rendered piecewise by the engine — see
+  // renderSplitSidebarHeader / renderSplitMainHeader.
+  if (h.layout === "split") return null;
   const basics = data?.basics ?? { fullName: "", role: "", email: "" };
   const displayName = basics.fullName?.trim() || "Untitled";
 
@@ -461,34 +579,11 @@ function renderHeader(
   const fg = resolveColor(h.fg, ctx) ?? ctx.theme.primaryText;
   const fgSoft = resolveColor(h.fgSoftRef, ctx) ?? withAlpha(fg, 0.85);
 
-  // photoShape inheritance: the recipe controls shape; the user's
-  // CVData.style.photoStyle still controls whether to show one at all
-  // (their "Hide" toggle in the editor sidebar). photoPosition being
-  // unset on the recipe also means "no photo".
-  const recipePhoto = h.photoShape;
-  const userPhoto = ctx.photoStyle;
-  const showPhoto =
-    h.photoPosition !== undefined &&
-    userPhoto !== "none" &&
-    Boolean(basics.photoUrl);
-
-  const effectiveShape =
-    recipePhoto ?? (userPhoto === "square" ? "square" : "circle");
-
   const contacts = buildContacts(data);
   const showContacts = h.showContacts ?? true;
 
-  const photoEl =
-    showPhoto && basics.photoUrl ? (
-      <PhotoFrame
-        src={basics.photoUrl}
-        alt={displayName}
-        shape={effectiveShape}
-        size={96}
-        border={{ color: fg, width: 2 }}
-        printSafe={printSafe}
-      />
-    ) : null;
+  const photoBuilt = buildPhotoEl(h, data, ctx, printSafe, 96);
+  const photoEl = photoBuilt?.el ?? null;
 
   const nameStyle: CSSProperties = {
     fontFamily: `${ctx.headingFont.cssVar}, ${ctx.headingFont.fallback}`,
@@ -606,6 +701,261 @@ function renderHeader(
       }}
     >
       {headerInner}
+    </div>
+  );
+}
+
+/**
+ * Split header — sidebar half. Renders the photo (with backdrop +
+ * tint, if declared) at the top of the sidebar slot. Pairs with
+ * renderSplitMainHeader, which puts the name + contacts in the main
+ * slot of the same row.
+ */
+function renderSplitSidebarHeader(
+  recipe: TemplateRecipe,
+  data: CVData,
+  ctx: RecipeCtx,
+  printSafe: boolean,
+): ReactNode {
+  if (recipe.header.layout !== "split") return null;
+  const built = buildPhotoEl(recipe.header, data, ctx, printSafe, 140);
+  if (!built) return null;
+  return (
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "flex-start",
+        marginBottom: "1.25rem",
+      }}
+    >
+      {built.el}
+    </div>
+  );
+}
+
+/**
+ * Split header — main half. Renders the display name, optional role
+ * line, and contacts (defaulting to horizontal-ruled) at the top of
+ * the main slot.
+ */
+function renderSplitMainHeader(
+  recipe: TemplateRecipe,
+  data: CVData,
+  ctx: RecipeCtx,
+): ReactNode {
+  const h = recipe.header;
+  if (h.layout !== "split") return null;
+  const basics = data?.basics ?? { fullName: "", role: "", email: "" };
+  const displayName = basics.fullName?.trim() || "Untitled";
+
+  const fg = resolveColor(h.fg, ctx) ?? ctx.theme.text;
+  const fgSoft = resolveColor(h.fgSoftRef, ctx) ?? ctx.theme.textSoft;
+
+  const contacts = buildContacts(data);
+  const showContacts = h.showContacts ?? true;
+
+  return (
+    <div style={{ marginBottom: "1.25rem" }}>
+      <h1
+        style={{
+          fontFamily: `${ctx.headingFont.cssVar}, ${ctx.headingFont.fallback}`,
+          color: fg,
+          fontSize: "3rem",
+          fontWeight: 500,
+          margin: 0,
+          lineHeight: 1.05,
+          letterSpacing: "-0.01em",
+        }}
+      >
+        {displayName}
+      </h1>
+      {basics.role && (
+        <p
+          style={{
+            color: fgSoft,
+            fontSize: "1rem",
+            margin: "0.25rem 0 0",
+            fontStyle: "italic",
+          }}
+        >
+          {basics.role}
+        </p>
+      )}
+      {showContacts && contacts.length > 0 && (
+        <div style={{ marginTop: "1rem" }}>
+          <ContactList
+            items={contacts}
+            orientation={h.contactsOrientation ?? "horizontal-ruled"}
+            textColor={fg}
+            iconColor={fgSoft}
+            ruleColor={withAlpha(fg, 0.4)}
+            textSize="xs"
+          />
+        </div>
+      )}
+    </div>
+  );
+}
+
+/**
+ * Footer band — full-bleed strip at the bottom of the page. Renders a
+ * single section (skills / interests / languages / etc.) as a
+ * left-label + right-content row. The section is automatically
+ * removed from the body block sequence so it doesn't show twice.
+ *
+ * Single-section by design (Phase 5b-1 Q4).
+ */
+function renderFooterBand(
+  footer: RecipeFooter,
+  recipe: TemplateRecipe,
+  data: CVData,
+  ctx: RecipeCtx,
+): ReactNode {
+  const bg = resolveColor(footer.bg, ctx) ?? ctx.theme.primary;
+  const fg = resolveColor(footer.fg, ctx) ?? ctx.theme.primaryText;
+  const padding = footer.padding ?? "1.25rem 2rem";
+
+  const heading = recipe.sectionHeading;
+  // Footer label uses the same heading variant as the rest of the
+  // recipe but forces the color to the footer fg so it reads against
+  // the band background.
+  const headingNode = (
+    <SectionHeading
+      variant={heading.variant}
+      size={heading.size ?? "xs"}
+      color={fg}
+      accentColor={fg}
+      icon={heading.iconMap?.[footer.section]}
+      headingFont={ctx.headingFont}
+    >
+      {sectionLabel(data, footer.section, footer.section)}
+    </SectionHeading>
+  );
+
+  // Body content — flat inline summary by section type.
+  let body: ReactNode = null;
+  switch (footer.section) {
+    case "skills": {
+      const items = data?.skills ?? [];
+      if (items.length > 0) {
+        body = (
+          <p
+            style={{
+              margin: 0,
+              fontSize: "0.85rem",
+              lineHeight: 1.5,
+              color: fg,
+              opacity: 0.9,
+            }}
+          >
+            {items.join(", ")}.
+          </p>
+        );
+      }
+      break;
+    }
+    case "interests": {
+      const items = data?.interests ?? [];
+      if (items.length > 0) {
+        body = (
+          <p
+            style={{
+              margin: 0,
+              fontSize: "0.85rem",
+              lineHeight: 1.5,
+              color: fg,
+              opacity: 0.9,
+            }}
+          >
+            {items.join(" · ")}
+          </p>
+        );
+      }
+      break;
+    }
+    case "languages": {
+      const items = data?.languages ?? [];
+      if (items.length > 0) {
+        body = (
+          <p
+            style={{
+              margin: 0,
+              fontSize: "0.85rem",
+              lineHeight: 1.5,
+              color: fg,
+              opacity: 0.9,
+            }}
+          >
+            {items
+              .map((l) => (l.level ? `${l.name} (${l.level})` : l.name))
+              .join(" · ")}
+          </p>
+        );
+      }
+      break;
+    }
+    case "certifications": {
+      const items = data?.certifications ?? [];
+      if (items.length > 0) {
+        body = (
+          <p
+            style={{
+              margin: 0,
+              fontSize: "0.85rem",
+              lineHeight: 1.5,
+              color: fg,
+              opacity: 0.9,
+            }}
+          >
+            {items.map((c) => c.name).join(" · ")}
+          </p>
+        );
+      }
+      break;
+    }
+    case "awards": {
+      const items = data?.awards ?? [];
+      if (items.length > 0) {
+        body = (
+          <p
+            style={{
+              margin: 0,
+              fontSize: "0.85rem",
+              lineHeight: 1.5,
+              color: fg,
+              opacity: 0.9,
+            }}
+          >
+            {items.map((a) => a.title).join(" · ")}
+          </p>
+        );
+      }
+      break;
+    }
+    default:
+      // Other section keys (profile, experience, education, projects)
+      // are layout-heavy and don't fit the single-line footer band.
+      // Recipe authors should pick a flat-list section.
+      body = null;
+  }
+
+  if (!body) return null;
+
+  return (
+    <div
+      style={{
+        backgroundColor: bg,
+        color: fg,
+        padding,
+        minHeight: footer.height,
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+        gap: "1.5rem",
+      }}
+    >
+      <div style={{ flexShrink: 0, minWidth: "32%" }}>{headingNode}</div>
+      <div style={{ flex: 1, minWidth: 0 }}>{body}</div>
     </div>
   );
 }
@@ -735,7 +1085,9 @@ function renderHeaderBgDecorators(
 }
 
 /** Build the ordered list of section nodes for one slot, weaving in any
- * inline dividers the recipe declared `between: [a, b]`. */
+ * inline dividers the recipe declared `between: [a, b]`. Skips any
+ * block whose section is being rendered into the layout footer band
+ * (so the section doesn't appear twice). */
 function buildBlocksForSlot(
   recipe: TemplateRecipe,
   data: CVData,
@@ -743,7 +1095,10 @@ function buildBlocksForSlot(
   slot: "main" | "sidebar",
   printSafe: boolean,
 ): PaginatedSection[] {
-  const blocks = recipe.blocks.filter((b) => b.slot === slot);
+  const footerSection = recipe.layout.footer?.section;
+  const blocks = recipe.blocks.filter(
+    (b) => b.slot === slot && b.section !== footerSection,
+  );
   const dividers = recipe.decorators.filter(
     (d): d is Extract<DecoratorSpec, { kind: "divider" }> =>
       d.kind === "divider" && d.slot === slot,
@@ -795,6 +1150,10 @@ type ArticleShellProps = {
   printSafe: boolean;
   children: ReactNode;
   sidebarChildren?: ReactNode;
+  /** Pre-rendered footer band (full-bleed strip across the bottom of
+   * the page). Caller is responsible for resolving the layout's
+   * `footer` config and skipping the footer-section from blocks. */
+  footer?: ReactNode;
 };
 
 function ArticleShell({
@@ -803,6 +1162,7 @@ function ArticleShell({
   printSafe,
   children,
   sidebarChildren,
+  footer,
 }: ArticleShellProps) {
   const paginated = false;
   const dCls = densityClass(ctx.density);
@@ -819,9 +1179,26 @@ function ArticleShell({
     `cv-page ${paginated ? "" : "mx-auto aspect-[210/297] max-w-[800px]"} ` +
     `w-full overflow-hidden rounded-lg shadow-warm-card-hover ${dCls}`.trim();
 
+  // The flex-column wrap is only needed when a footer band sits below
+  // the body — otherwise we keep the previous block-level article so
+  // existing recipes render bit-for-bit identically to before.
+  const hasFooter = footer != null;
+  const flexShell: CSSProperties = hasFooter
+    ? { display: "flex", flexDirection: "column" }
+    : {};
   const articleStyle: CSSProperties = paginated
-    ? { ...bodyFontStyle, width: 794, minHeight: 1123, position: "relative" }
-    : { ...bodyFontStyle, position: "relative" };
+    ? {
+        ...bodyFontStyle,
+        width: 794,
+        minHeight: 1123,
+        position: "relative",
+        ...flexShell,
+      }
+    : {
+        ...bodyFontStyle,
+        position: "relative",
+        ...flexShell,
+      };
 
   // Page-edge decorators sit above bg, below content.
   const edgeDecorators = (
@@ -875,13 +1252,24 @@ function ArticleShell({
       </div>
     );
 
+    const innerRow = (
+      <div
+        style={{
+          display: "flex",
+          width: "100%",
+          ...(hasFooter ? { flex: 1, minHeight: 0 } : {}),
+        }}
+      >
+        {sidebarOnLeft ? sidebarPanel : mainPanel}
+        {sidebarOnLeft ? mainPanel : sidebarPanel}
+      </div>
+    );
+
     return (
       <article className={baseClass} style={articleStyle}>
         {edgeDecorators}
-        <div style={{ display: "flex", width: "100%" }}>
-          {sidebarOnLeft ? sidebarPanel : mainPanel}
-          {sidebarOnLeft ? mainPanel : sidebarPanel}
-        </div>
+        {innerRow}
+        {footer}
       </article>
     );
   }
@@ -889,6 +1277,25 @@ function ArticleShell({
   // single-column. Caller passes a pre-rendered header via children when
   // the recipe declares one — we don't re-render here.
   const padding = layout.padding ?? "2.5rem";
+  if (hasFooter) {
+    return (
+      <article className={baseClass} style={articleStyle}>
+        {edgeDecorators}
+        <div
+          style={{
+            position: "relative",
+            zIndex: 1,
+            flex: 1,
+            padding,
+            minWidth: 0,
+          }}
+        >
+          {children}
+        </div>
+        {footer}
+      </article>
+    );
+  }
   return (
     <article className={baseClass} style={{ ...articleStyle, padding }}>
       {edgeDecorators}
@@ -927,11 +1334,20 @@ export function renderRecipe(
     ? buildBlocksForSlot(recipe, data, ctx, "sidebar", printSafe)
     : [];
 
+  // Header dispatch by layout. Each layout puts the header in a
+  // different slot:
+  //   sidebar-embedded → photo + name + contacts all in sidebar
+  //   split            → photo in sidebar, name + contacts in main
+  //   full-bleed/inset → header in main column above body
+  //   none             → no recipe-level header
+  const isSplitHeader = recipe.header.layout === "split";
   const sidebarHeader =
     recipe.header.layout === "sidebar-embedded" ? (
       <div style={{ marginBottom: "1rem" }}>
         {renderHeader(recipe, data, ctx, printSafe)}
       </div>
+    ) : isSplitHeader ? (
+      renderSplitSidebarHeader(recipe, data, ctx, printSafe)
     ) : null;
   const sidebarChildren = (
     <>
@@ -945,9 +1361,22 @@ export function renderRecipe(
   const mainHeaderInline =
     recipe.header.layout === "full-bleed" || recipe.header.layout === "inset"
       ? renderHeader(recipe, data, ctx, printSafe)
-      : null;
+      : isSplitHeader
+        ? renderSplitMainHeader(recipe, data, ctx)
+        : null;
+
+  // Footer band — full-bleed strip pinned to the bottom of the page
+  // (or the last paginated page). The footer.section block is already
+  // filtered out of mainSections / sidebarSections by buildBlocksForSlot.
+  const footerNode = recipe.layout.footer
+    ? renderFooterBand(recipe.layout.footer, recipe, data, ctx)
+    : null;
 
   if (paginated) {
+    const fullBleedHeaderMargin =
+      recipe.header.layout === "full-bleed" ||
+      recipe.header.layout === "inset";
+    const hasFooter = footerNode != null;
     const PageShell = (props: {
       pageIndex: number;
       pageCount: number;
@@ -955,6 +1384,7 @@ export function renderRecipe(
       children: ReactNode;
     }) => {
       const arr = Children.toArray(props.children);
+      const isLastPage = props.pageIndex === props.pageCount - 1;
       return (
         <article
           className={`cv-page w-full overflow-hidden rounded-lg ${densityClass(ctx.density)}`.trim()}
@@ -965,64 +1395,80 @@ export function renderRecipe(
             width: 794,
             minHeight: 1123,
             position: "relative",
-            display: isTwo ? "flex" : "block",
+            ...(hasFooter
+              ? { display: "flex", flexDirection: "column" }
+              : { display: isTwo ? "flex" : "block" }),
           }}
         >
           {renderDecoratorsForSlot(recipe, "page-edge-left", ctx, printSafe)}
           {renderDecoratorsForSlot(recipe, "page-edge-right", ctx, printSafe)}
           {renderDecoratorsForSlot(recipe, "page-edge-top", ctx, printSafe)}
           {renderDecoratorsForSlot(recipe, "page-edge-bottom", ctx, printSafe)}
-          {isTwo && (
-            <aside
-              style={{
-                width: `${(layout as Extract<typeof layout, { type: "two-column" }>).sidebarWidthPercent}%`,
-                flexShrink: 0,
-                backgroundColor:
-                  resolveColor(
-                    (layout as Extract<typeof layout, { type: "two-column" }>)
-                      .sidebarBg,
-                    ctx,
-                  ) ?? ctx.theme.primarySoft,
-                padding:
-                  (layout as Extract<typeof layout, { type: "two-column" }>)
-                    .sidebarPadding ?? "2rem 1.5rem",
-                position: "relative",
-                overflow: "hidden",
-                order:
-                  (layout as Extract<typeof layout, { type: "two-column" }>)
-                    .sidebarPosition === "right"
-                    ? 2
-                    : 0,
-              }}
-            >
-              {renderDecoratorsForSlot(recipe, "sidebar-bg", ctx, printSafe)}
-              <div style={{ position: "relative", zIndex: 1 }}>
-                {sidebarChildren}
-              </div>
-            </aside>
-          )}
           <div
             style={{
-              flex: isTwo ? 1 : undefined,
-              padding: isTwo
-                ? (layout as Extract<typeof layout, { type: "two-column" }>)
-                    .mainPadding ?? "2rem"
-                : layout.type === "single-column"
-                  ? layout.padding ?? "2.5rem"
-                  : "2rem",
-              position: "relative",
-              zIndex: 1,
+              display: isTwo ? "flex" : "block",
+              ...(hasFooter ? { flex: 1, minHeight: 0 } : {}),
             }}
           >
-            {props.isFirstPage && mainHeaderInline && (
-              <div style={{ margin: "-2rem -2rem 1.25rem" }}>
-                {mainHeaderInline}
-              </div>
+            {isTwo && (
+              <aside
+                style={{
+                  width: `${(layout as Extract<typeof layout, { type: "two-column" }>).sidebarWidthPercent}%`,
+                  flexShrink: 0,
+                  backgroundColor:
+                    resolveColor(
+                      (layout as Extract<typeof layout, { type: "two-column" }>)
+                        .sidebarBg,
+                      ctx,
+                    ) ?? ctx.theme.primarySoft,
+                  padding:
+                    (layout as Extract<typeof layout, { type: "two-column" }>)
+                      .sidebarPadding ?? "2rem 1.5rem",
+                  position: "relative",
+                  overflow: "hidden",
+                  order:
+                    (layout as Extract<typeof layout, { type: "two-column" }>)
+                      .sidebarPosition === "right"
+                      ? 2
+                      : 0,
+                }}
+              >
+                {renderDecoratorsForSlot(recipe, "sidebar-bg", ctx, printSafe)}
+                <div style={{ position: "relative", zIndex: 1 }}>
+                  {sidebarChildren}
+                </div>
+              </aside>
             )}
-            {arr.map((c, i) => (
-              <Fragment key={i}>{c}</Fragment>
-            ))}
+            <div
+              style={{
+                flex: isTwo ? 1 : undefined,
+                padding: isTwo
+                  ? (layout as Extract<typeof layout, { type: "two-column" }>)
+                      .mainPadding ?? "2rem"
+                  : layout.type === "single-column"
+                    ? layout.padding ?? "2.5rem"
+                    : "2rem",
+                position: "relative",
+                zIndex: 1,
+              }}
+            >
+              {props.isFirstPage && mainHeaderInline && (
+                <div
+                  style={
+                    fullBleedHeaderMargin
+                      ? { margin: "-2rem -2rem 1.25rem" }
+                      : { marginBottom: "1.25rem" }
+                  }
+                >
+                  {mainHeaderInline}
+                </div>
+              )}
+              {arr.map((c, i) => (
+                <Fragment key={i}>{c}</Fragment>
+              ))}
+            </div>
           </div>
+          {isLastPage && footerNode}
         </article>
       );
     };
@@ -1052,8 +1498,9 @@ export function renderRecipe(
       ctx={ctx}
       printSafe={printSafe}
       sidebarChildren={sidebarChildren}
+      footer={footerNode}
     >
-      {!isTwo && mainHeaderInline}
+      {(isSplitHeader || !isTwo) && mainHeaderInline}
       {mainSections.map((s) => (
         <Fragment key={s.key}>{s.node}</Fragment>
       ))}

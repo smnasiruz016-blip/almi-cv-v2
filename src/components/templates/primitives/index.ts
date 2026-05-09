@@ -52,6 +52,7 @@ export type {
   HeroBannerProps,
   PhotoFrameProps,
   PhotoFrameShape,
+  PhotoFrameTint,
   PatternStripDensity,
   PatternStripPattern,
   PatternStripProps,

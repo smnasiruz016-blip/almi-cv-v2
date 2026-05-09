@@ -121,6 +121,16 @@ const recipeBlockSchema = z
   })
   .strict();
 
+const recipeFooterSchema = z
+  .object({
+    bg: colorRefSchema,
+    fg: colorRefSchema.optional(),
+    height: z.union([z.string(), z.number()]).optional(),
+    padding: z.string().optional(),
+    section: sectionKey,
+  })
+  .strict();
+
 // RecipeLayout — discriminated by `type`
 const recipeLayoutSchema = z.discriminatedUnion("type", [
   z
@@ -128,6 +138,7 @@ const recipeLayoutSchema = z.discriminatedUnion("type", [
       type: z.literal("single-column"),
       padding: z.string().optional(),
       maxWidth: z.number().int().positive().optional(),
+      footer: recipeFooterSchema.optional(),
     })
     .strict(),
   z
@@ -138,6 +149,7 @@ const recipeLayoutSchema = z.discriminatedUnion("type", [
       sidebarBg: colorRefSchema.optional(),
       sidebarPadding: z.string().optional(),
       mainPadding: z.string().optional(),
+      footer: recipeFooterSchema.optional(),
     })
     .strict(),
 ]);
@@ -159,20 +171,46 @@ const heroBannerClipPath = z.enum([
   "wave-bottom",
 ]);
 
+const recipePhotoBackdropSchema = z
+  .object({
+    color: colorRefSchema,
+    offsetX: z.number().optional(),
+    offsetY: z.number().optional(),
+    width: z.number().positive().optional(),
+    height: z.number().positive().optional(),
+  })
+  .strict();
+
+const recipePhotoTintSchema = z
+  .object({
+    color: colorRefSchema,
+    mode: z.enum(["multiply", "soft-light"]).optional(),
+    alpha: z.number().min(0).max(1).optional(),
+  })
+  .strict();
+
 const recipeHeaderSchema = z
   .object({
-    layout: z.enum(["full-bleed", "inset", "sidebar-embedded", "none"]),
+    layout: z.enum([
+      "full-bleed",
+      "inset",
+      "sidebar-embedded",
+      "split",
+      "none",
+    ]),
     photoShape: photoFrameShape.optional(),
     photoPosition: z
       .enum(["left", "center", "right", "sidebar"])
       .optional(),
+    photoBackdrop: recipePhotoBackdropSchema.optional(),
+    photoTint: recipePhotoTintSchema.optional(),
     align: z.enum(["left", "center", "right"]).optional(),
     bg: colorRefSchema.optional(),
     fg: colorRefSchema.optional(),
     fgSoftRef: colorRefSchema.optional(),
     showContacts: z.boolean().optional(),
     contactsOrientation: z
-      .enum(["horizontal", "vertical", "grid-2col"])
+      .enum(["horizontal", "horizontal-ruled", "vertical", "grid-2col"])
       .optional(),
     clipPath: heroBannerClipPath.optional(),
   })
