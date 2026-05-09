@@ -11,7 +11,11 @@ export { HeroBanner } from "./HeroBanner";
 export type { HeroBannerClipPath, HeroBannerProps } from "./HeroBanner";
 
 export { PhotoFrame } from "./PhotoFrame";
-export type { PhotoFrameProps, PhotoFrameShape } from "./PhotoFrame";
+export type {
+  PhotoFrameProps,
+  PhotoFrameShape,
+  PhotoFrameTint,
+} from "./PhotoFrame";
 
 export { PatternStrip } from "./PatternStrip";
 export type {

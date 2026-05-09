@@ -12,9 +12,11 @@
  */
 import type { TemplateRecipe } from "@/components/templates/engine/recipe-types";
 import { healthcareBoldClinicalV1 } from "./healthcare/bold-clinical-v1";
+import { healthcareBoldIcuNurseV1 } from "./healthcare/bold-icu-nurse-v1";
 
 export const RECIPES = {
   [healthcareBoldClinicalV1.slug]: healthcareBoldClinicalV1,
+  [healthcareBoldIcuNurseV1.slug]: healthcareBoldIcuNurseV1,
 } as const satisfies Record<string, TemplateRecipe>;
 
 export const RECIPE_LIST: TemplateRecipe[] = Object.values(RECIPES);
@@ -24,3 +26,4 @@ export function getRecipe(slug: string): TemplateRecipe | undefined {
 }
 
 export { healthcareBoldClinicalV1 } from "./healthcare/bold-clinical-v1";
+export { healthcareBoldIcuNurseV1 } from "./healthcare/bold-icu-nurse-v1";

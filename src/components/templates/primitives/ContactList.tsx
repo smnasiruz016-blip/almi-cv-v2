@@ -7,11 +7,19 @@ import type { ContactItem, ContactKind } from "./types";
 
 export type ContactListProps = {
   items: ContactItem[];
-  orientation?: "vertical" | "horizontal" | "grid-2col";
+  /**
+   * `horizontal-ruled` is a horizontal layout with thin top + bottom
+   * rules — used by templates whose header sits between two divider
+   * lines (e.g. healthcare-bold-icu-nurse-v1). The rule color
+   * inherits from `ruleColor` (or `textColor` if unset).
+   */
+  orientation?: "vertical" | "horizontal" | "horizontal-ruled" | "grid-2col";
   iconStyle?: "outline" | "filled" | "none";
   iconSize?: number;
   textColor?: string;
   iconColor?: string;
+  /** Used only by `horizontal-ruled` for the top + bottom rules. */
+  ruleColor?: string;
   textSize?: "xs" | "sm" | "md";
   gap?: string;
   className?: string;
@@ -38,6 +46,7 @@ export function ContactList({
   iconSize = 14,
   textColor,
   iconColor,
+  ruleColor,
   textSize = "xs",
   gap = "0.5rem",
   className,
@@ -61,6 +70,13 @@ export function ContactList({
             columnGap: "1rem",
             rowGap: "0.25rem",
           };
+
+  if (orientation === "horizontal-ruled") {
+    const rule = `1px solid ${ruleColor ?? textColor ?? "currentColor"}`;
+    containerStyle.borderTop = rule;
+    containerStyle.borderBottom = rule;
+    containerStyle.padding = "0.5rem 0";
+  }
 
   return (
     <div className={className} style={containerStyle}>

@@ -120,11 +120,33 @@ export type RecipeBlock = {
   variant: SectionVariant;
 };
 
+/**
+ * A footer band runs full-bleed along the bottom of the page (or the
+ * last paginated page). Renders ONE section-key — the section is
+ * removed from the body block sequence to avoid duplication. Single-
+ * section by design (Phase 5b-1 Q4); a multi-stack version will be
+ * added when a template needs it.
+ *
+ * Visual contract: section heading on the left, content flowing to the
+ * right (horizontal layout, hardcoded for now). The footer is always
+ * a full-bleed band with `bg` covering the page width.
+ */
+export type RecipeFooter = {
+  bg: ColorRef;
+  fg?: ColorRef;
+  /** Optional fixed minimum height (px or CSS length). */
+  height?: string | number;
+  /** Padding override; defaults to "1rem 2rem". */
+  padding?: string;
+  section: SectionKey;
+};
+
 export type RecipeLayout =
   | {
       type: "single-column";
       padding?: string;
       maxWidth?: number;
+      footer?: RecipeFooter;
     }
   | {
       type: "two-column";
@@ -133,18 +155,63 @@ export type RecipeLayout =
       sidebarBg?: ColorRef;
       sidebarPadding?: string;
       mainPadding?: string;
+      footer?: RecipeFooter;
     };
 
+/**
+ * A backdrop block sits BEHIND the photo as a coloured offset
+ * rectangle (Canva-style). Used by templates where the photo wants a
+ * graphic anchor — e.g. healthcare-bold-icu-nurse-v1 has a green
+ * vertical block behind/beside Maria's portrait.
+ *
+ * Offsets are in px, relative to the photo's top-left corner. Width &
+ * height default to the photo size when omitted.
+ */
+export type RecipePhotoBackdrop = {
+  color: ColorRef;
+  offsetX?: number;
+  offsetY?: number;
+  width?: number;
+  height?: number;
+};
+
+/** Theme-reactive variant of PhotoFrameTint. The engine resolves
+ * `color` into a hex/rgba via resolveColor() at render time. */
+export type RecipePhotoTint = {
+  color: ColorRef;
+  mode?: "multiply" | "soft-light";
+  alpha?: number;
+};
+
 export type RecipeHeader = {
-  layout: "full-bleed" | "inset" | "sidebar-embedded" | "none";
+  /**
+   * - `full-bleed`: hero banner across the page.
+   * - `inset`: card-like header inside the page padding.
+   * - `sidebar-embedded`: photo + name + contacts all stacked into the
+   *   sidebar slot.
+   * - `split`: photo (with optional backdrop) anchored to the top of the
+   *   sidebar slot, name + role + contacts to the top of the main slot.
+   *   Requires a two-column layout.
+   * - `none`: skip the recipe-level header entirely.
+   */
+  layout: "full-bleed" | "inset" | "sidebar-embedded" | "split" | "none";
   photoShape?: PhotoFrameShape;
   photoPosition?: "left" | "center" | "right" | "sidebar";
+  /** Optional offset rectangle rendered behind the photo. */
+  photoBackdrop?: RecipePhotoBackdrop;
+  /** Optional color wash on top of the photo. printSafe drops the
+   * blend mode but keeps the flat-opacity wash (Q5). */
+  photoTint?: RecipePhotoTint;
   align?: "left" | "center" | "right";
   bg?: ColorRef;
   fg?: ColorRef;
   fgSoftRef?: ColorRef;
   showContacts?: boolean;
-  contactsOrientation?: "horizontal" | "vertical" | "grid-2col";
+  contactsOrientation?:
+    | "horizontal"
+    | "horizontal-ruled"
+    | "vertical"
+    | "grid-2col";
   /** Optional clip-path for the header. Disabled when printSafe=true. */
   clipPath?: HeroBannerClipPath;
 };
