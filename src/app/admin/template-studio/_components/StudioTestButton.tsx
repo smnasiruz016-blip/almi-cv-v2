@@ -12,6 +12,7 @@
 import { useState } from "react";
 import { RecipeRenderer } from "@/components/templates/engine/render-recipe";
 import type { TemplateRecipe } from "@/components/templates/engine/recipe-types";
+import type { CVData } from "@/lib/cv-types";
 import { PERSONAS, type PersonaId } from "@/lib/personas";
 
 type ApiResult =
@@ -38,12 +39,69 @@ type ApiResult =
       rawContent?: string;
     };
 
+type Gender = "female" | "male";
+
+// Photo URLs + display names sourced directly from the existing persona
+// library — one female and one male per role. The generation pipeline
+// uses gender to shape the palette/decorators; the preview photo just
+// makes that visible with a matching face.
+const GENDER_PREVIEW: Record<
+  string,
+  { female: string; femaleName: string; male: string; maleName: string }
+> = {
+  healthcare: {
+    female:
+      "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&h=400&fit=crop&crop=faces",
+    femaleName: "Sarah Chen, RN, BSN",
+    male: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=400&h=400&fit=crop&crop=faces",
+    maleName: "James Okafor, MD",
+  },
+  trades: {
+    female:
+      "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=400&h=400&fit=crop&crop=faces",
+    femaleName: "Fatima Hassan",
+    male: "https://images.unsplash.com/photo-1540569014015-19a7be504e3a?w=400&h=400&fit=crop&crop=faces",
+    maleName: "Marcus Reilly",
+  },
+  "customer-service-bpo": {
+    female:
+      "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=400&fit=crop&crop=faces",
+    femaleName: "Priya Sharma",
+    male: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&h=400&fit=crop&crop=faces",
+    maleName: "Hassan Khan",
+  },
+  "hospitality-chef": {
+    female:
+      "https://images.unsplash.com/photo-1542178243-bc20204b769f?w=400&h=400&fit=crop&crop=faces",
+    femaleName: "Yuki Tanaka",
+    male: "https://images.unsplash.com/photo-1577219491135-ce391730fb2c?w=400&h=400&fit=crop&crop=faces",
+    maleName: "Carlos Hernández",
+  },
+  tech: {
+    female:
+      "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=400&h=400&fit=crop&crop=faces",
+    femaleName: "Lin Wei",
+    male: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop&crop=faces",
+    maleName: "Alex Volkov",
+  },
+};
+
 function resolvePersonaId(recipeId: string): PersonaId {
-  // recipe.preview_persona_id is a free-form string in the schema; coerce
-  // to a known PersonaId, falling back so the preview renders even if the
-  // model picked an off-list value.
   if (recipeId in PERSONAS) return recipeId as PersonaId;
   return "healthcare-bold";
+}
+
+function applyGenderPhoto(base: CVData, role: string, gender: Gender): CVData {
+  const swap = GENDER_PREVIEW[role];
+  if (!swap) return base;
+  return {
+    ...base,
+    basics: {
+      ...base.basics,
+      fullName: gender === "female" ? swap.femaleName : swap.maleName,
+      photoUrl: gender === "female" ? swap.female : swap.male,
+    },
+  };
 }
 
 const ROLES = [
@@ -64,6 +122,7 @@ const MODELS_AVAILABLE = [
 export function StudioTestButton() {
   const [role, setRole] = useState<(typeof ROLES)[number]>("healthcare");
   const [mood, setMood] = useState<(typeof MOODS)[number]>("modern");
+  const [gender, setGender] = useState<Gender>("female");
   const [model, setModel] = useState<string>(MODELS_AVAILABLE[0].value);
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<ApiResult | null>(null);
@@ -75,7 +134,7 @@ export function StudioTestButton() {
       const res = await fetch("/api/admin/studio/generate-test", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ role, mood, model }),
+        body: JSON.stringify({ role, mood, gender, model }),
       });
       const data = (await res.json()) as ApiResult;
       setResult(data);
@@ -134,6 +193,38 @@ export function StudioTestButton() {
             ))}
           </select>
         </label>
+
+        <div className="flex flex-col gap-1">
+          <span className="text-xs text-plum-soft">Gender</span>
+          <div className="flex gap-1">
+            <button
+              type="button"
+              onClick={() => setGender("female")}
+              disabled={loading}
+              className={
+                "rounded-l-md border border-r-0 px-3 py-2 text-sm font-medium transition " +
+                (gender === "female"
+                  ? "border-coral bg-coral text-white"
+                  : "border-peach/40 bg-white text-plum-soft hover:border-coral/40")
+              }
+            >
+              Female
+            </button>
+            <button
+              type="button"
+              onClick={() => setGender("male")}
+              disabled={loading}
+              className={
+                "rounded-r-md border border-l-0 px-3 py-2 text-sm font-medium transition " +
+                (gender === "male"
+                  ? "border-coral bg-coral text-white"
+                  : "border-peach/40 bg-white text-plum-soft hover:border-coral/40")
+              }
+            >
+              Male
+            </button>
+          </div>
+        </div>
 
         <label className="flex flex-col gap-1 text-xs text-plum-soft">
           Model
@@ -209,7 +300,7 @@ export function StudioTestButton() {
       {result && result.ok && (
         <div className="mt-4">
           <p className="mb-3 text-xs uppercase tracking-widest text-plum-soft">
-            Live preview · rendered with{" "}
+            Live preview · {gender} design · rendered with{" "}
             <span className="font-mono normal-case tracking-normal">
               {resolvePersonaId(result.recipe.preview_persona_id)}
             </span>{" "}
@@ -218,11 +309,11 @@ export function StudioTestButton() {
           <div className="mx-auto aspect-[210/297] w-full max-w-[600px] overflow-hidden rounded-lg bg-white shadow-warm-card-hover">
             <RecipeRenderer
               recipe={result.recipe}
-              data={
-                PERSONAS[
-                  resolvePersonaId(result.recipe.preview_persona_id)
-                ]
-              }
+              data={applyGenderPhoto(
+                PERSONAS[resolvePersonaId(result.recipe.preview_persona_id)],
+                result.recipe.role,
+                gender,
+              )}
             />
           </div>
           <p className="mt-3 text-center text-xs text-plum-faint">

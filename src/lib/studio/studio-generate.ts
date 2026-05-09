@@ -13,7 +13,7 @@
 // and must be tracked).
 
 import { callStudio } from "./anthropic-client";
-import { buildRecipePrompt } from "./studio-prompts";
+import { buildRecipePrompt, type RecipeGender } from "./studio-prompts";
 import { validateRecipe } from "@/components/templates/engine/recipe-zod-schema";
 import type { TemplateRecipe } from "@/components/templates/engine/recipe-types";
 import type {
@@ -22,9 +22,13 @@ import type {
 } from "@/components/templates/engine/recipe-types";
 import { MODELS, type ModelId } from "@/lib/ai/models";
 
+export type { RecipeGender };
+
 export type GenerateRecipeInput = {
   role: RecipeRole;
   mood: RecipeMood;
+  /** Gender aesthetic for the generated design. Defaults to "female". */
+  gender?: RecipeGender;
   founderEmail: string;
   /** Defaults to MODELS.HAIKU for cost. Pass MODELS.SONNET for harder
    *  creative cases when Haiku consistently fails Zod validation. */
@@ -83,7 +87,8 @@ export async function generateRecipe(
   input: GenerateRecipeInput,
 ): Promise<GenerateRecipeResult> {
   const model: ModelId = input.model ?? MODELS.HAIKU;
-  const { systemPrompt, userPrompt } = buildRecipePrompt(input.role, input.mood);
+  const gender: RecipeGender = input.gender ?? "female";
+  const { systemPrompt, userPrompt } = buildRecipePrompt(input.role, input.mood, gender);
 
   const call = await callStudio({
     model,

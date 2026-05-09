@@ -18,6 +18,27 @@
 
 import type { RecipeRole, RecipeMood } from "@/components/templates/engine/recipe-types";
 
+export type RecipeGender = "female" | "male";
+
+// Gender-specific aesthetic overlay — injected into the system prompt so
+// the model chooses palette, decorator shapes, and photo frame to match.
+const GENDER_AESTHETIC: Record<RecipeGender, string> = {
+  female:
+    "GENDER AESTHETIC — FEMININE: Palette should feel warm and inviting. " +
+    "Preferred accent colors: coral, rose, peach, mauve, sage, dusty lavender, warm terracotta. " +
+    "Decorators should be organic — blobs, leaves, wave dividers, soft curves, petal shapes. " +
+    "Photo frame: prefer 'rounded', 'soft', or 'circle'. " +
+    "Section headings: prefer 'underline' or 'accent-bar' — refined, not aggressive. " +
+    "Overall feel: warmth, approachability, human-centered confidence.",
+  male:
+    "GENDER AESTHETIC — MASCULINE: Palette should feel structured and authoritative. " +
+    "Preferred accent colors: navy, steel blue, charcoal, deep forest green, slate, burnt amber. " +
+    "Decorators should be geometric — accent-blocks, triangles, hexagons, strong pattern rails. " +
+    "Photo frame: prefer 'square', 'hexagon', or 'diamond'. " +
+    "Section headings: prefer 'icon-prefix' or 'accent-bar' — structured and direct. " +
+    "Overall feel: precision, confidence, technical authority.",
+};
+
 const ROLE_VISUAL_LANGUAGE: Record<RecipeRole, string> = {
   healthcare:
     "Healthcare = trust + compassion + clinical precision. Think calm authority, " +
@@ -323,7 +344,11 @@ IconName — only these names are valid in iconMap:
   target, layers, book-open, users
 `;
 
-function buildSystemPrompt(role: RecipeRole, mood: RecipeMood): string {
+function buildSystemPrompt(
+  role: RecipeRole,
+  mood: RecipeMood,
+  gender: RecipeGender,
+): string {
   return `You design CV template recipes for AlmiCV — a CV builder competing with Canva and Resume.io for visual quality. Your job is to output a single TemplateRecipe JSON object.
 
 ══════════════════════════════════════════
@@ -348,6 +373,8 @@ ${ROLE_VISUAL_LANGUAGE[role]}
 MOOD — ${mood}:
 ${MOOD_VISUAL_PERSONALITY[mood]}
 
+${GENDER_AESTHETIC[gender]}
+
 ══════════════════════════════════════════
 EXEMPLAR — JSON STRUCTURE ONLY
 ══════════════════════════════════════════
@@ -363,15 +390,24 @@ ${SCHEMA_RULES}
 OUTPUT FORMAT:
 - Output ONLY the JSON object. No prose, no markdown code fences, no preamble.
 - Start with { and end with }.
-- The slug encodes role-mood-style-version, e.g. "healthcare-modern-airy-v1".
+- The slug encodes role-mood-gender-style-version, e.g. "healthcare-modern-f-airy-v1" or "trades-bold-m-slate-v1".
 - Use unique style descriptors (Airy, Steady, Crisp, Lattice, Calm, Bloom, Slate, Arc, etc.) — never reuse "Clinical".
 - ⚠ STRICT SCHEMA: Do not invent fields. Unrecognized keys cause validation failure. Use enum values verbatim.`;
 }
 
-function buildUserPrompt(role: RecipeRole, mood: RecipeMood): string {
+function buildUserPrompt(
+  role: RecipeRole,
+  mood: RecipeMood,
+  gender: RecipeGender,
+): string {
   const personaId = getPersonaIdForRoleMood(role, mood);
   const spec = MOOD_LAYOUT_SPEC[mood];
-  return `Generate one TemplateRecipe for role="${role}" mood="${mood}".
+  // Steer photoShape toward gender-appropriate defaults while allowing creative freedom.
+  const photoShapeHint =
+    gender === "female"
+      ? "prefer: rounded | soft | circle"
+      : "prefer: square | hexagon | diamond";
+  return `Generate one TemplateRecipe for role="${role}" mood="${mood}" gender="${gender}".
 
 REQUIRED LAYOUT (use these exact values — do not deviate):
   ${spec.layoutBlock}
@@ -379,7 +415,7 @@ REQUIRED LAYOUT (use these exact values — do not deviate):
 REQUIRED HEADER (set exactly):
   header.layout = "${spec.headerLayout}"
   header.photoPosition = "${spec.photoPosition}"
-  header.photoShape = [your creative choice: circle | square | rounded | hexagon | diamond | soft]
+  header.photoShape = [your creative choice — ${photoShapeHint}]
   header.showContacts = true
 
 BLOCKS NOTE: ${spec.noteForBlocks}
@@ -399,9 +435,10 @@ export type RecipePrompt = {
 export function buildRecipePrompt(
   role: RecipeRole,
   mood: RecipeMood,
+  gender: RecipeGender = "female",
 ): RecipePrompt {
   return {
-    systemPrompt: buildSystemPrompt(role, mood),
-    userPrompt: buildUserPrompt(role, mood),
+    systemPrompt: buildSystemPrompt(role, mood, gender),
+    userPrompt: buildUserPrompt(role, mood, gender),
   };
 }
