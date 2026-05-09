@@ -1,7 +1,7 @@
 // Stage 3b end-to-end test endpoint — founder-only.
 //
 // POST /api/admin/studio/generate-test
-//   Body: { role: RecipeRole, mood: RecipeMood, model?: ModelId }
+//   Body: { role: RecipeRole, mood: RecipeMood, gender?: "female"|"male", model?: ModelId }
 //   Returns: { ok: true, recipe, costUsd, ... } | { ok: false, reason, ... }
 //
 // This endpoint exists for one purpose: prove the Anthropic generation
@@ -15,7 +15,7 @@
 
 import { NextResponse } from "next/server";
 import { requireFounder } from "@/lib/founder";
-import { generateRecipe } from "@/lib/studio/studio-generate";
+import { generateRecipe, type RecipeGender } from "@/lib/studio/studio-generate";
 import type {
   RecipeRole,
   RecipeMood,
@@ -36,6 +36,7 @@ const VALID_ROLES: RecipeRole[] = [
   "tech",
 ];
 const VALID_MOODS: RecipeMood[] = ["bold", "modern", "refined"];
+const VALID_GENDERS: RecipeGender[] = ["female", "male"];
 const VALID_MODELS = new Set<ModelId>([
   MODELS.HAIKU,
   MODELS.SONNET,
@@ -48,6 +49,10 @@ function isRecipeRole(v: unknown): v is RecipeRole {
 
 function isRecipeMood(v: unknown): v is RecipeMood {
   return typeof v === "string" && (VALID_MOODS as string[]).includes(v);
+}
+
+function isRecipeGender(v: unknown): v is RecipeGender {
+  return typeof v === "string" && (VALID_GENDERS as string[]).includes(v);
 }
 
 function isModelId(v: unknown): v is ModelId {
@@ -75,9 +80,10 @@ export async function POST(req: Request) {
     );
   }
 
-  const { role, mood, model } = body as {
+  const { role, mood, gender, model } = body as {
     role?: unknown;
     mood?: unknown;
+    gender?: unknown;
     model?: unknown;
   };
 
@@ -99,6 +105,15 @@ export async function POST(req: Request) {
       { status: 400 },
     );
   }
+  if (gender !== undefined && !isRecipeGender(gender)) {
+    return NextResponse.json(
+      {
+        ok: false,
+        reason: `Invalid gender. Must be "female" or "male".`,
+      },
+      { status: 400 },
+    );
+  }
   if (model !== undefined && !isModelId(model)) {
     return NextResponse.json(
       {
@@ -112,6 +127,7 @@ export async function POST(req: Request) {
   const result = await generateRecipe({
     role,
     mood,
+    gender,
     founderEmail: founder.email,
     model,
   });
