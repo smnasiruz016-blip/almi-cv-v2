@@ -9,6 +9,12 @@
 // Output discipline: respond with strict JSON only. No code fences, no
 // commentary, no preamble. The parser tolerates a leading ```json fence
 // defensively, but the prompt instructs the model not to emit one.
+//
+// Variety strategy: MOOD_LAYOUT_SPEC assigns a distinct layout+header
+// combination per mood so bold/modern/refined generate structurally
+// different CVs rather than anchoring on the exemplar's two-column-left
+// pattern. The user prompt injects explicit layout, header.layout, and
+// photoPosition values so the model has no ambiguity.
 
 import type { RecipeRole, RecipeMood } from "@/components/templates/engine/recipe-types";
 
@@ -76,6 +82,51 @@ export function getPersonaIdForRoleMood(
 ): string {
   return PERSONA_BY_ROLE_MOOD[`${role}-${mood}`] ?? "healthcare-bold";
 }
+
+// Per-mood layout spec — injected into the user prompt verbatim so the
+// model gets exact field values rather than prose guidance. This is the
+// primary driver of structural variety across generations.
+//
+//  bold   → two-column, RIGHT sidebar, sidebar-embedded header, photo in sidebar
+//  modern → single-column, inset header, photo anchored LEFT
+//  refined→ single-column, full-bleed header, photo CENTERED
+//
+// Rule: every mood picks a layout the bold-clinical-v1 exemplar does NOT
+// use — that exemplar is two-column LEFT sidebar, so bold gets right
+// sidebar, and the other two go single-column entirely.
+type LayoutSpec = {
+  layoutBlock: string;
+  headerLayout: "full-bleed" | "inset" | "sidebar-embedded";
+  photoPosition: "left" | "center" | "right" | "sidebar";
+  noteForBlocks: string;
+};
+
+const MOOD_LAYOUT_SPEC: Record<RecipeMood, LayoutSpec> = {
+  bold: {
+    layoutBlock: `"layout": { "type": "two-column", "sidebarPosition": "right", "sidebarWidthPercent": 34, "sidebarBg": "theme.primary", "sidebarPadding": "2rem 1.5rem", "mainPadding": "2.25rem 2rem" }`,
+    headerLayout: "sidebar-embedded",
+    photoPosition: "sidebar",
+    noteForBlocks:
+      "Two-column right-sidebar: place profile/experience/education in 'main', " +
+      "place skills/certifications/languages in 'sidebar'. Photo is in the right sidebar header.",
+  },
+  modern: {
+    layoutBlock: `"layout": { "type": "single-column", "padding": "2rem 2.5rem", "maxWidth": 760 }`,
+    headerLayout: "inset",
+    photoPosition: "left",
+    noteForBlocks:
+      "Single-column: all blocks use slot 'main'. No sidebar slot exists — " +
+      "do NOT add any block with slot 'sidebar'.",
+  },
+  refined: {
+    layoutBlock: `"layout": { "type": "single-column", "padding": "2rem 2.5rem", "maxWidth": 760 }`,
+    headerLayout: "full-bleed",
+    photoPosition: "center",
+    noteForBlocks:
+      "Single-column: all blocks use slot 'main'. No sidebar slot exists — " +
+      "do NOT add any block with slot 'sidebar'.",
+  },
+};
 
 const EXEMPLAR_RECIPE_JSON = `{
   "id": "healthcare-bold-clinical-v1",
@@ -275,9 +326,21 @@ IconName — only these names are valid in iconMap:
 function buildSystemPrompt(role: RecipeRole, mood: RecipeMood): string {
   return `You design CV template recipes for AlmiCV — a CV builder competing with Canva and Resume.io for visual quality. Your job is to output a single TemplateRecipe JSON object.
 
-THE BAR: visually rich, role-specific, mood-distinct. NEVER generic minimal corporate. NEVER all-grayscale. Decorators (shapes, accent-blocks, hero-banners, patterns, dividers, photo-frames) are required, not optional — they are what separates AlmiCV from a Word document.
+══════════════════════════════════════════
+RULE #1 — PHOTO IS MANDATORY
+══════════════════════════════════════════
+Every generated recipe MUST include a candidate photo as a core design element.
+- header.layout MUST be "full-bleed", "inset", or "sidebar-embedded" — NEVER "none"
+- header.photoShape MUST be set to one of the 6 valid values
+- header.photoPosition MUST be set to one of the 4 valid values
+A recipe with no photo, or with header.layout "none", fails review and is discarded.
+The user prompt specifies exactly which header.layout and photoPosition to use — follow them exactly.
 
-PHOTO IS A CORE DESIGN ELEMENT — not optional. Every recipe MUST position a photo in the header (see HEADER schema rules below). Photo-less / "none" headers are forbidden, even in markets that prefer no-photo CVs — those users can hide the photo at render time.
+══════════════════════════════════════════
+RULE #2 — VISUAL QUALITY BAR
+══════════════════════════════════════════
+Visually rich, role-specific, mood-distinct. NEVER generic minimal corporate. NEVER all-grayscale.
+Decorators (shapes, accent-blocks, patterns, dividers) are REQUIRED — they separate AlmiCV from a Word document.
 
 ROLE — ${role}:
 ${ROLE_VISUAL_LANGUAGE[role]}
@@ -285,7 +348,14 @@ ${ROLE_VISUAL_LANGUAGE[role]}
 MOOD — ${mood}:
 ${MOOD_VISUAL_PERSONALITY[mood]}
 
-EXEMPLAR (for reference shape only — your output should be visually DIFFERENT from this; it's a different role/mood combination):
+══════════════════════════════════════════
+EXEMPLAR — JSON STRUCTURE ONLY
+══════════════════════════════════════════
+Study the field names, ColorRef format, block variant shapes, and decorator kinds.
+DO NOT copy its visual layout — you will be given a different layout in the user prompt.
+The exemplar uses: two-column, left sidebar, sidebar-embedded header, circle photo in sidebar.
+Your generation MUST use the layout specified in the user prompt instead.
+
 ${EXEMPLAR_RECIPE_JSON}
 
 ${SCHEMA_RULES}
@@ -293,14 +363,26 @@ ${SCHEMA_RULES}
 OUTPUT FORMAT:
 - Output ONLY the JSON object. No prose, no markdown code fences, no preamble.
 - Start with { and end with }.
-- The slug should encode role-mood-style-version, e.g. "healthcare-modern-airy-v1".
-- Use unique style descriptors per generation (Airy, Steady, Crisp, Lattice, Calm, etc.) — don't reuse "Clinical" since that's the exemplar's style.
-- ⚠ STRICT SCHEMA: Do not invent fields. If a property is not in the schema rules above, omit it. Unrecognized keys cause validation failure. When a field has a fixed enum, use one of the listed values verbatim — no near-misses.`;
+- The slug encodes role-mood-style-version, e.g. "healthcare-modern-airy-v1".
+- Use unique style descriptors (Airy, Steady, Crisp, Lattice, Calm, Bloom, Slate, Arc, etc.) — never reuse "Clinical".
+- ⚠ STRICT SCHEMA: Do not invent fields. Unrecognized keys cause validation failure. Use enum values verbatim.`;
 }
 
 function buildUserPrompt(role: RecipeRole, mood: RecipeMood): string {
   const personaId = getPersonaIdForRoleMood(role, mood);
+  const spec = MOOD_LAYOUT_SPEC[mood];
   return `Generate one TemplateRecipe for role="${role}" mood="${mood}".
+
+REQUIRED LAYOUT (use these exact values — do not deviate):
+  ${spec.layoutBlock}
+
+REQUIRED HEADER (set exactly):
+  header.layout = "${spec.headerLayout}"
+  header.photoPosition = "${spec.photoPosition}"
+  header.photoShape = [your creative choice: circle | square | rounded | hexagon | diamond | soft]
+  header.showContacts = true
+
+BLOCKS NOTE: ${spec.noteForBlocks}
 
 Set preview_persona_id to "${personaId}".
 Set version to 1.
