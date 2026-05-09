@@ -302,7 +302,7 @@ export function StudioTestButton() {
           <p className="mb-3 text-xs uppercase tracking-widest text-plum-soft">
             Live preview · {gender} design · rendered with{" "}
             <span className="font-mono normal-case tracking-normal">
-              {resolvePersonaId(result.recipe.preview_persona_id)}
+              {resolvePersonaId(result.recipe.previewPersonaKey)}
             </span>{" "}
             persona
           </p>
@@ -310,7 +310,7 @@ export function StudioTestButton() {
             <RecipeRenderer
               recipe={result.recipe}
               data={applyGenderPhoto(
-                PERSONAS[resolvePersonaId(result.recipe.preview_persona_id)],
+                PERSONAS[resolvePersonaId(result.recipe.previewPersonaKey)],
                 result.recipe.role ?? role,
                 gender,
               )}

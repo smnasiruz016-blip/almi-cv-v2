@@ -46,7 +46,7 @@ import { techBold } from "./tech-bold";
 import { techModern } from "./tech-modern";
 import { techRefined } from "./tech-refined";
 
-/** All persona IDs that recipes can reference via `preview_persona_id`. */
+/** All persona IDs that recipes can reference via `previewPersonaKey`. */
 export type PersonaId =
   | "healthcare-bold"
   | "healthcare-bold-icu"

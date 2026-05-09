@@ -17,9 +17,16 @@
 
 import { z } from "zod";
 import { ICON_ALLOWLIST } from "@/components/templates/primitives/icons";
+import { PERSONAS } from "@/lib/personas";
 import type { TemplateRecipe } from "./recipe-types";
 
 const ICON_NAMES = Object.keys(ICON_ALLOWLIST) as [string, ...string[]];
+
+// Persona keys are validated at runtime against the live PERSONAS
+// registry. A recipe pointing to a missing persona is rejected before
+// the row reaches the renderer.
+const PERSONA_KEYS = Object.keys(PERSONAS) as [string, ...string[]];
+const personaKey = z.enum(PERSONA_KEYS);
 
 const themeColorKey = z.enum([
   "theme.primary",
@@ -371,7 +378,7 @@ export const templateRecipeSchema = z
     blocks: z.array(recipeBlockSchema).min(1),
     decorators: z.array(decoratorSpecSchema),
     recommended_palette_hint: recipePaletteHintSchema.optional(),
-    preview_persona_id: z.string().min(1),
+    previewPersonaKey: personaKey,
   })
   .strict();
 

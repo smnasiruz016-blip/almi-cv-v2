@@ -139,5 +139,5 @@ export const healthcareBoldIcuNurseV1: TemplateRecipe = {
     note: "Reads strongest with a deep navy primary and a muted green or teal accent — the accent re-skins both the photo backdrop and the photo wash.",
   },
 
-  preview_persona_id: "healthcare-bold-icu",
+  previewPersonaKey: "healthcare-bold-icu",
 };

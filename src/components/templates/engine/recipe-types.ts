@@ -7,6 +7,7 @@ import type {
   PatternStripDensity,
 } from "@/components/templates/primitives/decorators/PatternStrip";
 import type { DecorativeShapeKind } from "@/components/templates/primitives/decorators/DecorativeShape";
+import type { PersonaId } from "@/lib/personas";
 
 /**
  * Recipe schema — Stage 2 of the template factory.
@@ -308,6 +309,10 @@ export type TemplateRecipe = {
   decorators: DecoratorSpec[];
   recommended_palette_hint?: RecipePaletteHint;
 
-  // pairing
-  preview_persona_id: string;
+  // pairing — locks the persona used for ALL preview surfaces
+  // (internal recipe-preview, /templates gallery thumbnails,
+  // /templates/<slug> detail page, homepage hero). The editor
+  // explicitly does NOT read this — it always renders the user's
+  // own CVData.
+  previewPersonaKey: PersonaId;
 };

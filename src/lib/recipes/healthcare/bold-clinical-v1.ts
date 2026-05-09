@@ -157,5 +157,5 @@ export const healthcareBoldClinicalV1: TemplateRecipe = {
     note: "Reads strongest with a dark medical-confidence theme + a bright contrast accent.",
   },
 
-  preview_persona_id: "healthcare-bold",
+  previewPersonaKey: "healthcare-bold",
 };

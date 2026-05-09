@@ -33,7 +33,7 @@ import type {
   RecipeRole,
 } from "@/components/templates/engine/recipe-types";
 import { RECIPE_LIST } from "@/lib/recipes";
-import { PERSONAS, type PersonaId } from "@/lib/personas";
+import { PERSONAS } from "@/lib/personas";
 
 export type TemplateMeta = {
   slug: string;
@@ -215,7 +215,7 @@ const RECIPE_TEMPLATES: TemplateMeta[] = RECIPE_LIST.map((recipe) => ({
   tagline: recipe.tagline,
   description: recipe.description,
   Component: makeRecipeComponent(recipe),
-  sampleData: PERSONAS[recipe.preview_persona_id as PersonaId],
+  sampleData: PERSONAS[recipe.previewPersonaKey],
   role: recipe.role,
   mood: recipe.mood,
   culturalFit: recipe.cultural_fit,

@@ -213,7 +213,7 @@ const EXEMPLAR_RECIPE_JSON = `{
     "accentKeys": ["mint", "gold"],
     "note": "Reads strongest with a dark medical-confidence theme + a bright contrast accent."
   },
-  "preview_persona_id": "healthcare-bold"
+  "previewPersonaKey": "healthcare-bold"
 }`;
 
 const SCHEMA_RULES = `
@@ -238,7 +238,7 @@ TOP-LEVEL fields (all required unless marked ?):
   blocks          array (≥1) of BLOCK objects — see BLOCKS below
   decorators      array of DECORATOR objects — see DECORATORS below; mood rules require ≥1
   recommended_palette_hint?   { themeKeys?, accentKeys?, note? }
-  preview_persona_id          string — must be the role-mood id given in the user prompt
+  previewPersonaKey           string — must be the role-mood id given in the user prompt
 
 LAYOUT — pick ONE shape, do not mix fields between shapes:
   { "type": "single-column", "padding"?: string, "maxWidth"?: positive int }
@@ -420,7 +420,7 @@ REQUIRED HEADER (set exactly):
 
 BLOCKS NOTE: ${spec.noteForBlocks}
 
-Set preview_persona_id to "${personaId}".
+Set previewPersonaKey to "${personaId}".
 Set version to 1.
 Use a fresh slug different from "healthcare-bold-clinical-v1".
 
