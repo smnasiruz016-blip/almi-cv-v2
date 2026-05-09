@@ -12,6 +12,7 @@ import { BoldColorBlock } from "@/components/templates/BoldColorBlock";
 import { SoftPastelRomantic } from "@/components/templates/SoftPastelRomantic";
 import { TimelinePro } from "@/components/templates/TimelinePro";
 import { Pearl } from "@/components/templates/Pearl";
+import { Verona } from "@/components/templates/Verona";
 import {
   alexChen,
   amaraHassan,
@@ -197,6 +198,17 @@ const HAND_CODED_TEMPLATES: TemplateMeta[] = [
       "Two-column premium template with peach sidebar, photo prominence, and pill-shaped section labels. Inspired by editorial CV design. Ideal for marketers, brand managers, and consumer-facing professionals who want warmth and elegance.",
     Component: Pearl,
     sampleData: saraKhan,
+    source: "hand-coded",
+  },
+  {
+    slug: "verona",
+    name: "Verona",
+    tier: "free",
+    tagline: "Dark sidebar · Gold accents · Professional",
+    description:
+      "Navy sidebar with gold accents and circular photo frame. Clean right column for experience and education. Inspired by European professional CV design. Suits finance, law, consulting, and any role that demands authority.",
+    Component: Verona,
+    sampleData: juliaCortazar,
     source: "hand-coded",
   },
 ];
