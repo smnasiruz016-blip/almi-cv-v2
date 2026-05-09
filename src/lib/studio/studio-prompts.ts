@@ -350,16 +350,19 @@ DECORATORS — array. Each item is ONE of these strict shapes (discriminated by 
     "width"?: string|number, "height"?: string|number,
     "rounded"?: "none"|"sm"|"md"|"lg"|"full",
     "opacity"?: 0..1, "offset"?: { top?, left?, right?, bottom? } }
+    ↳ width/height accept strings ("6px", "100%") OR plain numbers (6)
 
   { "kind": "shape", "slot": Slot, "shape": Shape, "color": ColorRef,
-    "width"?: positive number, "height"?: positive number,
+    "width"?: number, "height"?: number,
     "opacity"?: 0..1, "rotate"?: number,
     "offset"?: { top?, left?, right?, bottom? } }
+    ↳ ⚠ width/height MUST be plain positive numbers (e.g. 80, 120) — NEVER a string like "100%" or "80px"
 
   { "kind": "pattern", "slot": Slot, "pattern": Pattern, "color": ColorRef,
     "density"?: "loose"|"medium"|"tight",
     "opacity"?: 0..1, "width"?: string|number, "height"?: string|number,
     "offset"?: { top?, left?, right?, bottom? } }
+    ↳ width/height accept strings ("100%") OR plain numbers
 
   { "kind": "divider", "between": [section, section, ...] (≥2),
     "slot": "main"|"sidebar", "variant": DividerVariant, "color": ColorRef,

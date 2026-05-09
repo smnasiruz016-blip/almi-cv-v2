@@ -111,9 +111,11 @@ const ROLES = [
 
 const MOODS = ["bold", "modern", "refined"] as const;
 
+// Sonnet is first so it becomes the default. Haiku is kept for cost-
+// sensitive spot checks but consistently fails complex schema constraints.
 const MODELS_AVAILABLE = [
+  { value: "claude-sonnet-4-6", label: "Sonnet (recommended, ~$0.05)" },
   { value: "claude-haiku-4-5-20251001", label: "Haiku (cheap, ~$0.01)" },
-  { value: "claude-sonnet-4-6", label: "Sonnet (better, ~$0.05)" },
 ] as const;
 
 type AcceptState =
