@@ -176,14 +176,25 @@ LAYOUT — pick ONE shape, do not mix fields between shapes:
     "sidebarBg"?: ColorRef, "sidebarPadding"?: string, "mainPadding"?: string }
 
 HEADER — only these fields are valid:
-  layout                  "full-bleed" | "inset" | "sidebar-embedded" | "none"   (REQUIRED)
-  photoShape?             "circle" | "square" | "rounded" | "hexagon" | "diamond" | "soft"
-  photoPosition?          "left" | "center" | "right" | "sidebar"
+  layout                  "full-bleed" | "inset" | "sidebar-embedded"   (REQUIRED — see ⚠ below)
+  photoShape              "circle" | "square" | "rounded" | "hexagon" | "diamond" | "soft"   (REQUIRED — see ⚠ below)
+  photoPosition           "left" | "center" | "right" | "sidebar"   (REQUIRED — see ⚠ below)
   align?                  "left" | "center" | "right"
   bg?, fg?, fgSoftRef?    ColorRef
   showContacts?           boolean
   contactsOrientation?    "horizontal" | "vertical" | "grid-2col"
   clipPath?               "none" | "diagonal-bottom" | "arch" | "corner-cut" | "wave-bottom"
+
+  ⚠ PHOTO IS MANDATORY. Every recipe MUST have a header that positions a
+    photo as a core design element. This means:
+      - header.layout MUST be one of "full-bleed" | "inset" | "sidebar-embedded".
+        DO NOT use "none" — that is technically a valid enum value but it's
+        forbidden for AlmiCV's competitive bar.
+      - header.photoShape MUST be set (pick one of the 6 enum values).
+      - header.photoPosition MUST be set (pick one of the 4 enum values).
+    For two-column layouts, "photoPosition: sidebar" with "layout: sidebar-embedded"
+    works well. For single-column, "photoPosition: center" with "layout: full-bleed"
+    or "layout: inset" works well. Hide-the-photo CVs do not pass review.
 
 SECTION-HEADING — only these fields are valid:
   variant                 "plain" | "underline" | "accent-bar" | "icon-prefix"   (REQUIRED)
@@ -265,6 +276,8 @@ function buildSystemPrompt(role: RecipeRole, mood: RecipeMood): string {
   return `You design CV template recipes for AlmiCV — a CV builder competing with Canva and Resume.io for visual quality. Your job is to output a single TemplateRecipe JSON object.
 
 THE BAR: visually rich, role-specific, mood-distinct. NEVER generic minimal corporate. NEVER all-grayscale. Decorators (shapes, accent-blocks, hero-banners, patterns, dividers, photo-frames) are required, not optional — they are what separates AlmiCV from a Word document.
+
+PHOTO IS A CORE DESIGN ELEMENT — not optional. Every recipe MUST position a photo in the header (see HEADER schema rules below). Photo-less / "none" headers are forbidden, even in markets that prefer no-photo CVs — those users can hide the photo at render time.
 
 ROLE — ${role}:
 ${ROLE_VISUAL_LANGUAGE[role]}
