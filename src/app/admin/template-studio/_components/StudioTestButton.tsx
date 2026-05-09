@@ -1,13 +1,10 @@
 "use client";
 
-// Stage 3b verification UI — a single founder-only button that POSTs
-// to /api/admin/studio/generate-test and dumps the result on the page.
+// Studio UI — Stage 3b + 3c.
 //
-// This is INTENTIONALLY not the variant picker. Stage 3c will add the
-// real Studio UI (form for role/mood/variant count, side-by-side live
-// renders of generated recipes, accept/reject buttons, persist-on-accept
-// flow). This button only proves the integration works end-to-end on
-// production with cost protection in place.
+// Stage 3b: POST to /api/admin/studio/generate-test, show live A4 preview.
+// Stage 3c: Accept (✓) persists the recipe to the Recipe table as DRAFT.
+//           Reject (✗) discards and lets the founder regenerate.
 
 import { useState } from "react";
 import { RecipeRenderer } from "@/components/templates/engine/render-recipe";
@@ -119,6 +116,12 @@ const MODELS_AVAILABLE = [
   { value: "claude-sonnet-4-6", label: "Sonnet (better, ~$0.05)" },
 ] as const;
 
+type AcceptState =
+  | { status: "idle" }
+  | { status: "saving" }
+  | { status: "saved"; id: string; slug: string }
+  | { status: "error"; reason: string };
+
 export function StudioTestButton() {
   const [role, setRole] = useState<(typeof ROLES)[number]>("healthcare");
   const [mood, setMood] = useState<(typeof MOODS)[number]>("modern");
@@ -126,10 +129,12 @@ export function StudioTestButton() {
   const [model, setModel] = useState<string>(MODELS_AVAILABLE[0].value);
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<ApiResult | null>(null);
+  const [acceptState, setAcceptState] = useState<AcceptState>({ status: "idle" });
 
   async function handleRun() {
     setLoading(true);
     setResult(null);
+    setAcceptState({ status: "idle" });
     try {
       const res = await fetch("/api/admin/studio/generate-test", {
         method: "POST",
@@ -149,16 +154,43 @@ export function StudioTestButton() {
     }
   }
 
+  async function handleAccept(recipe: TemplateRecipe) {
+    setAcceptState({ status: "saving" });
+    try {
+      const res = await fetch("/api/admin/studio/accept-recipe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ recipe }),
+      });
+      const data = (await res.json()) as
+        | { ok: true; id: string; slug: string }
+        | { ok: false; reason: string };
+      if (data.ok) {
+        setAcceptState({ status: "saved", id: data.id, slug: data.slug });
+      } else {
+        setAcceptState({ status: "error", reason: data.reason });
+      }
+    } catch (err) {
+      setAcceptState({
+        status: "error",
+        reason: err instanceof Error ? err.message : String(err),
+      });
+    }
+  }
+
+  function handleReject() {
+    setResult(null);
+    setAcceptState({ status: "idle" });
+  }
+
   return (
     <section className="rounded-2xl border border-peach/40 bg-white p-6 shadow-warm-card">
       <h2 className="font-display text-lg text-plum">
         🧪 Run test generation
       </h2>
       <p className="mt-2 max-w-2xl text-sm text-plum-soft">
-        Stage 3b verification. Generates one recipe via the cost-protected
-        Anthropic pipeline, validates it against the Zod schema, and logs
-        the call to the cost ledger. Nothing is persisted to the Recipe
-        table yet — that lands in Stage 3c.
+        Generate a recipe, preview it live, then Accept ✓ to save it as a
+        DRAFT in the Recipe table — or Reject ✗ to discard and try again.
       </p>
 
       <div className="mt-4 flex flex-wrap items-end gap-3">
@@ -317,9 +349,55 @@ export function StudioTestButton() {
             />
           </div>
           <p className="mt-3 text-center text-xs text-plum-faint">
-            A4 Portrait · 21 × 29.7 cm · this template is NOT persisted
-            (Stage 3c adds the accept-and-save flow)
+            A4 Portrait · 21 × 29.7 cm
           </p>
+
+          {/* Accept / Reject */}
+          {acceptState.status !== "saved" && (
+            <div className="mt-5 flex items-center justify-center gap-3">
+              <button
+                type="button"
+                onClick={handleReject}
+                disabled={acceptState.status === "saving"}
+                className="rounded-md border border-peach/40 px-5 py-2 text-sm font-medium text-plum-soft transition hover:border-coral/40 hover:text-coral-deep disabled:opacity-50"
+              >
+                ✗ Reject
+              </button>
+              <button
+                type="button"
+                onClick={() => handleAccept(result.recipe)}
+                disabled={acceptState.status === "saving"}
+                className="rounded-md bg-mint px-5 py-2 text-sm font-medium text-plum shadow-warm-card transition hover:bg-mint/80 disabled:cursor-not-allowed disabled:opacity-60"
+              >
+                {acceptState.status === "saving" ? "Saving…" : "✓ Accept & save as draft"}
+              </button>
+            </div>
+          )}
+
+          {acceptState.status === "error" && (
+            <p className="mt-3 text-center text-xs text-coral-deep">
+              Save failed: {acceptState.reason}
+            </p>
+          )}
+
+          {acceptState.status === "saved" && (
+            <div className="mt-5 rounded-md border border-mint/50 bg-mint/10 p-4 text-center text-sm text-plum">
+              <p className="font-medium">✅ Saved to Recipe table as DRAFT</p>
+              <p className="mt-1 font-mono text-xs text-plum-soft">
+                {acceptState.slug}
+              </p>
+              <button
+                type="button"
+                onClick={() => {
+                  setResult(null);
+                  setAcceptState({ status: "idle" });
+                }}
+                className="mt-3 rounded-md bg-coral px-4 py-1.5 text-xs font-medium text-white transition hover:bg-coral-deep"
+              >
+                Generate another
+              </button>
+            </div>
+          )}
         </div>
       )}
 
