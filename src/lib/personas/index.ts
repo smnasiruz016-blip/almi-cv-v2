@@ -13,6 +13,7 @@
 import type { CVData } from "@/lib/cv-types";
 
 export { healthcareBold } from "./healthcare-bold";
+export { healthcareBoldIcu } from "./healthcare-bold-icu";
 export { healthcareModern } from "./healthcare-modern";
 export { healthcareRefined } from "./healthcare-refined";
 export { tradesBold } from "./trades-bold";
@@ -29,6 +30,7 @@ export { techModern } from "./tech-modern";
 export { techRefined } from "./tech-refined";
 
 import { healthcareBold } from "./healthcare-bold";
+import { healthcareBoldIcu } from "./healthcare-bold-icu";
 import { healthcareModern } from "./healthcare-modern";
 import { healthcareRefined } from "./healthcare-refined";
 import { tradesBold } from "./trades-bold";
@@ -47,6 +49,7 @@ import { techRefined } from "./tech-refined";
 /** All persona IDs that recipes can reference via `preview_persona_id`. */
 export type PersonaId =
   | "healthcare-bold"
+  | "healthcare-bold-icu"
   | "healthcare-modern"
   | "healthcare-refined"
   | "trades-bold"
@@ -64,6 +67,7 @@ export type PersonaId =
 
 export const PERSONAS: Record<PersonaId, CVData> = {
   "healthcare-bold": healthcareBold,
+  "healthcare-bold-icu": healthcareBoldIcu,
   "healthcare-modern": healthcareModern,
   "healthcare-refined": healthcareRefined,
   "trades-bold": tradesBold,
