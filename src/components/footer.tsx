@@ -3,6 +3,7 @@ import Link from "next/link";
 
 const FOOTER_LINKS = [
   { href: "/about", label: "About" },
+  { href: "https://almistudy.almiworld.com", label: "AlmiStudy" },
   { href: "/contact", label: "Contact" },
   { href: "/privacy", label: "Privacy" },
   { href: "/terms", label: "Terms" },
