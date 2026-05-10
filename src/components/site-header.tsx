@@ -29,6 +29,7 @@ export function SiteHeader({ isLoggedIn }: { isLoggedIn: boolean }) {
   const [isOpen, setIsOpen] = useState(false);
   const hamburgerRef = useRef<HTMLButtonElement>(null);
   const firstLinkRef = useRef<HTMLAnchorElement>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -45,6 +46,24 @@ export function SiteHeader({ isLoggedIn }: { isLoggedIn: boolean }) {
       if (event.key === "Escape") {
         setIsOpen(false);
         hamburgerRef.current?.focus();
+        return;
+      }
+      if (event.key !== "Tab") return;
+      const dialog = dialogRef.current;
+      if (!dialog) return;
+      const focusables = dialog.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])',
+      );
+      if (focusables.length === 0) return;
+      if (!dialog.contains(document.activeElement)) return;
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
       }
     };
     document.addEventListener("keydown", handler);
@@ -143,6 +162,7 @@ export function SiteHeader({ isLoggedIn }: { isLoggedIn: boolean }) {
 
         {isOpen && (
           <div
+            ref={dialogRef}
             id="mobile-menu"
             role="dialog"
             aria-modal="true"
