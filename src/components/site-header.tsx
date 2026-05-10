@@ -12,6 +12,7 @@ const ECOSYSTEM_LINKS: ReadonlyArray<{
 }> = [
   { label: "AlmiCV Home", href: "/", external: false },
   { label: "AlmiJob", href: "https://almijob.almiworld.com", external: true },
+  { label: "AlmiStudy", href: "https://almistudy.almiworld.com", external: true },
   {
     label: "Salary Checker",
     href: "https://almisalary.almiworld.com",
