@@ -1364,6 +1364,22 @@ export function CVEditorSidebar({
         </Field>
       </SectionAccordion>
 
+      {/* ACHIEVEMENTS — flowing-prose section, optional field on CVData.
+          Only the Dark Bold Marketing template renders it today; other
+          templates ignore an unset value (RichTextRender + isRichTextEmpty
+          handle absence gracefully). */}
+      <SectionAccordion title="Achievements">
+        <Field label="Achievements (flowing prose, supports bold)">
+          <RichTextEditor
+            value={data.achievements ?? ""}
+            onChange={(html) => onChange({ ...data, achievements: html })}
+            placeholder="Built X, recognized for Y, mentored Z..."
+            minHeight={120}
+            ariaLabel="Achievements"
+          />
+        </Field>
+      </SectionAccordion>
+
       <ExtractSkillsModal
         open={skillsModalOpen}
         onClose={() => setSkillsModalOpen(false)}
