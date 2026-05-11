@@ -14,6 +14,7 @@ import { TimelinePro } from "@/components/templates/TimelinePro";
 import { Pearl } from "@/components/templates/Pearl";
 import { HealthcareBoldICU } from "@/components/templates/HealthcareBoldICU";
 import { ClinicalCream } from "@/components/templates/ClinicalCream";
+import { HealthcareLightBlue } from "@/components/templates/HealthcareLightBlue";
 import {
   alexChen,
   amaraHassan,
@@ -35,7 +36,12 @@ import type {
   RecipeRole,
 } from "@/components/templates/engine/recipe-types";
 import { RECIPE_LIST } from "@/lib/recipes";
-import { PERSONAS, healthcareBoldIcu, type PersonaId } from "@/lib/personas";
+import {
+  PERSONAS,
+  healthcareBoldIcu,
+  healthcareRefined,
+  type PersonaId,
+} from "@/lib/personas";
 
 export type TemplateMeta = {
   slug: string;
@@ -250,6 +256,30 @@ const HAND_CODED_TEMPLATES: TemplateMeta[] = [
       "cream",
       "refined",
       "filipino-diaspora",
+    ],
+  },
+  {
+    slug: "healthcare-light-blue-handcoded",
+    name: "Light-blue Label-Column",
+    tier: "premium",
+    tagline: "Calm · Refined · Healthcare · Label-column",
+    description:
+      "Refined alternative to Clinical Cream for healthcare professionals who prefer a cool, calm aesthetic. Light-blue page background, italic display name, uppercase section labels in a left column, and a 2-column certifications grid at the bottom. Designed for nurses, allied health professionals, and clinical generalists.",
+    Component: HealthcareLightBlue,
+    sampleData: healthcareRefined,
+    role: "healthcare",
+    mood: "refined",
+    culturalFit: ["PH", "AE", "SA", "KW", "QA", "SG", "GB", "IE"],
+    source: "hand-coded",
+    tags: [
+      "healthcare",
+      "nurse",
+      "clinical",
+      "refined",
+      "label-column",
+      "light-blue",
+      "certifications-grid",
+      "italic-display",
     ],
   },
 ];
