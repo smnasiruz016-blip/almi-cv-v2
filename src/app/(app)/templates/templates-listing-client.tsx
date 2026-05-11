@@ -25,6 +25,7 @@ const ROLE_LABELS: Record<RoleFacet, string> = {
   "customer-service-bpo": "Customer Service / BPO",
   "hospitality-chef": "Hospitality / Chef",
   tech: "Tech",
+  "project-management": "Project Management",
 };
 
 const MOOD_LABELS: Record<MoodFacet, string> = {
@@ -47,6 +48,7 @@ const ROLE_OPTIONS: RoleFacet[] = [
   "customer-service-bpo",
   "hospitality-chef",
   "tech",
+  "project-management",
 ];
 const MOOD_OPTIONS: MoodFacet[] = ["all", "bold", "modern", "refined"];
 const TIER_OPTIONS: TierFacet[] = ["all", "free", "premium"];

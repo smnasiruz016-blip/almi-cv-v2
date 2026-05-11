@@ -27,7 +27,8 @@ export type RecipeRole =
   | "trades"
   | "customer-service-bpo"
   | "hospitality-chef"
-  | "tech";
+  | "tech"
+  | "project-management";
 
 export type RecipeMood = "bold" | "modern" | "refined";
 

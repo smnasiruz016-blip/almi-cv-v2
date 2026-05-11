@@ -15,6 +15,7 @@ import { Pearl } from "@/components/templates/Pearl";
 import { HealthcareBoldICU } from "@/components/templates/HealthcareBoldICU";
 import { ClinicalCream } from "@/components/templates/ClinicalCream";
 import { HealthcareLightBlue } from "@/components/templates/HealthcareLightBlue";
+import { ProjectManagementOrange } from "@/components/templates/ProjectManagementOrange";
 import {
   alexChen,
   amaraHassan,
@@ -40,6 +41,7 @@ import {
   PERSONAS,
   healthcareBoldIcu,
   healthcareRefined,
+  projectManagementBoldSenior,
   type PersonaId,
 } from "@/lib/personas";
 
@@ -280,6 +282,31 @@ const HAND_CODED_TEMPLATES: TemplateMeta[] = [
       "light-blue",
       "certifications-grid",
       "italic-display",
+    ],
+  },
+  {
+    slug: "project-management-orange-handcoded",
+    name: "Orange Project Manager",
+    tier: "premium",
+    tagline: "Bold corporate CV with warm orange hero and editorial spine",
+    description:
+      "Designed for senior project managers, program leaders, and corporate strategists. Warm orange hero band carries name, summary, and contact, with a signature 6-petal asterisk and a subtle navy spine line running through the body. Two-column layout pairs Work Experience and Additional Experience (certifications) on the left with Skills and Education on the right. Sun-burst accent anchors the bottom-right. Authority with warmth.",
+    Component: ProjectManagementOrange,
+    sampleData: projectManagementBoldSenior,
+    role: "project-management",
+    mood: "bold",
+    culturalFit: ["GB", "US", "DE", "ES", "FR", "NL", "AE", "SG"],
+    source: "hand-coded",
+    tags: [
+      "project-management",
+      "pm",
+      "corporate",
+      "bold",
+      "orange",
+      "two-column",
+      "additional-experience",
+      "asterisk",
+      "multilingual",
     ],
   },
 ];

@@ -60,6 +60,12 @@ const ROLE_VISUAL_LANGUAGE: Record<RecipeRole, string> = {
     "Tech = precision + modernity + clean information density. Think monospaced " +
     "or geometric sans, accent rails, structured grids, code-block-style skills " +
     "presentation. Suitable palette: cool blues, electric accents, minimal noise.",
+  "project-management":
+    "Project Management = authority + warmth + corporate poise. Think confident " +
+    "typographic restraint, editorial accents (asterisk marks, spine rails, " +
+    "sun-burst flourishes), two-column body separating delivery work from skills " +
+    "and education. Suitable palette: warm orange or terracotta hero with deep " +
+    "navy text, muted slate-blue section labels, cream body.",
 };
 
 const MOOD_VISUAL_PERSONALITY: Record<RecipeMood, string> = {
