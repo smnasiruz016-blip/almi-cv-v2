@@ -49,6 +49,8 @@ const STEPS = [
 const HOMEPAGE_FEATURED_PREMIUM_SLUGS: ReadonlySet<string> = new Set([
   "atelier",
   "healthcare-bold-clinical-v1",
+  "healthcare-bold-icu-handcoded",
+  "healthcare-clinical-cream-handcoded",
 ]);
 
 export default async function HomePage() {
@@ -175,9 +177,18 @@ function TrustSection() {
 function TemplatesSection() {
   const freeCount = TEMPLATE_LIST.filter((t) => t.tier === "free").length;
   const premiumCount = TEMPLATE_LIST.filter((t) => t.tier === "premium").length;
-  const featured = TEMPLATE_LIST.filter(
-    (t) => t.tier === "free" || HOMEPAGE_FEATURED_PREMIUM_SLUGS.has(t.slug),
-  );
+  const featured = TEMPLATE_LIST.map((tpl, idx) => ({ tpl, idx }))
+    .filter(
+      ({ tpl }) =>
+        tpl.tier === "free" || HOMEPAGE_FEATURED_PREMIUM_SLUGS.has(tpl.slug),
+    )
+    .sort((a, b) => {
+      const aHandCoded = a.tpl.source === "hand-coded" ? 1 : 0;
+      const bHandCoded = b.tpl.source === "hand-coded" ? 1 : 0;
+      if (aHandCoded !== bHandCoded) return bHandCoded - aHandCoded;
+      return b.idx - a.idx;
+    })
+    .map(({ tpl }) => tpl);
 
   return (
     <Section className="bg-gradient-to-b from-cream-soft to-peach/40 py-30">
