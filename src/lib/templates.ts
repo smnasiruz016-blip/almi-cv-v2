@@ -13,6 +13,7 @@ import { SoftPastelRomantic } from "@/components/templates/SoftPastelRomantic";
 import { TimelinePro } from "@/components/templates/TimelinePro";
 import { Pearl } from "@/components/templates/Pearl";
 import { HealthcareBoldICU } from "@/components/templates/HealthcareBoldICU";
+import { ClinicalCream } from "@/components/templates/ClinicalCream";
 import {
   alexChen,
   amaraHassan,
@@ -224,6 +225,30 @@ const HAND_CODED_TEMPLATES: TemplateMeta[] = [
       "critical-care",
       "bold",
       "color-blocked",
+      "filipino-diaspora",
+    ],
+  },
+  {
+    slug: "healthcare-clinical-cream-handcoded",
+    name: "Clinical Cream",
+    tier: "premium",
+    tagline: "Clinical · Cream Canvas · ICU-Ready",
+    description:
+      "Hand-coded healthcare layout with a cream canvas, an 18px sage stripe at photo left, and teal accents on heading and footer. Five horizontal zones with clinical experience prioritized in the right column. For ICU, ER, and critical-care nurses — same audience as Trusted Critical Care, in a softer cream-dominant palette.",
+    Component: ClinicalCream,
+    sampleData: healthcareBoldIcu,
+    role: "healthcare",
+    mood: "refined",
+    culturalFit: ["PH", "AE", "SA", "KW", "QA", "SG", "GB", "IE"],
+    source: "hand-coded",
+    tags: [
+      "healthcare",
+      "nurse",
+      "icu",
+      "critical-care",
+      "clinical",
+      "cream",
+      "refined",
       "filipino-diaspora",
     ],
   },
