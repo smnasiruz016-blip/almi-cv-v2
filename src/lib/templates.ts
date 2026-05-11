@@ -16,6 +16,7 @@ import { HealthcareBoldICU } from "@/components/templates/HealthcareBoldICU";
 import { ClinicalCream } from "@/components/templates/ClinicalCream";
 import { HealthcareLightBlue } from "@/components/templates/HealthcareLightBlue";
 import { ProjectManagementOrange } from "@/components/templates/ProjectManagementOrange";
+import { EditorialNavy } from "@/components/templates/EditorialNavy";
 import {
   alexChen,
   amaraHassan,
@@ -42,6 +43,7 @@ import {
   healthcareBoldIcu,
   healthcareRefined,
   projectManagementBoldSenior,
+  marketingEditorialSenior,
   type PersonaId,
 } from "@/lib/personas";
 
@@ -307,6 +309,31 @@ const HAND_CODED_TEMPLATES: TemplateMeta[] = [
       "additional-experience",
       "asterisk",
       "multilingual",
+    ],
+  },
+  {
+    slug: "editorial-navy-handcoded",
+    name: "Editorial Navy",
+    tier: "premium",
+    tagline: "Premium dark-navy CV with editorial typography and circular photo",
+    description:
+      "A typography-led CV on a deep navy canvas with warm cream text. Single-color treatment — hierarchy comes from weight, size, and whitespace alone, with no decorative flourishes. Hero pairs a dominant name and uppercase role with a circular photo slot (graceful initials fallback if no photo). Two-column body places Summary and Education on the left, Experience and Skills on the right. Designed for senior marketing managers, communications strategists, and consulting roles where editorial gravitas signals premium quality.",
+    Component: EditorialNavy,
+    sampleData: marketingEditorialSenior,
+    role: "marketing",
+    mood: "bold",
+    culturalFit: ["AE", "SA", "QA", "KW", "EG", "FR", "ES", "IT", "DE"],
+    source: "hand-coded",
+    tags: [
+      "marketing",
+      "editorial",
+      "navy",
+      "dark-bg",
+      "single-color",
+      "circular-photo",
+      "two-column",
+      "typography-led",
+      "premium",
     ],
   },
 ];

@@ -28,7 +28,8 @@ export type RecipeRole =
   | "customer-service-bpo"
   | "hospitality-chef"
   | "tech"
-  | "project-management";
+  | "project-management"
+  | "marketing";
 
 export type RecipeMood = "bold" | "modern" | "refined";
 
