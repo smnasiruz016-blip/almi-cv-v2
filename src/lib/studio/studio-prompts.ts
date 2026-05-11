@@ -66,6 +66,13 @@ const ROLE_VISUAL_LANGUAGE: Record<RecipeRole, string> = {
     "sun-burst flourishes), two-column body separating delivery work from skills " +
     "and education. Suitable palette: warm orange or terracotta hero with deep " +
     "navy text, muted slate-blue section labels, cream body.",
+  marketing:
+    "Marketing = editorial gravitas + brand-led confidence + multilingual fluency. " +
+    "Think typography-led layouts, generous whitespace, single-color text " +
+    "treatments where hierarchy comes from weight and tracking, hairline " +
+    "dividers, circular photo slots. Suitable palette: deep editorial navy or " +
+    "rich plum with warm cream text, or alternatively saturated brand color " +
+    "blocks. Section labels small-caps with tracking.",
 };
 
 const MOOD_VISUAL_PERSONALITY: Record<RecipeMood, string> = {
