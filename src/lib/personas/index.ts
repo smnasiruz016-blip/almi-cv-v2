@@ -28,6 +28,7 @@ export { hospitalityRefined } from "./hospitality-refined";
 export { techBold } from "./tech-bold";
 export { techModern } from "./tech-modern";
 export { techRefined } from "./tech-refined";
+export { projectManagementBoldSenior } from "./project-management-bold-senior";
 
 import { healthcareBold } from "./healthcare-bold";
 import { healthcareBoldIcu } from "./healthcare-bold-icu";
@@ -45,6 +46,7 @@ import { hospitalityRefined } from "./hospitality-refined";
 import { techBold } from "./tech-bold";
 import { techModern } from "./tech-modern";
 import { techRefined } from "./tech-refined";
+import { projectManagementBoldSenior } from "./project-management-bold-senior";
 
 /** All persona IDs that recipes can reference via `preview_persona_id`. */
 export type PersonaId =
@@ -63,7 +65,8 @@ export type PersonaId =
   | "hospitality-refined"
   | "tech-bold"
   | "tech-modern"
-  | "tech-refined";
+  | "tech-refined"
+  | "project-management-bold-senior";
 
 export const PERSONAS: Record<PersonaId, CVData> = {
   "healthcare-bold": healthcareBold,
@@ -82,6 +85,7 @@ export const PERSONAS: Record<PersonaId, CVData> = {
   "tech-bold": techBold,
   "tech-modern": techModern,
   "tech-refined": techRefined,
+  "project-management-bold-senior": projectManagementBoldSenior,
 };
 
 export function getPersona(id: PersonaId): CVData {
