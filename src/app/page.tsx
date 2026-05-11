@@ -51,6 +51,7 @@ const HOMEPAGE_FEATURED_PREMIUM_SLUGS: ReadonlySet<string> = new Set([
   "healthcare-bold-clinical-v1",
   "healthcare-bold-icu-handcoded",
   "healthcare-clinical-cream-handcoded",
+  "healthcare-light-blue-handcoded",
 ]);
 
 export default async function HomePage() {
