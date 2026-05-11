@@ -55,6 +55,10 @@ export type CVData = {
     year?: string;
   }>;
   interests?: string[];
+  // Flowing-prose summary of measurable wins. Stored as RichText so inline
+  // <strong>/<em> emphasis works. Additive optional field; templates that
+  // don't render it are unaffected. First consumer: Dark Bold Marketing.
+  achievements?: RichText;
   style?: {
     themeKey?: ThemeKey;
     headingFont?: HeadingFontKey;

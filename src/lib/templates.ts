@@ -17,6 +17,7 @@ import { ClinicalCream } from "@/components/templates/ClinicalCream";
 import { HealthcareLightBlue } from "@/components/templates/HealthcareLightBlue";
 import { ProjectManagementOrange } from "@/components/templates/ProjectManagementOrange";
 import { EditorialNavy } from "@/components/templates/EditorialNavy";
+import { DarkBoldMarketing } from "@/components/templates/DarkBoldMarketing";
 import {
   alexChen,
   amaraHassan,
@@ -44,6 +45,7 @@ import {
   healthcareRefined,
   projectManagementBoldSenior,
   marketingEditorialSenior,
+  marketingBoldDark,
   type PersonaId,
 } from "@/lib/personas";
 
@@ -334,6 +336,31 @@ const HAND_CODED_TEMPLATES: TemplateMeta[] = [
       "two-column",
       "typography-led",
       "premium",
+    ],
+  },
+  {
+    slug: "dark-bold-marketing-handcoded",
+    name: "Dark Bold Marketing",
+    tier: "premium",
+    tagline: "Bold charcoal CV with yellow accent name and achievements-led structure",
+    description:
+      "The boldest visual statement in the library. Pure charcoal canvas, a single warm-yellow accent reserved for the name, and a magazine-masthead layout where uppercase section labels run down the left margin and content fills the right. The asterisk-in-circle logo echoes Orange Project Manager's asterisk motif inverted for dark backgrounds. Includes a single-column ACHIEVEMENTS section for measurable wins — ideal for senior marketers, growth managers, and consulting roles where results take center stage.",
+    Component: DarkBoldMarketing,
+    sampleData: marketingBoldDark,
+    role: "marketing",
+    mood: "bold",
+    culturalFit: ["US", "GB", "CA", "AU", "DE", "NL", "SG", "AE"],
+    source: "hand-coded",
+    tags: [
+      "marketing",
+      "dark",
+      "bold",
+      "yellow-accent",
+      "charcoal",
+      "left-margin-labels",
+      "achievements",
+      "asterisk-circle",
+      "two-column-content",
     ],
   },
 ];
