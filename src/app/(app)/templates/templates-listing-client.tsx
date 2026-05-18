@@ -63,10 +63,7 @@ function chipClass(active: boolean): string {
 
 function TemplateCard({ template }: { template: TemplateMeta }) {
   return (
-    <Link
-      href={`/templates/${template.slug}`}
-      className="group relative block cursor-pointer overflow-hidden rounded-2xl border border-peach/40 bg-white p-6 shadow-warm-card transition duration-200 hover:-translate-y-0.5 hover:shadow-warm-card-hover focus:outline-none focus-visible:ring-4 focus-visible:ring-coral/30"
-    >
+    <div className="group relative overflow-hidden rounded-2xl border border-peach/40 bg-white p-6 shadow-warm-card transition duration-200 hover:-translate-y-0.5 hover:shadow-warm-card-hover">
       <div className="pointer-events-none absolute -right-12 -top-12 h-32 w-32 rounded-full bg-coral/10 blur-3xl transition group-hover:bg-coral/20" />
 
       <div className="relative">
@@ -110,7 +107,12 @@ function TemplateCard({ template }: { template: TemplateMeta }) {
           )}
         </div>
       </div>
-    </Link>
+      <Link
+        href={`/templates/${template.slug}`}
+        aria-label={template.name}
+        className="absolute inset-0 rounded-2xl focus:outline-none focus-visible:ring-4 focus-visible:ring-coral/30"
+      />
+    </div>
   );
 }
 

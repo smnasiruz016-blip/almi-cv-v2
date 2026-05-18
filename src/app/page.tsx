@@ -213,10 +213,9 @@ function TemplatesSection() {
         </p>
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 lg:gap-4">
           {featured.map((tpl) => (
-            <Link
+            <div
               key={tpl.slug}
-              href={`/templates/${tpl.slug}`}
-              className="group relative block rounded-2xl border border-peach/40 bg-white p-2 shadow-warm-card transition-all hover:-translate-y-0.5 hover:shadow-warm-card-hover"
+              className="group relative rounded-2xl border border-peach/40 bg-white p-2 shadow-warm-card transition-all hover:-translate-y-0.5 hover:shadow-warm-card-hover"
             >
               <TemplateThumbnail template={tpl} scale={0.2} />
               <div className="mt-2 flex items-start justify-between gap-2">
@@ -234,7 +233,12 @@ function TemplatesSection() {
               >
                 {tpl.tier === "free" ? "Free" : "Premium"}
               </p>
-            </Link>
+              <Link
+                href={`/templates/${tpl.slug}`}
+                aria-label={tpl.name}
+                className="absolute inset-0 rounded-2xl"
+              />
+            </div>
           ))}
         </div>
 
