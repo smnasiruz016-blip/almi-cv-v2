@@ -20,6 +20,7 @@ import { EditorialNavy } from "@/components/templates/EditorialNavy";
 import { DarkBoldMarketing } from "@/components/templates/DarkBoldMarketing";
 import { CulinaryChef } from "@/components/templates/CulinaryChef";
 import { VisualStoryteller } from "@/components/templates/VisualStoryteller";
+import { ScrapbookJournal } from "@/components/templates/ScrapbookJournal";
 import {
   alexChen,
   amaraHassan,
@@ -410,6 +411,30 @@ const HAND_CODED_TEMPLATES: TemplateMeta[] = [
       "amber",
       "bold",
       "two-column",
+    ],
+  },
+  {
+    slug: "scrapbook-journal-handcoded",
+    name: "Scrapbook Journal",
+    tier: "premium",
+    tagline: "A warm hand-crafted journal — washi, doodles, polaroid; for creative & artistic CVs",
+    description:
+      "Scrapbook/journal premium template: kraft texture, torn note cards, hand-drawn doodle frames, washi tape, polaroid photo (3-branch photoUrl), lined-notepad skills. Sections: Profile, Experience, Education, Skills, Awards.",
+    Component: ScrapbookJournal,
+    sampleData: juliaCortazar,
+    mood: "bold",
+    source: "hand-coded",
+    tags: [
+      "scrapbook",
+      "journal",
+      "creative",
+      "multimedia",
+      "hand-crafted",
+      "washi-tape",
+      "polaroid",
+      "torn-paper",
+      "kraft",
+      "bold",
     ],
   },
 ];
