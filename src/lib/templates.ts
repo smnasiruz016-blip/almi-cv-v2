@@ -18,6 +18,7 @@ import { HealthcareLightBlue } from "@/components/templates/HealthcareLightBlue"
 import { ProjectManagementOrange } from "@/components/templates/ProjectManagementOrange";
 import { EditorialNavy } from "@/components/templates/EditorialNavy";
 import { DarkBoldMarketing } from "@/components/templates/DarkBoldMarketing";
+import { CulinaryChef } from "@/components/templates/CulinaryChef";
 import {
   alexChen,
   amaraHassan,
@@ -48,6 +49,7 @@ import {
   marketingBoldDark,
   type PersonaId,
 } from "@/lib/personas";
+import { hospitalityBold } from "@/lib/personas/hospitality-bold";
 
 export type TemplateMeta = {
   slug: string;
@@ -361,6 +363,29 @@ const HAND_CODED_TEMPLATES: TemplateMeta[] = [
       "achievements",
       "asterisk-circle",
       "two-column-content",
+    ],
+  },
+  {
+    slug: "culinary-chef-handcoded",
+    name: "Culinary Chef",
+    tier: "premium",
+    tagline: "Warm, kitchen-toned CV that instantly reads as culinary",
+    description:
+      "Designed for chefs, sous chefs, and culinary professionals. Charcoal header with a chef's-toque mark and fork-and-knife divider; warm wood contact strip; clean cream body with Kitchen Experience, Specialties, Certifications and Education. Profession-evident at a glance.",
+    Component: CulinaryChef,
+    sampleData: hospitalityBold,
+    role: "hospitality-chef",
+    mood: "bold",
+    culturalFit: ["IT", "GB", "US", "FR", "AE", "ES"],
+    source: "hand-coded",
+    tags: [
+      "chef",
+      "culinary",
+      "kitchen",
+      "hospitality",
+      "warm",
+      "photo",
+      "two-column",
     ],
   },
 ];
