@@ -19,6 +19,7 @@ import { ProjectManagementOrange } from "@/components/templates/ProjectManagemen
 import { EditorialNavy } from "@/components/templates/EditorialNavy";
 import { DarkBoldMarketing } from "@/components/templates/DarkBoldMarketing";
 import { CulinaryChef } from "@/components/templates/CulinaryChef";
+import { VisualStoryteller } from "@/components/templates/VisualStoryteller";
 import {
   alexChen,
   amaraHassan,
@@ -385,6 +386,29 @@ const HAND_CODED_TEMPLATES: TemplateMeta[] = [
       "hospitality",
       "warm",
       "photo",
+      "two-column",
+    ],
+  },
+  {
+    slug: "visual-storyteller-handcoded",
+    name: "Visual Storyteller",
+    tier: "premium",
+    tagline: "Dark cinematic photographer CV with film-strip rail and amber accents",
+    description:
+      "Designed for photographers, visual creatives, and brand storytellers. Stage-black hero with a camera-aperture mark, perforated film-strip rail along the left edge, and amber accents in the headline. Clean paper body with Experience, Exhibitions & Awards, Skills and Education. Profession-evident at a glance.",
+    Component: VisualStoryteller,
+    sampleData: sofiaMarchetti,
+    mood: "bold",
+    source: "hand-coded",
+    tags: [
+      "photography",
+      "photographer",
+      "visual-creative",
+      "cinematic",
+      "dark",
+      "film-strip",
+      "amber",
+      "bold",
       "two-column",
     ],
   },
