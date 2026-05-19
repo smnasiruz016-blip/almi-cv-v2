@@ -21,6 +21,7 @@ import { DarkBoldMarketing } from "@/components/templates/DarkBoldMarketing";
 import { CulinaryChef } from "@/components/templates/CulinaryChef";
 import { VisualStoryteller } from "@/components/templates/VisualStoryteller";
 import { ScrapbookJournal } from "@/components/templates/ScrapbookJournal";
+import { BeautyArtist } from "@/components/templates/BeautyArtist";
 import {
   alexChen,
   amaraHassan,
@@ -465,6 +466,30 @@ const HAND_CODED_TEMPLATES: TemplateMeta[] = [
       "bold",
     ],
     addedAt: "2026-05-18T22:50:37Z",
+  },
+  {
+    slug: "beauty-artist-handcoded",
+    name: "Beauty Artist",
+    tier: "premium",
+    tagline: "Hand-illustrated beauty CV — roses, rose-gold brushes, blush marble; for makeup & salon",
+    description:
+      "Premium beauty/cosmetic template: blush-marble page with hand-drawn SVG roses and rose-gold makeup brushes cascading left, white content card right, circular rose-gold photo frame (3-branch photoUrl), elegant serif headings. Sections: Profile, Experience, Education, Skills, Awards.",
+    Component: BeautyArtist,
+    sampleData: juliaCortazar,
+    mood: "bold",
+    source: "hand-coded",
+    tags: [
+      "beauty",
+      "makeup",
+      "cosmetic",
+      "salon",
+      "elegant",
+      "floral",
+      "rose-gold",
+      "feminine",
+      "hand-illustrated",
+    ],
+    addedAt: "2026-05-19T01:25:35Z",
   },
 ];
 
