@@ -158,4 +158,6 @@ export const healthcareBoldClinicalV1: TemplateRecipe = {
   },
 
   preview_persona_id: "healthcare-bold",
+
+  addedAt: "2026-05-08T19:29:54Z",
 };

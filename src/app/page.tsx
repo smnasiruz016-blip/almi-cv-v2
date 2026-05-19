@@ -43,22 +43,6 @@ const STEPS = [
   },
 ];
 
-// Featured selection on the homepage tile grid: all six free templates,
-// plus a small curated set of premium designs that exemplify what Pro
-// unlocks. The full catalog lives at /templates.
-const HOMEPAGE_FEATURED_PREMIUM_SLUGS: ReadonlySet<string> = new Set([
-  "atelier",
-  "healthcare-bold-clinical-v1",
-  "healthcare-bold-icu-handcoded",
-  "healthcare-clinical-cream-handcoded",
-  "healthcare-light-blue-handcoded",
-  "project-management-orange-handcoded",
-  "editorial-navy-handcoded",
-  "dark-bold-marketing-handcoded",
-  "culinary-chef-handcoded",
-  "visual-storyteller-handcoded",
-]);
-
 export default async function HomePage() {
   const user = await getCurrentUser();
   const isLoggedIn = Boolean(user);
@@ -184,15 +168,11 @@ function TemplatesSection() {
   const freeCount = TEMPLATE_LIST.filter((t) => t.tier === "free").length;
   const premiumCount = TEMPLATE_LIST.filter((t) => t.tier === "premium").length;
   const featured = TEMPLATE_LIST.map((tpl, idx) => ({ tpl, idx }))
-    .filter(
-      ({ tpl }) =>
-        tpl.tier === "free" || HOMEPAGE_FEATURED_PREMIUM_SLUGS.has(tpl.slug),
-    )
     .sort((a, b) => {
       const aHandCoded = a.tpl.source === "hand-coded" ? 1 : 0;
       const bHandCoded = b.tpl.source === "hand-coded" ? 1 : 0;
       if (aHandCoded !== bHandCoded) return bHandCoded - aHandCoded;
-      return b.idx - a.idx;
+      return b.tpl.addedAt.localeCompare(a.tpl.addedAt);
     })
     .map(({ tpl }) => tpl);
 

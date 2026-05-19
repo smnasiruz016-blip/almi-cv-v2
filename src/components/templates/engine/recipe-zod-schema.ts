@@ -334,6 +334,7 @@ export const templateRecipeSchema = z
     decorators: z.array(decoratorSpecSchema),
     recommended_palette_hint: recipePaletteHintSchema.optional(),
     preview_persona_id: z.string().min(1),
+    addedAt: z.string().min(1),
   })
   .strict();
 
