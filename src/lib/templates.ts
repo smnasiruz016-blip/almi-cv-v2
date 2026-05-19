@@ -22,6 +22,7 @@ import { CulinaryChef } from "@/components/templates/CulinaryChef";
 import { VisualStoryteller } from "@/components/templates/VisualStoryteller";
 import { ScrapbookJournal } from "@/components/templates/ScrapbookJournal";
 import { BeautyArtist } from "@/components/templates/BeautyArtist";
+import { ChefMenu } from "@/components/templates/ChefMenu";
 import {
   alexChen,
   amaraHassan,
@@ -490,6 +491,33 @@ const HAND_CODED_TEMPLATES: TemplateMeta[] = [
       "hand-illustrated",
     ],
     addedAt: "2026-05-19T01:25:35Z",
+  },
+  {
+    slug: "chef-menu-handcoded",
+    name: "Chef Menu",
+    tier: "premium",
+    tagline: "Menu-style chef CV on a kitchen flatlay — wooden card, real ingredients, scattered herbs",
+    description:
+      "Premium chef/hospitality template designed like a printed restaurant menu on a wooden cutting board. Real photographic kitchen flatlay backdrop (knife, herbs, garlic, tomatoes, mushrooms on slate). Centered cream paper card with section title + accent label rows (MENU, SIGNATURE, TRAINING, HONORS), thin gold rules, dark olive bullets. White serif name and chef-toque mark crown the page above the card.",
+    Component: ChefMenu,
+    sampleData: hospitalityBold,
+    role: "hospitality-chef",
+    mood: "bold",
+    culturalFit: ["IT", "GB", "US", "FR", "AE", "ES", "MX"],
+    source: "hand-coded",
+    tags: [
+      "chef",
+      "culinary",
+      "kitchen",
+      "hospitality",
+      "menu",
+      "wooden",
+      "dark",
+      "photographic",
+      "flatlay",
+      "cutting-board",
+    ],
+    addedAt: "2026-05-19T02:31:12Z",
   },
 ];
 
