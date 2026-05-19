@@ -245,4 +245,10 @@ export type TemplateRecipe = {
 
   // pairing
   preview_persona_id: string;
+
+  // homepage ordering — REQUIRED. ISO 8601 datetime when this recipe
+  // was added to the catalog. Mirrors TemplateMeta.addedAt; the registry
+  // mapper propagates this onto the synthesized TemplateMeta. Drives the
+  // homepage descending-by-date sort.
+  addedAt: string;
 };

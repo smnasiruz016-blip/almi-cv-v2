@@ -81,6 +81,14 @@ export type TemplateMeta = {
    * /jobs/<country> and search-style filters. Optional — universal
    * hand-coded templates leave it unset. */
   tags?: string[];
+  /** ISO 8601 datetime when this template was added to the catalog.
+   * REQUIRED — drives the homepage's descending-by-date sort, so that
+   * newly shipped templates surface at the top without anyone having to
+   * touch a manual allowlist. For hand-coded templates this is sourced
+   * from `git log --diff-filter=A --follow`; for recipe-driven templates
+   * it's propagated from `TemplateRecipe.addedAt` via the registry
+   * mapper below. */
+  addedAt: string;
 };
 
 /**
@@ -99,6 +107,7 @@ const HAND_CODED_TEMPLATES: TemplateMeta[] = [
     Component: ClassicSerif,
     sampleData: mayaRodriguez,
     source: "hand-coded",
+    addedAt: "2026-04-29T03:03:26Z",
   },
   {
     slug: "modern-mono",
@@ -110,6 +119,7 @@ const HAND_CODED_TEMPLATES: TemplateMeta[] = [
     Component: ModernMono,
     sampleData: alexChen,
     source: "hand-coded",
+    addedAt: "2026-04-29T20:06:30Z",
   },
   {
     slug: "editorial-bold",
@@ -121,6 +131,7 @@ const HAND_CODED_TEMPLATES: TemplateMeta[] = [
     Component: EditorialBold,
     sampleData: priyaPatel,
     source: "hand-coded",
+    addedAt: "2026-04-29T03:03:26Z",
   },
   {
     slug: "photo-forward",
@@ -132,6 +143,7 @@ const HAND_CODED_TEMPLATES: TemplateMeta[] = [
     Component: PhotoForward,
     sampleData: sofiaMarchetti,
     source: "hand-coded",
+    addedAt: "2026-04-30T03:10:00Z",
   },
   {
     slug: "minimalist-mono",
@@ -143,6 +155,7 @@ const HAND_CODED_TEMPLATES: TemplateMeta[] = [
     Component: MinimalistMono,
     sampleData: edwardLindqvist,
     source: "hand-coded",
+    addedAt: "2026-04-30T03:50:14Z",
   },
   {
     slug: "atelier",
@@ -154,6 +167,7 @@ const HAND_CODED_TEMPLATES: TemplateMeta[] = [
     Component: Atelier,
     sampleData: ayeshaKhan,
     source: "hand-coded",
+    addedAt: "2026-04-29T03:03:26Z",
   },
   {
     slug: "director",
@@ -165,6 +179,7 @@ const HAND_CODED_TEMPLATES: TemplateMeta[] = [
     Component: Director,
     sampleData: marcusWebb,
     source: "hand-coded",
+    addedAt: "2026-04-29T03:03:26Z",
   },
   {
     slug: "atelier-pro",
@@ -176,6 +191,7 @@ const HAND_CODED_TEMPLATES: TemplateMeta[] = [
     Component: AtelierPro,
     sampleData: juliaCortazar,
     source: "hand-coded",
+    addedAt: "2026-04-30T01:37:37Z",
   },
   {
     slug: "bold-color-block",
@@ -187,6 +203,7 @@ const HAND_CODED_TEMPLATES: TemplateMeta[] = [
     Component: BoldColorBlock,
     sampleData: zaraOkonkwo,
     source: "hand-coded",
+    addedAt: "2026-04-30T04:00:22Z",
   },
   {
     slug: "soft-pastel-romantic",
@@ -198,6 +215,7 @@ const HAND_CODED_TEMPLATES: TemplateMeta[] = [
     Component: SoftPastelRomantic,
     sampleData: amaraHassan,
     source: "hand-coded",
+    addedAt: "2026-04-30T04:13:53Z",
   },
   {
     slug: "timeline-pro",
@@ -209,6 +227,7 @@ const HAND_CODED_TEMPLATES: TemplateMeta[] = [
     Component: TimelinePro,
     sampleData: laylaHassan,
     source: "hand-coded",
+    addedAt: "2026-05-06T04:42:31Z",
   },
   {
     slug: "pearl",
@@ -220,6 +239,7 @@ const HAND_CODED_TEMPLATES: TemplateMeta[] = [
     Component: Pearl,
     sampleData: saraKhan,
     source: "hand-coded",
+    addedAt: "2026-05-06T04:59:33Z",
   },
   {
     slug: "healthcare-bold-icu-handcoded",
@@ -243,6 +263,7 @@ const HAND_CODED_TEMPLATES: TemplateMeta[] = [
       "color-blocked",
       "filipino-diaspora",
     ],
+    addedAt: "2026-05-09T17:00:45Z",
   },
   {
     slug: "healthcare-clinical-cream-handcoded",
@@ -267,6 +288,7 @@ const HAND_CODED_TEMPLATES: TemplateMeta[] = [
       "refined",
       "filipino-diaspora",
     ],
+    addedAt: "2026-05-11T01:14:44Z",
   },
   {
     slug: "healthcare-light-blue-handcoded",
@@ -291,6 +313,7 @@ const HAND_CODED_TEMPLATES: TemplateMeta[] = [
       "certifications-grid",
       "italic-display",
     ],
+    addedAt: "2026-05-11T21:26:12Z",
   },
   {
     slug: "project-management-orange-handcoded",
@@ -316,6 +339,7 @@ const HAND_CODED_TEMPLATES: TemplateMeta[] = [
       "asterisk",
       "multilingual",
     ],
+    addedAt: "2026-05-11T22:27:43Z",
   },
   {
     slug: "editorial-navy-handcoded",
@@ -341,6 +365,7 @@ const HAND_CODED_TEMPLATES: TemplateMeta[] = [
       "typography-led",
       "premium",
     ],
+    addedAt: "2026-05-11T23:01:41Z",
   },
   {
     slug: "dark-bold-marketing-handcoded",
@@ -366,6 +391,7 @@ const HAND_CODED_TEMPLATES: TemplateMeta[] = [
       "asterisk-circle",
       "two-column-content",
     ],
+    addedAt: "2026-05-11T23:34:18Z",
   },
   {
     slug: "culinary-chef-handcoded",
@@ -389,6 +415,7 @@ const HAND_CODED_TEMPLATES: TemplateMeta[] = [
       "photo",
       "two-column",
     ],
+    addedAt: "2026-05-18T19:10:29Z",
   },
   {
     slug: "visual-storyteller-handcoded",
@@ -412,6 +439,7 @@ const HAND_CODED_TEMPLATES: TemplateMeta[] = [
       "bold",
       "two-column",
     ],
+    addedAt: "2026-05-18T19:50:03Z",
   },
   {
     slug: "scrapbook-journal-handcoded",
@@ -436,6 +464,7 @@ const HAND_CODED_TEMPLATES: TemplateMeta[] = [
       "kraft",
       "bold",
     ],
+    addedAt: "2026-05-18T22:50:37Z",
   },
 ];
 
@@ -458,6 +487,7 @@ const RECIPE_TEMPLATES: TemplateMeta[] = RECIPE_LIST.map((recipe) => ({
   mood: recipe.mood,
   culturalFit: recipe.cultural_fit,
   source: "recipe",
+  addedAt: recipe.addedAt,
 }));
 
 export const TEMPLATE_LIST: TemplateMeta[] = [
