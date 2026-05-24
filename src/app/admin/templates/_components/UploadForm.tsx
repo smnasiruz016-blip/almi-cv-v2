@@ -1,84 +1,66 @@
 "use client";
 
 import { useRef, useState, useTransition } from "react";
-import { uploadTemplateImages } from "../actions";
+import { uploadTemplateImages, type UploadResult } from "../actions";
 import { titleFromFilename } from "@/lib/template-images";
 import type { Role } from "@/lib/roles";
 
-type StagedFile = {
-  file: File;
-  title: string;
-};
+// Native <form action={handler}> with every field carrying a `name`
+// attribute so the browser's standard form-submit path constructs
+// FormData for us. The action prop receives a client handler that
+// awaits the server action; reset on success happens in the handler
+// body (event-handler context), not in an effect.
+//
+// Why this shape: the previous (PR #46) implementation built FormData
+// imperatively from React state and called the server action via
+// startTransition. When the file picker's onChange didn't sync state
+// (browser focus quirks, etc.), the submit button stayed disabled at
+// `staged.length === 0` and the click silently no-op'd — no network
+// request, matching every reported symptom. Native form submit fires
+// a request whenever the submit button is clicked.
 
 export function UploadForm({ roles }: { roles: Role[] }) {
-  const [staged, setStaged] = useState<StagedFile[]>([]);
-  const [roleSlug, setRoleSlug] = useState<string>(roles[0]?.slug ?? "");
-  const [status, setStatus] = useState<
-    | { kind: "idle" }
-    | { kind: "error"; message: string }
-    | { kind: "success"; created: number }
-  >({ kind: "idle" });
+  const [titles, setTitles] = useState<string[]>([]);
+  const [filenames, setFilenames] = useState<string[]>([]);
+  const [state, setState] = useState<UploadResult | null>(null);
   const [isPending, startTransition] = useTransition();
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const formRef = useRef<HTMLFormElement>(null);
 
   function onFilesPicked(list: FileList | null) {
-    if (!list) return;
-    const next: StagedFile[] = [];
-    for (const f of Array.from(list)) {
-      next.push({ file: f, title: titleFromFilename(f.name) });
+    if (!list || list.length === 0) {
+      setTitles([]);
+      setFilenames([]);
+      return;
     }
-    setStaged(next);
-    setStatus({ kind: "idle" });
+    const arr = Array.from(list);
+    setTitles(arr.map((f) => titleFromFilename(f.name)));
+    setFilenames(arr.map((f) => f.name));
   }
 
-  function updateTitle(index: number, value: string) {
-    setStaged((prev) =>
-      prev.map((s, i) => (i === index ? { ...s, title: value } : s)),
-    );
-  }
-
-  function removeStaged(index: number) {
-    setStaged((prev) => prev.filter((_, i) => i !== index));
-  }
-
-  function reset() {
-    setStaged([]);
-    setStatus({ kind: "idle" });
+  function clearAll() {
+    setTitles([]);
+    setFilenames([]);
     if (fileInputRef.current) fileInputRef.current.value = "";
   }
 
-  function submit() {
-    if (staged.length === 0) {
-      setStatus({ kind: "error", message: "Pick at least one image." });
-      return;
-    }
-    if (!roleSlug) {
-      setStatus({ kind: "error", message: "Pick a role." });
-      return;
-    }
-    if (staged.some((s) => !s.title.trim())) {
-      setStatus({ kind: "error", message: "Every file needs a title." });
-      return;
-    }
-    const fd = new FormData();
-    fd.set("roleSlug", roleSlug);
-    for (const s of staged) {
-      fd.append("files", s.file);
-      fd.append("titles", s.title);
-    }
+  function handleSubmit(formData: FormData) {
     startTransition(async () => {
-      const res = await uploadTemplateImages(fd);
-      if (res.ok) {
-        setStatus({ kind: "success", created: res.created });
-        reset();
-      } else {
-        setStatus({ kind: "error", message: res.error });
+      const result = await uploadTemplateImages(formData);
+      setState(result);
+      if (result.ok) {
+        clearAll();
+        if (formRef.current) formRef.current.reset();
       }
     });
   }
 
   return (
-    <div className="space-y-4 rounded-2xl border border-peach/40 bg-white p-6 shadow-warm-card">
+    <form
+      ref={formRef}
+      action={handleSubmit}
+      className="space-y-4 rounded-2xl border border-peach/40 bg-white p-6 shadow-warm-card"
+    >
       <div>
         <h2 className="font-display text-lg text-plum">Upload templates</h2>
         <p className="mt-1 text-sm text-plum-soft">
@@ -92,8 +74,9 @@ export function UploadForm({ roles }: { roles: Role[] }) {
         <label className="block text-sm">
           <span className="block font-medium text-plum">Role</span>
           <select
-            value={roleSlug}
-            onChange={(e) => setRoleSlug(e.target.value)}
+            id="roleSlug"
+            name="roleSlug"
+            defaultValue={roles[0]?.slug ?? ""}
             className="mt-1 w-full rounded-lg border border-plum/20 bg-white px-3 py-2 text-sm"
           >
             {roles.map((r) => (
@@ -108,6 +91,8 @@ export function UploadForm({ roles }: { roles: Role[] }) {
           <span className="block font-medium text-plum">Images</span>
           <input
             ref={fileInputRef}
+            id="files"
+            name="files"
             type="file"
             accept="image/*"
             multiple
@@ -117,29 +102,22 @@ export function UploadForm({ roles }: { roles: Role[] }) {
         </label>
       </div>
 
-      {staged.length > 0 && (
+      {titles.length > 0 && (
         <ul className="divide-y divide-plum/10 rounded-lg border border-plum/10">
-          {staged.map((s, i) => (
+          {titles.map((title, i) => (
             <li
-              key={`${s.file.name}-${i}`}
+              key={`${filenames[i] ?? "file"}-${i}`}
               className="flex items-center gap-3 px-3 py-2"
             >
               <span className="truncate text-xs text-plum-faint flex-1 min-w-0">
-                {s.file.name}
+                {filenames[i]}
               </span>
               <input
-                value={s.title}
-                onChange={(e) => updateTitle(i, e.target.value)}
+                name="titles"
+                defaultValue={title}
+                aria-label={`Title for ${filenames[i] ?? "file"}`}
                 className="flex-1 rounded-md border border-plum/20 px-2 py-1 text-sm"
-                aria-label={`Title for ${s.file.name}`}
               />
-              <button
-                type="button"
-                onClick={() => removeStaged(i)}
-                className="text-xs text-plum-soft hover:text-coral-deep"
-              >
-                Remove
-              </button>
             </li>
           ))}
         </ul>
@@ -147,17 +125,20 @@ export function UploadForm({ roles }: { roles: Role[] }) {
 
       <div className="flex items-center gap-3">
         <button
-          type="button"
-          onClick={submit}
-          disabled={isPending || staged.length === 0}
+          type="submit"
+          disabled={isPending}
           className="inline-flex items-center rounded-pill bg-coral px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-coral-deep disabled:cursor-not-allowed disabled:opacity-50"
         >
-          {isPending ? "Uploading…" : `Upload ${staged.length || ""}`.trim()}
+          {isPending
+            ? "Uploading…"
+            : titles.length > 0
+              ? `Upload ${titles.length}`
+              : "Upload"}
         </button>
-        {staged.length > 0 && (
+        {titles.length > 0 && (
           <button
             type="button"
-            onClick={reset}
+            onClick={clearAll}
             disabled={isPending}
             className="text-sm text-plum-soft hover:text-plum"
           >
@@ -166,16 +147,16 @@ export function UploadForm({ roles }: { roles: Role[] }) {
         )}
       </div>
 
-      {status.kind === "error" && (
+      {state && !state.ok && (
         <p className="rounded-md bg-coral/10 px-3 py-2 text-xs text-coral-deep">
-          {status.message}
+          {state.error}
         </p>
       )}
-      {status.kind === "success" && (
+      {state?.ok && (
         <p className="rounded-md bg-mint/10 px-3 py-2 text-xs text-[#0F766E]">
-          Uploaded {status.created} image{status.created === 1 ? "" : "s"}.
+          Uploaded {state.created} image{state.created === 1 ? "" : "s"}.
         </p>
       )}
-    </div>
+    </form>
   );
 }
