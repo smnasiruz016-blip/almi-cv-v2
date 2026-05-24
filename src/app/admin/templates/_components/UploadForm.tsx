@@ -5,19 +5,27 @@ import { uploadTemplateImages, type UploadResult } from "../actions";
 import { titleFromFilename } from "@/lib/template-images";
 import type { Role } from "@/lib/roles";
 
-// Native <form action={handler}> with every field carrying a `name`
-// attribute so the browser's standard form-submit path constructs
-// FormData for us. The action prop receives a client handler that
-// awaits the server action; reset on success happens in the handler
-// body (event-handler context), not in an effect.
+// <form onSubmit={...}> with every field carrying a `name` attribute
+// so FormData(formElement) picks up the user's input via standard
+// form serialization. The submit handler calls preventDefault and
+// invokes the server action under startTransition.
 //
-// Why this shape: the previous (PR #46) implementation built FormData
-// imperatively from React state and called the server action via
-// startTransition. When the file picker's onChange didn't sync state
-// (browser focus quirks, etc.), the submit button stayed disabled at
-// `staged.length === 0` and the click silently no-op'd — no network
-// request, matching every reported symptom. Native form submit fires
-// a request whenever the submit button is clicked.
+// Why onSubmit instead of <form action={fn}>: React 19's `action` prop
+// for client functions renders the HTML form with
+//   action="javascript:throw new Error('React form unexpectedly submitted.')"
+// as a fallback for no-JS submission. While this is intentional in
+// React, some browser configurations (ad-blockers, security plugins,
+// Vercel Firewall rules) treat javascript: URLs as malicious and
+// refuse to render forms containing them, producing a "page couldn't
+// load" symptom with no console errors. onSubmit avoids that
+// rendered-HTML entirely.
+//
+// Why not the original (PR #46) imperative-FormData pattern: that one
+// built FormData from React state and gated submit on
+// `staged.length === 0`. If the file picker's onChange didn't sync
+// state (browser focus quirks, etc.), the submit button stayed
+// disabled and clicks silently no-op'd. onSubmit + FormData(form) is
+// robust against state desync because it reads directly from the DOM.
 
 export function UploadForm({ roles }: { roles: Role[] }) {
   const [titles, setTitles] = useState<string[]>([]);
@@ -44,13 +52,16 @@ export function UploadForm({ roles }: { roles: Role[] }) {
     if (fileInputRef.current) fileInputRef.current.value = "";
   }
 
-  function handleSubmit(formData: FormData) {
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const formData = new FormData(form);
     startTransition(async () => {
       const result = await uploadTemplateImages(formData);
       setState(result);
       if (result.ok) {
         clearAll();
-        if (formRef.current) formRef.current.reset();
+        form.reset();
       }
     });
   }
@@ -58,7 +69,7 @@ export function UploadForm({ roles }: { roles: Role[] }) {
   return (
     <form
       ref={formRef}
-      action={handleSubmit}
+      onSubmit={handleSubmit}
       className="space-y-4 rounded-2xl border border-peach/40 bg-white p-6 shadow-warm-card"
     >
       <div>
