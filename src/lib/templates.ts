@@ -26,6 +26,7 @@ import { ChefMenu } from "@/components/templates/ChefMenu";
 import { CyberNeonAdmin } from "@/components/templates/CyberNeonAdmin";
 import { VelvetGoldAdmin } from "@/components/templates/VelvetGoldAdmin";
 import { AmberCyberAdmin } from "@/components/templates/AmberCyberAdmin";
+import { ExecutiveChrome } from "@/components/templates/ExecutiveChrome";
 import {
   alexChen,
   amaraHassan,
@@ -50,6 +51,7 @@ import { RECIPE_LIST } from "@/lib/recipes";
 import {
   PERSONAS,
   bpoBold,
+  bpoRefined,
   healthcareBoldIcu,
   healthcareRefined,
   projectManagementBoldSenior,
@@ -601,6 +603,32 @@ const HAND_CODED_TEMPLATES: TemplateMeta[] = [
       "server-rack",
     ],
     addedAt: "2026-05-24T04:45:00Z",
+  },
+  {
+    slug: "executive-chrome-handcoded",
+    name: "Executive Chrome",
+    tier: "premium",
+    tagline: "Royal-navy + brushed-silver CV with a rotated diamond photo frame — for C-suite EAs and corporate ops",
+    description:
+      "Premium polished-corporate template for Executive Assistants to C-suite, Chiefs of Staff, and senior corporate operations. Royal-navy gradient canvas with a sweeping brushed-silver chrome ribbon across the middle, rotated diamond photo frame with chrome border top-right, banner-shaped parallelogram section labels (\"EXPERIENCE\", \"SKILLS\", \"EDUCATION\"), and a floating 3D office + travel prop cluster on the right (desktop monitor, briefcase, papers, calendar, two commercial airplanes, blue diamond sparkles). White display name with text-shadow gravitas.",
+    Component: ExecutiveChrome,
+    sampleData: bpoRefined,
+    mood: "refined",
+    source: "hand-coded",
+    tags: [
+      "executive-assistant",
+      "ea",
+      "chief-of-staff",
+      "corporate",
+      "navy",
+      "chrome",
+      "silver",
+      "polished",
+      "diamond-frame",
+      "banner-labels",
+      "travel-management",
+    ],
+    addedAt: "2026-05-24T06:15:00Z",
   },
 ];
 
