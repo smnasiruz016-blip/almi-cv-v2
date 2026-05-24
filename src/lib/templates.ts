@@ -23,6 +23,7 @@ import { VisualStoryteller } from "@/components/templates/VisualStoryteller";
 import { ScrapbookJournal } from "@/components/templates/ScrapbookJournal";
 import { BeautyArtist } from "@/components/templates/BeautyArtist";
 import { ChefMenu } from "@/components/templates/ChefMenu";
+import { CyberNeonAdmin } from "@/components/templates/CyberNeonAdmin";
 import {
   alexChen,
   amaraHassan,
@@ -46,6 +47,7 @@ import type {
 import { RECIPE_LIST } from "@/lib/recipes";
 import {
   PERSONAS,
+  bpoBold,
   healthcareBoldIcu,
   healthcareRefined,
   projectManagementBoldSenior,
@@ -518,6 +520,32 @@ const HAND_CODED_TEMPLATES: TemplateMeta[] = [
       "cutting-board",
     ],
     addedAt: "2026-05-19T02:31:12Z",
+  },
+  {
+    slug: "cyber-neon-admin-handcoded",
+    name: "Cyber Neon Admin",
+    tier: "premium",
+    tagline: "Futuristic dark CV with neon-green accents, hex-mesh, and an octagon badge — for tech-forward admin & ops roles",
+    description:
+      "Premium cyberpunk/tech-UI template for office managers, executive assistants, and operations leads who work alongside engineering teams. Deep emerald canvas with sweeping neon-green light streaks, hex-mesh texture top-left, isometric building blocks and circuit graphs on the right, and a top-right neon octagon badge that frames the photo (or shows a neon avatar silhouette when none). Content sits in a sci-fi UI panel with neon border and hex-cut corners. Chrome-styled name with neon outline.",
+    Component: CyberNeonAdmin,
+    sampleData: bpoBold,
+    mood: "bold",
+    source: "hand-coded",
+    tags: [
+      "admin",
+      "office-manager",
+      "operations",
+      "tech-adjacent",
+      "cyber",
+      "neon",
+      "dark",
+      "futuristic",
+      "octagon",
+      "hex-mesh",
+      "circuit",
+    ],
+    addedAt: "2026-05-24T01:30:00Z",
   },
 ];
 
