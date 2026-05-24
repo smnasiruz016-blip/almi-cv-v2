@@ -29,6 +29,7 @@ import { AmberCyberAdmin } from "@/components/templates/AmberCyberAdmin";
 import { ExecutiveChrome } from "@/components/templates/ExecutiveChrome";
 import { BurgundyMaisonEA } from "@/components/templates/BurgundyMaisonEA";
 import { SilverLightEA } from "@/components/templates/SilverLightEA";
+import { SilverLightEAPixel } from "@/components/templates/SilverLightEAPixel";
 import {
   alexChen,
   amaraHassan,
@@ -683,6 +684,31 @@ const HAND_CODED_TEMPLATES: TemplateMeta[] = [
       "slate",
     ],
     addedAt: "2026-05-24T09:00:00Z",
+  },
+  {
+    slug: "silver-light-ea-pixel-handcoded",
+    name: "Silver Light EA (Pixel)",
+    tier: "premium",
+    tagline: "Pixel-mode build of Silver Light EA — source PNG rendered as full-bleed background, CV data overlaid on top",
+    description:
+      "First pixel-mode template in the catalog. Renders the source PNG (`public/templates/silver-light-ea-pixel-bg.png`) as a full-bleed background and overlays positioned CV data on top — instead of redrawing the design in SVG. Ships alongside the SVG-redraw version (`silver-light-ea-handcoded`, PR #43) so you can compare fidelity side-by-side at /templates. Chrome ribbon, scattered icons, and the photo-frame outline come from the source PNG directly. Silver-matched cover-up rectangles mask the baked-in mock text; real CV data sits on top.",
+    Component: SilverLightEAPixel,
+    sampleData: bpoBold,
+    mood: "refined",
+    source: "hand-coded",
+    tags: [
+      "executive-assistant",
+      "ea",
+      "corporate",
+      "light-canvas",
+      "silver",
+      "chrome",
+      "platinum",
+      "pixel-mode",
+      "png-background",
+      "high-fidelity",
+    ],
+    addedAt: "2026-05-24T10:00:00Z",
   },
 ];
 
