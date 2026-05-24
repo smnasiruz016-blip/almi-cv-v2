@@ -5,7 +5,8 @@ type AdminSection =
   | "comp-accounts"
   | "reviews"
   | "template-studio"
-  | "cost-log";
+  | "cost-log"
+  | "accounts";
 
 const TABS: {
   key: AdminSection;
@@ -30,6 +31,12 @@ const TABS: {
     key: "cost-log",
     href: "/admin/template-studio/cost-log",
     label: "💸 Cost Log",
+    founderOnly: true,
+  },
+  {
+    key: "accounts",
+    href: "/admin/accounts",
+    label: "👥 Accounts",
     founderOnly: true,
   },
 ];
