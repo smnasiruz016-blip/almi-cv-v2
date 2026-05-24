@@ -27,6 +27,7 @@ import { CyberNeonAdmin } from "@/components/templates/CyberNeonAdmin";
 import { VelvetGoldAdmin } from "@/components/templates/VelvetGoldAdmin";
 import { AmberCyberAdmin } from "@/components/templates/AmberCyberAdmin";
 import { ExecutiveChrome } from "@/components/templates/ExecutiveChrome";
+import { BurgundyMaisonEA } from "@/components/templates/BurgundyMaisonEA";
 import {
   alexChen,
   amaraHassan,
@@ -51,6 +52,7 @@ import { RECIPE_LIST } from "@/lib/recipes";
 import {
   PERSONAS,
   bpoBold,
+  bpoModern,
   bpoRefined,
   healthcareBoldIcu,
   healthcareRefined,
@@ -629,6 +631,32 @@ const HAND_CODED_TEMPLATES: TemplateMeta[] = [
       "travel-management",
     ],
     addedAt: "2026-05-24T06:15:00Z",
+  },
+  {
+    slug: "burgundy-maison-ea-handcoded",
+    name: "Burgundy Maison EA",
+    tier: "premium",
+    tagline: "Wine canvas + ornate gold filigree + vintage hospitality props — for luxury-maison EAs and concierge ops",
+    description:
+      "Premium vintage-luxury template for executive assistants in fine hospitality, 5-star hotel ops, and maison concierge teams. Deep burgundy gradient canvas with a thin double-ruled gold border, ornate gold-filigree circular photo frame top-right (24-petal laurel ring), and a maison prop scene across the lower half: leather suitcase with brass buckles, brass rotary telephone, red-roses bouquet in leather wrap, wax-sealed envelope, MAISON RÉSERVE wine bottle, fountain pen with gold nib. Cream/champagne display name in italic gold role tagline.",
+    Component: BurgundyMaisonEA,
+    sampleData: bpoModern,
+    mood: "refined",
+    source: "hand-coded",
+    tags: [
+      "executive-assistant",
+      "ea",
+      "concierge",
+      "hospitality",
+      "luxury-maison",
+      "burgundy",
+      "wine",
+      "gold-filigree",
+      "vintage",
+      "ornate",
+      "five-star-hotel",
+    ],
+    addedAt: "2026-05-24T07:30:00Z",
   },
 ];
 
