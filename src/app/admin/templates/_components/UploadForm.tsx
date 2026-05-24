@@ -84,18 +84,25 @@ export function UploadForm({ roles }: { roles: Role[] }) {
       <div className="grid gap-4 sm:grid-cols-2">
         <label className="block text-sm">
           <span className="block font-medium text-plum">Role</span>
-          <select
-            id="roleSlug"
-            name="roleSlug"
-            defaultValue={roles[0]?.slug ?? ""}
+          <input
+            id="roleName"
+            name="roleName"
+            type="text"
+            list="upload-roles-list"
+            defaultValue={roles[0]?.name ?? ""}
+            placeholder="Type to search — e.g. marketing specialist"
+            required
+            autoComplete="off"
+            spellCheck={false}
             className="mt-1 w-full rounded-lg border border-plum/20 bg-white px-3 py-2 text-sm"
-          >
+          />
+          <datalist id="upload-roles-list">
             {roles.map((r) => (
-              <option key={r.slug} value={r.slug}>
-                {r.name} ({r.sector})
+              <option key={r.slug} value={r.name}>
+                {r.sector}
               </option>
             ))}
-          </select>
+          </datalist>
         </label>
 
         <label className="block text-sm">
