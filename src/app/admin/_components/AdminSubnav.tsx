@@ -4,6 +4,7 @@ import { isFounder } from "@/lib/founder";
 type AdminSection =
   | "comp-accounts"
   | "reviews"
+  | "templates"
   | "template-studio"
   | "cost-log"
   | "accounts";
@@ -16,6 +17,12 @@ const TABS: {
 }[] = [
   { key: "comp-accounts", href: "/admin/comp-accounts", label: "🎁 Comp Accounts" },
   { key: "reviews", href: "/admin/reviews", label: "📝 Reviews" },
+  {
+    key: "templates",
+    href: "/admin/templates",
+    label: "🖼️ Templates",
+    founderOnly: true,
+  },
   // Studio tabs — gated by isFounder() at render time. Today the
   // founder set === the owner set (both read OWNER_EMAILS), so these
   // surface to every admin viewer. The founderOnly flag is in place

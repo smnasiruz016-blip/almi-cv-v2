@@ -30,16 +30,16 @@ enum TemplateTier {
 }
 
 model User {
-  id               String           @id @default(cuid())
-  name             String
-  email            String           @unique
-  passwordHash     String
-  role             UserRole         @default(USER)
-  subscriptionTier SubscriptionTier @default(FREE)
-  sessions         Session[]
+  id                  String               @id @default(cuid())
+  name                String
+  email               String               @unique
+  passwordHash        String
+  role                UserRole             @default(USER)
+  subscriptionTier    SubscriptionTier     @default(FREE)
+  sessions            Session[]
   passwordResetTokens PasswordResetToken[]
-  resumes          Resume[]
-  chatMessages     ChatMessage[]
+  resumes             Resume[]
+  chatMessages        ChatMessage[]
 
   // Stripe subscription state — kept in lockstep with subscriptionTier by webhook.
   stripeCustomerId              String?   @unique
@@ -67,7 +67,7 @@ model User {
   marketingOptIn   Boolean   @default(false)
   marketingOptInAt DateTime?
 
-  reviews   Review[]
+  reviews Review[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt
@@ -102,23 +102,23 @@ model PasswordResetToken {
 }
 
 model Resume {
-  id           String         @id @default(cuid())
-  userId       String
-  title        String         @default("Untitled CV")
-  templateKey  String         @default("brand-essence")
-  templateTier TemplateTier   @default(FREE)
-  status       DocumentStatus @default(DRAFT)
-  draftData    Json?
-  template     String         @default("classic-serif")
-  data         Json           @default("{}")
-  isDraft      Boolean        @default(true)
+  id             String         @id @default(cuid())
+  userId         String
+  title          String         @default("Untitled CV")
+  templateKey    String         @default("brand-essence")
+  templateTier   TemplateTier   @default(FREE)
+  status         DocumentStatus @default(DRAFT)
+  draftData      Json?
+  template       String         @default("classic-serif")
+  data           Json           @default("{}")
+  isDraft        Boolean        @default(true)
   lastSnapshot   Json?
   lastSnapshotAt DateTime?
-  user         User           @relation(fields: [userId], references: [id], onDelete: Cascade)
-  coverLetters CoverLetter[]
-  chatMessages ChatMessage[]
-  createdAt    DateTime       @default(now())
-  updatedAt    DateTime       @default(now()) @updatedAt
+  user           User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  coverLetters   CoverLetter[]
+  chatMessages   ChatMessage[]
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @default(now()) @updatedAt
 
   @@index([userId, updatedAt])
   @@index([userId, isDraft])
@@ -230,11 +230,34 @@ model Recipe {
   previewPersonaId String
   status           RecipeStatus @default(DRAFT)
   createdAt        DateTime     @default(now())
-  createdBy        String       // owner email at time of creation
+  createdBy        String // owner email at time of creation
   publishedAt      DateTime?
 
   @@index([status, role, mood])
   @@index([publishedAt])
+}
+
+// Image-only template gallery rows uploaded by founders through
+// /admin/templates. Parallel to (not replacing) the code-rendered
+// Recipe + TS-module templates in src/lib/templates.ts — these rows
+// are static screenshots used for the public template index and the
+// 263 role-template SEO hubs (/templates/role/[roleSlug]).
+//
+// roleSlug is validated against JOB_ROLES in src/lib/roles.ts at
+// write time (server action). Stored as a plain string — not a
+// Prisma relation — because JOB_ROLES is a TS file, not a table.
+model TemplateImage {
+  id               String   @id @default(cuid())
+  title            String
+  slug             String   @unique
+  roleSlug         String
+  imageUrl         String
+  filenameOriginal String
+  active           Boolean  @default(true)
+  createdAt        DateTime @default(now())
+
+  @@index([roleSlug, active, createdAt])
+  @@index([active, createdAt])
 }
 
 // Append-only ledger of Anthropic API calls made by the Studio.
