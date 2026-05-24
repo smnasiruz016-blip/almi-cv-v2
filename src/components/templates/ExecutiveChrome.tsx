@@ -225,8 +225,12 @@ function DiamondPhoto({ data }: { data: CVData }) {
 }
 
 /** Right-column floating 3D office + travel props — desktop monitor,
- *  laptop, briefcase, papers, calendar, two commercial airplanes, blue
- *  diamond sparkles. Matches the prop cluster in the source PNG. */
+ *  laptop, briefcase, papers, calendar, a stylized globe on a chrome
+ *  stand, a row of world-time clocks (NYC / LON / DXB), and blue
+ *  diamond sparkles. The globe + clocks replaced an earlier pair of
+ *  airplane silhouettes that read as toy-like at this scale; both
+ *  new props deliver the same "international executive schedule"
+ *  signal but render cleanly in flat SVG. */
 function ExecProps() {
   return (
     <svg
@@ -315,49 +319,121 @@ function ExecProps() {
         <rect x="-4" y="-4" width="8" height="8" fill={SKY_BRIGHT} />
       </g>
 
-      {/* Commercial airplane #1 — angled right-down */}
-      <g transform="translate(60, 390) rotate(8)">
-        {/* fuselage */}
-        <ellipse cx="60" cy="0" rx="62" ry="6" fill={PROP_BODY} stroke={CHROME_DEEP} strokeWidth="0.9" />
-        {/* tail fin */}
-        <polygon points="2,0 12,-14 22,0" fill={PROP_BODY} stroke={CHROME_DEEP} strokeWidth="0.9" />
-        {/* wings */}
-        <polygon points="48,-2 56,-18 68,-18 78,-2" fill={CHROME_LIGHT} stroke={CHROME_DEEP} strokeWidth="0.9" />
-        <polygon points="48,2 56,18 68,18 78,2" fill={CHROME_MID} stroke={CHROME_DEEP} strokeWidth="0.9" />
-        {/* nose */}
-        <ellipse cx="118" cy="0" rx="6" ry="4" fill={NAVY_LIFT} stroke={CHROME_DEEP} strokeWidth="0.7" />
-        {/* windows */}
-        <g fill={SKY} opacity="0.7">
-          <rect x="40" y="-2" width="3" height="2" />
-          <rect x="48" y="-2" width="3" height="2" />
-          <rect x="56" y="-2" width="3" height="2" />
-          <rect x="80" y="-2" width="3" height="2" />
-          <rect x="88" y="-2" width="3" height="2" />
-          <rect x="96" y="-2" width="3" height="2" />
-        </g>
+      {/* Globe on chrome stand — "international scope" signal.
+          Replaces the prior airplane #1 silhouette which read as toy-like. */}
+      <g transform="translate(60, 380)">
+        <defs>
+          <radialGradient id="globe-sphere-fill" cx="0.32" cy="0.32" r="0.85">
+            <stop offset="0%" stopColor={CHROME_HIGHLIGHT} />
+            <stop offset="35%" stopColor={SKY_BRIGHT} />
+            <stop offset="70%" stopColor={SKY} />
+            <stop offset="100%" stopColor={NAVY_LIFT} />
+          </radialGradient>
+        </defs>
+        {/* Sphere */}
+        <circle cx="50" cy="50" r="44" fill="url(#globe-sphere-fill)" stroke={CHROME_DEEP} strokeWidth="1.2" />
+        {/* Latitude rings */}
+        <ellipse cx="50" cy="30" rx="42" ry="5" fill="none" stroke={CHROME_LIGHT} strokeWidth="0.7" opacity="0.55" />
+        <ellipse cx="50" cy="50" rx="44" ry="12" fill="none" stroke={CHROME_LIGHT} strokeWidth="0.7" opacity="0.55" />
+        <ellipse cx="50" cy="70" rx="42" ry="5" fill="none" stroke={CHROME_LIGHT} strokeWidth="0.7" opacity="0.55" />
+        {/* Longitude rings (two ellipse widths to suggest sphere curvature) */}
+        <ellipse cx="50" cy="50" rx="14" ry="44" fill="none" stroke={CHROME_LIGHT} strokeWidth="0.7" opacity="0.55" />
+        <ellipse cx="50" cy="50" rx="30" ry="44" fill="none" stroke={CHROME_LIGHT} strokeWidth="0.7" opacity="0.55" />
+        {/* Simplified Africa-ish continent silhouette */}
+        <path
+          d="M 45 28 Q 56 28 60 38 Q 64 46 58 54 Q 60 64 52 72 Q 46 76 42 70 Q 38 60 42 50 Q 38 40 45 28 Z"
+          fill={NAVY_DEEP}
+          opacity="0.85"
+        />
+        {/* Stand: vertical post + oval base */}
+        <line x1="50" y1="94" x2="50" y2="106" stroke={CHROME_DEEP} strokeWidth="2" />
+        <ellipse cx="50" cy="108" rx="14" ry="3" fill={CHROME_MID} stroke={CHROME_DEEP} strokeWidth="0.8" />
       </g>
 
       {/* Diamond sparkle */}
-      <g transform="translate(180, 470) rotate(45)" opacity="0.9">
+      <g transform="translate(180, 510) rotate(45)" opacity="0.9">
         <rect x="-5" y="-5" width="10" height="10" fill={SKY_BRIGHT} filter="url(#sparkle-glow-2)" />
         <rect x="-5" y="-5" width="10" height="10" fill={SKY_BRIGHT} />
       </g>
 
-      {/* Commercial airplane #2 — smaller, lower */}
-      <g transform="translate(80, 540) rotate(-6)">
-        <ellipse cx="50" cy="0" rx="52" ry="5" fill={PROP_BODY} stroke={CHROME_DEEP} strokeWidth="0.8" />
-        <polygon points="2,0 10,-12 18,0" fill={PROP_BODY} stroke={CHROME_DEEP} strokeWidth="0.8" />
-        <polygon points="40,-2 46,-15 56,-15 64,-2" fill={CHROME_LIGHT} stroke={CHROME_DEEP} strokeWidth="0.8" />
-        <polygon points="40,2 46,15 56,15 64,2" fill={CHROME_MID} stroke={CHROME_DEEP} strokeWidth="0.8" />
-        <ellipse cx="98" cy="0" rx="5" ry="3.4" fill={NAVY_LIFT} stroke={CHROME_DEEP} strokeWidth="0.6" />
-        <g fill={SKY} opacity="0.7">
-          <rect x="34" y="-1.5" width="2.5" height="1.5" />
-          <rect x="42" y="-1.5" width="2.5" height="1.5" />
-          <rect x="50" y="-1.5" width="2.5" height="1.5" />
-          <rect x="68" y="-1.5" width="2.5" height="1.5" />
-          <rect x="76" y="-1.5" width="2.5" height="1.5" />
-          <rect x="84" y="-1.5" width="2.5" height="1.5" />
-        </g>
+      {/* World-time clocks row — NYC / LON / DXB. Signals international
+          executive schedule management. Replaces airplane #2. Hour + minute
+          angles computed inline so each clock genuinely reads a different
+          local time at a glance. */}
+      <g transform="translate(28, 540)">
+        {[
+          { cx: 24, label: "NYC", h: 8, m: 30 },
+          { cx: 82, label: "LON", h: 13, m: 30 },
+          { cx: 140, label: "DXB", h: 16, m: 30 },
+        ].map(({ cx, label, h, m }) => {
+          const hourDeg = (h % 12) * 30 + m / 2 - 90;
+          const minDeg = m * 6 - 90;
+          const hr = (hourDeg * Math.PI) / 180;
+          const mr = (minDeg * Math.PI) / 180;
+          const hourLen = 10;
+          const minLen = 14;
+          return (
+            <g key={label}>
+              {/* Outer rim */}
+              <circle cx={cx} cy={22} r={20} fill={CHROME_MID} stroke={CHROME_DEEP} strokeWidth={1.5} />
+              {/* Inner face */}
+              <circle cx={cx} cy={22} r={17} fill={NAVY_MID} stroke={CHROME_HIGHLIGHT} strokeWidth={0.5} />
+              {/* Hour ticks — every 3rd tick is thicker for the cardinal marks */}
+              {Array.from({ length: 12 }).map((_, i) => {
+                const a = ((i * 30 - 90) * Math.PI) / 180;
+                const x1 = cx + 15 * Math.cos(a);
+                const y1 = 22 + 15 * Math.sin(a);
+                const x2 = cx + 17 * Math.cos(a);
+                const y2 = 22 + 17 * Math.sin(a);
+                return (
+                  <line
+                    key={i}
+                    x1={x1}
+                    y1={y1}
+                    x2={x2}
+                    y2={y2}
+                    stroke={CHROME_HIGHLIGHT}
+                    strokeWidth={i % 3 === 0 ? 1.4 : 0.7}
+                  />
+                );
+              })}
+              {/* Hour hand */}
+              <line
+                x1={cx}
+                y1={22}
+                x2={cx + hourLen * Math.cos(hr)}
+                y2={22 + hourLen * Math.sin(hr)}
+                stroke={CHROME_HIGHLIGHT}
+                strokeWidth={2}
+                strokeLinecap="round"
+              />
+              {/* Minute hand */}
+              <line
+                x1={cx}
+                y1={22}
+                x2={cx + minLen * Math.cos(mr)}
+                y2={22 + minLen * Math.sin(mr)}
+                stroke={SKY_BRIGHT}
+                strokeWidth={1.4}
+                strokeLinecap="round"
+              />
+              {/* Center pin */}
+              <circle cx={cx} cy={22} r={1.6} fill={CHROME_HIGHLIGHT} />
+              {/* City label */}
+              <text
+                x={cx}
+                y={56}
+                textAnchor="middle"
+                fontSize={8}
+                fill={SKY_BRIGHT}
+                fontWeight="bold"
+                letterSpacing={1.4}
+              >
+                {label}
+              </text>
+            </g>
+          );
+        })}
       </g>
 
       {/* Diamond sparkle */}
