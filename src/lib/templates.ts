@@ -28,6 +28,7 @@ import { VelvetGoldAdmin } from "@/components/templates/VelvetGoldAdmin";
 import { AmberCyberAdmin } from "@/components/templates/AmberCyberAdmin";
 import { ExecutiveChrome } from "@/components/templates/ExecutiveChrome";
 import { BurgundyMaisonEA } from "@/components/templates/BurgundyMaisonEA";
+import { SilverLightEA } from "@/components/templates/SilverLightEA";
 import {
   alexChen,
   amaraHassan,
@@ -657,6 +658,31 @@ const HAND_CODED_TEMPLATES: TemplateMeta[] = [
       "five-star-hotel",
     ],
     addedAt: "2026-05-24T07:30:00Z",
+  },
+  {
+    slug: "silver-light-ea-handcoded",
+    name: "Silver Light EA",
+    tier: "premium",
+    tagline: "Soft silver-grey canvas with rectangular chrome photo frame, scattered slate icons, and a chrome ribbon across the lower half",
+    description:
+      "Premium light-canvas template for executive assistants and corporate-ops professionals who prefer a clean restrained look over a heavy dark palette. Soft silver-grey gradient page with faint lined edges, dark slate ink throughout, large rectangular chrome-framed portrait photo top-left, big bold dark-navy display name. Scattered minimal slate-line icons (clipboard with check, padlock, lab flask, briefcase, monitor) read as office workflow without crowding. Brushed-chrome ribbon sweeps across the lower half for the metallic accent.",
+    Component: SilverLightEA,
+    sampleData: bpoBold,
+    mood: "refined",
+    source: "hand-coded",
+    tags: [
+      "executive-assistant",
+      "ea",
+      "corporate",
+      "light-canvas",
+      "silver",
+      "chrome",
+      "platinum",
+      "rectangular-photo",
+      "minimal-icons",
+      "slate",
+    ],
+    addedAt: "2026-05-24T09:00:00Z",
   },
 ];
 
