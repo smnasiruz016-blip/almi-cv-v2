@@ -25,6 +25,7 @@ import { BeautyArtist } from "@/components/templates/BeautyArtist";
 import { ChefMenu } from "@/components/templates/ChefMenu";
 import { CyberNeonAdmin } from "@/components/templates/CyberNeonAdmin";
 import { VelvetGoldAdmin } from "@/components/templates/VelvetGoldAdmin";
+import { AmberCyberAdmin } from "@/components/templates/AmberCyberAdmin";
 import {
   alexChen,
   amaraHassan,
@@ -573,6 +574,33 @@ const HAND_CODED_TEMPLATES: TemplateMeta[] = [
       "office-props",
     ],
     addedAt: "2026-05-24T03:15:00Z",
+  },
+  {
+    slug: "amber-cyber-admin-handcoded",
+    name: "Amber Cyber Admin",
+    tier: "premium",
+    tagline: "Warm-amber neon counterpart to Cyber Neon Admin — for tech-forward admin & ops roles",
+    description:
+      "Premium cyber/tech-UI template, warm-amber colorway. The hot cousin of Cyber Neon Admin (cool cyan-green): near-black canvas with sweeping amber light streaks, octagon photo badge top-left (mirrored from the green version), chevron-marker section titles (▶ EXPERIENCE), and a dense right-column tech cluster (server racks, network graph, terminal panel, bar chart, wireframe cubes). Chrome-styled name with amber outline. Same audience as Cyber Neon: office managers, executive assistants, ops leads.",
+    Component: AmberCyberAdmin,
+    sampleData: bpoBold,
+    mood: "bold",
+    source: "hand-coded",
+    tags: [
+      "admin",
+      "office-manager",
+      "operations",
+      "tech-adjacent",
+      "cyber",
+      "amber",
+      "neon",
+      "dark",
+      "futuristic",
+      "octagon",
+      "chevron",
+      "server-rack",
+    ],
+    addedAt: "2026-05-24T04:45:00Z",
   },
 ];
 
