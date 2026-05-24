@@ -4,7 +4,7 @@ import { revalidatePath } from "next/cache";
 import { put, del } from "@vercel/blob";
 import { requireFounder } from "@/lib/founder";
 import { prisma } from "@/lib/db";
-import { getRoleBySlug } from "@/lib/roles";
+import { JOB_ROLES } from "@/lib/roles";
 import { slugifyTitle } from "@/lib/template-images";
 
 const MAX_FILE_BYTES = 8 * 1024 * 1024;
@@ -20,10 +20,25 @@ export async function uploadTemplateImages(
   try {
     await requireFounder();
 
-    const roleSlug = String(formData.get("roleSlug") ?? "");
-    if (!getRoleBySlug(roleSlug)) {
-      return { ok: false, error: `Unknown role slug: ${roleSlug}` };
+    // The form submits the role NAME (the datalist input is name-valued
+    // for readable post-selection UX); resolve to a canonical role here.
+    // Match is case-insensitive against role.name and any aliases — both
+    // of which originate from JOB_ROLES in src/lib/roles.ts, so the
+    // strict-against-roles.ts invariant is preserved.
+    const roleNameInput = String(formData.get("roleName") ?? "").trim();
+    if (!roleNameInput) {
+      return { ok: false, error: "Pick a role." };
     }
+    const q = roleNameInput.toLowerCase();
+    const role = JOB_ROLES.find(
+      (r) =>
+        r.name.toLowerCase() === q ||
+        (r.aliases ?? []).some((a) => a.toLowerCase() === q),
+    );
+    if (!role) {
+      return { ok: false, error: `Unknown role: ${roleNameInput}` };
+    }
+    const roleSlug = role.slug;
 
     const files = formData.getAll("files").filter((f): f is File => f instanceof File);
     const titles = formData.getAll("titles").map((t) => String(t));
