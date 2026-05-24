@@ -24,6 +24,7 @@ import { ScrapbookJournal } from "@/components/templates/ScrapbookJournal";
 import { BeautyArtist } from "@/components/templates/BeautyArtist";
 import { ChefMenu } from "@/components/templates/ChefMenu";
 import { CyberNeonAdmin } from "@/components/templates/CyberNeonAdmin";
+import { VelvetGoldAdmin } from "@/components/templates/VelvetGoldAdmin";
 import {
   alexChen,
   amaraHassan,
@@ -546,6 +547,32 @@ const HAND_CODED_TEMPLATES: TemplateMeta[] = [
       "circuit",
     ],
     addedAt: "2026-05-24T01:30:00Z",
+  },
+  {
+    slug: "velvet-gold-admin-handcoded",
+    name: "Velvet Gold Admin",
+    tier: "premium",
+    tagline: "Dark velvet CV with a swirling satin ribbon, gold name, and floating office props — for refined admin & ops roles",
+    description:
+      "Premium velvet/satin template for office managers, executive assistants, and operations leads who want a refined dark aesthetic rather than a cyber one. Deep indigo canvas with violet and peach halos, a signature silky satin ribbon swirling diagonally across the page, scattered gold diamond sparkles, and floating isometric office props (desktop monitor, office chair, document stack) on the right. Bright gold display name with glow; circular cream-bordered photo top-left.",
+    Component: VelvetGoldAdmin,
+    sampleData: bpoBold,
+    mood: "refined",
+    source: "hand-coded",
+    tags: [
+      "admin",
+      "office-manager",
+      "operations",
+      "executive-assistant",
+      "velvet",
+      "satin",
+      "silk-ribbon",
+      "gold",
+      "dark",
+      "refined",
+      "office-props",
+    ],
+    addedAt: "2026-05-24T03:15:00Z",
   },
 ];
 
