@@ -612,7 +612,7 @@ const HAND_CODED_TEMPLATES: TemplateMeta[] = [
     tier: "premium",
     tagline: "Royal-navy + brushed-silver CV with a rotated diamond photo frame — for C-suite EAs and corporate ops",
     description:
-      "Premium polished-corporate template for Executive Assistants to C-suite, Chiefs of Staff, and senior corporate operations. Royal-navy gradient canvas with a sweeping brushed-silver chrome ribbon across the middle, rotated diamond photo frame with chrome border top-right, banner-shaped parallelogram section labels (\"EXPERIENCE\", \"SKILLS\", \"EDUCATION\"), and a floating 3D office + travel prop cluster on the right (desktop monitor, briefcase, papers, calendar, two commercial airplanes, blue diamond sparkles). White display name with text-shadow gravitas.",
+      "Premium polished-corporate template for Executive Assistants to C-suite, Chiefs of Staff, and senior corporate operations. Royal-navy gradient canvas with a sweeping brushed-silver chrome ribbon across the middle, rotated diamond photo frame with chrome border top-right, banner-shaped parallelogram section labels (\"EXPERIENCE\", \"SKILLS\", \"EDUCATION\"), and a floating prop cluster on the right (desktop monitor, briefcase, papers, calendar, a chrome-stand globe, a row of NYC / LON / DXB world-time clocks, and blue diamond sparkles). White display name with text-shadow gravitas.",
     Component: ExecutiveChrome,
     sampleData: bpoRefined,
     mood: "refined",
