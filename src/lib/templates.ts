@@ -14,7 +14,7 @@
 
 import type { ComponentType } from "react";
 import type { CVData } from "@/lib/cv-types";
-import { ClassicSerif } from "@/components/templates/ClassicSerif";
+import { NeutralDefault } from "@/components/templates/NeutralDefault";
 
 export type TemplateMeta = {
   slug: string;
@@ -29,14 +29,14 @@ export type TemplateMeta = {
 
 export const TEMPLATE_LIST: TemplateMeta[] = [
   {
-    slug: "classic-serif",
-    name: "Classic Serif",
+    slug: "neutral-default",
+    name: "Neutral Default",
     tier: "free",
-    tagline: "Timeless · Formal · Single-column",
+    tagline: "Clean · ATS-friendly · Print-safe",
     description:
-      "A timeless, formal CV layout with a single-column structure. Designed for executives, consultants, and traditional industries.",
-    Component: ClassicSerif,
-    addedAt: "2025-10-01T00:00:00.000Z",
+      "The single CV layout the builder uses by default. ATS-friendly typography, generous whitespace, A4-print-safe. Sections render only when their data is present, so the template adapts to whatever the parsed PNG or user input provides.",
+    Component: NeutralDefault,
+    addedAt: "2026-05-25T00:00:00.000Z",
   },
 ];
 
