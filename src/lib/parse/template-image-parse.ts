@@ -32,7 +32,6 @@
 //     We accept whatever the model returns and surface the role string
 //     to the builder; downstream code can resolve to a slug if needed.
 
-import Anthropic from "@anthropic-ai/sdk";
 import { randomUUID } from "crypto";
 import { z } from "zod";
 import {
@@ -42,6 +41,7 @@ import {
   type GenerationType,
 } from "@/lib/studio-cost";
 import { MODELS } from "@/lib/ai/models";
+import { getAnthropicClient } from "@/lib/ai/anthropic-client";
 import { JOB_ROLES } from "@/lib/roles";
 import type { CVData } from "@/lib/cv-types";
 
@@ -355,8 +355,11 @@ export async function parseTemplateImageFromUrl(
 ): Promise<ParseTemplateImageResult> {
   const generationId = randomUUID();
 
-  const apiKey = process.env.ANTHROPIC_API_KEY;
-  if (!apiKey || apiKey.length < 20) {
+  // The wrapper throws when ANTHROPIC_API_KEY is missing — preserve
+  // the prior graceful-skip behavior by guarding before the call.
+  // Lets the backfill script see {ok: false, error: "...missing..."}
+  // and write parseError without raising.
+  if (!process.env.ANTHROPIC_API_KEY) {
     return {
       ok: false,
       error: "ANTHROPIC_API_KEY missing — parse skipped.",
@@ -382,11 +385,15 @@ export async function parseTemplateImageFromUrl(
     };
   }
 
-  const client = new Anthropic({ apiKey });
+  const client = getAnthropicClient();
   const systemPrompt = buildSystemPrompt();
 
   let message;
   try {
+    // Rate-limit pacing + 429/5xx/network retry happens INSIDE the
+    // wrapper. By the time this await resolves, transient failures
+    // have already been absorbed silently — only permanent failures
+    // (auth, malformed input, content policy) surface here.
     message = await client.messages.create({
       model: PARSE_MODEL,
       max_tokens: MAX_OUTPUT_TOKENS,
