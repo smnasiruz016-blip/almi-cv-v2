@@ -2,7 +2,10 @@
 
 import { useRef, useState, useTransition } from "react";
 import { uploadTemplateImages, type UploadResult } from "../actions";
-import { titleFromFilename } from "@/lib/template-images";
+import {
+  isNumericLikeTitle,
+  titleFromFilename,
+} from "@/lib/template-images";
 import type { Role } from "@/lib/roles";
 
 // <form onSubmit={...}> with every field carrying a `name` attribute
@@ -27,13 +30,55 @@ import type { Role } from "@/lib/roles";
 // disabled and clicks silently no-op'd. onSubmit + FormData(form) is
 // robust against state desync because it reads directly from the DOM.
 
-export function UploadForm({ roles }: { roles: Role[] }) {
+type Props = {
+  roles: Role[];
+  // Existing-count map per role slug. Used by the smart-title generator
+  // to position auto-numbered titles ("${roleName} Design ${N}") past
+  // any rows already in the DB. Includes hidden rows so re-uploading
+  // doesn't reuse a previously-burned number.
+  existingCountByRole: Record<string, number>;
+};
+
+export function UploadForm({ roles, existingCountByRole }: Props) {
   const [titles, setTitles] = useState<string[]>([]);
   const [filenames, setFilenames] = useState<string[]>([]);
+  const [roleInput, setRoleInput] = useState<string>(roles[0]?.name ?? "");
   const [state, setState] = useState<UploadResult | null>(null);
   const [isPending, startTransition] = useTransition();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
+
+  // Resolve the typed role name (case-insensitive, alias-aware — same
+  // contract the server enforces). Returns the canonical Role or null
+  // if the input doesn't match anything. Used for smart-title gen.
+  function resolveRole(typed: string): Role | null {
+    const q = typed.trim().toLowerCase();
+    if (!q) return null;
+    return (
+      roles.find(
+        (r) =>
+          r.name.toLowerCase() === q ||
+          (r.aliases ?? []).some((a) => a.toLowerCase() === q),
+      ) ?? null
+    );
+  }
+
+  // For numeric/short Canva filenames ("1.png", "3.png"), generate
+  //   `${role.name} Design ${position}`
+  // where position = existing count for role + index in current batch.
+  // For meaningful filenames ("modern-design.png"), keep the existing
+  // title-from-filename behavior.
+  function generateTitles(files: File[], typedRole: string): string[] {
+    const role = resolveRole(typedRole);
+    const existing = role ? (existingCountByRole[role.slug] ?? 0) : 0;
+    return files.map((f, i) => {
+      const fromFilename = titleFromFilename(f.name);
+      if (!isNumericLikeTitle(fromFilename)) return fromFilename;
+      if (!role) return fromFilename; // can't auto-number without a role
+      const position = existing + i + 1;
+      return `${role.name} Design ${position}`;
+    });
+  }
 
   function onFilesPicked(list: FileList | null) {
     if (!list || list.length === 0) {
@@ -42,8 +87,21 @@ export function UploadForm({ roles }: { roles: Role[] }) {
       return;
     }
     const arr = Array.from(list);
-    setTitles(arr.map((f) => titleFromFilename(f.name)));
+    setTitles(generateTitles(arr, roleInput));
     setFilenames(arr.map((f) => f.name));
+  }
+
+  // When the founder edits the role AFTER picking files, re-derive any
+  // titles that were auto-generated. Manually-edited titles aren't
+  // tracked separately — re-typing the role re-runs generateTitles on
+  // the current filenames. That's fine: the typical flow is pick role,
+  // then files, not the reverse.
+  function onRoleChanged(value: string) {
+    setRoleInput(value);
+    if (filenames.length > 0 && fileInputRef.current?.files) {
+      const arr = Array.from(fileInputRef.current.files);
+      setTitles(generateTitles(arr, value));
+    }
   }
 
   function clearAll() {
@@ -76,8 +134,9 @@ export function UploadForm({ roles }: { roles: Role[] }) {
         <h2 className="font-display text-lg text-plum">Upload templates</h2>
         <p className="mt-1 text-sm text-plum-soft">
           Pick a role, then drop image files. Titles auto-suggest from
-          filenames — edit before submitting. Slugs are derived from the
-          final title.
+          filenames; for purely numeric filenames (Canva exports) they
+          auto-number per role — edit any field before submitting. Slugs
+          are derived from the final title.
         </p>
       </div>
 
@@ -89,7 +148,8 @@ export function UploadForm({ roles }: { roles: Role[] }) {
             name="roleName"
             type="text"
             list="upload-roles-list"
-            defaultValue={roles[0]?.name ?? ""}
+            value={roleInput}
+            onChange={(e) => onRoleChanged(e.target.value)}
             placeholder="Type to search — e.g. marketing specialist"
             required
             autoComplete="off"
