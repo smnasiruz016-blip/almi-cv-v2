@@ -4,6 +4,11 @@ const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
       { protocol: "https", hostname: "images.unsplash.com" },
+      // Vercel Blob — TemplateImage uploads from /admin/templates land here
+      // (see src/lib/photo-upload.ts + src/app/admin/templates/actions.ts).
+      // The hash-prefixed subdomain is per-project, so the wildcard
+      // matches whatever Blob host this project resolves to.
+      { protocol: "https", hostname: "*.public.blob.vercel-storage.com" },
     ],
   },
   experimental: {

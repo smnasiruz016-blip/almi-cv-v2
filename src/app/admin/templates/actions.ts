@@ -99,6 +99,9 @@ export async function uploadTemplateImages(
     }
 
     revalidatePath("/admin/templates");
+    revalidatePath("/templates");
+    revalidatePath(`/templates/role/${roleSlug}`);
+    revalidatePath("/");
     return { ok: true, created };
   } catch (err) {
     console.error("uploadTemplateImages failed", err);
@@ -114,8 +117,14 @@ export async function setTemplateImageActive(
   active: boolean,
 ): Promise<void> {
   await requireFounder();
-  await prisma.templateImage.update({ where: { id }, data: { active } });
+  const row = await prisma.templateImage.update({
+    where: { id },
+    data: { active },
+  });
   revalidatePath("/admin/templates");
+  revalidatePath("/templates");
+  revalidatePath(`/templates/role/${row.roleSlug}`);
+  revalidatePath("/");
 }
 
 export async function updateTemplateImageTitle(
@@ -125,11 +134,13 @@ export async function updateTemplateImageTitle(
   await requireFounder();
   const trimmed = title.trim();
   if (!trimmed) return { ok: false, error: "Title cannot be empty." };
-  await prisma.templateImage.update({
+  const row = await prisma.templateImage.update({
     where: { id },
     data: { title: trimmed },
   });
   revalidatePath("/admin/templates");
+  revalidatePath("/templates");
+  revalidatePath(`/templates/role/${row.roleSlug}`);
   return { ok: true };
 }
 
@@ -147,6 +158,9 @@ export async function deleteTemplateImage(id: string): Promise<void> {
   }
   await prisma.templateImage.delete({ where: { id } });
   revalidatePath("/admin/templates");
+  revalidatePath("/templates");
+  revalidatePath(`/templates/role/${row.roleSlug}`);
+  revalidatePath("/");
 }
 
 async function uniqueSlug(base: string): Promise<string> {
@@ -270,6 +284,10 @@ async function regenerateNumericTitlesScoped(
     );
 
     revalidatePath("/admin/templates");
+    revalidatePath("/templates");
+    for (const p of perRole) {
+      revalidatePath(`/templates/role/${p.roleSlug}`);
+    }
     return { ok: true, updated: updates.length, perRole };
   } catch (err) {
     console.error("regenerateNumericTitlesScoped failed", err);

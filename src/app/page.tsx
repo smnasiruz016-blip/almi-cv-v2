@@ -9,8 +9,14 @@ import { Crown } from "lucide-react";
 import { TemplateThumbnail } from "@/components/templates/TemplateThumbnail";
 import { TEMPLATE_LIST } from "@/lib/templates";
 import { getCurrentUser } from "@/lib/auth";
+import { countActiveTemplateImagesByRole } from "@/lib/template-images";
 import { NewsletterCard } from "@/components/newsletter/NewsletterCard";
 import { SiteHeader } from "@/components/site-header";
+
+// Hourly ISR — the TrustSection count below depends on
+// countActiveTemplateImagesByRole, which is a DB query. Pages cached
+// for an hour; new uploads bust the cache via revalidatePath('/').
+export const revalidate = 3600;
 
 type TrustStat = {
   value: string;
@@ -18,12 +24,18 @@ type TrustStat = {
   href?: string;
 };
 
-const TRUST_STATS: TrustStat[] = [
-  { value: "942 sources", label: "Trusted job boards" },
-  { value: "60+ designs", label: "Coming soon" },
-  { value: "From $7/month", label: "7-day free trial", href: "/pricing" },
-  { value: "Multilingual", label: "Built-in translation" },
-];
+function buildTrustStats(designs: number, roles: number): TrustStat[] {
+  return [
+    { value: "942 sources", label: "Trusted job boards" },
+    {
+      value: `${designs} designs`,
+      label: `Across ${roles} roles`,
+      href: "/templates",
+    },
+    { value: "From $7/month", label: "7-day free trial", href: "/pricing" },
+    { value: "Multilingual", label: "Built-in translation" },
+  ];
+}
 
 const STEPS = [
   {
@@ -44,14 +56,23 @@ const STEPS = [
 ];
 
 export default async function HomePage() {
-  const user = await getCurrentUser();
+  const [user, countMap] = await Promise.all([
+    getCurrentUser(),
+    countActiveTemplateImagesByRole(),
+  ]);
   const isLoggedIn = Boolean(user);
+  const totalDesigns = Array.from(countMap.values()).reduce(
+    (sum, n) => sum + n,
+    0,
+  );
+  const populatedRoles = countMap.size;
+  const trustStats = buildTrustStats(totalDesigns, populatedRoles);
 
   return (
     <main>
       <SiteHeader isLoggedIn={isLoggedIn} />
       <HeroSection isLoggedIn={isLoggedIn} />
-      <TrustSection />
+      <TrustSection stats={trustStats} />
       <TemplatesSection />
       <HowItWorksSection />
       <FinalCTASection isLoggedIn={isLoggedIn} />
@@ -125,7 +146,7 @@ function HeroSection({ isLoggedIn }: { isLoggedIn: boolean }) {
   );
 }
 
-function TrustSection() {
+function TrustSection({ stats }: { stats: TrustStat[] }) {
   return (
     <Section className="bg-cream-soft py-18">
       <Container>
@@ -133,7 +154,7 @@ function TrustSection() {
           Built for the world
         </p>
         <div className="mt-10 grid grid-cols-2 gap-8 md:grid-cols-4">
-          {TRUST_STATS.map((stat) => {
+          {stats.map((stat) => {
             const inner = (
               <>
                 <p className="font-display text-3xl text-coral">

@@ -2,9 +2,9 @@
  * Chunked sitemap with async-id pattern from day one.
  *
  * Coverage:
- *   - Chunk 0: statics (6) + 23 templates + 196 /jobs/[country] + 193
- *     cv-guide country hubs + 1 /cv-guide index = ~419 URLs (preserved
- *     + new hubs)
+ *   - Chunk 0: statics (7) + 23 templates + N /templates/role/[slug]
+ *     hubs (one per role with active TemplateImage rows, ~61 today)
+ *     + 196 /jobs/[country] + 193 cv-guide country hubs = ~480 URLs
  *   - Chunks 1..N: 263 × 193 = 50,759 /cv-guide/[country]/[role] URLs,
  *     split into 25,000-URL chunks (3 chunks at current scale)
  *
@@ -25,6 +25,7 @@ import { COUNTRY_LANDING } from "@/lib/country-landing";
 import { TEMPLATE_LIST } from "@/lib/templates";
 import { COUNTRIES_SERVED } from "@/lib/countries";
 import { JOB_ROLES } from "@/lib/roles";
+import { listPopulatedRoleSlugs } from "@/lib/template-images";
 
 const SITE_ORIGIN = "https://almicv.almiworld.com";
 const CHUNK = 25000;
@@ -97,6 +98,19 @@ export default async function sitemap({
       priority: 0.6,
     }));
 
+    // /templates/role/[roleSlug] hubs — only roles with active uploads
+    // (per doctrine #3: no thin-content hubs for empty roles). Built
+    // at build-time, sitemap re-reads on each rebuild.
+    const populatedRoleSlugs = await listPopulatedRoleSlugs();
+    const roleHubEntries: MetadataRoute.Sitemap = populatedRoleSlugs.map(
+      (slug) => ({
+        url: `${SITE_ORIGIN}/templates/role/${slug}`,
+        lastModified: now,
+        changeFrequency: "weekly",
+        priority: 0.7,
+      }),
+    );
+
     // Existing /jobs/[country] SEO (196 countries — preserved).
     const jobsEntries: MetadataRoute.Sitemap = COUNTRY_LANDING.map((c) => ({
       url: `${SITE_ORIGIN}/jobs/${c.slug}`,
@@ -113,7 +127,13 @@ export default async function sitemap({
       priority: 0.8,
     }));
 
-    return [...staticEntries, ...templateEntries, ...jobsEntries, ...cvCountryHubs];
+    return [
+      ...staticEntries,
+      ...templateEntries,
+      ...roleHubEntries,
+      ...jobsEntries,
+      ...cvCountryHubs,
+    ];
   }
 
   const all = buildAllCvGuideUrls();
