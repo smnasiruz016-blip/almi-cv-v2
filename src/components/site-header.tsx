@@ -111,10 +111,10 @@ export function SiteHeader({ isLoggedIn }: { isLoggedIn: boolean }) {
                 </a>
               ))}
               <Link
-                href="/designs"
+                href="/templates"
                 className="hidden text-sm font-medium text-plum-soft transition hover:text-coral sm:inline-flex"
               >
-                Designs
+                Templates
               </Link>
               {isLoggedIn ? (
                 <Link
@@ -203,11 +203,11 @@ export function SiteHeader({ isLoggedIn }: { isLoggedIn: boolean }) {
               )}
 
               <Link
-                href="/designs"
+                href="/templates"
                 onClick={closeMenu}
                 className={MENU_LINK_CLASS}
               >
-                Designs
+                Templates
               </Link>
               {isLoggedIn ? (
                 <Link

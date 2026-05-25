@@ -11,6 +11,23 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "*.public.blob.vercel-storage.com" },
     ],
   },
+  async redirects() {
+    return [
+      // /designs was the public gallery in PR #50; PR #51 consolidated
+      // everything under /templates. 301 preserves any inbound links
+      // and SEO equity. ?role= filter survives via wildcard in :path*.
+      {
+        source: "/designs",
+        destination: "/templates",
+        permanent: true,
+      },
+      {
+        source: "/designs/:path*",
+        destination: "/templates/:path*",
+        permanent: true,
+      },
+    ];
+  },
   experimental: {
     serverActions: {
       // /admin/templates uploader posts multi-image FormData via a Server
