@@ -75,6 +75,27 @@ export function TemplateImageRow({ row }: { row: TemplateImage }) {
         >
           {row.active ? "Active" : "Hidden"}
         </span>
+        {/* Parse status — PR #52. Three states:
+            - parsedAt set       → green "Parsed ✓"
+            - parseError set     → coral "Parse failed ⚠" (tooltip shows reason)
+            - both null          → grey "Unparsed" (backfill candidate)
+        */}
+        {row.parsedAt ? (
+          <span className="rounded-pill bg-mint/15 px-2 py-0.5 text-[#0F766E]">
+            Parsed ✓
+          </span>
+        ) : row.parseError ? (
+          <span
+            className="rounded-pill bg-coral/15 px-2 py-0.5 text-coral-deep"
+            title={row.parseError}
+          >
+            Parse failed ⚠
+          </span>
+        ) : (
+          <span className="rounded-pill bg-plum/10 px-2 py-0.5 text-plum-soft">
+            Unparsed
+          </span>
+        )}
         <button
           type="button"
           onClick={toggleActive}

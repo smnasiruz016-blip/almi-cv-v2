@@ -141,6 +141,12 @@ export async function canGenerate(
   return { allowed: true, spentUsd, budgetUsd };
 }
 
+// Source of a spend row. Free-form string in the DB; this union exists
+// so calling code (and the cost dashboard) can't typo a new variant.
+// Add a value here when introducing a new pipeline that bills against
+// the same monthly cap.
+export type GenerationType = "studio_recipe" | "template_image_parse";
+
 export type RecordGenerationInput = {
   generationId: string;
   model: string;
@@ -149,6 +155,10 @@ export type RecordGenerationInput = {
   founderEmail: string;
   success: boolean;
   errorMessage?: string | null;
+  /** When omitted, the row keeps generationType=null. Existing pre-PR-52
+   *  rows are all null and read as legacy Studio recipe spend; new code
+   *  should always pass a value. */
+  generationType?: GenerationType;
 };
 
 export async function recordGeneration(
@@ -171,6 +181,7 @@ export async function recordGeneration(
       founderEmail: input.founderEmail,
       success: input.success,
       errorMessage: input.errorMessage ?? null,
+      generationType: input.generationType ?? null,
     },
   });
 }

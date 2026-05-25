@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import { prisma } from "@/lib/db";
 import { requireUser } from "@/lib/auth";
 import { createResume } from "@/lib/resume-actions";
+import type { CVData } from "@/lib/cv-types";
 
 /**
  * Idempotency guard. GETs that mutate state are dangerous — every visit to
@@ -24,31 +25,55 @@ import { createResume } from "@/lib/resume-actions";
 export default async function NewCVPage({
   searchParams,
 }: {
-  searchParams: Promise<{ template?: string }>;
+  searchParams: Promise<{ template?: string; templateImageId?: string }>;
 }) {
   const user = await requireUser();
   const params = await searchParams;
   const requestedTemplate = params.template;
+  const templateImageId = params.templateImageId;
   const template = requestedTemplate ?? "classic-serif";
 
-  // If the user specified a template, only reuse a draft of that exact
-  // template — don't drop them into a design they didn't ask for. If no
-  // template was specified, any untouched draft is fair game.
-  const reusable = await prisma.resume.findFirst({
-    where: {
-      userId: user.id,
-      isDraft: true,
-      ...(requestedTemplate !== undefined && { template: requestedTemplate }),
-    },
-    orderBy: { createdAt: "desc" },
-    select: { id: true },
-  });
+  // PR #52 — when ?templateImageId= is present and the row has cached
+  // parsedFields, build a seed Partial<CVData> from those fields. The
+  // builder still uses the requested Recipe template for visual layout;
+  // only the *data* comes from the PNG parse. A missing row, an unparsed
+  // row, or a row whose parse errored all fall back to the default seed
+  // (mayaRodriguez sample) with no error surfaced to the user.
+  let seed: Partial<CVData> | undefined;
+  if (templateImageId) {
+    const ti = await prisma.templateImage.findUnique({
+      where: { id: templateImageId },
+      select: { parsedFields: true, parsedAt: true },
+    });
+    if (ti?.parsedAt && ti.parsedFields) {
+      seed = ti.parsedFields as unknown as Partial<CVData>;
+    }
+  }
+
+  // Draft-reuse guard. Skip when we have a seed payload — the seeded
+  // content makes this a meaningfully different "new CV" intent than
+  // a generic empty draft, so reusing would silently throw away the
+  // parsed pre-fill.
+  const reusable =
+    seed === undefined
+      ? await prisma.resume.findFirst({
+          where: {
+            userId: user.id,
+            isDraft: true,
+            ...(requestedTemplate !== undefined && {
+              template: requestedTemplate,
+            }),
+          },
+          orderBy: { createdAt: "desc" },
+          select: { id: true },
+        })
+      : null;
 
   if (reusable) {
     redirect(`/cv/${reusable.id}/edit`);
   }
 
-  const result = await createResume(template);
+  const result = await createResume(template, seed);
   if (!result.ok) {
     if (result.code === "TEMPLATE_REQUIRES_PRO") {
       // Tier gate hit. Drop them on /pricing with this same /cv/new

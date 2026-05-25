@@ -4,11 +4,12 @@ import Image from "next/image";
 import Link from "next/link";
 import type { PublicDesign } from "../actions";
 
-// Image card only — TemplateImage rows. Logged-in click → /cv/new
-// (TemplateImage isn't a buildable Recipe so the builder picks default;
-// surfacing the actual image-to-builder mapping is a follow-up). Anon
-// click → /signup?intent=template&id={id} (intent param still not
-// handled in /signup; anon lands on standard signup flow).
+// Image card only — TemplateImage rows.
+// PR #52 update: logged-in click now carries the TemplateImage id so
+// /cv/new can read its cached parsedFields and seed the builder with
+// the placeholder content shown in the PNG (name, role, contact,
+// summary, experience entries, education entries, skills). Anon click
+// keeps the existing /signup?intent=template handoff.
 //
 // Recipe cards live in RecipeCard.tsx (server component) — they can't
 // share this file because Recipe.Component is a React function ref
@@ -24,7 +25,7 @@ export function ImageCard({
   isLoggedIn: boolean;
 }) {
   const href = isLoggedIn
-    ? "/cv/new"
+    ? `/cv/new?templateImageId=${design.id}`
     : `/signup?intent=template&id=${design.id}`;
   const cta = isLoggedIn ? "Use this template" : "Sign up to use";
   return (
