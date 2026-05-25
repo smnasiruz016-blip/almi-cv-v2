@@ -54,6 +54,19 @@ export async function countAllTemplateImagesByRole(): Promise<
   return m;
 }
 
+// Home page "A look for every story" section — fixed-slot top N by
+// createdAt DESC. Excludes hidden rows. Auto-rotates: new uploads
+// push the oldest off the home strip and into the /templates gallery.
+export async function getLatestTemplatesForHome(
+  limit = 30,
+): Promise<TemplateImage[]> {
+  return prisma.templateImage.findMany({
+    where: { active: true },
+    orderBy: { createdAt: "desc" },
+    take: limit,
+  });
+}
+
 // Public-gallery query for /designs and the home-page preview strip.
 // roleSlug filters to one role; offset+limit paginates. Always
 // active=true; ordered newest first.

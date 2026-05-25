@@ -26,10 +26,11 @@ function toPublic(row: TemplateImage): PublicDesign {
   };
 }
 
-// Called by the infinite-scroll sentinel on /designs as the user
-// reaches the bottom of the grid. Validates the optional roleSlug
-// against JOB_ROLES to keep the boundary honest (otherwise a crafted
-// query would pass through as a free-text filter on the column).
+// Infinite-scroll fetcher for the public /templates gallery. Returns
+// TemplateImage rows ONLY — Recipes are server-rendered once at the
+// top of the gallery (when no role filter is active) and never come
+// back via this action. The client passes the count of images already
+// shown as `offset`, NOT total-items-rendered.
 export async function loadMoreDesigns(args: {
   roleSlug?: string | null;
   offset: number;

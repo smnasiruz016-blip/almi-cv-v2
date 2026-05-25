@@ -1,39 +1,35 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState, useTransition } from "react";
+import { useCallback, useEffect, useRef, useState, useTransition, type ReactNode } from "react";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { X } from "lucide-react";
 import type { Role } from "@/lib/roles";
 import { loadMoreDesigns, type PublicDesign } from "../actions";
-import { DesignCard } from "./DesignCard";
+import { ImageCard } from "./GalleryCard";
 
 const PAGE_SIZE = 48;
 
 type Props = {
+  // Recipe cards rendered server-side in page.tsx and passed as a slot
+  // — TemplateMeta.Component is a React function ref that can't cross
+  // the RSC boundary, so this is the only way to keep Recipes inside
+  // the same grid as the image cards without breaking serialization.
+  recipesSlot: ReactNode;
   initialDesigns: PublicDesign[];
   initialHasMore: boolean;
   initialRoleSlug: string | null;
-  totalCount: number;
-  roleCount: number;
   popularChips: Array<{ roleSlug: string; roleName: string; count: number }>;
-  // The full canonical JOB_ROLES list (263 entries). Used to populate
-  // the datalist for type-ahead and to resolve typed names → slugs.
-  // Passed flat instead of imported here so this stays a single-source-
-  // of-truth pattern with /admin/templates UploadForm.
   roles: Role[];
   isLoggedIn: boolean;
-  // Map of roleSlug → role display name for fast card-tag lookup
-  // without an array find() per row.
   roleNameBySlug: Record<string, string>;
 };
 
-export function DesignsClient({
+export function GalleryClient({
+  recipesSlot,
   initialDesigns,
   initialHasMore,
   initialRoleSlug,
-  totalCount,
-  roleCount,
   popularChips,
   roles,
   isLoggedIn,
@@ -53,19 +49,15 @@ export function DesignsClient({
   );
   const [isPending, startTransition] = useTransition();
   const sentinelRef = useRef<HTMLDivElement>(null);
-  // Guards against double-firing the loader if the sentinel briefly
-  // enters/leaves the viewport during the in-flight load.
   const loadingRef = useRef(false);
 
-  // Reset the grid whenever the URL's ?role= changes (router push,
-  // back/forward, or chip click). The setState calls here ARE the
-  // legitimate "sync to external state" exception called out in the
-  // React docs — searchParams is an external system relative to this
-  // component's state. The lint rule errs on the side of caution.
+  // URL → state sync. The setState here is the "syncing to external
+  // state" exception called out in React docs; lint rule flagged but
+  // legitimate.
   useEffect(() => {
     const urlRole = searchParams.get("role");
     if (urlRole === activeRoleSlug) return;
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- syncing to URL (external state); see comment above
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- syncing to URL (external state)
     setActiveRoleSlug(urlRole);
     setSearchValue(urlRole ? (roleNameBySlug[urlRole] ?? "") : "");
     loadingRef.current = true;
@@ -94,8 +86,6 @@ export function DesignsClient({
     [pathname, router, searchParams],
   );
 
-  // Resolve typed input → canonical slug (case-insensitive, alias-aware
-  // — same contract /admin/templates uses).
   const resolveRole = useCallback(
     (typed: string): Role | null => {
       const q = typed.trim().toLowerCase();
@@ -117,20 +107,12 @@ export function DesignsClient({
     setRoleFilter(role?.slug ?? null);
   }
 
-  // Browser fires input's onChange when the user picks a datalist
-  // option (Chrome/Edge/Safari behavior). If the picked value resolves
-  // to a known role, switch the filter immediately — no submit needed.
   function onSearchChange(value: string) {
     setSearchValue(value);
     const role = resolveRole(value);
-    if (role) {
-      setRoleFilter(role.slug);
-    }
+    if (role) setRoleFilter(role.slug);
   }
 
-  // IntersectionObserver-driven infinite scroll. Margin pre-loads the
-  // next batch 200px before the sentinel actually enters viewport so
-  // there's no flash of "loading…" for fast scrollers.
   useEffect(() => {
     if (!hasMore) return;
     const node = sentinelRef.current;
@@ -161,19 +143,25 @@ export function DesignsClient({
     ? (roleNameBySlug[activeRoleSlug] ?? activeRoleSlug)
     : null;
 
+  // Recipes only show when no role filter — they don't have JOB_ROLES
+  // associations (Recipes use RecipeRole, a 5-value taxonomy that
+  // doesn't map cleanly to JOB_ROLES). Hiding them on filter prevents
+  // them from looking out-of-place under a "Nurse" search.
+  const showRecipes = !filterActive;
+
   return (
     <div className="space-y-8">
       <header className="space-y-3">
         <h1 className="text-balance font-display text-4xl text-plum md:text-5xl">
-          Browse {totalCount} designs across {roleCount} roles
+          Browse CV templates
         </h1>
 
         <form onSubmit={onSearchSubmit} className="flex max-w-xl gap-2">
           <input
-            id="designs-search"
+            id="templates-search"
             name="role"
             type="text"
-            list="designs-search-list"
+            list="templates-search-list"
             value={searchValue}
             onChange={(e) => onSearchChange(e.target.value)}
             placeholder="Which role? Type to search…"
@@ -182,7 +170,7 @@ export function DesignsClient({
             className="flex-1 rounded-pill border border-plum/20 bg-white px-4 py-2.5 text-sm shadow-warm-card focus:border-coral/50 focus:outline-none focus:ring-4 focus:ring-coral/15"
             aria-label="Filter templates by role"
           />
-          <datalist id="designs-search-list">
+          <datalist id="templates-search-list">
             {roles.map((r) => (
               <option key={r.slug} value={r.name}>
                 {r.sector}
@@ -226,8 +214,7 @@ export function DesignsClient({
         {filterActive && (
           <p className="text-sm text-plum-soft">
             Showing {designs.length} {activeRoleName} design
-            {designs.length === 1 ? "" : "s"}.
-            {" "}
+            {designs.length === 1 ? "" : "s"}.{" "}
             <Link
               href={`/templates/role/${activeRoleSlug}`}
               className="text-coral hover:text-coral-deep"
@@ -238,7 +225,7 @@ export function DesignsClient({
         )}
       </header>
 
-      {designs.length === 0 ? (
+      {designs.length === 0 && !showRecipes ? (
         <div className="rounded-2xl border border-plum/10 bg-white p-10 text-center">
           <p className="text-sm text-plum-soft">
             No templates yet for {activeRoleName ?? "this filter"}.
@@ -248,14 +235,15 @@ export function DesignsClient({
             onClick={() => setRoleFilter(null)}
             className="mt-3 text-sm text-coral hover:text-coral-deep"
           >
-            Show all designs
+            Show all templates
           </button>
         </div>
       ) : (
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
+          {showRecipes && recipesSlot}
           {designs.map((d) => (
-            <DesignCard
-              key={d.id}
+            <ImageCard
+              key={`i-${d.id}`}
               design={d}
               roleName={roleNameBySlug[d.roleSlug] ?? d.roleSlug}
               isLoggedIn={isLoggedIn}

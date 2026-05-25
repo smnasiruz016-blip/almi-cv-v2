@@ -6,21 +6,20 @@ import { HeroPreview } from "@/components/hero-preview";
 import { Container } from "@/components/ui/container";
 import { Section } from "@/components/ui/section";
 import { Badge } from "@/components/ui/badge";
-import { Crown } from "lucide-react";
-import { TemplateThumbnail } from "@/components/templates/TemplateThumbnail";
-import { TEMPLATE_LIST } from "@/lib/templates";
 import { getCurrentUser } from "@/lib/auth";
+import { prisma } from "@/lib/db";
+import { isBillingEnabled, getUserPlan } from "@/lib/billing/plans";
 import {
-  countActiveTemplateImagesByRole,
-  listPublicDesigns,
+  getLatestTemplatesForHome,
   type TemplateImage,
 } from "@/lib/template-images";
 import { NewsletterCard } from "@/components/newsletter/NewsletterCard";
 import { SiteHeader } from "@/components/site-header";
+import { PricingClient } from "@/app/pricing/pricing-client";
 
-// Hourly ISR — the TrustSection count below depends on
-// countActiveTemplateImagesByRole, which is a DB query. Pages cached
-// for an hour; new uploads bust the cache via revalidatePath('/').
+// Hourly ISR — admin upload action revalidates / via revalidatePath()
+// for faster cache busting after a new batch lands. Home queries:
+// getLatestTemplatesForHome (30) + getUserPlan if logged in.
 export const revalidate = 3600;
 
 type TrustStat = {
@@ -29,20 +28,14 @@ type TrustStat = {
   href?: string;
 };
 
-function buildTrustStats(designs: number, roles: number): TrustStat[] {
-  return [
-    { value: "942 sources", label: "Trusted job boards" },
-    {
-      value: `${designs} designs`,
-      label: `Across ${roles} roles`,
-      href: "/designs",
-    },
-    { value: "From $7/month", label: "7-day free trial", href: "/pricing" },
-    { value: "Multilingual", label: "Built-in translation" },
-  ];
-}
-
-const LATEST_PREVIEW_LIMIT = 20;
+// Numbers removed from TrustSection per PR #51 founder feedback —
+// static counts age poorly when scale grows daily. Replaced with
+// non-numeric phrasing.
+const TRUST_STATS: TrustStat[] = [
+  { value: "942 sources", label: "Trusted job boards" },
+  { value: "Designs", label: "Across many roles", href: "/templates" },
+  { value: "Multilingual", label: "Built-in translation" },
+];
 
 const STEPS = [
   {
@@ -63,29 +56,39 @@ const STEPS = [
 ];
 
 export default async function HomePage() {
-  const [user, countMap, latestDesigns] = await Promise.all([
+  const [user, latestDesigns] = await Promise.all([
     getCurrentUser(),
-    countActiveTemplateImagesByRole(),
-    listPublicDesigns({ offset: 0, limit: LATEST_PREVIEW_LIMIT }),
+    getLatestTemplatesForHome(30),
   ]);
   const isLoggedIn = Boolean(user);
-  const totalDesigns = Array.from(countMap.values()).reduce(
-    (sum, n) => sum + n,
-    0,
-  );
-  const populatedRoles = countMap.size;
-  const trustStats = buildTrustStats(totalDesigns, populatedRoles);
+
+  // Pricing cards need the same data the /pricing page resolves — only
+  // worth the DB hit when a user is actually logged in.
+  let currentPlan: "FREE" | "PRO_MONTHLY" | "PRO_YEARLY" = "FREE";
+  if (user) {
+    const u = await prisma.user.findUnique({
+      where: { id: user.id },
+      select: {
+        subscriptionStatus: true,
+        subscriptionCurrentPeriodEnd: true,
+        subscriptionPlan: true,
+        compProUntil: true,
+      },
+    });
+    if (u) currentPlan = getUserPlan(u);
+  }
 
   return (
     <main>
       <SiteHeader isLoggedIn={isLoggedIn} />
       <HeroSection isLoggedIn={isLoggedIn} />
-      <LatestDesignsSection
-        designs={latestDesigns}
-        totalCount={totalDesigns}
+      <TemplatesShowcaseSection designs={latestDesigns} />
+      <TrustSection stats={TRUST_STATS} />
+      <PricingSection
+        isLoggedIn={isLoggedIn}
+        currentPlan={currentPlan}
+        billingEnabled={isBillingEnabled()}
       />
-      <TrustSection stats={trustStats} />
-      <TemplatesSection />
       <HowItWorksSection />
       <FinalCTASection isLoggedIn={isLoggedIn} />
       <NewsletterSection />
@@ -158,41 +161,31 @@ function HeroSection({ isLoggedIn }: { isLoggedIn: boolean }) {
   );
 }
 
-function LatestDesignsSection({
-  designs,
-  totalCount,
-}: {
-  designs: TemplateImage[];
-  totalCount: number;
-}) {
+// Unified showcase section that replaces (a) the old hand-coded
+// TemplatesSection that paraded 30 Recipes and (b) the PR #50
+// LatestDesignsSection that surfaced 20 image rows in a separate
+// strip. One section now: 30 most recent TemplateImage rows + CTA to
+// the full /templates gallery. Auto-rotates as new uploads land.
+function TemplatesShowcaseSection({ designs }: { designs: TemplateImage[] }) {
   if (designs.length === 0) return null;
   return (
-    <Section className="bg-cream py-16">
+    <Section className="bg-gradient-to-b from-cream-soft to-peach/40 py-24">
       <Container>
-        <div className="mb-8 flex flex-wrap items-end justify-between gap-3">
-          <div>
-            <p className="text-sm uppercase tracking-widest text-plum-faint">
-              Latest designs
-            </p>
-            <h2 className="mt-2 font-display text-3xl text-plum md:text-4xl">
-              {totalCount} designs ready to use
-            </h2>
-          </div>
-          <Link
-            href="/designs"
-            className="inline-flex items-center gap-2 text-sm font-medium text-coral hover:text-coral-deep"
-          >
-            Browse all {totalCount} designs
-            <ArrowRight className="h-4 w-4" />
-          </Link>
+        <div className="mx-auto max-w-2xl text-center">
+          <Badge variant="mint" className="border-coral/30 bg-coral/15 text-coral-deep">
+            Templates
+          </Badge>
+          <h2 className="mt-4 text-4xl text-plum">A look for every story.</h2>
+          <p className="mt-4 text-plum-soft">Every template is a story.</p>
         </div>
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+
+        <div className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 lg:gap-4">
           {designs.map((d) => (
             <Link
               key={d.id}
-              href="/designs"
+              href={`/templates?selected=${d.id}`}
               className="group block overflow-hidden rounded-xl border border-peach/30 bg-white shadow-warm-card transition-transform hover:-translate-y-0.5"
-              aria-label={`See ${d.title} in /designs`}
+              aria-label={`See ${d.title} in /templates`}
             >
               <div className="relative aspect-[3/4] overflow-hidden bg-plum/5">
                 <Image
@@ -200,7 +193,7 @@ function LatestDesignsSection({
                   alt={d.title}
                   fill
                   loading="lazy"
-                  sizes="(min-width: 1024px) 20vw, (min-width: 640px) 33vw, 50vw"
+                  sizes="(min-width: 1024px) 16vw, (min-width: 640px) 25vw, 50vw"
                   className="object-cover transition-transform group-hover:scale-[1.02]"
                 />
               </div>
@@ -211,6 +204,16 @@ function LatestDesignsSection({
               </div>
             </Link>
           ))}
+        </div>
+
+        <div className="mt-10 flex justify-center">
+          <Link
+            href="/templates"
+            className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-pill px-5 py-3 text-sm font-semibold text-coral transition hover:text-coral-deep focus:outline-none focus:ring-4 focus:ring-coral/20"
+          >
+            Browse all designs
+            <ArrowRight className="h-4 w-4" />
+          </Link>
         </div>
       </Container>
     </Section>
@@ -224,7 +227,7 @@ function TrustSection({ stats }: { stats: TrustStat[] }) {
         <p className="text-center text-sm uppercase tracking-widest text-plum-faint">
           Built for the world
         </p>
-        <div className="mt-10 grid grid-cols-2 gap-8 md:grid-cols-4">
+        <div className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-3">
           {stats.map((stat) => {
             const inner = (
               <>
@@ -256,74 +259,37 @@ function TrustSection({ stats }: { stats: TrustStat[] }) {
   );
 }
 
-function TemplatesSection() {
-  const freeCount = TEMPLATE_LIST.filter((t) => t.tier === "free").length;
-  const premiumCount = TEMPLATE_LIST.filter((t) => t.tier === "premium").length;
-  const featured = TEMPLATE_LIST.map((tpl, idx) => ({ tpl, idx }))
-    .sort((a, b) => {
-      const aHandCoded = a.tpl.source === "hand-coded" ? 1 : 0;
-      const bHandCoded = b.tpl.source === "hand-coded" ? 1 : 0;
-      if (aHandCoded !== bHandCoded) return bHandCoded - aHandCoded;
-      return b.tpl.addedAt.localeCompare(a.tpl.addedAt);
-    })
-    .map(({ tpl }) => tpl);
-
+// Pricing cards inlined on home — same PricingClient component the
+// /pricing page renders, called cross-route. If this becomes a common
+// pattern, extract to @/components/pricing/PricingCards and have both
+// pages share it; for one-shot reuse the cross-route import is fine.
+function PricingSection({
+  isLoggedIn,
+  currentPlan,
+  billingEnabled,
+}: {
+  isLoggedIn: boolean;
+  currentPlan: "FREE" | "PRO_MONTHLY" | "PRO_YEARLY";
+  billingEnabled: boolean;
+}) {
   return (
-    <Section className="bg-gradient-to-b from-cream-soft to-peach/40 py-30">
+    <Section className="bg-cream py-24">
       <Container>
         <div className="mx-auto max-w-2xl text-center">
-          <Badge variant="mint" className="border-coral/30 bg-coral/15 text-coral-deep">
-            Templates
-          </Badge>
-          <h2 className="mt-4 text-4xl text-plum">A look for every story.</h2>
-          <p className="mt-4 text-plum-soft">
-            Start with one of six free classics. Unlock the role-specific
-            Premium library any time.
+          <h2 className="text-balance font-display text-4xl text-plum md:text-5xl">
+            Choose your plan
+          </h2>
+          <p className="mt-3 text-base leading-7 text-plum-soft">
+            Start free. Upgrade when you&apos;re ready for unlimited AI, more
+            CV slots, and every premium template.
           </p>
         </div>
-
-        <p className="mt-8 mb-8 text-center text-sm text-plum-soft">
-          {freeCount} free · {premiumCount} with Pro · more landing every month
-        </p>
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 lg:gap-4">
-          {featured.map((tpl) => (
-            <div
-              key={tpl.slug}
-              className="group relative rounded-2xl border border-peach/40 bg-white p-2 shadow-warm-card transition-all hover:-translate-y-0.5 hover:shadow-warm-card-hover"
-            >
-              <TemplateThumbnail template={tpl} scale={0.2} />
-              <div className="mt-2 flex items-start justify-between gap-2">
-                <h3 className="font-display text-sm text-plum">{tpl.name}</h3>
-                {tpl.tier === "premium" ? (
-                  <Crown className="mt-0.5 h-3 w-3 shrink-0 text-gold" />
-                ) : null}
-              </div>
-              <p
-                className={
-                  tpl.tier === "free"
-                    ? "text-[10px] text-sage"
-                    : "text-[10px] text-coral"
-                }
-              >
-                {tpl.tier === "free" ? "Free" : "Premium"}
-              </p>
-              <Link
-                href={`/templates/${tpl.slug}`}
-                aria-label={tpl.name}
-                className="absolute inset-0 rounded-2xl"
-              />
-            </div>
-          ))}
-        </div>
-
-        <div className="mt-10 flex justify-center">
-          <Link
-            href="/templates"
-            className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-pill px-5 py-3 text-sm font-semibold text-coral transition hover:text-coral-deep focus:outline-none focus:ring-4 focus:ring-coral/20"
-          >
-            See all templates
-            <ArrowRight className="h-4 w-4" />
-          </Link>
+        <div className="mt-10">
+          <PricingClient
+            isLoggedIn={isLoggedIn}
+            currentPlan={currentPlan}
+            billingEnabled={billingEnabled}
+          />
         </div>
       </Container>
     </Section>

@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 const FOOTER_LINKS = [
-  { href: "/designs", label: "Browse designs" },
+  { href: "/templates", label: "Templates" },
   { href: "/about", label: "About" },
   { href: "https://almijob.almiworld.com", label: "AlmiJob" },
   { href: "https://almisalary.almiworld.com", label: "AlmiSalary" },
