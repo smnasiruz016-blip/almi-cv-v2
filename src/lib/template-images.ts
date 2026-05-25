@@ -54,6 +54,19 @@ export async function countAllTemplateImagesByRole(): Promise<
   return m;
 }
 
+// Distinct roleSlugs that currently have at least one active TemplateImage.
+// Used for /templates/role/[roleSlug] generateStaticParams (so only
+// populated hubs are built) and for the sitemap (so only populated
+// hubs are advertised). Sorted alphabetically for stable build output.
+export async function listPopulatedRoleSlugs(): Promise<string[]> {
+  const rows = await prisma.templateImage.groupBy({
+    by: ["roleSlug"],
+    where: { active: true },
+    _count: { _all: true },
+  });
+  return rows.map((r) => r.roleSlug).sort();
+}
+
 // Matches purely numeric/symbolic titles that came out of Canva exports
 // (1.png, 2.png inside folders). Also flags titles shorter than 4 chars
 // since those are almost never meaningful. The form uses this to decide
