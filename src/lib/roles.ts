@@ -2,10 +2,16 @@
  * AlmiCV — canonical role registry, ported from `almijob-v2/lib/job-roles.ts`
  * (which itself is canonical across the AlmiWorld product family).
  *
- * 263 roles across 18 sectors:
+ * 283 roles across 18 sectors:
  *   - 254 from AlmiCV_Job_Roles_List.docx
  *   - 9 religious roles (PR #32 in almijob-v2): religious-scholar base + 8
  *     aliases (imam, khateeb, mufti, priest, pastor, rabbi, pandit, monk)
+ *   - 20 religious + 1 special added via PR #52 from
+ *     AlmiCV_Religious_Roles_List.docx (Qari, Hafiz, Madrasa Teacher,
+ *     Muezzin, Islamic Scholar, Deacon, Chaplain, Missionary, Yoga Teacher,
+ *     Guru, Sanskrit Teacher, Lama, Meditation Teacher, Cantor, Hebrew
+ *     Teacher, Granthi, Sikh Religious Teacher, Interfaith Minister,
+ *     Religious Studies Teacher, Open CV)
  *
  * Sync discipline: when AlmiJob's `lib/job-roles.ts` evolves, mirror here.
  * Slugs are ASCII-kebab and globally unique — cross-product deep links
@@ -309,6 +315,34 @@ export const JOB_ROLES: Role[] = [
   { name: "Rabbi", slug: "rabbi", sector: "Public Sector, Social & Other" },
   { name: "Pandit", slug: "pandit", sector: "Public Sector, Social & Other", aliases: ["Pujari", "Hindu Priest"] },
   { name: "Monk", slug: "monk", sector: "Public Sector, Social & Other", aliases: ["Buddhist Monk", "Bhikkhu"] },
+  // Religious — extended via PR #52 from AlmiCV_Religious_Roles_List.docx.
+  // Naming convention: native term as primary where widely searched, with
+  // English gloss in parens (e.g. "Granthi (Sikh Priest)") so the dropdown
+  // surfaces under both queries. Existing 9 entries above kept untouched so
+  // their slugs (and SEO surface) don't change.
+  { name: "Qari (Quran Reciter)", slug: "qari", sector: "Public Sector, Social & Other", aliases: ["Quran Reciter"] },
+  { name: "Hafiz (Quran Memorizer)", slug: "hafiz", sector: "Public Sector, Social & Other", aliases: ["Quran Memorizer"] },
+  { name: "Madrasa Teacher", slug: "madrasa-teacher", sector: "Public Sector, Social & Other", aliases: ["Islamic School Teacher"] },
+  { name: "Muezzin (Adhan Caller)", slug: "muezzin", sector: "Public Sector, Social & Other", aliases: ["Adhan Caller"] },
+  { name: "Islamic Scholar (Aalim)", slug: "islamic-scholar", sector: "Public Sector, Social & Other", aliases: ["Aalim", "Alim"] },
+  { name: "Deacon", slug: "deacon", sector: "Public Sector, Social & Other" },
+  { name: "Chaplain", slug: "chaplain", sector: "Public Sector, Social & Other" },
+  { name: "Missionary", slug: "missionary", sector: "Public Sector, Social & Other" },
+  { name: "Yoga Teacher", slug: "yoga-teacher", sector: "Public Sector, Social & Other", aliases: ["Yoga Instructor"] },
+  { name: "Guru (Spiritual Teacher)", slug: "guru", sector: "Public Sector, Social & Other", aliases: ["Spiritual Teacher"] },
+  { name: "Sanskrit Teacher", slug: "sanskrit-teacher", sector: "Public Sector, Social & Other" },
+  { name: "Lama", slug: "lama", sector: "Public Sector, Social & Other", aliases: ["Tibetan Buddhist Teacher"] },
+  { name: "Meditation Teacher", slug: "meditation-teacher", sector: "Public Sector, Social & Other", aliases: ["Mindfulness Teacher"] },
+  { name: "Cantor", slug: "cantor", sector: "Public Sector, Social & Other", aliases: ["Hazzan"] },
+  { name: "Hebrew Teacher", slug: "hebrew-teacher", sector: "Public Sector, Social & Other" },
+  { name: "Granthi (Sikh Priest)", slug: "granthi", sector: "Public Sector, Social & Other", aliases: ["Sikh Priest"] },
+  { name: "Sikh Religious Teacher", slug: "sikh-religious-teacher", sector: "Public Sector, Social & Other" },
+  { name: "Interfaith Minister", slug: "interfaith-minister", sector: "Public Sector, Social & Other" },
+  { name: "Religious Studies Teacher", slug: "religious-studies-teacher", sector: "Public Sector, Social & Other" },
+  // "Open CV" is a generic flagship — not a profession. Lives here so the
+  // builder pre-fill prompt has a fallback target when a TemplateImage
+  // doesn't clearly read as any specific role.
+  { name: "Open CV", slug: "open-cv", sector: "Public Sector, Social & Other", aliases: ["General CV", "Generic Template", "All-Purpose"] },
 ];
 
 /**
