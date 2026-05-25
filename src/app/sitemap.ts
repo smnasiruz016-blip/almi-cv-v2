@@ -22,7 +22,6 @@
 
 import type { MetadataRoute } from "next";
 import { COUNTRY_LANDING } from "@/lib/country-landing";
-import { TEMPLATE_LIST } from "@/lib/templates";
 import { COUNTRIES_SERVED } from "@/lib/countries";
 import { JOB_ROLES } from "@/lib/roles";
 import { listPopulatedRoleSlugs } from "@/lib/template-images";
@@ -91,12 +90,10 @@ export default async function sitemap({
       priority: r.priority,
     }));
 
-    const templateEntries: MetadataRoute.Sitemap = TEMPLATE_LIST.map((t) => ({
-      url: `${SITE_ORIGIN}/templates/${t.slug}`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.6,
-    }));
+    // /templates/[slug] detail pages were removed in PR #53 with the
+    // Recipe system; the /templates gallery now indexes TemplateImage
+    // role hubs only. No per-template detail URL exists to advertise.
+    const templateEntries: MetadataRoute.Sitemap = [];
 
     // /templates/role/[roleSlug] hubs — only roles with active uploads
     // (per doctrine #3: no thin-content hubs for empty roles). Built

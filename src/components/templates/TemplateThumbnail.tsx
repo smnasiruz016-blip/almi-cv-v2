@@ -1,18 +1,21 @@
 import type { CVData } from "@/lib/cv-types";
 import type { TemplateMeta } from "@/lib/templates";
-import { mayaRodriguez } from "@/lib/sample-cv-data";
 
+// Renders the template Component at small scale for dashboard cards.
+// Now that TemplateMeta.sampleData was removed in PR #53, callers must
+// pass `data` — there is no sample-CV fallback baked into this file.
+// The dashboard always has the user's real CVData in hand, so this
+// contract is straightforward.
 export function TemplateThumbnail({
   template,
   data,
   scale = 0.35,
 }: {
   template: TemplateMeta;
-  data?: CVData;
+  data: CVData;
   scale?: number;
 }) {
   const Component = template.Component;
-  const renderData = data ?? template.sampleData ?? mayaRodriguez;
 
   return (
     <div
@@ -28,7 +31,7 @@ export function TemplateThumbnail({
           transformOrigin: "top left",
         }}
       >
-        <Component data={renderData} paginated={false} />
+        <Component data={data} paginated={false} />
       </div>
     </div>
   );

@@ -5,8 +5,6 @@ type AdminSection =
   | "comp-accounts"
   | "reviews"
   | "templates"
-  | "template-studio"
-  | "cost-log"
   | "accounts";
 
 const TABS: {
@@ -21,23 +19,6 @@ const TABS: {
     key: "templates",
     href: "/admin/templates",
     label: "🖼️ Templates",
-    founderOnly: true,
-  },
-  // Studio tabs — gated by isFounder() at render time. Today the
-  // founder set === the owner set (both read OWNER_EMAILS), so these
-  // surface to every admin viewer. The founderOnly flag is in place
-  // so a future "ops admin" added to OWNER_EMAILS doesn't accidentally
-  // see Studio if we later split the two roles.
-  {
-    key: "template-studio",
-    href: "/admin/template-studio",
-    label: "🎨 Template Studio",
-    founderOnly: true,
-  },
-  {
-    key: "cost-log",
-    href: "/admin/template-studio/cost-log",
-    label: "💸 Cost Log",
     founderOnly: true,
   },
   {
