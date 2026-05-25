@@ -7,7 +7,6 @@ import { getCurrentUser } from "@/lib/auth";
 import { getCountryBySlug } from "@/lib/countries";
 import { getRoleBySlug } from "@/lib/roles";
 import { getConvention, hasVerifiedConvention } from "@/lib/cv-conventions";
-import { TEMPLATE_LIST, type TemplateMeta } from "@/lib/templates";
 
 export const revalidate = 86400;
 export const dynamicParams = true;
@@ -16,48 +15,6 @@ const SITE_ORIGIN = "https://almicv.almiworld.com";
 
 type Params = { country: string; role: string };
 
-// Sector → curated template slugs. Falls through to the first 6
-// universal templates when the sector isn't in the map. Templates
-// listed must exist in TEMPLATE_LIST; missing slugs are filtered out
-// at render time.
-const SECTOR_TEMPLATE_PICKS: Record<string, string[]> = {
-  "Technology & IT": ["modern-mono", "minimalist-mono", "director", "editorial-bold", "timeline-pro", "classic-serif"],
-  "Healthcare & Medical": ["healthcare-bold-icu", "clinical-cream", "healthcare-light-blue", "classic-serif", "modern-mono", "atelier"],
-  "Education & Training": ["classic-serif", "editorial-bold", "atelier", "editorial-navy", "modern-mono", "pearl"],
-  "Business, Office & Admin": ["director", "editorial-bold", "modern-mono", "classic-serif", "project-management-orange", "atelier-pro"],
-  "Finance & Accounting": ["director", "editorial-navy", "classic-serif", "modern-mono", "atelier-pro", "minimalist-mono"],
-  "Sales & Marketing": ["dark-bold-marketing", "editorial-bold", "bold-color-block", "director", "modern-mono", "editorial-navy"],
-  "Engineering": ["modern-mono", "minimalist-mono", "timeline-pro", "classic-serif", "director", "editorial-bold"],
-  "Hospitality, Tourism & Food": ["culinary-chef", "chef-menu", "soft-pastel-romantic", "photo-forward", "editorial-bold", "classic-serif"],
-  "Construction & Skilled Trades": ["classic-serif", "modern-mono", "timeline-pro", "minimalist-mono", "director", "editorial-bold"],
-  "Creative, Design & Media": ["visual-storyteller", "scrapbook-journal", "editorial-bold", "bold-color-block", "photo-forward", "atelier-pro"],
-  "Logistics, Transport & Supply Chain": ["classic-serif", "modern-mono", "director", "minimalist-mono", "timeline-pro", "editorial-bold"],
-  "Customer Service & Retail": ["soft-pastel-romantic", "pearl", "modern-mono", "classic-serif", "editorial-bold", "photo-forward"],
-  "Beauty & Personal Care": ["beauty-artist", "soft-pastel-romantic", "pearl", "scrapbook-journal", "photo-forward", "visual-storyteller"],
-  "Human Resources": ["director", "editorial-navy", "classic-serif", "modern-mono", "atelier-pro", "editorial-bold"],
-  "Legal": ["classic-serif", "director", "editorial-navy", "modern-mono", "atelier-pro", "minimalist-mono"],
-  "Science & Research": ["classic-serif", "modern-mono", "minimalist-mono", "editorial-bold", "timeline-pro", "atelier"],
-  "Manufacturing & Production": ["classic-serif", "modern-mono", "timeline-pro", "director", "minimalist-mono", "editorial-bold"],
-  "Public Sector, Social & Other": ["classic-serif", "atelier", "editorial-bold", "modern-mono", "pearl", "editorial-navy"],
-};
-
-function getTemplatesForSector(sector: string): TemplateMeta[] {
-  const slugs = SECTOR_TEMPLATE_PICKS[sector];
-  if (!slugs) return TEMPLATE_LIST.slice(0, 6);
-  const out: TemplateMeta[] = [];
-  for (const slug of slugs) {
-    const t = TEMPLATE_LIST.find((x) => x.slug === slug);
-    if (t) out.push(t);
-    if (out.length >= 6) break;
-  }
-  // Pad if any slugs were missing.
-  while (out.length < 4 && out.length < TEMPLATE_LIST.length) {
-    const next = TEMPLATE_LIST.find((x) => !out.includes(x));
-    if (next) out.push(next);
-    else break;
-  }
-  return out;
-}
 
 function buildTitle(roleName: string, countryName: string): string {
   const base = `${roleName} CV for ${countryName} 2026 — Build Free | AlmiCV`;
@@ -108,7 +65,6 @@ export default async function CvGuidePage({
   const convention = getConvention(c.slug);
   if (!convention) notFound();
   const isVerified = hasVerifiedConvention(c.slug);
-  const templates = getTemplatesForSector(r.sector);
 
   const user = await getCurrentUser();
   const isLoggedIn = Boolean(user);
@@ -173,32 +129,22 @@ export default async function CvGuidePage({
             </p>
           </header>
 
-          {/* 4. Template preview */}
+          {/* 4. Templates CTA — Recipe-system pick-by-sector removed in
+              PR #53. Direct visitors to the /templates gallery so they
+              can browse role-specific TemplateImage designs. */}
           <section className="mb-12" aria-labelledby="templates-title">
             <h2 id="templates-title" className="text-xl sm:text-2xl font-semibold tracking-tight text-plum mb-2">
               Designs ready for {r.name} in {c.name}
             </h2>
             <p className="text-sm text-plum-soft mb-5 max-w-2xl">
-              Pick a starting design — switch anytime. New designs added every day.
+              Browse the gallery — every {r.name} CV design we&apos;ve published, filtered to your role.
             </p>
-            <ul className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
-              {templates.map((t) => (
-                <li key={t.slug}>
-                  <Link
-                    href={`/cv?template=${t.slug}&role=${r.slug}`}
-                    className="block rounded-lg border border-peach bg-white p-4 hover:border-coral transition-colors h-full"
-                  >
-                    <p className="font-semibold text-plum text-sm">{t.name}</p>
-                    <p className="text-xs text-plum-soft mt-1">{t.tagline}</p>
-                    {t.tier === "premium" ? (
-                      <span className="inline-block mt-2 text-[10px] uppercase tracking-wide text-coral-deep bg-coral-soft/40 px-2 py-0.5 rounded-full">Pro</span>
-                    ) : (
-                      <span className="inline-block mt-2 text-[10px] uppercase tracking-wide text-plum-soft bg-cream-soft px-2 py-0.5 rounded-full">Free</span>
-                    )}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+            <Link
+              href={`/templates?role=${r.slug}`}
+              className="inline-flex items-center gap-2 rounded-lg border border-coral bg-white px-5 py-3 text-sm font-medium text-coral hover:bg-coral hover:text-white transition-colors"
+            >
+              See {r.name} templates →
+            </Link>
           </section>
 
           {/* 5. Country features */}

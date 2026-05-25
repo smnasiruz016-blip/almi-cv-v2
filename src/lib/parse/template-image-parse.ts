@@ -533,8 +533,9 @@ export async function parseTemplateImageFromUrl(
     ok: true,
     // Zod's parsed value is structurally narrower than CVData (no
     // RichText brand, no style/language metadata) — cast through to
-    // Partial<CVData> at the boundary. The builder merges with
-    // mayaRodriguez defaults so the missing fields are filled in.
+    // Partial<CVData> at the boundary. createResume() merges this
+    // seed into an empty CVData skeleton (PR #53); sections the
+    // parser didn't surface stay empty and NeutralDefault hides them.
     parsed: cleaned as Partial<CVData>,
     costUsd,
     generationId,

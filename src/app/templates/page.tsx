@@ -1,5 +1,4 @@
 import { JOB_ROLES, getRoleBySlug } from "@/lib/roles";
-import { TEMPLATE_LIST } from "@/lib/templates";
 import {
   listPublicDesigns,
   topRolesByTemplateCount,
@@ -10,15 +9,15 @@ import { Footer } from "@/components/footer";
 import { Container } from "@/components/ui/container";
 import { Section } from "@/components/ui/section";
 import { GalleryClient } from "./_components/GalleryClient";
-import { RecipeCard } from "./_components/RecipeCard";
 
-// Single source of truth for the templates surface. Was the auth-gated
-// builder picker (RecipeRole/Mood/Tier facets) before PR #51 — now a
-// public Canva-style gallery merging the 29 code-rendered Recipes
-// (pinned at top, no filter) with all active TemplateImage rows
-// (createdAt DESC, paginated 48/batch via infinite scroll).
+// PR #53 collapsed the dual-source gallery (29 hand-coded Recipe cards
+// pinned at the top + TemplateImage rows below) into a TemplateImage-
+// only feed. The Recipe cards used a slot prop because Recipe
+// components couldn't cross the RSC boundary; that whole branch is
+// gone now. /templates is exactly the 246 (and growing) cached PNG
+// designs admin-uploaded to Vercel Blob, paginated 48 per scroll.
 //
-// /designs → /templates 301 redirect lives in next.config.ts.
+// /designs → /templates 301 redirect still lives in next.config.ts.
 
 const PAGE_SIZE = 48;
 const POPULAR_CHIPS = 4;
@@ -28,7 +27,7 @@ export const revalidate = 3600;
 export const metadata = {
   title: "CV templates · AlmiCV",
   description:
-    "Browse every CV template — hand-coded recipes plus role-specific designs. Free to start, sign up to use any template.",
+    "Browse every CV template — role-specific designs cached and ready to seed your builder. Free to start.",
 };
 
 export default async function TemplatesPage({
@@ -61,13 +60,6 @@ export default async function TemplatesPage({
       <Section className="bg-cream-soft py-12 md:py-14">
         <Container>
           <GalleryClient
-            recipesSlot={
-              <>
-                {TEMPLATE_LIST.map((t) => (
-                  <RecipeCard key={`r-${t.slug}`} template={t} />
-                ))}
-              </>
-            }
             initialDesigns={initialDesigns.map((d) => ({
               id: d.id,
               title: d.title,

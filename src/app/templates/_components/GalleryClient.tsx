@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState, useTransition, type ReactNode } from "react";
+import { useCallback, useEffect, useRef, useState, useTransition } from "react";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { X } from "lucide-react";
@@ -11,11 +11,6 @@ import { ImageCard } from "./GalleryCard";
 const PAGE_SIZE = 48;
 
 type Props = {
-  // Recipe cards rendered server-side in page.tsx and passed as a slot
-  // — TemplateMeta.Component is a React function ref that can't cross
-  // the RSC boundary, so this is the only way to keep Recipes inside
-  // the same grid as the image cards without breaking serialization.
-  recipesSlot: ReactNode;
   initialDesigns: PublicDesign[];
   initialHasMore: boolean;
   initialRoleSlug: string | null;
@@ -26,7 +21,6 @@ type Props = {
 };
 
 export function GalleryClient({
-  recipesSlot,
   initialDesigns,
   initialHasMore,
   initialRoleSlug,
@@ -143,12 +137,6 @@ export function GalleryClient({
     ? (roleNameBySlug[activeRoleSlug] ?? activeRoleSlug)
     : null;
 
-  // Recipes only show when no role filter — they don't have JOB_ROLES
-  // associations (Recipes use RecipeRole, a 5-value taxonomy that
-  // doesn't map cleanly to JOB_ROLES). Hiding them on filter prevents
-  // them from looking out-of-place under a "Nurse" search.
-  const showRecipes = !filterActive;
-
   return (
     <div className="space-y-8">
       <header className="space-y-3">
@@ -225,7 +213,7 @@ export function GalleryClient({
         )}
       </header>
 
-      {designs.length === 0 && !showRecipes ? (
+      {designs.length === 0 ? (
         <div className="rounded-2xl border border-plum/10 bg-white p-10 text-center">
           <p className="text-sm text-plum-soft">
             No templates yet for {activeRoleName ?? "this filter"}.
@@ -240,7 +228,6 @@ export function GalleryClient({
         </div>
       ) : (
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
-          {showRecipes && recipesSlot}
           {designs.map((d) => (
             <ImageCard
               key={`i-${d.id}`}
