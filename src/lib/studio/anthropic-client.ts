@@ -12,7 +12,6 @@
 // canonical. If you find yourself reaching for `new Anthropic()`
 // elsewhere in the Studio, stop and add the case here instead.
 
-import Anthropic from "@anthropic-ai/sdk";
 import { randomUUID } from "crypto";
 import {
   canGenerate,
@@ -20,6 +19,7 @@ import {
   recordGeneration,
 } from "@/lib/studio-cost";
 import { MODELS, type ModelId } from "@/lib/ai/models";
+import { getAnthropicClient } from "@/lib/ai/anthropic-client";
 
 export type StudioCallInput = {
   model: ModelId;
@@ -112,7 +112,7 @@ export async function callStudio(
     };
   }
 
-  const client = new Anthropic({ apiKey });
+  const client = getAnthropicClient();
 
   try {
     const message = await client.messages.create({
@@ -139,6 +139,7 @@ export async function callStudio(
         founderEmail: input.founderEmail,
         success: false,
         errorMessage: `Empty response — stop_reason=${message.stop_reason ?? "unknown"}`,
+        generationType: "studio_recipe",
       });
       return {
         ok: false,
@@ -158,6 +159,7 @@ export async function callStudio(
       outputTokens,
       founderEmail: input.founderEmail,
       success: true,
+      generationType: "studio_recipe",
     });
 
     return {
@@ -182,6 +184,7 @@ export async function callStudio(
       founderEmail: input.founderEmail,
       success: false,
       errorMessage: errorMessage.slice(0, 500),
+      generationType: "studio_recipe",
     });
     return {
       ok: false,

@@ -1,6 +1,6 @@
 "use server";
 
-import Anthropic from "@anthropic-ai/sdk";
+import { getAnthropicClient } from "@/lib/ai/anthropic-client";
 import { requireUser } from "@/lib/auth";
 import { MODELS } from "@/lib/ai/models";
 import { requireAIAccess } from "@/lib/ai/access";
@@ -185,7 +185,7 @@ Return the JSON now.`;
       hasAudience: targetAudience.length > 0,
     });
 
-    const client = new Anthropic({ apiKey });
+    const client = getAnthropicClient();
     const message = await client.messages.create({
       model: MODEL_ID,
       max_tokens: 2400,

@@ -1,6 +1,6 @@
 "use server";
 
-import Anthropic from "@anthropic-ai/sdk";
+import { getAnthropicClient } from "@/lib/ai/anthropic-client";
 import { prisma } from "@/lib/db";
 import { requireUser } from "@/lib/auth";
 import { stripRichText } from "@/lib/rich-text";
@@ -233,7 +233,7 @@ Write the cover letter now.`;
       hasSummary: !!cv.basics?.summary,
     });
 
-    const client = new Anthropic({ apiKey });
+    const client = getAnthropicClient();
     const message = await client.messages.create({
       model: MODEL_ID,
       max_tokens: 1200,

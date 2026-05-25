@@ -1,6 +1,6 @@
 "use server";
 
-import Anthropic from "@anthropic-ai/sdk";
+import { getAnthropicClient } from "@/lib/ai/anthropic-client";
 import { z } from "zod";
 import { headers } from "next/headers";
 import { MODELS } from "@/lib/ai/models";
@@ -166,7 +166,7 @@ export async function scoreResume(input: {
       textLength: text.length,
     });
 
-    const client = new Anthropic({ apiKey });
+    const client = getAnthropicClient();
     const message = await client.messages.create({
       model: MODEL_ID,
       max_tokens: 800,
