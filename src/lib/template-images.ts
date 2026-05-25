@@ -54,6 +54,48 @@ export async function countAllTemplateImagesByRole(): Promise<
   return m;
 }
 
+// Public-gallery query for /designs and the home-page preview strip.
+// roleSlug filters to one role; offset+limit paginates. Always
+// active=true; ordered newest first.
+export async function listPublicDesigns(opts: {
+  roleSlug?: string | null;
+  offset?: number;
+  limit?: number;
+}): Promise<TemplateImage[]> {
+  const offset = Math.max(0, opts.offset ?? 0);
+  const limit = Math.max(1, Math.min(96, opts.limit ?? 48));
+  const where = opts.roleSlug
+    ? { active: true, roleSlug: opts.roleSlug }
+    : { active: true };
+  return prisma.templateImage.findMany({
+    where,
+    orderBy: { createdAt: "desc" },
+    skip: offset,
+    take: limit,
+  });
+}
+
+// Top N roles by active-template count. Used for the "popular roles"
+// chips below the /designs search bar. Returns [{roleSlug, count}]
+// sorted DESC; ties broken alphabetically (deterministic builds).
+export async function topRolesByTemplateCount(
+  limit: number,
+): Promise<Array<{ roleSlug: string; count: number }>> {
+  const rows = await prisma.templateImage.groupBy({
+    by: ["roleSlug"],
+    where: { active: true },
+    _count: { _all: true },
+  });
+  return rows
+    .map((r) => ({ roleSlug: r.roleSlug, count: r._count._all }))
+    .sort((a, b) =>
+      b.count !== a.count
+        ? b.count - a.count
+        : a.roleSlug.localeCompare(b.roleSlug),
+    )
+    .slice(0, limit);
+}
+
 // Distinct roleSlugs that currently have at least one active TemplateImage.
 // Used for /templates/role/[roleSlug] generateStaticParams (so only
 // populated hubs are built) and for the sitemap (so only populated
