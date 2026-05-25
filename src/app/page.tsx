@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { Footer } from "@/components/footer";
@@ -9,7 +10,11 @@ import { Crown } from "lucide-react";
 import { TemplateThumbnail } from "@/components/templates/TemplateThumbnail";
 import { TEMPLATE_LIST } from "@/lib/templates";
 import { getCurrentUser } from "@/lib/auth";
-import { countActiveTemplateImagesByRole } from "@/lib/template-images";
+import {
+  countActiveTemplateImagesByRole,
+  listPublicDesigns,
+  type TemplateImage,
+} from "@/lib/template-images";
 import { NewsletterCard } from "@/components/newsletter/NewsletterCard";
 import { SiteHeader } from "@/components/site-header";
 
@@ -30,12 +35,14 @@ function buildTrustStats(designs: number, roles: number): TrustStat[] {
     {
       value: `${designs} designs`,
       label: `Across ${roles} roles`,
-      href: "/templates",
+      href: "/designs",
     },
     { value: "From $7/month", label: "7-day free trial", href: "/pricing" },
     { value: "Multilingual", label: "Built-in translation" },
   ];
 }
+
+const LATEST_PREVIEW_LIMIT = 20;
 
 const STEPS = [
   {
@@ -56,9 +63,10 @@ const STEPS = [
 ];
 
 export default async function HomePage() {
-  const [user, countMap] = await Promise.all([
+  const [user, countMap, latestDesigns] = await Promise.all([
     getCurrentUser(),
     countActiveTemplateImagesByRole(),
+    listPublicDesigns({ offset: 0, limit: LATEST_PREVIEW_LIMIT }),
   ]);
   const isLoggedIn = Boolean(user);
   const totalDesigns = Array.from(countMap.values()).reduce(
@@ -72,6 +80,10 @@ export default async function HomePage() {
     <main>
       <SiteHeader isLoggedIn={isLoggedIn} />
       <HeroSection isLoggedIn={isLoggedIn} />
+      <LatestDesignsSection
+        designs={latestDesigns}
+        totalCount={totalDesigns}
+      />
       <TrustSection stats={trustStats} />
       <TemplatesSection />
       <HowItWorksSection />
@@ -140,6 +152,65 @@ function HeroSection({ isLoggedIn }: { isLoggedIn: boolean }) {
             </p>
           </div>
           <HeroPreview />
+        </div>
+      </Container>
+    </Section>
+  );
+}
+
+function LatestDesignsSection({
+  designs,
+  totalCount,
+}: {
+  designs: TemplateImage[];
+  totalCount: number;
+}) {
+  if (designs.length === 0) return null;
+  return (
+    <Section className="bg-cream py-16">
+      <Container>
+        <div className="mb-8 flex flex-wrap items-end justify-between gap-3">
+          <div>
+            <p className="text-sm uppercase tracking-widest text-plum-faint">
+              Latest designs
+            </p>
+            <h2 className="mt-2 font-display text-3xl text-plum md:text-4xl">
+              {totalCount} designs ready to use
+            </h2>
+          </div>
+          <Link
+            href="/designs"
+            className="inline-flex items-center gap-2 text-sm font-medium text-coral hover:text-coral-deep"
+          >
+            Browse all {totalCount} designs
+            <ArrowRight className="h-4 w-4" />
+          </Link>
+        </div>
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+          {designs.map((d) => (
+            <Link
+              key={d.id}
+              href="/designs"
+              className="group block overflow-hidden rounded-xl border border-peach/30 bg-white shadow-warm-card transition-transform hover:-translate-y-0.5"
+              aria-label={`See ${d.title} in /designs`}
+            >
+              <div className="relative aspect-[3/4] overflow-hidden bg-plum/5">
+                <Image
+                  src={d.imageUrl}
+                  alt={d.title}
+                  fill
+                  loading="lazy"
+                  sizes="(min-width: 1024px) 20vw, (min-width: 640px) 33vw, 50vw"
+                  className="object-cover transition-transform group-hover:scale-[1.02]"
+                />
+              </div>
+              <div className="px-2 py-2">
+                <p className="truncate text-xs font-medium text-plum">
+                  {d.title}
+                </p>
+              </div>
+            </Link>
+          ))}
         </div>
       </Container>
     </Section>
