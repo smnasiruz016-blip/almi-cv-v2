@@ -24,6 +24,11 @@ export type CreateResumeResult =
 
 export async function createResume(
   template: string = "classic-serif",
+  /** Optional seed payload merged on top of the sample data. Used by
+   *  /cv/new?templateImageId= path — the parse pipeline writes whatever
+   *  it could read from the PNG, and the builder fills the rest from
+   *  mayaRodriguez so every Recipe section still renders. */
+  seed?: Partial<CVData>,
 ): Promise<CreateResumeResult> {
   const user = await requireUser();
 
@@ -78,6 +83,13 @@ export async function createResume(
     }
   }
 
+  // Merge precedence: seed > sample. Seed is shallow-merged at the
+  // section level (basics, experience, education, …); a non-empty seed
+  // array fully replaces the sample equivalent, a missing key leaves
+  // the sample value intact. This matches what the builder expects:
+  // the PNG showed an experience entry → use those entries, not Maya's.
+  const seeded = seed ? mergeSeedIntoSample(mayaRodriguez, seed) : mayaRodriguez;
+
   const resume = await prisma.resume.create({
     data: {
       userId: user.id,
@@ -86,10 +98,55 @@ export async function createResume(
       templateKey: template,
       templateTier: tier === "premium" ? "PREMIUM" : "FREE",
       isDraft: true,
-      data: mayaRodriguez as unknown as Prisma.InputJsonValue,
+      data: seeded as unknown as Prisma.InputJsonValue,
     },
   });
   return { ok: true, id: resume.id };
+}
+
+/** Shallow per-section merge. A seed array (e.g. seed.experience) of
+ *  length > 0 wholly replaces the sample's array; objects (basics,
+ *  style, sectionLabels) are spread so partial overrides work field by
+ *  field. The sample's RichText branding survives — seed strings just
+ *  satisfy the alias. */
+function mergeSeedIntoSample(
+  sample: CVData,
+  seed: Partial<CVData>,
+): CVData {
+  const merged: CVData = { ...sample };
+
+  if (seed.basics) {
+    merged.basics = { ...sample.basics, ...seed.basics };
+  }
+  if (seed.experience && seed.experience.length > 0) {
+    merged.experience = seed.experience.map((e) => ({
+      ...e,
+      bullets: e.bullets ?? [],
+    }));
+  }
+  if (seed.education && seed.education.length > 0) {
+    merged.education = seed.education.map((e) => ({
+      ...e,
+      startDate: e.startDate ?? "",
+      endDate: e.endDate ?? "",
+    }));
+  }
+  if (seed.skills && seed.skills.length > 0) {
+    merged.skills = seed.skills;
+  }
+  if (seed.projects && seed.projects.length > 0) {
+    merged.projects = seed.projects;
+  }
+  if (seed.languages && seed.languages.length > 0) {
+    merged.languages = seed.languages;
+  }
+  if (seed.certifications && seed.certifications.length > 0) {
+    merged.certifications = seed.certifications;
+  }
+  if (seed.interests && seed.interests.length > 0) {
+    merged.interests = seed.interests;
+  }
+  return merged;
 }
 
 export async function getResume(id: string) {

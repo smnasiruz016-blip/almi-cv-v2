@@ -247,14 +247,23 @@ model Recipe {
 // write time (server action). Stored as a plain string — not a
 // Prisma relation — because JOB_ROLES is a TS file, not a table.
 model TemplateImage {
-  id               String   @id @default(cuid())
+  id               String    @id @default(cuid())
   title            String
-  slug             String   @unique
+  slug             String    @unique
   roleSlug         String
   imageUrl         String
   filenameOriginal String
-  active           Boolean  @default(true)
-  createdAt        DateTime @default(now())
+  active           Boolean   @default(true)
+  createdAt        DateTime  @default(now())
+
+  // PR #52 parse pipeline. parsedFields holds Partial<CVData> produced by
+  // Haiku 4.5 vision over imageUrl (see src/lib/parse/template-image-parse.ts).
+  // parsedAt is null until first successful parse; parseError captures the
+  // last failure reason so the backfill script can target rows with
+  // {parsedAt: null} cheaply and re-parse selectively.
+  parsedFields     Json?
+  parsedAt         DateTime?
+  parseError       String?
 
   @@index([roleSlug, active, createdAt])
   @@index([active, createdAt])
@@ -276,6 +285,15 @@ model StudioCostLedger {
   costUsd      Decimal  @db.Decimal(10, 6)
   success      Boolean  @default(true)
   errorMessage String?
+  // PR #52 — distinguishes spend sources rolling up into the same
+  // monthly cap. Values used so far:
+  //   null = pre-PR-52 Studio recipe generation (kept null to leave
+  //          existing rows untouched; no historical backfill)
+  //   "studio_recipe" = post-PR-52 Studio recipe generation
+  //   "template_image_parse" = PR #52 vision-based PNG-to-CVData parse
+  // Stored as a string (not Prisma enum) so we can add new types without
+  // running a schema migration; the cost dashboard groups by value.
+  generationType String?
 
   @@index([timestamp(sort: Desc)])
   @@index([generationId])

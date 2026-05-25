@@ -1,6 +1,6 @@
 "use server";
 
-import Anthropic from "@anthropic-ai/sdk";
+import { getAnthropicClient } from "@/lib/ai/anthropic-client";
 import { prisma } from "@/lib/db";
 import { requireUser } from "@/lib/auth";
 import { stripRichText } from "@/lib/rich-text";
@@ -231,7 +231,7 @@ export async function sendChatMessage(input: {
       messageLen: message.length,
     });
 
-    const client = new Anthropic({ apiKey });
+    const client = getAnthropicClient();
     const aiResponse = await client.messages.create({
       model: MODEL_ID,
       max_tokens: 1500,

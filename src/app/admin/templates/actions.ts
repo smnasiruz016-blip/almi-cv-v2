@@ -6,6 +6,7 @@ import { requireFounder } from "@/lib/founder";
 import { prisma } from "@/lib/db";
 import { JOB_ROLES } from "@/lib/roles";
 import { isNumericLikeTitle, slugifyTitle } from "@/lib/template-images";
+import { parseTemplateImageFromUrl } from "@/lib/parse/template-image-parse";
 
 const MAX_FILE_BYTES = 8 * 1024 * 1024;
 const ACCEPTED_PREFIX = "image/";
@@ -18,7 +19,7 @@ export async function uploadTemplateImages(
   formData: FormData,
 ): Promise<UploadResult> {
   try {
-    await requireFounder();
+    const founder = await requireFounder();
 
     // The form submits the role NAME (the datalist input is name-valued
     // for readable post-selection UX); resolve to a canonical role here.
@@ -86,7 +87,7 @@ export async function uploadTemplateImages(
         addRandomSuffix: false,
       });
 
-      await prisma.templateImage.create({
+      const row = await prisma.templateImage.create({
         data: {
           title: rawTitle,
           slug,
@@ -95,6 +96,44 @@ export async function uploadTemplateImages(
           filenameOriginal: file.name,
         },
       });
+
+      // PR #52 parse pipeline. Synchronous so the founder sees the
+      // Parsed ✓ / ⚠ badge immediately on the next page render after
+      // submit. Failures DO NOT block the upload — we keep the row,
+      // record the error, and let the backfill script retry later.
+      // Vision-Haiku is ~2-5s/image, so a batch of 10 lands in ~30s,
+      // within Vercel's 300s function timeout.
+      try {
+        const result = await parseTemplateImageFromUrl(
+          blob.url,
+          founder.email,
+        );
+        if (result.ok) {
+          await prisma.templateImage.update({
+            where: { id: row.id },
+            data: {
+              parsedFields: result.parsed as unknown as object,
+              parsedAt: new Date(),
+              parseError: null,
+            },
+          });
+        } else {
+          await prisma.templateImage.update({
+            where: { id: row.id },
+            data: { parseError: result.error, parsedAt: null },
+          });
+        }
+      } catch (parseErr) {
+        // Defensive — parseTemplateImageFromUrl is built to never throw
+        // (it returns {ok: false, error}), but if something slips
+        // through we still want the row created and the error captured.
+        const msg =
+          parseErr instanceof Error ? parseErr.message : String(parseErr);
+        await prisma.templateImage.update({
+          where: { id: row.id },
+          data: { parseError: `unexpected throw: ${msg}` },
+        });
+      }
       created++;
     }
 

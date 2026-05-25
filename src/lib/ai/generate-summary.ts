@@ -1,6 +1,6 @@
 "use server";
 
-import Anthropic from "@anthropic-ai/sdk";
+import { getAnthropicClient } from "@/lib/ai/anthropic-client";
 import { requireUser } from "@/lib/auth";
 import { stripRichText } from "@/lib/rich-text";
 import { MODELS } from "@/lib/ai/models";
@@ -140,7 +140,7 @@ export async function generateSummary(input: {
       };
     }
 
-    const client = new Anthropic({ apiKey });
+    const client = getAnthropicClient();
 
     const userMessage = `Tone: ${tone}
 Role: ${role}
