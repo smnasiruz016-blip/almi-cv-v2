@@ -12,16 +12,22 @@
 // rate-limit risk at typical org tier, and 5 parallel API calls keep
 // the 246-row backfill under ~3 minutes wall clock at ~3s/parse.
 //
-// Run:
-//   node --env-file=.env.local --experimental-strip-types \
+// Run (tsx handles the `@/*` path aliases that node strip-types alone
+// can't resolve — and `--env-file` injects DATABASE_URL +
+// ANTHROPIC_API_KEY from .env.local without polluting the shell):
+//
+//   node --env-file=.env.local --import tsx \
 //     scripts/backfill-template-image-parse.ts
 //
 //   # to retry rows that previously errored:
-//   node --env-file=.env.local --experimental-strip-types \
+//   node --env-file=.env.local --import tsx \
 //     scripts/backfill-template-image-parse.ts --retry-errors
+//
+// `tsx` is fetched on demand by npx-style resolution — no devDependency
+// add is needed; `npm exec tsx` or installing globally also work.
 
 import { PrismaClient } from "@prisma/client";
-import { parseTemplateImageFromUrl } from "../src/lib/parse/template-image-parse.ts";
+import { parseTemplateImageFromUrl } from "../src/lib/parse/template-image-parse";
 
 const prisma = new PrismaClient();
 
