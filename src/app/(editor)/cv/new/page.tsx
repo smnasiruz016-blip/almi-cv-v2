@@ -31,14 +31,18 @@ export default async function NewCVPage({
   const params = await searchParams;
   const requestedTemplate = params.template;
   const templateImageId = params.templateImageId;
-  const template = requestedTemplate ?? "classic-serif";
+  // PR #53 collapsed the template registry to one entry. The `template`
+  // column still gets written so old data paths keep working, but the
+  // builder always renders via neutral-default — getTemplate() returns
+  // it for any unknown slug.
+  const template = requestedTemplate ?? "neutral-default";
 
   // PR #52 — when ?templateImageId= is present and the row has cached
-  // parsedFields, build a seed Partial<CVData> from those fields. The
-  // builder still uses the requested Recipe template for visual layout;
-  // only the *data* comes from the PNG parse. A missing row, an unparsed
-  // row, or a row whose parse errored all fall back to the default seed
-  // (mayaRodriguez sample) with no error surfaced to the user.
+  // parsedFields, build a seed Partial<CVData> from those fields. PR
+  // #53 dropped the mayaRodriguez fallback: missing row / unparsed /
+  // parse-errored all yield `seed = undefined`, which createResume()
+  // turns into an empty CVData skeleton. NeutralDefault hides empty
+  // sections so the user starts with a blank canvas.
   let seed: Partial<CVData> | undefined;
   if (templateImageId) {
     const ti = await prisma.templateImage.findUnique({
@@ -50,12 +54,14 @@ export default async function NewCVPage({
     }
   }
 
-  // Draft-reuse guard. Skip when we have a seed payload — the seeded
-  // content makes this a meaningfully different "new CV" intent than
-  // a generic empty draft, so reusing would silently throw away the
-  // parsed pre-fill.
+  // Draft-reuse guard. Skip whenever the user clicked a specific
+  // TemplateImage (templateImageId in the URL) — that's an explicit
+  // "start fresh from this design" intent, even if the template has
+  // no parsedFields and the seed ends up undefined. Otherwise (the
+  // dashboard's bare "New CV" button), reuse any existing isDraft=true
+  // resume so double-clicks don't create duplicates.
   const reusable =
-    seed === undefined
+    templateImageId === undefined
       ? await prisma.resume.findFirst({
           where: {
             userId: user.id,

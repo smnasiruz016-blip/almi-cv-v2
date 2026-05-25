@@ -3,7 +3,6 @@
 import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/db";
 import { requireUser } from "@/lib/auth";
-import { mayaRodriguez } from "@/lib/sample-cv-data";
 import {
   getUserPlan,
   isBillingEnabled,
@@ -16,6 +15,18 @@ import type { CVData, LanguageCode } from "@/lib/cv-types";
 import type { TranslatedCV } from "@/lib/ai/translate-cv-shared";
 import type { Prisma } from "@prisma/client";
 
+/** Empty CVData skeleton — the seed when no parsed PNG content is in
+ *  hand. Required fields are populated with empty strings (CVData's
+ *  type requires them as `string`, not optional), but the rendering
+ *  side (NeutralDefault) filters out empty rows before drawing, so
+ *  the user sees a blank canvas with no placeholder cruft. */
+const EMPTY_CV_DATA: CVData = {
+  basics: { fullName: "", role: "", email: "" },
+  experience: [],
+  education: [],
+  skills: [],
+};
+
 export type CreateResumeResult =
   | { ok: true; id: string }
   | { ok: false; error: string; code: "CV_LIMIT_REACHED" }
@@ -23,11 +34,12 @@ export type CreateResumeResult =
   | { ok: false; error: string; code: "UNKNOWN_TEMPLATE" };
 
 export async function createResume(
-  template: string = "classic-serif",
-  /** Optional seed payload merged on top of the sample data. Used by
-   *  /cv/new?templateImageId= path — the parse pipeline writes whatever
-   *  it could read from the PNG, and the builder fills the rest from
-   *  mayaRodriguez so every Recipe section still renders. */
+  template: string = "neutral-default",
+  /** Optional seed payload merged into an empty CVData skeleton. Used
+   *  by /cv/new?templateImageId= — the parse pipeline writes whatever
+   *  fields it could read from the PNG, and unparsed fields stay
+   *  empty (NeutralDefault hides empty sections, so the user starts
+   *  with a blank canvas augmented by whatever the PNG provided). */
   seed?: Partial<CVData>,
 ): Promise<CreateResumeResult> {
   const user = await requireUser();
@@ -83,12 +95,12 @@ export async function createResume(
     }
   }
 
-  // Merge precedence: seed > sample. Seed is shallow-merged at the
-  // section level (basics, experience, education, …); a non-empty seed
-  // array fully replaces the sample equivalent, a missing key leaves
-  // the sample value intact. This matches what the builder expects:
-  // the PNG showed an experience entry → use those entries, not Maya's.
-  const seeded = seed ? mergeSeedIntoSample(mayaRodriguez, seed) : mayaRodriguez;
+  // Merge precedence: seed > empty skeleton. The seed comes from
+  // parsedFields (PR #52 vision parse). Anything the parser couldn't
+  // extract stays empty in the seed, which means the section gets
+  // hidden in NeutralDefault — the user sees only what the PNG
+  // actually showed, no transcribed dummy data.
+  const seeded = seed ? mergeSeedIntoSkeleton(EMPTY_CV_DATA, seed) : EMPTY_CV_DATA;
 
   const resume = await prisma.resume.create({
     data: {
@@ -105,18 +117,18 @@ export async function createResume(
 }
 
 /** Shallow per-section merge. A seed array (e.g. seed.experience) of
- *  length > 0 wholly replaces the sample's array; objects (basics,
- *  style, sectionLabels) are spread so partial overrides work field by
- *  field. The sample's RichText branding survives — seed strings just
- *  satisfy the alias. */
-function mergeSeedIntoSample(
-  sample: CVData,
+ *  length > 0 wholly replaces the skeleton's empty []; objects
+ *  (basics) are spread so seed fields override the empty-string
+ *  defaults. Sections the parser didn't surface stay empty and the
+ *  template hides them at render time. */
+function mergeSeedIntoSkeleton(
+  skeleton: CVData,
   seed: Partial<CVData>,
 ): CVData {
-  const merged: CVData = { ...sample };
+  const merged: CVData = { ...skeleton };
 
   if (seed.basics) {
-    merged.basics = { ...sample.basics, ...seed.basics };
+    merged.basics = { ...skeleton.basics, ...seed.basics };
   }
   if (seed.experience && seed.experience.length > 0) {
     merged.experience = seed.experience.map((e) => ({

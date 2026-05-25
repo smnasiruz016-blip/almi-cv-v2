@@ -220,11 +220,11 @@ function PreviewCardContent({ reduce }: { reduce: ReduceMotion }) {
       <div className="flex items-center justify-between gap-4">
         <div className="flex items-center gap-3">
           <div className="flex h-12 w-12 items-center justify-center rounded-full bg-mint text-base font-medium text-plum">
-            MR
+            JS
           </div>
           <div>
-            <p className="text-base font-medium text-plum">Maya Rodriguez</p>
-            <p className="text-sm text-plum-soft">Senior Product Designer</p>
+            <p className="text-base font-medium text-plum">Jordan Smith</p>
+            <p className="text-sm text-plum-soft">Marketing Manager</p>
           </div>
         </div>
         <ScoreBadge reduce={reduce} />
