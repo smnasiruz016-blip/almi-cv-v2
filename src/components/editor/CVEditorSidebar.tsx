@@ -644,8 +644,22 @@ export function CVEditorSidebar({
 
   return (
     <div className="space-y-1">
-      {/* STYLE */}
-      <SectionAccordion title="Style">
+      {/* STYLE — temporarily hidden in PR-fix-maya-leftovers.
+       *
+       * Background: every control inside this accordion (Theme picker,
+       * Accent, Heading/Body font, Section style, Photo style, Density)
+       * mutates `data.style.*` fields that the sole remaining template
+       * (NeutralDefault, PR #53) ignores at render time. Clicking the
+       * swatches had no effect on the live preview — a broken UX that
+       * misleadingly suggests the dark "Plum" swatch is the active
+       * theme even though the preview renders white.
+       *
+       * Kept code in place (wrapped in `false && ...`) so re-enabling
+       * is a one-character revert if/when the template stack grows
+       * theming support back. Removes the visible #2D1B3D plum swatch
+       * that founder flagged as a "dark purple header".
+       */}
+      {false && <SectionAccordion title="Style">
         <div className="mb-5">
           <Field label="Theme">
             <div className="mb-2">
@@ -855,7 +869,7 @@ export function CVEditorSidebar({
             </div>
           </Field>
         </div>
-      </SectionAccordion>
+      </SectionAccordion>}
 
       {/* BASICS */}
       <SectionAccordion title="Basics" defaultOpen>
