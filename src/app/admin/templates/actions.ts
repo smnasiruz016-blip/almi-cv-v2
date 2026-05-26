@@ -7,6 +7,7 @@ import { prisma } from "@/lib/db";
 import { JOB_ROLES } from "@/lib/roles";
 import { isNumericLikeTitle, slugifyTitle } from "@/lib/template-images";
 import { parseTemplateImageFromUrl } from "@/lib/parse/template-image-parse";
+import { suggestTemplate, getTemplate } from "@/components/templates/template-registry";
 
 const MAX_FILE_BYTES = 8 * 1024 * 1024;
 const ACCEPTED_PREFIX = "image/";
@@ -40,6 +41,17 @@ export async function uploadTemplateImages(
       return { ok: false, error: `Unknown role: ${roleNameInput}` };
     }
     const roleSlug = role.slug;
+
+    // Phase 4: pick the layout (templateSlug) to pin on each created
+    // TemplateImage. Falls back to suggestTemplate(roleSlug) when the
+    // form didn't include a value (older builds) or sent something
+    // unknown. The /cv/new flow reads templateImage.templateSlug to
+    // route users into the matching React template.
+    const submittedSlug = String(formData.get("templateSlug") ?? "").trim();
+    const templateSlug =
+      submittedSlug && getTemplate(submittedSlug).slug === submittedSlug
+        ? submittedSlug
+        : suggestTemplate({ roleSlug }).slug;
 
     const files = formData.getAll("files").filter((f): f is File => f instanceof File);
     const titles = formData.getAll("titles").map((t) => String(t));
@@ -92,6 +104,7 @@ export async function uploadTemplateImages(
           title: rawTitle,
           slug,
           roleSlug,
+          templateSlug,
           imageUrl: blob.url,
           filenameOriginal: file.name,
         },

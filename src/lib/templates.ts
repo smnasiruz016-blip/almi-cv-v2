@@ -1,20 +1,28 @@
-// Template registry.
+// Template registry — Phase 4d bridge to the 20-template engine.
 //
-// PR #53 collapsed the Recipe system: 29 hand-coded designs and the
-// recipe engine (factory.ts, primitives/, personas/) were removed in
-// favor of a single neutral default template. The TemplateMeta shape
-// is preserved so call sites (editor, print, dashboard, sitemap) keep
-// working without refactor — `Component`, `slug`, `name`, `tier`, and
-// `addedAt` stay; recipe-specific metadata (role/mood/culturalFit/
-// source/tags/sampleData) was dropped from the type.
+// History:
+//   PR #53 collapsed the Recipe system to a single "neutral-default"
+//   template, with this file as the sole public seam consumed by the
+//   editor, print, dashboard, sitemap, and resume-actions call sites.
 //
-// Sole entry below is "classic-serif" — the transitional default while
-// PR #53 lands. Commit 2 of this PR introduces `neutral-default` and
-// retires `classic-serif`; commit 3 wires it as the builder default.
+//   Phase 4 (this commit) re-points the registry at the 20-template
+//   engine in src/components/templates/template-registry.ts. Consumers
+//   still see the same TemplateMeta shape and the same getTemplate /
+//   isKnownTemplate API — only the underlying templates change.
+//
+//   The new registry uses `component` (lowercase) + ResumeData→CVData
+//   adapted components; this bridge re-exposes them as `Component`
+//   (capital) with the broader `{ data, paginated?, printSafe? }`
+//   contract every call site already expects.
 
 import type { ComponentType } from "react";
 import type { CVData } from "@/lib/cv-types";
-import { NeutralDefault } from "@/components/templates/NeutralDefault";
+import {
+  TEMPLATES as REGISTRY_TEMPLATES,
+  getTier,
+  getTagline,
+  getAddedAt,
+} from "@/components/templates/template-registry";
 
 export type TemplateMeta = {
   slug: string;
@@ -27,30 +35,33 @@ export type TemplateMeta = {
   addedAt: string;
 };
 
-export const TEMPLATE_LIST: TemplateMeta[] = [
-  {
-    slug: "neutral-default",
-    name: "Neutral Default",
-    tier: "free",
-    tagline: "Clean · ATS-friendly · Print-safe",
-    description:
-      "The single CV layout the builder uses by default. ATS-friendly typography, generous whitespace, A4-print-safe. Sections render only when their data is present, so the template adapts to whatever the parsed PNG or user input provides.",
-    Component: NeutralDefault,
-    addedAt: "2026-05-25T00:00:00.000Z",
-  },
-];
+/** Default fallback slug. Resumes whose `template` column points at a
+ *  legacy or unknown value (e.g. "neutral-default" from PR #53, or any
+ *  retired recipe slug) silently render via this template instead of
+ *  500-ing. Picked because it's the safest professional fallback. */
+const DEFAULT_TEMPLATE_SLUG = "classic-serif";
+
+/** Build the public TEMPLATE_LIST by mapping each new-registry entry into
+ *  the existing TemplateMeta shape. Order is preserved (most-specific
+ *  first → classic-serif last). */
+export const TEMPLATE_LIST: TemplateMeta[] = REGISTRY_TEMPLATES.map((t) => ({
+  slug: t.slug,
+  name: t.name,
+  tier: getTier(t),
+  tagline: getTagline(t),
+  description: t.description,
+  Component: t.component,
+  addedAt: getAddedAt(t),
+}));
 
 export const TEMPLATES: Record<string, TemplateMeta> = Object.fromEntries(
   TEMPLATE_LIST.map((t) => [t.slug, t]),
 );
 
-const DEFAULT_TEMPLATE_SLUG = TEMPLATE_LIST[0].slug;
-
 /** Returns the template by slug, falling back to the default when the
- *  slug is unknown. This is what shields existing user CVs whose
- *  `template` column points at a legacy recipe slug (29 deleted in PR
- *  #53) — they all silently render through the surviving template
- *  instead of 500-ing. */
+ *  slug is unknown. Shields existing user CVs whose `template` column
+ *  points at a legacy slug — they all render via classic-serif rather
+ *  than 500-ing. */
 export function getTemplate(slug: string): TemplateMeta {
   return TEMPLATES[slug] ?? TEMPLATES[DEFAULT_TEMPLATE_SLUG];
 }

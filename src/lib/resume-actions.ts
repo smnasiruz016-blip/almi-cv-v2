@@ -34,12 +34,15 @@ export type CreateResumeResult =
   | { ok: false; error: string; code: "UNKNOWN_TEMPLATE" };
 
 export async function createResume(
-  template: string = "neutral-default",
+  /** Slug from src/components/templates/template-registry. Phase 4 moved the
+   *  default from the retired "neutral-default" to "classic-serif" (the
+   *  template-engine fallback). Unknown slugs are rejected up front. */
+  template: string = "classic-serif",
   /** Optional seed payload merged into an empty CVData skeleton. Used
    *  by /cv/new?templateImageId= — the parse pipeline writes whatever
    *  fields it could read from the PNG, and unparsed fields stay
-   *  empty (NeutralDefault hides empty sections, so the user starts
-   *  with a blank canvas augmented by whatever the PNG provided). */
+   *  empty (templates hide empty sections, so the user starts with a
+   *  blank canvas augmented by whatever the PNG provided). */
   seed?: Partial<CVData>,
 ): Promise<CreateResumeResult> {
   const user = await requireUser();
@@ -106,8 +109,13 @@ export async function createResume(
     data: {
       userId: user.id,
       title: "Untitled CV",
+      // Phase 4 wired templateSlug as the authoritative column read by
+      // the editor + print + admin pipelines. We still write the
+      // legacy `template` and `templateKey` columns so dashboards,
+      // sitemaps, and dual-writers that haven't migrated yet keep working.
       template,
       templateKey: template,
+      templateSlug: template,
       templateTier: tier === "premium" ? "PREMIUM" : "FREE",
       isDraft: true,
       data: seeded as unknown as Prisma.InputJsonValue,
@@ -311,6 +319,7 @@ export async function createTranslatedResume(input: {
         title: `${source.title} (${input.languageName})`,
         template: source.template,
         templateKey: source.templateKey,
+        templateSlug: source.templateSlug,
         isDraft: false,
         data: mergedData as unknown as Prisma.InputJsonValue,
       },
@@ -339,6 +348,7 @@ export async function duplicateResume(id: string): Promise<string> {
       title: `${source.title} (copy)`,
       template: source.template,
       templateKey: source.templateKey,
+      templateSlug: source.templateSlug,
       isDraft: false,
       data: source.data as unknown as Prisma.InputJsonValue,
     },
