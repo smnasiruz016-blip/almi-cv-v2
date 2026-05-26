@@ -24,7 +24,6 @@ import type { MetadataRoute } from "next";
 import { COUNTRY_LANDING } from "@/lib/country-landing";
 import { COUNTRIES_SERVED } from "@/lib/countries";
 import { JOB_ROLES } from "@/lib/roles";
-import { listPopulatedRoleSlugs } from "@/lib/template-images";
 
 const SITE_ORIGIN = "https://almicv.almiworld.com";
 const CHUNK = 25000;
@@ -95,18 +94,18 @@ export default async function sitemap({
     // role hubs only. No per-template detail URL exists to advertise.
     const templateEntries: MetadataRoute.Sitemap = [];
 
-    // /templates/role/[roleSlug] hubs — only roles with active uploads
-    // (per doctrine #3: no thin-content hubs for empty roles). Built
-    // at build-time, sitemap re-reads on each rebuild.
-    const populatedRoleSlugs = await listPopulatedRoleSlugs();
-    const roleHubEntries: MetadataRoute.Sitemap = populatedRoleSlugs.map(
-      (slug) => ({
-        url: `${SITE_ORIGIN}/templates/role/${slug}`,
-        lastModified: now,
-        changeFrequency: "weekly",
-        priority: 0.7,
-      }),
-    );
+    // /templates/role/[roleSlug] hubs — PNG sunset moved the source of
+    // truth from "roles with TemplateImage rows" (max 61 historical) to
+    // "every JOB_ROLES entry" (263). Each hub now renders a live React
+    // preview via suggestTemplate() with classic-serif fallback, so the
+    // old "no thin content" guard isn't needed — every URL has a real
+    // A4 preview + role-tailored copy + CTA.
+    const roleHubEntries: MetadataRoute.Sitemap = JOB_ROLES.map((r) => ({
+      url: `${SITE_ORIGIN}/templates/role/${r.slug}`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.7,
+    }));
 
     // Existing /jobs/[country] SEO (196 countries — preserved).
     const jobsEntries: MetadataRoute.Sitemap = COUNTRY_LANDING.map((c) => ({
