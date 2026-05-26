@@ -229,6 +229,10 @@ const PLACEHOLDER_PATTERNS = {
     /^name$/i,
     /^client name$/i,
     /^full name$/i,
+    // PR-fix: legacy AlmiCV sample persona — its name occasionally
+    // leaks back into the parse output when a template PNG itself
+    // happened to display "Maya Rodriguez" as placeholder text.
+    /^maya\s+rodriguez$/i,
   ],
   email: [
     /your\.?email/i,
@@ -237,12 +241,16 @@ const PLACEHOLDER_PATTERNS = {
     /info@example/i,
     /name@/i,
     /you@/i,
+    // PR-fix: legacy AlmiCV sample persona email.
+    /maya@rodriguez\.design/i,
   ],
   phone: [
     /^(\+?1?\s?)?(555|123)[\s.-]?(555|0123|1234)/i,
     /^xxx[\s.-]/i,
     /^000/,
     /your phone/i,
+    // PR-fix: legacy AlmiCV sample persona phone.
+    /\+?1\s?415\s?555\s?0142/i,
   ],
   location: [
     /^city,?\s*(country|state|zip)/i,
@@ -251,10 +259,12 @@ const PLACEHOLDER_PATTERNS = {
     /^street address/i,
   ],
   linkedIn: [
-    /linkedin\.com\/in\/(yourname|username|johndoe|reallygreatsite)/i,
+    /linkedin\.com\/in\/(yourname|username|johndoe|reallygreatsite|mayarod)/i,
   ],
   website: [
     /(reallygreatsite|example|yoursite|yourdomain)\.com/i,
+    // PR-fix: legacy AlmiCV sample persona website variants.
+    /maya\.?rodriguez\.design/i,
   ],
 } as const;
 
