@@ -27,10 +27,14 @@ async function main() {
   // misconfigured env can be caught from the first console line.
   const dbHost = new URL(process.env.DATABASE_URL ?? "postgresql://x@unknown/").hostname;
   console.log(`Connected to: ${dbHost}`);
-  if (dbHost.includes("hidden-frog")) {
+  if (dbHost.includes("hidden-frog") && process.env.ALLOW_PROD !== "1") {
     console.error("\n🚨 REFUSING TO RUN — this looks like the production endpoint.");
-    console.error("    Re-export DATABASE_URL from .env.development.local before retrying.\n");
+    console.error("    To run against prod intentionally, set ALLOW_PROD=1:");
+    console.error("      ALLOW_PROD=1 npx tsx scripts/backfill-template-slugs.ts\n");
     process.exit(1);
+  }
+  if (dbHost.includes("hidden-frog")) {
+    console.log("⚠️  PRODUCTION RUN — ALLOW_PROD=1 override active.\n");
   }
 
   const images = await prisma.templateImage.findMany({
