@@ -871,6 +871,28 @@ export function CVEditorSidebar({
         </div>
       </SectionAccordion>}
 
+      {/* Style picker remains hidden (see comment above). The note below
+       * occupies the same visual slot — gives users the explicit path to
+       * a different look (switch templates) without re-introducing dead
+       * customization controls. Remove this block when proper template-
+       * aware theming lands (see AGENTS.md, theming-variants doctrine). */}
+      <div className="mb-2 rounded-2xl border border-plum/10 bg-cream-soft/60 p-4">
+        <p className="text-xs font-medium text-plum">Want a different look?</p>
+        <p className="mt-1 text-xs text-plum-soft">
+          Each AlmiCV template is a complete, ATS-safe design — colors,
+          fonts, and layout curated together. To change the styling, switch
+          to a different template.
+        </p>
+        <a
+          href="/templates"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-2 inline-flex items-center gap-1 text-xs font-medium text-coral hover:text-coral-deep"
+        >
+          Browse 20 templates →
+        </a>
+      </div>
+
       {/* BASICS */}
       <SectionAccordion title="Basics" defaultOpen>
         <Field label="Full name">
