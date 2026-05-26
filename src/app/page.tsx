@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { Footer } from "@/components/footer";
@@ -10,9 +9,10 @@ import { getCurrentUser } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 import { isBillingEnabled, getUserPlan } from "@/lib/billing/plans";
 import {
-  getLatestTemplatesForHome,
-  type TemplateImage,
-} from "@/lib/template-images";
+  TEMPLATES,
+  type TemplateMeta,
+} from "@/components/templates/template-registry";
+import { CVPreview } from "@/components/templates/CVPreview";
 import { NewsletterCard } from "@/components/newsletter/NewsletterCard";
 import { SiteHeader } from "@/components/site-header";
 import { PricingClient } from "@/app/pricing/pricing-client";
@@ -56,11 +56,12 @@ const STEPS = [
 ];
 
 export default async function HomePage() {
-  const [user, latestDesigns] = await Promise.all([
-    getCurrentUser(),
-    getLatestTemplatesForHome(30),
-  ]);
+  const user = await getCurrentUser();
   const isLoggedIn = Boolean(user);
+  // PNG sunset: home strip now sources from the registry (static), no DB
+  // hit. Show the first 12 templates from registry order (most-specific
+  // first) — enough variety to hint at the breadth without dominating.
+  const showcaseTemplates: TemplateMeta[] = TEMPLATES.slice(0, 12);
 
   // Pricing cards need the same data the /pricing page resolves — only
   // worth the DB hit when a user is actually logged in.
@@ -82,7 +83,10 @@ export default async function HomePage() {
     <main>
       <SiteHeader isLoggedIn={isLoggedIn} />
       <HeroSection isLoggedIn={isLoggedIn} />
-      <TemplatesShowcaseSection designs={latestDesigns} />
+      <TemplatesShowcaseSection
+        templates={showcaseTemplates}
+        isLoggedIn={isLoggedIn}
+      />
       <TrustSection stats={TRUST_STATS} />
       <PricingSection
         isLoggedIn={isLoggedIn}
@@ -161,13 +165,19 @@ function HeroSection({ isLoggedIn }: { isLoggedIn: boolean }) {
   );
 }
 
-// Unified showcase section that replaces (a) the old hand-coded
-// TemplatesSection that paraded 30 Recipes and (b) the PR #50
-// LatestDesignsSection that surfaced 20 image rows in a separate
-// strip. One section now: 30 most recent TemplateImage rows + CTA to
-// the full /templates gallery. Auto-rotates as new uploads land.
-function TemplatesShowcaseSection({ designs }: { designs: TemplateImage[] }) {
-  if (designs.length === 0) return null;
+// PNG sunset: this section used to render 30 most-recent TemplateImage
+// rows from the DB. Now it renders the first 12 templates from the
+// registry — static, no DB hit, identical CSS shape (responsive grid
+// of small card thumbnails). Each card jumps straight to /cv/new for
+// logged-in users or to /signup for anon.
+function TemplatesShowcaseSection({
+  templates,
+  isLoggedIn,
+}: {
+  templates: TemplateMeta[];
+  isLoggedIn: boolean;
+}) {
+  if (templates.length === 0) return null;
   return (
     <Section className="bg-gradient-to-b from-cream-soft to-peach/40 py-24">
       <Container>
@@ -180,30 +190,28 @@ function TemplatesShowcaseSection({ designs }: { designs: TemplateImage[] }) {
         </div>
 
         <div className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 lg:gap-4">
-          {designs.map((d) => (
-            <Link
-              key={d.id}
-              href={`/templates?selected=${d.id}`}
-              className="group block overflow-hidden rounded-xl border border-peach/30 bg-white shadow-warm-card transition-transform hover:-translate-y-0.5"
-              aria-label={`See ${d.title} in /templates`}
-            >
-              <div className="relative aspect-[3/4] overflow-hidden bg-plum/5">
-                <Image
-                  src={d.imageUrl}
-                  alt={d.title}
-                  fill
-                  loading="lazy"
-                  sizes="(min-width: 1024px) 16vw, (min-width: 640px) 25vw, 50vw"
-                  className="object-cover transition-transform group-hover:scale-[1.02]"
-                />
-              </div>
-              <div className="px-2 py-2">
-                <p className="truncate text-xs font-medium text-plum">
-                  {d.title}
-                </p>
-              </div>
-            </Link>
-          ))}
+          {templates.map((t) => {
+            const href = isLoggedIn
+              ? `/cv/new?template=${t.slug}`
+              : `/signup?intent=template&template=${t.slug}`;
+            return (
+              <Link
+                key={t.slug}
+                href={href}
+                className="group block overflow-hidden rounded-xl border border-peach/30 bg-white shadow-warm-card transition-transform hover:-translate-y-0.5"
+                aria-label={`Use the ${t.name} template`}
+              >
+                <div className="bg-plum/5">
+                  <CVPreview slug={t.slug} width={200} className="mx-auto" />
+                </div>
+                <div className="border-t border-peach/30 px-2 py-2">
+                  <p className="truncate text-xs font-medium text-plum">
+                    {t.name}
+                  </p>
+                </div>
+              </Link>
+            );
+          })}
         </div>
 
         <div className="mt-10 flex justify-center">
@@ -211,7 +219,7 @@ function TemplatesShowcaseSection({ designs }: { designs: TemplateImage[] }) {
             href="/templates"
             className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-pill px-5 py-3 text-sm font-semibold text-coral transition hover:text-coral-deep focus:outline-none focus:ring-4 focus:ring-coral/20"
           >
-            Browse all designs
+            Browse all templates
             <ArrowRight className="h-4 w-4" />
           </Link>
         </div>

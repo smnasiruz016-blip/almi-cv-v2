@@ -3,8 +3,6 @@ import { prisma } from "@/lib/db";
 import { requireUser } from "@/lib/auth";
 import { createResume } from "@/lib/resume-actions";
 import { isKnownTemplate } from "@/lib/templates";
-import { suggestTemplate } from "@/components/templates/template-registry";
-import type { CVData } from "@/lib/cv-types";
 
 /**
  * Idempotency guard. GETs that mutate state are dangerous — every visit to
@@ -23,86 +21,51 @@ import type { CVData } from "@/lib/cv-types";
  * Fluid Compute calling Neon Postgres the delta routinely exceeded 1s due
  * to network + pooler queueing time, so even brand-new untouched rows
  * looked "edited" and the guard skipped them. Don't go back to that.
+ *
+ * PNG sunset removed the ?templateImageId= path: the parse-and-seed
+ * pipeline died with TemplateImage. Old bookmarks that still carry
+ * ?templateImageId= are accepted (the param is silently ignored — no
+ * 500, no crash) and fall through to the default template. ?template=
+ * is the single supported handle now.
  */
 export default async function NewCVPage({
   searchParams,
 }: {
+  // templateImageId retained in the type so legacy links don't 404; the
+  // value is ignored. Remove from the type once external link sources
+  // (emails, sitemaps) have aged out.
   searchParams: Promise<{ template?: string; templateImageId?: string }>;
 }) {
   const user = await requireUser();
   const params = await searchParams;
   const requestedTemplate = params.template;
-  const templateImageId = params.templateImageId;
 
-  // Phase 4: resolve the template slug. Precedence:
-  //   1. Explicit ?template= query (founder/admin links)
-  //   2. TemplateImage.templateSlug — admin-curated layout for this PNG
-  //   3. suggestTemplate(roleSlug) — derived from the role this PNG covers
-  //   4. "classic-serif" — registry's neutral fallback
-  //
-  // PR #52 — when ?templateImageId= is present and the row has cached
-  // parsedFields, build a seed Partial<CVData> from those fields. PR
-  // #53 dropped the mayaRodriguez fallback: missing row / unparsed /
-  // parse-errored all yield `seed = undefined`, which createResume()
-  // turns into an empty CVData skeleton.
-  let seed: Partial<CVData> | undefined;
-  let templateImage:
-    | { parsedFields: unknown; parsedAt: Date | null; templateSlug: string; roleSlug: string }
-    | null = null;
-  if (templateImageId) {
-    templateImage = await prisma.templateImage.findUnique({
-      where: { id: templateImageId },
-      select: {
-        parsedFields: true,
-        parsedAt: true,
-        templateSlug: true,
-        roleSlug: true,
-      },
-    });
-    if (templateImage?.parsedAt && templateImage.parsedFields) {
-      seed = templateImage.parsedFields as Partial<CVData>;
-    }
-  }
+  const template =
+    requestedTemplate && isKnownTemplate(requestedTemplate)
+      ? requestedTemplate
+      : "classic-serif";
 
-  const template = (() => {
-    if (requestedTemplate && isKnownTemplate(requestedTemplate)) {
-      return requestedTemplate;
-    }
-    if (templateImage?.templateSlug && isKnownTemplate(templateImage.templateSlug)) {
-      return templateImage.templateSlug;
-    }
-    if (templateImage?.roleSlug) {
-      return suggestTemplate({ roleSlug: templateImage.roleSlug }).slug;
-    }
-    return "classic-serif";
-  })();
-
-  // Draft-reuse guard. Skip whenever the user clicked a specific
-  // TemplateImage (templateImageId in the URL) — that's an explicit
-  // "start fresh from this design" intent, even if the template has
-  // no parsedFields and the seed ends up undefined. Otherwise (the
-  // dashboard's bare "New CV" button), reuse any existing isDraft=true
-  // resume so double-clicks don't create duplicates.
-  const reusable =
-    templateImageId === undefined
-      ? await prisma.resume.findFirst({
-          where: {
-            userId: user.id,
-            isDraft: true,
-            ...(requestedTemplate !== undefined && {
-              template: requestedTemplate,
-            }),
-          },
-          orderBy: { createdAt: "desc" },
-          select: { id: true },
-        })
-      : null;
+  // Draft-reuse guard. Reuse any existing isDraft=true resume so double-
+  // clicks don't create duplicates. If the user explicitly passed
+  // ?template=<slug>, scope reuse to drafts on the same template so
+  // switching layouts always starts a fresh CV.
+  const reusable = await prisma.resume.findFirst({
+    where: {
+      userId: user.id,
+      isDraft: true,
+      ...(requestedTemplate !== undefined && {
+        template: requestedTemplate,
+      }),
+    },
+    orderBy: { createdAt: "desc" },
+    select: { id: true },
+  });
 
   if (reusable) {
     redirect(`/cv/${reusable.id}/edit`);
   }
 
-  const result = await createResume(template, seed);
+  const result = await createResume(template);
   if (!result.ok) {
     if (result.code === "TEMPLATE_REQUIRES_PRO") {
       // Tier gate hit. Drop them on /pricing with this same /cv/new
