@@ -2,6 +2,8 @@ import { redirect } from "next/navigation";
 import { prisma } from "@/lib/db";
 import { requireUser } from "@/lib/auth";
 import { createResume } from "@/lib/resume-actions";
+import { isKnownTemplate } from "@/lib/templates";
+import { suggestTemplate } from "@/components/templates/template-registry";
 import type { CVData } from "@/lib/cv-types";
 
 /**
@@ -31,28 +33,49 @@ export default async function NewCVPage({
   const params = await searchParams;
   const requestedTemplate = params.template;
   const templateImageId = params.templateImageId;
-  // PR #53 collapsed the template registry to one entry. The `template`
-  // column still gets written so old data paths keep working, but the
-  // builder always renders via neutral-default — getTemplate() returns
-  // it for any unknown slug.
-  const template = requestedTemplate ?? "neutral-default";
 
+  // Phase 4: resolve the template slug. Precedence:
+  //   1. Explicit ?template= query (founder/admin links)
+  //   2. TemplateImage.templateSlug — admin-curated layout for this PNG
+  //   3. suggestTemplate(roleSlug) — derived from the role this PNG covers
+  //   4. "classic-serif" — registry's neutral fallback
+  //
   // PR #52 — when ?templateImageId= is present and the row has cached
   // parsedFields, build a seed Partial<CVData> from those fields. PR
   // #53 dropped the mayaRodriguez fallback: missing row / unparsed /
   // parse-errored all yield `seed = undefined`, which createResume()
-  // turns into an empty CVData skeleton. NeutralDefault hides empty
-  // sections so the user starts with a blank canvas.
+  // turns into an empty CVData skeleton.
   let seed: Partial<CVData> | undefined;
+  let templateImage:
+    | { parsedFields: unknown; parsedAt: Date | null; templateSlug: string; roleSlug: string }
+    | null = null;
   if (templateImageId) {
-    const ti = await prisma.templateImage.findUnique({
+    templateImage = await prisma.templateImage.findUnique({
       where: { id: templateImageId },
-      select: { parsedFields: true, parsedAt: true },
+      select: {
+        parsedFields: true,
+        parsedAt: true,
+        templateSlug: true,
+        roleSlug: true,
+      },
     });
-    if (ti?.parsedAt && ti.parsedFields) {
-      seed = ti.parsedFields as unknown as Partial<CVData>;
+    if (templateImage?.parsedAt && templateImage.parsedFields) {
+      seed = templateImage.parsedFields as Partial<CVData>;
     }
   }
+
+  const template = (() => {
+    if (requestedTemplate && isKnownTemplate(requestedTemplate)) {
+      return requestedTemplate;
+    }
+    if (templateImage?.templateSlug && isKnownTemplate(templateImage.templateSlug)) {
+      return templateImage.templateSlug;
+    }
+    if (templateImage?.roleSlug) {
+      return suggestTemplate({ roleSlug: templateImage.roleSlug }).slug;
+    }
+    return "classic-serif";
+  })();
 
   // Draft-reuse guard. Skip whenever the user clicked a specific
   // TemplateImage (templateImageId in the URL) — that's an explicit

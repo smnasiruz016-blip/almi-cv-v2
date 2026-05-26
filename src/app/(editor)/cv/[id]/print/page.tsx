@@ -30,7 +30,10 @@ export default async function PrintCVPage({
   const resume = await getResume(id);
   if (!resume) notFound();
 
-  const slug = resume.template ?? "classic-serif";
+  // Phase 4: templateSlug is the authoritative column. Fall back to the
+  // legacy `template` column for rows created before the migration, then
+  // to classic-serif (the registry's neutral default).
+  const slug = resume.templateSlug || resume.template || "classic-serif";
 
   // Same tier check as the editor route. The Puppeteer print pipeline
   // forwards the user's session cookies, so requireUser + this gate

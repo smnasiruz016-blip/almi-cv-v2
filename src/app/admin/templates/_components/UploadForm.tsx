@@ -7,6 +7,10 @@ import {
   titleFromFilename,
 } from "@/lib/template-images";
 import type { Role } from "@/lib/roles";
+import {
+  TEMPLATES as REGISTRY_TEMPLATES,
+  suggestTemplate,
+} from "@/components/templates/template-registry";
 
 // <form onSubmit={...}> with every field carrying a `name` attribute
 // so FormData(formElement) picks up the user's input via standard
@@ -42,7 +46,17 @@ type Props = {
 export function UploadForm({ roles, existingCountByRole }: Props) {
   const [titles, setTitles] = useState<string[]>([]);
   const [filenames, setFilenames] = useState<string[]>([]);
-  const [roleInput, setRoleInput] = useState<string>(roles[0]?.name ?? "");
+  const initialRole = roles[0];
+  const [roleInput, setRoleInput] = useState<string>(initialRole?.name ?? "");
+  // Phase 4: persist the chosen layout on TemplateImage.templateSlug so the
+  // /cv/new flow can route users straight to the matching React template.
+  // Default mirrors suggestTemplate() for the initial role; founder can
+  // override via the dropdown before submit.
+  const [templateSlug, setTemplateSlug] = useState<string>(
+    initialRole
+      ? suggestTemplate({ roleSlug: initialRole.slug }).slug
+      : "classic-serif",
+  );
   const [state, setState] = useState<UploadResult | null>(null);
   const [isPending, startTransition] = useTransition();
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -96,11 +110,18 @@ export function UploadForm({ roles, existingCountByRole }: Props) {
   // tracked separately — re-typing the role re-runs generateTitles on
   // the current filenames. That's fine: the typical flow is pick role,
   // then files, not the reverse.
+  //
+  // Also re-suggests the template layout — the founder can still override
+  // via the dropdown after the role change.
   function onRoleChanged(value: string) {
     setRoleInput(value);
     if (filenames.length > 0 && fileInputRef.current?.files) {
       const arr = Array.from(fileInputRef.current.files);
       setTitles(generateTitles(arr, value));
+    }
+    const role = resolveRole(value);
+    if (role) {
+      setTemplateSlug(suggestTemplate({ roleSlug: role.slug }).slug);
     }
   }
 
@@ -179,6 +200,28 @@ export function UploadForm({ roles, existingCountByRole }: Props) {
           />
         </label>
       </div>
+
+      <label className="block text-sm">
+        <span className="block font-medium text-plum">Layout</span>
+        <select
+          id="templateSlug"
+          name="templateSlug"
+          value={templateSlug}
+          onChange={(e) => setTemplateSlug(e.target.value)}
+          className="mt-1 w-full rounded-lg border border-plum/20 bg-white px-3 py-2 text-sm"
+        >
+          {REGISTRY_TEMPLATES.map((t) => (
+            <option key={t.slug} value={t.slug}>
+              {t.name} — {t.category}
+            </option>
+          ))}
+        </select>
+        <span className="mt-1 block text-xs text-plum-faint">
+          Auto-suggested from the role; pick a different layout if needed.
+          Persists to TemplateImage.templateSlug so the editor opens the
+          matching React template when a user picks this PNG.
+        </span>
+      </label>
 
       {titles.length > 0 && (
         <ul className="divide-y divide-plum/10 rounded-lg border border-plum/10">

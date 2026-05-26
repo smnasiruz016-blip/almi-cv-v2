@@ -110,6 +110,7 @@ model Resume {
   status         DocumentStatus @default(DRAFT)
   draftData      Json?
   template       String         @default("classic-serif")
+  templateSlug   String         @default("classic-serif")
   data           Json           @default("{}")
   isDraft        Boolean        @default(true)
   lastSnapshot   Json?
@@ -251,6 +252,7 @@ model TemplateImage {
   title            String
   slug             String    @unique
   roleSlug         String
+  templateSlug     String    @default("classic-serif")
   imageUrl         String
   filenameOriginal String
   active           Boolean   @default(true)

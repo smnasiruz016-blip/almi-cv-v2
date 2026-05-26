@@ -1,20 +1,7 @@
 import type { Metadata } from "next";
-import { Fraunces, Inter } from "next/font/google";
 import { ToastProvider } from "@/components/ui/Toast";
+import { allFontVariables } from "./fonts";
 import "./globals.css";
-
-const sansFont = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
-});
-
-const displayFont = Fraunces({
-  subsets: ["latin"],
-  variable: "--font-fraunces",
-  style: ["normal", "italic"],
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://almicv.almiworld.com"),
@@ -40,7 +27,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${sansFont.variable} ${displayFont.variable}`}>
+    <html lang="en" className={allFontVariables}>
       <body className="min-h-screen bg-cream text-plum antialiased">
         <ToastProvider>{children}</ToastProvider>
       </body>
