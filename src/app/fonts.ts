@@ -15,9 +15,10 @@
 //   DM Serif Display → CreativeDirector, CreativePortfolio
 //   Lora             → Healthcare
 //   Crimson Pro      → Academic
-//   Cormorant Garamond → ReligiousTraditional, RealEstateElegant
-//   Playfair Display → BeautyPortfolio, RealEstateElegant
+//   Cormorant Garamond → ReligiousTraditional, RealEstateElegant, WellnessGolden (Batch 4)
+//   Playfair Display → BeautyPortfolio, RealEstateElegant, WellnessGolden (Batch 4 fallback)
 //   Amiri            → ReligiousTraditional (Arabic-friendly)
+//   Plus Jakarta Sans → IceBlueGlass, AdminFluid, CyberEmerald, CloudLight (Batch 4)
 // ============================================================================
 
 import {
@@ -31,6 +32,7 @@ import {
   Cormorant_Garamond,
   Playfair_Display,
   Amiri,
+  Plus_Jakarta_Sans,
 } from "next/font/google";
 
 export const inter = Inter({
@@ -114,6 +116,17 @@ export const amiri = Amiri({
   display: "swap",
 });
 
+// Plus Jakarta Sans is variable; Batch 4 templates reference it by literal
+// family name (e.g. fontFamily: '"Plus Jakarta Sans","Inter",sans-serif').
+// Also loaded by cv-fonts.ts for editor pages, but mounted at the root here
+// so the /templates gallery preview can use it too.
+export const plusJakartaSans = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  variable: "--font-plus-jakarta-sans",
+  style: ["normal", "italic"],
+  display: "swap",
+});
+
 /** Convenience — concatenates every font's CSS variable class so the
  *  root <html> can mount all of them in one expression. */
 export const allFontVariables = [
@@ -127,4 +140,5 @@ export const allFontVariables = [
   cormorantGaramond.variable,
   playfairDisplay.variable,
   amiri.variable,
+  plusJakartaSans.variable,
 ].join(" ");

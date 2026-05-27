@@ -24,6 +24,10 @@ export type CVData = {
     location?: string;
     startDate: string;
     endDate?: string;
+    // Optional convenience flag used by some templates to render "Present"
+    // without relying on `endDate`. Existing data without this field reads as
+    // undefined and falls through to the prior endDate-based behavior.
+    current?: boolean;
     bullets: RichText[];
   }>;
   education: Array<{

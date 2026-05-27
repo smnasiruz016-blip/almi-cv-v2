@@ -49,6 +49,16 @@ import VeterinaryCaring from "./batch3/VeterinaryCaring";
 import AviationPrecise from "./batch3/AviationPrecise";
 import HospitalityElegant from "./batch3/HospitalityElegant";
 import LinguistMultilingual from "./batch3/LinguistMultilingual";
+// Batch 4 (7) — Claude Design 2026-05-27. Schema-canonical: consume production
+// CVData directly with no adapter (no asTemplate cast). Helpers (BulletsRender
+// et al.) live in ./types alongside the helpers used by Batch 1+2.
+import IceBlueGlass from "./IceBlueGlass";
+import AdminFluid from "./AdminFluid";
+import CyberEmerald from "./CyberEmerald";
+import WellnessGolden from "./WellnessGolden";
+import MedicalSurgical from "./MedicalSurgical";
+import CloudLight from "./CloudLight";
+import PharmacyPastel from "./PharmacyPastel";
 
 // asTemplate — narrow cast used only for Batch 3 components whose data
 // prop is CD's pseudo-CVData. Editor + print routes pipe data through
@@ -154,6 +164,134 @@ export const TEMPLATES: TemplateMeta[] = [
     ],
     suggestedIndustries: ["religious", "faith-based", "spiritual"],
     themes: ["forest", "ivory", "wine"],
+  },
+
+  // ---- Batch 4 specialists (Claude Design, 2026-05-27). Schema-canonical:
+  //      consume production CVData directly, no adapter, no cast. Placed
+  //      above Batch 3 + broad fallbacks so they win for surgeons,
+  //      pharmacists, massage therapists, IT PMs, admin assistants,
+  //      office managers, and secondary-school teachers. ----
+
+  {
+    slug: "medical-surgical",
+    name: "Medical Surgical",
+    description: "White + bold red angular corners, dotted timeline. For surgeons and specialist doctors.",
+    category: "medical",
+    component: MedicalSurgical,
+    atsSafe: true, supportsPhoto: true,
+    addedAt: "2026-05-27T10:00:00.000Z",
+    suggestedRoles: [
+      "surgeon", "orthopedic-surgeon", "cardiothoracic-surgeon",
+      "neurosurgeon", "plastic-surgeon", "general-surgeon", "vascular-surgeon",
+      "trauma-surgeon", "oral-surgeon", "pediatric-surgeon",
+      "hospital-consultant", "specialist-doctor", "senior-consultant",
+    ],
+    suggestedIndustries: ["surgical-medicine", "specialist-medicine"],
+    themes: ["plum", "wine"],
+  },
+
+  {
+    slug: "pharmacy-pastel",
+    name: "Pharmacy Pastel",
+    description: "Lavender + gold soft waves, hexagonal photo. Built for pharmacy professionals.",
+    category: "medical",
+    component: PharmacyPastel,
+    atsSafe: true, supportsPhoto: true,
+    addedAt: "2026-05-27T10:01:00.000Z",
+    suggestedRoles: [
+      "pharmacist", "clinical-pharmacist", "retail-pharmacist", "hospital-pharmacist",
+      "compounding-pharmacist", "oncology-pharmacist", "pediatric-pharmacist",
+      "pharmacy-technician", "pharmacy-assistant", "dispensing-assistant",
+      "pharmaceutical-care-specialist",
+    ],
+    suggestedIndustries: ["pharmacy", "pharmaceutical"],
+    themes: ["plum", "ivory"],
+  },
+
+  {
+    slug: "wellness-golden",
+    name: "Wellness Golden",
+    description: "Dark chocolate + glowing gold + hexagonal photo. For massage therapists and holistic wellness.",
+    category: "beauty",
+    component: WellnessGolden,
+    atsSafe: true, supportsPhoto: true,
+    addedAt: "2026-05-27T10:02:00.000Z",
+    suggestedRoles: [
+      "massage-therapist", "licensed-massage-therapist", "sports-massage-therapist",
+      "spa-therapist", "holistic-healer", "reiki-practitioner",
+      "aromatherapist", "reflexologist", "wellness-coach", "yoga-instructor",
+      "meditation-instructor", "sound-healer", "ayurvedic-practitioner",
+    ],
+    suggestedIndustries: ["wellness", "spa", "holistic-health"],
+    themes: ["wine", "ivory"],
+  },
+
+  {
+    slug: "ice-blue-glass",
+    name: "Ice Blue Glass",
+    description: "Dark navy + cyan/purple wave + glass cards. Built for STEM teachers and academic instructors.",
+    category: "scholarly",
+    component: IceBlueGlass,
+    atsSafe: false, supportsPhoto: true,
+    addedAt: "2026-05-27T10:03:00.000Z",
+    suggestedRoles: [
+      "secondary-school-teacher", "high-school-teacher", "stem-teacher",
+      "physics-teacher", "chemistry-teacher", "biology-teacher", "mathematics-teacher",
+      "computer-science-teacher", "tutor", "academic-tutor", "online-tutor",
+    ],
+    suggestedIndustries: ["secondary-education", "stem-education"],
+    themes: ["midnight", "navy"],
+  },
+
+  {
+    slug: "cloud-light",
+    name: "Cloud Light",
+    description: "Light cream + soft blue + 3D cloud illustration. Lighter variant for IT PMs and architects.",
+    category: "infographic",
+    component: CloudLight,
+    atsSafe: false, supportsPhoto: true,
+    addedAt: "2026-05-27T10:04:00.000Z",
+    suggestedRoles: [
+      "it-project-manager", "technical-project-manager", "cloud-project-manager",
+      "cloud-architect", "solutions-architect", "enterprise-architect",
+      "saas-product-manager", "platform-product-manager",
+    ],
+    suggestedIndustries: ["cloud-infrastructure", "saas"],
+    themes: ["sky", "ivory"],
+  },
+
+  {
+    slug: "cyber-emerald",
+    name: "Cyber Emerald",
+    description: "Deep emerald + neon green isometric. For office managers with a tech edge.",
+    category: "business",
+    component: CyberEmerald,
+    atsSafe: false, supportsPhoto: false,
+    addedAt: "2026-05-27T10:05:00.000Z",
+    suggestedRoles: [
+      "office-manager", "operations-coordinator", "facilities-manager",
+      "it-office-manager", "executive-office-manager",
+      "operations-supervisor", "admin-operations-manager",
+    ],
+    suggestedIndustries: ["operations", "tech-office"],
+    themes: ["midnight"],
+  },
+
+  {
+    slug: "admin-fluid",
+    name: "Admin Fluid",
+    description: "Soft ice-blue with flowing blue ribbons and glassmorphism cards. Built for office and admin support.",
+    category: "professional",
+    component: AdminFluid,
+    atsSafe: true, supportsPhoto: false,
+    addedAt: "2026-05-27T10:06:00.000Z",
+    suggestedRoles: [
+      "administrative-assistant", "office-assistant", "executive-assistant",
+      "office-coordinator", "office-administrator", "secretary", "receptionist",
+      "personal-assistant", "virtual-assistant", "data-entry-clerk", "office-clerk",
+    ],
+    suggestedIndustries: ["administration", "office-support"],
+    themes: ["sky", "slate"],
   },
 
   // ---- Batch 3 specialists (Claude Design, 2026-05-26). Placed here so
