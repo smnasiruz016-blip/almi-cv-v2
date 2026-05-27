@@ -26,6 +26,7 @@ import { downloadCvPdf } from "@/lib/download-pdf";
 import { useToast } from "@/components/ui/Toast";
 import type { CVData } from "@/lib/cv-types";
 import { getTemplate } from "@/lib/templates";
+import { isBatch3Slug, toCDShape } from "@/lib/cd-adapter";
 import { RestoreCVModal } from "./restore-modal";
 import { TailoredBanner } from "./tailored-banner";
 
@@ -348,7 +349,16 @@ export function EditorClient({
             Live preview · A4
           </p>
           <div className="print-target w-full max-w-[600px]">
-            <TemplateComponent data={cvData} paginated />
+            {/* Batch 3 templates consume CD's pseudo-CVData shape; adapt
+             *  at the boundary. Batch 1+2 templates take CVData directly. */}
+            <TemplateComponent
+              data={
+                (isBatch3Slug(templateSlug)
+                  ? toCDShape(cvData)
+                  : cvData) as unknown as CVData
+              }
+              paginated
+            />
           </div>
         </main>
       </div>
