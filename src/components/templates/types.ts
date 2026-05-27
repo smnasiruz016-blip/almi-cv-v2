@@ -41,9 +41,27 @@ const DEFAULT_LABELS: Required<SectionLabels> = {
   interests: "Interests",
 };
 
-/** Read a translatable section label with English fallback. */
-export function getLabel(data: CVData, key: keyof SectionLabels): string {
-  return data.sectionLabels?.[key]?.trim() || DEFAULT_LABELS[key];
+/** Read a translatable section label with English fallback.
+ *
+ *  Two call shapes:
+ *    getLabel(data, "experience")                  → uses DEFAULT_LABELS
+ *    getLabel(data, "summary", "About Me")         → uses caller-supplied
+ *                                                    fallback (non-canonical
+ *                                                    keys like "summary" are
+ *                                                    permitted via this form).
+ */
+export function getLabel(data: CVData, key: keyof SectionLabels): string;
+export function getLabel(data: CVData, key: string, fallback: string): string;
+export function getLabel(
+  data: CVData,
+  key: string,
+  fallback?: string,
+): string {
+  const labels = data.sectionLabels as Record<string, string | undefined> | undefined;
+  const translated = labels?.[key]?.trim();
+  if (translated) return translated;
+  if (fallback !== undefined) return fallback;
+  return DEFAULT_LABELS[key as keyof SectionLabels];
 }
 
 // ----------------------------------------------------------------------------
@@ -156,13 +174,15 @@ export function mergeWithDefaults(
 }
 
 /** Shared helper — formats a date range "Jan 2022 — Present".
- *  endDate is optional in CVData; treat undefined/empty as "Present". */
+ *  endDate is optional in CVData; treat undefined/empty as "Present".
+ *  `current` (optional) forces the end to "Present" regardless of `end`. */
 export function dateRange(
   start: string | undefined,
   end: string | undefined,
+  current?: boolean,
 ): string {
   const s = (start ?? "").trim();
-  const e = (end ?? "").trim();
+  const e = current ? "Present" : (end ?? "").trim();
   if (s && e) return `${s} — ${e}`;
   if (s) return `${s} — Present`;
   if (e) return e;
@@ -178,7 +198,12 @@ export function initials(fullName: string): string {
 }
 
 // Re-export RichText helpers so templates only need one import path.
-export { RichTextRender, isRichTextEmpty, stripRichText } from "@/lib/rich-text";
+export {
+  RichTextRender,
+  BulletsRender,
+  isRichTextEmpty,
+  stripRichText,
+} from "@/lib/rich-text";
 
 /** True when a bullets array is effectively empty (all entries blank/whitespace). */
 export function hasNonEmptyBullets(
