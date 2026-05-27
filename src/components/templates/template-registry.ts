@@ -34,6 +34,27 @@ import EducationWarm from "./EducationWarm";
 import SalesModern from "./SalesModern";
 import ServiceFriendly from "./ServiceFriendly";
 import CreativePortfolio from "./CreativePortfolio";
+// Batch 3 (10) — Claude Design pseudo-CVData shape. Runtime adapter in
+// src/lib/cd-adapter.ts converts AlmiCV CVData → CD's shape at the
+// editor/print boundary. The casts below lie to TS so the registry
+// presents a uniform ComponentType<TemplateProps> regardless of which
+// shape each template actually consumes internally.
+import LegalFormal from "./batch3/LegalFormal";
+import FinancePrecise from "./batch3/FinancePrecise";
+import FinanceElite from "./batch3/FinanceElite";
+import PeopleWarm from "./batch3/PeopleWarm";
+import OperationsStructured from "./batch3/OperationsStructured";
+import InsuranceTrust from "./batch3/InsuranceTrust";
+import VeterinaryCaring from "./batch3/VeterinaryCaring";
+import AviationPrecise from "./batch3/AviationPrecise";
+import HospitalityElegant from "./batch3/HospitalityElegant";
+import LinguistMultilingual from "./batch3/LinguistMultilingual";
+
+// asTemplate — narrow cast used only for Batch 3 components whose data
+// prop is CD's pseudo-CVData. Editor + print routes pipe data through
+// toCDShape() before passing to these components, so the cast is sound
+// at runtime even though the static types disagree.
+const asTemplate = <T>(c: T) => c as unknown as ComponentType<TemplateProps>;
 
 export type TemplateCategory =
   | "ats-classic"
@@ -54,7 +75,17 @@ export type TemplateCategory =
   | "public-service"
   | "education-warm"
   | "sales"
-  | "service";
+  | "service"
+  // Batch 3 — new vertical specialists
+  | "legal"
+  | "finance"
+  | "people-hr"
+  | "operations"
+  | "insurance"
+  | "veterinary"
+  | "aviation"
+  | "hospitality-elegant"
+  | "linguist";
 
 export interface TemplateMeta {
   slug: string;
@@ -123,6 +154,243 @@ export const TEMPLATES: TemplateMeta[] = [
     ],
     suggestedIndustries: ["religious", "faith-based", "spiritual"],
     themes: ["forest", "ivory", "wine"],
+  },
+
+  // ---- Batch 3 specialists (Claude Design, 2026-05-26). Placed here so
+  //      they win the suggestTemplate() lookup against broader Batch 1+2
+  //      fallbacks (classic-serif for legal/finance, modern-two-column
+  //      for HR, healthcare for veterinary, warm-creative for hospitality,
+  //      etc.). Each component takes CD's pseudo-CVData internally;
+  //      lib/cd-adapter.ts converts at the editor/print boundary. ----
+
+  {
+    slug: "legal-formal",
+    name: "Legal Formal",
+    description: "Cream base + navy + gold wavy top band, scales watermark. Authority through typography, not heavy darks.",
+    category: "legal",
+    component: asTemplate(LegalFormal),
+    atsSafe: true, supportsPhoto: false,
+    suggestedRoles: [
+      "lawyer", "attorney", "barrister", "solicitor", "advocate",
+      "corporate-lawyer", "criminal-defense-attorney", "litigation-associate",
+      "litigation-attorney", "intellectual-property-attorney", "ip-attorney",
+      "tax-attorney", "real-estate-attorney", "family-law-attorney",
+      "employment-attorney", "immigration-attorney", "patent-attorney",
+      "paralegal", "legal-assistant", "legal-secretary",
+      "general-counsel", "associate-general-counsel", "deputy-general-counsel",
+      "judge", "magistrate", "law-clerk", "court-clerk",
+      "compliance-counsel", "in-house-counsel", "contract-attorney",
+      "legal-analyst", "law-firm-partner", "law-firm-associate",
+    ],
+    suggestedIndustries: ["legal", "law"],
+    themes: ["plum", "navy", "wine"],
+  },
+
+  {
+    slug: "finance-precise",
+    name: "Finance Precise",
+    description: "White + forest green + amber. Ledger-line divider, refined grid. For accounting, audit, and tax professionals.",
+    category: "finance",
+    component: asTemplate(FinancePrecise),
+    atsSafe: true, supportsPhoto: false,
+    suggestedRoles: [
+      "accountant", "senior-accountant", "junior-accountant", "staff-accountant",
+      "accounts-assistant", "accounts-payable-clerk", "accounts-receivable-clerk",
+      "bookkeeper", "senior-bookkeeper",
+      "cpa", "certified-public-accountant", "chartered-accountant",
+      "auditor", "internal-auditor", "external-auditor", "audit-manager", "audit-senior",
+      "tax-advisor", "tax-accountant", "tax-specialist", "tax-manager", "tax-consultant",
+      "payroll-officer", "payroll-manager", "payroll-specialist",
+      "credit-controller", "credit-analyst",
+      "financial-controller", "controller", "assistant-controller",
+      "treasury-analyst", "treasurer",
+      "billing-specialist", "cost-accountant", "forensic-accountant",
+    ],
+    suggestedIndustries: ["accounting", "audit", "tax", "bookkeeping"],
+    themes: ["forest", "ivory", "wine"],
+  },
+
+  {
+    slug: "finance-elite",
+    name: "Finance Elite",
+    description: "Cream + deep teal + rose gold, wavy right-side accent. Achievement-focused — deal size, AUM, returns.",
+    category: "finance",
+    component: asTemplate(FinanceElite),
+    atsSafe: true, supportsPhoto: false,
+    suggestedRoles: [
+      "investment-banker", "investment-banking-analyst", "ib-analyst", "ib-associate",
+      "investment-analyst", "senior-investment-analyst",
+      "financial-analyst", "senior-financial-analyst",
+      "private-equity-analyst", "pe-analyst", "private-equity-associate",
+      "hedge-fund-analyst", "hedge-fund-manager",
+      "portfolio-manager", "asset-manager", "wealth-manager",
+      "equity-research-analyst", "research-analyst-finance",
+      "venture-capital-analyst", "vc-analyst", "vc-associate",
+      "trader", "derivatives-trader", "quantitative-analyst", "quant",
+      "fund-manager", "investment-manager",
+    ],
+    suggestedIndustries: ["investment-banking", "private-equity", "hedge-funds", "asset-management"],
+    themes: ["midnight", "wine", "plum"],
+  },
+
+  {
+    slug: "people-warm",
+    name: "People Warm",
+    description: "Cream + coral + sage, top wave divider, network-nodes motif. Approachable but professional for HR & talent.",
+    category: "people-hr",
+    component: asTemplate(PeopleWarm),
+    atsSafe: true, supportsPhoto: true,
+    suggestedRoles: [
+      "human-resources-manager", "hr-manager", "hr-coordinator", "hr-generalist",
+      "hr-business-partner", "hrbp", "senior-hr-business-partner",
+      "hr-director", "vp-of-hr", "chief-human-resources-officer", "chro",
+      "recruiter", "senior-recruiter", "executive-recruiter",
+      "talent-acquisition-specialist", "talent-acquisition-manager",
+      "technical-recruiter", "head-of-talent", "head-of-recruiting",
+      "people-operations-manager", "people-operations-specialist",
+      "employee-relations-manager", "employee-experience-manager",
+      "training-coordinator", "training-manager",
+      "learning-and-development-specialist", "l-and-d-manager", "l-and-d-director",
+      "diversity-equity-inclusion-manager", "dei-manager",
+      "compensation-and-benefits-analyst", "comp-and-benefits-manager",
+    ],
+    suggestedIndustries: ["human-resources", "talent-acquisition", "people-operations"],
+    themes: ["coral", "sand", "linen"],
+  },
+
+  {
+    slug: "operations-structured",
+    name: "Operations Structured",
+    description: "White + slate blue + amber, diagonal accent panels, KPI tiles. For operations & supply-chain leadership.",
+    category: "operations",
+    component: asTemplate(OperationsStructured),
+    atsSafe: true, supportsPhoto: true,
+    suggestedRoles: [
+      "operations-manager", "operations-director", "vp-of-operations",
+      "chief-operating-officer", "coo",
+      "head-of-operations", "operations-lead",
+      "business-operations-manager", "business-operations-analyst",
+      "process-improvement-manager", "continuous-improvement-manager",
+      "process-improvement-specialist",
+      "supply-chain-director", "head-of-supply-chain",
+      "operations-analyst", "senior-operations-analyst",
+      "operations-consultant",
+    ],
+    suggestedIndustries: ["operations", "supply-chain"],
+    themes: ["navy", "slate", "midnight"],
+  },
+
+  {
+    slug: "insurance-trust",
+    name: "Insurance Trust",
+    description: "Ivory + teal + bronze, shield emblem, middle trust-bar. Licenses and certifications front and centre.",
+    category: "insurance",
+    component: asTemplate(InsuranceTrust),
+    atsSafe: true, supportsPhoto: false,
+    suggestedRoles: [
+      "insurance-agent", "licensed-insurance-agent", "insurance-broker",
+      "insurance-sales-agent", "insurance-account-manager",
+      "underwriter", "insurance-underwriter", "commercial-underwriter",
+      "life-insurance-agent", "health-insurance-agent", "property-casualty-agent",
+      "claims-adjuster", "claims-examiner", "claims-specialist",
+      "insurance-claims-specialist", "claims-manager",
+      "actuary", "actuarial-analyst",
+      "risk-analyst", "risk-manager", "risk-officer", "enterprise-risk-manager",
+      "compliance-officer-finance",
+    ],
+    suggestedIndustries: ["insurance", "risk-management"],
+    themes: ["navy", "ivory", "linen"],
+  },
+
+  {
+    slug: "veterinary-caring",
+    name: "Veterinary Caring",
+    description: "Cream + sage + dusty rose, wavy side bar with paw silhouettes. Warm but professional — distinct from clinical Healthcare.",
+    category: "veterinary",
+    component: asTemplate(VeterinaryCaring),
+    atsSafe: true, supportsPhoto: false,
+    suggestedRoles: [
+      "veterinarian", "vet", "veterinary-surgeon", "exotic-animal-veterinarian",
+      "veterinary-technician", "vet-tech", "veterinary-assistant",
+      "veterinary-nurse", "registered-veterinary-technician",
+      "animal-hospital-administrator", "veterinary-practice-manager",
+      "animal-care-specialist", "animal-trainer", "dog-trainer",
+      "kennel-attendant", "groomer", "pet-groomer",
+      "wildlife-biologist", "zookeeper", "zoological-technician",
+      "animal-control-officer", "shelter-manager",
+    ],
+    suggestedIndustries: ["veterinary", "animal-care", "wildlife"],
+    themes: ["forest", "linen", "sand"],
+  },
+
+  {
+    slug: "aviation-precise",
+    name: "Aviation Precise",
+    description: "Sky-blue gradient + silver, wings emblem, altitude-line dividers. Technical precision for aviation roles.",
+    category: "aviation",
+    component: asTemplate(AviationPrecise),
+    atsSafe: true, supportsPhoto: false,
+    suggestedRoles: [
+      "pilot", "commercial-pilot", "airline-pilot", "first-officer", "captain",
+      "co-pilot", "private-pilot", "charter-pilot", "helicopter-pilot",
+      "flight-attendant", "cabin-crew", "senior-flight-attendant", "purser",
+      "air-traffic-controller", "atc", "tower-controller",
+      "aviation-mechanic", "aircraft-mechanic", "a-and-p-mechanic",
+      "avionics-technician", "flight-engineer",
+      "aviation-safety-inspector", "aviation-dispatcher",
+      "ground-staff", "airport-operations-agent", "airline-operations-agent",
+      "drone-pilot", "uav-pilot",
+    ],
+    suggestedIndustries: ["aviation", "airline", "aerospace-operations"],
+    themes: ["sky", "ivory"],
+  },
+
+  {
+    slug: "hospitality-elegant",
+    name: "Hospitality Elegant",
+    description: "Champagne + burgundy + gold, top wave + monogram. Premium feel for hotel and hospitality leadership.",
+    category: "hospitality-elegant",
+    component: asTemplate(HospitalityElegant),
+    atsSafe: true, supportsPhoto: false,
+    suggestedRoles: [
+      "hotel-manager", "hotel-general-manager", "general-manager-hotel",
+      "hospitality-director", "director-of-hospitality",
+      "resort-manager", "resort-general-manager",
+      "front-office-manager", "rooms-division-manager",
+      "concierge-director", "head-concierge",
+      "food-and-beverage-director", "director-of-food-and-beverage",
+      "executive-housekeeper", "director-of-housekeeping",
+      "revenue-manager", "director-of-revenue",
+      "director-of-sales-hospitality", "director-of-marketing-hospitality",
+      "spa-director", "guest-services-director",
+      "hotel-owner", "boutique-hotel-owner",
+    ],
+    suggestedIndustries: ["luxury-hospitality", "hotels", "resorts"],
+    themes: ["wine", "ivory", "sand"],
+  },
+
+  {
+    slug: "linguist-multilingual",
+    name: "Linguist Multilingual",
+    description: "White + lavender + rose gold, multi-script header, languages-as-hero section. Built for translators and interpreters.",
+    category: "linguist",
+    component: asTemplate(LinguistMultilingual),
+    atsSafe: true, supportsPhoto: false,
+    suggestedRoles: [
+      "translator", "professional-translator", "literary-translator",
+      "technical-translator", "legal-translator", "medical-translator",
+      "interpreter", "professional-interpreter",
+      "court-interpreter", "medical-interpreter", "conference-interpreter",
+      "simultaneous-interpreter", "consecutive-interpreter",
+      "sign-language-interpreter", "asl-interpreter",
+      "linguist", "computational-linguist", "applied-linguist",
+      "localization-specialist", "localization-manager", "localization-engineer",
+      "language-coordinator", "language-services-manager",
+      "subtitler", "subtitle-translator", "dubbing-director",
+      "language-teacher", "foreign-language-teacher",
+    ],
+    suggestedIndustries: ["translation", "localization", "linguistics"],
+    themes: ["plum", "linen", "ivory"],
   },
 
   {

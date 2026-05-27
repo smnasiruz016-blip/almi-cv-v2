@@ -15,6 +15,7 @@
 
 import { getTemplate } from "@/lib/templates";
 import { mergeWithDefaults } from "@/components/templates/types";
+import { isBatch3Slug, toCDShape } from "@/lib/cd-adapter";
 import type { CVData } from "@/lib/cv-types";
 
 const A4_W = 794;
@@ -37,6 +38,13 @@ export function CVPreview({
   const TemplateComponent = template.Component;
   const scale = width / A4_W;
   const height = A4_H * scale;
+  // Batch 3 templates consume Claude Design's pseudo-CVData; adapt the
+  // merged-defaults output at this seam. Batch 1+2 templates take CVData
+  // directly so they pass through unchanged.
+  const merged = mergeWithDefaults(data);
+  const renderData = (
+    isBatch3Slug(slug) ? toCDShape(merged) : merged
+  ) as unknown as CVData;
 
   return (
     <div
@@ -63,7 +71,7 @@ export function CVPreview({
         }}
         aria-hidden
       >
-        <TemplateComponent data={mergeWithDefaults(data)} />
+        <TemplateComponent data={renderData} />
       </div>
     </div>
   );

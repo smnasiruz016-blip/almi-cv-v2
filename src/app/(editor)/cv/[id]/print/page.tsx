@@ -3,6 +3,7 @@ import type { ComponentType } from "react";
 import { requireUser } from "@/lib/auth";
 import { getResume } from "@/lib/resume-actions";
 import { getTemplate } from "@/lib/templates";
+import { isBatch3Slug, toCDShape } from "@/lib/cd-adapter";
 import { userCanAccessTemplate } from "@/lib/billing/template-access";
 import type { CVData } from "@/lib/cv-types";
 import { AutoPrint } from "./auto-print";
@@ -45,15 +46,19 @@ export default async function PrintCVPage({
   const template = getTemplate(slug);
   const TemplateComponent = template.Component as PrintableTemplateComponent;
 
+  // Batch 3 templates expect CD's pseudo-CVData shape — adapt at the
+  // boundary. Batch 1+2 templates take CVData directly. See
+  // src/lib/cd-adapter.ts for the field-by-field conversion.
+  const cvData = resume.data as unknown as CVData;
+  const renderData = (
+    isBatch3Slug(slug) ? toCDShape(cvData) : cvData
+  ) as unknown as CVData;
+
   return (
     <>
       <AutoPrint />
       <div className="print-target">
-        <TemplateComponent
-          data={resume.data as unknown as CVData}
-          paginated
-          printSafe
-        />
+        <TemplateComponent data={renderData} paginated printSafe />
       </div>
     </>
   );
