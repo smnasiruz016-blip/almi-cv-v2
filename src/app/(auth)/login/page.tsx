@@ -62,9 +62,14 @@ export default async function LoginPage({
           />
         </div>
         <div>
-          <label htmlFor="password" className="block text-sm font-medium text-plum">
-            Password
-          </label>
+          <div className="flex items-baseline justify-between">
+            <label htmlFor="password" className="block text-sm font-medium text-plum">
+              Password
+            </label>
+            <Link href="/forgot-password" className="text-xs font-medium text-coral hover:underline">
+              Forgot password?
+            </Link>
+          </div>
           <input
             type="password"
             id="password"
