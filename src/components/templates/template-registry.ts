@@ -59,6 +59,35 @@ import WellnessGolden from "./WellnessGolden";
 import MedicalSurgical from "./MedicalSurgical";
 import CloudLight from "./CloudLight";
 import PharmacyPastel from "./PharmacyPastel";
+// ---- Expansion batch (2026-06-01): 38 new templates ----
+import ArchitectIsometric from "./ArchitectIsometric";
+import AviationHUD from "./AviationHUD";
+import BarberEditorial from "./BarberEditorial";
+import ConstructionBlueprint from "./ConstructionBlueprint";
+import CulinaryGold from "./CulinaryGold";
+import DataPulseDark from "./DataPulseDark";
+import DentalClean from "./DentalClean";
+import EditorialInk from "./EditorialInk";
+import EngineerBlueprint from "./EngineerBlueprint";
+import EventLumen from "./EventLumen";
+import FinanceAdvisorGold from "./FinanceAdvisorGold";
+import FitnessDynamic from "./FitnessDynamic";
+import GoldLiquidLuxe from "./GoldLiquidLuxe";
+import HolographicSunset from "./HolographicSunset";
+import IsometricSilver from "./IsometricSilver";
+import LegalLuxe from "./LegalLuxe";
+import MarketingGradient from "./MarketingGradient";
+import NeonServerStack from "./NeonServerStack";
+import NurseVitalSigns from "./NurseVitalSigns";
+import PhotographyGallery from "./PhotographyGallery";
+import ProductRoadmap from "./ProductRoadmap";
+import PurpleGradientPro from "./PurpleGradientPro";
+import RealEstateLuxe from "./RealEstateLuxe";
+import SpaZenWatercolor from "./SpaZenWatercolor";
+import TeacherChalk from "./TeacherChalk";
+import TealCleanSplit from "./TealCleanSplit";
+import TradesVolt from "./TradesVolt";
+import UXPortfolioGrid from "./UXPortfolioGrid";
 
 // asTemplate — narrow cast used only for Batch 3 components whose data
 // prop is CD's pseudo-CVData. Editor + print routes pipe data through
@@ -920,6 +949,450 @@ export const TEMPLATES: TemplateMeta[] = [
     ],
     suggestedIndustries: ["sales", "business-development"],
     themes: ["coral", "plum", "wine"],
+  },
+
+  // ──────── Expansion batch (2026-06-01): 38 new templates. Placed above the
+  //          generic fallbacks (corporate-blue / modern-two-column /
+  //          classic-serif) so new specialists outrank only the catch-alls,
+  //          never the existing tuned specialists above. ────────
+{
+    slug: "spa-zen-watercolor", name: "Spa Zen Watercolor",
+    description: "White + soft mint/teal watercolor waves + lotus motifs. Calm, airy, light alternative for spa & wellness.",
+    category: "beauty", component: SpaZenWatercolor,
+    atsSafe: true, supportsPhoto: true,
+    addedAt: "2026-06-01T00:00:00.000Z",
+    suggestedRoles: [
+      "esthetician", "skincare-specialist", "spa-manager", "spa-attendant",
+      "facialist", "lash-technician", "wellness-consultant",
+      "beauty-therapist", "holistic-therapist", "wellness-retreat-host",
+    ],
+    suggestedIndustries: ["spa", "wellness", "beauty"],
+    themes: ["sage", "linen", "ivory"],
+  },
+
+  {
+    slug: "teal-clean-split", name: "Teal Clean Split",
+    description: "Solid teal header band + clean white two-column + skill pills. ATS-friendly. For data and analytics roles.",
+    category: "developer", component: TealCleanSplit,
+    atsSafe: true, supportsPhoto: true,
+    addedAt: "2026-06-01T00:00:00.000Z",
+    suggestedRoles: [
+      "data-analyst", "senior-data-analyst", "business-intelligence-analyst",
+      "data-scientist", "junior-data-scientist", "research-analyst",
+      "analytics-consultant", "insights-analyst", "reporting-analyst",
+      "quantitative-researcher", "statistician", "data-consultant",
+    ],
+    suggestedIndustries: ["data-analytics", "business-intelligence"],
+    themes: ["forest", "sky", "slate"],
+  },
+
+  {
+    slug: "editorial-ink", name: "Editorial Ink",
+    description: "Cream newsprint + bold serif masthead + column rules + drop-cap. ATS-safe. For writers, editors, journalists.",
+    category: "creative", component: EditorialInk,
+    atsSafe: true, supportsPhoto: false,
+    addedAt: "2026-06-01T00:00:00.000Z",
+    suggestedRoles: [
+      "writer", "content-writer", "copywriter", "senior-copywriter",
+      "journalist", "reporter", "staff-writer", "feature-writer",
+      "editor", "managing-editor", "senior-editor", "content-editor",
+      "content-strategist", "content-manager", "author", "ghostwriter",
+      "editorial-assistant", "proofreader", "technical-writer",
+      "communications-specialist", "communications-manager",
+    ],
+    suggestedIndustries: ["publishing", "media", "communications"],
+    themes: ["wine", "ivory", "plum"],
+  },
+
+  {
+    slug: "holographic-sunset", name: "Holographic Sunset",
+    description: "Sunset orange→purple gradient hero + glowing hexagon photo + science motifs. For trainers, coaches, lecturers.",
+    category: "scholarly", component: HolographicSunset,
+    atsSafe: false, supportsPhoto: true,
+    addedAt: "2026-06-01T00:00:00.000Z",
+    suggestedRoles: [
+      "corporate-trainer", "soft-skills-trainer", "leadership-coach",
+      "life-coach", "career-coach", "public-speaking-coach",
+      "motivational-speaker", "learning-facilitator", "workshop-facilitator",
+      "professional-development-trainer",
+    ],
+    suggestedIndustries: ["training", "coaching", "professional-development"],
+    themes: ["coral", "plum", "midnight"],
+  },
+
+  {
+    slug: "purple-gradient-pro", name: "Purple Gradient Pro",
+    description: "Diagonal purple gradient header + two-column + glowing skill bars + impact metric tiles. For developers.",
+    category: "developer", component: PurpleGradientPro,
+    atsSafe: false, supportsPhoto: true,
+    addedAt: "2026-06-01T00:00:00.000Z",
+    suggestedRoles: [
+      "backend-developer", "full-stack-developer", "software-developer",
+      "senior-software-engineer", "lead-developer", "application-developer",
+      "api-developer", "platform-developer", "machine-learning-engineer",
+    ],
+    suggestedIndustries: ["software", "technology"],
+    themes: ["plum", "midnight", "wine"],
+  },
+
+  {
+    slug: "isometric-silver", name: "Isometric Silver",
+    description: "Deep navy + silver metallic wave + diamond photo frame + floating 3D motifs. For executive/corporate support.",
+    category: "professional", component: IsometricSilver,
+    atsSafe: false, supportsPhoto: true,
+    addedAt: "2026-06-01T00:00:00.000Z",
+    suggestedRoles: [
+      "executive-support-specialist", "corporate-coordinator", "board-secretary",
+      "senior-executive-assistant", "operations-support-lead", "office-operations-manager",
+    ],
+    suggestedIndustries: ["corporate-support", "operations"],
+    themes: ["navy", "midnight", "slate"],
+  },
+
+  {
+    slug: "gold-liquid-luxe", name: "Gold Liquid Luxe",
+    description: "Black + flowing gold liquid ribbons + glass folder cards. Premium dark luxe for senior admin & coordinators.",
+    category: "professional", component: GoldLiquidLuxe,
+    atsSafe: false, supportsPhoto: true,
+    addedAt: "2026-06-01T00:00:00.000Z",
+    suggestedRoles: [
+      "chief-of-staff", "executive-coordinator", "luxury-office-manager",
+      "private-office-manager", "estate-manager", "household-manager",
+      "personal-executive-assistant",
+    ],
+    suggestedIndustries: ["executive-support", "luxury-administration"],
+    themes: ["midnight", "wine", "plum"],
+  },
+
+  {
+    slug: "construction-blueprint", name: "Construction Blueprint",
+    description: "Concrete charcoal + safety amber + blueprint grid + isometric crane. For construction & civil leadership.",
+    category: "trades-industrial", component: ConstructionBlueprint,
+    atsSafe: false, supportsPhoto: false,
+    addedAt: "2026-06-01T00:00:00.000Z",
+    suggestedRoles: [
+      "construction-manager", "construction-project-manager", "civil-engineer",
+      "structural-engineer-construction", "site-engineer-construction", "architect",
+      "quantity-surveyor", "building-surveyor", "land-surveyor",
+      "estimator", "construction-estimator", "project-engineer-construction",
+      "site-manager", "building-inspector",
+    ],
+    suggestedIndustries: ["construction", "civil-engineering", "architecture"],
+    themes: ["charcoal", "midnight"],
+  },
+
+  {
+    slug: "fitness-dynamic", name: "Fitness Dynamic",
+    description: "Black + neon lime/red diagonal slashes + bold italic display + energy bars. For trainers & sports coaches.",
+    category: "service", component: FitnessDynamic,
+    atsSafe: false, supportsPhoto: true,
+    addedAt: "2026-06-01T00:00:00.000Z",
+    suggestedRoles: [
+      "personal-trainer", "fitness-coach", "strength-and-conditioning-coach",
+      "sports-coach", "athletic-trainer", "fitness-instructor",
+      "crossfit-coach", "gym-manager", "performance-coach",
+      "bootcamp-instructor", "spin-instructor", "sports-instructor",
+    ],
+    suggestedIndustries: ["fitness", "sports", "athletics"],
+    themes: ["midnight", "charcoal"],
+  },
+
+  {
+    slug: "photography-gallery", name: "Photography Gallery",
+    description: "Charcoal gallery wall + filmstrip motif + serif display + aperture photo ring. For photographers & cinematographers.",
+    category: "creative", component: PhotographyGallery,
+    atsSafe: false, supportsPhoto: true,
+    addedAt: "2026-06-01T00:00:00.000Z",
+    suggestedRoles: [
+      "photographer", "portrait-photographer", "wedding-photographer",
+      "editorial-photographer", "fashion-photographer", "commercial-photographer",
+      "videographer", "cinematographer", "director-of-photography",
+      "visual-artist", "photo-editor", "studio-photographer",
+    ],
+    suggestedIndustries: ["photography", "visual-arts", "film"],
+    themes: ["midnight", "charcoal", "wine"],
+  },
+
+  {
+    slug: "neon-server-stack", name: "Neon Server Stack",
+    description: "Deep navy + neon cyan/blue, isometric server stack, glass cards. For network & infrastructure engineers.",
+    category: "developer", component: NeonServerStack,
+    atsSafe: false, supportsPhoto: false,
+    addedAt: "2026-06-01T00:00:00.000Z",
+    suggestedRoles: [
+      "network-engineer", "senior-network-engineer", "network-administrator",
+      "systems-administrator", "sysadmin", "infrastructure-engineer",
+      "noc-engineer", "network-architect", "voip-engineer",
+      "wireless-engineer", "datacenter-technician", "network-technician",
+    ],
+    suggestedIndustries: ["networking", "infrastructure", "telecommunications"],
+    themes: ["midnight", "navy"],
+  },
+
+  {
+    slug: "data-pulse-dark", name: "Data Pulse Dark",
+    description: "Ink + teal→violet gradient, pie + waveform + neon bars, circular photo. For data analysts & BI.",
+    category: "developer", component: DataPulseDark,
+    atsSafe: false, supportsPhoto: true,
+    addedAt: "2026-06-01T00:00:00.000Z",
+    suggestedRoles: [
+      "business-intelligence-developer", "bi-developer", "bi-analyst",
+      "data-visualization-specialist", "analytics-engineer",
+      "marketing-analyst", "product-analyst", "growth-analyst",
+      "tableau-developer", "power-bi-developer", "dashboard-developer",
+    ],
+    suggestedIndustries: ["data-analytics", "business-intelligence"],
+    themes: ["midnight", "plum"],
+  },
+
+  {
+    slug: "marketing-gradient", name: "Marketing Gradient",
+    description: "Vibrant coral→magenta→violet hero, KPI tiles, skill chips. For digital marketing & growth.",
+    category: "creative", component: MarketingGradient,
+    atsSafe: false, supportsPhoto: false,
+    addedAt: "2026-06-01T00:00:00.000Z",
+    suggestedRoles: [
+      "digital-marketing-manager", "digital-marketing-specialist", "growth-marketer",
+      "growth-manager", "performance-marketing-manager", "social-media-manager",
+      "social-media-strategist", "seo-specialist", "seo-manager",
+      "content-marketing-manager", "email-marketing-manager", "ppc-specialist",
+      "brand-marketing-manager", "marketing-coordinator",
+    ],
+    suggestedIndustries: ["marketing", "advertising", "growth"],
+    themes: ["coral", "plum", "wine"],
+  },
+
+  {
+    slug: "culinary-gold", name: "Culinary Gold",
+    description: "Charcoal + warm gold, plate motif, elegant serif. Premium graphical option for chefs & culinary leads.",
+    category: "hospitality", component: CulinaryGold,
+    atsSafe: false, supportsPhoto: true,
+    addedAt: "2026-06-01T00:00:00.000Z",
+    suggestedRoles: [
+      "chef", "executive-chef", "head-chef", "sous-chef", "pastry-chef",
+      "culinary-director", "chef-de-partie", "private-chef", "personal-chef",
+      "banquet-chef", "catering-chef", "culinary-instructor",
+    ],
+    suggestedIndustries: ["culinary", "fine-dining", "hospitality"],
+    themes: ["midnight", "wine", "ivory"],
+  },
+
+  {
+    slug: "nurse-vital-signs", name: "Nurse Vital Signs",
+    description: "White + medical teal/green, ECG heartbeat divider, credential pills. Graphical-yet-clean for nursing.",
+    category: "medical", component: NurseVitalSigns,
+    atsSafe: true, supportsPhoto: true,
+    addedAt: "2026-06-01T00:00:00.000Z",
+    suggestedRoles: [
+      "registered-nurse", "nurse-practitioner", "licensed-practical-nurse",
+      "staff-nurse", "charge-nurse", "icu-nurse", "er-nurse", "pediatric-nurse",
+      "oncology-nurse", "surgical-nurse", "nurse-manager", "clinical-nurse-specialist",
+      "home-health-nurse", "travel-nurse", "nursing-assistant",
+    ],
+    suggestedIndustries: ["nursing", "healthcare", "clinical-care"],
+    themes: ["forest", "sky", "ivory"],
+  },
+
+  {
+    slug: "engineer-blueprint", name: "Engineer Blueprint",
+    description: "Blueprint navy + cyan grid, gear motif, mono accents. For mechanical/electrical/aerospace engineers.",
+    category: "trades-industrial", component: EngineerBlueprint,
+    atsSafe: false, supportsPhoto: false,
+    addedAt: "2026-06-01T00:00:00.000Z",
+    suggestedRoles: [
+      "mechanical-engineer", "electrical-engineer", "automotive-engineer",
+      "aerospace-engineer", "robotics-engineer", "mechatronics-engineer",
+      "design-engineer", "manufacturing-engineer-graphical", "controls-engineer",
+      "hardware-engineer", "rd-engineer", "product-engineer",
+    ],
+    suggestedIndustries: ["engineering", "manufacturing", "automotive"],
+    themes: ["navy", "midnight"],
+  },
+
+  {
+    slug: "legal-luxe", name: "Legal Luxe",
+    description: "Near-black plum + gold + scales motif, serif. Premium dark option for senior legal.",
+    category: "legal", component: LegalLuxe,
+    atsSafe: false, supportsPhoto: false,
+    addedAt: "2026-06-01T00:00:00.000Z",
+    suggestedRoles: [
+      "managing-partner", "senior-partner", "law-firm-partner",
+      "trial-lawyer", "trial-attorney", "litigation-partner",
+      "senior-counsel", "queens-counsel", "kings-counsel", "senior-barrister",
+      "prosecutor", "district-attorney",
+    ],
+    suggestedIndustries: ["legal", "law"],
+    themes: ["midnight", "wine"],
+  },
+
+  {
+    slug: "architect-isometric", name: "Architect Isometric",
+    description: "Warm off-white + terracotta + isometric building line-art. For architects & spatial designers.",
+    category: "creative", component: ArchitectIsometric,
+    atsSafe: true, supportsPhoto: false,
+    addedAt: "2026-06-01T00:00:00.000Z",
+    suggestedRoles: [
+      "architect", "architectural-designer", "design-architect", "project-architect",
+      "interior-designer", "interior-architect", "landscape-architect",
+      "urban-planner", "urban-designer", "town-planner", "spatial-designer",
+      "bim-manager", "revit-specialist",
+    ],
+    suggestedIndustries: ["architecture", "design", "urban-planning"],
+    themes: ["sand", "linen", "ivory"],
+  },
+
+  {
+    slug: "finance-advisor-gold", name: "Finance Advisor Gold",
+    description: "Navy + gold + growth-chart motif + metric tiles. For financial advisors and planners.",
+    category: "finance", component: FinanceAdvisorGold,
+    atsSafe: false, supportsPhoto: false,
+    addedAt: "2026-06-01T00:00:00.000Z",
+    suggestedRoles: [
+      "financial-advisor", "financial-planner", "certified-financial-planner",
+      "wealth-advisor", "investment-advisor", "retirement-planner",
+      "financial-consultant", "personal-financial-advisor", "estate-planner",
+      "relationship-manager-finance", "private-banker",
+    ],
+    suggestedIndustries: ["financial-advisory", "wealth-management"],
+    themes: ["navy", "midnight", "wine"],
+  },
+
+  {
+    slug: "product-roadmap", name: "Product Roadmap",
+    description: "Slate + indigo + roadmap timeline + metric tiles. Graphical option for product management.",
+    category: "business", component: ProductRoadmap,
+    atsSafe: false, supportsPhoto: false,
+    addedAt: "2026-06-01T00:00:00.000Z",
+    suggestedRoles: [
+      "product-manager", "senior-product-manager", "product-owner",
+      "technical-product-manager", "group-product-manager", "principal-product-manager",
+      "director-of-product", "head-of-product", "associate-product-manager",
+      "growth-product-manager",
+    ],
+    suggestedIndustries: ["product-management", "technology"],
+    themes: ["sky", "plum", "slate"],
+  },
+
+  {
+    slug: "ux-portfolio-grid", name: "UX Portfolio Grid",
+    description: "Off-white + electric violet + asymmetric work grid. For UX/product designers & researchers.",
+    category: "creative", component: UXPortfolioGrid,
+    atsSafe: false, supportsPhoto: false,
+    addedAt: "2026-06-01T00:00:00.000Z",
+    suggestedRoles: [
+      "ux-designer", "senior-ux-designer", "ui-ux-designer", "ux-ui-designer",
+      "interaction-designer", "ux-researcher", "user-researcher",
+      "design-lead", "ux-lead", "service-designer", "information-architect",
+    ],
+    suggestedIndustries: ["ux-design", "product-design", "design"],
+    themes: ["plum", "ivory", "wine"],
+  },
+
+  {
+    slug: "real-estate-luxe", name: "Real Estate Luxe",
+    description: "Near-black + champagne gold + skyline motif. Premium dark option for luxury real estate.",
+    category: "real-estate", component: RealEstateLuxe,
+    atsSafe: false, supportsPhoto: false,
+    addedAt: "2026-06-01T00:00:00.000Z",
+    suggestedRoles: [
+      "luxury-real-estate-agent", "luxury-real-estate-broker", "luxury-property-consultant",
+      "real-estate-broker", "commercial-real-estate-broker", "commercial-real-estate-agent",
+      "property-developer", "real-estate-developer", "estate-agent",
+      "real-estate-investor",
+    ],
+    suggestedIndustries: ["luxury-real-estate", "property", "real-estate"],
+    themes: ["midnight", "wine", "sand"],
+  },
+
+  {
+    slug: "trades-volt", name: "Trades Volt",
+    description: "Steel black + electric yellow + bolt motif + skew skill bars. Bold graphical option for licensed trades.",
+    category: "trades-industrial", component: TradesVolt,
+    atsSafe: false, supportsPhoto: false,
+    addedAt: "2026-06-01T00:00:00.000Z",
+    suggestedRoles: [
+      "electrician", "master-electrician", "journeyman-electrician",
+      "plumber", "pipefitter", "hvac-technician", "hvac-installer",
+      "welder", "ironworker", "millwright", "industrial-electrician",
+      "maintenance-technician",
+    ],
+    suggestedIndustries: ["trades", "skilled-trades", "industrial"],
+    themes: ["charcoal", "midnight"],
+  },
+
+  {
+    slug: "aviation-hud", name: "Aviation HUD",
+    description: "Deep navy + cyan HUD + horizon/compass motif + mono accents. Graphical option for flight crew.",
+    category: "aviation", component: AviationHUD,
+    atsSafe: false, supportsPhoto: false,
+    addedAt: "2026-06-01T00:00:00.000Z",
+    suggestedRoles: [
+      "pilot", "airline-pilot", "commercial-pilot", "first-officer", "captain",
+      "co-pilot", "helicopter-pilot", "cabin-crew", "flight-attendant",
+      "air-traffic-controller", "flight-engineer", "drone-pilot",
+    ],
+    suggestedIndustries: ["aviation", "airline", "aerospace-operations"],
+    themes: ["midnight", "navy"],
+  },
+
+  {
+    slug: "dental-clean", name: "Dental Clean",
+    description: "White + clinical teal/mint + tooth motif + credential pills. Built for dental professionals.",
+    category: "medical", component: DentalClean,
+    atsSafe: true, supportsPhoto: true,
+    addedAt: "2026-06-01T00:00:00.000Z",
+    suggestedRoles: [
+      "dentist", "dental-surgeon", "orthodontist", "endodontist", "periodontist",
+      "prosthodontist", "oral-surgeon-dental", "pediatric-dentist",
+      "dental-hygienist", "oral-hygienist", "dental-assistant", "dental-therapist",
+    ],
+    suggestedIndustries: ["dentistry", "dental-care", "healthcare"],
+    themes: ["forest", "sky", "ivory"],
+  },
+
+  {
+    slug: "barber-editorial", name: "Barber Editorial",
+    description: "Black + cream + red accent + bold editorial type + razor motif. For barbers & men's grooming.",
+    category: "beauty", component: BarberEditorial,
+    atsSafe: false, supportsPhoto: false,
+    addedAt: "2026-06-01T00:00:00.000Z",
+    suggestedRoles: [
+      "barber", "master-barber", "mens-stylist", "mens-grooming-specialist",
+      "grooming-specialist", "barbershop-owner", "barber-apprentice",
+    ],
+    suggestedIndustries: ["grooming", "barbering", "personal-care"],
+    themes: ["charcoal", "wine"],
+  },
+
+  {
+    slug: "event-lumen", name: "Event Lumen",
+    description: "Deep plum + gold + string-lights motif + elegant serif. For event & wedding professionals.",
+    category: "hospitality", component: EventLumen,
+    atsSafe: false, supportsPhoto: false,
+    addedAt: "2026-06-01T00:00:00.000Z",
+    suggestedRoles: [
+      "event-planner", "wedding-planner", "event-coordinator", "event-producer",
+      "event-manager", "conference-organizer", "party-planner",
+      "catering-event-manager", "experiential-producer", "venue-manager",
+    ],
+    suggestedIndustries: ["events", "weddings", "hospitality"],
+    themes: ["plum", "wine", "midnight"],
+  },
+
+  {
+    slug: "teacher-chalk", name: "Teacher Chalk",
+    description: "Chalkboard green + chalk white + apple motif + playful chips. Warm graphical option for educators.",
+    category: "education-warm", component: TeacherChalk,
+    atsSafe: true, supportsPhoto: false,
+    addedAt: "2026-06-01T00:00:00.000Z",
+    suggestedRoles: [
+      "teacher", "classroom-teacher", "substitute-teacher", "montessori-teacher",
+      "middle-school-teacher", "subject-teacher", "homeroom-teacher",
+      "language-arts-teacher", "history-teacher", "geography-teacher",
+      "drama-teacher", "music-teacher",
+    ],
+    suggestedIndustries: ["education", "k12-education", "teaching"],
+    themes: ["forest", "sand", "ivory"],
   },
 
   {
