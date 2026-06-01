@@ -83,6 +83,7 @@ export default async function HomePage() {
     <main>
       <SiteHeader isLoggedIn={isLoggedIn} />
       <HeroSection isLoggedIn={isLoggedIn} />
+      <VideoSection />
       <TemplatesShowcaseSection
         templates={showcaseTemplates}
         isLoggedIn={isLoggedIn}
@@ -159,6 +160,39 @@ function HeroSection({ isLoggedIn }: { isLoggedIn: boolean }) {
             </p>
           </div>
           <HeroPreview />
+        </div>
+      </Container>
+    </Section>
+  );
+}
+
+// Tutorial walkthrough — sits between the hero and the templates strip.
+// Privacy-friendly youtube-nocookie embed; responsive 16:9 via a padding-bottom
+// box so it holds ratio without relying on aspect-ratio support.
+function VideoSection() {
+  return (
+    <Section className="bg-cream-soft py-20">
+      <Container>
+        <div className="mx-auto max-w-2xl text-center">
+          <Badge variant="mint" className="border-coral/30 bg-coral/15 text-coral-deep">
+            Tutorial
+          </Badge>
+          <h2 className="mt-4 text-4xl text-plum">See how it works.</h2>
+          <p className="mt-4 text-plum-soft">A quick walkthrough of building your CV with AlmiCV.</p>
+        </div>
+
+        <div className="mx-auto mt-10 w-full max-w-[820px] overflow-hidden rounded-2xl border border-peach/30 bg-plum/5 shadow-warm-card-hover">
+          <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
+            <iframe
+              className="absolute inset-0 h-full w-full"
+              src="https://www.youtube-nocookie.com/embed/RPNZ3L-SnsU?rel=0"
+              title="See how AlmiCV works — tutorial"
+              loading="lazy"
+              referrerPolicy="strict-origin-when-cross-origin"
+              allow="accelerated-sensors; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen"
+              allowFullScreen
+            />
+          </div>
         </div>
       </Container>
     </Section>
