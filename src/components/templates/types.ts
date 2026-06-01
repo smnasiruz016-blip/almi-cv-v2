@@ -198,11 +198,14 @@ export function initials(fullName: string): string {
 }
 
 // Re-export RichText helpers so templates only need one import path.
+// `stripHtml` is an alias of stripRichText (same job) — the expansion-batch
+// templates import it under that name.
 export {
   RichTextRender,
   BulletsRender,
   isRichTextEmpty,
   stripRichText,
+  stripRichText as stripHtml,
 } from "@/lib/rich-text";
 
 /** True when a bullets array is effectively empty (all entries blank/whitespace). */
