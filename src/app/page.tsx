@@ -156,7 +156,7 @@ function HeroSection({ isLoggedIn }: { isLoggedIn: boolean }) {
               </Link>
             </div>
             <p className="mt-5 text-sm text-plum-faint">
-              Free to start · No credit card · 3 CVs included · Pro from just $5/month
+              Free to start · No credit card · 3 CVs included · Pro from just $7/month
             </p>
           </div>
           <HeroPreview />
