@@ -131,14 +131,14 @@ function HeroSection({ isLoggedIn }: { isLoggedIn: boolean }) {
           <div>
             <Badge variant="gold" className="bg-gold/15 text-[#8A5F1F]">
               <Sparkles className="h-3.5 w-3.5" />
-              Brand-quality CVs without the design work
+              Built to beat the resume robots — not your budget
             </Badge>
             <h1 className="mt-8 max-w-xl text-balance text-5xl font-medium leading-[1.05] text-plum lg:text-6xl xl:text-7xl">
               A CV that looks like it was{" "}
               <span className="text-coral">designed for you.</span>
             </h1>
             <p className="mt-6 max-w-md text-lg text-plum-soft">
-              Premium templates, an editor that updates live, AI writing that respects your voice, and an ATS score that tells you when you&apos;re ready.
+              Premium templates, a live editor, AI writing that keeps your voice, and a real ATS score that tells you when you&apos;re ready. Start free — and even our Pro plan is half what other builders charge.
             </p>
             <div className="mt-10 flex flex-wrap items-center gap-3">
               <Link
@@ -156,7 +156,7 @@ function HeroSection({ isLoggedIn }: { isLoggedIn: boolean }) {
               </Link>
             </div>
             <p className="mt-5 text-sm text-plum-faint">
-              Free to start · No credit card · 3 CVs included
+              Free to start · No credit card · 3 CVs included · Pro from just $5/month
             </p>
           </div>
           <HeroPreview />
