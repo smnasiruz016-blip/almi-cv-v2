@@ -30,8 +30,8 @@ export async function generateMetadata({
   const { country } = await params;
   const entry = SLUG_TO_COUNTRY[country];
   if (!entry) return {};
-  const title = `Find jobs in ${entry.name} — AlmiCV`;
-  const description = `Hand-picked job sites for ${entry.name}, paired with AlmiCV's ATS-ready CV builder. Find your next role and apply with a polished resume.`;
+  const title = `Find Jobs in ${entry.name} — ATS-Ready CV Builder · AlmiCV`;
+  const description = `Hand-picked job sites for ${entry.name}, paired with AlmiCV's ATS-ready CV builder. Find your next role and apply with a polished resume — free to start.`;
   const path = `/jobs/${entry.slug}`;
   return {
     title,

@@ -15,20 +15,17 @@ const SITE_ORIGIN = "https://almicv.almiworld.com";
 
 type Params = { country: string; role: string };
 
+// Dynamic so the year-stamped title stays current each year with no code
+// change (generateMetadata runs server-side). This page has no visible
+// year in the body, so the meta title is the only place it appears.
+const YEAR = new Date().getFullYear();
 
 function buildTitle(roleName: string, countryName: string): string {
-  const base = `${roleName} CV for ${countryName} 2026 — Build Free | AlmiCV`;
-  if (base.length <= 60) return base;
-  // Truncate role name to fit
-  const shorter = `${roleName} CV for ${countryName} 2026 | AlmiCV`;
-  if (shorter.length <= 60) return shorter;
-  return `${roleName} CV for ${countryName} | AlmiCV`;
+  return `${roleName} CV for ${countryName} (${YEAR}) — Free & ATS-Ready`;
 }
 
 function buildDescription(roleName: string, countryName: string): string {
-  const base = `Build professional ${roleName} CV for ${countryName}. AlmiCV AI-tailored, ATS-optimized, transform into many designs. Free start, $7/mo Pro.`;
-  if (base.length > 160) return base.slice(0, 157) + "…";
-  return base;
+  return `Build a professional ${roleName} CV for ${countryName} — AI-tailored, ATS-optimized, in any language. Free to start, Pro $7/mo on AlmiCV.`;
 }
 
 export async function generateMetadata({
