@@ -19,7 +19,7 @@ type Params = { country: string };
 const YEAR = new Date().getFullYear();
 
 function buildTitle(name: string): string {
-  return `${name} CV Guide (${YEAR}) — Free, ATS-Ready Builder`;
+  return `${name} CV Guide (${YEAR}) — Free, ATS-Ready Builder · AlmiCV`;
 }
 
 function buildDescription(name: string): string {

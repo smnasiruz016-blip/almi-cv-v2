@@ -21,7 +21,7 @@ type Params = { country: string; role: string };
 const YEAR = new Date().getFullYear();
 
 function buildTitle(roleName: string, countryName: string): string {
-  return `${roleName} CV for ${countryName} (${YEAR}) — Free & ATS-Ready`;
+  return `${roleName} CV for ${countryName} (${YEAR}) — Free & ATS-Ready · AlmiCV`;
 }
 
 function buildDescription(roleName: string, countryName: string): string {
