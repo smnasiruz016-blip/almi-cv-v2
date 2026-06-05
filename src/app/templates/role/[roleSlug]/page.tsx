@@ -34,10 +34,13 @@ export async function generateMetadata({
   const { roleSlug } = await params;
   const role = getRoleBySlug(roleSlug);
   if (!role) return { title: "CV templates · AlmiCV" };
-  const layout = suggestTemplate({ roleSlug });
+  const title = `${role.name} CV Template — Free & ATS-Ready · AlmiCV`;
+  const description = `Start your ${role.name} CV in under a minute with a free, ATS-ready template. AI writing, live ATS score, any language. Pro $7/mo.`;
   return {
-    title: `${role.name} CV template · AlmiCV`,
-    description: `${layout.description} Use the ${layout.name} layout to start your ${role.name.toLowerCase()} CV in under a minute.`,
+    title,
+    description,
+    openGraph: { title, description, type: "website" },
+    twitter: { card: "summary_large_image", title, description },
   };
 }
 

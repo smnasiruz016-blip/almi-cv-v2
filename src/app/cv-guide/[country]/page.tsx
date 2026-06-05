@@ -15,15 +15,15 @@ const SITE_ORIGIN = "https://almicv.almiworld.com";
 
 type Params = { country: string };
 
+// Dynamic so the year-stamped title stays current each year (server-side).
+const YEAR = new Date().getFullYear();
+
 function buildTitle(name: string): string {
-  const base = `${name} CV Guide — Build Free | AlmiCV`;
-  return base.length <= 60 ? base : `${name} CV Guide | AlmiCV`;
+  return `${name} CV Guide (${YEAR}) — Free, ATS-Ready Builder`;
 }
 
-function buildDescription(name: string, noteFragment: string): string {
-  const base = `Build a ${name}-ready CV for any role with AlmiCV. ${noteFragment} AI-tailored, ATS-optimized, transform into many designs. Free start, $7/mo Pro.`;
-  if (base.length > 160) return base.slice(0, 157) + "…";
-  return base;
+function buildDescription(name: string): string {
+  return `Build a ${name}-ready CV for any role with AlmiCV — local conventions, AI-tailored, ATS-optimized. Free to start, Pro $7/mo.`;
 }
 
 export async function generateMetadata({
@@ -34,12 +34,9 @@ export async function generateMetadata({
   const { country } = await params;
   const c = getCountryBySlug(country);
   if (!c) return {};
-  const convention = getConvention(c.slug);
   const url = `${SITE_ORIGIN}/cv-guide/${c.slug}`;
   const title = buildTitle(c.name);
-  // Short fragment from convention notes — first phrase only
-  const fragment = convention ? convention.notes.split(/[.;]/)[0] + "." : "";
-  const description = buildDescription(c.name, fragment);
+  const description = buildDescription(c.name);
   return {
     title,
     description,

@@ -16,11 +16,25 @@ import { CVPreview } from "@/components/templates/CVPreview";
 import { NewsletterCard } from "@/components/newsletter/NewsletterCard";
 import { SiteHeader } from "@/components/site-header";
 import { PricingClient } from "@/app/pricing/pricing-client";
+import type { Metadata } from "next";
 
 // Hourly ISR — admin upload action revalidates / via revalidatePath()
 // for faster cache busting after a new batch lands. Home queries:
 // getLatestTemplatesForHome (30) + getUserPlan if logged in.
 export const revalidate = 3600;
+
+// SEO meta for the homepage (previously inherited the generic root-layout
+// title). Keyword-led, brand once via " · AlmiCV"; OG/Twitter mirror it.
+const HOME_TITLE = "Free CV & Resume Builder — ATS Score Included · AlmiCV";
+const HOME_DESC =
+  "Build a professional, ATS-ready CV free in any language. Premium templates, AI writing that keeps your voice, and a live ATS score that tells you when you're ready. Pro from $7/mo.";
+
+export const metadata: Metadata = {
+  title: HOME_TITLE,
+  description: HOME_DESC,
+  openGraph: { title: HOME_TITLE, description: HOME_DESC, type: "website" },
+  twitter: { card: "summary_large_image", title: HOME_TITLE, description: HOME_DESC },
+};
 
 type TrustStat = {
   value: string;
