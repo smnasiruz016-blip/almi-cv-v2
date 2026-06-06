@@ -88,6 +88,19 @@ import TeacherChalk from "./TeacherChalk";
 import TealCleanSplit from "./TealCleanSplit";
 import TradesVolt from "./TradesVolt";
 import UXPortfolioGrid from "./UXPortfolioGrid";
+// Batch 12 (12) — Design System kit (1): soft/feminine family + verticals
+import WatercolorBlush from "./WatercolorBlush";
+import BotanicalSage from "./BotanicalSage";
+import GradientAura from "./GradientAura";
+import PlayfulPop from "./PlayfulPop";
+import OrganicBlush from "./OrganicBlush";
+import AbstractTeal from "./AbstractTeal";
+import BrushScriptBlue from "./BrushScriptBlue";
+import SunsetBoldSerif from "./SunsetBoldSerif";
+import OrganicBlobGray from "./OrganicBlobGray";
+import RedAccentClean from "./RedAccentClean";
+import TherapyCalm from "./TherapyCalm";
+import RetailVibrant from "./RetailVibrant";
 
 // asTemplate — narrow cast used only for Batch 3 components whose data
 // prop is CD's pseudo-CVData. Editor + print routes pipe data through
@@ -1472,6 +1485,179 @@ export const TEMPLATES: TemplateMeta[] = [
     ],
     suggestedIndustries: ["finance", "accounting", "legal", "consulting", "executive"],
     themes: ["plum", "navy", "wine", "charcoal"],
+  },
+
+  // ---- Batch 12 — Design System kit (1): soft/feminine family + verticals (added 2026-06-06) ----
+  {
+    slug: "watercolor-blush", name: "Watercolor Blush",
+    description: "Soft pink/blush watercolor washes, elegant serif + script name, photo block. Feminine & premium.",
+    category: "creative", component: WatercolorBlush,
+    atsSafe: true, supportsPhoto: true,
+    addedAt: "2026-06-06T00:00:00Z",
+    suggestedRoles: [
+      "graphic-designer", "creative-assistant", "brand-designer-feminine",
+      "marketing-assistant", "communications-coordinator", "executive-assistant-creative",
+      "social-media-coordinator", "content-creator", "illustrator-feminine",
+    ],
+    suggestedIndustries: ["design", "creative", "marketing"],
+    themes: ["blush", "linen", "ivory"],
+  },
+  {
+    slug: "botanical-sage", name: "Botanical Sage",
+    description: "Soft sage green with botanical leaf motifs and a vertical script name. Calm, organic, eco-minded.",
+    category: "professional", component: BotanicalSage,
+    atsSafe: true, supportsPhoto: true,
+    addedAt: "2026-06-06T00:00:00Z",
+    suggestedRoles: [
+      "environmental-engineer", "sustainability-consultant", "sustainability-manager",
+      "environmental-scientist", "conservation-officer", "renewable-energy-engineer",
+      "ngo-coordinator", "csr-manager", "ecology-researcher", "horticulturist",
+      "wellness-consultant-botanical",
+    ],
+    suggestedIndustries: ["environment", "sustainability", "renewable-energy"],
+    themes: ["sage", "linen", "ivory"],
+  },
+  {
+    slug: "gradient-aura", name: "Gradient Aura",
+    description: "Soft blue→pink aesthetic gradient aura, elegant serif, outlined pill headers. Modern feminine.",
+    category: "creative", component: GradientAura,
+    atsSafe: true, supportsPhoto: true,
+    addedAt: "2026-06-06T00:00:00Z",
+    suggestedRoles: [
+      "marketing-specialist", "digital-marketing-strategist", "social-media-strategist",
+      "content-strategist-feminine", "community-manager", "brand-strategist",
+      "influencer-manager", "marketing-consultant", "communications-manager-feminine",
+    ],
+    suggestedIndustries: ["marketing", "social-media", "branding"],
+    themes: ["sky", "blush", "plum"],
+  },
+  {
+    slug: "playful-pop", name: "Playful Pop",
+    description: "Colorful bold pop — rounded cards, thick black borders, lime/lavender/pink. Fun & confident.",
+    category: "creative", component: PlayfulPop,
+    atsSafe: false, supportsPhoto: true,
+    addedAt: "2026-06-06T00:00:00Z",
+    suggestedRoles: [
+      "copywriter-freelance", "creative-copywriter", "freelance-creative",
+      "content-designer", "social-media-creative", "art-director-junior",
+      "creative-strategist", "brand-copywriter", "creative-freelancer",
+    ],
+    suggestedIndustries: ["creative", "advertising", "freelance"],
+    themes: ["lime", "lavender", "blush"],
+  },
+  {
+    slug: "organic-blush", name: "Organic Blush",
+    description: "Warm cream/beige with organic floral background and colored timeline date bars. Warm professional.",
+    category: "finance", component: OrganicBlush,
+    atsSafe: true, supportsPhoto: true,
+    addedAt: "2026-06-06T00:00:00Z",
+    suggestedRoles: [
+      "accountant", "public-accountant", "staff-accountant", "bookkeeper",
+      "financial-analyst-feminine", "administrative-coordinator", "office-administrator-feminine",
+      "auditor", "tax-preparer", "consultant-feminine",
+    ],
+    suggestedIndustries: ["accounting", "administration", "consulting"],
+    themes: ["sand", "blush", "sage"],
+  },
+  {
+    slug: "abstract-teal", name: "Abstract Teal",
+    description: "Playful geometric teal/blue diagonal bars, dot grid, circular photo. Fresh, modern, friendly.",
+    category: "developer", component: AbstractTeal,
+    atsSafe: true, supportsPhoto: true,
+    addedAt: "2026-06-06T00:00:00Z",
+    suggestedRoles: [
+      "data-analyst-feminine", "junior-data-analyst", "business-analyst",
+      "research-assistant", "operations-analyst", "marketing-analyst-feminine",
+      "recent-graduate", "entry-level-analyst", "project-coordinator",
+    ],
+    suggestedIndustries: ["data-analytics", "business", "operations"],
+    themes: ["teal", "sky", "linen"],
+  },
+  {
+    slug: "brush-script-blue", name: "Brush Script Blue",
+    description: "White + sky-blue watercolor brush strokes, script section headers, round photo. Light, editorial, feminine.",
+    category: "creative", component: BrushScriptBlue,
+    atsSafe: true, supportsPhoto: true,
+    addedAt: "2026-06-06T00:00:00Z",
+    suggestedRoles: [
+      "content-writer-feminine", "copywriter-feminine", "journalist-feminine",
+      "blogger", "content-creator-writer", "editorial-assistant-feminine",
+      "communications-coordinator-feminine", "pr-coordinator", "social-media-writer",
+    ],
+    suggestedIndustries: ["writing", "media", "communications"],
+    themes: ["sky", "ivory", "linen"],
+  },
+  {
+    slug: "sunset-bold-serif", name: "Sunset Bold Serif",
+    description: "Warm coral→peach gradient aura with a huge bold display-serif name. Confident, editorial, creative.",
+    category: "creative", component: SunsetBoldSerif,
+    atsSafe: true, supportsPhoto: true,
+    addedAt: "2026-06-06T00:00:00Z",
+    suggestedRoles: [
+      "creative-director-feminine", "marketing-director-feminine", "brand-director",
+      "design-lead-feminine", "digital-marketing-lead", "creative-manager",
+      "campaign-manager", "marketing-manager-creative",
+    ],
+    suggestedIndustries: ["creative", "marketing", "branding"],
+    themes: ["coral", "sand", "blush"],
+  },
+  {
+    slug: "organic-blob-gray", name: "Organic Blob Gray",
+    description: "Soft gray organic blob with peach accents, round photo, two-column. Warm-neutral professional.",
+    category: "finance", component: OrganicBlobGray,
+    atsSafe: true, supportsPhoto: true,
+    addedAt: "2026-06-06T00:00:00Z",
+    suggestedRoles: [
+      "accountant-feminine", "junior-accountant", "bookkeeper-feminine",
+      "financial-administrator", "office-administrator-organic", "administrative-assistant-feminine",
+      "operations-assistant", "billing-specialist", "payroll-administrator",
+    ],
+    suggestedIndustries: ["accounting", "administration", "finance"],
+    themes: ["slate", "sand", "blush"],
+  },
+  {
+    slug: "red-accent-clean", name: "Red Accent Clean",
+    description: "Crisp white + light-gray sidebar, bold red pill accents and divider rule. Clean, confident, versatile.",
+    category: "professional", component: RedAccentClean,
+    atsSafe: true, supportsPhoto: true,
+    addedAt: "2026-06-06T00:00:00Z",
+    suggestedRoles: [
+      "designer-illustrator", "illustrator", "graphic-designer-clean",
+      "web-designer", "ui-designer-feminine", "brand-designer-clean",
+      "content-designer-clean", "junior-designer", "visual-designer",
+    ],
+    suggestedIndustries: ["design", "illustration", "creative"],
+    themes: ["coral", "slate", "ivory"],
+  },
+  {
+    slug: "therapy-calm", name: "Therapy Calm",
+    description: "Soft warm beige + muted sage/terracotta, rounded calm layout with a gentle timeline. For mental-health pros.",
+    category: "medical", component: TherapyCalm,
+    atsSafe: true, supportsPhoto: true,
+    addedAt: "2026-06-06T00:00:00Z",
+    suggestedRoles: [
+      "psychologist", "clinical-psychologist", "counselor", "therapist",
+      "psychotherapist", "marriage-family-therapist", "mental-health-counselor",
+      "social-worker", "clinical-social-worker", "case-manager",
+      "behavioral-therapist", "child-psychologist", "school-counselor",
+    ],
+    suggestedIndustries: ["mental-health", "counseling", "social-services"],
+    themes: ["sage", "sand", "ivory"],
+  },
+  {
+    slug: "retail-vibrant", name: "Retail Vibrant",
+    description: "Bright friendly orange/teal with bold rounded headers and skill chips. Energetic, approachable, front-line.",
+    category: "service", component: RetailVibrant,
+    atsSafe: true, supportsPhoto: true,
+    addedAt: "2026-06-06T00:00:00Z",
+    suggestedRoles: [
+      "retail-associate", "sales-associate", "store-associate", "cashier",
+      "customer-service-representative", "retail-supervisor", "store-supervisor",
+      "shop-assistant", "barista", "front-desk-associate", "brand-ambassador",
+      "sales-assistant", "floor-supervisor",
+    ],
+    suggestedIndustries: ["retail", "customer-service", "hospitality"],
+    themes: ["coral", "forest", "ivory"],
   },
 ];
 
