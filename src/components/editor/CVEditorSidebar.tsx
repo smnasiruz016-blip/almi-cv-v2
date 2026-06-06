@@ -889,7 +889,7 @@ export function CVEditorSidebar({
           rel="noopener noreferrer"
           className="mt-2 inline-flex items-center gap-1 text-xs font-medium text-coral hover:text-coral-deep"
         >
-          Browse 20 templates →
+          Browse all templates →
         </a>
       </div>
 

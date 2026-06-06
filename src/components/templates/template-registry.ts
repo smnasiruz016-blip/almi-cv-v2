@@ -1,5 +1,5 @@
 // ============================================================================
-// AlmiCV Template Registry — 20 production templates
+// AlmiCV Template Registry — 107 production templates
 // ----------------------------------------------------------------------------
 // Single source of truth. Order matters: suggestTemplate() returns the FIRST
 // template whose suggestedRoles includes the requested roleSlug. More-specific
@@ -101,6 +101,37 @@ import OrganicBlobGray from "./OrganicBlobGray";
 import RedAccentClean from "./RedAccentClean";
 import TherapyCalm from "./TherapyCalm";
 import RetailVibrant from "./RetailVibrant";
+// Design System kit (2) — 2026-06-06: 30 new vertical/niche templates
+import AgricultureField from "./AgricultureField";
+import ArchPhotoBlue from "./ArchPhotoBlue";
+import AutomotiveGarage from "./AutomotiveGarage";
+import BroadcastMedia from "./BroadcastMedia";
+import BrowserAnalyst from "./BrowserAnalyst";
+import BubbleMinimal from "./BubbleMinimal";
+import CaregiverWarm from "./CaregiverWarm";
+import ChildcarePlayful from "./ChildcarePlayful";
+import CommSparkle from "./CommSparkle";
+import CurvedWaveNavy from "./CurvedWaveNavy";
+import CyberMatrix from "./CyberMatrix";
+import DaisyFieldGreen from "./DaisyFieldGreen";
+import DarkSplitPro from "./DarkSplitPro";
+import EcoSustainable from "./EcoSustainable";
+import FashionVogue from "./FashionVogue";
+import GameDevPixel from "./GameDevPixel";
+import GeoTriangleBlue from "./GeoTriangleBlue";
+import GovPolicyCrest from "./GovPolicyCrest";
+import LabResearch from "./LabResearch";
+import MusicWaveDark from "./MusicWaveDark";
+import NonprofitHeart from "./NonprofitHeart";
+import PeachGridOrganic from "./PeachGridOrganic";
+import RestaurantMenu from "./RestaurantMenu";
+import RetroDesktopOS from "./RetroDesktopOS";
+import SageSoftRounded from "./SageSoftRounded";
+import SocialPulse from "./SocialPulse";
+import SupportHeadset from "./SupportHeadset";
+import TimelineSpineNavy from "./TimelineSpineNavy";
+import TravelCompass from "./TravelCompass";
+import WarehouseOps from "./WarehouseOps";
 
 // asTemplate — narrow cast used only for Batch 3 components whose data
 // prop is CD's pseudo-CVData. Editor + print routes pipe data through
@@ -137,7 +168,29 @@ export type TemplateCategory =
   | "veterinary"
   | "aviation"
   | "hospitality-elegant"
-  | "linguist";
+  | "linguist"
+  // Design System kit (2) — 2026-06-06: new vertical/niche categories
+  | "agriculture"
+  | "automotive"
+  | "broadcast"
+  | "web-analytics"
+  | "caregiving"
+  | "childcare"
+  | "communications"
+  | "cybersecurity"
+  | "marketing"
+  | "environmental"
+  | "fashion"
+  | "game-dev"
+  | "government"
+  | "science"
+  | "music"
+  | "nonprofit"
+  | "restaurant"
+  | "creator"
+  | "customer-support"
+  | "travel"
+  | "warehouse";
 
 export interface TemplateMeta {
   slug: string;
@@ -1659,6 +1712,399 @@ export const TEMPLATES: TemplateMeta[] = [
     suggestedIndustries: ["retail", "customer-service", "hospitality"],
     themes: ["coral", "forest", "ivory"],
   },
+  // ==== Design System kit (2) — 2026-06-06: 30 new vertical/niche templates ====
+
+  {
+    addedAt: "2026-06-06T00:00:00.000Z",
+    slug: "agriculture-field", name: "Agriculture Field",
+    description: "Cream + harvest green + wheat gold + field/wheat motif. For farmers, agronomists & agricultural roles.",
+    category: "agriculture", component: AgricultureField,
+    atsSafe: true, supportsPhoto: false,
+    suggestedRoles: [
+      "farmer", "agronomist", "agricultural-technician", "farm-manager", "rancher",
+      "horticulturist", "crop-specialist", "agricultural-engineer", "livestock-manager",
+      "viticulturist", "agricultural-consultant", "greenhouse-manager",
+    ],
+    suggestedIndustries: ["agriculture", "farming", "agribusiness"],
+  },
+  {
+    addedAt: "2026-06-06T00:01:00.000Z",
+    slug: "arch-photo-blue", name: "Arch Photo Blue",
+    description: "Navy sidebar + arched photo + blue header block + skill bars. Confident look for product & project managers.",
+    category: "business", component: ArchPhotoBlue,
+    atsSafe: false, supportsPhoto: true,
+    suggestedRoles: [
+      "product-manager", "project-manager", "program-manager",
+      "business-manager", "delivery-manager", "scrum-master",
+      "product-owner", "business-development-manager",
+    ],
+    suggestedIndustries: ["product-management", "project-management", "business"],
+  },
+  {
+    addedAt: "2026-06-06T00:02:00.000Z",
+    slug: "automotive-garage", name: "Automotive Garage",
+    description: "Carbon black + racing red + gear/checkered motif + bold condensed. For mechanics & auto technicians.",
+    category: "automotive", component: AutomotiveGarage,
+    atsSafe: false, supportsPhoto: false,
+    suggestedRoles: [
+      "mechanic", "automotive-technician", "auto-technician", "service-advisor",
+      "diesel-mechanic", "auto-body-technician", "car-detailer", "tire-technician",
+      "automotive-electrician", "vehicle-inspector", "workshop-foreman",
+    ],
+    suggestedIndustries: ["automotive", "auto-repair", "transportation"],
+  },
+  {
+    addedAt: "2026-06-06T00:03:00.000Z",
+    slug: "broadcast-media", name: "Broadcast Media",
+    description: "White + bold red + charcoal + ON-AIR badge + mic/play motif. For journalists, broadcasters & presenters.",
+    category: "broadcast", component: BroadcastMedia,
+    atsSafe: true, supportsPhoto: true,
+    suggestedRoles: [
+      "journalist", "broadcast-journalist", "news-reporter", "news-anchor", "tv-presenter",
+      "radio-host", "radio-presenter", "correspondent", "news-producer", "broadcaster",
+      "video-journalist", "podcast-host",
+    ],
+    suggestedIndustries: ["broadcast", "media", "journalism"],
+  },
+  {
+    addedAt: "2026-06-06T00:04:00.000Z",
+    slug: "browser-analyst", name: "Browser Analyst",
+    description: "Sky-blue desktop + white browser-window cards with traffic-light dots. For digital, web & SEO analysts.",
+    category: "web-analytics", component: BrowserAnalyst,
+    atsSafe: false, supportsPhoto: true,
+    suggestedRoles: [
+      "digital-analyst", "web-analyst", "web-analytics-specialist", "seo-analyst",
+      "digital-marketing-analyst", "web-designer", "ux-analyst",
+      "conversion-analyst", "ecommerce-analyst", "digital-strategist",
+    ],
+    suggestedIndustries: ["digital", "web", "analytics"],
+  },
+  {
+    addedAt: "2026-06-06T00:05:00.000Z",
+    slug: "bubble-minimal", name: "Bubble Minimal",
+    description: "White + soft grey blobs + circle photo + elegant serif + center divider. Calm minimal look for any professional.",
+    category: "professional", component: BubbleMinimal,
+    atsSafe: true, supportsPhoto: true,
+    suggestedRoles: [
+      "marketing-coordinator", "administrative-assistant", "office-administrator",
+      "project-assistant", "account-coordinator", "customer-success",
+      "operations-assistant", "general-professional",
+    ],
+    suggestedIndustries: ["administration", "marketing", "business"],
+  },
+  {
+    addedAt: "2026-06-06T00:06:00.000Z",
+    slug: "caregiver-warm", name: "Caregiver Warm",
+    description: "Soft rose + sage + warm cream + heart-hand motif. Gentle look for caregivers & home-health aides.",
+    category: "caregiving", component: CaregiverWarm,
+    atsSafe: true, supportsPhoto: true,
+    suggestedRoles: [
+      "caregiver", "home-health-aide", "personal-support-worker", "elderly-care-assistant",
+      "care-assistant", "live-in-carer", "disability-support-worker", "hospice-aide",
+      "companion-caregiver", "certified-nursing-assistant", "patient-care-technician",
+    ],
+    suggestedIndustries: ["caregiving", "home-care", "healthcare"],
+  },
+  {
+    addedAt: "2026-06-06T00:07:00.000Z",
+    slug: "childcare-playful", name: "Childcare Playful",
+    description: "White + soft rainbow pastels + rounded shapes + star motif. For childcare, early years & nannies.",
+    category: "childcare", component: ChildcarePlayful,
+    atsSafe: true, supportsPhoto: true,
+    suggestedRoles: [
+      "childcare-worker", "early-years-educator", "preschool-teacher", "nanny", "au-pair",
+      "daycare-assistant", "nursery-nurse", "kindergarten-teacher", "babysitter",
+      "early-childhood-educator", "childminder", "teaching-assistant-early-years",
+    ],
+    suggestedIndustries: ["childcare", "early-education", "education"],
+  },
+  {
+    addedAt: "2026-06-06T00:08:00.000Z",
+    slug: "comm-sparkle", name: "Comm Sparkle",
+    description: "White + holographic corner gradients + sparkle accents + bold serif + purple bars. Elegant look for comms & PR.",
+    category: "communications", component: CommSparkle,
+    atsSafe: true, supportsPhoto: true,
+    suggestedRoles: [
+      "communications-specialist", "communications-manager", "pr-specialist",
+      "public-relations-manager", "content-strategist", "communications-officer",
+      "corporate-communications", "media-relations-specialist", "brand-communications",
+    ],
+    suggestedIndustries: ["communications", "public-relations", "media"],
+  },
+  {
+    addedAt: "2026-06-06T00:09:00.000Z",
+    slug: "curved-wave-navy", name: "Curved Wave Navy",
+    description: "White + navy curved wave header + circle photo + condensed caps. Polished look for advisors & consultants.",
+    category: "finance", component: CurvedWaveNavy,
+    atsSafe: true, supportsPhoto: true,
+    suggestedRoles: [
+      "financial-advisor", "financial-consultant", "business-consultant",
+      "management-consultant", "investment-consultant", "account-manager",
+      "relationship-manager", "advisory-consultant",
+    ],
+    suggestedIndustries: ["finance", "consulting", "advisory"],
+  },
+  {
+    addedAt: "2026-06-06T00:10:00.000Z",
+    slug: "cyber-matrix", name: "Cyber Matrix",
+    description: "Black + matrix green + shield/lock + monospace terminal blocks. Hacker-aesthetic look for cybersecurity & InfoSec.",
+    category: "cybersecurity", component: CyberMatrix,
+    atsSafe: false, supportsPhoto: false,
+    suggestedRoles: [
+      "cybersecurity-analyst", "security-engineer", "information-security-analyst",
+      "penetration-tester", "ethical-hacker", "soc-analyst", "security-architect",
+      "incident-responder", "security-consultant", "malware-analyst", "devsecops-engineer",
+    ],
+    suggestedIndustries: ["cybersecurity", "information-security", "technology"],
+  },
+  {
+    addedAt: "2026-06-06T00:11:00.000Z",
+    slug: "daisy-field-green", name: "Daisy Field Green",
+    description: "Deep green sidebar + daisy motifs + flower-icon timeline. Friendly, fresh look for students & entry-level creatives.",
+    category: "creative", component: DaisyFieldGreen,
+    atsSafe: false, supportsPhoto: true,
+    suggestedRoles: [
+      "student", "recent-graduate", "intern", "junior-designer",
+      "entry-level", "junior-marketing", "content-creator", "social-media-assistant",
+      "administrative-assistant", "junior-coordinator",
+    ],
+    suggestedIndustries: ["entry-level", "creative", "education"],
+  },
+  {
+    addedAt: "2026-06-06T00:12:00.000Z",
+    slug: "dark-split-pro", name: "Dark Split Pro",
+    description: "Charcoal + blue highlight section bars + footer contact band. Bold dark look for marketing & strategy.",
+    category: "marketing", component: DarkSplitPro,
+    atsSafe: false, supportsPhoto: true,
+    suggestedRoles: [
+      "marketing-manager", "marketing-strategist", "brand-strategist",
+      "digital-strategist", "marketing-director", "communications-strategist",
+      "campaign-manager", "marketing-lead",
+    ],
+    suggestedIndustries: ["marketing", "strategy", "advertising"],
+  },
+  {
+    addedAt: "2026-06-06T00:13:00.000Z",
+    slug: "eco-sustainable", name: "Eco Sustainable",
+    description: "Warm paper + forest/leaf green + organic leaf motifs. For environmental, sustainability & ESG roles.",
+    category: "environmental", component: EcoSustainable,
+    atsSafe: true, supportsPhoto: true,
+    suggestedRoles: [
+      "environmental-scientist", "sustainability-manager", "sustainability-consultant",
+      "esg-analyst", "environmental-engineer", "conservation-officer", "ecologist",
+      "climate-analyst", "environmental-consultant", "sustainability-coordinator",
+    ],
+    suggestedIndustries: ["environmental", "sustainability", "conservation"],
+  },
+  {
+    addedAt: "2026-06-06T00:14:00.000Z",
+    slug: "fashion-vogue", name: "Fashion Vogue",
+    description: "White + black editorial + thin serif masthead + magazine grid + grayscale photo. For fashion & stylists.",
+    category: "fashion", component: FashionVogue,
+    atsSafe: false, supportsPhoto: true,
+    suggestedRoles: [
+      "fashion-designer", "fashion-stylist", "stylist", "model", "fashion-editor",
+      "beauty-editor", "creative-director-fashion", "wardrobe-stylist", "fashion-buyer",
+      "merchandiser", "fashion-marketing", "makeup-artist",
+    ],
+    suggestedIndustries: ["fashion", "beauty", "editorial"],
+  },
+  {
+    addedAt: "2026-06-06T00:15:00.000Z",
+    slug: "game-dev-pixel", name: "Game Dev Pixel",
+    description: "Dark indigo + arcade neon + pixel/8-bit accents + stat bars + mono. For game developers & designers.",
+    category: "game-dev", component: GameDevPixel,
+    atsSafe: false, supportsPhoto: false,
+    suggestedRoles: [
+      "game-developer", "game-designer", "game-programmer", "gameplay-engineer",
+      "technical-artist", "game-qa-tester", "level-designer", "unity-developer",
+      "unreal-developer", "game-producer", "3d-game-artist",
+    ],
+    suggestedIndustries: ["gaming", "game-development", "interactive-media"],
+  },
+  {
+    addedAt: "2026-06-06T00:16:00.000Z",
+    slug: "geo-triangle-blue", name: "Geo Triangle Blue",
+    description: "White + steel-blue triangle corners + semicircle skill dials. Clean geometric look for marketing & management.",
+    category: "marketing", component: GeoTriangleBlue,
+    atsSafe: true, supportsPhoto: true,
+    suggestedRoles: [
+      "marketing-manager", "marketing-coordinator", "marketing-executive",
+      "business-manager", "account-manager", "project-coordinator",
+      "operations-manager", "team-lead", "general-manager",
+    ],
+    suggestedIndustries: ["marketing", "business", "management"],
+  },
+  {
+    addedAt: "2026-06-06T00:17:00.000Z",
+    slug: "gov-policy-crest", name: "Gov Policy Crest",
+    description: "Ivory + deep navy + gold crest + dignified serif. For government, public policy & civil service.",
+    category: "government", component: GovPolicyCrest,
+    atsSafe: true, supportsPhoto: false,
+    suggestedRoles: [
+      "policy-analyst", "policy-advisor", "public-policy-specialist", "civil-servant",
+      "government-affairs-manager", "legislative-assistant", "public-administrator",
+      "diplomat", "foreign-service-officer", "program-officer", "public-affairs-specialist",
+    ],
+    suggestedIndustries: ["government", "public-policy", "public-administration"],
+  },
+  {
+    addedAt: "2026-06-06T00:18:00.000Z",
+    slug: "lab-research", name: "Lab Research",
+    description: "White + clean teal + molecule/DNA motif + publications section. For scientists, researchers & R&D.",
+    category: "science", component: LabResearch,
+    atsSafe: true, supportsPhoto: false,
+    suggestedRoles: [
+      "research-scientist", "scientist", "laboratory-technician", "lab-technician",
+      "research-associate", "biologist", "chemist", "biochemist", "microbiologist",
+      "clinical-researcher", "r-and-d-scientist", "biotech-researcher", "data-scientist-research",
+    ],
+    suggestedIndustries: ["research", "science", "biotech", "pharmaceutical"],
+  },
+  {
+    addedAt: "2026-06-06T00:19:00.000Z",
+    slug: "music-wave-dark", name: "Music Wave Dark",
+    description: "Near-black + neon magenta/cyan waveform + equalizer bars. For musicians, producers, DJs & audio engineers.",
+    category: "music", component: MusicWaveDark,
+    atsSafe: false, supportsPhoto: false,
+    suggestedRoles: [
+      "musician", "music-producer", "audio-engineer", "sound-designer", "dj",
+      "sound-engineer", "recording-engineer", "mixing-engineer", "composer",
+      "session-musician", "music-director", "beatmaker",
+    ],
+    suggestedIndustries: ["music", "audio", "entertainment"],
+  },
+  {
+    addedAt: "2026-06-06T00:20:00.000Z",
+    slug: "nonprofit-heart", name: "Nonprofit Heart",
+    description: "Warm cream + coral + teal + heart/hands motif + impact tiles. For nonprofit, NGO & fundraising roles.",
+    category: "nonprofit", component: NonprofitHeart,
+    atsSafe: true, supportsPhoto: true,
+    suggestedRoles: [
+      "nonprofit-manager", "program-manager-nonprofit", "fundraising-manager", "development-officer",
+      "volunteer-coordinator", "grant-writer", "community-outreach-coordinator", "ngo-program-officer",
+      "charity-coordinator", "donor-relations-manager", "social-impact-manager",
+    ],
+    suggestedIndustries: ["nonprofit", "ngo", "social-impact"],
+  },
+  {
+    addedAt: "2026-06-06T00:21:00.000Z",
+    slug: "peach-grid-organic", name: "Peach Grid Organic",
+    description: "Cream + peach organic blobs + grid texture + black label bars. Warm, modern look for graphic & brand designers.",
+    category: "creative", component: PeachGridOrganic,
+    atsSafe: false, supportsPhoto: true,
+    suggestedRoles: [
+      "graphic-designer", "brand-designer", "social-media-designer",
+      "visual-identity-designer", "junior-graphic-designer", "marketing-designer",
+      "freelance-designer", "creative-designer",
+    ],
+    suggestedIndustries: ["design", "branding", "creative"],
+  },
+  {
+    addedAt: "2026-06-06T00:22:00.000Z",
+    slug: "restaurant-menu", name: "Restaurant Menu",
+    description: "Cream menu-card + warm terracotta border + elegant serif + rule dividers. For servers, hosts & restaurant FOH.",
+    category: "restaurant", component: RestaurantMenu,
+    atsSafe: true, supportsPhoto: false,
+    suggestedRoles: [
+      "server", "waiter", "waitress", "host", "hostess", "bartender",
+      "restaurant-server", "food-runner", "barback", "restaurant-supervisor",
+      "front-of-house-manager", "maitre-d", "sommelier",
+    ],
+    suggestedIndustries: ["restaurant", "hospitality", "food-service"],
+  },
+  {
+    addedAt: "2026-06-06T00:23:00.000Z",
+    slug: "retro-desktop-os", name: "Retro Desktop OS",
+    description: "Mauve desktop + beige retro windows w/ title bars + X buttons + mono type. Playful 90s-UI look for creatives.",
+    category: "creative", component: RetroDesktopOS,
+    atsSafe: false, supportsPhoto: true,
+    suggestedRoles: [
+      "graphic-designer", "illustrator", "motion-designer", "animator",
+      "digital-artist", "multimedia-designer", "art-director", "visual-designer",
+      "game-designer", "creative-technologist",
+    ],
+    suggestedIndustries: ["design", "creative", "media"],
+  },
+  {
+    addedAt: "2026-06-06T00:24:00.000Z",
+    slug: "sage-soft-rounded", name: "Sage Soft Rounded",
+    description: "Sage green + cream blocks + rounded photo + circle motifs. Soft, refined ATS-safe look for finance & admin.",
+    category: "finance", component: SageSoftRounded,
+    atsSafe: true, supportsPhoto: true,
+    suggestedRoles: [
+      "accountant", "senior-accountant", "junior-accountant", "bookkeeper",
+      "accounts-payable", "accounts-receivable", "payroll-specialist",
+      "financial-analyst", "auditor", "tax-associate", "office-administrator",
+    ],
+    suggestedIndustries: ["accounting", "finance", "administration"],
+  },
+  {
+    addedAt: "2026-06-06T00:25:00.000Z",
+    slug: "social-pulse", name: "Social Pulse",
+    description: "White + vivid purple→pink→amber gradient + content grid + engagement-metric tiles. For creators & social media.",
+    category: "creator", component: SocialPulse,
+    atsSafe: false, supportsPhoto: true,
+    suggestedRoles: [
+      "content-creator", "social-media-manager", "influencer", "social-media-coordinator",
+      "community-manager", "social-media-strategist", "content-producer", "youtuber",
+      "digital-content-creator", "social-media-specialist", "brand-ambassador-creator",
+    ],
+    suggestedIndustries: ["social-media", "content-creation", "digital-media"],
+  },
+  {
+    addedAt: "2026-06-06T00:26:00.000Z",
+    slug: "support-headset", name: "Support Headset",
+    description: "White + friendly teal + coral + headset/chat-bubble motif. For customer support & call-center roles.",
+    category: "customer-support", component: SupportHeadset,
+    atsSafe: true, supportsPhoto: true,
+    suggestedRoles: [
+      "customer-support-specialist", "customer-service-representative", "call-center-agent",
+      "help-desk-technician", "client-success-manager", "customer-success-specialist",
+      "technical-support", "support-team-lead", "contact-center-agent", "customer-care-agent",
+    ],
+    suggestedIndustries: ["customer-service", "support", "bpo"],
+  },
+  {
+    addedAt: "2026-06-06T00:27:00.000Z",
+    slug: "timeline-spine-navy", name: "Timeline Spine Navy",
+    description: "White + navy circular icon nodes down a vertical spine + slate header. Clean ATS-safe look for admin & managers.",
+    category: "professional", component: TimelineSpineNavy,
+    atsSafe: true, supportsPhoto: true,
+    suggestedRoles: [
+      "administrative-manager", "office-manager", "operations-coordinator",
+      "general-manager", "business-administrator", "team-manager",
+      "department-manager", "project-coordinator", "executive-assistant",
+    ],
+    suggestedIndustries: ["administration", "management", "operations"],
+  },
+  {
+    addedAt: "2026-06-06T00:28:00.000Z",
+    slug: "travel-compass", name: "Travel Compass",
+    description: "Sunset gradient + compass/globe + passport-stamp chips + plane timeline. For travel, tourism & flight crew.",
+    category: "travel", component: TravelCompass,
+    atsSafe: true, supportsPhoto: true,
+    suggestedRoles: [
+      "travel-agent", "travel-consultant", "tour-guide", "tourism-manager",
+      "flight-attendant", "cabin-crew-travel", "concierge", "reservations-agent",
+      "travel-coordinator", "destination-specialist", "cruise-staff", "tour-operator",
+    ],
+    suggestedIndustries: ["travel", "tourism", "hospitality"],
+  },
+  {
+    addedAt: "2026-06-06T00:29:00.000Z",
+    slug: "warehouse-ops", name: "Warehouse Ops",
+    description: "Steel grey + safety orange + hazard stripe + box/pallet motif. For warehouse, supply-chain & logistics ops.",
+    category: "warehouse", component: WarehouseOps,
+    atsSafe: true, supportsPhoto: true,
+    suggestedRoles: [
+      "warehouse-associate", "warehouse-worker", "forklift-operator", "inventory-specialist",
+      "warehouse-supervisor", "shipping-receiving-clerk", "order-picker", "dispatch-coordinator",
+      "logistics-coordinator", "material-handler", "stock-controller", "warehouse-manager",
+    ],
+    suggestedIndustries: ["warehousing", "supply-chain", "logistics"],
+  },
+
 ];
 
 // ============================================================================
