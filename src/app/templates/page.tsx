@@ -4,21 +4,28 @@ import { SiteHeader } from "@/components/site-header";
 import { Footer } from "@/components/footer";
 import { Container } from "@/components/ui/container";
 import { Section } from "@/components/ui/section";
-import { TEMPLATES, getTagline } from "@/components/templates/template-registry";
+import { TEMPLATES, getTagline, getAddedAt } from "@/components/templates/template-registry";
+
+// Gallery order: newest templates first (by addedAt) so visitors see the
+// latest, most polished designs up top. The registry array order is left
+// untouched, so suggestTemplate() role priority is unaffected.
+const GALLERY_TEMPLATES = [...TEMPLATES].sort((a, b) =>
+  getAddedAt(b).localeCompare(getAddedAt(a)),
+);
 import { CVPreview } from "@/components/templates/CVPreview";
 
 // PNG sunset: the gallery used to render 246 admin-uploaded screenshots
-// from TemplateImage. Now it renders 20 React template cards directly
+// from TemplateImage. Now it renders the 77 React template cards directly
 // from the registry — each click goes straight to /cv/new?template=slug
 // without a TemplateImage indirection. No DB calls, no infinite scroll,
-// no role-filter chips (20 entries fits comfortably in one screen).
+// no role-filter chips. Cards are ordered newest-first (by addedAt).
 
 export const revalidate = 3600;
 
 export const metadata = {
   title: "CV templates · AlmiCV",
   description:
-    "20 production-ready CV templates — pick a layout and start your CV in under a minute. ATS-safe, A4-print-ready, free to start.",
+    "77 production-ready CV templates — pick a layout and start your CV in under a minute. ATS-safe, A4-print-ready, free to start.",
 };
 
 export default async function TemplatesPage() {
@@ -36,13 +43,13 @@ export default async function TemplatesPage() {
               Browse CV templates
             </h1>
             <p className="mt-4 text-lg text-plum-soft">
-              20 industry-tailored layouts — every one ATS-safe, A4-print-ready,
+              77 industry-tailored layouts — every one ATS-safe, A4-print-ready,
               and free to start. Click any card to open the editor.
             </p>
           </header>
 
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {TEMPLATES.map((t) => {
+            {GALLERY_TEMPLATES.map((t) => {
               const href = isLoggedIn
                 ? `/cv/new?template=${t.slug}`
                 : `/signup?intent=template&template=${t.slug}`;

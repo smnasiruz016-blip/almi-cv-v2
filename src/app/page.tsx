@@ -10,6 +10,7 @@ import { prisma } from "@/lib/db";
 import { isBillingEnabled, getUserPlan } from "@/lib/billing/plans";
 import {
   TEMPLATES,
+  getAddedAt,
   type TemplateMeta,
 } from "@/components/templates/template-registry";
 import { CVPreview } from "@/components/templates/CVPreview";
@@ -73,9 +74,12 @@ export default async function HomePage() {
   const user = await getCurrentUser();
   const isLoggedIn = Boolean(user);
   // PNG sunset: home strip now sources from the registry (static), no DB
-  // hit. Show the first 12 templates from registry order (most-specific
-  // first) — enough variety to hint at the breadth without dominating.
-  const showcaseTemplates: TemplateMeta[] = TEMPLATES.slice(0, 12);
+  // hit. Show the 12 newest templates (by addedAt) so new visitors see the
+  // latest, most polished designs first. Registry array order is untouched,
+  // so suggestTemplate() role priority is unaffected.
+  const showcaseTemplates: TemplateMeta[] = [...TEMPLATES]
+    .sort((a, b) => getAddedAt(b).localeCompare(getAddedAt(a)))
+    .slice(0, 12);
 
   // Pricing cards need the same data the /pricing page resolves — only
   // worth the DB hit when a user is actually logged in.
