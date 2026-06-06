@@ -2,7 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 import { JOB_ROLES, getRoleBySlug } from "@/lib/roles";
-import { suggestTemplate } from "@/components/templates/template-registry";
+import { suggestTemplate, TEMPLATES } from "@/components/templates/template-registry";
 import { CVPreview } from "@/components/templates/CVPreview";
 import { getCurrentUser } from "@/lib/auth";
 import { SiteHeader } from "@/components/site-header";
@@ -116,7 +116,7 @@ export default async function RoleHubPage({
                   Want a different look?
                 </p>
                 <p className="mt-1 text-sm text-plum-soft">
-                  Browse all 20 templates and pick any layout — every one is
+                  Browse all {TEMPLATES.length} templates and pick any layout — every one is
                   ATS-safe, A4-print-ready, and free to start.
                 </p>
                 <Link

@@ -15,7 +15,7 @@ const GALLERY_TEMPLATES = [...TEMPLATES].sort((a, b) =>
 import { CVPreview } from "@/components/templates/CVPreview";
 
 // PNG sunset: the gallery used to render 246 admin-uploaded screenshots
-// from TemplateImage. Now it renders the 77 React template cards directly
+// from TemplateImage. Now it renders the React template cards directly
 // from the registry — each click goes straight to /cv/new?template=slug
 // without a TemplateImage indirection. No DB calls, no infinite scroll,
 // no role-filter chips. Cards are ordered newest-first (by addedAt).
@@ -24,8 +24,7 @@ export const revalidate = 3600;
 
 export const metadata = {
   title: "CV templates · AlmiCV",
-  description:
-    "77 production-ready CV templates — pick a layout and start your CV in under a minute. ATS-safe, A4-print-ready, free to start.",
+  description: `${TEMPLATES.length} production-ready CV templates — pick a layout and start your CV in under a minute. ATS-safe, A4-print-ready, free to start.`,
 };
 
 export default async function TemplatesPage() {
@@ -43,7 +42,7 @@ export default async function TemplatesPage() {
               Browse CV templates
             </h1>
             <p className="mt-4 text-lg text-plum-soft">
-              77 industry-tailored layouts — every one ATS-safe, A4-print-ready,
+              {TEMPLATES.length} industry-tailored layouts — every one ATS-safe, A4-print-ready,
               and free to start. Click any card to open the editor.
             </p>
           </header>
