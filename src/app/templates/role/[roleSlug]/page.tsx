@@ -41,6 +41,7 @@ export async function generateMetadata({
     description,
     openGraph: { title, description, type: "website" },
     twitter: { card: "summary_large_image", title, description },
+    alternates: { canonical: `https://almicv.almiworld.com/templates/role/${role.slug}` },
   };
 }
 

@@ -35,6 +35,7 @@ export const metadata: Metadata = {
   description: HOME_DESC,
   openGraph: { title: HOME_TITLE, description: HOME_DESC, type: "website" },
   twitter: { card: "summary_large_image", title: HOME_TITLE, description: HOME_DESC },
+  alternates: { canonical: "https://almicv.almiworld.com" },
 };
 
 type TrustStat = {
