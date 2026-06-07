@@ -11,6 +11,7 @@ export const metadata: Metadata = {
       "Paste your resume, get an instant 0-100 score across keywords, action verbs, format, and length — plus one actionable tip.",
     type: "website",
   },
+  alternates: { canonical: "https://almicv.almiworld.com/resume-score" },
 };
 
 export default function ResumeScorePage() {

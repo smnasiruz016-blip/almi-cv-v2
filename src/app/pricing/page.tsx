@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: "Pricing · AlmiCV",
   description:
     "Free forever for up to 3 CVs. Upgrade to Pro for unlimited AI, premium templates, and 10 CV slots — $7/month or $60/year with a 7-day free trial.",
+  alternates: { canonical: "https://almicv.almiworld.com/pricing" },
 };
 
 export default async function PricingPage() {
