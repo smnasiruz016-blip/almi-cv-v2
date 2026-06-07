@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import {
@@ -16,6 +17,11 @@ async function logoutAction() {
   await destroySession();
   redirect("/");
 }
+
+// Signed-in app pages (account/dashboard/interview-prep) are per-user — never index.
+export const metadata: Metadata = {
+  robots: { index: false },
+};
 
 export default async function AppLayout({
   children,

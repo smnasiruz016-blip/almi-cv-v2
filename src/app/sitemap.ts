@@ -37,8 +37,7 @@ const STATIC_ROUTES: ReadonlyArray<{
   { path: "/pricing", changeFrequency: "monthly", priority: 0.8 },
   { path: "/templates", changeFrequency: "weekly", priority: 0.9 },
   { path: "/resume-score", changeFrequency: "monthly", priority: 0.7 },
-  { path: "/login", changeFrequency: "yearly", priority: 0.3 },
-  { path: "/signup", changeFrequency: "yearly", priority: 0.5 },
+  // /login and /signup are noindex (auth route group) — excluded from sitemap.
   { path: "/cv-guide", changeFrequency: "weekly", priority: 0.9 },
 ];
 
