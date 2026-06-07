@@ -1,5 +1,11 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
+
+// Admin pages must never be indexed.
+export const metadata: Metadata = {
+  robots: { index: false },
+};
 
 export default function AdminLayout({
   children,

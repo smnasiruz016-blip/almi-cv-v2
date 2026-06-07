@@ -1,5 +1,11 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Footer } from "@/components/footer";
+
+// Auth pages (login/signup/forgot/reset) must never be indexed.
+export const metadata: Metadata = {
+  robots: { index: false },
+};
 
 export default function AuthLayout({
   children,
