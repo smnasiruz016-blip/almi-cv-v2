@@ -37,14 +37,21 @@ export async function generateMetadata({
   const c = getCountryBySlug(country);
   const r = getRoleBySlug(role);
   if (!c || !r) return {};
-  const url = `${SITE_ORIGIN}/cv-guide/${c.slug}/${r.slug}`;
+  // SEO consolidation (stopgap): the role dimension here is a name token over
+  // country-level CV-convention data, so the ~50k role×country pages are thin
+  // near-duplicates of the richer /cv-guide/[country] hub. They canonicalise
+  // up to that hub and are kept out of the sitemap, concentrating crawl budget
+  // on the country hubs + the /templates/role/[roleSlug] role hubs (which keep
+  // the role-keyword surface). The page still renders for users. Reversible if
+  // a verified role-content dataset is added later.
+  const canonicalUrl = `${SITE_ORIGIN}/cv-guide/${c.slug}`;
   const title = buildTitle(r.name, c.name);
   const description = buildDescription(r.name, c.name);
   return {
     title,
     description,
-    alternates: { canonical: url },
-    openGraph: { title, description, url, type: "website", siteName: "AlmiCV" },
+    alternates: { canonical: canonicalUrl },
+    openGraph: { title, description, url: canonicalUrl, type: "website", siteName: "AlmiCV" },
     twitter: { card: "summary_large_image", title, description },
   };
 }

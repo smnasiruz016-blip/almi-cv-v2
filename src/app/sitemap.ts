@@ -1,23 +1,26 @@
 /**
- * Chunked sitemap with async-id pattern from day one.
+ * Chunked sitemap route (kept at /sitemap/[id].xml, fronted by the manual
+ * /sitemap-index.xml handler; /sitemap.xml is reserved per
+ * almijob-v2/docs/SITEMAP_CHUNKING_FUTURE.md).
  *
- * Coverage:
- *   - Chunk 0: statics (7) + 23 templates + N /templates/role/[slug]
- *     hubs (one per role with active TemplateImage rows, ~61 today)
- *     + 196 /jobs/[country] + 193 cv-guide country hubs = ~480 URLs
- *   - Chunks 1..N: 263 × 193 = 50,759 /cv-guide/[country]/[role] URLs,
- *     split into 25,000-URL chunks (3 chunks at current scale)
+ * Canonical surface = chunk 0 only: statics + /templates/role/[slug] role
+ * hubs (JOB_ROLES) + 196 /jobs/[country] + 193 /cv-guide/[country] hubs
+ * (~650 URLs).
  *
- * Total ≈ 51,178 URLs. Past Google's 50k-per-sitemap cap, so chunking
- * is mandatory.
+ * The /cv-guide/[country]/[role] grid (COUNTRIES_SERVED × JOB_ROLES ≈ 50,759)
+ * is DELIBERATELY excluded: the role dimension is a name token over
+ * country-level convention data, so those pages are thin near-duplicates that
+ * canonicalise up to /cv-guide/[country] (see that page's generateMetadata).
+ * Listing them would dilute crawl budget. The pages still render for users.
  *
- * CRITICAL — `id: Promise<string>` + `await id` per
- * almijob-v2/docs/SITEMAP_CHUNKING_FUTURE.md. Without the await the
- * chunks render as empty <urlset></urlset> bodies — that bug ate
- * 4 AlmiJob PRs (#26-#29).
+ * Now well under Google's 50k cap, so chunk 0 alone suffices. The chunked
+ * routing + async-id signature are retained so the /sitemap-index.xml ->
+ * /sitemap/0.xml URL shape is unchanged and restoring the grid later is a
+ * small change (builder kept in git history).
  *
- * Test discipline: NEVER smoke via `npx tsx`. Use `npm run build &&
- * npx next start && curl /sitemap/N.xml`.
+ * CRITICAL — `id: Promise<string>` + `await id` per SITEMAP_CHUNKING_FUTURE.md.
+ * Test discipline: NEVER smoke via `npx tsx`. Use `npx next start && curl
+ * /sitemap/0.xml`.
  */
 
 import type { MetadataRoute } from "next";
@@ -26,7 +29,6 @@ import { COUNTRIES_SERVED } from "@/lib/countries";
 import { JOB_ROLES } from "@/lib/roles";
 
 const SITE_ORIGIN = "https://almicv.almiworld.com";
-const CHUNK = 25000;
 
 const STATIC_ROUTES: ReadonlyArray<{
   path: string;
@@ -41,33 +43,9 @@ const STATIC_ROUTES: ReadonlyArray<{
   { path: "/cv-guide", changeFrequency: "weekly", priority: 0.9 },
 ];
 
-const TOTAL_CV_GUIDE = COUNTRIES_SERVED.length * JOB_ROLES.length;
-const NUM_CV_CHUNKS = Math.ceil(TOTAL_CV_GUIDE / CHUNK);
-
-let _allCvGuideCache: MetadataRoute.Sitemap | null = null;
-
-function buildAllCvGuideUrls(): MetadataRoute.Sitemap {
-  if (_allCvGuideCache) return _allCvGuideCache;
-  const now = new Date();
-  const out: MetadataRoute.Sitemap = [];
-  for (const c of COUNTRIES_SERVED) {
-    for (const r of JOB_ROLES) {
-      out.push({
-        url: `${SITE_ORIGIN}/cv-guide/${c.slug}/${r.slug}`,
-        lastModified: now,
-        changeFrequency: "monthly",
-        priority: 0.5,
-      });
-    }
-  }
-  _allCvGuideCache = out;
-  return out;
-}
-
 export async function generateSitemaps() {
-  // Chunk 0 = statics + templates + jobs + cv-guide country hubs.
-  // Chunks 1..NUM_CV_CHUNKS = cv-guide role-country grid URLs.
-  return Array.from({ length: 1 + NUM_CV_CHUNKS }, (_, i) => ({ id: i }));
+  // Single chunk — the canonical surface (~650 URLs) fits well within one.
+  return [{ id: 0 }];
 }
 
 export default async function sitemap({
@@ -77,10 +55,11 @@ export default async function sitemap({
   // This is the bug documented in almijob-v2/docs/SITEMAP_CHUNKING_FUTURE.md.
   id: Promise<string>;
 }): Promise<MetadataRoute.Sitemap> {
-  const n = Number(await id);
+  // Only chunk 0 is generated; any other id yields an empty sitemap.
+  if (Number(await id) !== 0) return [];
   const now = new Date();
 
-  if (n === 0) {
+  {
     const staticEntries: MetadataRoute.Sitemap = STATIC_ROUTES.map((r) => ({
       url: `${SITE_ORIGIN}${r.path}`,
       lastModified: now,
@@ -130,8 +109,4 @@ export default async function sitemap({
       ...cvCountryHubs,
     ];
   }
-
-  const all = buildAllCvGuideUrls();
-  const start = (n - 1) * CHUNK;
-  return all.slice(start, start + CHUNK);
 }

@@ -9,14 +9,12 @@
  * Submit /sitemap-index.xml to Google Search Console once after deploy.
  */
 
-import { COUNTRIES_SERVED } from "@/lib/countries";
-import { JOB_ROLES } from "@/lib/roles";
-
 const SITE_ORIGIN = "https://almicv.almiworld.com";
-const CHUNK = 25000;
 
-const TOTAL_CV_GUIDE = COUNTRIES_SERVED.length * JOB_ROLES.length;
-const NUM_SITEMAPS = 1 + Math.ceil(TOTAL_CV_GUIDE / CHUNK);
+// The cv-guide/[country]/[role] grid was removed from the sitemap (it
+// canonicalises up to /cv-guide/[country]); the canonical surface (~650 URLs)
+// now fits in chunk 0 alone.
+const NUM_SITEMAPS = 1;
 
 export function GET() {
   const now = new Date().toISOString();
