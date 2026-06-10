@@ -1,5 +1,5 @@
 // ============================================================================
-// AlmiCV Template Registry — 107 production templates
+// AlmiCV Template Registry — 147 production templates
 // ----------------------------------------------------------------------------
 // Single source of truth. Order matters: suggestTemplate() returns the FIRST
 // template whose suggestedRoles includes the requested roleSlug. More-specific
@@ -132,6 +132,47 @@ import SupportHeadset from "./SupportHeadset";
 import TimelineSpineNavy from "./TimelineSpineNavy";
 import TravelCompass from "./TravelCompass";
 import WarehouseOps from "./WarehouseOps";
+// Design System kit (3) — 2026-06-10: 40 new vertical/niche templates
+import BakerPastry from "./BakerPastry";
+import BankFinanceOps from "./BankFinanceOps";
+import ConciergeLuxe from "./ConciergeLuxe";
+import CourierRoute from "./CourierRoute";
+import CyberGradientIso from "./CyberGradientIso";
+import CyberShieldLight from "./CyberShieldLight";
+import DataAdminMono from "./DataAdminMono";
+import DevOpsPipeline from "./DevOpsPipeline";
+import DispatcherRadio from "./DispatcherRadio";
+import EduGradientPills from "./EduGradientPills";
+import EsportsStream from "./EsportsStream";
+import FlightInstructorSky from "./FlightInstructorSky";
+import FloristBloom from "./FloristBloom";
+import HRTalentWarm from "./HRTalentWarm";
+import HoloPremiumLight from "./HoloPremiumLight";
+import LabTechDark from "./LabTechDark";
+import LibrarianNeonWave from "./LibrarianNeonWave";
+import MedicalNeonHUD from "./MedicalNeonHUD";
+import MobileDevDuotone from "./MobileDevDuotone";
+import MuseumCurator from "./MuseumCurator";
+import NeonCircuitDev from "./NeonCircuitDev";
+import NeuroCleanLight from "./NeuroCleanLight";
+import NurseGlassPastel from "./NurseGlassPastel";
+import NurseryMeadow from "./NurseryMeadow";
+import OptometristVision from "./OptometristVision";
+import ParalegalBrief from "./ParalegalBrief";
+import ParamedicPulse from "./ParamedicPulse";
+import PhotoRealEstate from "./PhotoRealEstate";
+import SecurityShield from "./SecurityShield";
+import SkillRadarNavy from "./SkillRadarNavy";
+import SocialWorkerBridge from "./SocialWorkerBridge";
+import SportsCoachField from "./SportsCoachField";
+import SynthwaveGrid from "./SynthwaveGrid";
+import TattooInk from "./TattooInk";
+import TeacherSunshine from "./TeacherSunshine";
+import TealCodeTimeline from "./TealCodeTimeline";
+import TranslatorGlobal from "./TranslatorGlobal";
+import UtilityLineworker from "./UtilityLineworker";
+import VetTechPaws from "./VetTechPaws";
+import WarmMinimalDials from "./WarmMinimalDials";
 
 // asTemplate — narrow cast used only for Batch 3 components whose data
 // prop is CD's pseudo-CVData. Editor + print routes pipe data through
@@ -190,7 +231,14 @@ export type TemplateCategory =
   | "creator"
   | "customer-support"
   | "travel"
-  | "warehouse";
+  | "warehouse"
+  // Design System kit (3) — 2026-06-10: new vertical/niche categories
+  | "culinary"
+  | "fitness"
+  | "library"
+  | "mobile"
+  | "nursing"
+  | "photography";
 
 export interface TemplateMeta {
   slug: string;
@@ -2103,6 +2151,605 @@ export const TEMPLATES: TemplateMeta[] = [
       "logistics-coordinator", "material-handler", "stock-controller", "warehouse-manager",
     ],
     suggestedIndustries: ["warehousing", "supply-chain", "logistics"],
+  },
+
+
+  // ════════════ Design System kit (3) — 2026-06-10: 40 new vertical/niche templates ════════════
+
+  {
+    slug: "baker-pastry", name: "Baker Pastry",
+    description: "Warm flour cream + cocoa + wheat/whisk motif + artisan serif. For bakers, pastry chefs & cake decorators.",
+    category: "culinary", component: BakerPastry,
+    atsSafe: true, supportsPhoto: false,
+    addedAt: "2026-06-10T10:00:00.000Z",
+    suggestedRoles: [
+      "baker", "pastry-chef", "head-baker", "artisan-baker", "cake-decorator",
+      "chocolatier", "patissier", "bakery-manager", "bread-baker", "dessert-chef",
+    ],
+    suggestedIndustries: ["bakery", "pastry", "food-service"],
+    themes: ["sand", "wine", "ivory"],
+  },
+
+  {
+    slug: "bank-finance-ops", name: "Bank Finance Ops",
+    description: "Crisp white + forest green + gold pinstripe + ledger-style rows. For bank branch & finance operations staff.",
+    category: "finance", component: BankFinanceOps,
+    atsSafe: true, supportsPhoto: true,
+    addedAt: "2026-06-10T10:01:00.000Z",
+    suggestedRoles: [
+      "bank-teller", "loan-officer", "mortgage-advisor", "branch-manager",
+      "personal-banker", "credit-analyst", "underwriter", "finance-operations-analyst",
+      "accounts-payable-specialist", "payroll-specialist", "bookkeeper",
+    ],
+    suggestedIndustries: ["banking", "finance-operations", "financial-services"],
+    themes: ["forest", "sand", "ivory"],
+  },
+
+  {
+    slug: "concierge-luxe", name: "Concierge Luxe",
+    description: "Midnight teal + champagne + key motif + refined serif + service list. For concierges & private service.",
+    category: "hospitality-elegant", component: ConciergeLuxe,
+    atsSafe: false, supportsPhoto: false,
+    addedAt: "2026-06-10T10:02:00.000Z",
+    suggestedRoles: [
+      "concierge", "head-concierge", "hotel-concierge", "butler", "private-butler",
+      "guest-relations-manager", "guest-services-agent", "vip-services-coordinator",
+      "lifestyle-manager", "residence-concierge",
+    ],
+    suggestedIndustries: ["luxury-hospitality", "private-service", "hotels"],
+    themes: ["midnight", "forest", "sand"],
+  },
+
+  {
+    slug: "courier-route", name: "Courier Route",
+    description: "Navy + amber route-map pins + dashed delivery timeline + record tiles. For drivers & last-mile couriers.",
+    category: "logistics", component: CourierRoute,
+    atsSafe: true, supportsPhoto: false,
+    addedAt: "2026-06-10T10:03:00.000Z",
+    suggestedRoles: [
+      "delivery-driver", "courier", "van-driver", "truck-driver", "cdl-driver",
+      "rideshare-driver", "last-mile-driver", "route-driver", "bike-courier",
+      "food-delivery-driver", "chauffeur",
+    ],
+    suggestedIndustries: ["delivery", "logistics", "transportation"],
+    themes: ["navy", "sand"],
+  },
+
+  {
+    slug: "cyber-gradient-iso", name: "Cyber Gradient Iso",
+    description: "Violet→cyan gradient sidebar + isometric security line-art + white content cards. Modern light cyber look.",
+    category: "cybersecurity", component: CyberGradientIso,
+    atsSafe: false, supportsPhoto: true,
+    addedAt: "2026-06-10T10:04:00.000Z",
+    suggestedRoles: [
+      "cybersecurity-specialist", "security-analyst", "it-security-analyst",
+      "network-security-engineer", "cloud-security-engineer", "grc-analyst",
+      "vulnerability-analyst", "threat-intelligence-analyst",
+    ],
+    suggestedIndustries: ["cybersecurity", "information-security", "technology"],
+    themes: ["plum", "sky"],
+  },
+
+  {
+    slug: "cyber-shield-light", name: "Cyber Shield Light",
+    description: "Sky-blue + white rounded card + neon photo ring + shield/lock illustration + gradient bars. Friendly light cyber look.",
+    category: "cybersecurity", component: CyberShieldLight,
+    atsSafe: true, supportsPhoto: true,
+    addedAt: "2026-06-10T10:05:00.000Z",
+    suggestedRoles: [
+      "junior-cybersecurity-analyst", "soc-analyst-tier1", "security-operations-analyst",
+      "information-security-officer", "it-auditor", "compliance-analyst-security",
+      "security-administrator", "identity-access-analyst",
+    ],
+    suggestedIndustries: ["cybersecurity", "it-security", "technology"],
+    themes: ["sky", "navy", "ivory"],
+  },
+
+  {
+    slug: "data-admin-mono", name: "Data Admin Mono",
+    description: "White + big black sans name + circle photo + thin teal rules. Ultra-clean ATS-safe for DBAs & IT ops.",
+    category: "professional", component: DataAdminMono,
+    atsSafe: true, supportsPhoto: true,
+    addedAt: "2026-06-10T10:06:00.000Z",
+    suggestedRoles: [
+      "database-administrator", "dba", "sql-developer", "database-engineer",
+      "data-engineer", "etl-developer", "it-operations-specialist", "systems-analyst",
+      "it-administrator", "middleware-administrator",
+    ],
+    suggestedIndustries: ["data", "it-operations", "technology"],
+    themes: ["slate", "sky", "ivory"],
+  },
+
+  {
+    slug: "devops-pipeline", name: "DevOps Pipeline",
+    description: "Slate + electric green CI/CD pipeline stages + mono accents + metric tiles. For DevOps, SRE & platform engineers.",
+    category: "developer", component: DevOpsPipeline,
+    atsSafe: false, supportsPhoto: false,
+    addedAt: "2026-06-10T10:07:00.000Z",
+    suggestedRoles: [
+      "devops-engineer", "site-reliability-engineer", "sre", "platform-engineer",
+      "cloud-engineer", "infrastructure-developer", "kubernetes-engineer",
+      "ci-cd-engineer", "release-engineer", "automation-engineer",
+    ],
+    suggestedIndustries: ["devops", "cloud", "infrastructure"],
+    themes: ["charcoal", "midnight", "emerald"],
+  },
+
+  {
+    slug: "dispatcher-radio", name: "Dispatcher Radio",
+    description: "Dark slate + amber radio-wave motif + channel chips + metric tiles. Calm authority for emergency comms.",
+    category: "public-service", component: DispatcherRadio,
+    atsSafe: false, supportsPhoto: false,
+    addedAt: "2026-06-10T10:08:00.000Z",
+    suggestedRoles: [
+      "911-dispatcher", "emergency-dispatcher", "police-dispatcher", "fire-dispatcher",
+      "emergency-call-operator", "control-room-operator", "dispatch-supervisor",
+      "transit-dispatcher", "flight-dispatcher", "security-control-operator",
+    ],
+    suggestedIndustries: ["emergency-services", "public-safety", "operations"],
+    themes: ["charcoal", "midnight"],
+  },
+
+  {
+    slug: "edu-gradient-pills", name: "Edu Gradient Pills",
+    description: "Deep navy + orange→gold gradient pill section bars + glow photo ring + wave footer. Playful-dark for education coordinators.",
+    category: "scholarly", component: EduGradientPills,
+    atsSafe: false, supportsPhoto: true,
+    addedAt: "2026-06-10T10:09:00.000Z",
+    suggestedRoles: [
+      "education-coordinator", "academic-coordinator", "school-administrator",
+      "education-administrator", "curriculum-coordinator", "librarian",
+      "school-librarian", "media-specialist", "education-program-manager",
+      "admissions-coordinator", "student-affairs-coordinator",
+    ],
+    suggestedIndustries: ["education", "academic-administration", "library"],
+    themes: ["midnight", "coral", "sand"],
+  },
+
+  {
+    slug: "esports-stream", name: "Esports Stream",
+    description: "Near-black + electric violet/cyan + hexagon photo + angular stat tiles. For esports players, streamers & casters.",
+    category: "game-dev", component: EsportsStream,
+    atsSafe: false, supportsPhoto: true,
+    addedAt: "2026-06-10T10:10:00.000Z",
+    suggestedRoles: [
+      "esports-player", "professional-gamer", "streamer", "content-creator-gaming",
+      "esports-coach", "shoutcaster", "esports-manager", "gaming-community-manager",
+      "twitch-streamer", "esports-analyst",
+    ],
+    suggestedIndustries: ["esports", "gaming", "streaming"],
+    themes: ["midnight", "plum"],
+  },
+
+  {
+    slug: "flight-instructor-sky", name: "Flight Instructor Sky",
+    description: "Sky gradient + climb-path line + cloud accents + log-book stat tiles. Light look for flight instructors & CFIs.",
+    category: "aviation", component: FlightInstructorSky,
+    atsSafe: true, supportsPhoto: false,
+    addedAt: "2026-06-10T10:11:00.000Z",
+    suggestedRoles: [
+      "flight-instructor", "certified-flight-instructor", "cfi", "cfii",
+      "aviation-instructor", "simulator-instructor", "ground-instructor",
+      "chief-flight-instructor", "aerobatic-instructor",
+    ],
+    suggestedIndustries: ["aviation-training", "flight-school", "aviation"],
+    themes: ["sky", "navy", "ivory"],
+  },
+
+  {
+    slug: "florist-bloom", name: "Florist Bloom",
+    description: "Cream + rose/sage + hand-drawn bloom motifs + arch photo. Soft botanical for florists & garden designers.",
+    category: "beauty", component: FloristBloom,
+    atsSafe: true, supportsPhoto: true,
+    addedAt: "2026-06-10T10:12:00.000Z",
+    suggestedRoles: [
+      "florist", "floral-designer", "garden-designer", "landscape-designer",
+      "landscaper", "gardener", "nursery-worker-plants", "botanical-stylist",
+      "wedding-florist", "plant-care-specialist",
+    ],
+    suggestedIndustries: ["floristry", "gardening", "landscaping"],
+    themes: ["wine", "sage", "ivory"],
+  },
+
+  {
+    slug: "hr-talent-warm", name: "HR Talent Warm",
+    description: "Soft apricot header + rounded photo + people-dots motif + plum accents. Warm people-first look for HR & recruiting.",
+    category: "people-hr", component: HRTalentWarm,
+    atsSafe: true, supportsPhoto: true,
+    addedAt: "2026-06-10T10:13:00.000Z",
+    suggestedRoles: [
+      "hr-manager", "hr-generalist", "hr-specialist", "recruiter", "talent-acquisition-specialist",
+      "talent-acquisition-manager", "hr-coordinator", "people-operations-manager",
+      "hr-business-partner", "recruitment-consultant", "sourcer",
+    ],
+    suggestedIndustries: ["human-resources", "recruiting", "people-operations"],
+    themes: ["plum", "coral", "ivory"],
+  },
+
+  {
+    slug: "holo-premium-light", name: "Holo Premium Light",
+    description: "Soft pearl + holographic pastel sheen corners + thin gold rules + elegant serif. Premium light for senior professionals.",
+    category: "professional", component: HoloPremiumLight,
+    atsSafe: true, supportsPhoto: true,
+    addedAt: "2026-06-10T10:14:00.000Z",
+    suggestedRoles: [
+      "senior-consultant", "management-consultant-premium", "executive-consultant",
+      "director", "vice-president", "senior-manager", "partner-consulting",
+      "strategy-director", "principal-consultant",
+    ],
+    suggestedIndustries: ["consulting", "executive", "professional-services"],
+    themes: ["ivory", "sand", "linen"],
+  },
+
+  {
+    slug: "lab-tech-dark", name: "Lab Tech Dark",
+    description: "Deep teal-black + cyan/violet beaker + specimen grid + glow bars. Dramatic dark for lab professionals.",
+    category: "science", component: LabTechDark,
+    atsSafe: false, supportsPhoto: false,
+    addedAt: "2026-06-10T10:15:00.000Z",
+    suggestedRoles: [
+      "medical-laboratory-scientist", "medical-lab-technician", "pathology-technician",
+      "histotechnologist", "phlebotomist", "clinical-lab-technologist",
+      "quality-control-analyst-lab", "forensic-lab-technician", "chemistry-analyst",
+    ],
+    suggestedIndustries: ["laboratory", "diagnostics", "science"],
+    themes: ["midnight", "emerald"],
+  },
+
+  {
+    slug: "librarian-neon-wave", name: "Librarian Neon Wave",
+    description: "Deep navy + sweeping blue/white wave + neon hexagon photo + bold white sections. For librarians & information specialists.",
+    category: "library", component: LibrarianNeonWave,
+    atsSafe: false, supportsPhoto: true,
+    addedAt: "2026-06-10T10:16:00.000Z",
+    suggestedRoles: [
+      "librarian", "digital-librarian", "archivist", "information-specialist",
+      "cataloging-librarian", "research-librarian", "records-manager",
+      "knowledge-manager", "information-officer", "library-technician",
+    ],
+    suggestedIndustries: ["library", "information-management", "education"],
+    themes: ["navy", "midnight", "sky"],
+  },
+
+  {
+    slug: "medical-neon-hud", name: "Medical Neon HUD",
+    description: "Deep ink + neon cyan corner brackets + glow photo ring + teal hero panel + glowing timeline. Dramatic option for specialist physicians.",
+    category: "medical", component: MedicalNeonHUD,
+    atsSafe: false, supportsPhoto: true,
+    addedAt: "2026-06-10T10:17:00.000Z",
+    suggestedRoles: [
+      "cardiologist", "neurologist", "radiologist", "oncologist", "anesthesiologist",
+      "dermatologist", "gastroenterologist", "pulmonologist", "nephrologist",
+      "endocrinologist", "physician", "medical-specialist", "attending-physician",
+    ],
+    suggestedIndustries: ["medicine", "specialist-medicine", "healthcare"],
+    themes: ["midnight", "navy"],
+  },
+
+  {
+    slug: "mobile-dev-duotone", name: "Mobile Dev Duotone",
+    description: "White + teal/orange duotone + app project cards + KPI footer band. For mobile app developers.",
+    category: "mobile", component: MobileDevDuotone,
+    atsSafe: true, supportsPhoto: true,
+    addedAt: "2026-06-10T10:18:00.000Z",
+    suggestedRoles: [
+      "mobile-app-developer", "mobile-developer", "flutter-developer", "react-native-developer",
+      "ios-developer", "android-developer", "swift-developer", "kotlin-developer",
+      "cross-platform-developer", "mobile-engineer",
+    ],
+    suggestedIndustries: ["mobile-development", "software", "apps"],
+    themes: ["forest", "coral", "ivory"],
+  },
+
+  {
+    slug: "museum-curator", name: "Museum Curator",
+    description: "Gallery white + stone + plinth-frame photo + classical serif + exhibit labels. For curators & conservators.",
+    category: "scholarly", component: MuseumCurator,
+    atsSafe: true, supportsPhoto: true,
+    addedAt: "2026-06-10T10:19:00.000Z",
+    suggestedRoles: [
+      "curator", "museum-curator", "gallery-manager", "art-conservator",
+      "collections-manager", "exhibitions-manager", "art-historian", "registrar-museum",
+      "gallery-director", "museum-educator",
+    ],
+    suggestedIndustries: ["museums", "galleries", "cultural-heritage"],
+    themes: ["sand", "linen", "ivory"],
+  },
+
+  {
+    slug: "neon-circuit-dev", name: "Neon Circuit Dev",
+    description: "Deep blue→violet circuit board + glow name + neon ring dials sidebar + white panel. Bold dark for full-stack devs.",
+    category: "developer", component: NeonCircuitDev,
+    atsSafe: false, supportsPhoto: false,
+    addedAt: "2026-06-10T10:20:00.000Z",
+    suggestedRoles: [
+      "full-stack-engineer", "javascript-engineer", "mern-developer", "mean-developer",
+      "web-application-developer", "senior-full-stack-developer", "react-node-developer",
+    ],
+    suggestedIndustries: ["software", "web-development", "technology"],
+    themes: ["midnight", "navy", "plum"],
+  },
+
+  {
+    slug: "neuro-clean-light", name: "Neuro Clean Light",
+    description: "Ice white card + gradient photo ring + pale blue dot timeline + publications section. Light clinical for physicians.",
+    category: "medical", component: NeuroCleanLight,
+    atsSafe: true, supportsPhoto: true,
+    addedAt: "2026-06-10T10:21:00.000Z",
+    suggestedRoles: [
+      "neurologist-light", "internist", "general-practitioner", "family-physician",
+      "hospitalist", "clinical-researcher", "medical-officer", "resident-physician",
+      "psychiatrist", "pediatrician",
+    ],
+    suggestedIndustries: ["medicine", "healthcare", "clinical-research"],
+    themes: ["sky", "ivory", "slate"],
+  },
+
+  {
+    slug: "nurse-glass-pastel", name: "Nurse Glass Pastel",
+    description: "Icy pastel blue + glassmorphism card + floating orbs/capsule + donut dials. Soft modern look for nursing.",
+    category: "nursing", component: NurseGlassPastel,
+    atsSafe: false, supportsPhoto: true,
+    addedAt: "2026-06-10T10:22:00.000Z",
+    suggestedRoles: [
+      "nurse-practitioner", "registered-nurse-np", "family-nurse-practitioner",
+      "clinical-nurse", "pediatric-nurse-practitioner", "acute-care-np",
+      "physician-assistant", "medical-assistant", "clinical-officer",
+    ],
+    suggestedIndustries: ["nursing", "healthcare", "clinical-care"],
+    themes: ["sky", "ivory"],
+  },
+
+  {
+    slug: "nursery-meadow", name: "Nursery Meadow",
+    description: "White + layered green/yellow meadow waves + rounded yellow photo frame + daisies + smiling sun. For nursery & early years.",
+    category: "childcare", component: NurseryMeadow,
+    atsSafe: true, supportsPhoto: true,
+    addedAt: "2026-06-10T10:23:00.000Z",
+    suggestedRoles: [
+      "nursery-assistant", "nursery-practitioner", "nursery-teacher",
+      "early-years-assistant", "daycare-teacher", "preschool-assistant",
+      "playgroup-leader", "creche-assistant",
+    ],
+    suggestedIndustries: ["childcare", "early-education", "nursery"],
+    themes: ["forest", "sand", "ivory"],
+  },
+
+  {
+    slug: "optometrist-vision", name: "Optometrist Vision",
+    description: "White + iris blue/violet + eye/lens motif + acuity-chart accent. For optometrists & eye-care staff.",
+    category: "medical", component: OptometristVision,
+    atsSafe: true, supportsPhoto: false,
+    addedAt: "2026-06-10T10:24:00.000Z",
+    suggestedRoles: [
+      "optometrist", "optician", "dispensing-optician", "ophthalmic-technician",
+      "ophthalmologist", "optical-assistant", "vision-therapist", "contact-lens-specialist",
+    ],
+    suggestedIndustries: ["eye-care", "optometry", "healthcare"],
+    themes: ["sky", "plum", "ivory"],
+  },
+
+  {
+    slug: "paralegal-brief", name: "Paralegal Brief",
+    description: "White + oxblood + ruled brief-document margin line + case-file tabs. Crisp legal-support look.",
+    category: "legal", component: ParalegalBrief,
+    atsSafe: true, supportsPhoto: false,
+    addedAt: "2026-06-10T10:25:00.000Z",
+    suggestedRoles: [
+      "paralegal", "senior-paralegal", "legal-assistant", "legal-secretary",
+      "litigation-paralegal", "corporate-paralegal", "court-clerk", "law-clerk",
+      "legal-administrator", "compliance-assistant",
+    ],
+    suggestedIndustries: ["legal", "legal-support", "law"],
+    themes: ["wine", "slate", "ivory"],
+  },
+
+  {
+    slug: "paramedic-pulse", name: "Paramedic Pulse",
+    description: "Navy + emergency red + star-of-life + pulse line + readiness chips. Bold urgent look for EMS.",
+    category: "medical", component: ParamedicPulse,
+    atsSafe: true, supportsPhoto: false,
+    addedAt: "2026-06-10T10:26:00.000Z",
+    suggestedRoles: [
+      "paramedic", "emt", "emergency-medical-technician", "ambulance-technician",
+      "first-responder", "emergency-responder", "flight-paramedic", "er-technician",
+      "firefighter-emt", "rescue-technician",
+    ],
+    suggestedIndustries: ["emergency-services", "ems", "healthcare"],
+    themes: ["navy", "wine"],
+  },
+
+  {
+    slug: "photo-real-estate", name: "Photo Real Estate",
+    description: "White + charcoal + sky accent + viewfinder corner frame + property-grid shoots. For property & aerial photographers.",
+    category: "photography", component: PhotoRealEstate,
+    atsSafe: true, supportsPhoto: false,
+    addedAt: "2026-06-10T10:27:00.000Z",
+    suggestedRoles: [
+      "real-estate-photographer", "architecture-photographer", "interior-photographer",
+      "drone-photographer", "drone-operator", "property-videographer",
+      "virtual-tour-photographer", "matterport-technician",
+    ],
+    suggestedIndustries: ["photography", "real-estate-media", "drone-services"],
+    themes: ["slate", "sky", "ivory"],
+  },
+
+  {
+    slug: "security-shield", name: "Security Shield",
+    description: "Charcoal + steel blue + shield badge + vigilance chips. For security guards & loss prevention.",
+    category: "public-service", component: SecurityShield,
+    atsSafe: true, supportsPhoto: false,
+    addedAt: "2026-06-10T10:28:00.000Z",
+    suggestedRoles: [
+      "security-guard", "security-officer", "loss-prevention-officer", "surveillance-operator",
+      "corporate-security-officer", "event-security", "campus-security", "armed-security-officer",
+      "security-supervisor", "patrol-officer",
+    ],
+    suggestedIndustries: ["security", "protective-services", "facilities"],
+    themes: ["charcoal", "navy"],
+  },
+
+  {
+    slug: "skill-radar-navy", name: "Skill Radar Navy",
+    description: "Navy sidebar + circle photo + pentagon radar skill chart + geometric accents. Infographic look for web developers.",
+    category: "developer", component: SkillRadarNavy,
+    atsSafe: false, supportsPhoto: true,
+    addedAt: "2026-06-10T10:29:00.000Z",
+    suggestedRoles: [
+      "frontend-developer", "front-end-developer", "web-developer", "junior-web-developer",
+      "javascript-developer", "react-developer", "vue-developer", "ui-developer",
+      "html-css-developer", "web-designer-developer",
+    ],
+    suggestedIndustries: ["web-development", "software", "technology"],
+    themes: ["navy", "coral", "sand"],
+  },
+
+  {
+    slug: "social-worker-bridge", name: "Social Worker Bridge",
+    description: "Warm white + dusty blue + terracotta + bridge/connection motif. For social workers & case managers.",
+    category: "nonprofit", component: SocialWorkerBridge,
+    atsSafe: true, supportsPhoto: false,
+    addedAt: "2026-06-10T10:30:00.000Z",
+    suggestedRoles: [
+      "social-worker", "licensed-clinical-social-worker", "case-manager", "caseworker",
+      "child-welfare-worker", "school-social-worker", "medical-social-worker",
+      "community-outreach-worker", "family-support-worker", "youth-worker",
+    ],
+    suggestedIndustries: ["social-services", "community", "welfare"],
+    themes: ["sky", "coral", "ivory"],
+  },
+
+  {
+    slug: "sports-coach-field", name: "Sports Coach Field",
+    description: "Pitch-green header with tactic-board arrows + stat tiles + badge chips. For sports coaches & PE teachers.",
+    category: "fitness", component: SportsCoachField,
+    atsSafe: true, supportsPhoto: false,
+    addedAt: "2026-06-10T10:31:00.000Z",
+    suggestedRoles: [
+      "sports-coach-team", "football-coach", "soccer-coach", "basketball-coach",
+      "pe-teacher", "physical-education-teacher", "athletic-director",
+      "team-manager-sports", "youth-coach", "swimming-coach", "tennis-coach",
+    ],
+    suggestedIndustries: ["sports", "coaching", "education"],
+    themes: ["forest", "midnight"],
+  },
+
+  {
+    slug: "synthwave-grid", name: "Synthwave Grid",
+    description: "Black→sunset horizon + neon pink perspective grid + glow photo ring + white content cards. Retro-futuristic for UI designers.",
+    category: "creative", component: SynthwaveGrid,
+    atsSafe: false, supportsPhoto: true,
+    addedAt: "2026-06-10T10:32:00.000Z",
+    suggestedRoles: [
+      "ui-designer", "visual-designer", "digital-designer", "web-designer",
+      "digital-artist", "creative-technologist", "motion-designer", "3d-artist",
+      "brand-designer", "graphic-designer-digital",
+    ],
+    suggestedIndustries: ["design", "digital-art", "creative"],
+    themes: ["midnight", "plum", "wine"],
+  },
+
+  {
+    slug: "tattoo-ink", name: "Tattoo Ink",
+    description: "Black + parchment + gold old-school banner + ink flourish. Bold editorial for tattoo & studio artists.",
+    category: "beauty", component: TattooInk,
+    atsSafe: false, supportsPhoto: false,
+    addedAt: "2026-06-10T10:33:00.000Z",
+    suggestedRoles: [
+      "tattoo-artist", "tattooist", "piercer", "body-piercer", "permanent-makeup-artist",
+      "tattoo-apprentice", "studio-artist", "flash-artist",
+    ],
+    suggestedIndustries: ["tattoo", "body-art", "studio"],
+    themes: ["charcoal", "midnight", "wine"],
+  },
+
+  {
+    slug: "teacher-sunshine", name: "Teacher Sunshine",
+    description: "Warm cream + sunny yellow/sky waves + sun-ray photo ring + crayon chips. Light playful for primary teachers.",
+    category: "education-warm", component: TeacherSunshine,
+    atsSafe: true, supportsPhoto: true,
+    addedAt: "2026-06-10T10:34:00.000Z",
+    suggestedRoles: [
+      "primary-school-teacher", "elementary-teacher", "primary-teacher",
+      "grade-school-teacher", "reception-teacher", "year-one-teacher",
+      "elementary-school-teacher", "junior-school-teacher",
+    ],
+    suggestedIndustries: ["primary-education", "education", "teaching"],
+    themes: ["sand", "sky", "ivory"],
+  },
+
+  {
+    slug: "teal-code-timeline", name: "Teal Code Timeline",
+    description: "Teal header band + circle photo + code watermarks + dot timeline + skill bars + footer contact band. ATS-safe dev look.",
+    category: "developer", component: TealCodeTimeline,
+    atsSafe: true, supportsPhoto: true,
+    addedAt: "2026-06-10T10:35:00.000Z",
+    suggestedRoles: [
+      "senior-frontend-developer", "fullstack-developer", "full-stack-developer",
+      "software-engineer", "web-engineer", "angular-developer", "typescript-developer",
+      "node-developer", "php-developer", "wordpress-developer",
+    ],
+    suggestedIndustries: ["software", "web-development", "technology"],
+    themes: ["forest", "sky", "slate"],
+  },
+
+  {
+    slug: "translator-global", name: "Translator Global",
+    description: "White + indigo + globe/speech-bubble motif + language proficiency bars. For translators & interpreters.",
+    category: "linguist", component: TranslatorGlobal,
+    atsSafe: true, supportsPhoto: false,
+    addedAt: "2026-06-10T10:36:00.000Z",
+    suggestedRoles: [
+      "translator", "interpreter", "localization-specialist", "localization-manager",
+      "conference-interpreter", "medical-interpreter", "legal-translator",
+      "subtitler", "transcreation-specialist", "bilingual-coordinator",
+    ],
+    suggestedIndustries: ["translation", "localization", "language-services"],
+    themes: ["navy", "sky", "ivory"],
+  },
+
+  {
+    slug: "utility-lineworker", name: "Utility Lineworker",
+    description: "Slate blue + high-vis yellow + power-line motif + safety stripe. For lineworkers & utility field crew.",
+    category: "trades-industrial", component: UtilityLineworker,
+    atsSafe: true, supportsPhoto: false,
+    addedAt: "2026-06-10T10:37:00.000Z",
+    suggestedRoles: [
+      "lineworker", "lineman", "power-line-technician", "utility-technician",
+      "cable-technician", "telecom-field-technician", "fiber-optic-technician",
+      "meter-technician", "substation-technician", "utility-locator",
+    ],
+    suggestedIndustries: ["utilities", "power", "telecommunications"],
+    themes: ["slate", "navy"],
+  },
+
+  {
+    slug: "vet-tech-paws", name: "Vet Tech Paws",
+    description: "Soft cream + teal + paw-print trail + organic blob photo + care chips. Warm look for veterinary support.",
+    category: "veterinary", component: VetTechPaws,
+    atsSafe: true, supportsPhoto: true,
+    addedAt: "2026-06-10T10:38:00.000Z",
+    suggestedRoles: [
+      "veterinary-technician", "vet-tech", "veterinary-nurse", "veterinary-assistant",
+      "animal-care-technician", "kennel-technician", "animal-shelter-worker",
+      "dog-groomer", "pet-sitter", "zookeeper-assistant",
+    ],
+    suggestedIndustries: ["veterinary", "animal-care", "pet-services"],
+    themes: ["forest", "coral", "ivory"],
+  },
+
+  {
+    slug: "warm-minimal-dials", name: "Warm Minimal Dials",
+    description: "Cream + terracotta/sage + big serif name + donut percentage dials + dot timeline. Warm infographic for generalist tech.",
+    category: "developer", component: WarmMinimalDials,
+    atsSafe: false, supportsPhoto: true,
+    addedAt: "2026-06-10T10:39:00.000Z",
+    suggestedRoles: [
+      "full-stack-developer-warm", "software-developer-generalist", "web-developer-freelance",
+      "freelance-developer", "creative-developer", "indie-developer", "consultant-developer",
+    ],
+    suggestedIndustries: ["software", "freelance", "technology"],
+    themes: ["sand", "linen", "ivory"],
   },
 
 ];
