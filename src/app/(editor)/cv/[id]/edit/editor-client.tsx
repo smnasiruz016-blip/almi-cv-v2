@@ -27,6 +27,7 @@ import { useToast } from "@/components/ui/Toast";
 import type { CVData } from "@/lib/cv-types";
 import { getTemplate } from "@/lib/templates";
 import { isBatch3Slug, toCDShape } from "@/lib/cd-adapter";
+import { SAMPLE_CV_DATA, isBlankCV } from "@/lib/cv-sample";
 import { RestoreCVModal } from "./restore-modal";
 import { TailoredBanner } from "./tailored-banner";
 
@@ -348,6 +349,27 @@ export function EditorClient({
           <p className="print-hide mb-3 text-xs uppercase tracking-widest text-plum-soft">
             Live preview · A4
           </p>
+          {/* Blank-CV escape hatch. New CVs and never-touched drafts are
+           *  seeded server-side, but a CV the user has edited down to empty
+           *  (isDraft already false) is intentionally not auto-refilled —
+           *  that would fight a deliberate clear and re-appear on every
+           *  reload. Offer an explicit one-click fill instead. */}
+          {isBlankCV(cvData) && (
+            <div className="print-hide mb-4 w-full max-w-[600px] rounded-lg border border-plum/15 bg-white px-4 py-3 text-center">
+              <p className="mb-2 text-sm text-plum-soft">
+                This CV is empty. Load the example layout to see the full
+                design, then edit the text.
+              </p>
+              <button
+                type="button"
+                onClick={() => setCvData(SAMPLE_CV_DATA)}
+                className="inline-flex items-center gap-1.5 rounded-md bg-plum px-3 py-1.5 text-sm font-medium text-white hover:bg-plum/90"
+              >
+                <Sparkles className="h-3.5 w-3.5" />
+                Load example layout
+              </button>
+            </div>
+          )}
           <div className="print-target w-full max-w-[600px]">
             {/* Batch 3 templates consume CD's pseudo-CVData shape; adapt
              *  at the boundary. Batch 1+2 templates take CVData directly. */}
