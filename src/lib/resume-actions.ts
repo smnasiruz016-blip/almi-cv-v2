@@ -12,6 +12,7 @@ import {
 import { userCanAccessTier } from "@/lib/billing/template-access";
 import { getTemplate, isKnownTemplate } from "@/lib/templates";
 import type { CVData, LanguageCode } from "@/lib/cv-types";
+import { SAMPLE_CV_DATA } from "@/lib/cv-sample";
 import type { TranslatedCV } from "@/lib/ai/translate-cv-shared";
 import type { Prisma } from "@prisma/client";
 
@@ -98,12 +99,19 @@ export async function createResume(
     }
   }
 
-  // Merge precedence: seed > empty skeleton. The seed comes from
-  // parsedFields (PR #52 vision parse). Anything the parser couldn't
-  // extract stays empty in the seed, which means the section gets
-  // hidden in NeutralDefault — the user sees only what the PNG
-  // actually showed, no transcribed dummy data.
-  const seeded = seed ? mergeSeedIntoSkeleton(EMPTY_CV_DATA, seed) : EMPTY_CV_DATA;
+  // Two creation paths:
+  //   • PNG-parse path (seed present): merge the parsed fields into an
+  //     EMPTY skeleton. Sections the parser couldn't extract stay empty —
+  //     the user sees only what the PNG actually showed, never dummy text
+  //     overlaid on a real import.
+  //   • Gallery path (no seed): start from complete, editable SAMPLE
+  //     content so the editor opens on the same finished design the
+  //     gallery shows. The user edits the text in place. Without this a
+  //     fresh CV rendered as empty section boxes, which read as a broken
+  //     template next to its fully-populated thumbnail.
+  const seeded = seed
+    ? mergeSeedIntoSkeleton(EMPTY_CV_DATA, seed)
+    : SAMPLE_CV_DATA;
 
   const resume = await prisma.resume.create({
     data: {
