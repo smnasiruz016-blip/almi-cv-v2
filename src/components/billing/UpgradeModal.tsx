@@ -20,7 +20,7 @@ const COPY: Record<Props["reason"], { title: string; default: string }> = {
   CV_LIMIT_REACHED: {
     title: "CV limit reached",
     default:
-      "Free plan is limited to 3 CVs. Upgrade to Pro to create up to 10 CVs and unlock every premium template.",
+      "Free plan is limited to 3 CVs. Upgrade to Pro for unlimited CVs and unlock every premium template.",
   },
   PRO_REQUIRED: {
     title: "Pro feature",
@@ -30,7 +30,7 @@ const COPY: Record<Props["reason"], { title: string; default: string }> = {
 
 const PERKS = [
   "Unlimited AI (rewrite, tailor, summary, cover letters, chat)",
-  "Up to 10 CVs",
+  "Unlimited CVs",
   "All premium templates",
   "AI Translator + Interview Prep",
 ];
