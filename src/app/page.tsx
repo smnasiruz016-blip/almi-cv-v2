@@ -1,10 +1,9 @@
 import Link from "next/link";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight, Check, ShieldCheck, Mic, LayoutTemplate, Zap } from "lucide-react";
 import { Footer } from "@/components/footer";
 import { HeroPreview } from "@/components/hero-preview";
 import { Container } from "@/components/ui/container";
 import { Section } from "@/components/ui/section";
-import { Badge } from "@/components/ui/badge";
 import { getCurrentUser } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 import { isBillingEnabled, getUserPlan } from "@/lib/billing/plans";
@@ -14,21 +13,19 @@ import {
   type TemplateMeta,
 } from "@/components/templates/template-registry";
 import { CVPreview } from "@/components/templates/CVPreview";
-import { NewsletterCard } from "@/components/newsletter/NewsletterCard";
 import { SiteHeader } from "@/components/site-header";
 import { PricingClient } from "@/app/pricing/pricing-client";
 import type { Metadata } from "next";
 
 // Hourly ISR — admin upload action revalidates / via revalidatePath()
-// for faster cache busting after a new batch lands. Home queries:
-// getLatestTemplatesForHome (30) + getUserPlan if logged in.
+// for faster cache busting after a new batch lands.
 export const revalidate = 3600;
 
-// SEO meta for the homepage (previously inherited the generic root-layout
-// title). Keyword-led, brand once via " · AlmiCV"; OG/Twitter mirror it.
-const HOME_TITLE = "Free CV & Resume Builder — ATS Score Included · AlmiCV";
+// SEO from AlmiCV_Page_Copy_v1.md. Layout sets a plain `title` (no template),
+// so this string fully replaces it — no double-brand suffix.
+const HOME_TITLE = "AI Resume Builder with Real ATS Score | AlmiCV";
 const HOME_DESC =
-  "Build a professional, ATS-ready CV free in any language. Premium templates, AI writing that keeps your voice, and a live ATS score that tells you when you're ready. Pro from $7/mo.";
+  "Build a CV that beats the filter. Premium templates, AI writing that keeps your voice, and a real ATS score that tells you when you're ready. Start free — Pro is half what other builders charge.";
 
 export const metadata: Metadata = {
   title: HOME_TITLE,
@@ -38,52 +35,85 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://almicv.almiworld.com" },
 };
 
-type TrustStat = {
-  value: string;
-  label: string;
-  href?: string;
-};
+// One primary CTA, repeated down the page (per the copy spec).
+const CTA_LABEL = "Build my CV — free";
 
-// Numbers removed from TrustSection per PR #51 founder feedback —
-// static counts age poorly when scale grows daily. Replaced with
-// non-numeric phrasing.
-const TRUST_STATS: TrustStat[] = [
-  { value: "942 sources", label: "Trusted job boards" },
-  { value: "Designs", label: "Across many roles", href: "/templates" },
-  { value: "Multilingual", label: "Built-in translation" },
+// Honest trust statements (no invented numbers/reviews) — from the copy.
+const TRUST = [
+  "Real ATS score — not a vanity rating",
+  "AI that keeps your voice — not robotic filler",
+  "Premium templates, recruiter-friendly",
+  "Export to PDF, ready to send",
+];
+
+const BENEFITS = [
+  {
+    icon: ShieldCheck,
+    title: "Beat the filter",
+    body: "A real ATS score on every CV, so you know it'll reach a human — not a reject pile.",
+  },
+  {
+    icon: Mic,
+    title: "Sound like you, only sharper",
+    body: "AI writing that strengthens your words without erasing your voice. No generic, copy-paste filler.",
+  },
+  {
+    icon: LayoutTemplate,
+    title: "Look the part",
+    body: "Premium, recruiter-friendly templates with a live editor. Edit and see it change instantly.",
+  },
+  {
+    icon: Zap,
+    title: "Ready in minutes, not days",
+    body: "Build unlimited CVs, tailored to each job, in the time it used to take to format one.",
+  },
 ];
 
 const STEPS = [
   {
     n: 1,
     title: "Pick a template",
-    body: "Six free classics with full color and layout control. Or unlock the Premium library — role-specific designs for healthcare, trades, hospitality, customer service, and tech.",
+    body: "Choose a premium, recruiter-tested design.",
   },
   {
     n: 2,
-    title: "Tell your story",
-    body: "Editor updates as you type. AI helper rewrites in your voice when you're stuck.",
+    title: "Write with AI",
+    body: "Let AI sharpen each line while keeping your voice — and edit live.",
   },
   {
     n: 3,
-    title: "Score and ship",
-    body: "Live ATS score tells you when you're ready. Export PDF. Send. Get the call.",
+    title: "Check your ATS score",
+    body: "See your real score, fix what's flagged, and export when it says you're ready.",
+  },
+];
+
+const FAQS = [
+  {
+    q: "Is the ATS score real?",
+    a: "Yes — we score your CV against the criteria applicant-tracking software actually uses, and show you what to fix. It's a practical check, not a vanity number.",
+  },
+  {
+    q: "Will the AI make my CV sound generic?",
+    a: "No. The AI sharpens your words and keeps your voice — it doesn't replace you with template filler.",
+  },
+  {
+    q: "Can I make more than one CV?",
+    a: "On Pro, unlimited — so you can tailor a version for every job, which is exactly what beats the filter.",
+  },
+  {
+    q: "Can I cancel anytime?",
+    a: "Yes. Monthly, no lock-in, no hidden fees.",
   },
 ];
 
 export default async function HomePage() {
   const user = await getCurrentUser();
   const isLoggedIn = Boolean(user);
-  // PNG sunset: home strip now sources from the registry (static), no DB
-  // hit. Show the 12 newest templates (by addedAt) so new visitors see the
-  // latest, most polished designs first. Registry array order is untouched,
-  // so suggestTemplate() role priority is unaffected.
+
   const showcaseTemplates: TemplateMeta[] = [...TEMPLATES]
     .sort((a, b) => getAddedAt(b).localeCompare(getAddedAt(a)))
     .slice(0, 12);
 
-  // Pricing cards need the same data the /pricing page resolves — only
-  // worth the DB hit when a user is actually logged in.
   let currentPlan: "FREE" | "PRO_MONTHLY" | "PRO_YEARLY" = "FREE";
   if (user) {
     const u = await prisma.user.findUnique({
@@ -102,41 +132,51 @@ export default async function HomePage() {
     <main>
       <SiteHeader isLoggedIn={isLoggedIn} />
       <HeroSection isLoggedIn={isLoggedIn} />
-      <VideoSection />
-      <TemplatesShowcaseSection
-        templates={showcaseTemplates}
-        isLoggedIn={isLoggedIn}
-      />
-      <TrustSection stats={TRUST_STATS} />
+      <TrustBar />
+      <ProblemSection />
+      <BenefitsSection />
+      <TemplatesShowcaseSection templates={showcaseTemplates} isLoggedIn={isLoggedIn} />
+      <HowItWorksSection />
       <PricingSection
         isLoggedIn={isLoggedIn}
         currentPlan={currentPlan}
         billingEnabled={isBillingEnabled()}
       />
-      <HowItWorksSection />
+      <FAQSection />
       <FinalCTASection isLoggedIn={isLoggedIn} />
-      <NewsletterSection />
       <Footer />
     </main>
   );
 }
 
-function NewsletterSection() {
+// The single primary CTA, reused everywhere. Anonymous → signup; logged-in →
+// dashboard (the "build" intent still lands them where they create a CV).
+function PrimaryCTA({
+  isLoggedIn,
+  className,
+}: {
+  isLoggedIn: boolean;
+  className?: string;
+}) {
+  const href = isLoggedIn ? "/dashboard" : "/signup";
+  const label = isLoggedIn ? "Open dashboard" : CTA_LABEL;
   return (
-    <Section className="bg-cream-soft py-16">
-      <Container>
-        <NewsletterCard />
-      </Container>
-    </Section>
+    <Link
+      href={href}
+      className={
+        "inline-flex min-h-[44px] items-center justify-center gap-2 rounded-pill bg-coral px-6 py-3 text-sm font-semibold text-white shadow-warm-card transition hover:-translate-y-0.5 hover:bg-coral-deep focus:outline-none focus:ring-4 focus:ring-coral/30 " +
+        (className ?? "")
+      }
+    >
+      {label}
+      <ArrowRight className="h-4 w-4" />
+    </Link>
   );
 }
 
 function HeroSection({ isLoggedIn }: { isLoggedIn: boolean }) {
-  const href = isLoggedIn ? "/dashboard" : "/signup";
-  const label = isLoggedIn ? "Open dashboard" : "Get started — free";
-
   return (
-    <Section className="relative isolate overflow-hidden bg-gradient-to-br from-cream via-cream to-peach pt-20 pb-30 md:min-h-[600px]">
+    <Section className="relative isolate overflow-hidden bg-gradient-to-br from-cream via-cream to-peach pt-20 pb-28 md:min-h-[600px]">
       <div
         aria-hidden
         className="pointer-events-none absolute -top-10 -right-10 z-0 h-96 w-96 rounded-full bg-coral/25 blur-3xl"
@@ -148,34 +188,22 @@ function HeroSection({ isLoggedIn }: { isLoggedIn: boolean }) {
       <Container>
         <div className="relative z-10 grid items-center gap-12 md:grid-cols-2">
           <div>
-            <Badge variant="gold" className="bg-gold/15 text-[#8A5F1F]">
-              <Sparkles className="h-3.5 w-3.5" />
-              Built to beat the resume robots — not your budget
-            </Badge>
-            <h1 className="mt-8 max-w-xl text-balance text-5xl font-medium leading-[1.05] text-plum lg:text-6xl xl:text-7xl">
-              A CV that looks like it was{" "}
-              <span className="text-coral">designed for you.</span>
+            <h1 className="max-w-xl text-balance text-5xl font-medium leading-[1.05] text-plum lg:text-6xl xl:text-7xl">
+              The CV that gets you{" "}
+              <span className="text-coral">the interview.</span>
             </h1>
             <p className="mt-6 max-w-md text-lg text-plum-soft">
-              Premium templates, a live editor, AI writing that keeps your voice, and a real ATS score that tells you when you&apos;re ready. Start free — and even our Pro plan is half what other builders charge.
+              Most resumes are rejected by software before a human ever reads
+              them. AlmiCV builds a CV that beats the filter — premium
+              templates, AI writing that sounds like <em>you</em>, and a real
+              ATS score that tells you when you&apos;re ready.
             </p>
-            <div className="mt-10 flex flex-wrap items-center gap-3">
-              <Link
-                href={href}
-                className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-pill bg-coral px-5 py-3 text-sm font-semibold text-white shadow-warm-card transition hover:-translate-y-0.5 hover:bg-coral-deep focus:outline-none focus:ring-4 focus:ring-coral/30"
-              >
-                {label}
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-              <Link
-                href="/templates"
-                className="inline-flex min-h-[44px] items-center justify-center rounded-pill border border-plum/20 bg-transparent px-5 py-3 text-sm font-semibold text-plum transition hover:border-plum/40 hover:bg-plum/5 focus:outline-none focus:ring-4 focus:ring-plum/15"
-              >
-                See templates
-              </Link>
+            <div className="mt-10">
+              <PrimaryCTA isLoggedIn={isLoggedIn} />
             </div>
             <p className="mt-5 text-sm text-plum-faint">
-              Free to start · No credit card · 3 CVs included · Pro from just $7/month
+              No card to start. Pro is $7/month — half what other builders
+              charge.
             </p>
           </div>
           <HeroPreview />
@@ -185,44 +213,87 @@ function HeroSection({ isLoggedIn }: { isLoggedIn: boolean }) {
   );
 }
 
-// Tutorial walkthrough — sits between the hero and the templates strip.
-// Privacy-friendly youtube-nocookie embed; responsive 16:9 via a padding-bottom
-// box so it holds ratio without relying on aspect-ratio support.
-function VideoSection() {
+function TrustBar() {
   return (
-    <Section className="bg-cream-soft py-20">
+    <Section className="border-y border-peach/40 bg-cream-soft py-8">
       <Container>
-        <div className="mx-auto max-w-2xl text-center">
-          <Badge variant="mint" className="border-coral/30 bg-coral/15 text-coral-deep">
-            Tutorial
-          </Badge>
-          <h2 className="mt-4 text-4xl text-plum">See how it works.</h2>
-          <p className="mt-4 text-plum-soft">A quick walkthrough of building your CV with AlmiCV.</p>
-        </div>
+        <ul className="grid grid-cols-1 gap-x-8 gap-y-3 text-sm text-plum-soft sm:grid-cols-2 lg:grid-cols-4">
+          {TRUST.map((t) => (
+            <li key={t} className="flex items-start gap-2">
+              <Check className="mt-0.5 h-4 w-4 shrink-0 text-mint" />
+              <span>{t}</span>
+            </li>
+          ))}
+        </ul>
+      </Container>
+    </Section>
+  );
+}
 
-        <div className="mx-auto mt-10 w-full max-w-[820px] overflow-hidden rounded-2xl border border-peach/30 bg-plum/5 shadow-warm-card-hover">
-          <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
-            <iframe
-              className="absolute inset-0 h-full w-full"
-              src="https://www.youtube-nocookie.com/embed/RPNZ3L-SnsU?rel=0"
-              title="See how AlmiCV works — tutorial"
-              loading="lazy"
-              referrerPolicy="strict-origin-when-cross-origin"
-              allow="accelerated-sensors; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen"
-              allowFullScreen
-            />
-          </div>
+// PROBLEM — Problem / Agitate / Solve.
+function ProblemSection() {
+  return (
+    <Section className="bg-cream py-24">
+      <Container>
+        <div className="mx-auto max-w-3xl">
+          <h2 className="text-balance text-4xl font-medium leading-tight text-plum">
+            Your CV isn&apos;t being rejected by people. It&apos;s being
+            rejected by a robot.
+          </h2>
+          <p className="mt-6 text-lg leading-8 text-plum-soft">
+            Before a human sees your application, software (an ATS) scans it —
+            and quietly filters out most CVs for formatting it can&apos;t read
+            or keywords it can&apos;t find. You never hear back. You assume you
+            weren&apos;t good enough. The truth: your CV never made it into the
+            room.
+          </p>
+          <p className="mt-4 text-lg leading-8 text-plum-soft">
+            AlmiCV fixes the part you can&apos;t see. We score your CV the way
+            the software does, show you exactly what&apos;s holding it back, and
+            help you fix it — before you hit send.
+          </p>
         </div>
       </Container>
     </Section>
   );
 }
 
-// PNG sunset: this section used to render 30 most-recent TemplateImage
-// rows from the DB. Now it renders the first 12 templates from the
-// registry — static, no DB hit, identical CSS shape (responsive grid
-// of small card thumbnails). Each card jumps straight to /cv/new for
-// logged-in users or to /signup for anon.
+// BENEFITS — 4 cards, benefit + the pain it kills.
+function BenefitsSection() {
+  return (
+    <Section className="bg-gradient-to-b from-cream to-peach/30 py-24">
+      <Container>
+        <div className="mx-auto max-w-2xl text-center">
+          <h2 className="text-balance text-4xl text-plum">
+            Everything your CV needs to get read.
+          </h2>
+        </div>
+        <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2">
+          {BENEFITS.map((b) => {
+            const Icon = b.icon;
+            return (
+              <div
+                key={b.title}
+                className="rounded-2xl border border-peach/40 bg-white p-7 shadow-warm-card"
+              >
+                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-coral/10 text-coral">
+                  <Icon className="h-5 w-5" />
+                </div>
+                <h3 className="mt-5 text-xl font-semibold text-plum">
+                  {b.title}
+                </h3>
+                <p className="mt-2 text-plum-soft">{b.body}</p>
+              </div>
+            );
+          })}
+        </div>
+      </Container>
+    </Section>
+  );
+}
+
+// Real product imagery (template renders, not stock) — visual proof for the
+// "Look the part / premium templates" benefit.
 function TemplatesShowcaseSection({
   templates,
   isLoggedIn,
@@ -232,14 +303,13 @@ function TemplatesShowcaseSection({
 }) {
   if (templates.length === 0) return null;
   return (
-    <Section className="bg-gradient-to-b from-cream-soft to-peach/40 py-24">
+    <Section className="bg-peach/30 py-24">
       <Container>
         <div className="mx-auto max-w-2xl text-center">
-          <Badge variant="mint" className="border-coral/30 bg-coral/15 text-coral-deep">
-            Templates
-          </Badge>
-          <h2 className="mt-4 text-4xl text-plum">A look for every story.</h2>
-          <p className="mt-4 text-plum-soft">Every template is a story.</p>
+          <h2 className="text-4xl text-plum">Premium, recruiter-friendly templates.</h2>
+          <p className="mt-4 text-plum-soft">
+            Every design reads cleanly — for the software and the human.
+          </p>
         </div>
 
         <div className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 lg:gap-4">
@@ -281,92 +351,14 @@ function TemplatesShowcaseSection({
   );
 }
 
-function TrustSection({ stats }: { stats: TrustStat[] }) {
-  return (
-    <Section className="bg-cream-soft py-18">
-      <Container>
-        <p className="text-center text-sm uppercase tracking-widest text-plum-faint">
-          Built for the world
-        </p>
-        <div className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-3">
-          {stats.map((stat) => {
-            const inner = (
-              <>
-                <p className="font-display text-3xl text-coral">
-                  {stat.value}
-                </p>
-                <p className="mt-2 text-xs uppercase tracking-widest text-plum-soft">
-                  {stat.label}
-                </p>
-              </>
-            );
-            return stat.href ? (
-              <Link
-                key={stat.value}
-                href={stat.href}
-                className="block rounded-xl text-center transition-transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-coral/30"
-              >
-                {inner}
-              </Link>
-            ) : (
-              <div key={stat.value} className="text-center">
-                {inner}
-              </div>
-            );
-          })}
-        </div>
-      </Container>
-    </Section>
-  );
-}
-
-// Pricing cards inlined on home — same PricingClient component the
-// /pricing page renders, called cross-route. If this becomes a common
-// pattern, extract to @/components/pricing/PricingCards and have both
-// pages share it; for one-shot reuse the cross-route import is fine.
-function PricingSection({
-  isLoggedIn,
-  currentPlan,
-  billingEnabled,
-}: {
-  isLoggedIn: boolean;
-  currentPlan: "FREE" | "PRO_MONTHLY" | "PRO_YEARLY";
-  billingEnabled: boolean;
-}) {
+// HOW IT WORKS — 3 steps.
+function HowItWorksSection() {
   return (
     <Section className="bg-cream py-24">
       <Container>
-        <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-balance font-display text-4xl text-plum md:text-5xl">
-            Choose your plan
-          </h2>
-          <p className="mt-3 text-base leading-7 text-plum-soft">
-            Start free. Upgrade when you&apos;re ready for unlimited AI, more
-            CV slots, and every premium template.
-          </p>
-        </div>
-        <div className="mt-10">
-          <PricingClient
-            isLoggedIn={isLoggedIn}
-            currentPlan={currentPlan}
-            billingEnabled={billingEnabled}
-          />
-        </div>
-      </Container>
-    </Section>
-  );
-}
-
-function HowItWorksSection() {
-  return (
-    <Section className="bg-peach/30 py-30">
-      <Container>
         <div className="mx-auto max-w-3xl text-center">
-          <Badge variant="mint" className="bg-mint/20 text-[#0F4A42]">
-            How it works
-          </Badge>
-          <h2 className="mt-4 text-balance text-4xl text-plum">
-            From blank page to interview-ready in 10 minutes.
+          <h2 className="text-balance text-4xl text-plum">
+            Three steps to an interview-ready CV.
           </h2>
         </div>
         <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-3">
@@ -385,32 +377,80 @@ function HowItWorksSection() {
   );
 }
 
-function FinalCTASection({ isLoggedIn }: { isLoggedIn: boolean }) {
-  const href = isLoggedIn ? "/dashboard" : "/signup";
-  const label = isLoggedIn ? "Open dashboard" : "Start your CV — free";
-
+function PricingSection({
+  isLoggedIn,
+  currentPlan,
+  billingEnabled,
+}: {
+  isLoggedIn: boolean;
+  currentPlan: "FREE" | "PRO_MONTHLY" | "PRO_YEARLY";
+  billingEnabled: boolean;
+}) {
   return (
-    <Section className="bg-plum py-30">
+    <Section className="bg-gradient-to-b from-cream to-peach/30 py-24">
+      <Container>
+        <div className="mx-auto max-w-2xl text-center">
+          <h2 className="text-balance font-display text-4xl text-plum md:text-5xl">
+            Start free. Upgrade when you&apos;re ready.
+          </h2>
+          <p className="mt-3 text-base leading-7 text-plum-soft">
+            Build and preview at no cost. Pro is $7/month (or $60/year) for
+            unlimited CVs, full AI features, real ATS scoring, and every premium
+            template.
+          </p>
+        </div>
+        <div className="mt-10">
+          <PricingClient
+            isLoggedIn={isLoggedIn}
+            currentPlan={currentPlan}
+            billingEnabled={billingEnabled}
+          />
+        </div>
+        <p className="mt-8 text-center text-sm text-plum-faint">
+          Half the price of other builders. Cancel anytime. No hidden fees.
+        </p>
+      </Container>
+    </Section>
+  );
+}
+
+function FAQSection() {
+  return (
+    <Section className="bg-cream py-24">
+      <Container>
+        <div className="mx-auto max-w-3xl">
+          <h2 className="text-center text-4xl text-plum">Questions, answered.</h2>
+          <div className="mt-10 space-y-4">
+            {FAQS.map((f) => (
+              <div
+                key={f.q}
+                className="rounded-2xl border border-peach/40 bg-white p-6 shadow-warm-card"
+              >
+                <h3 className="text-lg font-semibold text-plum">{f.q}</h3>
+                <p className="mt-2 text-plum-soft">{f.a}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </Container>
+    </Section>
+  );
+}
+
+function FinalCTASection({ isLoggedIn }: { isLoggedIn: boolean }) {
+  return (
+    <Section className="bg-plum py-28">
       <Container>
         <div className="mx-auto max-w-3xl text-center">
-          <h2 className="text-balance text-5xl font-medium leading-tight text-cream md:text-6xl">
-            Your next chapter starts with a better CV.
+          <h2 className="text-balance text-4xl font-medium leading-tight text-cream md:text-5xl">
+            Stop guessing why you&apos;re not hearing back.
           </h2>
           <p className="mx-auto mt-6 max-w-2xl text-lg text-cream/70">
-            Free to start. Three CVs included. Upgrade to Pro for unlimited AI and every premium template — $7/month with a 7-day free trial.
+            Build a CV that reaches a human — and gets you the interview.
           </p>
           <div className="mt-10 flex justify-center">
-            <Link
-              href={href}
-              className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-pill bg-coral px-5 py-3 text-sm font-semibold text-white shadow-warm-card transition hover:-translate-y-0.5 hover:bg-coral-deep focus:outline-none focus:ring-4 focus:ring-coral/30"
-            >
-              {label}
-              <ArrowRight className="h-4 w-4" />
-            </Link>
+            <PrimaryCTA isLoggedIn={isLoggedIn} />
           </div>
-          <p className="mt-5 text-sm text-cream/50">
-            No credit card. No subscription. No tricks.
-          </p>
         </div>
       </Container>
     </Section>

@@ -25,12 +25,12 @@ export const PLANS: Record<PlanKey, PlanConfig> = {
     templatesAccess: "free_only",
   },
   PRO_MONTHLY: {
-    cvLimit: 10,
+    cvLimit: Infinity, // unlimited CVs on Pro (count >= Infinity is never true)
     aiCallsPerMonth: Infinity,
     templatesAccess: "all",
   },
   PRO_YEARLY: {
-    cvLimit: 10,
+    cvLimit: Infinity, // unlimited CVs on Pro
     aiCallsPerMonth: Infinity,
     templatesAccess: "all",
   },

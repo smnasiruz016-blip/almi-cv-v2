@@ -350,7 +350,7 @@ export function AccountClient({
               CVs created
             </p>
             <p className="mt-1 text-base font-semibold text-plum">
-              {cvCount} of {cvLimit}
+              {Number.isFinite(cvLimit) ? `${cvCount} of ${cvLimit}` : `${cvCount} · Unlimited`}
             </p>
           </div>
           <div className="rounded-xl bg-cream-soft px-4 py-3">

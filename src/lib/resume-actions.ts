@@ -93,7 +93,7 @@ export async function createResume(
         ok: false,
         code: "CV_LIMIT_REACHED",
         error: isFree
-          ? `Free plan is limited to ${limit} CVs. Upgrade to Pro to create up to ${PLANS.PRO_MONTHLY.cvLimit}.`
+          ? `Free plan is limited to ${limit} CVs. Upgrade to Pro for unlimited CVs.`
           : `${PLAN_DISPLAY_NAME[plan]} is limited to ${limit} CVs. Please delete an existing CV to create a new one.`,
       };
     }

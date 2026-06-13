@@ -23,7 +23,7 @@ const FREE_FEATURES = [
 ];
 
 const PRO_FEATURES = [
-  "Up to 10 CVs",
+  "Unlimited CVs",
   "Unlimited AI (rewrite, tailor, summary, cover letters, chat)",
   "All premium templates",
   "AI Translator (8 languages)",
