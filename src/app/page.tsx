@@ -25,7 +25,7 @@ export const revalidate = 3600;
 // so this string fully replaces it — no double-brand suffix.
 const HOME_TITLE = "AI Resume Builder with Real ATS Score | AlmiCV";
 const HOME_DESC =
-  "Build a CV that beats the filter. Premium templates, AI writing that keeps your voice, and a real ATS score that tells you when you're ready. Start free — Pro is $7/month, a fraction of what resume.io and Zety charge.";
+  "Free AI resume builder with a real ATS score. Beat the filter with the right keywords and templates — for $7/mo, no download traps. Build your CV now.";
 
 export const metadata: Metadata = {
   title: HOME_TITLE,
@@ -43,36 +43,36 @@ const TRUST = [
   "A real ATS score — not a vanity number",
   "AI that keeps your voice — never robotic filler",
   "$7/mo flat — no download paywall",
-  "Unlimited CVs, one for every job",
+  "Unlimited CVs — one tailored for every job",
 ];
 
 const BENEFITS = [
   {
     icon: ShieldCheck,
-    title: "Beat the robot",
-    body: "A real ATS score on every CV, so you know it'll reach a human — not vanish into a reject pile.",
+    title: "Beat the ATS filter",
+    body: "A real ATS score on every CV, so you know it'll reach a human, not vanish into a reject pile.",
   },
   {
     icon: Mic,
-    title: "Sound like you — only sharper",
-    body: "AI rewrites weak lines into strong ones — “Managed a team” becomes “Led a team of 8 to deliver X early” — while keeping your voice. No generic filler that screams “AI wrote this.”",
+    title: "AI that sounds like you — only sharper",
+    body: "Our AI resume builder rewrites weak lines into strong ones — “Managed a team” becomes “Led a team of 8 to deliver X early” — while keeping your voice. No generic filler that screams “AI wrote this.”",
   },
   {
     icon: LayoutTemplate,
-    title: "Look like you belong",
+    title: "ATS-friendly resume templates",
     body: "Premium, recruiter-tested templates that pass the ATS and impress the human. Edit live, see it change instantly.",
   },
   {
     icon: Zap,
-    title: "One CV for every job — unlimited",
-    body: "The secret to beating the filter is tailoring each CV to each posting. On Pro, that's unlimited. Most builders charge per download for this. We don't.",
+    title: "Unlimited CVs — one for every job",
+    body: "The secret to beating the filter is tailoring each resume to each posting. On Pro, that's unlimited. Most builders charge per download for this. We don't.",
   },
 ];
 
 const STEPS = [
   {
     n: 1,
-    title: "Pick a template",
+    title: "Pick a resume template",
     body: "Recruiter-tested and ATS-safe.",
   },
   {
@@ -89,24 +89,24 @@ const STEPS = [
 
 const FAQS = [
   {
-    q: "Will AlmiCV actually get me past the ATS?",
-    a: "Yes — we score your CV the way applicant-tracking software does, and show you what to fix, starting with the #1 thing recruiters search: the exact job title.",
+    q: "Will AlmiCV get my resume past the ATS?",
+    a: "Yes — our ATS resume checker scores your CV the way applicant-tracking software does, and shows you what to fix, starting with the #1 keyword recruiters search: the exact job title.",
   },
   {
-    q: "Is it really free to start?",
+    q: "Is AlmiCV really a free resume builder?",
     a: "Yes. Build free. Pro is $7/month — no download paywall, no weekly-billing trick. What you see is what you pay.",
   },
   {
-    q: "How are you so much cheaper than resume.io and Zety?",
-    a: "No tricks, no inflated pricing, no per-download charges. A fair price for a tool that works.",
+    q: "How is AlmiCV cheaper than resume.io and Zety?",
+    a: "No tricks, no inflated pricing, no per-download charges. resume.io runs ~$389/year; AlmiCV Pro is $7/month flat.",
   },
   {
-    q: "Will the AI make me sound generic?",
+    q: "Will the AI make my resume sound generic?",
     a: "Never. It sharpens your words. You stay in control of every line.",
   },
   {
     q: "Can I make a different CV for each job?",
-    a: "Unlimited on Pro — which is exactly how you beat the filter.",
+    a: "Unlimited on Pro — which is exactly how you beat the ATS filter.",
   },
 ];
 
@@ -192,23 +192,28 @@ function HeroSection({ isLoggedIn }: { isLoggedIn: boolean }) {
       <Container>
         <div className="relative z-10 grid items-center gap-12 md:grid-cols-2">
           <div>
-            <h1 className="max-w-xl text-balance text-5xl font-medium leading-[1.05] text-plum lg:text-6xl xl:text-7xl">
+            <h1 className="text-sm font-semibold uppercase tracking-wide text-coral">
+              AI Resume Builder with a Real ATS Score
+            </h1>
+            <p className="mt-3 max-w-xl text-balance text-5xl font-medium leading-[1.05] text-plum lg:text-6xl xl:text-7xl">
               The CV that gets you{" "}
               <span className="text-coral">the interview.</span>
-            </h1>
+            </p>
             <p className="mt-6 max-w-md text-lg text-plum-soft">
-              Right now, a robot is deleting your CV before a human ever reads
-              it. Not because you&apos;re not good enough — because your CV
-              doesn&apos;t speak the machine&apos;s language. AlmiCV fixes that:
-              a real ATS score, the exact keywords recruiters search for, and AI
-              that sharpens your words without erasing your <em>voice</em>.
+              Right now, a robot — an ATS — is deleting your resume before a
+              human ever reads it. Not because you&apos;re not good enough, but
+              because your CV doesn&apos;t speak its language. AlmiCV is the AI
+              resume builder that fixes this: a real ATS score, the exact
+              keywords recruiters search for, and AI that sharpens your words
+              without erasing your <em>voice</em>.
             </p>
             <div className="mt-10">
               <PrimaryCTA isLoggedIn={isLoggedIn} />
             </div>
             <p className="mt-5 text-sm text-plum-faint">
-              Free to start. Pro is $7/month — a third of what resume.io and
-              Zety charge. No download traps. No weekly-billing tricks.
+              Free to start. Pro is $7/month — a fraction of what resume.io
+              (~$30 every 4 weeks, ~$389/year) and Zety charge. No download
+              traps. No weekly-billing tricks.
             </p>
           </div>
           <HeroPreview />
@@ -246,21 +251,22 @@ function ProblemSection() {
             them to a robot you never see.
           </h2>
           <p className="mt-6 text-lg leading-8 text-plum-soft">
-            Here&apos;s what really happens after you hit “apply”: software (an
-            ATS) scans your CV first. If it can&apos;t find the right keywords,
-            or can&apos;t read your formatting, it rejects you — silently. No
-            email. No reason. You assume you weren&apos;t good enough.
+            Here&apos;s what really happens after you hit “apply”: an Applicant
+            Tracking System (ATS) scans your resume first. If it can&apos;t find
+            the right keywords, or can&apos;t read your formatting, it rejects
+            you — silently. No email. No reason. You assume you weren&apos;t good
+            enough.
           </p>
           <p className="mt-4 text-lg leading-8 text-plum-soft">
-            The truth is harsher and easier to fix: your CV never reached a
-            human at all. Around 75% of CVs are filtered out this way before
-            anyone reads them. Every “we went with another candidate” might
-            really mean a robot threw you out in 6 seconds.
+            The truth is harsher and far easier to fix: your CV never reached a
+            human at all. Around 75% of resumes are filtered out by ATS software
+            before anyone reads them. Every “we went with another candidate”
+            might really mean a robot threw you out in 6 seconds.
           </p>
           <p className="mt-4 text-lg leading-8 text-plum-soft">
-            AlmiCV ends the guessing. We score your CV the way the software
-            does, show you exactly what&apos;s killing it, and help you fix it —
-            before you apply.
+            AlmiCV ends the guessing. Our ATS resume checker scores your CV the
+            way the software does, shows you exactly what&apos;s killing it, and
+            helps you fix it — before you apply.
           </p>
         </div>
       </Container>
@@ -275,7 +281,7 @@ function BenefitsSection() {
       <Container>
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-balance text-4xl text-plum">
-            Everything your CV needs to get read.
+            Everything your resume needs to beat the ATS.
           </h2>
         </div>
         <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2">
@@ -316,9 +322,10 @@ function TemplatesShowcaseSection({
     <Section className="bg-peach/30 py-24">
       <Container>
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-4xl text-plum">Premium, recruiter-friendly templates.</h2>
+          <h2 className="text-4xl text-plum">ATS-friendly resume templates.</h2>
           <p className="mt-4 text-plum-soft">
-            Every design reads cleanly — for the software and the human.
+            Premium, recruiter-tested designs that read cleanly — for the ATS
+            software and the human.
           </p>
         </div>
 
@@ -368,7 +375,7 @@ function HowItWorksSection() {
       <Container>
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="text-balance text-4xl text-plum">
-            Three steps to an interview-ready CV.
+            Three steps to an ATS-ready resume.
           </h2>
         </div>
         <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-3">
@@ -404,11 +411,12 @@ function PricingSection({
             Start free. Build and preview at no cost.
           </h2>
           <p className="mt-3 text-base leading-7 text-plum-soft">
-            Pro is $7/month — unlimited CVs, full AI, real ATS scoring, and
-            every premium template. resume.io charges around $30 every 4 weeks
-            (about $389 a year); Zety bills you weekly and locks your download
-            behind a paywall. We charge $7, flat, with no tricks — because
-            we&apos;d rather you stayed for being good than for being trapped.
+            Pro is $7/month (or $60/year): unlimited CVs, full AI, real ATS
+            scoring, and every premium template. resume.io charges around $30
+            every 4 weeks — roughly $389 a year. Zety bills you weekly and locks
+            your download behind a paywall. We charge $7, flat, with no tricks —
+            because we&apos;d rather you stayed for being good than for being
+            trapped.
           </p>
         </div>
         <div className="mt-10">
@@ -459,7 +467,8 @@ function FinalCTASection({ isLoggedIn }: { isLoggedIn: boolean }) {
             Stop letting a robot decide your future in 6 seconds.
           </h2>
           <p className="mx-auto mt-6 max-w-2xl text-lg text-cream/70">
-            Build a CV that reaches a human — and gets you the interview.
+            Build a CV that beats the ATS and reaches a human — and gets you the
+            interview.
           </p>
           <div className="mt-10 flex justify-center">
             <PrimaryCTA isLoggedIn={isLoggedIn} />
