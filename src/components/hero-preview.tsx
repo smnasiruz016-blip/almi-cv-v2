@@ -1,13 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import {
-  animate,
-  motion,
-  useMotionValue,
-  useReducedMotion,
-  useTransform,
-} from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { CheckCircle2, Heart, Sparkles } from "lucide-react";
 
 const RESUME_TIP =
@@ -285,35 +279,9 @@ function PreviewCardContent({ reduce }: { reduce: ReduceMotion }) {
   );
 }
 
+// Neutral label — no fabricated score. Illustrates the ATS-score feature
+// without implying a real number (founder rule: no fake numbers).
 function ScoreBadge({ reduce }: { reduce: ReduceMotion }) {
-  const score = useMotionValue(0);
-  const rounded = useTransform(score, (v) => Math.round(v).toString());
-
-  useEffect(() => {
-    if (reduce) {
-      score.set(92);
-      return;
-    }
-    const controls = animate(score, 92, { duration: 1.5, ease: "easeOut" });
-    return () => controls.stop();
-  }, [reduce, score]);
-
-  useEffect(() => {
-    if (reduce) return;
-    let pendingTimeout: ReturnType<typeof setTimeout> | undefined;
-    const interval = setInterval(() => {
-      animate(score, 87, { duration: 0.8, ease: "easeIn" });
-      pendingTimeout = setTimeout(
-        () => animate(score, 92, { duration: 1.2, ease: "easeOut" }),
-        900
-      );
-    }, 12000);
-    return () => {
-      clearInterval(interval);
-      if (pendingTimeout) clearTimeout(pendingTimeout);
-    };
-  }, [reduce, score]);
-
   return (
     <motion.span
       animate={
@@ -333,9 +301,10 @@ function ScoreBadge({ reduce }: { reduce: ReduceMotion }) {
           ? undefined
           : { duration: 2, repeat: Infinity, ease: "easeInOut" }
       }
-      className="inline-flex items-center whitespace-nowrap rounded-pill bg-mint px-4 py-2 text-base font-semibold text-plum"
+      className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-pill bg-mint px-4 py-2 text-base font-semibold text-plum"
     >
-      <motion.span>{rounded}</motion.span>/100 match
+      <CheckCircle2 className="h-4 w-4" />
+      Your real ATS score
     </motion.span>
   );
 }

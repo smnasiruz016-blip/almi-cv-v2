@@ -405,10 +405,10 @@ function PricingSection({
           </h2>
           <p className="mt-3 text-base leading-7 text-plum-soft">
             Pro is $7/month — unlimited CVs, full AI, real ATS scoring, and
-            every premium template. resume.io charges around $25/month; Zety
-            bills you weekly and locks your download behind a paywall. We charge
-            $7, flat, with no tricks — because we&apos;d rather you stayed for
-            being good than for being trapped.
+            every premium template. resume.io charges around $30 every 4 weeks
+            (about $389 a year); Zety bills you weekly and locks your download
+            behind a paywall. We charge $7, flat, with no tricks — because
+            we&apos;d rather you stayed for being good than for being trapped.
           </p>
         </div>
         <div className="mt-10">
