@@ -13,6 +13,7 @@
 // ============================================================================
 "use client";
 
+import { renderToStaticMarkup } from "react-dom/server";
 import { getTemplate } from "@/lib/templates";
 import { mergeWithDefaults } from "@/components/templates/types";
 import { isBatch3Slug, toCDShape } from "@/lib/cd-adapter";
@@ -20,6 +21,18 @@ import type { CVData } from "@/lib/cv-types";
 
 const A4_W = 794;
 const A4_H = 1123;
+
+// A thumbnail is decoration — it must not contribute headings (especially a
+// second <h1>) to the host page's outline and compete with the page's real
+// SEO <h1>. Templates correctly use <h1> for the candidate's name (right for
+// an actual CV, the editor, and print), so we leave the templates alone and
+// instead demote every heading to a <div> in the preview render only. Styling
+// is inline / className-based, so the swap is visually identical.
+function demoteHeadings(html: string): string {
+  return html
+    .replace(/<(h[1-6])(\s|>)/g, "<div data-cv-heading$2")
+    .replace(/<\/h[1-6]>/g, "</div>");
+}
 
 export function CVPreview({
   slug,
@@ -45,6 +58,12 @@ export function CVPreview({
   const renderData = (
     isBatch3Slug(slug) ? toCDShape(merged) : merged
   ) as unknown as CVData;
+  // Render once to static markup so we can demote the template's headings
+  // before they reach the DOM. Identical on server and client (pure function
+  // of data), and the preview is non-interactive, so no hydration is lost.
+  const markup = demoteHeadings(
+    renderToStaticMarkup(<TemplateComponent data={renderData} />)
+  );
 
   return (
     <div
@@ -70,9 +89,8 @@ export function CVPreview({
           userSelect: "none",
         }}
         aria-hidden
-      >
-        <TemplateComponent data={renderData} />
-      </div>
+        dangerouslySetInnerHTML={{ __html: markup }}
+      />
     </div>
   );
 }
