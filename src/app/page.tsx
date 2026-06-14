@@ -25,7 +25,7 @@ export const revalidate = 3600;
 // so this string fully replaces it — no double-brand suffix.
 const HOME_TITLE = "AI Resume Builder with Real ATS Score | AlmiCV";
 const HOME_DESC =
-  "Build a CV that beats the filter. Premium templates, AI writing that keeps your voice, and a real ATS score that tells you when you're ready. Start free — Pro is half what other builders charge.";
+  "Build a CV that beats the filter. Premium templates, AI writing that keeps your voice, and a real ATS score that tells you when you're ready. Start free — Pro is $7/month, a fraction of what resume.io and Zety charge.";
 
 export const metadata: Metadata = {
   title: HOME_TITLE,
@@ -40,32 +40,32 @@ const CTA_LABEL = "Build my CV — free";
 
 // Honest trust statements (no invented numbers/reviews) — from the copy.
 const TRUST = [
-  "Real ATS score — not a vanity rating",
-  "AI that keeps your voice — not robotic filler",
-  "Premium templates, recruiter-friendly",
-  "Export to PDF, ready to send",
+  "A real ATS score — not a vanity number",
+  "AI that keeps your voice — never robotic filler",
+  "$7/mo flat — no download paywall",
+  "Unlimited CVs, one for every job",
 ];
 
 const BENEFITS = [
   {
     icon: ShieldCheck,
-    title: "Beat the filter",
-    body: "A real ATS score on every CV, so you know it'll reach a human — not a reject pile.",
+    title: "Beat the robot",
+    body: "A real ATS score on every CV, so you know it'll reach a human — not vanish into a reject pile.",
   },
   {
     icon: Mic,
-    title: "Sound like you, only sharper",
-    body: "AI writing that strengthens your words without erasing your voice. No generic, copy-paste filler.",
+    title: "Sound like you — only sharper",
+    body: "AI rewrites weak lines into strong ones — “Managed a team” becomes “Led a team of 8 to deliver X early” — while keeping your voice. No generic filler that screams “AI wrote this.”",
   },
   {
     icon: LayoutTemplate,
-    title: "Look the part",
-    body: "Premium, recruiter-friendly templates with a live editor. Edit and see it change instantly.",
+    title: "Look like you belong",
+    body: "Premium, recruiter-tested templates that pass the ATS and impress the human. Edit live, see it change instantly.",
   },
   {
     icon: Zap,
-    title: "Ready in minutes, not days",
-    body: "Build unlimited CVs, tailored to each job, in the time it used to take to format one.",
+    title: "One CV for every job — unlimited",
+    body: "The secret to beating the filter is tailoring each CV to each posting. On Pro, that's unlimited. Most builders charge per download for this. We don't.",
   },
 ];
 
@@ -73,36 +73,40 @@ const STEPS = [
   {
     n: 1,
     title: "Pick a template",
-    body: "Choose a premium, recruiter-tested design.",
+    body: "Recruiter-tested and ATS-safe.",
   },
   {
     n: 2,
     title: "Write with AI",
-    body: "Let AI sharpen each line while keeping your voice — and edit live.",
+    body: "Every line sharpened, your voice kept. Edit live.",
   },
   {
     n: 3,
-    title: "Check your ATS score",
-    body: "See your real score, fix what's flagged, and export when it says you're ready.",
+    title: "Check your real ATS score",
+    body: "See what's holding you back, fix it, and export when it says you're ready.",
   },
 ];
 
 const FAQS = [
   {
-    q: "Is the ATS score real?",
-    a: "Yes — we score your CV against the criteria applicant-tracking software actually uses, and show you what to fix. It's a practical check, not a vanity number.",
+    q: "Will AlmiCV actually get me past the ATS?",
+    a: "Yes — we score your CV the way applicant-tracking software does, and show you what to fix, starting with the #1 thing recruiters search: the exact job title.",
   },
   {
-    q: "Will the AI make my CV sound generic?",
-    a: "No. The AI sharpens your words and keeps your voice — it doesn't replace you with template filler.",
+    q: "Is it really free to start?",
+    a: "Yes. Build free. Pro is $7/month — no download paywall, no weekly-billing trick. What you see is what you pay.",
   },
   {
-    q: "Can I make more than one CV?",
-    a: "On Pro, unlimited — so you can tailor a version for every job, which is exactly what beats the filter.",
+    q: "How are you so much cheaper than resume.io and Zety?",
+    a: "No tricks, no inflated pricing, no per-download charges. A fair price for a tool that works.",
   },
   {
-    q: "Can I cancel anytime?",
-    a: "Yes. Monthly, no lock-in, no hidden fees.",
+    q: "Will the AI make me sound generic?",
+    a: "Never. It sharpens your words. You stay in control of every line.",
+  },
+  {
+    q: "Can I make a different CV for each job?",
+    a: "Unlimited on Pro — which is exactly how you beat the filter.",
   },
 ];
 
@@ -193,17 +197,18 @@ function HeroSection({ isLoggedIn }: { isLoggedIn: boolean }) {
               <span className="text-coral">the interview.</span>
             </h1>
             <p className="mt-6 max-w-md text-lg text-plum-soft">
-              Most resumes are rejected by software before a human ever reads
-              them. AlmiCV builds a CV that beats the filter — premium
-              templates, AI writing that sounds like <em>you</em>, and a real
-              ATS score that tells you when you&apos;re ready.
+              Right now, a robot is deleting your CV before a human ever reads
+              it. Not because you&apos;re not good enough — because your CV
+              doesn&apos;t speak the machine&apos;s language. AlmiCV fixes that:
+              a real ATS score, the exact keywords recruiters search for, and AI
+              that sharpens your words without erasing your <em>voice</em>.
             </p>
             <div className="mt-10">
               <PrimaryCTA isLoggedIn={isLoggedIn} />
             </div>
             <p className="mt-5 text-sm text-plum-faint">
-              No card to start. Pro is $7/month — half what other builders
-              charge.
+              Free to start. Pro is $7/month — a third of what resume.io and
+              Zety charge. No download traps. No weekly-billing tricks.
             </p>
           </div>
           <HeroPreview />
@@ -237,20 +242,25 @@ function ProblemSection() {
       <Container>
         <div className="mx-auto max-w-3xl">
           <h2 className="text-balance text-4xl font-medium leading-tight text-plum">
-            Your CV isn&apos;t being rejected by people. It&apos;s being
-            rejected by a robot.
+            You&apos;re not losing jobs to better candidates. You&apos;re losing
+            them to a robot you never see.
           </h2>
           <p className="mt-6 text-lg leading-8 text-plum-soft">
-            Before a human sees your application, software (an ATS) scans it —
-            and quietly filters out most CVs for formatting it can&apos;t read
-            or keywords it can&apos;t find. You never hear back. You assume you
-            weren&apos;t good enough. The truth: your CV never made it into the
-            room.
+            Here&apos;s what really happens after you hit “apply”: software (an
+            ATS) scans your CV first. If it can&apos;t find the right keywords,
+            or can&apos;t read your formatting, it rejects you — silently. No
+            email. No reason. You assume you weren&apos;t good enough.
           </p>
           <p className="mt-4 text-lg leading-8 text-plum-soft">
-            AlmiCV fixes the part you can&apos;t see. We score your CV the way
-            the software does, show you exactly what&apos;s holding it back, and
-            help you fix it — before you hit send.
+            The truth is harsher and easier to fix: your CV never reached a
+            human at all. Around 75% of CVs are filtered out this way before
+            anyone reads them. Every “we went with another candidate” might
+            really mean a robot threw you out in 6 seconds.
+          </p>
+          <p className="mt-4 text-lg leading-8 text-plum-soft">
+            AlmiCV ends the guessing. We score your CV the way the software
+            does, show you exactly what&apos;s killing it, and help you fix it —
+            before you apply.
           </p>
         </div>
       </Container>
@@ -391,12 +401,14 @@ function PricingSection({
       <Container>
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-balance font-display text-4xl text-plum md:text-5xl">
-            Start free. Upgrade when you&apos;re ready.
+            Start free. Build and preview at no cost.
           </h2>
           <p className="mt-3 text-base leading-7 text-plum-soft">
-            Build and preview at no cost. Pro is $7/month (or $60/year) for
-            unlimited CVs, full AI features, real ATS scoring, and every premium
-            template.
+            Pro is $7/month — unlimited CVs, full AI, real ATS scoring, and
+            every premium template. resume.io charges around $25/month; Zety
+            bills you weekly and locks your download behind a paywall. We charge
+            $7, flat, with no tricks — because we&apos;d rather you stayed for
+            being good than for being trapped.
           </p>
         </div>
         <div className="mt-10">
@@ -407,7 +419,8 @@ function PricingSection({
           />
         </div>
         <p className="mt-8 text-center text-sm text-plum-faint">
-          Half the price of other builders. Cancel anytime. No hidden fees.
+          Start free — upgrade when you&apos;re ready. Cancel anytime. No hidden
+          fees.
         </p>
       </Container>
     </Section>
@@ -443,7 +456,7 @@ function FinalCTASection({ isLoggedIn }: { isLoggedIn: boolean }) {
       <Container>
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="text-balance text-4xl font-medium leading-tight text-cream md:text-5xl">
-            Stop guessing why you&apos;re not hearing back.
+            Stop letting a robot decide your future in 6 seconds.
           </h2>
           <p className="mx-auto mt-6 max-w-2xl text-lg text-cream/70">
             Build a CV that reaches a human — and gets you the interview.
