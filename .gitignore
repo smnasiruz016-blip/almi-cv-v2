@@ -46,3 +46,6 @@ next-env.d.ts
 .vercel
 .env*.local
 scripts/backups/
+
+# local QA screenshots (not part of the app)
+.screenshots/
