@@ -18,6 +18,8 @@ const ECOSYSTEM_LINKS: ReadonlyArray<{
     href: "https://almisalary.almiworld.com",
     external: true,
   },
+  { label: "AlmiPrep", href: "https://almiprep.almiworld.com", external: true },
+  { label: "AlmiPTE", href: "https://almipte.almiworld.com", external: true },
   { label: "eBooks", href: "https://almiworld.com/ebooks-2/", external: true },
   { label: "AlmiWorld", href: "https://almiworld.com", external: true },
 ];
