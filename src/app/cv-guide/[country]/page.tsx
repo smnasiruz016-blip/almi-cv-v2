@@ -7,7 +7,7 @@ import { getCurrentUser } from "@/lib/auth";
 import { getCountryBySlug } from "@/lib/countries";
 import { JOB_ROLES, JOB_ROLES_BY_SECTOR } from "@/lib/roles";
 import { getConvention, hasVerifiedConvention } from "@/lib/cv-conventions";
-import { indefiniteArticle } from "@/lib/cv-origin-localization";
+import { indefiniteArticle, CV_ORIGINS, isCvOriginIndexable } from "@/lib/cv-origin-localization";
 
 export const revalidate = 86400;
 export const dynamicParams = true;
@@ -169,6 +169,34 @@ export default async function CountryHub({
               ))}
             </div>
           </section>
+
+          {/* 5b. Origin down-links — push hub authority into the from-[origin] pages */}
+          {(() => {
+            const originLinks = CV_ORIGINS.filter((o) => isCvOriginIndexable(c.slug, o.slug)).slice(0, 10);
+            if (originLinks.length === 0) return null;
+            return (
+              <section className="mb-12" aria-labelledby="origin-links-title">
+                <h2 id="origin-links-title" className="text-xl sm:text-2xl font-semibold tracking-tight text-plum mb-2">
+                  Applying from a specific country?
+                </h2>
+                <p className="text-sm text-plum-soft mb-4 max-w-2xl">
+                  Country-specific CV guidance — local conventions, how to present your credentials, and an ATS-ready approach localized to where you&apos;re applying from.
+                </p>
+                <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
+                  {originLinks.map((o) => (
+                    <li key={o.slug}>
+                      <Link
+                        href={`/cv-guide/${c.slug}/from-${o.slug}`}
+                        className="block px-3 py-2 rounded-md border border-peach bg-white text-sm text-plum hover:border-coral transition-colors"
+                      >
+                        <span aria-hidden="true">{o.flag} </span>{c.name} CV from {o.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            );
+          })()}
 
           {/* 6. Cross-product 3-card DEEP */}
           <section className="mb-12" aria-label="Other AlmiWorld products">

@@ -8,6 +8,8 @@ import {
   findCvOrigin,
   getCvOriginLocalization,
   indefiniteArticle,
+  CV_ORIGINS,
+  isCvOriginIndexable,
 } from "@/lib/cv-origin-localization";
 
 const SITE_ORIGIN = "https://almicv.almiworld.com";
@@ -115,6 +117,33 @@ export function OriginCvGuide({
               </p>
             </div>
           </section>
+
+          {/* 4b. Sibling-origin strip — webs the origin pages together (no orphan) */}
+          {(() => {
+            const siblings = CV_ORIGINS.filter(
+              (o) => o.slug !== origin.slug && isCvOriginIndexable(c.slug, o.slug),
+            );
+            if (siblings.length === 0) return null;
+            return (
+              <section className="mb-12" aria-labelledby="siblings-title">
+                <h2 id="siblings-title" className="text-base font-semibold text-plum mb-3">
+                  Also applying to {c.name} from:
+                </h2>
+                <ul className="flex flex-wrap gap-2">
+                  {siblings.map((o) => (
+                    <li key={o.slug}>
+                      <Link
+                        href={`/cv-guide/${c.slug}/from-${o.slug}`}
+                        className="inline-block px-3 py-1.5 rounded-full border border-peach bg-white text-sm text-plum hover:border-coral transition-colors"
+                      >
+                        <span aria-hidden="true">{o.flag} </span>{o.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            );
+          })()}
 
           {/* 5. CV conventions panel (destination) */}
           <section className="mb-12 rounded-xl border border-peach bg-white p-6 sm:p-8" aria-labelledby="conventions-title">
