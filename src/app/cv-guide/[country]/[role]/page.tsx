@@ -7,6 +7,13 @@ import { getCurrentUser } from "@/lib/auth";
 import { getCountryBySlug } from "@/lib/countries";
 import { getRoleBySlug } from "@/lib/roles";
 import { getConvention, hasVerifiedConvention } from "@/lib/cv-conventions";
+import { OriginCvGuide } from "@/components/cv-origin-guide";
+import { findCvOrigin, isCvOriginIndexable, indefiniteArticle } from "@/lib/cv-origin-localization";
+
+// The [role] segment doubles as the origin segment when prefixed "from-"
+// (e.g. /cv-guide/united-kingdom/from-pakistan). No role slug starts with
+// "from-", so the dispatch is unambiguous — mirrors AlmiPTE's flywheel nesting.
+const FROM = "from-";
 
 export const revalidate = 86400;
 export const dynamicParams = true;
@@ -35,6 +42,24 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { country, role } = await params;
   const c = getCountryBySlug(country);
+
+  // Origin × destination CV guide — distinct, self-canonical (NOT canonical-up).
+  if (role.startsWith(FROM)) {
+    const originSlug = role.slice(FROM.length);
+    const origin = findCvOrigin(originSlug);
+    if (!c || !origin || !isCvOriginIndexable(c.slug, originSlug)) return {};
+    const canonicalUrl = `${SITE_ORIGIN}/cv-guide/${c.slug}/from-${origin.slug}`;
+    const title = `${c.name} CV from ${origin.name} (${YEAR}) — Free, ATS-Ready · AlmiCV`;
+    const description = `Build ${indefiniteArticle(c.name)} ${c.name}-ready, ATS-friendly CV from ${origin.name} — AI-tailored to ${c.name} conventions, in any language. Free to start, Pro $7/mo on AlmiCV.`;
+    return {
+      title,
+      description,
+      alternates: { canonical: canonicalUrl },
+      openGraph: { title, description, url: canonicalUrl, type: "website", siteName: "AlmiCV" },
+      twitter: { card: "summary_large_image", title, description },
+    };
+  }
+
   const r = getRoleBySlug(role);
   if (!c || !r) return {};
   // SEO consolidation (stopgap): the role dimension here is a name token over
@@ -63,6 +88,17 @@ export default async function CvGuidePage({
 }) {
   const { country, role } = await params;
   const c = getCountryBySlug(country);
+
+  // Origin × destination CV guide (Tier 1).
+  if (role.startsWith(FROM)) {
+    const originSlug = role.slice(FROM.length);
+    if (!c || !findCvOrigin(originSlug) || !isCvOriginIndexable(c.slug, originSlug)) {
+      notFound();
+    }
+    const user = await getCurrentUser();
+    return <OriginCvGuide country={c} originSlug={originSlug} isLoggedIn={Boolean(user)} />;
+  }
+
   const r = getRoleBySlug(role);
   if (!c || !r) notFound();
 

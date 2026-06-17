@@ -27,6 +27,7 @@ import type { MetadataRoute } from "next";
 import { COUNTRY_LANDING } from "@/lib/country-landing";
 import { COUNTRIES_SERVED } from "@/lib/countries";
 import { JOB_ROLES } from "@/lib/roles";
+import { CV_ORIGINS, CV_ORIGIN_DESTINATIONS } from "@/lib/cv-origin-localization";
 
 const SITE_ORIGIN = "https://almicv.almiworld.com";
 
@@ -101,12 +102,26 @@ export default async function sitemap({
       priority: 0.8,
     }));
 
+    // Origin × destination CV guides (10 destinations × 10 researched origins =
+    // 100). Distinct per-origin copy → self-canonical + indexed (NOT thin like
+    // the role×country grid). Promotion is data-only (add a destination slug).
+    const cvOriginEntries: MetadataRoute.Sitemap = CV_ORIGIN_DESTINATIONS.flatMap(
+      (dest) =>
+        CV_ORIGINS.map((o) => ({
+          url: `${SITE_ORIGIN}/cv-guide/${dest}/from-${o.slug}`,
+          lastModified: now,
+          changeFrequency: "weekly" as const,
+          priority: 0.7,
+        })),
+    );
+
     return [
       ...staticEntries,
       ...templateEntries,
       ...roleHubEntries,
       ...jobsEntries,
       ...cvCountryHubs,
+      ...cvOriginEntries,
     ];
   }
 }

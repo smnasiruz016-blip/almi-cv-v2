@@ -1,72 +1,41 @@
-import type { Metadata } from "next";
 import Link from "next/link";
-import { notFound } from "next/navigation";
 import { Footer } from "@/components/footer";
 import { SiteHeader } from "@/components/site-header";
-import { getCurrentUser } from "@/lib/auth";
-import { getCountryBySlug } from "@/lib/countries";
+import type { Country } from "@/lib/countries";
 import { JOB_ROLES, JOB_ROLES_BY_SECTOR } from "@/lib/roles";
 import { getConvention, hasVerifiedConvention } from "@/lib/cv-conventions";
-import { indefiniteArticle } from "@/lib/cv-origin-localization";
-
-export const revalidate = 86400;
-export const dynamicParams = true;
+import {
+  findCvOrigin,
+  getCvOriginLocalization,
+  indefiniteArticle,
+} from "@/lib/cv-origin-localization";
 
 const SITE_ORIGIN = "https://almicv.almiworld.com";
 
-type Params = { country: string };
-
-// Dynamic so the year-stamped title stays current each year (server-side).
-const YEAR = new Date().getFullYear();
-
-function buildTitle(name: string): string {
-  return `${name} CV Guide (${YEAR}) — Free, ATS-Ready Builder · AlmiCV`;
-}
-
-function buildDescription(name: string): string {
-  return `Build a ${name}-ready CV for any role with AlmiCV — local conventions, AI-tailored, ATS-optimized. Free to start, Pro $7/mo.`;
-}
-
-export async function generateMetadata({
-  params,
+// Origin × destination CV guide (Tier 1: /cv-guide/[country]/from-[origin]).
+// Leads with the origin's researched worry, then keeps the country-hub sections
+// (conventions panel, role grid, cross-product). Self-canonical + indexable —
+// distinct per-origin copy, not a thin name-swap.
+export function OriginCvGuide({
+  country: c,
+  originSlug,
+  isLoggedIn,
 }: {
-  params: Promise<Params>;
-}): Promise<Metadata> {
-  const { country } = await params;
-  const c = getCountryBySlug(country);
-  if (!c) return {};
-  const url = `${SITE_ORIGIN}/cv-guide/${c.slug}`;
-  const title = buildTitle(c.name);
-  const description = buildDescription(c.name);
-  return {
-    title,
-    description,
-    alternates: { canonical: url },
-    openGraph: { title, description, url, type: "website", siteName: "AlmiCV" },
-    twitter: { card: "summary_large_image", title, description },
-  };
-}
-
-export default async function CountryHub({
-  params,
-}: {
-  params: Promise<Params>;
+  country: Country;
+  originSlug: string;
+  isLoggedIn: boolean;
 }) {
-  const { country } = await params;
-  const c = getCountryBySlug(country);
-  if (!c) notFound();
+  const origin = findCvOrigin(originSlug);
+  const local = getCvOriginLocalization(originSlug, c.slug);
   const convention = getConvention(c.slug);
-  if (!convention) notFound();
+  if (!origin || !local || !convention) return null;
   const isVerified = hasVerifiedConvention(c.slug);
 
-  const user = await getCurrentUser();
-  const isLoggedIn = Boolean(user);
-
-  const url = `${SITE_ORIGIN}/cv-guide/${c.slug}`;
+  const url = `${SITE_ORIGIN}/cv-guide/${c.slug}/from-${origin.slug}`;
   const webApplication = {
     "@context": "https://schema.org",
     "@type": "WebApplication",
-    name: `AlmiCV — CV Builder for ${c.name}`,
+    name: `AlmiCV — CV Builder for ${c.name} (from ${origin.name})`,
     url,
     applicationCategory: "BusinessApplication",
     operatingSystem: "Web",
@@ -83,7 +52,8 @@ export default async function CountryHub({
     itemListElement: [
       { "@type": "ListItem", position: 1, name: "Home", item: SITE_ORIGIN },
       { "@type": "ListItem", position: 2, name: "CV Guide", item: `${SITE_ORIGIN}/cv-guide` },
-      { "@type": "ListItem", position: 3, name: c.name, item: url },
+      { "@type": "ListItem", position: 3, name: c.name, item: `${SITE_ORIGIN}/cv-guide/${c.slug}` },
+      { "@type": "ListItem", position: 4, name: `From ${origin.name}`, item: url },
     ],
   };
 
@@ -102,21 +72,51 @@ export default async function CountryHub({
               <li aria-hidden="true">·</li>
               <li><Link href="/cv-guide" className="hover:text-coral transition-colors">CV Guide</Link></li>
               <li aria-hidden="true">·</li>
-              <li><span className="font-medium text-plum">{c.name}</span></li>
+              <li><Link href={`/cv-guide/${c.slug}`} className="hover:text-coral transition-colors">{c.name}</Link></li>
+              <li aria-hidden="true">·</li>
+              <li><span className="font-medium text-plum">From {origin.name}</span></li>
             </ol>
           </nav>
 
-          {/* 2. H1 + 3. Intro */}
+          {/* 2. H1 + 3. Localized hero sub-hook */}
           <header className="mb-8">
+            <p className="text-sm font-semibold uppercase tracking-wide text-coral-deep mb-2">
+              {origin.flag} {origin.name} → {c.name}
+            </p>
             <h1 className="text-3xl sm:text-5xl font-semibold tracking-tight text-plum mb-4">
-              Build {indefiniteArticle(c.name)} {c.name}-Ready CV for Any Role
+              Build {indefiniteArticle(c.name)} {c.name}-Ready CV from {origin.name}
             </h1>
             <p className="text-base sm:text-lg text-plum-soft leading-relaxed max-w-3xl">
-              AlmiCV builds CVs tailored to {c.name} employer expectations. {convention.notes} Browse role-specific guides below or start building free.
+              {local.subHook}
             </p>
           </header>
 
-          {/* 4. Country features */}
+          {/* 4. Origin-specific section (the localized angle) */}
+          <section className="mb-12 rounded-xl border border-peach bg-white p-6 sm:p-8" aria-labelledby="origin-title">
+            <h2 id="origin-title" className="text-xl sm:text-2xl font-semibold tracking-tight text-plum mb-4">
+              {local.heading}
+            </h2>
+            {local.paras.map((p) => (
+              <p key={p} className="text-sm sm:text-base text-plum-soft leading-relaxed mb-4 max-w-3xl">
+                {p}
+              </p>
+            ))}
+            <ul className="space-y-2.5 mb-5">
+              {local.bullets.map((b) => (
+                <li key={b} className="flex items-start gap-2.5 text-sm sm:text-base text-plum-soft leading-relaxed">
+                  <span aria-hidden className="mt-1 text-coral">✓</span>
+                  <span>{b}</span>
+                </li>
+              ))}
+            </ul>
+            <div className="rounded-lg border border-coral/30 bg-coral-soft/20 p-4">
+              <p className="text-sm text-plum leading-relaxed">
+                <strong className="font-semibold">Honesty check:</strong> {local.callout}
+              </p>
+            </div>
+          </section>
+
+          {/* 5. CV conventions panel (destination) */}
           <section className="mb-12 rounded-xl border border-peach bg-white p-6 sm:p-8" aria-labelledby="conventions-title">
             <h2 id="conventions-title" className="text-xl sm:text-2xl font-semibold tracking-tight text-plum mb-4">
               CV conventions in {c.name}
@@ -134,12 +134,13 @@ export default async function CountryHub({
               <div><dt className="text-xs uppercase tracking-wide text-plum-soft">GPA</dt><dd className="text-plum">{convention.includeGPA}</dd></div>
               <div><dt className="text-xs uppercase tracking-wide text-plum-soft">References</dt><dd className="text-plum">{convention.referenceSection}</dd></div>
             </dl>
-            <p className="text-sm text-plum-soft leading-relaxed">
+            <p className="text-sm text-plum-soft leading-relaxed">{convention.notes}</p>
+            <p className="text-sm text-plum-soft leading-relaxed mt-3">
               AlmiCV translates to {c.primaryLanguage} with built-in AI.
             </p>
           </section>
 
-          {/* 5. Role grid by sector */}
+          {/* 6. Role grid by sector (drill into role×country) */}
           <section className="mb-12" aria-labelledby="roles-title">
             <h2 id="roles-title" className="text-xl sm:text-2xl font-semibold tracking-tight text-plum mb-2">
               {JOB_ROLES.length} role-specific guides for {c.name}
@@ -170,7 +171,7 @@ export default async function CountryHub({
             </div>
           </section>
 
-          {/* 6. Cross-product 3-card DEEP */}
+          {/* 7. Cross-product 3-card DEEP */}
           <section className="mb-12" aria-label="Other AlmiWorld products">
             <h2 className="text-xl sm:text-2xl font-semibold tracking-tight text-plum mb-5">
               Around the globe, around your career
@@ -184,7 +185,7 @@ export default async function CountryHub({
               </li>
               <li>
                 <a href={`https://almijob.almiworld.com/jobs/${c.slug}`} className="block rounded-lg border border-peach bg-white p-5 hover:border-coral transition-colors h-full">
-                  <p className="font-semibold text-plum mb-1">Jobs in {c.name} →</p>
+                  <p className="font-semibold text-plum mb-1">Visa-sponsorship jobs in {c.name} →</p>
                   <p className="text-sm text-plum-soft leading-relaxed">AlmiJob — one CV, every site.</p>
                 </a>
               </li>
@@ -197,7 +198,7 @@ export default async function CountryHub({
             </ul>
           </section>
 
-          {/* 7. Final CTA */}
+          {/* 8. Final CTA */}
           <section className="mb-10 text-center">
             <Link
               href={`/signup?country=${c.slug}`}
