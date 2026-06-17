@@ -11,10 +11,11 @@
     "postinstall": "prisma generate"
   },
   "dependencies": {
-    "@smnasiruz016-blip/job-roles": "^0.1.1",
     "@anthropic-ai/sdk": "^0.91.1",
     "@hookform/resolvers": "^5.2.2",
     "@prisma/client": "^6.19.3",
+    "@smnasiruz016-blip/almi-data": "0.1.0",
+    "@smnasiruz016-blip/job-roles": "^0.1.1",
     "@sparticuz/chromium-min": "^148.0.0",
     "@tiptap/extension-placeholder": "^3.22.5",
     "@tiptap/extension-underline": "^3.22.5",

@@ -22,21 +22,22 @@
  * NOT change the existing country-hub / role×country canonicals or sitemap rules.
  */
 
+import {
+  ORIGINS as SHARED_ORIGINS,
+  indefiniteArticle as sharedIndefiniteArticle,
+} from "@smnasiruz016-blip/almi-data";
+
 export type CvOrigin = { slug: string; name: string; flag: string };
 
-// The 10 researched origins (Playbook Phase 1).
-export const CV_ORIGINS: CvOrigin[] = [
-  { slug: "pakistan", name: "Pakistan", flag: "🇵🇰" },
-  { slug: "india", name: "India", flag: "🇮🇳" },
-  { slug: "nigeria", name: "Nigeria", flag: "🇳🇬" },
-  { slug: "bangladesh", name: "Bangladesh", flag: "🇧🇩" },
-  { slug: "nepal", name: "Nepal", flag: "🇳🇵" },
-  { slug: "philippines", name: "Philippines", flag: "🇵🇭" },
-  { slug: "vietnam", name: "Vietnam", flag: "🇻🇳" },
-  { slug: "china", name: "China", flag: "🇨🇳" },
-  { slug: "egypt", name: "Egypt", flag: "🇪🇬" },
-  { slug: "sri-lanka", name: "Sri Lanka", flag: "🇱🇰" },
-];
+// The 10 researched origins — identity now READ from the shared data layer
+// (@smnasiruz016-blip/almi-data) instead of an inlined copy. Order preserved;
+// verified identical to the prior inlined list. The CV ATS copy-templates below
+// stay local (product voice); only the shared FACTS move.
+export const CV_ORIGINS: CvOrigin[] = SHARED_ORIGINS.map((o) => ({
+  slug: o.slug,
+  name: o.name,
+  flag: o.flag,
+}));
 
 // v1 destination markets these origins actually send CVs to (anglophone + Gulf
 // + Germany). Origin pages render + index only for these; other served
@@ -358,12 +359,10 @@ export function isCvOriginIndexable(destSlug: string, originSlug: string): boole
   );
 }
 
-// Indefinite article for a country name in "Build {a/an} {Country}-Ready CV".
-// Vowel-sound rule for our destination set: A/E/I/O → "an" (Australia, Ireland);
-// "U" stays "a" because every U-country here reads /juː/ ("a United Kingdom").
-export function indefiniteArticle(name: string): string {
-  return /^[aeio]/i.test(name) ? "an" : "a";
-}
+// Indefinite article — now re-exported from the shared data layer (was
+// duplicated 3× across CV/Study/Salary). Same implementation; consumers that
+// import { indefiniteArticle } from this module keep working unchanged.
+export const indefiniteArticle = sharedIndefiniteArticle;
 
 export function getCvOriginLocalization(
   originSlug: string,
