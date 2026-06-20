@@ -4200,6 +4200,162 @@ export const ROLE_CV_CONTENT: Record<string, RoleCvContent> = {
     atsNote:
       "Organise keywords by category (strategy, methodologies, metrics, tools — Jira, Amplitude, Figma), write quantified bullets (\"delivered 15+ features, +40% engagement\"), and keep API/developer-experience work prominent for platform roles.",
   },
+  // ── Batch 31 (sourced via live SERP 2026: ResumeWorded, ResumeAdapter, VisualCV, TealHQ, Enhancv, ZipRecruiter, LiveCareer, QwikResume, Indeed, GreatSampleResume) ──
+  // Priorities: office/admin, medical, HR, sales, faith, education.
+  "office-administrator": {
+    include:
+      "Contact details, a professional summary tailored to the posting, work experience in reverse chronological order with metrics, education, and a core-skills section using standard headings.",
+    length:
+      "One to two pages — keep scheduling, data entry and office management high, mirror the posting's exact phrasing, and quantify (e.g. \"reduced supply costs 15%\").",
+    hardSkills: ["Office management", "Calendar & scheduling", "Data entry", "Microsoft Office Suite", "Vendor management", "Bookkeeping (QuickBooks)", "Record keeping"],
+    softSkills: ["Organization", "Multi-tasking", "Communication", "Confidentiality", "Team coordination"],
+    atsKeywords: ["Office Administration", "Scheduling", "Data Entry", "Microsoft Office", "Calendar Management", "Vendor Management", "Office Management"],
+    atsNote:
+      "Mirror the posting's wording (\"scheduling\", \"calendar management\", \"vendor management\") in the summary and core-skills section, quantify outcomes (cost reduced, schedules coordinated), and mention CAP/MOS certifications.",
+  },
+  "receptionist-hotel": {
+    include:
+      "Contact details, a professional summary, a work-history section, education, and a skills section mixing property-management systems with guest-facing soft skills.",
+    length:
+      "One page — keep reservation systems, check-in/out and guest service high, tailor to the posting's wording, and quantify guest-satisfaction and upsell results.",
+    hardSkills: ["Property management systems (Opera)", "Reservation management", "Check-in & check-out", "Cash handling & payment processing", "Front-desk operations", "Booking platforms", "Bilingual communication"],
+    softSkills: ["Customer service", "Communication", "Multitasking", "Diplomacy", "Conflict resolution"],
+    atsKeywords: ["Hotel Receptionist", "Front Desk", "Reservation Management", "Property Management System", "Check-in", "Customer Service", "Cash Handling"],
+    atsNote:
+      "Show a mix of hard skills (property management systems, reservation management, cash handling) and guest-facing soft skills; tailor to the posting and quantify guest-satisfaction and upsell results.",
+  },
+  "secretary": {
+    include:
+      "Contact details, a resume summary of experience and key strengths, work experience in chronological order with quantified accomplishments, education, and a skills section.",
+    length:
+      "One to two pages — focus on accomplishments with numbers rather than routine duties, integrate skills into experience, and keep MS Office and scheduling high.",
+    hardSkills: ["Microsoft Office (Word/Excel/Outlook)", "Calendar & scheduling", "Data entry", "Email & correspondence management", "Minute taking", "Filing & records", "Travel coordination"],
+    softSkills: ["Organization", "Communication", "Discretion", "Time management", "Attention to detail"],
+    atsKeywords: ["Secretary", "Administrative Support", "Microsoft Office", "Scheduling", "Data Entry", "Correspondence", "Calendar Management"],
+    atsNote:
+      "Use exact keywords from the posting (\"scheduling\", \"correspondence\", \"data entry\"), avoid listing routine duties, and integrate skills into accomplishment statements with numbers.",
+  },
+  "licensed-practical-nurse": {
+    include:
+      "Contact details, a professional summary, professional experience, education, a skills section (hard plus soft), and a certifications section (LPN licence, BLS) that reinforces your qualifications.",
+    length:
+      "One to two pages — list the posting's required skills first, keep patient-care and medication-administration experience high, and close with credentials.",
+    hardSkills: ["Patient care", "Vital-signs monitoring", "Medication administration", "Wound care", "Specimen collection", "Charting & documentation", "EHR documentation"],
+    softSkills: ["Communication", "Empathy", "Teamwork", "Attention to detail", "Time management"],
+    atsKeywords: ["Licensed Practical Nurse", "LPN", "Patient Care", "Vital Signs", "Medication Administration", "Wound Care", "BLS"],
+    atsNote:
+      "List the posting's required skills first (\"patient care\", \"vital signs\", \"medication administration\"), and close with credentials (LPN licence, BLS/ACLS) with issuer and date.",
+  },
+  "medical-lab-technologist": {
+    include:
+      "Contact details, a summary capturing measurable outcomes, professional experience with quantified achievements, education, a skills section, and a certifications section (ASCP).",
+    length:
+      "One page for entry-level, two for 5+ years — lead with years and the lab techniques you have mastered, and quantify accuracy, turnaround and quality outcomes.",
+    hardSkills: ["Diagnostic testing", "Quality control", "Hematology & chemistry analyzers", "PCR & molecular techniques", "Mass spectrometry", "Laboratory information systems (LIS)", "Analytical reasoning"],
+    softSkills: ["Attention to detail", "Problem solving", "Communication", "Time management", "Teamwork"],
+    atsKeywords: ["Medical Laboratory Science", "Diagnostic Testing", "Quality Control", "ASCP", "PCR", "LIS", "Hematology"],
+    atsNote:
+      "Certification is required in ~98% of postings — list ASCP/AMT prominently — and name the techniques the role uses (PCR, mass spectrometry, LIS); quantify accuracy, turnaround and quality outcomes.",
+  },
+  "retail-pharmacist": {
+    include:
+      "Contact details, a personal profile, work history, education, a skills section, and a certifications section (immunization, MTM).",
+    length:
+      "One to two pages — keep dispensing, patient counseling and customer-service strengths high, and quantify scripts filled, accuracy and community-health outcomes.",
+    hardSkills: ["Dispensing & prescription verification", "Medication therapy management", "Immunization", "Patient counseling", "Drug-interaction review", "Inventory management", "Pharmacy software"],
+    softSkills: ["Customer service", "Communication", "Attention to detail", "Problem solving", "Empathy"],
+    atsKeywords: ["Retail Pharmacist", "Dispensing", "Medication Therapy Management", "Immunization", "Patient Counseling", "Customer Service", "Pharmacy"],
+    atsNote:
+      "Highlight customer service, dispensing accuracy and community-health initiatives, list immunization/MTM certifications, and quantify scripts filled, accuracy and improved patient outcomes.",
+  },
+  "hr-coordinator": {
+    include:
+      "Contact details, a summary, an experience section with achievement statements, education, and a skills section using standard headings near the top.",
+    length:
+      "One page for entry to mid-career — distribute 15–25 keywords across summary, skills and experience, and keep onboarding, HRIS and employee relations high.",
+    hardSkills: ["Employee onboarding", "HRIS (Workday/BambooHR)", "Applicant tracking systems (ATS)", "Benefits administration", "Payroll processing", "Employee records", "Compliance"],
+    softSkills: ["Communication", "Organization", "Problem solving", "Discretion", "Project management"],
+    atsKeywords: ["Human Resources", "Onboarding", "HRIS", "Benefits Administration", "Payroll", "Employee Relations", "Compliance"],
+    atsNote:
+      "Distribute 15–25 keywords (onboarding, HRIS, payroll processing, employee relations, compliance) across summary, skills and experience, name your HRIS (Workday, BambooHR), and avoid burying the skills section.",
+  },
+  "employee-relations-officer": {
+    include:
+      "Contact details, a summary, an experience section, education, and a skills section using standard job titles and employee-relations keywords in the body text.",
+    length:
+      "One to two pages — keep employee relations, compliance and conflict resolution high, name your HRIS, and quantify cases handled and retention outcomes.",
+    hardSkills: ["Employee relations management", "Conflict resolution & mediation", "Workplace investigations", "Labour-law compliance", "Performance management", "Grievance handling", "HRIS"],
+    softSkills: ["Communication", "Empathy", "Discretion", "Problem solving", "Facilitation"],
+    atsKeywords: ["Employee Relations", "Conflict Resolution", "Compliance", "Workplace Investigations", "Performance Management", "Labor Relations", "Mediation"],
+    atsNote:
+      "Use exact terms (\"employee relations management\", \"conflict resolution\", \"workplace investigations\", \"labour relations\") in the body text not just headers, name your HRIS, and quantify cases handled and retention.",
+  },
+  "outside-sales-representative": {
+    include:
+      "Contact details, a professional summary, work experience with quantified results, education, and a dedicated skills block of primary and secondary keywords.",
+    length:
+      "One to two pages in a clean single-column layout — keep territory management, CRM and quota performance high, and quantify pipeline, deals and quota attainment.",
+    hardSkills: ["Field & territory sales", "Lead generation & prospecting", "CRM (Salesforce)", "Pipeline management", "Negotiation", "Account management", "B2B/B2C sales"],
+    softSkills: ["Communication", "Relationship building", "Resilience", "Self-motivation", "Time management"],
+    atsKeywords: ["Outside Sales Representative", "Field Sales", "Territory", "CRM", "Salesforce", "Pipeline", "Quota"],
+    atsNote:
+      "Include high-priority keywords (\"field sales\", \"territory\", \"CRM\", \"Salesforce\", \"pipeline\", \"quota\") in a dedicated skills block, use a single-column layout, and quantify pipeline, deals closed and quota attainment.",
+  },
+  "relationship-manager": {
+    include:
+      "Contact details, a professional summary highlighting core strengths, a skills section with keywords, and experience in reverse chronological order with quantified results.",
+    length:
+      "One to two pages — keep client relationship management, financial analysis and your strongest portfolio results high, and quantify portfolio growth and retention.",
+    hardSkills: ["Client relationship management", "Financial analysis", "Portfolio & account management", "Cross-selling financial products", "Risk assessment", "Market-trend analysis", "Sales-target attainment"],
+    softSkills: ["Communication", "Negotiation", "Relationship building", "Attention to detail", "Teamwork"],
+    atsKeywords: ["Relationship Management", "Client Relationship Management", "Financial Analysis", "Portfolio Management", "Cross-Selling", "Risk Assessment", "Banking"],
+    atsNote:
+      "Use the posting's exact terms (\"client relationship management\", \"financial analysis\", \"portfolio management\") — not synonyms — in a dedicated skills section, and quantify portfolio growth, cross-sell and retention.",
+  },
+  "hafiz": {
+    include:
+      "Contact details, a professional summary, an education section (Hifz, Qira'a, any Ijaza), teaching experience (in-person or online), a skills section, and languages (Arabic and others).",
+    length:
+      "One to two pages — feature your Hafiz status and Tajweed/Qira'a credentials prominently, and show your years and methods of Quran teaching.",
+    hardSkills: ["Quran memorization (Hifz)", "Tajweed & Qira'a", "Quran recitation & pronunciation", "Curriculum development", "Islamic studies", "Arabic", "Student assessment"],
+    softSkills: ["Patience", "Communication", "Adaptability", "Cultural sensitivity", "Discipline"],
+    atsKeywords: ["Hafiz", "Quran", "Tajweed", "Hifz", "Islamic Education", "Arabic", "Curriculum Development"],
+    atsNote:
+      "Feature your Hafiz status and Tajweed/Qira'a credentials (and any Ijaza) prominently, reflect both your Islamic credentials and teaching methodology, and use keywords like \"curriculum development\" and \"student assessment\".",
+  },
+  "qari": {
+    include:
+      "Contact details, a professional summary, an education section (Qira'a, Tajweed, Ijaza), teaching and recitation experience, a skills section, and languages (Arabic).",
+    length:
+      "One to two pages — feature your Qira'a and Tajweed mastery and any Ijaza, and show your teaching and recitation experience.",
+    hardSkills: ["Quran recitation (Qira'a)", "Tajweed mastery", "Pronunciation (Makharij)", "Quran teaching with Tajweed", "Curriculum design", "Islamic studies", "Arabic"],
+    softSkills: ["Patience", "Communication", "Cultural sensitivity", "Discipline", "Empathy"],
+    atsKeywords: ["Qari", "Quran", "Tajweed", "Qira'a", "Recitation", "Islamic Education", "Arabic"],
+    atsNote:
+      "Emphasise your Qira'a and Tajweed mastery, good pronunciation (Makharij) and any Ijaza, and show teaching experience; use keywords like \"curriculum development\" and \"student assessment\".",
+  },
+  "online-tutor": {
+    include:
+      "Contact details, a professional summary, a dedicated skills section (subject expertise plus virtual-teaching tools), work experience that weaves skills into duties, education, and certifications.",
+    length:
+      "One to two pages — emphasise virtual-communication and technology skills (LMS, video tools), name the platforms you have used, and quantify student improvement.",
+    hardSkills: ["Subject-matter expertise", "Online teaching tools & LMS", "Lesson planning", "Curriculum development", "Student assessment", "Synchronous & asynchronous tools", "Progress tracking"],
+    softSkills: ["Communication", "Patience", "Adaptability", "Active listening", "Time management"],
+    atsKeywords: ["Online Tutoring", "Virtual Learning", "Lesson Planning", "Curriculum Development", "Subject Matter Expertise", "Learning Management System", "Student Assessment"],
+    atsNote:
+      "Emphasise virtual-communication and technology skills (LMS, synchronous/asynchronous tools), name the online platforms you have used, weave skills into your experience bullets, and quantify student improvement.",
+  },
+  "office-coordinator": {
+    include:
+      "Contact details, a summary statement leading with your strengths, an experience section using role-specific keywords, education, and a skills section combining hard and soft skills.",
+    length:
+      "One to two pages — put the exact title \"Office Coordinator\" in the resume, mirror the posting's wording, and include accomplishments involving leading or collaborating with a team.",
+    hardSkills: ["Office coordination", "Scheduling", "Data entry", "Microsoft Office & Excel", "Vendor management", "Invoicing", "Administrative support"],
+    softSkills: ["Customer service", "Communication", "Multi-tasking", "Detail orientation", "Collaboration"],
+    atsKeywords: ["Office Coordinator", "Scheduling", "Administrative Support", "Customer Service", "Data Entry", "Microsoft Office", "Vendor Management"],
+    atsNote:
+      "Put the exact title \"Office Coordinator\" in the resume, mirror the posting's wording (\"scheduling\", \"administrative support\", \"vendor management\"), and include 1–2 accomplishments involving leading or collaborating with a team.",
+  },
 };
 
 const BY_SLUG = ROLE_CV_CONTENT;
