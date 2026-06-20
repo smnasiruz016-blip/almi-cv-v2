@@ -4356,6 +4356,468 @@ export const ROLE_CV_CONTENT: Record<string, RoleCvContent> = {
     atsNote:
       "Put the exact title \"Office Coordinator\" in the resume, mirror the posting's wording (\"scheduling\", \"administrative support\", \"vendor management\"), and include 1–2 accomplishments involving leading or collaborating with a team.",
   },
+  "deacon": {
+    include:
+      "Ordination/formation status, ministry summary, liturgical and pastoral duties, community outreach, denomination, seminary or diaconate-program education, and any chaplaincy or counseling certifications.",
+    length:
+      "One page for newly ordained deacons; two pages where there is long bi-vocational ministry or multi-parish service to document.",
+    hardSkills: [
+      "Liturgical assistance",
+      "Homily and scripture preparation",
+      "Sacramental and ceremonial duties",
+      "Pastoral and bereavement care",
+      "Community outreach coordination",
+      "Faith formation and catechesis",
+      "Diaconate / seminary formation",
+    ],
+    softSkills: [
+      "Compassion",
+      "Active listening",
+      "Discretion and confidentiality",
+      "Public speaking",
+      "Conflict mediation",
+    ],
+    atsKeywords: [
+      "deacon",
+      "ordained minister",
+      "pastoral care",
+      "liturgy",
+      "faith formation",
+      "community outreach",
+      "diaconate",
+    ],
+    atsNote:
+      "Recruiters and diocesan/denominational boards screen for ordination or formation status, liturgical duties and pastoral-care experience; lead each ministry bullet with the service rendered and the community it served, not a job title alone.",
+  },
+  "missionary": {
+    include:
+      "Mission-field summary, regions and languages served, cross-cultural ministry and community-development work, support-raising/fundraising results, sending organization, and theology or missions education.",
+    length:
+      "One page for a single term of service; two pages where multiple fields, languages or long-term church-planting work need documenting.",
+    hardSkills: [
+      "Cross-cultural ministry",
+      "Church planting / discipleship",
+      "Community development",
+      "Support-raising and donor relations",
+      "Language acquisition",
+      "Humanitarian project coordination",
+      "Volunteer team leadership",
+    ],
+    softSkills: [
+      "Cultural adaptability",
+      "Resilience",
+      "Relationship building",
+      "Self-direction",
+      "Communication across languages",
+    ],
+    atsKeywords: [
+      "missionary",
+      "cross-cultural ministry",
+      "church planting",
+      "community development",
+      "support-raising",
+      "discipleship",
+      "mission field",
+    ],
+    atsNote:
+      "Sending agencies and NGOs screen for field regions, language fluency and measurable community or donor outcomes; name the country, language and result on each bullet, and list the sending organization so service is verifiable.",
+  },
+  "religious-studies-teacher": {
+    include:
+      "Teaching summary, grade levels and subjects, curriculum and lesson-planning work, classroom-management approach, theology or comparative-religion expertise, teaching credentials, and education.",
+    length:
+      "One page early-career; two pages for experienced teachers with department-lead, curriculum-design or accreditation work.",
+    hardSkills: [
+      "Curriculum and lesson planning",
+      "Classroom management",
+      "Student assessment",
+      "Comparative religion / theology instruction",
+      "Differentiated instruction",
+      "Parent and community communication",
+      "Educational technology",
+    ],
+    softSkills: [
+      "Patience",
+      "Clear explanation",
+      "Cultural sensitivity",
+      "Mentoring",
+      "Critical-thinking facilitation",
+    ],
+    atsKeywords: [
+      "religious studies teacher",
+      "curriculum development",
+      "classroom management",
+      "lesson planning",
+      "theology",
+      "student assessment",
+      "teaching certification",
+    ],
+    atsNote:
+      "Schools screen for grade level, subjects taught and a teaching credential; open each bullet with the instructional outcome (engagement, assessment results, curriculum shipped) and place certifications and licenses in a clearly labeled section.",
+  },
+  "substance-abuse-counselor": {
+    include:
+      "Counseling summary, licensure/certification (LADC, CADC, LCDC), treatment modalities, caseload and case-management work, crisis-intervention experience, populations served, and clinical education.",
+    length:
+      "One page for entry-level or recently certified counselors; two pages where there is supervisory, program-coordination or multi-setting clinical experience.",
+    hardSkills: [
+      "Individual and group counseling",
+      "Treatment planning",
+      "Case management",
+      "Crisis intervention",
+      "Motivational interviewing",
+      "Relapse-prevention planning",
+      "Clinical documentation",
+    ],
+    softSkills: [
+      "Empathy",
+      "Non-judgmental listening",
+      "Boundary setting",
+      "Resilience",
+      "Cultural competence",
+    ],
+    atsKeywords: [
+      "substance abuse counselor",
+      "addiction counseling",
+      "LADC",
+      "CADC",
+      "case management",
+      "treatment planning",
+      "motivational interviewing",
+    ],
+    atsNote:
+      "Treatment centers screen for state licensure/certification (LADC, CADC, LCDC) and named modalities; put the credential in a dedicated section and tie each bullet to caseload size, populations served and treatment outcomes.",
+  },
+  "spa-therapist": {
+    include:
+      "Treatment-menu and modalities summary, certifications and licenses, client-care record, retail and upselling results, sanitation and safety practice, and training.",
+    length:
+      "One page is standard; a second page only where there is lead-therapist, trainer or multi-location experience.",
+    hardSkills: [
+      "Swedish and deep-tissue massage",
+      "Facials and skincare treatments",
+      "Body wraps and exfoliation",
+      "Aromatherapy",
+      "Sanitation and hygiene protocols",
+      "Retail and product recommendation",
+      "Treatment-room preparation",
+    ],
+    softSkills: [
+      "Client rapport",
+      "Attentiveness",
+      "Stamina",
+      "Discretion",
+      "Upselling without pressure",
+    ],
+    atsKeywords: [
+      "spa therapist",
+      "massage therapy",
+      "facial treatments",
+      "body treatments",
+      "client care",
+      "retail sales",
+      "sanitation",
+    ],
+    atsNote:
+      "Spas and resorts screen for licensure/certification and the specific treatments you deliver; list your modality menu plainly and quantify rebooking, retail and client-satisfaction results on the experience bullets.",
+  },
+  "it-support-technician": {
+    include:
+      "Support summary, ticketing and SLA record, hardware/software and OS troubleshooting, networking basics, certifications (CompTIA A+, ITIL), supported user count, and technical education.",
+    length:
+      "One page for help-desk and early-career roles; two pages where there is escalation, sysadmin or team-lead scope.",
+    hardSkills: [
+      "Hardware and software troubleshooting",
+      "Windows / macOS / Linux support",
+      "Active Directory and account management",
+      "Ticketing systems (ServiceNow, Jira, Zendesk)",
+      "Network connectivity diagnostics",
+      "Remote support tools",
+      "Imaging and device deployment",
+    ],
+    softSkills: [
+      "Patience with non-technical users",
+      "Clear written communication",
+      "Prioritization under load",
+      "Documentation",
+      "Calm problem-solving",
+    ],
+    atsKeywords: [
+      "IT support technician",
+      "help desk",
+      "troubleshooting",
+      "Active Directory",
+      "ticketing system",
+      "CompTIA A+",
+      "technical support",
+    ],
+    atsNote:
+      "Employers screen for ticketing/SLA experience and named certifications (CompTIA A+, ITIL); quantify tickets resolved, first-contact-resolution rate and users supported, and list certs in their own section so the ATS matches them.",
+  },
+  "maintenance-engineer": {
+    include:
+      "Maintenance summary, preventive/predictive-maintenance record, electrical-mechanical and PLC troubleshooting, CMMS use, safety and compliance, equipment and plant types, and technical qualifications.",
+    length:
+      "One page early-career; two pages for senior engineers with reliability, shutdown or team-lead responsibility.",
+    hardSkills: [
+      "Preventive and predictive maintenance",
+      "Electrical and mechanical troubleshooting",
+      "PLC and control systems",
+      "Hydraulics and pneumatics",
+      "CMMS (SAP PM, Maximo)",
+      "Root-cause failure analysis",
+      "Health-and-safety compliance",
+    ],
+    softSkills: [
+      "Methodical diagnosis",
+      "Composure under breakdown pressure",
+      "Teamwork with operations",
+      "Documentation discipline",
+      "Safety awareness",
+    ],
+    atsKeywords: [
+      "maintenance engineer",
+      "preventive maintenance",
+      "PLC troubleshooting",
+      "CMMS",
+      "root cause analysis",
+      "reliability",
+      "mechanical and electrical",
+    ],
+    atsNote:
+      "Plants and facilities screen for preventive-maintenance metrics and PLC/CMMS experience; quantify uptime, MTBF/MTTR and reduced downtime on the bullets, and name the equipment, control systems and CMMS you actually worked on.",
+  },
+  "ui-designer": {
+    include:
+      "Portfolio link, design summary, tool stack (Figma), design-system and component work, prototyping and handoff, collaboration with UX and engineering, and education.",
+    length:
+      "One page; the portfolio carries the visual proof, so the resume stays concise and outcome-focused.",
+    hardSkills: [
+      "Figma and design tooling",
+      "Design systems and component libraries",
+      "Visual and interaction design",
+      "Prototyping",
+      "Responsive and mobile-first layout",
+      "Accessibility (WCAG)",
+      "Developer handoff",
+    ],
+    softSkills: [
+      "Visual judgment",
+      "Receiving and giving critique",
+      "Cross-functional collaboration",
+      "Attention to detail",
+      "Communicating design rationale",
+    ],
+    atsKeywords: [
+      "UI designer",
+      "Figma",
+      "design system",
+      "prototyping",
+      "interaction design",
+      "responsive design",
+      "accessibility",
+    ],
+    atsNote:
+      "A portfolio link near the contact details is non-negotiable for UI roles; in the resume, name your tool stack and design-system work and tie bullets to shipped products and measurable usability or conversion outcomes.",
+  },
+  "pr-manager": {
+    include:
+      "Communications summary, media-relations and press record, campaign results, crisis-communications experience, tools (Cision, Muck Rack), spokesperson and stakeholder work, and education.",
+    length:
+      "One page early-career; two pages for managers with multi-campaign, agency or in-house leadership history.",
+    hardSkills: [
+      "Media relations",
+      "Press-release and messaging writing",
+      "Crisis communications",
+      "Campaign planning and measurement",
+      "Media monitoring (Cision, Muck Rack)",
+      "Spokesperson and media training",
+      "Social and digital communications",
+    ],
+    softSkills: [
+      "Persuasive writing",
+      "Composure under scrutiny",
+      "Relationship building with press",
+      "Stakeholder influence",
+      "News judgment",
+    ],
+    atsKeywords: [
+      "public relations manager",
+      "media relations",
+      "press release",
+      "crisis communications",
+      "media coverage",
+      "Cision",
+      "communications strategy",
+    ],
+    atsNote:
+      "Employers screen for media-relations results and crisis-comms experience; quantify coverage earned, share of voice and reach on the bullets, and name the monitoring tools (Cision, Muck Rack) so the skills section matches the posting.",
+  },
+  "performance-marketer": {
+    include:
+      "Growth summary, paid-channel record (search, social, programmatic), efficiency metrics (ROAS, CAC, LTV), A/B testing, analytics stack, budget scale managed, and education.",
+    length:
+      "One page early-career; two pages where there is multi-channel, large-budget or team-lead responsibility to evidence.",
+    hardSkills: [
+      "Google Ads and paid search",
+      "Meta and paid social",
+      "Programmatic and YouTube",
+      "A/B and creative testing",
+      "Analytics (GA4, attribution modeling)",
+      "Budget and bid management",
+      "Conversion-rate optimization",
+    ],
+    softSkills: [
+      "Data-driven decision making",
+      "Experimentation mindset",
+      "Cross-functional collaboration",
+      "Clear reporting",
+      "Commercial focus",
+    ],
+    atsKeywords: [
+      "performance marketing",
+      "paid search",
+      "paid social",
+      "ROAS",
+      "customer acquisition cost",
+      "A/B testing",
+      "Google Ads",
+    ],
+    atsNote:
+      "Recruiters reject vague \"managed campaigns\" bullets; lead each line with the efficiency metric moved (ROAS, CPA, CAC, LTV) and the budget scale, and name the ad platforms and analytics tools so the ATS matches them exactly.",
+  },
+  "treasurer": {
+    include:
+      "Treasury summary, cash-management and liquidity record, financial-risk and hedging work, banking and rating-agency relationships, treasury systems, and finance credentials (CTP, CPA).",
+    length:
+      "One page is rare; two pages is standard for the seniority, with capital-structure and debt-management results documented.",
+    hardSkills: [
+      "Cash and liquidity management",
+      "Cash forecasting and positioning",
+      "Financial-risk and hedging strategy",
+      "Debt and capital-structure management",
+      "Bank and rating-agency relationships",
+      "Treasury management systems (SAP, Kyriba)",
+      "Financial reporting and compliance",
+    ],
+    softSkills: [
+      "Analytical rigor",
+      "Judgment under uncertainty",
+      "Stakeholder communication",
+      "Discretion",
+      "Cross-functional partnership",
+    ],
+    atsKeywords: [
+      "treasurer",
+      "cash management",
+      "liquidity",
+      "treasury operations",
+      "risk management",
+      "hedging",
+      "financial forecasting",
+    ],
+    atsNote:
+      "Boards and CFOs screen for liquidity, risk-management and capital-structure results plus a CTP or CPA; quantify cash optimized, financing secured and risk reduced, and name the treasury systems (SAP, Kyriba, Oracle) for ATS matching.",
+  },
+  "management-consultant": {
+    include:
+      "Consulting summary, engagement record with quantified client impact, problem-solving frameworks, stakeholder-management work, analytics and tooling, certifications (CMC, PMP, Lean Six Sigma), and education.",
+    length:
+      "One page is the expectation at most firms for early and mid-career; two pages only for principal/partner-level depth.",
+    hardSkills: [
+      "Strategy and business analysis",
+      "Financial and operational modeling",
+      "Hypothesis-driven problem solving",
+      "Stakeholder and change management",
+      "Process optimization",
+      "Data analysis (Excel, SQL, Tableau)",
+      "Executive presentation",
+    ],
+    softSkills: [
+      "Structured thinking",
+      "Client influence",
+      "Comfort with ambiguity",
+      "Synthesis and storytelling",
+      "Teamwork under deadline",
+    ],
+    atsKeywords: [
+      "management consultant",
+      "strategy",
+      "business analysis",
+      "stakeholder management",
+      "process optimization",
+      "change management",
+      "financial modeling",
+    ],
+    atsNote:
+      "Firms weight the most recent role and skills section heavily and scan for quantified client impact; lead each engagement bullet with the result delivered (cost, revenue, time) and distribute 15–25 relevant keywords across summary, skills and experience.",
+  },
+  "nutritionist": {
+    include:
+      "Practice summary, nutritional-counseling and meal-planning record, client or patient outcomes, certifications and licenses (CNC, CCN, RD/RDN where applicable), specialties, and education.",
+    length:
+      "One page for most practitioners; two pages where there is clinical, research or program-management experience.",
+    hardSkills: [
+      "Nutritional assessment and counseling",
+      "Meal and diet planning",
+      "Clinical and medical nutrition therapy",
+      "Health and wellness education",
+      "Dietary-analysis tools",
+      "Behavior-change coaching",
+      "Documentation and care notes",
+    ],
+    softSkills: [
+      "Empathy",
+      "Motivational communication",
+      "Active listening",
+      "Patience",
+      "Cultural sensitivity around food",
+    ],
+    atsKeywords: [
+      "nutritionist",
+      "nutritional counseling",
+      "meal planning",
+      "clinical nutrition",
+      "dietetics",
+      "health education",
+      "wellness",
+    ],
+    atsNote:
+      "Clinics and wellness employers screen for credentials (CNC, CCN, RD/RDN) and counseling outcomes; put licenses and certifications in a dedicated section and tie bullets to client results, populations served and any clinical setting.",
+  },
+  "operations-supervisor": {
+    include:
+      "Operations summary, team size and shift/line scope, KPI record (throughput, cycle time, on-time delivery), scheduling, process-improvement (lean, Six Sigma), safety record, and qualifications.",
+    length:
+      "One page for first-line supervisors; two pages where there is multi-shift, multi-site or larger-team responsibility.",
+    hardSkills: [
+      "Team scheduling and workforce planning",
+      "KPI and performance management",
+      "Lean / Six Sigma process improvement",
+      "Inventory and logistics coordination",
+      "Quality and defect reduction",
+      "Safety and compliance management",
+      "ERP / WMS systems",
+    ],
+    softSkills: [
+      "Team leadership",
+      "Coaching and mentoring",
+      "Decision-making under pressure",
+      "Conflict resolution",
+      "Clear communication across shifts",
+    ],
+    atsKeywords: [
+      "operations supervisor",
+      "team leadership",
+      "process improvement",
+      "lean",
+      "Six Sigma",
+      "scheduling",
+      "KPI",
+    ],
+    atsNote:
+      "Employers screen for team size led and operational metrics; quantify throughput, cycle time, on-time delivery, labor cost and safety incidents on the bullets, and name lean/Six Sigma methods and the ERP/WMS systems you ran.",
+  },
 };
 
 const BY_SLUG = ROLE_CV_CONTENT;
