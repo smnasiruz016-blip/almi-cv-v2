@@ -4044,6 +4044,162 @@ export const ROLE_CV_CONTENT: Record<string, RoleCvContent> = {
     atsNote:
       "Place posting terms (\"marketing strategy\", \"campaign management\", \"brand strategy\", \"go-to-market\") across the summary, competencies and experience, name tools (HubSpot, GA4), and quantify ROI, pipeline and growth.",
   },
+  // ── Batch 30 (sourced via live SERP 2026: ResumeWorded, Enhancv, ResumeAdapter, QwikResume, TealHQ, Wozber, Medium/Reshtei, ResumeKraft, Zety, Indeed) ──
+  // Priorities: emerging tech/AI, product, marketing, wellness.
+  "kubernetes-engineer": {
+    include:
+      "A professional summary, a technical-skills section grouping tools by category (containers, CI/CD, cloud, IaC, monitoring), work experience with quantified achievements, and a certifications section (CKA/CKAD/CKS).",
+    length:
+      "One to two pages — group skills by category for ATS parsing, keep cluster management and your strongest deployments high, and quantify deployment-time and reliability gains.",
+    hardSkills: ["Kubernetes (cluster management)", "Docker & containerization", "Helm", "Microservices", "CI/CD pipelines", "Terraform / IaC", "Monitoring (Prometheus/Grafana)"],
+    softSkills: ["Problem solving", "Communication", "Collaboration", "Ownership", "Attention to detail"],
+    atsKeywords: ["Kubernetes", "Docker", "Helm", "Microservices", "CI/CD", "Terraform", "CKA"],
+    atsNote:
+      "List \"Kubernetes\" under a clearly labelled technical-skills area grouped with Docker, Helm and cloud, put CKA/CKAD/CKS in a certifications section, and quantify achievements (e.g. \"reduced deployment time 40%\").",
+  },
+  "ml-operations-engineer": {
+    include:
+      "A professional summary, a skills section with 20–30 technical keywords grouped (infrastructure, ML platforms, cloud), work experience using Action + System + Keyword + Result bullets, and a certifications section.",
+    length:
+      "One to two pages — include the MLOps, model-deployment and production-infrastructure keywords (resumes lacking them are often filtered), and quantify throughput, latency and uptime.",
+    hardSkills: ["MLOps & model deployment", "CI/CD for ML", "Kubernetes & Docker", "MLflow / Kubeflow / SageMaker", "Python", "Model serving (Triton/BentoML)", "Monitoring & drift detection"],
+    softSkills: ["Problem solving", "Communication", "Collaboration", "Ownership", "Analytical thinking"],
+    atsKeywords: ["MLOps", "Model Deployment", "Kubernetes", "CI/CD", "Python", "Docker", "SageMaker"],
+    atsNote:
+      "Include the keywords recruiters search (MLOps, model deployment, production ML, Kubernetes, model serving, drift detection) — resumes lacking them are often filtered — and write \"Action + system + keyword + result\" bullets (e.g. \"75K predictions/hour at 99.9% uptime\").",
+  },
+  "nlp-engineer": {
+    include:
+      "A professional summary, a skills section mirroring the posting's NLP libraries and frameworks, work experience with action verbs and metrics, a projects section, and education.",
+    length:
+      "One to two pages — mirror the posting's NLP terms (the exact libraries it names), keep your strongest models and outcomes high, and lead each bullet with a strong action verb.",
+    hardSkills: ["Natural language processing", "Text classification & NER", "Sentiment analysis & topic modeling", "Transformers / BERT", "Python", "TensorFlow / PyTorch", "spaCy / NLTK / Hugging Face"],
+    softSkills: ["Analytical thinking", "Problem solving", "Communication", "Collaboration", "Attention to detail"],
+    atsKeywords: ["Natural Language Processing", "NLP", "Machine Learning", "Transformers", "Python", "PyTorch", "Named Entity Recognition"],
+    atsNote:
+      "Mirror the posting's exact NLP libraries (spaCy, NLTK, Hugging Face) and techniques (NER, sentiment analysis, transformers), include \"machine learning\" and \"natural language processing\", and lead bullets with action verbs and metrics.",
+  },
+  "prompt-engineer": {
+    include:
+      "A professional summary tying technical depth to business impact, a skills section grouped by category (LLMs, frameworks, prompting techniques), work experience and AI projects with measurable outcomes, and an education section listing relevant courses.",
+    length:
+      "One to two pages — use 15–25 posting-matched keywords, group skills (LLMs, frameworks, techniques), and tie model/method detail to outcomes (speed, cost, accuracy).",
+    hardSkills: ["Prompt design & optimization", "Few-shot & chain-of-thought prompting", "RAG pipeline design", "LLM evaluation & testing", "LangChain / LlamaIndex", "OpenAI / Claude / Gemini APIs", "Python"],
+    softSkills: ["Analytical thinking", "Communication", "Creativity", "Problem solving", "Attention to detail"],
+    atsKeywords: ["Prompt Engineering", "LLM", "Prompt Design", "RAG", "LangChain", "Few-Shot Learning", "Generative AI"],
+    atsNote:
+      "Use 15–25 posting-matched keywords (prompt design, few-shot, chain-of-thought, RAG, LangChain, the specific LLMs), group skills into categories, list AI courses under Education, and tie model/method detail to outcomes (speed, cost, accuracy).",
+  },
+  "security-architect": {
+    include:
+      "Contact details, a summary, work experience, education, a skills section, and a certifications section (CISSP/CISM) — with frameworks and platforms placed in the summary, skills and first bullets.",
+    length:
+      "One to two pages — name the exact frameworks, controls and threat terms the posting uses, place certifications and frameworks in high-visibility spots, and quantify risk reduced.",
+    hardSkills: ["Security architecture design", "Risk assessment", "Vulnerability management", "SIEM", "Network & cloud security", "Compliance (PCI DSS, ISO 27001)", "Identity & access management"],
+    softSkills: ["Strategic thinking", "Communication", "Problem solving", "Stakeholder management", "Attention to detail"],
+    atsKeywords: ["Security Architecture", "Information Security", "Risk Assessment", "Vulnerability Management", "SIEM", "PCI DSS", "CISSP"],
+    atsNote:
+      "Name the exact frameworks, controls and threat terms the posting uses (PCI DSS, ISO 27001, SIEM) rather than broad language, use both full term and abbreviation, and place CISSP/CISM in the summary, skills and first bullets.",
+  },
+  "quantum-computing-researcher": {
+    include:
+      "Contact details, a professional summary stating your degree and a unique specialism, a skills section (quantum languages plus mathematics), research experience with quantified achievements, a publications section, and education (MSc/PhD).",
+    length:
+      "One to two pages (longer for an academic CV) — establish your PhD/MSc and a specific specialism (e.g. quantum machine learning) in the summary, and showcase quantifiable research outcomes.",
+    hardSkills: ["Quantum algorithms", "Qiskit / Cirq", "Quantum machine learning", "Advanced mathematics & linear algebra", "Python", "Quantum error correction", "Research & experiment design"],
+    softSkills: ["Analytical thinking", "Problem solving", "Communication", "Collaboration", "Scientific writing"],
+    atsKeywords: ["Quantum Computing", "Quantum Algorithms", "Qiskit", "Cirq", "Quantum Machine Learning", "Python", "Research"],
+    atsNote:
+      "Avoid generic phrases (\"hard-working\") and lead with unique skills — quantum programming (Qiskit, Cirq) and a specialism (quantum ML) — establish your MSc/PhD in the summary, and quantify research outcomes and publications.",
+  },
+  "smart-contract-developer": {
+    include:
+      "A powerful professional summary, a skills section focused on blockchain languages and toolchains, experience emphasising specific dApp/smart-contract projects with technical detail and impact, and education.",
+    length:
+      "One to two pages — keep Solidity, smart-contract security and your strongest projects high, and quantify impact (gas reduced, funds secured).",
+    hardSkills: ["Solidity / Vyper", "Smart-contract development", "EVM toolchain (Hardhat, Foundry)", "DeFi protocols", "Smart-contract security & audits", "Web3.js / Ethers.js", "Blockchain protocols"],
+    softSkills: ["Problem solving", "Attention to detail", "Communication", "Collaboration", "Security mindset"],
+    atsKeywords: ["Smart Contract Development", "Solidity", "Blockchain", "DeFi", "Ethereum", "Web3", "Smart Contract Audit"],
+    atsNote:
+      "Include ATS terms (\"smart contract development\", \"solidity programming\", \"DeFi\", \"smart contract audit\"), name your toolchain (Hardhat, Foundry), and quantify impact (e.g. \"reduced gas costs 15%\", \"secured $X million in funds\").",
+  },
+  "yoga-teacher": {
+    include:
+      "Contact details, a professional summary, a dedicated skills section near the top featuring your certifications and yoga styles, teaching experience, education, and a certifications section (RYT-200/500).",
+    length:
+      "One to two pages — put your RYT certification and yoga styles in a skills section near the top, and show class sizes, retention and any specialisms (prenatal, trauma-informed).",
+    hardSkills: ["Asana & sequencing", "Pranayama & meditation", "Anatomy & alignment", "Class planning", "Yoga styles (Hatha/Vinyasa/Yin)", "Hands-on adjustments", "Prenatal / therapeutic yoga"],
+    softSkills: ["Communication", "Empathy", "Adaptability", "Patience", "Motivation"],
+    atsKeywords: ["Yoga Instructor", "RYT-200", "Vinyasa", "Hatha", "Meditation", "Anatomy", "Class Planning"],
+    atsNote:
+      "Put RYT-200/500 (and any E-RYT or C-IAYT) in a skills section near the top with the yoga styles you teach, and show class sizes, retention and specialisms (prenatal, trauma-informed) with the awarding body.",
+  },
+  "reiki-practitioner": {
+    include:
+      "Contact details, a professional summary, a skills section, experience conducting sessions and assessments, an education section, and a certifications section (Reiki Level 2+/Master).",
+    length:
+      "One page — keep your Reiki level and energy-healing experience high, note client confidentiality and ethics, and show client outcomes.",
+    hardSkills: ["Reiki energy healing", "Energy-field assessment", "Session & treatment planning", "Chakra balancing", "Client intake & records", "Relaxation techniques", "Holistic wellness"],
+    softSkills: ["Empathy", "Active listening", "Communication", "Compassion", "Confidentiality"],
+    atsKeywords: ["Reiki", "Energy Healing", "Holistic Therapy", "Treatment Planning", "Chakra", "Wellness", "Reiki Master"],
+    atsNote:
+      "List your Reiki certification level (Level 2, Master/Shinpiden) and awarding body, note client confidentiality and ethical practice, and show customised treatment plans and client outcomes.",
+  },
+  "wellness-coach": {
+    include:
+      "Contact details, a professional summary, work experience with quantifiable achievements, education and certifications establishing credibility, and a skills section of wellness-coaching competencies.",
+    length:
+      "One to two pages — emphasise quantifiable coaching outcomes, list your NBHWC-accredited certification, and cover nutrition, fitness and stress-management competencies.",
+    hardSkills: ["Health & wellness coaching", "Behaviour-change techniques", "Nutrition guidance", "Stress management", "Goal setting & accountability", "Wellness program design", "Progress tracking"],
+    softSkills: ["Communication", "Active listening", "Motivation", "Empathy", "Organization"],
+    atsKeywords: ["Wellness Coaching", "Health Coaching", "Nutrition", "Behavior Change", "Stress Management", "Goal Setting", "NBHWC"],
+    atsNote:
+      "Establish credibility with an NBHWC-accredited certification (plus CHES/CPT/CPR), cover core competencies (nutrition, stress management, behaviour change), and quantify client outcomes (weight, adherence, programme completion).",
+  },
+  "ppc-specialist": {
+    include:
+      "Contact details, a summary, a skills section clustered (platforms, analytics, optimization, client-facing), work experience with metrics, and a dedicated certifications section (Google Ads).",
+    length:
+      "One to two pages — cluster skills (platforms, analytics, optimization), favour metrics (CTR, CPA, ROAS, impression share), and show optimisation judgement (A/B tests, wasted-spend reduction).",
+    hardSkills: ["Google Ads & Bing Ads", "Keyword research", "Bid management & optimization", "Ad copywriting", "Conversion tracking", "A/B testing", "Google Analytics"],
+    softSkills: ["Analytical thinking", "Attention to detail", "Communication", "Client management", "Problem solving"],
+    atsKeywords: ["PPC", "Paid Search", "Google Ads", "SEM", "Keyword Research", "Conversion Rate Optimization", "Bid Management"],
+    atsNote:
+      "Cluster skills (platforms, analytics tools, optimization methods), include certifications with issuer and date, favour metrics (CTR, CPA, ROAS, impression share), and show optimisation judgement (A/B tests, wasted-spend reduction).",
+  },
+  "seo-manager": {
+    include:
+      "Contact details, a profile/summary, work experience, education, a skills section labelled \"Skills\", and certifications and projects sections.",
+    length:
+      "One to two pages — keep keyword research, technical SEO and your strongest traffic results high, label the skills section \"Skills\" for the ATS, and quantify rankings and organic-traffic growth.",
+    hardSkills: ["Keyword research", "Technical SEO", "On-page optimization", "Content strategy", "Link building", "Google Analytics & Search Console", "SEO auditing"],
+    softSkills: ["Analytical thinking", "Communication", "Project management", "Collaboration", "Problem solving"],
+    atsKeywords: ["SEO", "Keyword Research", "Technical SEO", "On-Page SEO", "Link Building", "Google Analytics", "Content Optimization"],
+    atsNote:
+      "Label the section \"Skills\" so the ATS recognises it, tailor it to the posting (keyword research, technical SEO, Search Console, link building), and quantify rankings, organic traffic and revenue impact.",
+  },
+  "saas-product-manager": {
+    include:
+      "A title and summary, a focused skills section near the top (user research, A/B testing, analytics), experience with quantified outcomes, education, and certifications.",
+    length:
+      "One to two pages — mirror the exact title (\"SaaS Product Manager\"), keep roadmap, Agile and your strongest outcomes high, and quantify adoption, retention and revenue (ARR/MRR).",
+    hardSkills: ["Product strategy & roadmap", "Agile / Scrum", "User research", "A/B testing", "Data analysis & SQL", "Stakeholder management", "Analytics (Mixpanel/Amplitude)"],
+    softSkills: ["Leadership", "Communication", "Decision-making", "Problem solving", "Collaboration"],
+    atsKeywords: ["Product Management", "Product Roadmap", "Agile", "A/B Testing", "User Research", "ARR/MRR", "Stakeholder Management"],
+    atsNote:
+      "Mirror the exact title (\"SaaS Product Manager\") at the top, keep a focused skills section (roadmap, Agile, A/B testing, SQL), and quantify adoption, retention and revenue (ARR/MRR) with before-and-after baselines.",
+  },
+  "platform-product-manager": {
+    include:
+      "A title and summary, a skills section organised by category (strategy, methodologies, metrics, tools), experience bullets with methodologies, tools and metrics, a projects section, and education.",
+    length:
+      "One to two pages — integrate keywords across summary, experience and skills, keep roadmap, APIs and your strongest platform work high, and quantify engagement and reliability.",
+    hardSkills: ["Platform & product strategy", "Product roadmap", "API & developer experience", "Agile / Scrum", "User research & A/B testing", "Metrics (OKRs, KPIs)", "Tools (Jira, Amplitude, Figma)"],
+    softSkills: ["Strategic thinking", "Communication", "Decision-making", "Collaboration", "Problem solving"],
+    atsKeywords: ["Product Management", "Product Roadmap", "Platform", "Agile", "A/B Testing", "Stakeholder Management", "OKRs"],
+    atsNote:
+      "Organise keywords by category (strategy, methodologies, metrics, tools — Jira, Amplitude, Figma), write quantified bullets (\"delivered 15+ features, +40% engagement\"), and keep API/developer-experience work prominent for platform roles.",
+  },
 };
 
 const BY_SLUG = ROLE_CV_CONTENT;
