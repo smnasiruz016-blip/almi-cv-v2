@@ -3888,6 +3888,162 @@ export const ROLE_CV_CONTENT: Record<string, RoleCvContent> = {
     atsNote:
       "Include the keywords in nearly every posting (Project Management, Agile, Scrum, PMP, stakeholder management, Jira), list PMP/Scrum and any cloud certs in a dedicated section, and quantify scope, budget and timelines.",
   },
+  // ── Batch 29 (sourced via live SERP 2026: Wozber, LiveCareer, QwikResume, ResumeWorded, Enhancv, SikhNet, Resumaker, ResumeGemini, Indeed, Resume.io) ──
+  // Priorities: surgery, nursing, tech, faith leaders, therapy, marketing.
+  "oral-surgeon": {
+    include:
+      "Contact details, a professional summary, education (DDS/DMD, OMS residency, fellowships), board certification (ABOMS) prominently, surgical experience using the Context-Action-Result framework, a skills section, and publications and affiliations.",
+    length:
+      "A surgeon's CV is multi-page; keep board certification (ABOMS) and your strongest surgical experience on page one, and quantify procedures and outcomes.",
+    hardSkills: ["Dentoalveolar surgery", "Dental implants", "Orthognathic surgery", "IV sedation & anaesthesia", "Bone grafting", "Maxillofacial trauma", "Pathology & extractions"],
+    softSkills: ["Precision", "Patient communication", "Composure", "Teamwork", "Empathy"],
+    atsKeywords: ["Oral and Maxillofacial Surgery", "Board Certified", "Dental Implants", "Orthognathic Surgery", "IV Sedation", "ABOMS", "Patient Care"],
+    atsNote:
+      "Feature board certification (ABOMS) prominently and name procedures the way postings do (\"dental implants\", \"orthognathic surgery\", \"IV sedation\"); use the Context-Action-Result format and quantify procedures.",
+  },
+  "orthodontist": {
+    include:
+      "Contact details, a 3–4 line summary, work experience, education (dental school, orthodontic residency), a board-certification and licensure section (bulleted, with issuer), and a skills section.",
+    length:
+      "One to two pages — keep your ABO board certification, licences and your strongest clinical experience high, and quantify cases and outcomes.",
+    hardSkills: ["Braces & aligners (Invisalign)", "Diagnosis & treatment planning", "Cephalometric analysis", "Dental imaging", "Appliance fitting", "Patient management software", "Lingual orthodontics"],
+    softSkills: ["Patient communication", "Attention to detail", "Customer service", "Organization", "Empathy"],
+    atsKeywords: ["Orthodontics", "Board Certified", "Braces", "Aligners", "Treatment Planning", "Cephalometric Analysis", "ABO"],
+    atsNote:
+      "List ABO board certification and state licensure in a bulleted section with issuer and date, and name treatments the posting cites (\"braces\", \"aligners\", \"treatment planning\"); quantify cases.",
+  },
+  "pediatric-surgeon": {
+    include:
+      "Contact details, a professional summary, education and training, board certification (American Board of Surgery, Pediatric Surgery) with certificate number and date, surgical experience with case volumes, a skills section, and committee memberships and publications.",
+    length:
+      "A surgeon's CV is multi-page; keep board certification, licence and your strongest paediatric surgical experience on page one, and quantify case volumes and outcomes.",
+    hardSkills: ["Pediatric general surgery", "Neonatal surgery", "Laparoscopic & robotic techniques", "Trauma management", "Pediatric anatomy & physiology", "Intensive care", "EHR documentation"],
+    softSkills: ["Precision", "Composure under pressure", "Communication", "Empathy", "Team leadership"],
+    atsKeywords: ["Pediatric Surgery", "Board Certified", "Neonatal Surgery", "Laparoscopic", "Trauma", "ATLS/PALS", "Patient Care"],
+    atsNote:
+      "List board certification (American Board of Surgery, Pediatric Surgery) with certificate number and date plus ATLS/PALS/NRP, and name paediatric procedures and techniques; quantify case volumes and outcomes.",
+  },
+  "trauma-surgeon": {
+    include:
+      "Contact details (credentials in the header, e.g. MD, FACS, board certified), a summary emphasising surgical expertise, surgical experience in reverse chronological order, education and a dedicated certifications section, and a technical-skills section.",
+    length:
+      "A surgeon's CV is multi-page; put credentials in the header, keep board certification and your strongest trauma experience on page one, and quantify cases and outcomes.",
+    hardSkills: ["Emergency & trauma surgery", "Resuscitation & damage control", "Surgical decision-making", "Critical care", "Interventional procedures", "Trauma protocols", "EHR documentation"],
+    softSkills: ["Decision-making under pressure", "Composure", "Leadership", "Communication", "Teamwork"],
+    atsKeywords: ["Trauma Surgery", "Board Certified", "Resuscitation", "Critical Care", "ATLS/ACLS", "Emergency Surgery", "Patient Care"],
+    atsNote:
+      "Put credentials in the header (MD, FACS, Board Certified), list ABS certification and ATLS/ACLS/BLS in a dedicated section, and mirror trauma terms (\"resuscitation\", \"damage control\", \"critical care\"); quantify cases.",
+  },
+  "nurse-midwife": {
+    include:
+      "Contact details, a summary or objective, professional experience with action-verb bullets, education, a skills section (clinical plus interpersonal), and a certifications section (CNM via AMCB, BLS, NRP).",
+    length:
+      "One to two pages — keep your CNM certification and obstetric experience high, and quantify deliveries, patient panels and outcomes.",
+    hardSkills: ["Prenatal & postnatal care", "Labour & delivery", "Newborn assessment", "Women's health & gynaecology", "Family-health counseling", "Patient education", "EHR documentation"],
+    softSkills: ["Communication", "Empathy", "Composure", "Patient advocacy", "Teamwork"],
+    atsKeywords: ["Nurse Midwife", "CNM", "Prenatal Care", "Labor and Delivery", "Women's Health", "Newborn Care", "BLS"],
+    atsNote:
+      "List your CNM certification (AMCB) plus BLS and NRP, mirror the posting's terms (\"prenatal care\", \"labour and delivery\", \"women's health\"), and quantify deliveries and outcomes.",
+  },
+  "mental-health-nurse": {
+    include:
+      "Contact details, a summary, professional experience, a skills section grouped by category (mental-health care, medication management, therapeutic techniques), a licences-and-certifications section (PMHN-BC, CPI, BLS), and education.",
+    length:
+      "One to two pages — keep psychiatric-assessment and crisis-intervention experience high, list de-escalation training, and quantify caseloads and outcomes.",
+    hardSkills: ["Psychiatric evaluation & assessment", "Crisis intervention & de-escalation", "Medication management", "Treatment-plan development", "Suicide-risk assessment", "Therapeutic techniques (CBT/MI)", "EHR documentation"],
+    softSkills: ["Empathy", "Communication", "Composure under pressure", "Patience", "Teamwork"],
+    atsKeywords: ["Mental Health Nursing", "Psychiatric Assessment", "Crisis Intervention", "Medication Management", "Treatment Planning", "PMHN-BC", "De-escalation"],
+    atsNote:
+      "Group skills by category (mental-health care, medication management, therapeutic techniques), list PMHN-BC plus de-escalation training (CPI) and BLS/ACLS, and quantify caseloads and outcomes.",
+  },
+  "solutions-architect": {
+    include:
+      "A professional summary, a skills section leading with system architecture and cloud, work experience weaving keywords into outcome-based bullets, education, and a certifications section (AWS/Azure Solutions Architect).",
+    length:
+      "One to two pages — keep system architecture, cloud platforms and your strongest designs on page one, and quantify scale, reliability and cost outcomes.",
+    hardSkills: ["Solution & system architecture", "Cloud platforms (AWS/Azure)", "Microservices", "DevOps & CI/CD", "Databases & SQL", "Technical design", "ITIL"],
+    softSkills: ["Communication", "Stakeholder management", "Problem solving", "Decision-making", "Documentation"],
+    atsKeywords: ["Solution Architecture", "Cloud Computing", "AWS", "Microservices", "System Architecture", "DevOps", "Technical Design"],
+    atsNote:
+      "The top skills (system architecture, technical design, enterprise solutions, cloud platforms, databases) appear in 80%+ of postings — prioritise them and weave them into bullets; list AWS/Azure Solutions Architect certifications.",
+  },
+  "granthi": {
+    include:
+      "Contact details, a professional summary, an experience section (Gurdwara service, ceremonies), education and training (Sikh Missionary College or equivalent), a skills section, and languages (Punjabi/Gurmukhi).",
+    length:
+      "One to two pages — keep your Gurbani knowledge, Kirtan and Gurdwara experience high, and note your years of service in a busy Gurdwara.",
+    hardSkills: ["Gurbani recitation & Katha", "Kirtan (classical ragas)", "Harmonium & tabla", "Sikh ceremonies (Anand Karaj, Akhand Path)", "Punjabi & Gurmukhi", "Spiritual counseling", "Religious teaching"],
+    softSkills: ["Oratory", "Empathy", "Community leadership", "Patience", "Devotion"],
+    atsKeywords: ["Granthi", "Gurbani", "Kirtan", "Sikh Ceremonies", "Punjabi", "Spiritual Counseling", "Gurdwara"],
+    atsNote:
+      "Show extensive knowledge of Gurbani and Sikh principles, fluency in Punjabi/Gurmukhi and proficiency in Kirtan (ragas, harmonium, tabla), and note years of service in a busy Gurdwara and your training.",
+  },
+  "pandit": {
+    include:
+      "Contact details, a professional summary, an experience section detailing ceremonies performed (poojas, yagnas, samskaras), education and scriptural training, a skills section, and languages (Sanskrit/Hindi/regional).",
+    length:
+      "One to two pages — keep your scriptural knowledge and the range of ceremonies you perform high, and note community and temple service.",
+    hardSkills: ["Vedic rituals & poojas", "Yagnas & havans", "Samskaras (life-cycle ceremonies)", "Mantra & scripture recitation", "Sanskrit & shastra knowledge", "Astrology (where applicable)", "Spiritual guidance"],
+    softSkills: ["Public speaking", "Empathy", "Community outreach", "Patience", "Organization"],
+    atsKeywords: ["Pandit", "Hindu Priest", "Vedic Rituals", "Pooja", "Sanskrit", "Ceremonies", "Spiritual Guidance"],
+    atsNote:
+      "Emphasise the ceremonies you perform (poojas, yagnas, samskaras), scriptural and Sanskrit knowledge, and pastoral/community outreach; note languages (Sanskrit, Hindi, regional) and temple service.",
+  },
+  "monk": {
+    include:
+      "Contact details, a professional summary highlighting spiritual growth and inclusive community, an experience section with quantified reach, a skills section, education and training, and any teaching or interfaith work.",
+    length:
+      "One to two pages — keep meditation-instruction and Dharma-teaching experience high, and quantify the groups and students you have led.",
+    hardSkills: ["Meditation instruction", "Buddhist philosophy & Dharma teaching", "Mindfulness training", "Spiritual counseling", "Group facilitation", "Temple & community programmes", "Ethics & contemplative practice"],
+    softSkills: ["Compassion", "Communication", "Patience", "Mindfulness", "Inclusivity"],
+    atsKeywords: ["Meditation", "Buddhist Philosophy", "Dharma", "Mindfulness", "Spiritual Counseling", "Group Facilitation", "Wellness"],
+    atsNote:
+      "Highlight meditation instruction, Dharma teaching and mindfulness training, quantify the groups and students led, and note interfaith collaboration and youth/education programmes.",
+  },
+  "infrastructure-engineer": {
+    include:
+      "A summary, a skills section showing you can design, automate and operate reliable systems, work experience with quantified reliability gains, a projects section, education, and a certifications section.",
+    length:
+      "One to two pages — mirror the posting's cloud and IaC keywords, keep your strongest reliability work high, and quantify uptime and cost improvements.",
+    hardSkills: ["Cloud (AWS/Azure/GCP)", "Infrastructure as Code (Terraform/Ansible)", "Kubernetes & Docker", "CI/CD pipelines", "Networking & security", "Monitoring & observability", "Linux"],
+    softSkills: ["Problem solving", "Communication", "Collaboration", "Ownership", "Attention to detail"],
+    atsKeywords: ["Infrastructure as Code", "AWS", "Terraform", "Kubernetes", "CI/CD", "Cloud", "Reliability"],
+    atsNote:
+      "Mirror the posting's keywords (\"Infrastructure as Code\", \"CI/CD pipelines\", \"Terraform\", \"Kubernetes\", \"AWS\"), show you design and operate reliable systems, and quantify uptime and cost improvements.",
+  },
+  "speech-therapist": {
+    include:
+      "Contact details, an objective or summary, work experience with bulleted duties, education (degree and Master's), a skills section (clinical plus interpersonal), and a certifications section (ASHA CCC-SLP, state licence).",
+    length:
+      "One to two pages — keep your CCC-SLP and clinical-assessment experience high, name your therapy techniques, and quantify caseloads and outcomes.",
+    hardSkills: ["Speech & language assessment", "Swallowing (dysphagia) evaluation", "Cognitive-communication therapy", "Treatment planning", "Standardized testing", "AAC", "Progress documentation"],
+    softSkills: ["Communication", "Empathy", "Patience", "Creativity", "Collaboration"],
+    atsKeywords: ["Speech-Language Pathology", "CCC-SLP", "Dysphagia", "Articulation", "Treatment Planning", "Assessment", "ASHA"],
+    atsNote:
+      "List ASHA CCC-SLP and state licensure prominently, name therapy techniques and tools the posting cites (\"dysphagia\", \"AAC\", \"articulation\"), and quantify caseloads and functional outcomes.",
+  },
+  "marriage-family-therapist": {
+    include:
+      "Contact details, a 3–4 line professional summary, experience, education, and a certifications section with your LMFT licence upfront, naming the state where you hold it.",
+    length:
+      "One to two pages — keep your LMFT licence and therapeutic-modality experience high, and quantify caseloads and client outcomes.",
+    hardSkills: ["Family-systems therapy", "Cognitive-behavioural therapy (CBT)", "Couples counseling", "Assessment & treatment planning", "Crisis intervention", "Case documentation", "Knowledge of regulations"],
+    softSkills: ["Active listening", "Empathy", "Communication", "Rapport building", "Problem solving"],
+    atsKeywords: ["Marriage and Family Therapy", "LMFT", "Family Systems Therapy", "CBT", "Couples Counseling", "Treatment Planning", "Crisis Intervention"],
+    atsNote:
+      "Put your LMFT licence (with the state) upfront to match the posting, name your therapeutic modalities (family systems, CBT), and quantify caseloads and client outcomes.",
+  },
+  "marketing-director": {
+    include:
+      "Contact details, a professional summary presenting strategic vision, a core-competencies section, professional experience with quantified impact, a significant-campaigns section, and education and certifications.",
+    length:
+      "One to two pages — include 10–20 posting-matched keywords, keep brand strategy, campaign management and your strongest results high, and quantify ROI, pipeline and growth.",
+    hardSkills: ["Marketing strategy", "Brand strategy & messaging", "Campaign management", "Demand generation", "Digital marketing & SEO", "Marketing automation (HubSpot)", "Analytics (GA4) & ROI"],
+    softSkills: ["Strategic leadership", "Team leadership", "Communication", "Decision-making", "Collaboration"],
+    atsKeywords: ["Marketing Strategy", "Brand Strategy", "Campaign Management", "Demand Generation", "SEO", "Marketing Automation", "ROI Analysis"],
+    atsNote:
+      "Place posting terms (\"marketing strategy\", \"campaign management\", \"brand strategy\", \"go-to-market\") across the summary, competencies and experience, name tools (HubSpot, GA4), and quantify ROI, pipeline and growth.",
+  },
 };
 
 const BY_SLUG = ROLE_CV_CONTENT;
