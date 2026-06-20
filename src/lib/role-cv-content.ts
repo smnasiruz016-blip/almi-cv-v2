@@ -4818,6 +4818,468 @@ export const ROLE_CV_CONTENT: Record<string, RoleCvContent> = {
     atsNote:
       "Employers screen for team size led and operational metrics; quantify throughput, cycle time, on-time delivery, labor cost and safety incidents on the bullets, and name lean/Six Sigma methods and the ERP/WMS systems you ran.",
   },
+  "clinical-social-worker": {
+    include:
+      "Licensure header (LCSW/LICSW/LMSW with state and number), clinical summary, therapeutic modalities, caseload and case-management record, populations and settings, supervision hours, and clinical education.",
+    length:
+      "One page for newly licensed clinicians; two pages where there is supervisory, program or multi-setting clinical experience.",
+    hardSkills: [
+      "Psychosocial assessment",
+      "Individual and group therapy",
+      "Treatment planning",
+      "Crisis intervention",
+      "CBT, DBT and trauma-informed care",
+      "Case management and care coordination",
+      "Electronic health records and clinical documentation",
+    ],
+    softSkills: [
+      "Empathy",
+      "Boundary setting",
+      "Cultural competency",
+      "Resilience",
+      "Collaborative communication",
+    ],
+    atsKeywords: [
+      "clinical social worker",
+      "LCSW",
+      "psychosocial assessment",
+      "case management",
+      "crisis intervention",
+      "trauma-informed care",
+      "treatment planning",
+    ],
+    atsNote:
+      "Place the license type, state and number in the header and summary for fast screening; name modalities explicitly (CBT, DBT, EMDR) and quantify clinical outcomes — caseload size, PHQ-9/symptom improvement, readmission reduction.",
+  },
+  "school-counsellor": {
+    include:
+      "Counseling summary, grade levels served, individual/group counseling record, college-and-career and 504/IEP work, data-driven program results, certification/licensure, and education.",
+    length:
+      "One page early-career; two pages for counselors with department-lead or district program experience.",
+    hardSkills: [
+      "Individual and group counseling",
+      "Crisis intervention",
+      "College and career readiness planning",
+      "504 and IEP coordination",
+      "Data-driven program evaluation",
+      "Student information systems (PowerSchool)",
+      "Psychological and needs assessment",
+    ],
+    softSkills: [
+      "Empathy",
+      "Active listening",
+      "Cultural competency",
+      "Patience",
+      "Conflict resolution",
+    ],
+    atsKeywords: [
+      "school counselor",
+      "individual counseling",
+      "academic planning",
+      "crisis intervention",
+      "college and career readiness",
+      "504 IEP",
+      "student support",
+    ],
+    atsNote:
+      "Schools screen for state certification/licensure (CSC, NCC, LPC) and student-outcome data; put the credential above or beside education and quantify program results — attendance, graduation, college-application or referral rates — rather than listing duties.",
+  },
+  "trainer": {
+    include:
+      "Training summary, programs designed and delivered, audience size and formats (ILT, virtual, e-learning), measured learning outcomes, LMS and authoring tools, certifications (CPTD, ATD), and education.",
+    length:
+      "One page early-career; two pages for trainers with curriculum-ownership or program-management scope.",
+    hardSkills: [
+      "Instructional design",
+      "Training delivery and facilitation",
+      "Curriculum and needs analysis",
+      "Onboarding program design",
+      "LMS administration",
+      "E-learning authoring",
+      "Kirkpatrick evaluation",
+    ],
+    softSkills: [
+      "Engaging facilitation",
+      "Adaptability to audiences",
+      "Clear communication",
+      "Coaching",
+      "Stakeholder collaboration",
+    ],
+    atsKeywords: [
+      "corporate trainer",
+      "instructional design",
+      "training delivery",
+      "curriculum development",
+      "needs analysis",
+      "LMS",
+      "learning outcomes",
+    ],
+    atsNote:
+      "Employers screen for instructional-design and facilitation experience plus measured learning impact; quantify learners trained, completion and assessment-pass rates and performance gains, and name your LMS, authoring tools and any CPTD/ATD credential.",
+  },
+  "stem-teacher": {
+    include:
+      "Teaching summary, subjects and grade levels, curriculum and lab/project work, classroom-management approach, educational-technology use, teaching license/certification, and education.",
+    length:
+      "One page early-career; two pages for experienced teachers with department-lead, curriculum or grant work.",
+    hardSkills: [
+      "STEM curriculum and lesson planning",
+      "Inquiry and project-based learning",
+      "Laboratory and safety management",
+      "Classroom management",
+      "Student assessment and data analysis",
+      "Educational technology and coding tools",
+      "Differentiated instruction",
+    ],
+    softSkills: [
+      "Clear explanation of complex concepts",
+      "Patience",
+      "Mentoring",
+      "Collaboration",
+      "Adaptability",
+    ],
+    atsKeywords: [
+      "STEM teacher",
+      "curriculum development",
+      "classroom management",
+      "project-based learning",
+      "student assessment",
+      "educational technology",
+      "teaching certification",
+    ],
+    atsNote:
+      "Schools require the appropriate teaching license/certification (Praxis, state subject endorsement, NBC) visible in its own section; lead bullets with instructional outcomes — proficiency growth, lab/project completion, competition results — not a list of duties.",
+  },
+  "site-manager": {
+    include:
+      "Construction summary, project types and values, site-supervision and safety record, scheduling and budget control, subcontractor coordination, software and certifications (OSHA, CCM), and qualifications.",
+    length:
+      "One page for early-career site managers; two pages where there are multiple large projects and team-leadership scope to document.",
+    hardSkills: [
+      "Site supervision and project management",
+      "Construction scheduling (Primavera P6, MS Project)",
+      "Budget and cost control",
+      "Health-and-safety compliance",
+      "Subcontractor and vendor coordination",
+      "Quality control and inspections",
+      "Procore and AutoCAD",
+    ],
+    softSkills: [
+      "On-site leadership",
+      "Problem-solving under pressure",
+      "Clear communication",
+      "Attention to detail",
+      "Decisiveness",
+    ],
+    atsKeywords: [
+      "site manager",
+      "construction management",
+      "site supervision",
+      "safety compliance",
+      "project scheduling",
+      "budget control",
+      "OSHA",
+    ],
+    atsNote:
+      "Employers screen for project scale, safety record and named tools (Primavera, Procore, MS Project) plus OSHA/CCM certifications; quantify project value, on-time/under-budget delivery and incident-rate reduction, and keep section headings standard for the ATS.",
+  },
+  "warehouse-operative": {
+    include:
+      "Profile, warehouse-duties summary (picking, packing, goods-in), equipment and licences (forklift/FLT, reach truck), accuracy and safety record, systems used, and any safety training.",
+    length:
+      "One page — keep it concise and back each skill with a short, concrete example.",
+    hardSkills: [
+      "Picking and packing",
+      "Goods-in and goods-out handling",
+      "Stock rotation and inventory accuracy",
+      "Forklift / reach-truck operation",
+      "Warehouse management systems (WMS) scanning",
+      "Pallet and load handling",
+      "Health-and-safety compliance",
+    ],
+    softSkills: [
+      "Stamina and reliability",
+      "Time management",
+      "Teamwork",
+      "Attention to detail",
+      "Organisation",
+    ],
+    atsKeywords: [
+      "warehouse operative",
+      "picking and packing",
+      "stock rotation",
+      "forklift",
+      "goods handling",
+      "inventory accuracy",
+      "health and safety",
+    ],
+    atsNote:
+      "Employers and the ATS scan for licences (FLT/forklift counterbalance, reach) and accuracy; list 8–10 clear skills, name the trucks and WMS you have used, and quantify pick rate, accuracy and units handled rather than writing vague duties.",
+  },
+  "production-manager": {
+    include:
+      "Manufacturing summary, plant/line scope and team size, KPI record (throughput, OEE, scrap, on-time delivery), lean and quality systems, ERP use, safety record, and qualifications.",
+    length:
+      "One page early-career; two pages for managers with multi-line, multi-shift or plant-wide responsibility.",
+    hardSkills: [
+      "Production planning and scheduling",
+      "Lean manufacturing (5S, Kaizen, value-stream mapping)",
+      "Capacity and workforce planning",
+      "Quality management (ISO 9001)",
+      "ERP systems (SAP, Oracle)",
+      "Equipment-maintenance coordination",
+      "KPI and continuous-improvement management",
+    ],
+    softSkills: [
+      "Team leadership",
+      "Analytical decision-making",
+      "Communication across shifts",
+      "Problem-solving",
+      "Accountability",
+    ],
+    atsKeywords: [
+      "production manager",
+      "manufacturing",
+      "lean manufacturing",
+      "production planning",
+      "continuous improvement",
+      "ISO 9001",
+      "throughput",
+    ],
+    atsNote:
+      "Recruiters scan for lean/continuous-improvement results and ERP/quality systems; quantify throughput, OEE, scrap reduction, on-time delivery and cost savings on the bullets, and name the lean methods (5S, Kaizen) and ERP (SAP, Oracle) for ATS matching.",
+  },
+  "shift-supervisor": {
+    include:
+      "Supervisory summary, team size and shift scope, operations and customer-service record, scheduling and cash-handling, compliance and safety, systems used, and any certifications.",
+    length:
+      "One page for most shift supervisors; a second page only where there is multi-site or larger-team responsibility.",
+    hardSkills: [
+      "Team scheduling and supervision",
+      "Daily operations management",
+      "Inventory and stock control",
+      "Cash handling and reconciliation",
+      "Food-safety / health-and-safety compliance",
+      "Point-of-sale and scheduling systems",
+      "Staff training and onboarding",
+    ],
+    softSkills: [
+      "Leadership on the floor",
+      "Customer-service focus",
+      "Multitasking under pressure",
+      "Conflict resolution",
+      "Clear communication",
+    ],
+    atsKeywords: [
+      "shift supervisor",
+      "team leadership",
+      "scheduling",
+      "customer service",
+      "inventory management",
+      "cash handling",
+      "operations",
+    ],
+    atsNote:
+      "Employers scan for proof you can run a shift, manage staff and stay compliant; weave the keywords into experience bullets and quantify team size led, sales or service metrics, and shrink/safety results rather than listing duties.",
+  },
+  "event-coordinator": {
+    include:
+      "Events summary, event types and scale, vendor and budget management, logistics and day-of coordination record, event software, and education.",
+    length:
+      "One page early-career; two pages where there are large or recurring events and team coordination to document.",
+    hardSkills: [
+      "Event planning and logistics coordination",
+      "Vendor management and contract negotiation",
+      "Budget management",
+      "Registration and attendee management",
+      "Day-of coordination and staff supervision",
+      "Event software (Cvent)",
+      "Site selection",
+    ],
+    softSkills: [
+      "Organisation under deadline",
+      "Client communication",
+      "Calm problem-solving",
+      "Attention to detail",
+      "Negotiation",
+    ],
+    atsKeywords: [
+      "event coordinator",
+      "vendor management",
+      "budget management",
+      "logistics coordination",
+      "Cvent",
+      "contract negotiation",
+      "day-of coordination",
+    ],
+    atsNote:
+      "ATS often needs literal matches — use the posting's exact terms (\"vendor management\", not \"supplier coordination\"); list 15–25 matched keywords across summary, skills and bullets, and quantify events run, budgets managed and attendance delivered.",
+  },
+  "web-designer": {
+    include:
+      "Portfolio link, design summary, tool stack (Figma), responsive-design and visual work, front-end basics (HTML/CSS), collaboration with developers, and education or bootcamp/certifications.",
+    length:
+      "One page; the portfolio carries the visual proof, so the resume stays concise and metric-focused.",
+    hardSkills: [
+      "Figma and design tooling",
+      "Responsive and mobile-first design",
+      "UI and visual design",
+      "HTML and CSS",
+      "Wireframing and prototyping",
+      "Branding and visual communication",
+      "Accessibility (WCAG)",
+    ],
+    softSkills: [
+      "Visual judgment",
+      "Communicating design rationale",
+      "Collaboration with developers",
+      "Attention to detail",
+      "Receiving critique",
+    ],
+    atsKeywords: [
+      "web designer",
+      "Figma",
+      "responsive design",
+      "user interface",
+      "HTML CSS",
+      "visual design",
+      "wireframing",
+    ],
+    atsNote:
+      "A portfolio link by the contact details is essential — it is the proof of ability; in the resume use standard section headings and the posting's terms (\"responsive design\", \"user interface\") and tie bullets to shipped sites and measurable engagement or conversion gains.",
+  },
+  "sound-engineer": {
+    include:
+      "Audio summary, notable projects (with outcomes), DAW and equipment proficiency, recording/mixing/live-sound specialties, a reel or portfolio link, and any training.",
+    length:
+      "One page; a reel or sample link carries the audio proof, so the resume stays concise.",
+    hardSkills: [
+      "Digital audio workstations (Pro Tools, Ableton Live)",
+      "Studio recording and tracking",
+      "Mixing and mastering",
+      "Live sound and front-of-house",
+      "Signal processing and routing",
+      "Microphone and interface setup",
+      "Audio editing and restoration",
+    ],
+    softSkills: [
+      "Critical listening",
+      "Collaboration with artists",
+      "Composure under live pressure",
+      "Communication",
+      "Problem-solving",
+    ],
+    atsKeywords: [
+      "sound engineer",
+      "audio engineer",
+      "Pro Tools",
+      "mixing",
+      "studio recording",
+      "live sound",
+      "audio editing",
+    ],
+    atsNote:
+      "Employers scan for named DAWs and gear plus notable projects; list your tool and equipment proficiency explicitly, include a reel or portfolio link, and quantify project scale (sessions, venues, releases) rather than listing generic duties.",
+  },
+  "project-coordinator": {
+    include:
+      "Coordination summary, projects and stakeholders supported, scheduling and risk-tracking record, PM tools, budget-tracking work, certifications (CAPM, Google PM), and education.",
+    length:
+      "One page early-career; two pages where there is multi-project or larger-program support to document.",
+    hardSkills: [
+      "Project scheduling and task management",
+      "Stakeholder coordination",
+      "Risk flagging and escalation",
+      "Budget and resource tracking",
+      "PM tools (MS Project, Asana, Smartsheet, Trello)",
+      "Gantt charts and status reporting",
+      "Meeting and document coordination",
+    ],
+    softSkills: [
+      "Organisation",
+      "Clear communication",
+      "Prioritisation",
+      "Proactive follow-up",
+      "Stakeholder rapport",
+    ],
+    atsKeywords: [
+      "project coordinator",
+      "stakeholder management",
+      "scheduling",
+      "Gantt",
+      "risk management",
+      "budget tracking",
+      "CAPM",
+    ],
+    atsNote:
+      "Use exact posting terms — \"stakeholder management\" and \"Gantt\" are common hard filters, so name them in skills and a bullet; if you hold a CAPM or Google PM cert, put it in the header and a certifications section, and quantify schedule and efficiency gains.",
+  },
+  "hr-assistant": {
+    include:
+      "HR summary, onboarding and records work, HRIS/payroll-support experience, benefits-administration and compliance exposure, systems used, certifications, and education.",
+    length:
+      "One page early-career; two pages where there is broad HR-operations or multi-site support.",
+    hardSkills: [
+      "Employee onboarding",
+      "HRIS data entry and maintenance",
+      "Payroll support",
+      "Benefits administration",
+      "Records and file management",
+      "Applicant tracking and scheduling",
+      "Compliance (EEOC, FMLA)",
+    ],
+    softSkills: [
+      "Discretion and confidentiality",
+      "Organisation",
+      "Clear communication",
+      "Attention to detail",
+      "Service orientation",
+    ],
+    atsKeywords: [
+      "HR assistant",
+      "employee onboarding",
+      "HRIS",
+      "payroll processing",
+      "benefits administration",
+      "Workday",
+      "applicant tracking",
+    ],
+    atsNote:
+      "Include 15–25 HR keywords matched to the posting — software (Workday, ADP, BambooHR), tasks (onboarding, benefits admin) and compliance (EEOC, FMLA); quantify employees supported and records/onboarding volume, and keep the layout clean for parsing.",
+  },
+  "research-assistant": {
+    include:
+      "Research summary, projects and methods, data-collection and analysis tools, lab or field techniques, publications/posters, research certifications (CITI, IRB), and education with relevant coursework.",
+    length:
+      "One page for students and early-career; two pages where there is substantial publication or multi-project history.",
+    hardSkills: [
+      "Literature review",
+      "Data collection and management",
+      "Statistical analysis (SPSS, R, Stata)",
+      "Laboratory or field techniques",
+      "Survey and experiment design",
+      "Scientific writing",
+      "IRB / research-ethics compliance",
+    ],
+    softSkills: [
+      "Critical thinking",
+      "Attention to detail",
+      "Self-direction",
+      "Collaboration",
+      "Clear communication",
+    ],
+    atsKeywords: [
+      "research assistant",
+      "data collection",
+      "statistical analysis",
+      "literature review",
+      "data analysis",
+      "research methods",
+      "CITI training",
+    ],
+    atsNote:
+      "Tailor technical skills to the field — clinical/lab roles need bench techniques and GCP/CITI credentials, academic/market roles weight analysis and writing; quantify datasets, participants and any publications, and list methods and tools the posting names.",
+  },
 };
 
 const BY_SLUG = ROLE_CV_CONTENT;
