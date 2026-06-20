@@ -19,7 +19,9 @@ export type RoleCvContent = {
 
 export const ROLE_CV_CONTENT: Record<string, RoleCvContent> = {
   // ── Batch 1 (sourced via live SERP 2026: Indeed, Nurse.org, enhancv, ATS guides) ──
-  nurse: {
+  // NOTE: keys MUST be the canonical role slug from @smnasiruz016-blip/job-roles
+  // (e.g. "registered-nurse", not "nurse" — there is no "nurse" slug).
+  "registered-nurse": {
     include:
       "Your name and contact details, a short professional summary, your nursing registration and licence number, clinical experience with measurable achievements, education, certifications (BLS, ACLS, PALS), and a key-skills section.",
     length:
