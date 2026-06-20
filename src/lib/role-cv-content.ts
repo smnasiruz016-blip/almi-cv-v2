@@ -5280,6 +5280,468 @@ export const ROLE_CV_CONTENT: Record<string, RoleCvContent> = {
     atsNote:
       "Tailor technical skills to the field — clinical/lab roles need bench techniques and GCP/CITI credentials, academic/market roles weight analysis and writing; quantify datasets, participants and any publications, and list methods and tools the posting names.",
   },
+  "islamic-scholar": {
+    include:
+      "Scholarly summary, areas of expertise (Fiqh, Hadith, Tafsir, Usul), teaching and research roles, ijazah/Aalimiyyah and higher degrees, publications, languages (Arabic, Urdu, English), and the institutions of study.",
+    length:
+      "Two pages is standard for an academic religious CV — list teaching posts, research areas and publications in full.",
+    hardSkills: [
+      "Fiqh and Islamic jurisprudence",
+      "Quran, Tafsir and Hadith sciences",
+      "Arabic language and classical texts",
+      "Religious instruction and lecturing",
+      "Research and scholarly writing",
+      "Fatwa and religious guidance",
+      "Comparative and Islamic history",
+    ],
+    softSkills: [
+      "Clear teaching",
+      "Measured judgment",
+      "Public speaking",
+      "Patience",
+      "Community engagement",
+    ],
+    atsKeywords: [
+      "islamic scholar",
+      "fiqh",
+      "hadith",
+      "tafsir",
+      "arabic",
+      "islamic studies",
+      "religious instruction",
+    ],
+    atsNote:
+      "Hiring committees screen for formal qualification (Aalimiyyah/ijazah, MA/PhD) and named specializations; place the credentials and areas of expertise (Fiqh, Hadith, Tafsir) high, list languages explicitly, and document teaching posts and publications in full.",
+  },
+  "religious-scholar": {
+    include:
+      "Scholarly summary, tradition and areas of expertise, teaching and research roles, degrees and ordination/formation, publications and lectures, languages, and institutions of study.",
+    length:
+      "Two pages — an academic/clerical CV documents teaching posts, research areas and publications, not a one-page resume.",
+    hardSkills: [
+      "Theology and scriptural studies",
+      "Religious instruction and lecturing",
+      "Research and scholarly writing",
+      "Comparative religion",
+      "Pastoral and community guidance",
+      "Ancient/liturgical languages",
+      "Curriculum and program development",
+    ],
+    softSkills: [
+      "Clear teaching",
+      "Reasoned judgment",
+      "Public speaking",
+      "Cultural sensitivity",
+      "Mentoring",
+    ],
+    atsKeywords: [
+      "religious scholar",
+      "theology",
+      "scriptural studies",
+      "religious instruction",
+      "comparative religion",
+      "research",
+      "lecturing",
+    ],
+    atsNote:
+      "Committees screen for degrees, ordination/formation status and named specializations; lead with credentials and areas of expertise, list teaching posts and publications in full, and name the scriptural/ancient languages you read.",
+  },
+  "khateeb": {
+    include:
+      "Ministry summary, Friday-sermon (khutbah) and prayer-leading record, religious-instruction duties, community programs, ijazah/formation and degrees, languages (Arabic + local), and institutions of study.",
+    length:
+      "One page for an early-career khateeb; two pages where there is long mosque leadership, teaching or program development.",
+    hardSkills: [
+      "Khutbah (sermon) preparation and delivery",
+      "Leading congregational prayer",
+      "Quran and Tajweed instruction",
+      "Religious counseling and guidance",
+      "Youth and community program coordination",
+      "Officiating weddings and funerals",
+      "Arabic and scriptural knowledge",
+    ],
+    softSkills: [
+      "Public speaking",
+      "Compassion",
+      "Community leadership",
+      "Discretion",
+      "Active listening",
+    ],
+    atsKeywords: [
+      "khateeb",
+      "khutbah",
+      "imam",
+      "congregational prayer",
+      "quran",
+      "religious instruction",
+      "community engagement",
+    ],
+    atsNote:
+      "Mosque committees screen for sermon-delivery and prayer-leading experience plus formal qualification (ijazah/Aalimiyyah); open each bullet with the duty performed and the congregation served, list Arabic and local-language fluency, and document teaching and community programs.",
+  },
+  "madrasa-teacher": {
+    include:
+      "Teaching summary, subjects (Quran, Tajweed, Arabic, Islamic studies) and student levels, curriculum and mentoring work, community programs, ijazah/qualifications, languages, and education.",
+    length:
+      "One page early-career; two pages for experienced teachers with curriculum, department or competition-coaching work.",
+    hardSkills: [
+      "Quran memorization (Hifz) instruction",
+      "Tajweed and recitation teaching",
+      "Arabic language instruction",
+      "Islamic studies curriculum",
+      "Student assessment and mentoring",
+      "Classroom management",
+      "Competition and program preparation",
+    ],
+    softSkills: [
+      "Patience",
+      "Cultural sensitivity",
+      "Clear communication",
+      "Mentoring",
+      "Organisation",
+    ],
+    atsKeywords: [
+      "madrasa teacher",
+      "islamic studies teacher",
+      "quran",
+      "tajweed",
+      "arabic",
+      "curriculum development",
+      "student engagement",
+    ],
+    atsNote:
+      "Schools and madaris screen for the subjects you teach and formal qualification (ijazah, Aalimiyyah, teaching credential); keep the skills list to 6–10, lead bullets with student outcomes (Hifz completion, competition results) and place certifications in a clear section.",
+  },
+  "muezzin": {
+    include:
+      "Service summary, adhan and iqamah duties, mosque-operations responsibilities (opening/closing, sound system, prayer support), Quran and recitation training, qualifications, and languages.",
+    length:
+      "One page — a focused record of mosque service, recitation training and reliability.",
+    hardSkills: [
+      "Adhan and Iqamah recitation",
+      "Tajweed and vocal projection",
+      "Quran recitation",
+      "Mosque opening and closing",
+      "Sound-system setup and operation",
+      "Prayer support and timing",
+      "Congregation assistance",
+    ],
+    softSkills: [
+      "Reliability and punctuality",
+      "Devotion and good character",
+      "Calm presence",
+      "Community trust",
+      "Attentiveness",
+    ],
+    atsKeywords: [
+      "muezzin",
+      "adhan",
+      "iqamah",
+      "tajweed",
+      "quran recitation",
+      "mosque",
+      "call to prayer",
+    ],
+    atsNote:
+      "Mosque committees value punctual, accurate recitation and trustworthy character above all; document your recitation training (Tajweed, Quran), the mosque duties you held (adhan, opening/closing, sound system) and your reliability across the five daily prayers.",
+  },
+  "guru": {
+    include:
+      "Teaching summary, tradition and practices taught, classes/workshops/retreats led, philosophy and lineage, certifications or formation, client/student outcomes, and education.",
+    length:
+      "One to two pages — a focused record of teaching, practices and the communities served.",
+    hardSkills: [
+      "Spiritual and meditation guidance",
+      "Class, workshop and retreat facilitation",
+      "Philosophy and scriptural instruction",
+      "Ritual and ceremony facilitation",
+      "Individual and group teaching",
+      "Community and program development",
+      "Mentoring and personal development",
+    ],
+    softSkills: [
+      "Compassion",
+      "Active listening",
+      "Calm presence",
+      "Deep subject knowledge",
+      "Relationship building",
+    ],
+    atsKeywords: [
+      "spiritual teacher",
+      "meditation guidance",
+      "spiritual guidance",
+      "workshop facilitation",
+      "personal development",
+      "community engagement",
+      "ritual facilitation",
+    ],
+    atsNote:
+      "Centers and students look for depth of practice, lineage/formation and a record of teaching; lead the summary with your tradition and years of practice, and quantify classes, workshops, retreats and student retention rather than listing abstract qualities.",
+  },
+  "sanskrit-teacher": {
+    include:
+      "Teaching summary, levels and subjects (grammar, literature, chanting), curriculum and lesson work, student outcomes, teaching credential, languages, and education.",
+    length:
+      "One to two pages — focus on teaching impact, curriculum work and credentials.",
+    hardSkills: [
+      "Sanskrit grammar and language instruction",
+      "Sanskrit literature and texts",
+      "Lesson planning and curriculum",
+      "Chanting and pronunciation teaching",
+      "Student assessment",
+      "Classroom management",
+      "Educational technology",
+    ],
+    softSkills: [
+      "Patience",
+      "Clear explanation",
+      "Cultural knowledge",
+      "Mentoring",
+      "Organisation",
+    ],
+    atsKeywords: [
+      "sanskrit teacher",
+      "sanskrit grammar",
+      "lesson planning",
+      "curriculum development",
+      "student assessment",
+      "language instruction",
+      "classroom management",
+    ],
+    atsNote:
+      "Schools screen for subject depth, grade levels and a teaching credential; open bullets with student outcomes (proficiency, exam results, recitation) and place qualifications and languages in clear sections — keep it one to two pages.",
+  },
+  "lama": {
+    include:
+      "Teaching summary, tradition and practices taught, Dharma classes/retreats led, philosophy and lineage/formation, academic or organizational roles, languages, and education.",
+    length:
+      "One to two pages — document teaching, retreats led and any academic or organizational appointments.",
+    hardSkills: [
+      "Dharma teaching and instruction",
+      "Meditation guidance",
+      "Retreat and workshop facilitation",
+      "Buddhist philosophy and texts",
+      "Ritual and ceremony facilitation",
+      "Individual and group teaching",
+      "Community and program development",
+    ],
+    softSkills: [
+      "Compassion",
+      "Calm under difficulty",
+      "Active listening",
+      "Patience",
+      "Commitment to practice",
+    ],
+    atsKeywords: [
+      "buddhist teacher",
+      "dharma",
+      "meditation guidance",
+      "retreat facilitation",
+      "buddhist philosophy",
+      "spiritual guidance",
+      "community engagement",
+    ],
+    atsNote:
+      "Centers and institutions look for lineage/formation, depth of practice and a teaching record; lead with tradition and years of practice, document Dharma classes, retreats and any academic post, and use action verbs (taught, guided, led) on each bullet.",
+  },
+  "cantor": {
+    include:
+      "Liturgical-music summary, services and lifecycle events led, b'nai mitzvah teaching, choir direction, instruments, sacred-music degree/ordination, Hebrew proficiency, and education.",
+    length:
+      "One to two pages — document services led, teaching and any cantorial ordination or sacred-music degree.",
+    hardSkills: [
+      "Liturgical music and chant (nusach)",
+      "Leading worship in Hebrew and English",
+      "B'nai mitzvah preparation and teaching",
+      "Choir direction",
+      "Torah and Haftarah chanting",
+      "Instrumental accompaniment (guitar, keyboard)",
+      "Lifecycle-ceremony officiation",
+    ],
+    softSkills: [
+      "Strong vocal performance",
+      "Congregational leadership",
+      "Teaching",
+      "Warmth and pastoral presence",
+      "Collaboration with clergy",
+    ],
+    atsKeywords: [
+      "cantor",
+      "hazzan",
+      "liturgical music",
+      "nusach",
+      "b'nai mitzvah",
+      "choir direction",
+      "hebrew",
+    ],
+    atsNote:
+      "Synagogues screen for sacred-music training (Hebrew Union College, Jewish Theological Seminary) or cantorial ordination, Hebrew prayer modes (nusach) and teaching ability; document services and lifecycle events led, b'nai mitzvah students taught and choir work.",
+  },
+  "hebrew-teacher": {
+    include:
+      "Teaching summary, levels and subjects (language, grammar, literature), curriculum and lesson work, student outcomes, teaching credential, language proficiencies, and education.",
+    length:
+      "One page early-career; two pages for experienced teachers with curriculum or department work.",
+    hardSkills: [
+      "Hebrew language instruction",
+      "Grammar and literature teaching",
+      "Lesson planning and curriculum",
+      "Student assessment",
+      "Classroom management",
+      "Educational technology",
+      "Differentiated instruction",
+    ],
+    softSkills: [
+      "Patience",
+      "Clear communication",
+      "Empathy",
+      "Adaptability",
+      "Mentoring",
+    ],
+    atsKeywords: [
+      "hebrew teacher",
+      "hebrew language",
+      "lesson planning",
+      "curriculum development",
+      "student assessment",
+      "classroom management",
+      "language instruction",
+    ],
+    atsNote:
+      "Schools screen for grade levels, subjects and a teaching credential; highlight reading/writing/speaking Hebrew plus other languages, open bullets with student outcomes, and keep certifications and education in clearly labeled sections.",
+  },
+  "sikh-religious-teacher": {
+    include:
+      "Service summary, Gurbani and Kirtan duties, scripture reading (Paath) and discourse (Katha), ceremony officiation, Kirtan/Tabla teaching, Sikh-studies qualifications, Punjabi proficiency, and education.",
+    length:
+      "One to two pages — document services led, ceremonies officiated, teaching and qualifications.",
+    hardSkills: [
+      "Gurbani recitation and interpretation",
+      "Kirtan (devotional music) and ragas",
+      "Paath (scripture reading) and Katha (discourse)",
+      "Ardas and ceremony officiation",
+      "Harmonium and Tabla",
+      "Sikh history and principles instruction",
+      "Punjabi (written and verbal)",
+    ],
+    softSkills: [
+      "Devotion and discipline",
+      "Community leadership",
+      "Clear teaching",
+      "Compassion",
+      "Mentoring",
+    ],
+    atsKeywords: [
+      "granthi",
+      "gurbani",
+      "kirtan",
+      "katha",
+      "sikh studies",
+      "punjabi",
+      "religious instruction",
+    ],
+    atsNote:
+      "Gurdwara committees screen for Gurbani knowledge, Kirtan/Tabla skill and Punjabi fluency, plus practice as an Amritdhari Sikh; document services led, ceremonies officiated and Kirtan/Tabla classes taught, and list scripture and music competencies explicitly.",
+  },
+  "interfaith-minister": {
+    include:
+      "Ministry summary, spiritual-care and counseling record, interfaith and ceremony work, ordination/endorsement, chaplaincy settings, Master of Divinity and certifications, and education.",
+    length:
+      "One to two pages — document ministry settings, ceremonies and ordination/endorsement.",
+    hardSkills: [
+      "Spiritual care and counseling",
+      "Interfaith dialogue and communication",
+      "Grief and crisis support",
+      "Ceremony and lifecycle officiation",
+      "Worship and program facilitation",
+      "Pastoral visitation",
+      "Community outreach",
+    ],
+    softSkills: [
+      "Empathy",
+      "Active listening",
+      "Cultural sensitivity",
+      "Confidentiality",
+      "Public speaking",
+    ],
+    atsKeywords: [
+      "interfaith minister",
+      "chaplain",
+      "spiritual care",
+      "interfaith dialogue",
+      "pastoral counseling",
+      "grief support",
+      "ordination",
+    ],
+    atsNote:
+      "Employers screen for ordination/commissioning and chaplaincy endorsement plus a Master of Divinity; place ordination and credentials clearly, document pastoral-care and interfaith work with the settings served, and emphasize confidentiality and cultural sensitivity.",
+  },
+  "meditation-teacher": {
+    include:
+      "Teaching summary, modalities and traditions taught, classes/workshops/retreats led, certifications and training hours, student outcomes, and education.",
+    length:
+      "One page — lead with certifications and a concrete teaching record.",
+    hardSkills: [
+      "Guided meditation instruction",
+      "Mindfulness and breathwork techniques",
+      "Individual and group class instruction",
+      "Workshop and retreat facilitation",
+      "Curriculum and session design",
+      "Anatomy and safety awareness",
+      "Beginner-to-advanced progression",
+    ],
+    softSkills: [
+      "Calm presence",
+      "Empathy",
+      "Active listening",
+      "Clear communication",
+      "Relationship building",
+    ],
+    atsKeywords: [
+      "meditation teacher",
+      "guided meditation",
+      "mindfulness",
+      "class instruction",
+      "workshop facilitation",
+      "breathwork",
+      "group instruction",
+    ],
+    atsNote:
+      "Studios and wellness employers screen for certification and a teaching record; put your training (style, institution, hours) in a dedicated section near the top and quantify classes, workshops, retreats and student retention using a Context-Action-Result framing.",
+  },
+  "yoga-instructor": {
+    include:
+      "Teaching summary, styles taught and specialties, certifications (RYT-200/500, CPR), classes and student outcomes, anatomy knowledge, class plans or portfolio links, and education.",
+    length:
+      "One page — certifications and a concrete teaching record carry the resume.",
+    hardSkills: [
+      "Yoga instruction (Hatha, Vinyasa, etc.)",
+      "Sequencing and class planning",
+      "Adjustments and assists",
+      "Anatomy and physiology",
+      "Meditation and breathwork",
+      "Individual and group instruction",
+      "Modifications and safety awareness",
+    ],
+    softSkills: [
+      "Calming presence",
+      "Clear cueing",
+      "Empathy",
+      "Motivation",
+      "Relationship building",
+    ],
+    atsKeywords: [
+      "yoga instructor",
+      "RYT-200",
+      "vinyasa",
+      "hatha",
+      "class instruction",
+      "anatomy",
+      "meditation techniques",
+    ],
+    atsNote:
+      "Studios screen for certification first — put RYT-200/RYT-500 (style, institution, hours) and CPR in a dedicated section near the top; list the styles you teach and quantify class size, retention and any specialty (prenatal, therapeutic) on the experience bullets.",
+  },
 };
 
 const BY_SLUG = ROLE_CV_CONTENT;
