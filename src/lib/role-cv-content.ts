@@ -5742,6 +5742,468 @@ export const ROLE_CV_CONTENT: Record<string, RoleCvContent> = {
     atsNote:
       "Studios screen for certification first — put RYT-200/RYT-500 (style, institution, hours) and CPR in a dedicated section near the top; list the styles you teach and quantify class size, retention and any specialty (prenatal, therapeutic) on the experience bullets.",
   },
+  "specialist-doctor": {
+    include:
+      "Clinical summary, specialty and board certifications, licensure and registration (visible up front), clinical and research experience, procedures/competencies, publications, leadership roles, and medical education.",
+    length:
+      "Two pages is standard for a specialist CV — board certification, licensure, training, procedures and publications need full documentation.",
+    hardSkills: [
+      "Specialty diagnosis and treatment",
+      "Clinical procedures and competencies",
+      "Patient management and care coordination",
+      "Pharmacology and evidence-based medicine",
+      "Clinical documentation",
+      "Medical research",
+      "Multidisciplinary collaboration",
+    ],
+    softSkills: [
+      "Clinical judgment",
+      "Patient communication",
+      "Leadership",
+      "Composure under pressure",
+      "Teamwork",
+    ],
+    atsKeywords: [
+      "specialist physician",
+      "board certified",
+      "clinical experience",
+      "patient care",
+      "medical license",
+      "diagnosis and treatment",
+      "specialty",
+    ],
+    atsNote:
+      "Licensure and board certification often decide whether the application advances — make current status, specialty standing and registration confirmable in one quick read; list procedures/competencies and quantify outcomes, caseload and any research or leadership.",
+  },
+  "senior-consultant": {
+    include:
+      "Consulting summary, engagement record with quantified client impact, industry and functional expertise, methodologies, leadership/mentoring, tools, certifications (CMC, PMP, Lean Six Sigma), and education.",
+    length:
+      "One to two pages — at senior level, two pages is acceptable to evidence engagement depth and leadership.",
+    hardSkills: [
+      "Strategy and business analysis",
+      "Financial and operational modeling",
+      "Project and program management",
+      "Stakeholder and change management",
+      "Process improvement (Lean Six Sigma, Agile)",
+      "Data analysis and due diligence",
+      "Client engagement delivery",
+    ],
+    softSkills: [
+      "Structured problem-solving",
+      "Client influence",
+      "Team leadership and mentoring",
+      "Clear communication of insight",
+      "Comfort with ambiguity",
+    ],
+    atsKeywords: [
+      "senior consultant",
+      "strategy",
+      "business analysis",
+      "stakeholder management",
+      "project management",
+      "process improvement",
+      "client engagement",
+    ],
+    atsNote:
+      "Open every bullet with a strong action verb (Led, Analyzed, Quantified) and embed competency keywords inside it; tie consulting work to measurable cost savings and outcomes, and add leadership signals (mentored, championed) that mark the senior level.",
+  },
+  "pharmacy-assistant": {
+    include:
+      "Profile, dispensing-support and inventory record, customer-service and accuracy strengths, pharmacy software, certifications (PTCB, First Aid/CPR), and education.",
+    length:
+      "One page — concise, accuracy-focused, with certifications clearly listed.",
+    hardSkills: [
+      "Medication dispensing support",
+      "Prescription data entry",
+      "Inventory management and audits",
+      "Pharmacy software",
+      "Stock rotation and ordering",
+      "Pharmacy-law awareness",
+      "Point-of-sale and customer service",
+    ],
+    softSkills: [
+      "Accuracy and attention to detail",
+      "Customer service",
+      "Composure under pressure",
+      "Communication",
+      "Teamwork",
+    ],
+    atsKeywords: [
+      "pharmacy assistant",
+      "medication dispensing",
+      "inventory management",
+      "customer service",
+      "pharmacy software",
+      "PTCB",
+      "attention to detail",
+    ],
+    atsNote:
+      "Accuracy is the core signal — name dispensing-support and inventory skills plainly, list any PTCB/state-licensure and First Aid/CPR (with in-progress dates if applicable), and quantify prescriptions handled and inventory accuracy.",
+  },
+  "pharmaceutical-care-specialist": {
+    include:
+      "Clinical-pharmacy summary, medication-therapy-management and patient-counseling record, clinical interventions, pharmacy and EHR software, regulatory compliance, certifications/licensure, and education.",
+    length:
+      "One page early-career; two pages where there is clinical-rotation, residency or specialist experience.",
+    hardSkills: [
+      "Medication therapy management (MTM)",
+      "Drug utilization review",
+      "Patient counseling and immunizations",
+      "Clinical interventions and pharmacokinetics",
+      "Chronic disease management",
+      "Pharmacy software (Epic Willow, Cerner, PioneerRx)",
+      "Regulatory compliance (USP 797/800, HIPAA, DEA)",
+    ],
+    softSkills: [
+      "Clinical judgment",
+      "Patient communication",
+      "Attention to detail",
+      "Collaboration with prescribers",
+      "Empathy",
+    ],
+    atsKeywords: [
+      "pharmaceutical care",
+      "medication therapy management",
+      "patient counseling",
+      "drug utilization review",
+      "clinical pharmacy",
+      "chronic disease management",
+      "pharmacokinetics",
+    ],
+    atsNote:
+      "Identify 10–15 keywords from the posting and weave them through summary, experience and skills; name pharmacy software (Epic Willow, Cerner) and compliance standards (USP 797/800, HIPAA) explicitly, and quantify interventions and patient outcomes.",
+  },
+  "information-security-manager": {
+    include:
+      "Security-leadership summary, governance and risk record, incident-response and compliance work, security tools by name, team-leadership scope, certifications (CISSP, CISM), and education.",
+    length:
+      "Two pages is standard at manager level — document governance, frameworks, programs and quantified risk reduction.",
+    hardSkills: [
+      "Security governance and risk management",
+      "Incident response",
+      "SIEM and security operations (Splunk, CrowdStrike)",
+      "Vulnerability assessment",
+      "Compliance (ISO 27001, NIST, SOC 2)",
+      "Security architecture and policy",
+      "Audit readiness",
+    ],
+    softSkills: [
+      "Risk communication",
+      "Team leadership",
+      "Stakeholder influence",
+      "Decision-making under pressure",
+      "Clear reporting to executives",
+    ],
+    atsKeywords: [
+      "information security manager",
+      "risk management",
+      "incident response",
+      "SIEM",
+      "ISO 27001",
+      "security governance",
+      "CISSP",
+    ],
+    atsNote:
+      "ATS matches literally — use the posting's exact framework names (\"risk management framework\", ISO 27001) and name tools (Splunk, CrowdStrike) not generic terms; place CISSP/CISM near education and quantify audit-readiness and risk-reduction outcomes.",
+  },
+  "trader": {
+    include:
+      "Trading summary, asset classes and strategies, performance metrics (P&L, Sharpe), risk-management record, platforms and languages, licenses (CFA, FRM, Series), and education.",
+    length:
+      "One to two pages — keep formatting clean (no tables/charts) and lead with quantified performance.",
+    hardSkills: [
+      "Trade execution and order routing",
+      "Risk and portfolio management",
+      "Derivatives, options and futures",
+      "Market analysis and microstructure",
+      "Bloomberg and Reuters terminals",
+      "Python, R and SQL",
+      "P&L and trade surveillance",
+    ],
+    softSkills: [
+      "Decision-making under pressure",
+      "Discipline",
+      "Quantitative reasoning",
+      "Composure",
+      "Focus",
+    ],
+    atsKeywords: [
+      "trader",
+      "risk management",
+      "derivatives",
+      "Bloomberg",
+      "algorithmic trading",
+      "portfolio management",
+      "P&L",
+    ],
+    atsNote:
+      "ATS scans for trading tools, strategies and licenses — name Bloomberg/Reuters, the instruments traded and any CFA/FRM/Series; quantify P&L, returns and risk metrics, and skip tables, columns and embedded charts so the resume parses cleanly.",
+  },
+  "marketing-executive": {
+    include:
+      "Marketing summary, campaign and channel record, measurable results (ROI, CAC, ROAS, CTR), martech tools, content and brand work, certifications, and education.",
+    length:
+      "One to two pages — lead with quantified campaign outcomes.",
+    hardSkills: [
+      "Marketing strategy and go-to-market",
+      "Campaign management",
+      "SEO and content marketing",
+      "Email and social media marketing",
+      "Marketing automation",
+      "Analytics (GA4) and A/B testing",
+      "Conversion-rate optimization",
+    ],
+    softSkills: [
+      "Creative thinking",
+      "Data-driven judgment",
+      "Cross-functional collaboration",
+      "Clear communication",
+      "Project ownership",
+    ],
+    atsKeywords: [
+      "marketing executive",
+      "marketing strategy",
+      "campaign management",
+      "SEO",
+      "marketing automation",
+      "content marketing",
+      "ROI",
+    ],
+    atsNote:
+      "Use the posting's exact terms across summary (top 3–5 keywords), skills (10–15) and bullets (one keyword + a metric each); name your martech (GA4, HubSpot, SEMrush) and write outcomes (\"grew organic engagement 45%\"), not duties.",
+  },
+  "public-relations-officer": {
+    include:
+      "Communications summary, media-relations and press record, campaign results, crisis-management experience, tools (Cision, Hootsuite), social and stakeholder work, and education.",
+    length:
+      "One page early-career; two pages where there is extensive campaign or in-house communications history.",
+    hardSkills: [
+      "Media relations",
+      "Press-release and content writing",
+      "Crisis communications",
+      "Corporate communications",
+      "Campaign planning and measurement",
+      "Media monitoring (Cision)",
+      "Social media management",
+    ],
+    softSkills: [
+      "Persuasive writing",
+      "Composure under scrutiny",
+      "Relationship building",
+      "Teamwork",
+      "News judgment",
+    ],
+    atsKeywords: [
+      "public relations officer",
+      "media relations",
+      "press release",
+      "crisis management",
+      "corporate communications",
+      "Cision",
+      "media coverage",
+    ],
+    atsNote:
+      "Use standard headings and weave the posting's terms (\"media relations\", \"crisis management\") through skills, profile and experience; lead bullets with measurable outcomes — coverage earned, reach, share of voice — and name your PR tools.",
+  },
+  "sales-assistant": {
+    include:
+      "Profile, retail-sales and customer-service record, POS and inventory handling, merchandising, product knowledge, any retail training/certifications, and education.",
+    length:
+      "One page — concise, with a data-backed fact in the summary and clear skills.",
+    hardSkills: [
+      "POS operation and cash handling",
+      "Customer service",
+      "Inventory control and stock replenishment",
+      "Visual merchandising",
+      "Product knowledge",
+      "Upselling and add-on sales",
+      "Returns and transaction handling",
+    ],
+    softSkills: [
+      "Friendly communication",
+      "Teamwork",
+      "Attention to detail",
+      "Problem-solving",
+      "Reliability",
+    ],
+    atsKeywords: [
+      "sales assistant",
+      "customer service",
+      "POS",
+      "inventory control",
+      "merchandising",
+      "cash handling",
+      "retail sales",
+    ],
+    atsNote:
+      "Keep it one page with standard headings; lead the summary with one data-backed fact (e.g. sales target or footfall served), list 6–10 clear retail skills, and quantify sales, upsell rate and customer-satisfaction results on the experience bullets.",
+  },
+  "telesales-agent": {
+    include:
+      "Profile, outbound-sales and call record, conversion and quota results, CRM use, objection-handling and product knowledge, any sales training, and education.",
+    length:
+      "One page — concise, results-led, with CRM and call metrics visible.",
+    hardSkills: [
+      "Outbound and cold calling",
+      "Objection handling and closing",
+      "CRM software (Salesforce)",
+      "Lead qualification",
+      "Product knowledge",
+      "Call scheduling and follow-up",
+      "Sales documentation",
+    ],
+    softSkills: [
+      "Persuasion",
+      "Active listening",
+      "Resilience",
+      "Clear phone manner",
+      "Customer-service orientation",
+    ],
+    atsKeywords: [
+      "telesales agent",
+      "outbound calling",
+      "cold calling",
+      "CRM",
+      "objection handling",
+      "lead generation",
+      "sales calls",
+    ],
+    atsNote:
+      "Name your CRM (Salesforce) and include call/conversion terms (cold calling, objection handling); quantify calls per day, conversion rate and quota attainment on the bullets, and include synonyms (telemarketing, outreach) to match ATS keyword variants.",
+  },
+  "seo-writer": {
+    include:
+      "Writing summary, SEO and content record, traffic/ranking results, CMS and SEO tools, portfolio link, certifications (Google Analytics, HubSpot), and education.",
+    length:
+      "One page — lead with measurable traffic and ranking outcomes; link a portfolio.",
+    hardSkills: [
+      "SEO writing and on-page optimization",
+      "Keyword research",
+      "Content strategy and editorial calendars",
+      "WordPress and CMS",
+      "SEO tools (Ahrefs, SEMrush, GSC)",
+      "Analytics (Google Analytics)",
+      "Proofreading and AP style",
+    ],
+    softSkills: [
+      "Clear storytelling",
+      "Audience awareness",
+      "Self-direction",
+      "Attention to detail",
+      "Adaptable brand voice",
+    ],
+    atsKeywords: [
+      "SEO writer",
+      "search engine optimization",
+      "content strategy",
+      "keyword research",
+      "WordPress",
+      "blog posts",
+      "Google Analytics",
+    ],
+    atsNote:
+      "Include must-have terms (SEO writing, keyword research, content strategy, WordPress) and name the tools (Ahrefs, SEMrush, GSC); quantify results — \"grew organic traffic 50%\", ranking improvements — and add a portfolio link to prove range.",
+  },
+  "vp-of-sales": {
+    include:
+      "Executive summary, revenue and quota-attainment record, team and territory scale led, GTM and pipeline strategy, key wins, methodologies and tools, and education/credentials.",
+    length:
+      "Two pages — cover the last 10–15 years with quantified revenue and leadership outcomes.",
+    hardSkills: [
+      "Strategic sales leadership",
+      "Revenue growth and quota attainment",
+      "Go-to-market and territory strategy",
+      "Pipeline and forecast management",
+      "Sales-team building and enablement",
+      "Key-account and partnership development",
+      "CRM and sales analytics",
+    ],
+    softSkills: [
+      "Executive leadership",
+      "People management",
+      "Strategic thinking",
+      "Negotiation",
+      "Board and stakeholder communication",
+    ],
+    atsKeywords: [
+      "VP of sales",
+      "strategic sales leadership",
+      "quota attainment",
+      "revenue growth",
+      "go-to-market",
+      "business development",
+      "sales leadership",
+    ],
+    atsNote:
+      "Use Problem-Solution-Result bullets with action verbs (spearheaded, accelerated) and quantify revenue, growth %, quota attainment and team size; include variant keywords (\"sales leadership\", \"business development\") and keep standard headings for the ATS.",
+  },
+  "vp-of-marketing": {
+    include:
+      "Executive summary, brand and demand-generation record, revenue and pipeline impact, team scale led, notable campaigns, martech and analytics, certifications, and education.",
+    length:
+      "Two pages — cover the last 10–15 years with data-driven marketing outcomes.",
+    hardSkills: [
+      "Marketing strategy and brand management",
+      "Demand and lead generation",
+      "Integrated and digital marketing",
+      "Go-to-market strategy",
+      "Marketing analytics and attribution",
+      "Budget and team management",
+      "Martech stack ownership",
+    ],
+    softSkills: [
+      "Executive leadership",
+      "Strategic vision",
+      "Cross-functional influence",
+      "Storytelling",
+      "Decision-making",
+    ],
+    atsKeywords: [
+      "VP of marketing",
+      "marketing strategy",
+      "brand management",
+      "demand generation",
+      "integrated marketing",
+      "digital marketing",
+      "go-to-market",
+    ],
+    atsNote:
+      "Executive recruiters screen for leadership scope and martech depth; lead with an executive summary, quantify pipeline/revenue impact and team size, name your stack and certifications, and use clear headings so the ATS surfaces the qualifications.",
+  },
+  "marketing-automation-specialist": {
+    include:
+      "Automation summary, platform record (HubSpot, Marketo, Pardot), campaign and lead-nurture results, CRM integration, email and landing-page work, certifications, and education.",
+    length:
+      "One to two pages — lead with platform expertise and measurable campaign outcomes.",
+    hardSkills: [
+      "Marketing automation (HubSpot, Marketo, Pardot)",
+      "Email marketing and nurture flows",
+      "Lead scoring and generation",
+      "Campaign management",
+      "CRM integration",
+      "Landing pages and HTML",
+      "Data analysis and reporting",
+    ],
+    softSkills: [
+      "Process orientation",
+      "Data-driven judgment",
+      "Cross-functional collaboration",
+      "Attention to detail",
+      "Clear reporting",
+    ],
+    atsKeywords: [
+      "marketing automation",
+      "HubSpot",
+      "Marketo",
+      "Pardot",
+      "lead generation",
+      "email marketing",
+      "campaign management",
+    ],
+    atsNote:
+      "Name your automation platforms (HubSpot, Marketo, Pardot) and CRM in the skills section so hiring managers see qualifications at a glance; quantify lead, conversion and campaign results, and keep the file a clean text-based PDF/DOCX for parsing.",
+  },
 };
 
 const BY_SLUG = ROLE_CV_CONTENT;
