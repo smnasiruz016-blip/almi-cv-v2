@@ -1698,6 +1698,132 @@ export const ROLE_CV_CONTENT: Record<string, RoleCvContent> = {
     atsKeywords: ["Forensic Accounting", "Fraud Investigation", "Fraud Examination", "Auditing", "Financial Analysis", "Fraud Detection", "Investigative Research", "Internal Controls"],
     atsNote: "The high-signal keywords are Financial Analysis, Fraud Examination, Auditing and Investigative Research (ATS used by 75%+ of employers); add the CFE credential and lead with caseload scope, jurisdictional reach and investigations owned intake-to-resolution.",
   },
+  "heavy-equipment-operator": {
+    include:
+      "A summary (years + specialization + biggest proof point), a Skills section (equipment + GPS + safety), certifications, and Experience with cubic yards and grade tolerances.",
+    length: "One to two pages; ATS scans for exact matches, so name equipment and GPS systems.",
+    hardSkills: ["Excavators / bulldozers / graders", "GPS grading (Trimble, Topcon)", "Site work & earthmoving", "Grade & elevation control", "Equipment inspection & maintenance", "Blueprint reading", "Load handling", "Site safety"],
+    softSkills: ["Safety awareness", "Communication", "Teamwork", "Problem solving"],
+    atsKeywords: ["Heavy Equipment Operator", "Excavator", "Bulldozer", "GPS Grading", "Site Work", "Earthmoving", "Equipment Maintenance", "Safety"],
+    atsNote: "Name the exact machines and GPS systems (Trimble, Topcon are high-value keywords) and list NCCER/CDL (NCCCO if crane-certified); quantify cubic yards moved, grade tolerances and project values.",
+  },
+  "surveyor": {
+    include:
+      "A summary with achievements, a Skills section (instruments + CAD + GNSS), Education/licensure with full certification names, and Experience tied to project outcomes.",
+    length: "One to two pages; plain bullets, no columns/creative fonts (ATS misreads them).",
+    hardSkills: ["Boundary surveys", "Topographic mapping", "Construction staking", "GNSS / GPS surveying", "Total station / robotic instruments", "AutoCAD / Civil 3D", "GIS mapping", "Data collection & adjustment"],
+    softSkills: ["Attention to detail", "Problem solving", "Communication", "Precision"],
+    atsKeywords: ["Land Surveying", "Boundary Surveys", "Topographic Mapping", "Construction Staking", "GNSS", "GIS", "AutoCAD", "Total Station"],
+    atsNote: "Include exact terms (Boundary Surveys, Topographic Mapping, Construction Staking, GNSS) and name your instruments/software; list licensure (PLS where required) with the full certification name, issuer and date.",
+  },
+  "foreman": {
+    include:
+      "A summary, a Skills section balancing supervision + trade + software, and Experience with concrete crew sizes and on-time/on-budget metrics.",
+    length: "One to two pages; place keywords inside accomplishment bullets, human-readable first.",
+    hardSkills: ["Site supervision", "Crew & labor management", "Schedule management", "Subcontractor coordination", "Quality control", "Budget planning", "Blueprint reading", "Safety compliance (OSHA)"],
+    softSkills: ["Leadership", "Communication", "Problem solving", "Conflict resolution"],
+    atsKeywords: ["Construction Management", "Team Leadership", "Site Supervision", "Labor Management", "Quality Control", "Subcontractor Management", "Scheduling", "Safety Compliance"],
+    atsNote: "Show concrete proof ('Supervised a crew of 10+', 'Reduced material waste 15%') with action verbs (Supervised, Coordinated); hiring managers want on-time/on-budget delivery, contractor relations and safety — put those keywords in accomplishment bullets.",
+  },
+  "structural-engineer": {
+    include:
+      "A summary, a Skills section led by analysis software + codes, PE/SE licensure prominent in Education, and Experience quantifying tonnage/spans/stories.",
+    length: "One to two pages; Arial/Calibri 10-12pt; sections Summary/Skills/Experience/Education/Certifications.",
+    hardSkills: ["Structural analysis (SAP2000, ETABS)", "RISA-3D / RAM", "Revit Structure / Tekla (BIM)", "Reinforced concrete design (ACI 318)", "Structural steel design (AISC 360)", "Seismic analysis", "Finite element analysis", "Load calculation"],
+    softSkills: ["Analytical judgment", "Attention to detail", "Communication", "Decision making"],
+    atsKeywords: ["Structural Engineering", "PE License", "SAP2000", "ETABS", "ACI 318", "AISC 360", "Finite Element Analysis", "Seismic Analysis"],
+    atsNote: "Feature your PE/SE license prominently (70% of structural roles require it) and reference design codes (ACI 318, AISC 360, ASCE 7) to show code-compliant fluency; quantify steel tonnage, span lengths, story count and budget.",
+  },
+  "project-engineer": {
+    include:
+      "Sections in order Summary/Core Skills/Experience/Education/Certifications, skills grouped (engineering + project mgmt), and Experience turning responsibilities into measured achievements.",
+    length: "One to two pages; 10-15 skills grouped by category; add the posting's skills word-for-word.",
+    hardSkills: ["Project coordination", "Engineering design", "AutoCAD", "Primavera P6 / MS Project", "Schedule & budget management", "Quantity take-off", "BIM coordination", "Quality assurance"],
+    softSkills: ["Team coordination", "Risk mitigation", "Communication", "Stakeholder management"],
+    atsKeywords: ["Project Coordination", "Engineering Design", "AutoCAD", "Primavera P6", "Schedule Management", "Budget Tracking", "Risk Management", "Regulatory Compliance"],
+    atsNote: "ATS scans for AutoCAD, Primavera P6 and MS Project — include them naturally — and add the job ad's skills word-for-word; start bullets with led/developed/optimized and close with measurable results.",
+  },
+  "site-engineer": {
+    include:
+      "A summary, a prominent Skills section (CAD + structural + site), PE license near the top if held, and Experience with quantified project scope.",
+    length: "One to two pages; single-column, Calibri/Arial 11pt, 10-15 skills by relevance.",
+    hardSkills: ["AutoCAD / Civil 3D", "Structural analysis", "Site planning & setting-out", "Construction management", "Building codes & permitting", "Surveying", "Geotechnical basics", "Quality & materials control"],
+    softSkills: ["Critical thinking", "Project management", "Communication", "Problem solving"],
+    atsKeywords: ["Civil Engineering", "AutoCAD", "Site Planning", "Construction Management", "Structural Analysis", "Building Codes", "Civil 3D", "Site Supervision"],
+    atsNote: "Lead the skills section with the five terms in 80%+ of civil postings (CAD Design, Project Management, Structural Analysis, Building Codes, Site Analysis) and put your PE near the top if held; only use skills that appear in the posting.",
+  },
+  "construction-worker": {
+    include:
+      "A summary, a Skills section (tools/equipment + safety), OSHA certification, and Experience showing safety record and versatility.",
+    length: "One to two pages; formatted for easy ATS scanning, 8+ industry keywords.",
+    hardSkills: ["Hand & power tools", "Heavy machinery operation", "Blueprint reading", "Site preparation", "Concrete & framing", "Material handling", "Safety inspections", "Hazardous material handling"],
+    softSkills: ["Reliability", "Teamwork", "Physical stamina", "Attention to detail"],
+    atsKeywords: ["Construction", "OSHA", "Power Tools", "Site Preparation", "Blueprint Reading", "Safety Compliance", "Material Handling", "Heavy Machinery"],
+    atsNote: "Get OSHA 10 or 30 — safety is a top priority and missing it greatly reduces your odds — and include 8+ keywords (OSHA, Power Tools, Site Preparation); describe how you reduced incidents and the equipment you've run.",
+  },
+  "petroleum-engineer": {
+    include:
+      "A summary, a Skills section grouped (Reservoir/Drilling/Software/Operations), and Experience with production-uplift and cost-per-barrel metrics.",
+    length: "One to two pages; tailor language to each posting's tools, basins and KPIs.",
+    hardSkills: ["Reservoir engineering & simulation", "Drilling engineering", "Production optimization", "Artificial lift", "Reservoir management", "Petrel / Eclipse / CMG / OFM", "Workover operations", "Field development"],
+    softSkills: ["Analytical thinking", "Problem solving", "Communication", "HSE focus"],
+    atsKeywords: ["Petroleum Engineering", "Reservoir Engineering", "Drilling", "Production Optimization", "Reservoir Simulation", "Petrel", "Artificial Lift", "Oil & Gas"],
+    atsNote: "Name the exact software (Eclipse, CMG, OFM, Petrel) since recruiters search tool names; quantify production uplift %, drilling days saved, NPT reductions and cost per barrel using BOE/day, IP rates and reserve figures.",
+  },
+  "aerospace-engineer": {
+    include:
+      "A summary, a Skills section (analysis tools + systems + compliance), and Experience quantifying weight/thrust/reliability outcomes.",
+    length: "One to two pages; spell keywords exactly as the posting does, standardized bullets.",
+    hardSkills: ["MATLAB", "CFD (computational fluid dynamics)", "CAD software (CATIA/NX)", "GD&T", "Flight control systems", "Propulsion systems", "Composite materials", "Testing & validation"],
+    softSkills: ["Analytical thinking", "Teamwork", "Communication", "Attention to detail"],
+    atsKeywords: ["Aerospace Engineering", "MATLAB", "CFD", "GD&T", "Flight Control Systems", "Propulsion", "Composite Materials", "Safety Analysis"],
+    atsNote: "Spell keywords exactly as the posting (MATLAB, CFD, GD&T, propulsion systems, composite materials) and lead with requirements analysis, testing & validation and regulatory compliance; quantify weight, thrust, drag, reliability and test pass rates.",
+  },
+  "automotive-engineer": {
+    include:
+      "A summary, a Skills section mixing tools/methods + execution behaviors, and Experience showing design-validate-launch of vehicle systems.",
+    length: "One to two pages; match the posting's phrasing ('fuel efficiency' if it says so).",
+    hardSkills: ["CAD software", "MATLAB", "DFMEA", "Vehicle dynamics", "Powertrain integration", "Vehicle testing & prototyping", "Validation processes", "Vehicle safety standards"],
+    softSkills: ["Problem solving", "Communication", "Collaboration", "Strategic thinking"],
+    atsKeywords: ["Automotive Engineering", "CAD", "MATLAB", "DFMEA", "Vehicle Dynamics", "Powertrain", "Validation", "Prototyping"],
+    atsNote: "Use field terms (vehicle dynamics, powertrain, CAD software, DFMEA) and mirror the posting's wording — if it says 'fuel efficiency' use that exact phrase; show hands-on testing/prototyping and quantify validation improvements.",
+  },
+  "manufacturing-engineer": {
+    include:
+      "A summary, a Skills section grouped (Engineering Software / Manufacturing / Quality & Efficiency / Soft), certifications, and Experience with quantified savings.",
+    length: "One to two pages; save as PDF for ATS parsability.",
+    hardSkills: ["Lean manufacturing", "Six Sigma", "Process optimization", "SolidWorks / AutoCAD / CATIA", "CNC machining / injection molding", "SPC", "Value stream mapping", "FMEA / ISO 9001"],
+    softSkills: ["Problem solving", "Collaboration", "Communication", "Continuous improvement"],
+    atsKeywords: ["Lean Manufacturing", "Six Sigma", "Process Optimization", "SolidWorks", "CNC Machining", "Continuous Improvement", "FMEA", "SPC"],
+    atsNote: "Include the posting's exact terms (Lean Six Sigma, FMEA, ISO 9001) and group skills into Engineering Software / Manufacturing / Quality categories; quantify cost reduction, efficiency boosts and process improvements.",
+  },
+  "process-engineer": {
+    include:
+      "A summary containing the exact title 'Process Engineer', a Skills section aligned to the posting, and Experience showing impact with numbers.",
+    length: "One to two pages; mix hard and soft skills, prioritized from the job ad.",
+    hardSkills: ["Lean Six Sigma", "Process mapping", "Statistical process control (SPC)", "Process optimization", "Data analysis", "AutoCAD", "Root cause analysis", "Technical writing"],
+    softSkills: ["Project management", "Stakeholder communication", "Team coordination", "Problem solving"],
+    atsKeywords: ["Process Engineering", "Lean Six Sigma", "Process Mapping", "Statistical Process Control", "Process Optimization", "Data Analysis", "Continuous Improvement", "Root Cause Analysis"],
+    atsNote: "Put the exact title 'Process Engineer' on the page and align skills to the posting (Lean Six Sigma, process mapping, SPC, improved cycle times); show impact with numbers in every experience bullet.",
+  },
+  "chemist": {
+    include:
+      "A summary, a Skills section (instrumentation + techniques + compliance + LIMS), and Experience with achievement bullets that quantify method gains.",
+    length: "One to two pages; tailor to the employer's focus to clear ATS.",
+    hardSkills: ["HPLC", "GC-MS", "UV-Vis spectroscopy", "Chromatography & wet chemistry", "Method validation", "GLP / GMP / ISO", "LIMS / Empower 3", "QA/QC"],
+    softSkills: ["Attention to detail", "Analytical thinking", "Communication", "Teamwork"],
+    atsKeywords: ["HPLC", "GC-MS", "Method Validation", "Chromatography", "Spectroscopy", "GLP", "GMP", "Quality Control"],
+    atsNote: "Lead with instrumentation keywords (HPLC, GC-MS, UV-Vis) and compliance terms (GLP, GMP, ISO) plus your LIMS/software (Empower 3, TrackWise); write achievements not duties ('enhanced HPLC throughput 20% via method optimization').",
+  },
+  "biologist": {
+    include:
+      "A summary naming your specialty, a Skills section (lab techniques + software), publications/conferences, and Experience with quantified impact.",
+    length: "One to two pages (longer academic CV if research-heavy); feature the posting's exact terms.",
+    hardSkills: ["PCR & DNA/RNA extraction", "Gene sequencing & genotyping", "Cell culture & assays", "Flow cytometry", "Microscopy", "Experimental design", "Statistical analysis (Python, R)", "Bioinformatics (GenBank, BLAST)"],
+    softSkills: ["Analytical thinking", "Scientific writing", "Collaboration", "Attention to detail"],
+    atsKeywords: ["Molecular Biology", "PCR", "Cell Culture", "Gene Sequencing", "Flow Cytometry", "Experimental Design", "Data Analysis", "Statistical Modeling"],
+    atsNote: "Feature the posting's exact terms (PCR analysis, cell-based assays, statistical modeling) and name your specialty (molecular biology, environmental science, drug discovery); list publications/talks and quantify your research impact.",
+  },
 };
 
 const BY_SLUG = ROLE_CV_CONTENT;
