@@ -688,6 +688,132 @@ export const ROLE_CV_CONTENT: Record<string, RoleCvContent> = {
     atsKeywords: ["Case Management", "Crisis Intervention", "Psychosocial Assessment", "LCSW", "MSW", "Treatment Planning", "EHR", "Caseload Management"],
     atsNote: "Place licenses (LCSW, LMSW, MSW) near the top — an unlicensed candidate is filtered before a human reviews; quantify outcomes (caseload size, readmission reductions, PHQ-9 improvements).",
   },
+  "pharmacy-technician": {
+    include:
+      "A 2-3 sentence summary led by your CPhT certification and setting, a Certifications section, a Skills section (pharmacy systems + clinical + safety), and Experience with daily script volume and accuracy.",
+    length: "One page, reverse-chronological; spell out abbreviations at least once (e.g. Certified Pharmacy Technician (CPhT)).",
+    hardSkills: ["Prescription processing", "Sterile IV compounding (USP 797/800)", "Insurance billing/adjudication", "Inventory management", "Unit-dose packaging", "Controlled substance handling", "HIPAA", "Pharmacy software (Rx30, QS/1, Epic Willow)"],
+    softSkills: ["Accuracy", "Patient communication", "Teamwork", "Time management"],
+    atsKeywords: ["CPhT", "PTCB Certified", "Sterile Compounding", "USP 797", "Insurance Billing", "Patient Counseling", "HIPAA", "Workflow Optimization"],
+    atsNote: "Lead with 'CPhT' and 'Certified' — recruiters routinely filter out resumes missing the word 'certified'; name the specific setting (retail, hospital, specialty, long-term care) and the dispensing system you use.",
+  },
+  "veterinarian": {
+    include:
+      "A summary, your DVM and state license + DEA registration near the top, a Skills section (clinical + software + lab), and Experience with quantified clinical volume and practice type.",
+    length: "One to two pages; every line should add value.",
+    hardSkills: ["Surgery", "Anesthesia", "Diagnostic imaging (radiology/ultrasound)", "Hematology/urinalysis/cytology", "Dentistry", "Preventive care", "Veterinary software (Cornerstone, ImproMed, AVImark)"],
+    softSkills: ["Client communication", "Composure under pressure", "Team leadership", "Compassion"],
+    atsKeywords: ["DVM", "Licensed Veterinarian", "DEA Registration", "Small Animal", "Emergency Medicine", "Surgery", "Cornerstone", "Fear Free"],
+    atsNote: "Lead with DVM, state license, and DEA registration — these are screened first; tailor to practice type (general, emergency, specialty) and add Fear Free / VECCS or board eligibility if held.",
+  },
+  "optometrist": {
+    include:
+      "A summary, your OD degree and state license + certifications, a Skills section (clinical + equipment + EMR), and Experience with patient volume and exam types.",
+    length: "One to two pages, reverse-chronological; clean ATS-safe layout (no images or non-standard fonts).",
+    hardSkills: ["Comprehensive eye exams", "Refraction", "Contact lens fitting", "OCT/visual field testing", "Glaucoma management", "Ophthalmic pharmacology", "EMR software"],
+    softSkills: ["Patient communication", "Empathy", "Attention to detail", "Time management"],
+    atsKeywords: ["Optometry", "Eye Examination", "Refraction", "Contact Lenses", "Glaucoma", "OCT", "Visual Field Testing", "Patient Care"],
+    atsNote: "Include your degree and state license up front, plus terms like refraction, OCT and glaucoma naturally through the summary and skills; quantify patients seen per day/week and add TPA/glaucoma certification where it applies.",
+  },
+  "dietitian": {
+    include:
+      "Credentials (RDN/LDN) right after your name, a Licensure & Certifications section, a Skills section (MNT + tools + counseling), and Experience with measurable patient outcomes.",
+    length: "One to two pages; list highest degree and ACEND-accredited internship in Education.",
+    hardSkills: ["Medical nutrition therapy (MNT)", "Nutrition assessment", "Enteral/parenteral nutrition", "Motivational interviewing", "Food service management", "EMR (Epic)", "Diabetes/renal/oncology nutrition"],
+    softSkills: ["Counseling", "Communication", "Empathy", "Education delivery"],
+    atsKeywords: ["RDN", "Registered Dietitian", "Medical Nutrition Therapy", "MNT", "Enteral Nutrition", "Motivational Interviewing", "Epic", "Patient Education"],
+    atsNote: "Show RDN/LDN and any state license clearly near the top (an unlicensed dietitian is filtered first); use both 'RDN' and 'Registered Dietitian Nutritionist', and quantify outcomes (length-of-stay reductions, class attendance).",
+  },
+  "quality-engineer": {
+    include:
+      "A summary naming your methodology focus, a Skills section (quality systems + statistical tools + software), Certifications (ASQ CQE / Six Sigma), and Experience with CAPA closure and defect metrics.",
+    length: "One to two pages; list 8-12 prioritized skills mirroring the posting.",
+    hardSkills: ["ISO 9001", "Six Sigma (Green/Black Belt)", "FMEA", "PPAP", "SPC", "CAPA", "Root cause analysis", "Minitab", "Auditing"],
+    softSkills: ["Problem solving", "Attention to detail", "Cross-functional collaboration", "Communication"],
+    atsKeywords: ["ISO 9001", "Six Sigma", "FMEA", "SPC", "CAPA", "Root Cause Analysis", "DMAIC", "Process Improvement"],
+    atsNote: "Mirror the posting's quality acronyms exactly (ISO 9001, FMEA, SPC, CAPA) and include both 'Six Sigma' and your belt level; attach CAPA closure rates and defect-reduction numbers to bullets.",
+  },
+  "industrial-engineer": {
+    include:
+      "A summary, a Skills section (lean tools + software + analytics), and Experience with quantified efficiency gains; add a projects section for improvement initiatives.",
+    length: "One to two pages; list 8-12 skills, prioritizing those in the job description.",
+    hardSkills: ["Lean manufacturing", "Six Sigma", "Value stream mapping", "Time studies", "Capacity planning", "Process optimization", "AutoCAD", "SAP", "Data analytics"],
+    softSkills: ["Analytical thinking", "Continuous improvement", "Communication", "Project management"],
+    atsKeywords: ["Lean Manufacturing", "Six Sigma", "Process Optimization", "Value Stream Mapping", "Continuous Improvement", "Kaizen", "Capacity Planning", "Root Cause Analysis"],
+    atsNote: "Use the exact posting terms and include both acronyms and full terms (Lean Manufacturing, Six Sigma); quantify impact ('improved production efficiency by 15% through process optimization') and add simulation/IIoT/analytics for 2026.",
+  },
+  "chemical-engineer": {
+    include:
+      "A summary naming your specialization (process design, plant operations, or process safety) and industry, a Skills section (core engineering + simulation software + safety), and Experience with throughput/yield/energy metrics.",
+    length: "One to two pages; feature PE/FE licensure prominently for design-authority roles.",
+    hardSkills: ["Process design", "Process safety (PSM/HAZOP)", "Aspen Plus/HYSYS", "P&ID/PFD", "Thermodynamics", "Heat & mass transfer", "Scale-up", "GMP/cGMP", "MATLAB"],
+    softSkills: ["Problem solving", "Cross-functional collaboration", "Attention to detail", "Communication"],
+    atsKeywords: ["Process Design", "Process Safety", "PSM", "HAZOP", "Aspen Plus", "P&ID", "Six Sigma", "OSHA Compliance"],
+    atsNote: "Mirror process-simulation and regulatory keywords from the posting (Aspen/HYSYS, HAZOP, PSM, P&ID); attach throughput, yield or energy-saving metrics to bullets and feature PE/FE licensure where design authority is required.",
+  },
+  "sous-chef": {
+    include:
+      "A summary, a Skills section (culinary techniques + kitchen management + safety), cuisines you've run, and Experience with quantified impact (covers, food cost, team size).",
+    length: "One page; start bullets with strong action verbs.",
+    hardSkills: ["Menu development", "Food cost control", "Inventory management", "HACCP/food safety", "Kitchen line management", "Advanced culinary techniques", "Staff training", "Portion control"],
+    softSkills: ["Leadership", "Communication", "Teamwork", "Composure under pressure"],
+    atsKeywords: ["Menu Development", "Cost Control", "HACCP", "Food Safety", "Inventory Management", "Kitchen Management", "Staff Leadership", "Quality Assurance"],
+    atsNote: "Mirror the posting's culinary keywords in the skills and experience sections and cite cuisines that overlap the role; quantify impact (food-cost %, covers per service, team size) and lead with HACCP/food-safety certification.",
+  },
+  "waiter": {
+    include:
+      "A 2-3 sentence summary, a Skills section anchored on POS proficiency and certifications, and Experience with quantified service metrics (covers, upsell, satisfaction).",
+    length: "One page; the strongest 2026 server resumes list 15-25 skills.",
+    hardSkills: ["POS systems (Toast, Aloha, Micros, Square)", "Order accuracy", "Menu & allergen knowledge", "Upselling", "Cash handling", "Table service", "ServSafe/TIPS", "Multitasking"],
+    softSkills: ["Customer service", "Communication", "Teamwork", "Composure under pressure"],
+    atsKeywords: ["POS Systems", "Customer Service", "Food Safety", "Upselling", "ServSafe", "TIPS", "Cash Handling", "Guest Satisfaction"],
+    atsNote: "Name the specific POS systems you've used (Toast, Aloha, Micros, Square) and put ServSafe/TIPS up top; ATS matching is literal, so include both 'POS system' and 'point-of-sale', and quantify upsell rates and guest-satisfaction scores.",
+  },
+  "bartender": {
+    include:
+      "A profile summary, a 6-10 item Skills section mixing craft skills and POS/certs, and Experience with quantified metrics (covers per shift, sales).",
+    length: "One page unless you have 5+ years with management experience.",
+    hardSkills: ["Craft cocktail preparation", "Mixology", "Wine & beer knowledge", "POS systems (Toast, Square, Aloha)", "Cash handling & closing", "Inventory management", "Responsible alcohol service"],
+    softSkills: ["Customer service", "Conflict resolution", "Teamwork", "Speed under pressure"],
+    atsKeywords: ["Bartending", "Mixology", "POS Systems", "Customer Service", "Cash Handling", "Inventory Management", "Responsible Alcohol Service", "Cocktail Preparation"],
+    atsNote: "If a state alcohol permit (or TIPS) is mandatory for the location, place it immediately after the summary so it's visible in the first 6 seconds; use literal job-ad terms and quantify customers served per shift.",
+  },
+  "housekeeper": {
+    include:
+      "A short summary, a Skills section (cleaning techniques + safety + equipment), and Experience with bullet points starting on action verbs and metrics (rooms per shift, inspection scores).",
+    length: "One page; clean ATS-safe layout — no graphics or unusual fonts.",
+    hardSkills: ["Room/deep cleaning", "Safety protocols", "Housekeeping equipment", "Linen & laundry management", "Eco-friendly cleaning", "Inventory of supplies", "Sanitation standards"],
+    softSkills: ["Attention to detail", "Time management", "Reliability", "Communication"],
+    atsKeywords: ["Housekeeping", "Cleaning", "Sanitation", "Safety Protocols", "Attention to Detail", "Time Management", "Room Attendant", "Guest Satisfaction"],
+    atsNote: "Cross-reference the posting and weave its exact terms (sanitation, deep cleaning, safety protocols) into experience and skills; quantify rooms cleaned per shift and any inspection/quality scores.",
+  },
+  "hotel-manager": {
+    include:
+      "A summary, a Skills section led by revenue/operations strengths and PMS software, and Experience that always states room count, annual revenue and team size.",
+    length: "One to two pages; use standard headings (Professional Summary, Skills, Work Experience, Education).",
+    hardSkills: ["Revenue management", "Property management systems (Opera, FOSSE)", "P&L management", "OTA management", "Budgeting", "Front office operations", "Staff training", "Dynamic pricing"],
+    softSkills: ["Hospitality leadership", "Guest service", "Staff development", "Problem solving under pressure"],
+    atsKeywords: ["Revenue Management", "P&L Management", "Guest Satisfaction", "Opera PMS", "OTA Management", "Staff Training", "Budgeting", "Front Office Operations"],
+    atsNote: "Lead with revenue management, P&L and Opera PMS to match hospitality job descriptions; always specify room count, annual revenue and team size so recruiters can gauge your scope.",
+  },
+  "interior-designer": {
+    include:
+      "A profile, a Skills section heavy on design software and project typology, a verified portfolio link, and Experience with project management and FF&E scope.",
+    length: "One to two pages; double-check the portfolio link — one typo can cost the interview.",
+    hardSkills: ["AutoCAD", "SketchUp", "Revit", "3ds Max", "Space planning", "FF&E selection", "Color theory", "Lighting design", "Project management"],
+    softSkills: ["Creativity", "Client communication", "Collaboration", "Attention to detail"],
+    atsKeywords: ["AutoCAD", "Revit", "SketchUp", "Space Planning", "FF&E", "Color Theory", "Project Management", "Residential/Commercial Design"],
+    atsNote: "Design directors first screen by ATS for tool proficiency (AutoCAD, Revit, SketchUp, 3ds Max) and project typology (hospitality, healthcare, commercial, residential) — name yours explicitly, and the resume's job is to pass the filter so the portfolio can close the interview.",
+  },
+  "journalist": {
+    include:
+      "A summary, a verified portfolio/clips link, a Skills section (reporting + multimedia + CMS), and Experience with quantified reach or output (stories, audience growth).",
+    length: "One to two pages; start each bullet with a strong action verb.",
+    hardSkills: ["Reporting & sourcing", "News & feature writing", "Data journalism", "SEO content", "CMS (WordPress)", "Photo/video editing", "Interviewing", "Fact-checking"],
+    softSkills: ["Storytelling", "Deadline discipline", "Curiosity", "Communication"],
+    atsKeywords: ["Reporting", "News Writing", "Data Journalism", "SEO", "Content Management Systems", "Editing", "Multimedia", "Sourcing"],
+    atsNote: "Weave a few keywords from the posting into your summary and show a strong portfolio of published clips; add emerging skills (podcast production, AI content curation, data journalism) to appeal to digital newsrooms.",
+  },
 };
 
 const BY_SLUG = ROLE_CV_CONTENT;
