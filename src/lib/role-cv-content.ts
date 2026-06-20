@@ -1572,6 +1572,132 @@ export const ROLE_CV_CONTENT: Record<string, RoleCvContent> = {
     atsKeywords: ["Videography", "Cinematography", "Adobe Premiere Pro", "Post-Production", "Lighting", "Motion Graphics", "DaVinci Resolve", "Color Grading"],
     atsNote: "Name specific software and gear (Adobe Premiere Pro, not 'video editing'; Sony FS7, ProRes, H.265) and group skills by Camera/Editing/Lighting/Audio; quantify turnaround, output volume and engagement — keep soft skills out of the skills list.",
   },
+  "legal-secretary": {
+    include:
+      "A summary, a Skills section (document prep + e-filing + calendaring + software), certifications (PLS), and Experience with action verbs and deadline metrics.",
+    length: "One to two pages; 15-25 relevant keywords matched to the posting, no tables.",
+    hardSkills: ["Legal document preparation & formatting", "E-filing (PACER, ECF)", "Docket & deadline management", "Calendar management", "Legal billing (TABS3, Bill4Time)", "Document management (NetDocuments, iManage)", "Service of process", "Client communication"],
+    softSkills: ["Discretion", "Accuracy", "Time management", "Confidentiality"],
+    atsKeywords: ["Legal Document Preparation", "E-Filing", "Docket Management", "Calendar Management", "PACER", "Legal Billing", "Deadline Tracking", "Case File Management"],
+    atsNote: "Use exact legal-admin keywords (e-filing, docket management, deadline compliance) and name your systems (PACER/ECF, NetDocuments, TABS3); add the PLS designation and start each bullet with an action verb, not a duty.",
+  },
+  "legal-assistant": {
+    include:
+      "A summary with the exact title 'Legal Assistant', a Skills section (research + docketing + named tools), and Experience with accomplishments, not duties.",
+    length: "One to two pages; clean headings; list specific tools, never 'computer skills'.",
+    hardSkills: ["Legal research (Westlaw, LexisNexis)", "Legal document preparation", "Court filing / e-filing procedures", "Docket & calendar management", "Legal CRM (Clio, Lexicata)", "Adobe Acrobat Pro", "Case management", "Trial preparation"],
+    softSkills: ["Discretion", "Confidentiality", "Attention to detail", "Time management"],
+    atsKeywords: ["Legal Assistant", "Legal Research", "Westlaw", "LexisNexis", "Docketing", "E-Filing", "Clio", "Litigation Support"],
+    atsNote: "Put the exact title 'Legal Assistant' in your resume and list specific tools by name (Clio, Westlaw, PACER, Adobe Acrobat Pro) — never 'computer skills'; start bullets with action verbs and quantify caseload.",
+  },
+  "compliance-officer": {
+    include:
+      "A summary stating your compliance focus, a Skills section organized by category (regulations + risk + audit), certifications, and Experience with metrics.",
+    length: "One to two pages; name the regulation, not the category.",
+    hardSkills: ["Regulatory compliance (BSA/AML, KYC, OFAC, SOX, GDPR)", "Risk assessment & control testing", "Transaction monitoring", "Due diligence", "Policy development", "Regulatory reporting", "Compliance auditing", "Gap analysis"],
+    softSkills: ["Integrity", "Analytical judgment", "Communication", "Attention to detail"],
+    atsKeywords: ["Regulatory Compliance", "AML", "KYC", "Risk Assessment", "SOX Compliance", "BSA", "Transaction Monitoring", "Due Diligence"],
+    atsNote: "Name the regulation, not the category — 'BSA/AML compliance' beats 'financial compliance' — and include regulatory-body tokens (OCC, FDIC, FINRA, SEC); 97% of firms use ATS, so missing 'Regulatory Compliance' or 'SOX' disqualifies you. Add CRCM/AML certs.",
+  },
+  "notary": {
+    include:
+      "A summary, a Licenses & Certifications section with your commission, a Skills section (notarization + loan signing + platforms), and Experience with volume metrics.",
+    length: "One page; list your commission clearly under a Licenses/Certifications header.",
+    hardSkills: ["Notarization procedures", "Loan document review & signing", "Remote online notarization (RON)", "Electronic notarization (DocuSign, Snapdocs)", "Document verification", "State notary law", "Identity verification", "Mobile notary service"],
+    softSkills: ["Attention to detail", "Confidentiality", "Time management", "Customer service"],
+    atsKeywords: ["Commissioned Notary Public", "Loan Signing Agent", "RON Certified", "Notarization", "Loan Document Notarization", "Electronic Notarization", "Document Verification", "Remote Online Notarization"],
+    atsNote: "Use exact credential phrases ('Commissioned Notary Public', 'RON Certified', 'Loan Signing Agent') under a Licenses header and name your platforms (DocuSign, Snapdocs); quantify signings completed and turnaround.",
+  },
+  "legal-counsel": {
+    include:
+      "A summary (title + years + industry + 1-2 measurable wins), a Skills section near the top (contracts + research + compliance), and quantified Experience.",
+    length: "One to two pages; include the exact title 'Legal Counsel'; no tables/images.",
+    hardSkills: ["Contract drafting & negotiation", "Legal research", "Regulatory analysis", "Compliance frameworks", "Litigation management", "M&A due diligence", "Dispute resolution", "Data privacy (GDPR, CCPA)"],
+    softSkills: ["Judgment", "Negotiation", "Cross-functional communication", "Risk awareness"],
+    atsKeywords: ["Contract Drafting", "Contract Negotiation", "Legal Research", "Compliance", "Litigation Management", "Regulatory Analysis", "Due Diligence", "Risk Management"],
+    atsNote: "Put the exact title 'Legal Counsel' on the page and cite specific regulations (GDPR, CCPA, SOX, HIPAA, SEC); quantify achievements ('reduced litigation exposure 30%, saving $500K annually in outside-counsel fees').",
+  },
+  "tax-advisor": {
+    include:
+      "A summary showcasing tax expertise + credentials, a Skills section (tax + software + compliance), and Experience quantifying tax savings.",
+    length: "One to two pages; balance tax terminology with soft skills for ATS.",
+    hardSkills: ["Corporate tax planning", "Tax compliance", "ASC 740 / tax provision", "GAAP / IFRS", "Tax software", "Financial reporting", "International tax", "Internal controls (SOX)"],
+    softSkills: ["Analytical judgment", "Attention to detail", "Client communication", "Integrity"],
+    atsKeywords: ["Tax Compliance", "Corporate Tax", "Tax Advisory", "ASC 740", "GAAP", "Tax Planning", "CPA", "Financial Reporting"],
+    atsNote: "Surface CPA/CTA/EA (and your IRS PTIN if an enrolled agent) and tax-specific keywords (tax compliance, corporate tax, ASC 740, tax provision); quantify tax savings and audit-readiness improvements.",
+  },
+  "financial-planner": {
+    include:
+      "A summary, a Certifications/Licenses section early (CFP catches the eye fast), a Skills section (planning + products + platforms), and Experience leading with AUM/client scope.",
+    length: "One to two pages; standard headings, no images, clean layout.",
+    hardSkills: ["Financial planning", "Retirement planning", "Portfolio management", "Tax strategy", "Estate planning", "Planning software (eMoney, MoneyGuidePro)", "Salesforce Financial Services Cloud", "Risk analysis"],
+    softSkills: ["Client communication", "Trust building", "Analytical thinking", "Discretion"],
+    atsKeywords: ["Financial Planning", "Retirement Planning", "Portfolio Management", "CFP", "Estate Planning", "Tax Strategy", "Client Relationship Management", "Asset Allocation"],
+    atsNote: "List CFP (plus CFA/ChFC/CPA/EA) early in a Certifications/Licenses section; lead each role with scope (client accounts, assets under advisement) and name planning platforms (eMoney, MoneyGuidePro), quantifying retention and growth.",
+  },
+  "wealth-manager": {
+    include:
+      "A summary, a multi-column Skills section (portfolio + HNW relations + planning), licenses listed clearly, and Experience anchored to AUM and growth.",
+    length: "One to two pages; 25-35 keywords; precise, compliant, professional language.",
+    hardSkills: ["Portfolio management", "HNW/UHNW client relations", "Asset allocation", "Financial planning", "Estate & trust planning", "Tax-loss harvesting", "Bloomberg / FactSet", "Business development & prospecting"],
+    softSkills: ["Relationship building", "Discretion", "Communication", "Trust"],
+    atsKeywords: ["Wealth Management", "Portfolio Management", "Asset Allocation", "UHNW", "Series 7", "Financial Planning", "Client Acquisition", "Estate Planning"],
+    atsNote: "List 'FINRA Series 7 & 66 Licensed' clearly (don't bury it) plus CFA/CPA/FRM, and include HNW/UHNW, Asset Allocation and Client Acquisition; recruiters screen for trust with client assets, so keep language precise and compliant.",
+  },
+  "portfolio-manager": {
+    include:
+      "A summary, a Skills section (portfolio + financial analysis + technologies), credentials (CFA), and Experience replacing vague claims with bps of alpha.",
+    length: "One to two pages; anchor every skill in a measurable outcome.",
+    hardSkills: ["Asset allocation", "Portfolio optimization", "Risk management", "Financial modeling (DCF)", "Portfolio attribution", "Bloomberg Terminal (PORT)", "Excel VBA / Python", "Investment strategy"],
+    softSkills: ["Analytical judgment", "Decision making", "Communication", "Discipline"],
+    atsKeywords: ["Portfolio Management", "Asset Allocation", "Risk Management", "Portfolio Optimization", "Bloomberg Terminal", "Financial Modeling", "CFA", "Investment Strategy"],
+    atsNote: "Include 'Bloomberg Terminal'/'Bloomberg PORT', portfolio optimization and attribution, and list CFA/CAIA/FRM prominently; replace vague claims with hard numbers (bps of alpha, quantified efficiency gains) and keep it to 1-2 pages.",
+  },
+  "risk-analyst": {
+    include:
+      "A summary, a prominent Skills section near the top (risk types + models + software), and Experience naming the risk domains you've covered.",
+    length: "One to two pages; 15+ industry keywords; no tables/graphics.",
+    hardSkills: ["Risk assessment", "VaR modeling", "Monte Carlo simulation", "Quantitative analysis", "Risk software (IBM OpenPages, SAP GRC)", "Statistical analysis (R, Python, SAS)", "Regulatory compliance", "Enterprise risk management (ERM)"],
+    softSkills: ["Analytical thinking", "Attention to detail", "Communication", "Problem solving"],
+    atsKeywords: ["Risk Management", "Risk Assessment", "VaR Modeling", "Quantitative Analysis", "ERM", "Regulatory Compliance", "Monte Carlo", "Risk Modeling"],
+    atsNote: "Place the skills section near the top and include 15+ exact keywords (ERM, VaR Modeling, Regulatory Compliance) plus your risk software (SAS, Tableau, IBM OpenPages); be specific about risk types covered (financial, operational, compliance).",
+  },
+  "quantitative-analyst": {
+    include:
+      "A summary, a Skills section (quant finance + languages + ML/modeling), and Experience embedding keywords inside quantified achievement statements.",
+    length: "One to two pages; no tables/graphics; achievements over duties.",
+    hardSkills: ["Quantitative finance", "Python / R", "Financial modeling", "Derivatives pricing", "Time series analysis", "Machine learning", "SQL", "Statistical analysis"],
+    softSkills: ["Analytical thinking", "Problem solving", "Communication", "Rigor"],
+    atsKeywords: ["Quantitative Finance", "Python", "Financial Modeling", "Machine Learning", "Time Series Analysis", "Derivatives Pricing", "SQL", "Quantitative Analytics"],
+    atsNote: "ATS weights keywords more when they sit inside achievement statements, not standalone lists — embed Python, financial modeling and time-series in quantified bullets; prioritize the skills the posting names.",
+  },
+  "treasury-analyst": {
+    include:
+      "A summary, a Skills section (cash management + forecasting + tools), and Experience with specific, measurable accomplishments.",
+    length: "One to two pages; identify and mirror the posting's hard skills.",
+    hardSkills: ["Cash management", "Cash-flow forecasting", "Treasury management", "Bank reconciliation", "Liquidity management", "Excel / Power BI modeling", "Bloomberg Terminal / SAP", "Corporate finance"],
+    softSkills: ["Analytical thinking", "Attention to detail", "Communication", "Collaboration"],
+    atsKeywords: ["Treasury Management", "Cash Management", "Cash Flow Forecasting", "Financial Analysis", "Bank Reconciliation", "Liquidity Management", "Corporate Finance", "SAP"],
+    atsNote: "Mirror the posting's hard skills (cash management, cash-flow forecasting, treasury management) and name high-value tools (Excel, Bloomberg Terminal, SAP, Power BI); make bullets measurable, not duty descriptions.",
+  },
+  "cost-accountant": {
+    include:
+      "A summary, a Skills section (cost accounting + ERP + lean), certifications (CMA), and Experience with cost-savings and variance metrics.",
+    length: "One to two pages; feature keywords directly from the posting.",
+    hardSkills: ["Cost accounting", "Variance analysis", "Activity-based costing", "General ledger", "Financial reporting", "SAP ERP", "Budgeting & forecasting", "Internal controls (SOX)"],
+    softSkills: ["Attention to detail", "Analytical thinking", "Communication", "Integrity"],
+    atsKeywords: ["Cost Accounting", "Variance Analysis", "General Ledger", "Financial Reporting", "SAP", "Manufacturing", "Internal Controls", "Account Reconciliation"],
+    atsNote: "Feature cost-accounting keywords (variance analysis, activity-based costing, SAP ERP) and manufacturing/lean terms (5S, Kaizen); add CMA and quantify cost savings and efficiency gains.",
+  },
+  "forensic-accountant": {
+    include:
+      "A summary, a Skills section (forensic + fraud tools + analytics), the CFE credential, and Experience leading with caseload scope and investigations owned.",
+    length: "One to two pages; weave keywords through summary, bullets and skills.",
+    hardSkills: ["Forensic accounting", "Fraud examination & detection", "Investigative research", "Auditing", "Fraud-detection software (ACL, IDEA)", "Data analytics (Tableau, Power BI)", "e-Discovery", "Regulatory compliance (SOX)"],
+    softSkills: ["Ethical judgment", "Critical thinking", "Attention to detail", "Communication"],
+    atsKeywords: ["Forensic Accounting", "Fraud Investigation", "Fraud Examination", "Auditing", "Financial Analysis", "Fraud Detection", "Investigative Research", "Internal Controls"],
+    atsNote: "The high-signal keywords are Financial Analysis, Fraud Examination, Auditing and Investigative Research (ATS used by 75%+ of employers); add the CFE credential and lead with caseload scope, jurisdictional reach and investigations owned intake-to-resolution.",
+  },
 };
 
 const BY_SLUG = ROLE_CV_CONTENT;
