@@ -1014,6 +1014,15 @@ export const ROLE_CV_CONTENT: Record<string, RoleCvContent> = {
     atsKeywords: ["Delivery Driver", "Route Management", "CDL", "DOT Compliance", "GPS Navigation", "Customer Service", "Package Handling", "Vehicle Inspection"],
     atsNote: "Show a clean driving record (MVR), valid license/CDL and DOT physical card up front, and use the posting's exact terms (route management, last-mile, DOT compliance); quantify on-time-delivery % and packages handled per shift.",
   },
+  "dispatcher": {
+    include:
+      "A summary, a Skills section (planning + dispatch software + regulations), and Experience tying each skill to a measurable result (fuel savings, on-time rate).",
+    length: "One to two pages; connect every skill to a concrete action and metric.",
+    hardSkills: ["Route planning & optimization", "Load planning", "Dispatch software (TMW Suite, NextLoad)", "GPS/fleet tracking", "TMS platforms & load boards", "Freight scheduling", "Driver communication", "DOT regulations"],
+    softSkills: ["Communication", "Multitasking", "Problem solving", "Composure under pressure"],
+    atsKeywords: ["Dispatch Software", "Route Optimization", "Load Planning", "Driver Communication", "Fleet Management", "Freight Scheduling", "TMS", "On-Time Delivery"],
+    atsNote: "Name your dispatch/TMS software by brand (TMW Suite, NextLoad, FleetComplete) and use the posting's exact terms (load planning, route optimization, driver communication); quantify wins like improved on-time-delivery rate or fuel/cost savings.",
+  },
   "translator": {
     include:
       "A summary, language pairs listed directionally, a Skills section (interpretation + CAT tools + domains), certifications, and Experience with quantified volume/accuracy.",
