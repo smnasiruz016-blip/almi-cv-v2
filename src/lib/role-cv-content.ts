@@ -1320,6 +1320,132 @@ export const ROLE_CV_CONTENT: Record<string, RoleCvContent> = {
     atsKeywords: ["Sales Engineering", "Pre-Sales", "Solution Architecture", "Product Demonstrations", "Requirements Gathering", "SaaS", "Technical Documentation", "Cloud Computing"],
     atsNote: "Reflect the same technical skills in both summary and skills section for ATS consistency; make each pre-sales bullet pull triple duty (deal context + tool/method + outcome) and mirror posting phrases like 'present technical information clearly'.",
   },
+  "site-reliability-engineer": {
+    include:
+      "A title like 'Site Reliability Engineer (SRE)', a summary, a Skills section clustered (observability + IaC + orchestration + reliability), and Experience telling 'I did X with Y, achieving Z'.",
+    length: "One to two pages; put keywords in titles, summary, skills and the first bullet of each role.",
+    hardSkills: ["Observability & monitoring (Prometheus, Grafana, DataDog)", "Reliability metrics (SLI/SLO/SLA, error budgets)", "Kubernetes", "Terraform / Ansible", "Incident management & post-mortems", "On-call & chaos engineering", "CI/CD (Jenkins, ArgoCD)", "Go / Python"],
+    softSkills: ["Incident leadership", "Cross-functional coordination", "Mentoring", "Communication"],
+    atsKeywords: ["Site Reliability Engineer", "SRE", "Observability", "SLO", "Kubernetes", "Terraform", "Incident Management", "Error Budgets"],
+    atsNote: "Missing SRE-specific terms ('Observability', 'SLOs', 'Chaos Engineering') gets you rejected before a human looks; aim for 15-25 keywords at 60-80% coverage and quantify SLO attainment, MTTR and on-call outcomes.",
+  },
+  "penetration-tester": {
+    include:
+      "A tailored summary, a Certifications section (OSCP, CEH, Security+), a Skills section (tools + languages), a Methodologies section (OWASP, NIST, PTES), and quantified Experience.",
+    length: "One to two pages; standard section titles (Work Experience, Skills, Education).",
+    hardSkills: ["Vulnerability assessment", "Web/network/mobile pen testing", "Metasploit", "Burp Suite", "Nmap / Wireshark", "Python scripting", "OWASP Top 10", "Exploit development"],
+    softSkills: ["Analytical thinking", "Report writing", "Communication", "Cross-team collaboration"],
+    atsKeywords: ["Penetration Testing", "OSCP", "CEH", "Burp Suite", "Metasploit", "OWASP", "Vulnerability Assessment", "Ethical Hacking"],
+    atsNote: "Showcase OSCP/CEH/Security+ and name your tools (Metasploit, Burp Suite, Nmap) and frameworks (OWASP, NIST, PTES); quantify vulnerabilities found and incident reductions, and state the environments tested (cloud/on-prem/hybrid).",
+  },
+  "firmware-engineer": {
+    include:
+      "A results-driven summary, a Skills section listing languages clearly (e.g. 'C/C++', 'embedded Linux'), and Experience quantifying performance gains.",
+    length: "One page if under 10 years; list programming languages explicitly for ATS.",
+    hardSkills: ["Embedded C / C++", "RTOS", "Microcontrollers (ARM Cortex-M)", "Device drivers", "SPI / I2C / UART / CAN", "Hardware debugging (JTAG/SWD)", "Firmware optimization", "Git"],
+    softSkills: ["Problem solving", "Attention to detail", "Hardware-software collaboration", "Communication"],
+    atsKeywords: ["Firmware", "Embedded C", "Embedded Systems", "RTOS", "Microcontrollers", "Device Drivers", "I2C", "Debugging"],
+    atsNote: "List languages exactly as ATS searches them ('C/C++', 'embedded Linux') plus Embedded C, RTOS, microcontrollers and bus protocols; quantify gains ('improved device startup time by 25%', 'reduced latency 30%').",
+  },
+  "android-developer": {
+    include:
+      "A summary leading with Kotlin/Java + a measurable app outcome, a Skills section (8-12), and Experience with action verbs and metrics (crash rate, load time).",
+    length: "One to two pages; single-column, standard headings.",
+    hardSkills: ["Kotlin", "Jetpack Compose", "Android SDK", "MVVM / Clean Architecture", "Coroutines & Flow", "Retrofit / Room", "Firebase", "CI/CD & testing (JUnit/Espresso)"],
+    softSkills: ["Problem solving", "Collaboration", "Communication", "Ownership"],
+    atsKeywords: ["Kotlin", "Jetpack Compose", "Android SDK", "MVVM", "Coroutines", "Firebase", "Android Studio", "REST APIs"],
+    atsNote: "Lead with Kotlin/Java and notable app launches; mirror exact posting terms (if it says 'Dependency Injection' include both that and 'Hilt') and quantify reduced crash rates or faster load times.",
+  },
+  "ios-developer": {
+    include:
+      "A keyword-rich summary, a hard-skill-heavy Skills section plus targeted collaboration skills, and Experience with quantified impact and domain (fintech/health).",
+    length: "One to two pages; single-column, standard headings.",
+    hardSkills: ["Swift", "SwiftUI", "UIKit", "Xcode", "Core Data", "Combine", "REST APIs", "App Store Connect / TestFlight"],
+    softSkills: ["Problem solving", "Collaboration", "Communication", "Ownership"],
+    atsKeywords: ["Swift", "SwiftUI", "UIKit", "Xcode", "Core Data", "Combine", "MVVM", "App Store"],
+    atsNote: "Keep the summary keyword-rich (Swift, SwiftUI, UIKit, Xcode) and include Core Data, Combine and REST APIs to clear screening; quantify impact ('increased sales by 25%') and highlight domain experience (fintech, healthcare).",
+  },
+  "qa-automation-engineer": {
+    include:
+      "A summary, a Skills section categorized (language + frameworks + automation tools + CI/CD), and Experience with quantified coverage/defect impact.",
+    length: "One page under 5 years, two max for senior; single-column, no tables.",
+    hardSkills: ["Selenium WebDriver", "Cypress / Playwright", "Java / Python / JavaScript", "API testing (Postman, RestAssured)", "CI/CD (Jenkins, GitHub Actions)", "Cucumber / JUnit", "Git", "Performance testing"],
+    softSkills: ["Attention to detail", "Analytical thinking", "Collaboration", "Communication"],
+    atsKeywords: ["Test Automation", "Selenium WebDriver", "Cypress", "CI/CD", "API Testing", "Python", "Java", "Performance Testing"],
+    atsNote: "Use exact keyword matches ('Selenium WebDriver', not just 'Selenium') and categorize skills (Programming / Frameworks / Automation Tools / CI/CD); quantify defect-escape reduction, coverage and run-time savings.",
+  },
+  "platform-engineer": {
+    include:
+      "A summary with product-thinking, a Skills section clustered (Cloud + Kubernetes + IaC + Observability + Security), certifications, and Experience leading each role with scope of ownership.",
+    length: "One to two pages; pattern-match the posting's top 2-3 tools verbatim.",
+    hardSkills: ["Kubernetes", "Terraform", "CI/CD & GitOps (ArgoCD)", "Cloud platforms (AWS/Azure/GCP)", "Go / Python", "Developer portals (Backstage)", "Observability", "FinOps"],
+    softSkills: ["Product thinking", "Developer empathy", "Collaboration", "Communication"],
+    atsKeywords: ["Platform Engineering", "Kubernetes", "Terraform", "CI/CD", "Infrastructure as Code", "GitOps", "Developer Experience", "Observability"],
+    atsNote: "Speak the language of scalable platforms (Kubernetes, Terraform, GitOps, platform-as-a-product) and add CKA / AWS / Terraform Associate; quantify everything — workloads migrated, SLO attainment, deploy frequency, FinOps savings, developer adoption.",
+  },
+  "it-manager": {
+    include:
+      "A summary, keywords embedded in outcome bullets (not a 40-tool list), a Certifications section, and Experience using Problem-Solution-Result.",
+    length: "One to two pages; 15-25 keywords at 60-80% coverage, woven in naturally.",
+    hardSkills: ["IT infrastructure", "Team & vendor management", "Budget management", "ITIL / service delivery", "Project management", "Security compliance", "Disaster recovery", "Cloud platforms (AWS, Azure)"],
+    softSkills: ["Leadership", "Stakeholder engagement", "Change management", "Communication"],
+    atsKeywords: ["IT Infrastructure", "Team Management", "ITIL", "Budget Management", "Vendor Management", "Service Delivery", "Active Directory", "Disaster Recovery"],
+    atsNote: "Embed keywords in outcome bullets — ATS now penalizes a bare 40-tool 'Skills' list; include the named systems (Active Directory, Windows Server, ServiceNow) plus ITIL 4 / Azure Administrator certs and quantify budget/SLA impact.",
+  },
+  "it-director": {
+    include:
+      "A Professional Summary (experience level + specialty), a Skills section matching the posting, Work Experience in Problem-Solution-Result with bottom-line metrics, and Credentials.",
+    length: "One to two pages; 25-35 keywords; embed them in bullets, not a 40-tool list.",
+    hardSkills: ["IT strategy", "Digital transformation", "Budget & P&L management", "Vendor management", "IT governance", "Solution architecture", "IT service management", "Security & infrastructure"],
+    softSkills: ["Executive leadership", "Strategic thinking", "Stakeholder management", "Communication"],
+    atsKeywords: ["IT Strategy", "Digital Transformation", "Team Leadership", "Budget Management", "Vendor Management", "IT Governance", "ServiceNow", "Infrastructure"],
+    atsNote: "97% of firms use ATS — missing 'Active Directory', 'Network Troubleshooting' or 'ServiceNow' disqualifies you; embed 25-35 keywords in outcome bullets (ATS penalizes bare tool lists) and tie achievements to the company's bottom line.",
+  },
+  "help-desk-technician": {
+    include:
+      "A summary, a Skills section (ticketing + OS/AD + remote tools), a Certifications section (CompTIA A+, ITIL), and Experience with resolution-rate metrics.",
+    length: "One to two pages; 15-25 keywords woven into skills, summary and bullets.",
+    hardSkills: ["Technical support / troubleshooting", "Ticketing systems (ServiceNow, Zendesk, Jira)", "Active Directory", "Windows / macOS support", "Remote desktop tools", "Networking basics", "Hardware/peripheral support", "IT asset management"],
+    softSkills: ["Active listening", "Empathy", "Patience", "Communication"],
+    atsKeywords: ["Technical Support", "Help Desk", "Active Directory", "ServiceNow", "Troubleshooting", "Ticketing Systems", "CompTIA A+", "Remote Support"],
+    atsNote: "Name your ticketing system (ServiceNow, Zendesk, Jira Service Desk) and certs (CompTIA A+, ITIL Foundation); quantify impact like 'increased ticket resolution rate by 25% through improved documentation'.",
+  },
+  "cloud-engineer": {
+    include:
+      "A reverse-chronological summary, skills grouped into clusters (Cloud / Kubernetes / IaC / Observability / Security / FinOps), and roles led with scope of ownership.",
+    length: "One to two pages; pattern-match the posting's top 2-3 tools verbatim.",
+    hardSkills: ["AWS (EC2, EKS, Lambda, IAM)", "Terraform / CloudFormation", "Docker & Kubernetes", "Ansible / Jenkins", "Azure / GCP", "CloudWatch & observability", "FinOps", "Networking (VPC, Transit Gateway)"],
+    softSkills: ["Problem solving", "Collaboration", "Ownership", "Cost awareness"],
+    atsKeywords: ["AWS", "Terraform", "Kubernetes", "Docker", "CloudFormation", "DevOps", "Infrastructure as Code", "CloudWatch"],
+    atsNote: "Lead each role with scope of ownership (AWS accounts managed, regions/environments, team coordination) and group skills into clusters; add HashiCorp Terraform Associate / FinOps Practitioner and match the posting's top tools verbatim.",
+  },
+  "blockchain-developer": {
+    include:
+      "A summary highlighting smart-contract expertise, a robust Skills section, and Experience detailing specific dApp/smart-contract projects with security and gas metrics.",
+    length: "One to two pages; full-stack knowledge is a plus — show cross-functional delivery.",
+    hardSkills: ["Solidity", "Smart contract development", "EVM / Hardhat / Foundry", "Ethers.js / Web3.js", "Gas optimization", "Security best practices / audits", "Solana / Rust", "Cryptography & consensus"],
+    softSkills: ["Problem solving", "Security mindset", "Collaboration", "Communication"],
+    atsKeywords: ["Solidity", "Smart Contracts", "Ethereum", "Hardhat", "EVM", "Gas Optimization", "dApp Development", "Web3"],
+    atsNote: "ATS filters for Solidity, EVM, Hardhat/Foundry and an L2 you shipped to; include 'smart contract development', 'blockchain protocols' and quantify impact ('reduced gas costs 15% across 5 contracts', 'audited contracts securing $X').",
+  },
+  "ux-researcher": {
+    include:
+      "A summary, a Skills section categorized (research methods + tools + synthesis), and Experience with specific studies and measurable outcomes.",
+    length: "One to two pages; simple ATS-safe formatting, mirror the posting's exact phrasing.",
+    hardSkills: ["Usability testing", "User interviews", "Surveys & card sorting", "Contextual inquiry / diary studies", "A/B testing", "Research tools (Dovetail, Maze, UserTesting)", "Thematic analysis & affinity mapping", "Journey mapping / personas"],
+    softSkills: ["Empathy", "Storytelling", "Cross-functional collaboration", "Communication"],
+    atsKeywords: ["UX Research", "Usability Testing", "User Interviews", "Surveys", "Card Sorting", "A/B Testing", "Journey Mapping", "Qualitative Research"],
+    atsNote: "Mirror the posting's exact phrasing (use 'cross-functional collaboration' verbatim, not 'teamwork') and name your methods and tools (Dovetail, Maze, UserTesting); quantify outcomes ('15+ interviews → 30% increase in retention').",
+  },
+  "ai-engineer": {
+    include:
+      "A summary led by production metrics, a Skills section (LLM + frameworks + MLOps), and Experience proving you shipped models serving real users at scale.",
+    length: "One to two pages; production metrics > model metrics > framework fluency > credentials.",
+    hardSkills: ["LLMs & fine-tuning", "RAG pipelines", "Vector databases", "LangChain / LlamaIndex", "PyTorch / Hugging Face", "MLOps (CI/CD for ML, drift detection)", "Kubernetes & model serving", "REST APIs"],
+    softSkills: ["Problem solving", "Product thinking", "Collaboration", "Communication"],
+    atsKeywords: ["LLMs", "RAG", "LangChain", "Vector Database", "MLOps", "PyTorch", "Model Deployment", "Hugging Face"],
+    atsNote: "Mirror exact phrasing — if the job says 'LangChain', write 'LangChain' (not 'LLM orchestration framework'); lead with production metrics (latency, throughput, cost) and include the MLOps layer (monitoring, CI/CD for ML, drift detection) that seniors are screened for.",
+  },
 };
 
 const BY_SLUG = ROLE_CV_CONTENT;
