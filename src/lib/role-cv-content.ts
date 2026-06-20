@@ -942,6 +942,123 @@ export const ROLE_CV_CONTENT: Record<string, RoleCvContent> = {
     atsKeywords: ["CCNA", "TCP/IP", "Routing and Switching", "Firewall Configuration", "VLAN", "Network Troubleshooting", "VPN", "LAN/WAN"],
     atsNote: "List CCNA / CompTIA Network+ in a clear Certifications section and use Cisco-specific terms ('Cisco router configuration', 'switch configuration'); quantify impact like 'reduced network downtime by 40%'.",
   },
+  "actuary": {
+    include:
+      "Sections in order: contact, summary, actuarial exams passed (with dates), experience, education, technical skills, certifications. Show exams and designations in the summary.",
+    length: "One to two pages; clean single-column layout — insurers parse resumes into structured fields.",
+    hardSkills: ["Actuarial modeling", "Loss reserving", "Pricing analysis", "Predictive modeling", "SQL", "R", "Python", "Actuarial software (Prophet, GGY AXIS)"],
+    softSkills: ["Analytical judgment", "Communication", "Attention to detail", "Problem solving"],
+    atsKeywords: ["Actuarial Modeling", "Loss Reserving", "Pricing Analysis", "ASA", "Exam P", "Exam FM", "Predictive Modeling", "SQL"],
+    atsNote: "List the exams you've passed by full name at least once ('Exam P: Probability', 'Exam FM: Financial Mathematics') with dates, plus designations (ASA, CERA); use a single-column layout so the ATS parses your exam record.",
+  },
+  "statistician": {
+    include:
+      "A summary, a Skills section near the top (languages + methods + visualization), and Experience bullets that name the method and tool you actually used.",
+    length: "One to two pages; simple single-column layout, no graphics or tables.",
+    hardSkills: ["R", "Python", "SAS", "SQL", "Regression analysis", "Hypothesis testing", "Experimental design", "Bayesian methods", "Data visualization"],
+    softSkills: ["Analytical thinking", "Communication", "Attention to detail", "Collaboration"],
+    atsKeywords: ["Statistics", "R", "SAS", "Regression Analysis", "Hypothesis Testing", "Experimental Design", "Bayesian", "Predictive Modeling"],
+    atsNote: "Use the exact wording from job ads (R, SAS, regression analysis, A/B testing, time series, Bayesian) in the summary, skills and the bullets where you used them; for clinical-trial roles include CDISC and SAS specifically.",
+  },
+  "tax-accountant": {
+    include:
+      "A summary showcasing tax software and your CPA, a Skills section (compliance + software + reporting), and Experience with quantified compliance/savings outcomes.",
+    length: "One to two pages; standard headings, 10-12pt Arial/Calibri for clean ATS parsing.",
+    hardSkills: ["Tax preparation", "GAAP", "Tax software (ProSystem fx, Lacerte, UltraTax)", "Financial reporting", "General ledger", "Bank reconciliation", "Month-end close", "Regulatory compliance"],
+    softSkills: ["Attention to detail", "Confidentiality", "Integrity", "Deadline management"],
+    atsKeywords: ["GAAP", "Tax Preparation", "CPA", "Financial Reporting", "General Ledger", "Bank Reconciliation", "Month-End Close", "Regulatory Compliance"],
+    atsNote: "Surface your CPA and tax-prep software (ProSystem fx, Lacerte, UltraTax) in the summary; GAAP, General Ledger, AP/AR and Bank Reconciliation appear in 90%+ of accounting postings — use the exact terms, not synonyms.",
+  },
+  "auditor": {
+    include:
+      "Credentials (CPA/CIA/CISA) in or just below the contact block, a Skills section (audit + standards + software), and Experience leading with findings and control improvements.",
+    length: "One to two pages; 10-12pt standard fonts. ATS parses top-to-bottom — put credentials in the first 20%.",
+    hardSkills: ["Audit planning & risk assessment", "SOX compliance testing", "Internal controls (COSO)", "PCAOB/IIA standards", "Audit software (TeamMate, AuditBoard)", "Data analytics (ACL, IDEA)", "Financial controls"],
+    softSkills: ["Professional skepticism", "Report writing", "Stakeholder management", "Ethical judgment"],
+    atsKeywords: ["Internal Audit", "SOX Compliance", "Risk Assessment", "CPA", "CIA", "COSO", "Audit Planning", "Internal Controls"],
+    atsNote: "Put CPA/CIA/CISA in or immediately below the contact block (a credential buried at the bottom gets less ATS weight); lead experience with major findings and quantify by risk-reduction % or financial impact.",
+  },
+  "credit-analyst": {
+    include:
+      "A summary, a hard-skill-heavy Skills section (analysis + models + tools), and Experience with portfolio scope and underwriting outcomes.",
+    length: "One to two pages; 6-10 highly relevant skills, mostly hard skills; 10-12pt standard fonts.",
+    hardSkills: ["Financial statement analysis & spreading", "Credit risk modeling", "Cash flow analysis", "Ratio analysis (DSCR, leverage, liquidity)", "Loan structuring & covenants", "Excel financial modeling", "Moody's Analytics / S&P Capital IQ"],
+    softSkills: ["Analytical judgment", "Risk communication", "Credit-memo writing", "Independent decision making"],
+    atsKeywords: ["Financial Statement Analysis", "Credit Risk", "Credit Scoring", "Risk Assessment", "Cash Flow Analysis", "Loan Structuring", "Excel", "Underwriting"],
+    atsNote: "Mirror the posting's exact terms (financial statement analysis, credit risk modeling, risk rating) and name your tools (Moody's Analytics, S&P Capital IQ); reference OCC/FDIC standards where relevant and quantify improved underwriting decisions.",
+  },
+  "investment-banker": {
+    include:
+      "A summary, a dedicated technical Skills section, and a 'Selected Transactions' / Deal Sheet showing M&A, IPO and debt deals with the keywords those deals carry.",
+    length: "One page (IB convention); a clean, dense layout. Never list Microsoft Office.",
+    hardSkills: ["Financial modeling", "DCF valuation", "LBO analysis", "Comparable company analysis (Comps)", "Precedent transactions", "M&A execution", "Due diligence", "Bloomberg / Capital IQ / FactSet"],
+    softSkills: ["Attention to detail", "Stamina under deadline", "Communication", "Discretion"],
+    atsKeywords: ["Financial Modeling", "DCF", "LBO", "Valuation", "Mergers & Acquisitions", "Comparable Company Analysis", "Capital Markets", "Due Diligence"],
+    atsNote: "ATS does exact-string matching — if the posting says 'leveraged buyout analysis' use that, not 'LBO' alone; include a Deal Sheet, name modeling tools (Bloomberg, Capital IQ, FactSet, VBA) and never list Word/Excel/PowerPoint.",
+  },
+  "forklift-operator": {
+    include:
+      "A summary, certifications with the standard number and validity, a Skills section (equipment + safety + WMS), and Experience with throughput and safety metrics.",
+    length: "One page; simple ATS-safe layout, keywords woven through summary/experience/skills.",
+    hardSkills: ["Forklift operation (sit-down, reach, cherry picker)", "OSHA safety compliance", "Pallet jack", "RF scanner", "Warehouse management systems (WMS)", "Load handling", "Shipping/receiving", "Inventory management"],
+    softSkills: ["Safety awareness", "Reliability", "Team collaboration", "Time management"],
+    atsKeywords: ["Forklift Operator", "OSHA Certified", "Warehouse", "Pallet Jack", "WMS", "RF Scanner", "Material Handling", "Safety Compliance"],
+    atsNote: "Include the certification name + OSHA standard number + validity period for keyword coverage, and match the exact forklift types and WMS named in the posting; quantify pallets per shift and days without incident.",
+  },
+  "delivery-driver": {
+    include:
+      "A summary, skills grouped (driving + customer service + technical), licenses (CDL/clean MVR/DOT card), and Experience with on-time and volume metrics.",
+    length: "One page; a summary beats an objective for experienced drivers.",
+    hardSkills: ["Route optimization", "GPS navigation", "Defensive driving", "Vehicle inspection", "Package handling", "DOT compliance", "Delivery apps", "Inventory management"],
+    softSkills: ["Customer service", "Reliability", "Time management", "Communication"],
+    atsKeywords: ["Delivery Driver", "Route Management", "CDL", "DOT Compliance", "GPS Navigation", "Customer Service", "Package Handling", "Vehicle Inspection"],
+    atsNote: "Show a clean driving record (MVR), valid license/CDL and DOT physical card up front, and use the posting's exact terms (route management, last-mile, DOT compliance); quantify on-time-delivery % and packages handled per shift.",
+  },
+  "translator": {
+    include:
+      "A summary, language pairs listed directionally, a Skills section (interpretation + CAT tools + domains), certifications, and Experience with quantified volume/accuracy.",
+    length: "One to two pages; 10-15 skills categorized by language, CAT tools and soft skills.",
+    hardSkills: ["Document translation & localization", "Simultaneous & consecutive interpretation", "CAT tools (SDL Trados, MemoQ)", "Translation memory management", "Legal/medical terminology", "Proofreading & QA", "Glossary management"],
+    softSkills: ["Linguistic precision", "Cultural sensitivity", "Active listening", "Concentration"],
+    atsKeywords: ["Translation", "Localization", "CAT Tools", "SDL Trados", "MemoQ", "Interpretation", "Translation Memory", "Proofreading"],
+    atsNote: "List language pairs in the working direction ('Spanish > English') — ATS and recruiters search directional pairs, not just languages; name CAT tools (Trados, MemoQ) tied to projects and quantify word volume, accuracy and turnaround.",
+  },
+  "editor": {
+    include:
+      "A summary, a Skills section (editing + style guides + tools), style-guide expertise, and Experience showing brand-voice and editorial-quality outcomes.",
+    length: "One to two pages; clearly labeled standard sections for ATS parsing.",
+    hardSkills: ["Copy editing", "Proofreading", "AP & Chicago style", "Fact-checking", "Adobe InDesign", "CMS", "SEO", "Headline writing"],
+    softSkills: ["Attention to detail", "Brand-voice judgment", "Collaboration", "Prioritization"],
+    atsKeywords: ["Copy Editing", "Proofreading", "AP Style", "Chicago Style", "Fact-Checking", "Content Management Systems", "SEO", "Editing"],
+    atsNote: "Name the style guides you work in (AP, Chicago) and tools (InDesign, CMS, SEO) explicitly — if the posting lists 'content management systems' or 'AI editing tools', those exact phrases need to appear in your experience or skills.",
+  },
+  "technical-writer": {
+    include:
+      "A summary, a Skills section (documentation types + authoring tools + docs-as-code), a portfolio/samples link, and Experience with quantified docs scope.",
+    length: "One to two pages; tailor the skills section to the exact role (API docs vs user guides).",
+    hardSkills: ["Technical documentation", "API documentation", "Docs-as-code (Markdown, Git)", "Authoring tools (MadCap Flare, FrameMaker, Oxygen XML)", "DITA / structured authoring", "Single-sourcing", "Information architecture", "Style guides"],
+    softSkills: ["Audience analysis", "Clarity", "Collaboration", "Attention to detail"],
+    atsKeywords: ["Technical Writing", "API Documentation", "Docs-as-Code", "Markdown", "DITA", "MadCap Flare", "User Guides", "Information Architecture"],
+    atsNote: "ATS and hiring managers specifically look for developer-documentation authoring, Markdown/MDX fluency and docs-as-code in Git — name your authoring tools (MadCap Flare, FrameMaker, Oxygen XML) and add CPTC or the Google Technical Writing certificate for an edge.",
+  },
+  "animator": {
+    include:
+      "A 3-4 sentence profile (specialization + key accomplishment), a portfolio/demo-reel link in the header, a Skills section (10-15 tools), and Experience with strong verbs.",
+    length: "One page (studios review hundreds); PDF/DOCX, clean fonts, no columns or graphics.",
+    hardSkills: ["Character animation", "Maya", "Blender", "After Effects", "Rigging", "Keyframe animation", "Motion graphics", "Storyboarding", "Lip sync", "Toon Boom Harmony"],
+    softSkills: ["Creativity", "Collaboration", "Storytelling", "Time management"],
+    atsKeywords: ["Character Animation", "Maya", "After Effects", "Blender", "Rigging", "Motion Graphics", "Storyboarding", "Keyframe Animation"],
+    atsNote: "Put a demo-reel/portfolio link (Vimeo, Behance, ArtStation) in the header — keep the reel 60-90s, best work first; start bullets with Animated/Produced/Created (never 'Worked on'), and mirror the posting's software list.",
+  },
+  "video-editor": {
+    include:
+      "A summary, a Skills section (5-10 editing skills + software), a portfolio/reel link, and Experience with 2-3 tools per bullet and measurable impact.",
+    length: "One to two pages; simple labeled sections, no images or non-standard fonts.",
+    hardSkills: ["Adobe Premiere Pro", "After Effects", "DaVinci Resolve", "Color grading", "Motion graphics", "Audio sync & mixing", "Transitions & VFX", "Storytelling"],
+    softSkills: ["Creativity", "Attention to detail", "Collaboration", "Deadline discipline"],
+    atsKeywords: ["Adobe Premiere Pro", "After Effects", "DaVinci Resolve", "Color Grading", "Video Editing", "Motion Graphics", "Final Cut Pro", "Post-Production"],
+    atsNote: "Name your editing software (Premiere Pro, After Effects, DaVinci Resolve) and put 2-3 tools/techniques in each experience bullet so the ATS catches them; include a reel link and quantify views, turnaround or output volume.",
+  },
 };
 
 const BY_SLUG = ROLE_CV_CONTENT;
