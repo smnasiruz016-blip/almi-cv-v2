@@ -2076,6 +2076,132 @@ export const ROLE_CV_CONTENT: Record<string, RoleCvContent> = {
     atsKeywords: ["Data Entry", "Data Accuracy", "Typing Speed", "Microsoft Excel", "Data Validation", "Database Management", "Records Management", "10-Key"],
     atsNote: "Match software names exactly to the posting and quantify everything — records/day, error rate, backlog cleared, audit pass rate ('250+ records/day into Salesforce at 99.8% accuracy'; '150 invoices/week, backlog −50%').",
   },
+  "icu-nurse": {
+    include:
+      "A header with RN + CCRN credentials, a 3-4 line summary (ICU acuity + outcomes), a Skills section (critical-care + EHR + certs), and quantified Experience.",
+    length: "One to two pages; break skills into 2-4 categories; ATS-safe fonts, no tables.",
+    hardSkills: ["Critical-care monitoring", "Ventilator management (AC/VC, PRVC, APRV)", "Invasive lines (A-line, CVP, PA catheter)", "Patient assessment", "Medication & smart-pump administration", "Waveform interpretation", "EHR (Epic Beacon, Cerner iView)", "Wound care"],
+    softSkills: ["Critical thinking", "Empathy", "Communication", "Composure under pressure"],
+    atsKeywords: ["ICU", "Critical Care", "CCRN", "Ventilator Management", "Invasive Monitoring", "ACLS", "Patient Assessment", "Epic"],
+    atsNote: "Put RN + CCRN by your name and ACLS/TNCC up top; name your EHR and modules (Epic Beacon, Cerner iView) and list ventilator modes/invasive lines exactly (AC/VC, PRVC, A-line, CVP, PA catheter); quantify recovery rates and reduced medication errors.",
+  },
+  "er-nurse": {
+    include:
+      "A header with RN + specialty credentials, a categorized Skills section (emergency care + tech), certifications (BLS/ACLS/PALS/CEN), and quantified Experience.",
+    length: "One to two pages; 2-4 skill categories max; ATS-safe formatting.",
+    hardSkills: ["Triage", "Emergency & trauma care", "Patient assessment", "IV therapy", "Medication administration", "Wound care", "EHR (Epic, Cerner, Meditech)", "Pyxis medication management"],
+    softSkills: ["Critical thinking", "Patient advocacy", "Communication", "Composure under pressure"],
+    atsKeywords: ["Triage", "Emergency Care", "ACLS", "Trauma Care", "IV Therapy", "CEN", "Patient Assessment", "Epic"],
+    atsNote: "Use exact keywords (ACLS, Trauma Care, IV Therapy, Triage) and list BLS/ACLS/PALS/CEN; name your EHR + modules and break skills into 2-4 categories (Emergency Care / Technology); quantify patient volume and outcomes.",
+  },
+  "pediatric-nurse": {
+    include:
+      "A header with RN + CPN, a summary, a Skills section (pediatric clinical + EHR + certs), and Experience noting subspecialty (NICU/oncology) and family-centered care.",
+    length: "One to two pages; ATS-compatible fonts (Rubik, Lato), no tables/columns/images.",
+    hardSkills: ["Pediatric assessment", "Pediatric medication administration", "Pediatric IV insertion", "Neonatal resuscitation", "Vital signs monitoring", "Emergency response (PALS)", "EHR (Epic, Cerner)", "Patient & family communication"],
+    softSkills: ["Empathy", "Communication with children", "Teamwork", "Patience"],
+    atsKeywords: ["Pediatric Nursing", "PALS", "CPN", "Pediatric Medication Administration", "Neonatal Resuscitation", "Patient Assessment", "Family-Centered Care", "Epic"],
+    atsNote: "Put RN + CPN (Certified Pediatric Nurse) and PALS/NRP up front, and use keywords like 'pediatric medication administration' and 'neonatal resuscitation'; mention subspecialty (oncology, cardiology, NICU) and family-centered care.",
+  },
+  "oncology-nurse": {
+    include:
+      "A header with RN + OCN, a summary, a Skills section (chemo + clinical + EHR), and Experience using reverse-chronological clinical roles.",
+    length: "One to two pages; clear headings (education/experience/skills/certifications).",
+    hardSkills: ["Chemotherapy administration", "Pain management", "IV therapy & port access", "Radiation safety", "Patient education & support", "Oncology clinical trials", "EMR (Epic, Cerner)", "Blood transfusion safety"],
+    softSkills: ["Empathy", "Patient advocacy", "Critical thinking", "Team collaboration"],
+    atsKeywords: ["Oncology Nursing", "Chemotherapy Administration", "OCN", "Pain Management", "Patient Education", "IV Therapy", "Radiation Safety", "Clinical Trials"],
+    atsNote: "Lead with 'Chemotherapy Administration' and OCN (Oncology Certified Nurse), plus ACLS/PALS and chemo/transfusion-safety certs; use keywords like 'patient education and support', 'pain management' and 'oncology clinical trials'.",
+  },
+  "travel-nurse": {
+    include:
+      "A header with RN + active license #, a Skills section (15-25 clinical/tech keywords), every EMR you've used, and Experience showing multi-facility adaptability.",
+    length: "One to two pages; simple labeled sections, no images/non-standard fonts.",
+    hardSkills: ["Patient assessment", "Medication administration", "IV therapy", "Care planning", "Wound care", "Barcode medication administration (BCMA)", "EHR (Epic, Cerner, Meditech)", "Rapid onboarding"],
+    softSkills: ["Adaptability", "Communication", "Independence", "Teamwork"],
+    atsKeywords: ["Travel Nursing", "Patient Assessment", "IV Therapy", "ACLS", "BLS", "Epic", "Cerner", "RN License"],
+    atsNote: "Include your active RN license number and copy 15-25 clinical/cert keywords straight from the posting; list every EMR you've documented in (Epic + modules, Cerner, Meditech) in order of proficiency — travel experience signals flexibility and fast onboarding.",
+  },
+  "anesthesiologist": {
+    include:
+      "A summary led by board status, a prominent Certifications section, a Skills section (anesthesia technical + safety), and Experience with case volumes.",
+    length: "One to two pages (or academic CV); make current board standing obvious at a glance.",
+    hardSkills: ["General & regional anesthesia", "Airway management", "Pharmacology", "Patient monitoring", "Pain management", "Anesthetic machines & monitors", "Patient safety", "Perioperative assessment"],
+    softSkills: ["Composure under pressure", "Communication", "Vigilance", "Team collaboration"],
+    atsKeywords: ["Anesthesiology", "Board Certified", "Regional Anesthesia", "Airway Management", "Pain Management", "ACLS", "Patient Safety", "Patient Assessment"],
+    atsNote: "Board certification is a hiring filter, not decoration — lead with board status + ACLS/PALS and make current standing obvious; use keywords like 'regional anesthesia', 'airway management', 'patient safety' and quantify procedures performed.",
+  },
+  "cardiologist": {
+    include:
+      "A summary, a Certifications & Licenses section (board certified/eligible), a Skills section (procedures + diagnostics + EMR), and Research/Affiliations.",
+    length: "One to two pages (or academic CV); reverse-chronological, clean headings.",
+    hardSkills: ["Cardiac catheterization", "Echocardiography", "EKG interpretation", "Stress test analysis", "Pacemaker implantation", "Nuclear cardiology", "CT angiography", "EPIC / ICD-10"],
+    softSkills: ["Clinical judgment", "Communication", "Collaboration", "Patient focus"],
+    atsKeywords: ["Cardiology", "Board Certified", "Cardiac Catheterization", "Echocardiography", "EKG Interpretation", "Patient Care", "Nuclear Cardiology", "ICD-10"],
+    atsNote: "State 'Board Certified (or Eligible) in Cardiology' plus state license up front, and include procedure/diagnostic keywords (cardiac catheterization, echocardiography, EKG interpretation); add Research/Presentations/Affiliations and EPIC + ICD-10.",
+  },
+  "radiologist": {
+    include:
+      "A summary identifying you as board-certified, a Skills section (modalities + software), board certifications/affiliations, and skill-action-result Experience.",
+    length: "One to two pages (or academic CV); spell out modality + acronym.",
+    hardSkills: ["Computed tomography (CT)", "Magnetic resonance imaging (MRI)", "Ultrasound imaging", "PET/CT", "X-ray radiography", "Interventional procedures", "PowerScribe 360", "Diagnostic interpretation"],
+    softSkills: ["Diagnostic acumen", "Communication", "Interdisciplinary collaboration", "Attention to detail"],
+    atsKeywords: ["Radiology", "Diagnostic Imaging", "Board Certified", "CT", "MRI", "Ultrasound", "Radiation Safety", "PACS"],
+    atsNote: "List ABR (American Board of Radiology) certification and use both full term + acronym ('Magnetic Resonance Imaging (MRI)'); embed 'diagnostic imaging', 'radiation safety' and 'interdisciplinary collaboration', and use skill-action-result bullets tied to patient outcomes.",
+  },
+  "surgeon": {
+    include:
+      "A summary (expertise + leadership + precision), a dedicated Certifications section (board + license + ACLS/ATLS), a Skills section, and case-volume Experience.",
+    length: "One to two pages (or academic CV); Arial/Calibri 10-12pt, bold headings, bullets.",
+    hardSkills: ["Surgical procedures (open & minimally invasive)", "Preoperative assessment", "Postoperative care", "Surgical technique", "Patient safety", "Sterile technique", "Clinical decision making", "EMR"],
+    softSkills: ["Precision", "Leadership", "Communication", "Composure under pressure"],
+    atsKeywords: ["Surgery", "Board Certified", "Surgical Procedures", "Patient Care", "ACLS", "ATLS", "Perioperative Care", "Clinical Outcomes"],
+    atsNote: "Always list board certification, state licensure and ACLS/ATLS in a dedicated section; include 'surgical procedures' and 'patient care', and quantify case volumes, complication rates and recovery-time reductions — metrics also boost ATS matching.",
+  },
+  "pediatrician": {
+    include:
+      "A 2-3 sentence summary, a Certifications section (ABP, PALS, NRP), a balanced Skills section (clinical + soft), and measurable Experience.",
+    length: "One to two pages (or academic CV); standard sections in expected order.",
+    hardSkills: ["Pediatric physical examinations", "Immunization administration", "Growth & development monitoring", "Neonatal care", "Diagnostic interpretation", "Pediatric asthma/preventive care", "EMR (Epic, Cerner)", "Telehealth"],
+    softSkills: ["Bedside manner", "Communication with children & families", "Empathy", "Patience"],
+    atsKeywords: ["Pediatrics", "Board Certified", "Immunization", "Pediatric Care", "Neonatal Care", "Patient Assessment", "Epic", "Preventive Medicine"],
+    atsNote: "Include ABP (American Board of Pediatrics) certification, PALS and NRP plus state license, and weave keywords like 'pediatric care' and 'immunization'; emphasize bedside manner and family communication, with measurable achievements.",
+  },
+  "psychiatrist": {
+    include:
+      "A summary stating board-certified + expertise areas, a Certifications section (ABPN), a Skills section (assessment + treatment), and publications if any.",
+    length: "One to two pages (or academic CV); standard layout, ATS-safe.",
+    hardSkills: ["Psychiatric assessment & diagnosis", "Treatment planning", "Psychopharmacology / medication management", "Psychotherapy (CBT)", "Mood & anxiety disorders", "Risk assessment", "EMR", "DSM-5 diagnosis"],
+    softSkills: ["Empathy", "Active listening", "Communication", "Clinical judgment"],
+    atsKeywords: ["Psychiatry", "Board Certified", "Medication Management", "Treatment Plans", "Psychotherapy", "Patient Assessment", "Diagnosis", "Psychopharmacology"],
+    atsNote: "Include ABPN (American Board of Psychiatry and Neurology) certification with year and use exact job-ad terms (Diagnosis, Treatment Plans, Psychotherapy, Medication Management); name expertise areas (mood disorders, psychopharmacology, CBT) and list journal publications.",
+  },
+  "sonographer": {
+    include:
+      "A summary, a Skills section (modalities + PACS + patient care), ARDMS/ARRT certifications, and Experience targeting each bullet to a posting requirement.",
+    length: "One to two pages; swap in keywords from the listing in the skills section.",
+    hardSkills: ["Diagnostic medical sonography", "Abdominal/OB-GYN/vascular ultrasound", "Ultrasound equipment operation", "Patient positioning & assessment", "PACS", "Image optimization", "Doppler", "BLS"],
+    softSkills: ["Attention to detail", "Patient communication", "Teamwork", "Empathy"],
+    atsKeywords: ["Sonography", "ARDMS", "Diagnostic Imaging", "Ultrasound", "PACS", "Vascular", "Patient Care", "Medical Imaging"],
+    atsNote: "List ARDMS (and RDCS/ARRT where applicable) plus BLS/ACLS, and use 'diagnostic imaging', 'ultrasound technology' and 'patient assessments'; target each bullet to a posting requirement and name your modalities (abdominal, OB-GYN, vascular).",
+  },
+  "mri-technologist": {
+    include:
+      "A summary, ARRT-MRI certification listed prominently, a Skills section (imaging + safety + PACS), and Experience with positioning and image-acquisition detail.",
+    length: "One to two pages; standard titles, Arial/Times, PDF/.docx, no tables/images.",
+    hardSkills: ["MRI image acquisition", "Patient positioning", "MRI safety & screening", "Sequence selection", "Radiation/quality assurance", "PACS / CR / DR", "Contrast administration", "Patient care"],
+    softSkills: ["Attention to detail", "Patient communication", "Composure", "Teamwork"],
+    atsKeywords: ["MRI", "ARRT", "Radiology", "Patient Care", "Medical Imaging", "MRI Safety", "PACS", "Patient Positioning"],
+    atsNote: "List ARRT(MR) certification prominently plus BLS/MRI Safety Officer, and include 'MRI', 'radiology', 'patient care' and PACS/CR/DR; describe patient positioning, safety screening and image acquisition. Add ASRT/RSNA membership.",
+  },
+  "dermatologist": {
+    include:
+      "A board-certified summary, an Education & Certifications section (ABD + license), a Skills section (procedures + EMR), and reverse-chronological Experience.",
+    length: "One to two pages (or academic CV); traditional layout, Arial/Times, PDF/.docx.",
+    hardSkills: ["Skin disease diagnosis", "Skin biopsy techniques", "Laser therapy / phototherapy", "Skin cancer treatment", "Chronic skin disorder management (psoriasis, eczema)", "Dermatoscopy", "Teledermatology", "EMR (Epic, Cerner)"],
+    softSkills: ["Patient communication", "Empathy", "Attention to detail", "Clinical judgment"],
+    atsKeywords: ["Dermatology", "Board Certified", "Skin Cancer Treatment", "Dermatology Procedures", "Laser Therapy", "Patient Care", "Skin Biopsy", "Teledermatology"],
+    atsNote: "Include American Board of Dermatology certification and state license, and use keywords like 'dermatology procedures', 'skin cancer treatment' and 'laser therapy'; name dermatoscope/EMR proficiency and use a reverse-chronological ATS-safe layout.",
+  },
 };
 
 const BY_SLUG = ROLE_CV_CONTENT;
