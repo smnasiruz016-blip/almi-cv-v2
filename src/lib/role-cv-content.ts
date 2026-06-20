@@ -6666,6 +6666,237 @@ export const ROLE_CV_CONTENT: Record<string, RoleCvContent> = {
     atsNote:
       "Tailor the skills to the posting's exact terms (tools, methodologies) and weave them into achievements rather than listing them; quantify the impact (e.g. \"improved completion rate 15% using Asana\") and keep the layout clean — no tables or text boxes.",
   },
+  "it-office-manager": {
+    include:
+      "Office-operations summary, IT/systems and vendor coordination, budget and facilities work, tools (Office/Google Workspace, HRIS, ticketing), team coordination, certifications, and education.",
+    length:
+      "One to two pages — lead with measurable operational and cost-saving outcomes.",
+    hardSkills: [
+      "Office operations management",
+      "IT systems and helpdesk coordination",
+      "Vendor and supplier management",
+      "Facilities coordination",
+      "Budget administration",
+      "Microsoft Office / Google Workspace",
+      "HRIS and ticketing tools",
+    ],
+    softSkills: [
+      "Organisation",
+      "Multitasking",
+      "Confidentiality",
+      "Team coordination",
+      "Problem-solving",
+    ],
+    atsKeywords: [
+      "office manager",
+      "office operations",
+      "vendor management",
+      "facilities coordination",
+      "budget administration",
+      "calendar management",
+      "team coordination",
+    ],
+    atsNote:
+      "The ATS rarely recognizes synonyms — mirror the posting's exact wording (\"calendar management\", \"vendor management\", \"inventory tracking\"); spread keywords across summary, skills and bullets, and show measurable outcomes (cost savings, process improvements) rather than task lists.",
+  },
+  "office-assistant": {
+    include:
+      "Profile, administrative-support record, software and data-entry skills, scheduling and filing work, communication and customer-service strengths, and education.",
+    length:
+      "One page — ATS-clean, standard headings, a clear skills section.",
+    hardSkills: [
+      "Microsoft Office (Word, Excel, Outlook)",
+      "Data entry and record keeping",
+      "Calendar management and scheduling",
+      "Filing and document management",
+      "Phone and reception handling",
+      "Travel coordination",
+      "Correspondence preparation",
+    ],
+    softSkills: [
+      "Organisation",
+      "Time management",
+      "Communication",
+      "Attention to detail",
+      "Teamwork",
+    ],
+    atsKeywords: [
+      "office assistant",
+      "administrative support",
+      "data entry",
+      "scheduling",
+      "Microsoft Office",
+      "file management",
+      "customer service",
+    ],
+    atsNote:
+      "Recruiters search for terms like \"scheduling\", \"data entry\", \"administrative support\" and \"file management\" — mirror the posting's exact words; balance hard skills (Office Suite, data entry) with soft skills (organisation, communication) and put them in summary, skills and the first bullet of each role.",
+  },
+  "training-development-officer": {
+    include:
+      "L&D summary, programs designed and delivered, training-needs-analysis work, measured outcomes, LMS and tools, certifications (CPTM, CPTD), and education.",
+    length:
+      "One page early-career; two pages where there is program-ownership or department scope.",
+    hardSkills: [
+      "Training needs analysis",
+      "Instructional design",
+      "Training delivery and facilitation",
+      "Employee and instructor-led training",
+      "Coaching and organizational development",
+      "LMS administration",
+      "Evaluation and reporting",
+    ],
+    softSkills: [
+      "Engaging facilitation",
+      "Clear communication",
+      "Coaching",
+      "Adaptability",
+      "Stakeholder collaboration",
+    ],
+    atsKeywords: [
+      "training and development",
+      "training needs analysis",
+      "instructional design",
+      "training delivery",
+      "employee training",
+      "learning and development",
+      "coaching",
+    ],
+    atsNote:
+      "Front-load keywords in the professional summary (most ATS/human attention) and keep dense placement in the skills section; mirror the posting's wording, weave terms into achievement statements, and note CPTM/CPTD certifications and measured learning outcomes.",
+  },
+  "shop-assistant": {
+    include:
+      "Profile, retail and customer-service record, till/POS and stock work, product knowledge, any retail training, and education.",
+    length:
+      "One to two pages — enough to show contributions without overloading; lead with a measurable result.",
+    hardSkills: [
+      "Customer service",
+      "POS and till operation (Square, Clover)",
+      "Cash handling",
+      "Stock replenishment",
+      "Inventory management",
+      "Product knowledge",
+      "Merchandising support",
+    ],
+    softSkills: [
+      "Patience",
+      "Communication",
+      "Problem-solving",
+      "Teamwork",
+      "Reliability",
+    ],
+    atsKeywords: [
+      "shop assistant",
+      "retail assistant",
+      "customer service",
+      "POS",
+      "cash handling",
+      "stock replenishment",
+      "inventory management",
+    ],
+    atsNote:
+      "For an entry-level retail role the skills section is decisive — list tangible skills (managing tills, replenishing stock, resolving queries) and POS systems (Square, Clover) by name, and back the profile with one measurable result (sales target, customer-satisfaction).",
+  },
+  "visual-merchandiser": {
+    include:
+      "Merchandising summary, display and store-layout record with results, brand-standards and planogram work, design software, portfolio link, certifications, and education.",
+    length:
+      "One page early-career; two pages where there are multi-store or flagship projects to document.",
+    hardSkills: [
+      "Visual displays and window dressing",
+      "Store layout and planograms",
+      "Brand-standards execution",
+      "Mannequin and product styling",
+      "Trend analysis",
+      "Adobe Creative Suite",
+      "Retail and space design",
+    ],
+    softSkills: [
+      "Creativity",
+      "Communication",
+      "Attention to detail",
+      "Collaboration",
+      "Commercial awareness",
+    ],
+    atsKeywords: [
+      "visual merchandiser",
+      "visual merchandising",
+      "window displays",
+      "store layout",
+      "planograms",
+      "brand standards",
+      "styling",
+    ],
+    atsNote:
+      "Use the posting's exact terms (if it says \"store layout\", use that) and name software (Adobe Creative Suite, 3D tools) the ATS scans for; quantify display impact (sales lift, conversion) on the bullets, link a portfolio, and avoid graphics/tables that confuse parsers.",
+  },
+  "stock-associate": {
+    include:
+      "Profile, stockroom and inventory record, receiving and replenishment duties, scanner/equipment use, accuracy and merchandising support, and education.",
+    length:
+      "One page — concise, with a measurable accuracy or productivity result.",
+    hardSkills: [
+      "Inventory management and stock control",
+      "Receiving and replenishment",
+      "Scanners and barcode readers",
+      "Merchandising and shelf stocking",
+      "Stockroom organisation",
+      "Cycle counting",
+      "Manual handling of heavy items",
+    ],
+    softSkills: [
+      "Organisation",
+      "Teamwork",
+      "Reliability",
+      "Following instructions",
+      "Time management",
+    ],
+    atsKeywords: [
+      "stock associate",
+      "inventory management",
+      "stock control",
+      "replenishment",
+      "merchandising",
+      "barcode scanner",
+      "stockroom",
+    ],
+    atsNote:
+      "Lead with the inventory/stockroom terms the posting uses and note physical capability (lifting, moving stock) plus scanner proficiency; quantify accuracy, units processed and replenishment speed, and add any merchandising or cashiering crossover skills.",
+  },
+  "farm-worker": {
+    include:
+      "Profile, agricultural-work record, crop/livestock and machinery experience, irrigation and harvesting duties, safety/first-aid certifications, and any agricultural education.",
+    length:
+      "One page — hands-on experience and equipment/safety skills carry the resume.",
+    hardSkills: [
+      "Crop harvesting and planting",
+      "Farm-equipment and machinery operation",
+      "Irrigation management",
+      "Equipment maintenance",
+      "Livestock and animal care",
+      "Soil and crop management",
+      "Safety compliance",
+    ],
+    softSkills: [
+      "Physical stamina",
+      "Teamwork",
+      "Reliability",
+      "Problem-solving",
+      "Adaptability",
+    ],
+    atsKeywords: [
+      "farm worker",
+      "agricultural worker",
+      "crop harvesting",
+      "equipment operation",
+      "irrigation",
+      "livestock",
+      "safety compliance",
+    ],
+    atsNote:
+      "Employers value hands-on experience with farm processes and machinery plus safety training — name the equipment you have operated and any First Aid/safety certifications, and show harvesting, irrigation and crop/livestock duties with concrete detail.",
+  },
 };
 
 const BY_SLUG = ROLE_CV_CONTENT;
