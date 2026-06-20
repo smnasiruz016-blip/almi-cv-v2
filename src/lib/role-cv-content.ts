@@ -3108,6 +3108,162 @@ export const ROLE_CV_CONTENT: Record<string, RoleCvContent> = {
     atsNote:
       "List your state teaching licence and subject endorsements in a dedicated section, mirror the posting's terms (\"classroom management\", \"differentiated instruction\", \"AP/IB\"), and quantify outcomes (pass rates, exam scores, student growth).",
   },
+  // ── Batch 24 (sourced via live SERP 2026: ResumeWorded, Wiz, TealHQ, Enhancv, Wozber, ZipRecruiter, ResumeMentor, VisualCV, Indeed, Resumaker, ResumeAdapter, Jobscan) ──
+  // Priorities: tech/cloud/AI, digital marketing, nursing, pharmacy, wellness, admin/ops, finance, education.
+  "google-cloud-architect": {
+    include:
+      "A professional summary naming your GCP certification, a skills section mirroring the posting's services, work experience leading with quantified achievements per platform, a projects section, a dedicated certifications section, and education.",
+    length:
+      "One to two pages — lead with quantified GCP achievements, keep your certification in the summary and a dedicated section, and group services by the role (infrastructure, data or DevOps).",
+    hardSkills: ["GCP (Compute Engine, GKE, VPC, IAM)", "BigQuery / Dataflow / Pub/Sub", "Terraform / Deployment Manager", "Cloud architecture & migration", "Kubernetes / GKE", "CI/CD (Cloud Build)", "Monitoring & security"],
+    softSkills: ["Problem solving", "Communication", "Stakeholder management", "Decision-making", "Documentation"],
+    atsKeywords: ["Google Cloud Platform", "GCP", "BigQuery", "GKE", "Terraform", "Cloud Architecture", "Cloud Migration"],
+    atsNote:
+      "Put your GCP certification (Professional Cloud Architect) in the summary and a dedicated section — in cloud roles certifications often outweigh degrees — and name the exact services the posting lists (Compute Engine, BigQuery, GKE); quantify achievements per platform.",
+  },
+  "computer-vision-engineer": {
+    include:
+      "Contact details, a professional summary, a skills section positioning deep learning and computer vision first, work experience with quantified achievements, a projects section showing image-processing applications, education, and certifications.",
+    length:
+      "One to two pages — put deep learning, computer vision and your strongest frameworks at the forefront, and quantify results (e.g. model accuracy and the value it delivered).",
+    hardSkills: ["Python / C++", "OpenCV", "PyTorch / TensorFlow", "CNNs, Transformers & GANs", "Object detection & segmentation", "CUDA / TensorRT / ONNX", "Docker & deployment"],
+    softSkills: ["Problem solving", "Communication", "Teamwork", "Project management", "Analytical thinking"],
+    atsKeywords: ["Computer Vision", "Deep Learning", "Python", "PyTorch", "TensorFlow", "OpenCV", "Object Detection"],
+    atsNote:
+      "Position \"deep learning\" and \"computer vision\" first, mirror the posting's frameworks (PyTorch, TensorFlow, OpenCV) and advanced terms (CUDA, TensorRT, ONNX, SLAM) where you genuinely use them, and quantify model accuracy and impact.",
+  },
+  "ai-research-scientist": {
+    include:
+      "Contact details, a professional summary with your target title and three to four top skills, a skills section balancing research domains, languages and frameworks, work experience with quantified results, a publications/projects section, and education.",
+    length:
+      "One to two pages (longer for an academic CV) — lead with the exact skills named in the posting, then closely related terms you genuinely use, and quantify outcomes.",
+    hardSkills: ["Python / C++", "PyTorch / TensorFlow", "Machine & deep learning", "NLP / computer vision", "Mathematics & statistics", "MLOps (SageMaker/Vertex AI)", "Experiment design"],
+    softSkills: ["Analytical thinking", "Communication", "Collaboration", "Problem solving", "Scientific writing"],
+    atsKeywords: ["Machine Learning", "Deep Learning", "Python", "PyTorch", "NLP", "Computer Vision", "Research"],
+    atsNote:
+      "Anchor on the exact skills the posting names (Python, PyTorch, deep learning, NLP), use your target title plus three to four top skills in the summary, and quantify results (e.g. \"92% accuracy, $1.2M retained revenue\") rather than listing tasks.",
+  },
+  "google-ads-specialist": {
+    include:
+      "Contact details, a summary statement, a dedicated skills section clustered by platform and method near the top, work experience using the context-action-result framework with quantified results, and a certifications section (Google Ads).",
+    length:
+      "One to two pages — put core PPC competencies near the top so the ATS captures them, and favour metrics (CTR, conversion rate, CPA, ROAS, impression share).",
+    hardSkills: ["Google Ads", "Keyword research", "PPC / paid search", "A/B testing", "Conversion tracking", "Audience segmentation", "Google Analytics & Ads Editor"],
+    softSkills: ["Analytical thinking", "Attention to detail", "Communication", "Client management", "Problem solving"],
+    atsKeywords: ["PPC", "Google Ads", "Paid Search Marketing", "Keyword Research", "Conversion Rate Optimization", "Google Analytics", "A/B Testing"],
+    atsNote:
+      "Place core competencies (keyword research, A/B testing, conversion tracking) in a dedicated skills section near the top, and use the context-action-result framework to quantify CTR, conversion rate, CPA and ROAS.",
+  },
+  "affiliate-marketer": {
+    include:
+      "Contact details, a professional summary, a skills section, work experience with quantified achievements, education, and the affiliate networks and tools you use.",
+    length:
+      "One page if you have under ten years of experience — keep affiliate program management, partner recruitment and performance tracking high, and quantify revenue and efficiency gains.",
+    hardSkills: ["Affiliate program management", "Partner recruitment & negotiation", "CPA & ROI tracking", "Campaign optimization", "Attribution modeling", "Affiliate networks (CJ/ShareASale/Impact)", "Analytics (GA, Looker)"],
+    softSkills: ["Relationship management", "Communication", "Analytical thinking", "Negotiation", "Attention to detail"],
+    atsKeywords: ["Affiliate Marketing", "Affiliate Networks", "Campaign Management", "Performance Analytics", "Partner Recruitment", "CPA", "ROI Tracking"],
+    atsNote:
+      "Use affiliate-specific terms (\"affiliate networks\", \"partner negotiation\", \"performance reporting\") and name your platforms (CJ, ShareASale, Impact, Google Analytics); quantify revenue driven and efficiency gained.",
+  },
+  "cardiac-care-nurse": {
+    include:
+      "Contact details, a professional summary, a distinct licences-and-certifications section, professional experience with quantified outcomes, a technical-skills section, and education and awards.",
+    length:
+      "One to two pages — lead with cardiac monitoring and telemetry experience, keep BLS/ACLS current in a distinct section, and quantify patient outcomes in high-acuity settings.",
+    hardSkills: ["Cardiac monitoring & telemetry", "ECG interpretation", "Cardiac pharmacology", "Medication administration", "Invasive line management", "Patient assessment", "EHR documentation"],
+    softSkills: ["Critical thinking under pressure", "Communication", "Empathy", "Teamwork", "Adaptability"],
+    atsKeywords: ["Telemetry", "Cardiac Monitoring", "ECG Interpretation", "ACLS", "BLS", "Medication Administration", "Patient Care"],
+    atsNote:
+      "Mirror the posting's terms (\"cardiac monitoring\", \"telemetry\", \"ECG interpretation\") and keep current BLS/ACLS in a distinct certifications section; quantify patient outcomes and acuity.",
+  },
+  "home-health-nurse": {
+    include:
+      "Contact details, a summary, a skills section, work experience with quantified outcomes, education, a certifications section, and optionally awards or professional memberships.",
+    length:
+      "One to two pages — keep clinical skills (wound care, medication management, patient assessment) and your certifications high, and show the caseloads you managed.",
+    hardSkills: ["Patient assessment", "Medication management", "Wound care", "IV therapy", "Catheter care", "Care planning & documentation", "EHR documentation"],
+    softSkills: ["Empathy", "Active listening", "Organization", "Time management", "Communication"],
+    atsKeywords: ["Home Health", "Patient Assessment", "Wound Care", "Medication Management", "IV Therapy", "BLS", "Care Planning"],
+    atsNote:
+      "Customise to the posting's wording (\"wound care\", \"medication management\", \"patient assessment\"), list CPR/BLS/ACLS with issuer and date, and show the daily caseloads you managed.",
+  },
+  "hospital-pharmacist": {
+    include:
+      "Contact details, a two-to-three-sentence professional summary, a skills section drawn from the posting, employment history in reverse chronological order with quantified bullets, education and licensure, and a continuing-education or certifications section.",
+    length:
+      "One to two pages — keep your pharmacy degree, licensure and strongest clinical experience high, and quantify accuracy, turnaround and safety improvements.",
+    hardSkills: ["Medication therapy management", "Pharmaceutical calculations", "Drug interactions & contraindications", "Compounding & dispensing", "Inventory & regulatory compliance", "Critical-care pharmacotherapy", "Pharmacy software"],
+    softSkills: ["Attention to detail", "Communication", "Critical thinking", "Collaboration", "Patient confidentiality"],
+    atsKeywords: ["Hospital Pharmacist", "Medication Therapy Management", "Compounding", "Drug Interactions", "Medication Safety", "Regulatory Compliance", "Pharmacotherapy"],
+    atsNote:
+      "Pull keywords from the posting (\"medication therapy management\", \"compounding\", \"medication safety\"), list your degree, licensure and immunisation/specialty certifications, and quantify accuracy, turnaround and error-prevention.",
+  },
+  "cosmetologist": {
+    include:
+      "A professional summary, a dedicated skills section (up to six skills balancing hard and soft), education (cosmetology school and courses), a separate certifications-and-licences section, and optional awards, memberships or a portfolio.",
+    length:
+      "One page — present a focused skills section of up to six relevant skills, keep your licence prominent, and quantify retail sales and client retention.",
+    hardSkills: ["Cutting & styling", "Hair colouring", "Chemical treatments", "Skin & nail care", "Make-up application", "Beauty-product knowledge", "Salon hygiene & safety"],
+    softSkills: ["Customer service", "Communication", "Creativity", "Time management", "Attention to detail"],
+    atsKeywords: ["Cosmetology", "Hair Styling", "Hair Colouring", "Skin Care", "Make-up Application", "Cosmetology License", "Customer Service"],
+    atsNote:
+      "Keep a focused skills section of up to six skills unique to your expertise, list your cosmetology licence and any specialist certifications in a separate section with issuer and date, and quantify retail sales and rebookings.",
+  },
+  "aromatherapist": {
+    include:
+      "Contact details, a professional summary, a skills section (oil knowledge plus communication and organisation), work experience including client intake and case studies, a certifications section (NAHA/AIA-accredited), and education.",
+    length:
+      "One page — keep your accredited aromatherapy certification and oils knowledge high, note professional liability insurance and memberships, and reference case studies that show practical experience.",
+    hardSkills: ["Essential-oil knowledge", "Blending & dilution", "Client intake & consultation", "Treatment planning", "Anatomy & physiology", "Case-study documentation", "Massage & application"],
+    softSkills: ["Communication", "Empathy", "Organization", "Attention to detail", "Client care"],
+    atsKeywords: ["Aromatherapy", "Essential Oils", "Holistic Therapy", "Client Consultation", "Treatment Planning", "Blending", "NAHA Certified"],
+    atsNote:
+      "List your accredited certification (NAHA or Alliance of International Aromatherapists), name your oils-knowledge and treatment skills, and reference client intake, case studies, liability insurance and professional memberships for credibility.",
+  },
+  "admin-operations-manager": {
+    include:
+      "Contact details, a professional summary, a core-competencies section organised by category, experience bullets pairing methodologies with measurable results, a skills/tools section, and a certifications section (Six Sigma, PMP).",
+    length:
+      "One to two pages — include 15–25 keywords matched to the posting, organise skills by category, and quantify results (e.g. \"reduced operational costs 20%\", \"increased efficiency 30%\").",
+    hardSkills: ["Process improvement", "Lean Six Sigma", "KPI management", "Budget management", "Vendor management", "Resource allocation", "ERP / SAP / CRM systems"],
+    softSkills: ["Team leadership", "Communication", "Problem solving", "Decision-making", "Stakeholder management"],
+    atsKeywords: ["Operations Management", "Process Improvement", "Lean Six Sigma", "KPI Management", "Budget Management", "Vendor Management", "Operational Excellence"],
+    atsNote:
+      "Weave 15–25 posting-matched keywords (\"process improvement\", \"Lean Six Sigma\", \"KPI management\", \"vendor management\") across the summary, skills and bullets, name your systems (SAP, ERP), and quantify cost and efficiency gains.",
+  },
+  "executive-office-manager": {
+    include:
+      "Contact details, a professional summary, an experience section with measurable achievements, education, a skills section (hard plus soft), and a certifications section.",
+    length:
+      "One to two pages following Summary → Experience → Education → Skills → Certifications — use exact posting phrases (\"calendar management\", \"team coordination\") and quantify cost savings and process improvements.",
+    hardSkills: ["Office operations", "Calendar & travel management", "Vendor & facilities coordination", "Budget administration", "HR support (onboarding, records)", "Microsoft Office / Google Workspace", "Bookkeeping (QuickBooks)"],
+    softSkills: ["Organization", "Multi-tasking", "Confidentiality", "Communication", "Team coordination"],
+    atsKeywords: ["Office Management", "Office Operations", "Calendar Management", "Vendor Management", "Budget Administration", "Team Coordination", "Microsoft Office"],
+    atsNote:
+      "Use exact posting phrases (\"calendar management\", \"team coordination\", \"inventory tracking\") in the summary, experience and skills, and quantify cost savings, process improvements and workplace gains rather than listing tasks.",
+  },
+  "credit-controller": {
+    include:
+      "Contact details, a summary, work experience with quantified collections results, education, a skills section organised by category (10–15 skills), and a certifications and languages section.",
+    length:
+      "One to two pages in a simple single-column layout — keep invoicing, reconciliation and collections high, and quantify aged-debt reduction and cash collected.",
+    hardSkills: ["Accounts receivable & collections", "Invoicing", "Account reconciliation", "Credit analysis & scoring", "Aged-debt management", "Microsoft Excel", "SAP / accounting software"],
+    softSkills: ["Communication", "Negotiation", "Attention to detail", "Customer service", "Proactivity"],
+    atsKeywords: ["Credit Control", "Accounts Receivable", "Invoicing", "Reconciliation", "Collections", "Credit Analysis", "Account Management"],
+    atsNote:
+      "Use the posting's exact terms (\"invoicing\", \"reconciling\", \"accounts receivable\", \"collections\"), list 10–15 categorised skills (SAP, Excel, credit scoring plus negotiation), and quantify aged-debt reduction and cash collected.",
+  },
+  "academic-tutor": {
+    include:
+      "Contact details, an objective or summary of qualifications, work experience, educational background, a skills-and-proficiencies section (hard plus soft), and a certifications-and-licences section.",
+    length:
+      "One to two pages — match your skills to the listing for the ATS, keep your subject expertise and teaching methods high, and quantify student improvement (grades, exam scores).",
+    hardSkills: ["Subject-matter expertise", "Lesson planning", "Curriculum differentiation", "Exam & test preparation", "Progress assessment", "Online learning platforms", "Teaching methodologies"],
+    softSkills: ["Communication", "Patience", "Empathy", "Adaptability", "Problem solving"],
+    atsKeywords: ["Tutoring", "Subject Matter Expertise", "Lesson Planning", "Test Preparation", "Differentiated Instruction", "Academic Support", "Student Assessment"],
+    atsNote:
+      "Match your skills to the listing's wording (\"test preparation\", \"differentiated instruction\", \"subject-matter expertise\"), highlight digital-tool and online-platform proficiency, and quantify student improvement (grades, exam scores).",
+  },
 };
 
 const BY_SLUG = ROLE_CV_CONTENT;
