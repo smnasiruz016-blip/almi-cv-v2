@@ -434,6 +434,133 @@ export const ROLE_CV_CONTENT: Record<string, RoleCvContent> = {
     atsKeywords: ["Technical Support", "Troubleshooting", "Active Directory", "Help Desk", "ServiceNow", "ITIL", "Windows", "Networking"],
     atsNote: "List certifications (CompTIA A+, ITIL) in BOTH the certifications and skills sections for ATS visibility; quantify first-call resolution, tickets/day, CSAT and mean-time-to-resolution.",
   },
+  // ── Batch 4 (sourced via live SERP 2026: Indeed, enhancv, beamjobs, ResumeWorded, ResumeAdapter) ──
+  "network-engineer": {
+    include:
+      "A Skills section near the top (Cisco certifications, protocols, tools), outcome-driven Experience (including lab/homelab projects), a prominent Certifications section (CCNA/CCNP/CCIE), and Education.",
+    length: "Standard headings, no tables — demonstrate skills through results, not a standalone keyword list.",
+    hardSkills: ["Cisco IOS", "Routing protocols (OSPF / BGP / EIGRP)", "TCP/IP", "VLANs", "Network security", "MPLS", "Wireshark", "SD-WAN / SD-Access", "Ansible"],
+    softSkills: ["Problem solving", "Communication", "Analytical thinking", "Teamwork"],
+    atsKeywords: ["CCNA", "Cisco", "OSPF", "BGP", "TCP/IP", "VLAN", "Network Security", "MPLS"],
+    atsNote: "Put CCNA/CCNP/CCIE at the top (they carry as much weight as degrees); name exact protocols/tools (OSPF, BGP, NX-OS, Wireshark) and prove them in outcome-driven bullets.",
+  },
+  "quantity-surveyor": {
+    include:
+      "A profile, a Skills section (take-off, cost estimation, software), Experience (cost estimation, budgeting, contract administration), Certifications (RICS), and Education.",
+    length: "Focus on measurable cost achievements.",
+    hardSkills: ["Quantity take-off", "Cost estimation", "Budgeting", "Contract administration", "Value engineering", "CostX", "Primavera P6", "Bluebeam", "Advanced Excel"],
+    softSkills: ["Negotiation", "Communication", "Attention to detail", "Analytical thinking"],
+    atsKeywords: ["Cost Estimation", "Quantity Take-off", "Budgeting", "Contract Administration", "Value Engineering", "Procurement", "CostX"],
+    atsNote: "Include \"cost estimation\", \"value engineering\" and \"procurement strategies\" plus the software named in the posting (CostX, Primavera); cite RICS and quantify cost outcomes.",
+  },
+  bookkeeper: {
+    include:
+      "A summary, a Skills section (software + processes), Experience that shows initiative beyond transaction recording, Certifications (Certified Bookkeeper, QuickBooks ProAdvisor), and Education.",
+    length: "Keep it to one page with clean, standard headings.",
+    hardSkills: ["QuickBooks (Online / Desktop)", "Xero", "General ledger", "Bank reconciliation", "Accounts payable / receivable", "Payroll", "Advanced Excel"],
+    softSkills: ["Reliability", "Discretion", "Organization", "Time management"],
+    atsKeywords: ["QuickBooks", "Reconciliation", "Accounts Payable", "Accounts Receivable", "General Ledger", "Payroll", "Xero"],
+    atsNote: "Name the specific platform the posting uses (QuickBooks/Xero) — recruiters scan for QuickBooks, reconciliation and attention to detail within seconds; list Certified Bookkeeper / QuickBooks ProAdvisor.",
+  },
+  "financial-controller": {
+    include:
+      "A summary, a Skills section (ERP + GAAP/IFRS + reporting tools + compliance), Experience built on process-improvement accomplishments, Certifications (e.g. CPA), and Education.",
+    length: "List at least 10 key skills to clear ATS scans.",
+    hardSkills: ["GAAP", "IFRS", "SAP / Oracle ERP", "Financial Reporting", "Internal Controls", "SOX Compliance", "Financial Modeling", "Forecasting", "Budgeting", "Audit Coordination"],
+    softSkills: ["Leadership", "Communication", "Critical thinking", "Adaptability"],
+    atsKeywords: ["Financial Reporting", "GAAP", "Internal Controls", "SOX", "ERP", "Forecasting", "Budgeting", "Audit"],
+    atsNote: "Show accomplishments, not duties — e.g. \"reduced month-end close from 10 to 5 days, improving reporting efficiency 50%\".",
+  },
+  "qa-engineer": {
+    include:
+      "A summary, a Skills section grouped (Testing types, Tools, Programming, Methodologies), Experience leading with test design / regression ownership / defect triage, and Education.",
+    length: "Name the actual tools, not \"testing tools\".",
+    hardSkills: ["Manual testing", "Automated testing", "Regression testing", "API testing", "Selenium WebDriver", "Jira", "Postman", "JMeter", "Java / Python / SQL"],
+    softSkills: ["Attention to detail", "Problem solving", "Communication", "Collaboration"],
+    atsKeywords: ["Selenium", "Jira", "API Testing", "Automated Testing", "Regression Testing", "Test Planning", "Postman", "SQL"],
+    atsNote: "Call out actual tools by name (Selenium, Jira, Postman) — \"testing tools\" won't pass ATS; lead with test design, regression ownership and defect triage (you're expected to have touched at least one browser-automation tool).",
+  },
+  paralegal: {
+    include:
+      "A summary that includes the title \"Paralegal\" and your specializations, a Skills section (legal research + tools + practice areas), Experience with metrics, Certifications, and Education.",
+    length: "Put the exact title in your summary — ATS searches for it.",
+    hardSkills: ["Legal research (Westlaw / LexisNexis)", "Legal document preparation", "E-filing (PACER)", "Docketing", "Case management (Clio / MyCase)", "Discovery", "Litigation support"],
+    softSkills: ["Attention to detail", "Communication", "Organization", "Time management"],
+    atsKeywords: ["Legal Research", "Legal Document Preparation", "E-Filing", "Westlaw", "Clio", "Docketing", "Litigation", "Discovery"],
+    atsNote: "Specify practice areas (Litigation, Corporate) and tools (Clio, Westlaw, PACER) — missing \"Legal Document Preparation\" or \"E-Filing\" filters you out; quantify (e.g. \"13 discovery packages/month\").",
+  },
+  physiotherapist: {
+    include:
+      "A summary, your licensure and DPT/education, clinical specializations, a Skills section (clinical competencies + software), Experience with quantified patient outcomes, and Certifications.",
+    length: "Clear, standard headings so both ATS and hiring managers can scan.",
+    hardSkills: ["Therapeutic exercise", "Gait training", "Manual therapy", "Musculoskeletal assessment", "Neurological rehab", "Standardized measures (FIM / TUG)", "EMR (WebPT)", "Modalities"],
+    softSkills: ["Compassion", "Communication", "Attention to detail", "Interpersonal skills"],
+    atsKeywords: ["Therapeutic Exercise", "Gait Training", "Manual Therapy", "Patient Care", "Rehabilitation", "WebPT", "DPT", "Licensure"],
+    atsNote: "Lead with DPT degree, state licensure and clinical specializations (OCS, NCS, etc.); name PT software (WebPT, Therabill) and quantify outcomes (goal attainment, visits-to-discharge, satisfaction).",
+  },
+  radiographer: {
+    include:
+      "A summary, a Skills section listing imaging modalities by specific type, a Certifications section (ARRT, BLS), Experience with metrics, and patient-care/safety examples.",
+    length: "Group skills by category for quick scanning.",
+    hardSkills: ["Digital radiography (DR)", "Computed radiography (CR)", "CT", "MRI", "Radiation safety", "Imaging workflow", "PACS", "Patient positioning"],
+    softSkills: ["Compassion", "Attention to detail", "Communication", "Teamwork"],
+    atsKeywords: ["Digital Radiography", "Computed Tomography", "Radiation Safety", "ARRT", "Imaging", "MRI", "Patient Care", "PACS"],
+    atsNote: "Use specific equipment types (\"Digital radiography (DR)\", \"CT\"), not \"X-ray machine\"; list ARRT certification + BLS and quantify (e.g. \"improved patient throughput 25%\").",
+  },
+  "store-manager": {
+    include:
+      "A profile summary, a Skills section aligned to the posting, Experience showing P&L, team size and comparable-store sales, and Education/Certifications.",
+    length: "Clean one-column layout with standard headings.",
+    hardSkills: ["Inventory management", "Staff scheduling", "KPI tracking", "Loss prevention", "Sales forecasting", "P&L ownership", "Visual merchandising", "POS systems"],
+    softSkills: ["Leadership", "Communication", "Coaching", "Conflict resolution"],
+    atsKeywords: ["Inventory Management", "Sales Forecasting", "KPI Tracking", "Loss Prevention", "Customer Service", "P&L", "Staff Scheduling"],
+    atsNote: "At this level recruiters look for P&L ownership, team size, turnover reduction and comparable-store sales growth — quantify (sales growth %, shrink reduction, conversion rate, CSAT).",
+  },
+  recruiter: {
+    include:
+      "A summary, a Skills section (sourcing + ATS platforms + methodologies), Experience with hiring metrics, Certifications (SHRM-CP / PHR / AIRS), and Education.",
+    length: "Single column — pick 8–15 genuine keywords (parsers penalize density above ~1.5%).",
+    hardSkills: ["Full-cycle recruiting", "Talent sourcing", "Boolean search", "ATS management (Greenhouse / Lever / Workday)", "Employer branding", "Pipeline management", "LinkedIn Recruiter"],
+    softSkills: ["Communication", "Relationship building", "Negotiation", "Organization"],
+    atsKeywords: ["Full-Cycle Recruiting", "Talent Sourcing", "Boolean Search", "ATS", "Employer Branding", "Candidate Experience", "Pipeline Management"],
+    atsNote: "Name your ATS/HRIS by version (e.g. \"Greenhouse (admin, 4 yrs), Workday Recruiting\"); these keywords appear in 85%+ of talent-acquisition postings.",
+  },
+  "primary-school-teacher": {
+    include:
+      "A summary, a Skills section categorized (Classroom management, Curriculum, EdTech, Assessment), Experience with student-outcome metrics, and Certifications (state certification, grade levels).",
+    length: "Include the full name AND the acronym for key terms (e.g. PBIS).",
+    hardSkills: ["Lesson planning", "Differentiated instruction", "Classroom management (PBIS)", "Phonics / Science of Reading", "Google Classroom / Seesaw", "Formative assessment", "IEP development"],
+    softSkills: ["Communication", "Patience", "Adaptability", "Collaboration"],
+    atsKeywords: ["Lesson Planning", "Classroom Management", "Differentiated Instruction", "PBIS", "Google Classroom", "Assessment", "Phonics", "IEP"],
+    atsNote: "Principals scan for certification status, student-outcome data and differentiated instruction — quantify (growth %, proficiency rates) and replace \"patience/caring\" with evidence (e.g. \"PBIS, zero major referrals in 3 years\").",
+  },
+  plumber: {
+    include:
+      "A summary stating your license level and state, a Licenses & Certifications section (with number and expiry), a Skills section (code compliance + materials), and Experience with metrics.",
+    length: "15–25 keywords matched to the posting — your actual skills and license level, not keyword stuffing.",
+    hardSkills: ["Pipe installation & repair", "UPC/IPC code compliance", "Blueprint / isometric reading", "Soldering / brazing", "Backflow testing", "Leak detection", "Materials (Copper / PVC / PEX)", "Water heater servicing"],
+    softSkills: ["Problem solving", "Communication", "Time management", "Customer service"],
+    atsKeywords: ["Pipe Installation", "Plumbing Code Compliance", "Blueprint Reading", "Backflow Testing", "Leak Detection", "Journeyman", "UPC/IPC"],
+    atsNote: "State your license level + state (\"California Licensed Journeyman Plumber\") with number/expiry; name code compliance (UPC/IPC) and the materials you've mastered (Copper, PVC, PEX) — without them ATS passes you over.",
+  },
+  welder: {
+    include:
+      "A summary, a Skills section (processes + materials + qualified positions), a Certifications section with codes (AWS, ASME, Red Seal), and Experience with quality metrics.",
+    length: "Match the posting's exact processes and material types.",
+    hardSkills: ["MIG (GMAW)", "TIG (GTAW)", "Stick (SMAW)", "FCAW", "Metal fabrication", "Blueprint reading", "Pipe welding", "Plasma cutting", "Qualified positions (6G / 5G)"],
+    softSkills: ["Attention to detail", "Safety awareness", "Reliability", "Teamwork"],
+    atsKeywords: ["MIG Welding", "TIG Welding", "SMAW", "Metal Fabrication", "Blueprint Reading", "AWS D1.1", "Pipe Welding", "FCAW"],
+    atsNote: "Certifications are the highest-priority welding keywords — list all current ones with codes (AWS D1.1, ASME, CWB, Red Seal); match the exact processes (MIG/TIG) and materials (stainless, aluminum) the posting names, with first-pass inspection rates.",
+  },
+  "machine-operator": {
+    include:
+      "A summary, a Skills section (machine operation + safety), Experience with reliability and output metrics, Certifications (OSHA, CNC), and Education.",
+    length: "Embed role-specific keywords matched to the posting.",
+    hardSkills: ["CNC machine operation", "Blueprint reading", "Production workflow", "Preventive maintenance", "Safety compliance (OSHA)", "Lockout/Tagout", "Quality inspection", "Forklift operation"],
+    softSkills: ["Attention to detail", "Reliability", "Dexterity", "Communication"],
+    atsKeywords: ["Machine Operation", "CNC", "Blueprint Reading", "OSHA", "Lockout/Tagout", "Preventive Maintenance", "Safety Compliance", "Production"],
+    atsNote: "Embed role-specific keywords (\"machine operator\", \"CNC\") plus safety terms (OSHA, LOTO, PPE); list OSHA/CNC certifications and quantify reliability and output.",
+  },
 };
 
 const BY_SLUG = ROLE_CV_CONTENT;
