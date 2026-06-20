@@ -2328,6 +2328,162 @@ export const ROLE_CV_CONTENT: Record<string, RoleCvContent> = {
     atsKeywords: ["Quality Control", "Quality Assurance", "Inspection", "GD&T", "ISO 9001", "Calipers", "Root Cause Analysis", "Six Sigma"],
     atsNote: "Name your measurement tools (calipers, micrometers, CMM) and methods (GD&T, ISO 9001 auditing, Six Sigma) exactly, and state your industry (manufacturing, aerospace, food); quantify defect-detection improvements, scrap reduction and dollars saved.",
   },
+  // ── Batch 19 (sourced via live SERP 2026: StandOut-CV, Jobseeker, ResumeWorded, Zety, Resumaker, TealHQ, ResumeMentor, MyPerfectResume, ZipRecruiter) ──
+  // Priorities this batch: skilled trades, plus remaining physician & finance specialties.
+  "roofer": {
+    include:
+      "Your name and contact details, a short professional summary highlighting your roofing experience and safety record, a core-skills section, work experience in reverse chronological order with measurable detail (square footage, project values, safety record), and education listing apprenticeships and safety certifications (OSHA, Red Seal where applicable).",
+    length:
+      "One page is plenty — recruiters scan in seconds, so lead with your strongest install and repair experience and current safety tickets, and quantify with years, projects and square footage.",
+    hardSkills: ["Shingle & tile installation", "Flat & pitched roofing", "Roof inspection & repair", "Flashing & waterproofing", "Material handling", "Working at height", "Blueprint reading"],
+    softSkills: ["Reliability", "Safety awareness", "Teamwork", "Physical stamina", "Attention to detail"],
+    atsKeywords: ["Roof Installation", "Shingle Installation", "Roof Repair", "Flashing", "Waterproofing", "OSHA", "Fall Protection", "Material Handling"],
+    atsNote:
+      "Mirror the posting's exact terms (\"shingle installation\", \"flat roofing\", \"flashing\") and name your safety tickets (OSHA 30, fall protection, Red Seal); a clean single-column layout parses reliably, and square-footage and safety-record numbers add credibility.",
+  },
+  "plasterer": {
+    include:
+      "Your contact details, a short profile of your plastering experience and finishes, a core-skills section, work experience covering the type of work (rendering, skimming, dry-lining) with project detail, and education listing your NVQ or apprenticeship and health-and-safety training.",
+    length:
+      "Keep it to one page — a targeted core-skills list plus quantified experience (project sizes, finishes, years) reads better than a long duty list.",
+    hardSkills: ["Skimming & floating", "Rendering", "Dry-lining", "Plasterboard fixing", "Decorative & ornamental plaster", "Mixing materials", "Surface preparation"],
+    softSkills: ["Attention to detail", "Reliability", "Time management", "Teamwork", "Customer communication"],
+    atsKeywords: ["Plastering", "Skimming", "Rendering", "Dry Lining", "Plasterboard", "Surface Preparation", "NVQ"],
+    atsNote:
+      "List the finishes and methods a posting names exactly (\"skimming\", \"rendering\", \"dry-lining\") plus your NVQ level and CSCS/health-and-safety training; quantify with project sizes and finishes completed.",
+  },
+  "painter-decorator": {
+    include:
+      "Your contact details, a personal profile of your decorating experience and areas of expertise, a core-skills section, work experience across domestic and commercial projects with measurable detail, and education listing your NVQ or apprenticeship and health-and-safety training (COSHH, working at height).",
+    length:
+      "One page is right — lead with a targeted core-skills section matched to the advert and quantify with project values, property counts and years.",
+    hardSkills: ["Surface preparation", "Paint application & spraying", "Wallpapering", "Colour matching", "Decorative finishes", "Access equipment", "Estimating & quoting"],
+    softSkills: ["Attention to detail", "Customer communication", "Time management", "Reliability", "Tidiness"],
+    atsKeywords: ["Painting and Decorating", "Surface Preparation", "Spray Painting", "Wallpapering", "Colour Matching", "COSHH", "NVQ"],
+    atsNote:
+      "Match the advert's wording (\"surface preparation\", \"spray painting\", \"wallpapering\") and show health-and-safety awareness (COSHH, PPE, working at height) plus your NVQ Level 2/3; a simple single-column CV parses cleanly.",
+  },
+  "laboratory-technician": {
+    include:
+      "Your contact details, a professional summary, a skills section grouped by category (techniques, instruments, software) near the top, work experience with measurable outcomes, certifications, and education.",
+    length:
+      "One page for most lab technicians; group your skills when you have ten or more, and keep the strongest hard skills high on page one where recruiters and the ATS scan first.",
+    hardSkills: ["Specimen processing", "Hematology & chemistry analyzers", "Microscopy", "Quality control (QC/QA)", "LIMS software", "CLIA/CAP compliance", "Equipment calibration & maintenance"],
+    softSkills: ["Attention to detail", "Problem solving", "Time management", "Communication", "Teamwork"],
+    atsKeywords: ["Laboratory Testing", "Specimen Processing", "Quality Control", "Microscopy", "LIMS", "Calibration", "CLIA/CAP"],
+    atsNote:
+      "Use the posting's exact technical terms — instrument names, assays and methods, plus compliance frameworks (CLIA, CAP, GLP); ATS matching is literal, so spell out both the acronym and full term (e.g. \"LIMS (Laboratory Information Management System)\").",
+  },
+  "general-surgeon": {
+    include:
+      "Contact details, a professional summary, education and training placed prominently (medical degree, residency, fellowships), medical licences and board certifications with issuing body and dates, surgical experience in reverse chronological order with procedures and case volumes, a skills section, and research, publications and professional affiliations.",
+    length:
+      "A physician CV runs longer than a one-page resume — typically two-plus pages — but keep licences, board certification and your strongest surgical experience on page one; quantify case volumes and outcomes.",
+    hardSkills: ["Open & laparoscopic surgery", "Trauma & emergency surgery", "Pre & post-operative care", "Surgical decision-making", "Patient assessment & diagnosis", "Sterile technique", "EHR documentation"],
+    softSkills: ["Leadership", "Communication", "Decision-making under pressure", "Teamwork", "Empathy"],
+    atsKeywords: ["General Surgery", "Board Certified", "Laparoscopic Surgery", "Trauma Surgery", "ATLS/ACLS", "Pre-operative Care", "Patient Care"],
+    atsNote:
+      "Lead with board certification (ABS) and state licence — non-negotiable parsing targets — and name specific procedures and case volumes the way the posting does; list ATLS/ACLS/BLS with current dates.",
+  },
+  "orthopedic-surgeon": {
+    include:
+      "Contact details, a professional summary, education and training (MD/DO, residency, fellowship) prominently, board certifications and state licences with dates, surgical experience listing procedures mastered (joint replacement, ACL reconstruction, fracture fixation) with case volumes, a skills section, and research, publications and affiliations.",
+    length:
+      "Use a multi-page physician CV, but keep board certification, licence and your strongest subspecialty experience on page one; quantify procedures performed and outcomes.",
+    hardSkills: ["Joint replacement (hip/knee)", "Arthroscopy", "Fracture fixation", "ACL reconstruction", "Spinal procedures", "Surgical robotics & implants", "Advanced imaging interpretation"],
+    softSkills: ["Leadership", "Communication", "Precision", "Collaboration", "Empathy"],
+    atsKeywords: ["Orthopedic Surgery", "Board Certified", "Total Joint Replacement", "Arthroscopy", "Fracture Fixation", "ATLS/BLS", "Sports Medicine"],
+    atsNote:
+      "Name the specific procedures you have mastered exactly as postings phrase them (\"total knee arthroplasty\", \"ACL reconstruction\", \"fracture fixation\") and list board certification (ABOS), fellowship and current ATLS/BLS; quantify case volumes.",
+  },
+  "neurologist": {
+    include:
+      "Contact details, a professional summary, education and licences (medical council or state registration, board certification), clinical experience, a skills section blending diagnostics and patient care, and research and publications.",
+    length:
+      "A neurologist CV is typically multi-page; keep board certification, licence and your strongest clinical and diagnostic experience on page one, with research and publications below.",
+    hardSkills: ["Neurological examination", "EEG interpretation", "EMG & nerve conduction studies", "MRI/CT interpretation", "Stroke & epilepsy management", "Lumbar puncture", "EHR documentation"],
+    softSkills: ["Patient communication", "Critical thinking", "Empathy", "Collaboration", "Attention to detail"],
+    atsKeywords: ["Neurology", "Board Certified", "EEG", "EMG", "MRI Interpretation", "Stroke Management", "ABPN"],
+    atsNote:
+      "List board certification (ABPN) and medical licence first — they are required and parsed top-down — and mirror the diagnostic terms the posting uses (\"EEG\", \"EMG\", \"MRI interpretation\"); pair each hard skill with patient-care context.",
+  },
+  "oncologist": {
+    include:
+      "Contact details, a professional summary, education and training, medical licence and board certification (e.g. Medical Oncology), clinical experience including tumour-board and clinical-trial work, a skills section, and research and publications.",
+    length:
+      "Use a multi-page physician CV; keep board certification, licence and your strongest oncology experience on page one, and detail clinical trials, tumour-board work and publications below.",
+    hardSkills: ["Chemotherapy administration", "Treatment planning", "Tumor board participation", "Clinical trial management", "Radiation therapy coordination", "Palliative care", "EHR documentation"],
+    softSkills: ["Empathy", "Communication", "Composure under pressure", "Collaboration", "Ethical judgement"],
+    atsKeywords: ["Medical Oncology", "Board Certified", "Chemotherapy", "Clinical Trials", "Tumor Board", "Oncology Patient Care", "ABIM"],
+    atsNote:
+      "Lead with board certification (ABIM, Medical Oncology) and licence, then name the modalities and settings a posting lists (\"chemotherapy\", \"clinical trials\", \"tumor board\"); quantify patient panels and trial involvement.",
+  },
+  "ophthalmologist": {
+    include:
+      "Contact details, a concise professional summary (subspecialty, years, notable achievements), education and residency, board certifications and licences in a dedicated section, clinical and surgical experience, a skills section, and research, publications and professional affiliations.",
+    length:
+      "An ophthalmologist CV typically runs multiple pages; keep board certification, licence and your strongest surgical and clinical experience on page one, with research and memberships below.",
+    hardSkills: ["Comprehensive eye exams", "Cataract surgery", "Refractive & LASIK procedures", "Retinal evaluation", "Glaucoma management", "OCT & slit-lamp diagnostics", "EHR documentation"],
+    softSkills: ["Patient communication", "Empathy", "Precision", "Patience", "Collaboration"],
+    atsKeywords: ["Ophthalmology", "Board Certified", "Cataract Surgery", "Glaucoma Management", "Refractive Surgery", "OCT", "Patient Care"],
+    atsNote:
+      "List board certification (ABO) and licence in a dedicated section parsed top-down, and name procedures and diagnostics exactly as the posting does (\"cataract surgery\", \"OCT\", \"glaucoma management\"); a dedicated certifications section keeps credentials scannable.",
+  },
+  "chartered-accountant": {
+    include:
+      "Contact details (with LinkedIn), a professional summary, your chartered qualification (ACA, ACCA or CIMA) in a dedicated section, work experience in reverse chronological order with quantified accomplishments, a categorised skills section, and education.",
+    length:
+      "One to two pages — keep your qualification, strongest technical skills (IFRS, financial reporting, tax) and quantified achievements high on page one.",
+    hardSkills: ["IFRS & financial reporting", "Statutory & management accounts", "Audit", "Taxation & compliance", "Advanced Excel", "SAP / ERP", "Reconciliations"],
+    softSkills: ["Analytical thinking", "Attention to detail", "Communication", "Ethical judgement", "Time management"],
+    atsKeywords: ["Chartered Accountant", "ACA", "ACCA", "IFRS", "Financial Reporting", "Audit", "Taxation", "Reconciliation"],
+    atsNote:
+      "ATS matching is literal — use the posting's exact phrases (\"tax compliance\", not \"tax reporting\") and spell out both the acronym and full term (\"ACCA\", \"IFRS\"); list 10–15 categorised skills in a one-column layout.",
+  },
+  "certified-public-accountant": {
+    include:
+      "Contact details with \"CPA\" in the header, a professional summary stating your CPA status, a categorised skills section (financial accounting, software, compliance), work experience with quantified outcomes, a certifications section, and education.",
+    length:
+      "One page for 0–5 years, two pages for senior roles; put CPA status in the header and summary and keep your strongest accounting functions and software high on page one.",
+    hardSkills: ["GAAP & financial reporting", "General ledger & month-end close", "Reconciliations", "Tax preparation", "Audit preparation", "QuickBooks / SAP / NetSuite", "SOX & internal controls"],
+    softSkills: ["Attention to detail", "Problem solving", "Communication", "Collaboration", "Integrity"],
+    atsKeywords: ["CPA", "GAAP", "Financial Reporting", "General Ledger", "Month-End Close", "Reconciliation", "Tax Preparation", "SOX"],
+    atsNote:
+      "Put \"CPA\" after your name and in a certifications section — ATS parses top-down — and include both full names and acronyms (\"GAAP (Generally Accepted Accounting Principles)\"); group keywords by function and quantify every bullet.",
+  },
+  "chief-financial-officer": {
+    include:
+      "Contact details, a professional summary, a core-competencies section grouped into four to five categories (financial strategy, M&A & capital, risk & compliance, technology & analytics), executive experience with quantified financial impact, education, and certifications (CPA/MBA).",
+    length:
+      "Two pages for a CFO — lead with a strong summary and core competencies, then experience that quantifies impact (dollars saved, percentage gains, team size, deals closed).",
+    hardSkills: ["Financial planning & analysis (FP&A)", "Financial modeling", "M&A & capital markets", "Budgeting & forecasting", "Risk management", "GAAP & SOX compliance", "Investor relations", "ERP systems"],
+    softSkills: ["Strategic leadership", "Board communication", "Decision-making", "Negotiation", "Talent development"],
+    atsKeywords: ["Financial Planning and Analysis", "FP&A", "Financial Modeling", "M&A", "SOX Compliance", "GAAP", "Investor Relations", "Risk Management"],
+    atsNote:
+      "Mirror the posting's exact phrases (\"financial forecasting\", \"budget management\", \"FP&A\") in your core-competencies section, and quantify everything — dollars saved, percentage improvements, team sizes and deals closed.",
+  },
+  "internal-auditor": {
+    include:
+      "Contact details with certifications (CIA/CPA/CISA) in the header, a professional summary emphasising risk, compliance and controls, a skills section (risk & compliance, communications), work experience with quantified findings, a certifications section, and education.",
+    length:
+      "One to two pages in a single-column layout — put your certifications in the header and a dedicated section, and keep risk-assessment and internal-controls experience high on page one.",
+    hardSkills: ["Risk assessment", "Internal controls evaluation", "Compliance audit", "Audit findings & reporting", "SOX testing", "Data analysis", "Audit planning"],
+    softSkills: ["Analytical thinking", "Attention to detail", "Stakeholder management", "Communication", "Objectivity"],
+    atsKeywords: ["Internal Audit", "Risk Assessment", "Internal Controls", "Compliance", "SOX", "CIA", "Audit Findings"],
+    atsNote:
+      "Put audit certifications (CIA, CPA, CISA, CFE) after your name and in a dedicated section — ATS parses top to bottom — and use a single-column layout with standard headers; quantify findings, risks mitigated and process improvements.",
+  },
+  "tax-consultant": {
+    include:
+      "Contact details, a professional summary stating your tax niche (corporate, individual, international) and years, a skills section pairing technical tax competencies with software (Drake, Lacerte, ProSeries), experience with accomplishment-focused bullets, and a certifications section (CPA, EA, CTP).",
+    length:
+      "One to two pages — state your tax specialism in the summary, group technical skills and software, and quantify tax savings, compliance improvements and client retention.",
+    hardSkills: ["Tax planning", "Tax preparation & compliance", "Tax research", "Corporate & individual tax", "Tax software (Drake/Lacerte/ProSeries)", "Advanced Excel", "Regulatory knowledge"],
+    softSkills: ["Analytical thinking", "Attention to detail", "Client consultation", "Communication", "Problem solving"],
+    atsKeywords: ["Tax Planning", "Tax Compliance", "Tax Preparation", "Tax Research", "CPA", "Client Consultation", "Public Accounting"],
+    atsNote:
+      "Use the posting's frequent terms — \"tax planning\", \"compliance\", \"client consultation\" — name your tax software (Drake, Lacerte, ProSeries) and list CPA/EA/CTP in a dedicated section; avoid graphics that large accounting firms' ATS cannot parse.",
+  },
 };
 
 const BY_SLUG = ROLE_CV_CONTENT;
