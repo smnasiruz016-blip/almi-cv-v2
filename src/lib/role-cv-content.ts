@@ -2640,6 +2640,162 @@ export const ROLE_CV_CONTENT: Record<string, RoleCvContent> = {
     atsNote:
       "Name your certification exactly (Certified EKG Technician — NHA/CET) and BLS, and mirror clinical terms (\"electrode placement\", \"cardiac monitoring\", \"Holter\"); a dedicated certifications section differentiates you and parses cleanly.",
   },
+  // ── Batch 21 (sourced via live SERP 2026: ResumeMentor, QwikResume, Wozber, Resumaker, Enhancv, ResumeWorded, ZipRecruiter, OwlApply, ResumeAdapter, VisualCV) ──
+  // Priorities: remaining physician specialties + finance/markets specialties.
+  "pulmonologist": {
+    include:
+      "Contact details, a professional summary, education and training (internal-medicine residency, pulmonary/critical-care fellowship), board certification and licences, clinical experience emphasising diagnostic procedures, a skills section, and research, publications and affiliations.",
+    length:
+      "A physician CV is multi-page; keep board certification, licence and your strongest pulmonary and critical-care experience on page one, and quantify procedure volumes and outcomes.",
+    hardSkills: ["Bronchoscopy", "Pulmonary function testing", "Critical-care & ventilator management", "Imaging interpretation", "Sleep medicine", "Smoking-cessation programmes", "EHR documentation"],
+    softSkills: ["Patient communication", "Critical thinking", "Empathy", "Collaboration", "Attention to detail"],
+    atsKeywords: ["Pulmonology", "Board Certified", "Bronchoscopy", "Pulmonary Function Tests", "Critical Care", "Patient Care", "ABIM"],
+    atsNote:
+      "Lead with board certification (ABIM, Pulmonary Disease) and licence, and mirror the posting's diagnostic terms (\"bronchoscopy\", \"pulmonary function tests\", \"critical care\"); quantify procedure volumes.",
+  },
+  "rheumatologist": {
+    include:
+      "Contact details, a professional summary, education and training, board certification (Rheumatology) and licence in a dedicated section, clinical experience with the conditions you manage, a skills section, and research, publications and affiliations.",
+    length:
+      "A physician CV is multi-page; board certification is often a hard filter, so place it and your licence prominently, keep your strongest clinical experience on page one, and cite specific conditions managed.",
+    hardSkills: ["Autoimmune & inflammatory disease management", "Musculoskeletal ultrasound", "Joint injection & aspiration", "Diagnostic interpretation", "Treatment planning (DMARDs/biologics)", "EMR (Epic / Cerner)", "EHR documentation"],
+    softSkills: ["Patient communication", "Advanced diagnostics", "Empathy", "Time management", "Teamwork"],
+    atsKeywords: ["Rheumatology", "Board Certified", "Autoimmune Diseases", "Musculoskeletal Ultrasound", "Treatment Planning", "Patient Care", "ABIM"],
+    atsNote:
+      "Board certification (ABIM/AOBIM, Rheumatology) is frequently a hard filter — place it in a dedicated section with the date — and name the conditions and tools the posting cites (\"musculoskeletal ultrasound\", \"DMARDs\", \"biologics\").",
+  },
+  "vascular-surgeon": {
+    include:
+      "Contact details, a professional summary, education and training, board certification (Vascular Surgery) and licences, surgical experience detailing open and endovascular procedures with case volumes, a skills section, and research, publications and affiliations.",
+    length:
+      "A surgeon's CV runs multiple pages; keep board certification, licence and your strongest open and endovascular experience on page one, and quantify complex reconstructions and outcomes.",
+    hardSkills: ["Open vascular reconstruction", "Endovascular techniques", "Aneurysm repair", "Carotid endarterectomy", "Peripheral bypass", "Angioplasty & stenting", "Doppler ultrasound & CT angiography"],
+    softSkills: ["Surgical precision", "Leadership", "Communication", "Composure under pressure", "Complex case management"],
+    atsKeywords: ["Vascular Surgery", "Board Certified", "Endovascular", "Aneurysm Repair", "Carotid Endarterectomy", "Angioplasty", "Patient Care"],
+    atsNote:
+      "Name procedures exactly (\"endovascular\", \"carotid endarterectomy\", \"aneurysm repair\", \"peripheral bypass\") and lead with board certification (ABS, Vascular Surgery) and licence; quantify complex reconstructions and outcomes.",
+  },
+  "plastic-surgeon": {
+    include:
+      "Contact details, a professional summary, education and training, board certification (Plastic Surgery) and licences, surgical experience in reverse chronological order with procedures and quantified outcomes, a skills section, and research, publications and affiliations.",
+    length:
+      "A surgeon's CV runs multiple pages; keep board certification, licence and your strongest reconstructive and cosmetic experience on page one, and quantify outcomes with numbers.",
+    hardSkills: ["Reconstructive surgery", "Cosmetic surgery", "Microsurgery", "Hand surgery", "Rhinoplasty & facial procedures", "Breast & body contouring", "Surgical anatomy & technique"],
+    softSkills: ["Precision", "Patient communication", "Leadership", "Aesthetic judgement", "Empathy"],
+    atsKeywords: ["Plastic Surgery", "Board Certified", "Reconstructive Surgery", "Cosmetic Surgery", "Microsurgery", "ACLS/BLS", "Patient Care"],
+    atsNote:
+      "List board certification (ABPS) and licence prominently, and name procedures the way postings do (\"reconstructive surgery\", \"rhinoplasty\", \"microsurgery\"); write reverse-chronological bullets that quantify outcomes.",
+  },
+  "pathologist": {
+    include:
+      "Contact details, a professional summary, education and training, board certification (American Board of Pathology) in a dedicated section, clinical and diagnostic experience, a skills section pairing technical and interpersonal competencies, and research, publications and affiliations.",
+    length:
+      "A physician CV is multi-page; place board certification and subspecialty prominently, keep your diagnostic experience on page one, and name your instruments and software.",
+    hardSkills: ["Anatomical pathology", "Clinical pathology", "Immunohistochemistry", "Molecular diagnostics", "Autopsy procedures", "LIS proficiency", "Microscopy & slide review"],
+    softSkills: ["Attention to detail", "Analytical thinking", "Communication", "Collaboration", "Diagnostic judgement"],
+    atsKeywords: ["Pathology", "Board Certified", "Anatomical Pathology", "Immunohistochemistry", "Molecular Diagnostics", "LIS", "ABPath"],
+    atsNote:
+      "Place board certification (American Board of Pathology) and subspecialty in a dedicated section with the date, and name your methods and systems (\"immunohistochemistry\", \"molecular diagnostics\", \"LIS\") exactly as the posting does.",
+  },
+  "nurse-anesthetist": {
+    include:
+      "Contact details, a professional summary, work experience, education, a certifications section (NBCRNA first, then APRN/RN licence, ACLS, BLS, PALS), and a skills section specific enough that another CRNA knows what you can do.",
+    length:
+      "Keep it tight and reverse-chronological — list NBCRNA certification first (it is the single credential hiring managers scan for), keep your strongest anaesthesia experience on page one, and quantify cases per year and complication rates.",
+    hardSkills: ["General & regional anesthesia", "Airway management", "Nerve blocks", "Crisis & malignant-hyperthermia response", "Acute pain management", "Patient monitoring", "EHR documentation"],
+    softSkills: ["Composure under pressure", "Communication", "Critical thinking", "Interdisciplinary collaboration", "Attention to detail"],
+    atsKeywords: ["CRNA", "Nurse Anesthetist", "NBCRNA", "Regional Anesthesia", "Airway Management", "ACLS/BLS", "Patient Care"],
+    atsNote:
+      "List NBCRNA certification first, then APRN and RN licences, ACLS, BLS and PALS — that is the order hiring managers scan; name specific block types and quantify cases per year, complication rates and OR turnaround.",
+  },
+  "mortgage-broker": {
+    include:
+      "Contact details, a professional summary highlighting your experience and specialty, a skills section matching the posting (six to ten skills), work experience with quantified achievements, and credentials (licence, certifications) and education.",
+    length:
+      "One page suits most mortgage brokers — lead with a focused skills section and quantify funded volume, pull-through rate, time-to-close and pricing impact across your pipeline.",
+    hardSkills: ["Loan origination", "Residential & commercial mortgages", "Refinancing", "Underwriting guidelines", "Pipeline management", "Financial analysis", "CRM & loan-origination software"],
+    softSkills: ["Client relationship management", "Communication", "Negotiation", "Attention to detail", "Time management"],
+    atsKeywords: ["Mortgage Lending", "Loan Origination", "Refinance", "Underwriting Guidelines", "Pipeline Management", "Customer Relationship Management", "Residential Mortgages"],
+    atsNote:
+      "Incorporate the posting's exact terms (\"loan origination\", \"underwriting guidelines\", \"pipeline management\") and name your loan-origination/CRM software; quantify funded volume, pull-through rate and time-to-close.",
+  },
+  "insurance-broker": {
+    include:
+      "Contact details, a professional summary highlighting your experience level and specialty areas, a skills section matched to the posting (six to ten skills), work experience with quantified achievements, and credentials (licences, certifications) and education.",
+    length:
+      "One to two pages — keep a focused skills section of six to ten relevant skills, lead with your specialty areas, and quantify policies placed, retention and premium handled.",
+    hardSkills: ["Risk assessment", "Insurance policies & coverage", "Client management", "Premium auditing", "Claims processing", "Policy renewals", "Insurance software"],
+    softSkills: ["Customer service", "Communication", "Relationship management", "Attention to detail", "Negotiation"],
+    atsKeywords: ["Insurance Broker", "Risk Assessment", "Client Management", "Insurance Policies", "Claims Processing", "Premium Auditing", "Customer Service"],
+    atsNote:
+      "Match the posting's terms (\"risk assessment\", \"client management\", \"claims processing\") and keep to six to ten relevant skills; quantify policies placed, retention and premium handled, and keep the layout clean for the ATS.",
+  },
+  "stockbroker": {
+    include:
+      "Contact details, a professional summary, licences and certifications (Series 7, SIE, Series 63) and core competencies near the top, work experience that demonstrates skills inside the bullets, education, and the trading platforms you use.",
+    length:
+      "One to two pages — place Series 7/63 where recruiters see them first, demonstrate skills inside experience bullets rather than only a list, and quantify revenue, assets gathered, retention and compliance accuracy.",
+    hardSkills: ["Equity trading", "Investment strategies", "Portfolio management", "Market analysis", "Client prospecting & acquisition", "Risk assessment", "Trading platforms"],
+    softSkills: ["Client relationship management", "Communication", "Negotiation", "Discipline", "Resilience"],
+    atsKeywords: ["Series 7", "Equity Trading", "Portfolio Management", "Investment Strategies", "Market Analysis", "Client Relationship Management", "Series 63"],
+    atsNote:
+      "Place Series 7, SIE and Series 63 where recruiters look first, name your trading platforms, and avoid vague phrases — quantify revenue, assets gathered, volume handled and compliance accuracy in every bullet.",
+  },
+  "private-equity-associate": {
+    include:
+      "Contact details, a professional summary, a skills section covering financial analysis and tools, work experience using ownership verbs with quantified impact, education, and certifications (CFA) where relevant.",
+    length:
+      "One page in plain single-column text — keep LBO modeling, due diligence and your strongest deal experience on page one, use ownership verbs (led, owned, drove) and quantify impact (IRR, margin lift, dollars).",
+    hardSkills: ["LBO modeling", "Financial modeling & valuation", "Due diligence", "DCF & IRR analysis", "Deal sourcing", "Portfolio company analysis", "Bloomberg / FactSet / Advanced Excel"],
+    softSkills: ["Analytical thinking", "Attention to detail", "Communication", "Ownership", "Problem solving"],
+    atsKeywords: ["LBO Modeling", "Financial Modeling", "Due Diligence", "IRR", "DCF", "EBITDA", "Deal Sourcing"],
+    atsNote:
+      "ATS looks for \"LBO modeling\", \"IRR\", \"DCF\", \"EBITDA\", \"due diligence\" and \"deal sourcing\" — mirror them, keep a single-column plain-text layout, and quantify impact (IRR bps, margin lift, dollars saved).",
+  },
+  "m-a-analyst": {
+    include:
+      "Contact details, a professional summary, a skills section using industry-specific M&A terms, work experience (chronological or hybrid) with quantified deal results, and education; include the exact title \"Mergers and Acquisitions Analyst\" somewhere.",
+    length:
+      "One to two pages — keep financial modeling, valuation and due diligence high on page one, and quantify deal value, synergies and outcomes.",
+    hardSkills: ["Financial modeling", "Valuation", "Due diligence", "Deal sourcing", "Synergy & integration analysis", "Corporate finance", "Capital markets"],
+    softSkills: ["Analytical thinking", "Attention to detail", "Communication", "Stakeholder management", "Problem solving"],
+    atsKeywords: ["Mergers & Acquisitions", "Financial Modeling", "Due Diligence", "Valuation", "Deal Sourcing", "Synergy", "Investment Banking"],
+    atsNote:
+      "Use M&A-specific terms (\"due diligence\", \"valuation\", \"synergy\", \"deal sourcing\") and put the exact title \"Mergers and Acquisitions Analyst\" in your resume; quantify deal value and outcomes.",
+  },
+  "fp-a-analyst": {
+    include:
+      "Contact details, a professional summary, a skills section organised by category (modeling, Excel, analysis, technical tools), work experience with quantified results, a projects section for financial models, and education.",
+    length:
+      "One to two pages — write \"financial planning and analysis (FP&A)\" once then repeat \"FP&A\" in bullets, keep forecasting and modeling high on page one, and include 25–35 relevant keywords matched to the posting.",
+    hardSkills: ["Financial modeling", "Budgeting & forecasting", "Variance analysis", "Three-statement & rolling models", "Advanced Excel", "P&L & management reporting", "SQL / Power BI / Tableau"],
+    softSkills: ["Analytical thinking", "Communication", "Attention to detail", "Business partnering", "Problem solving"],
+    atsKeywords: ["FP&A", "Financial Modeling", "Forecasting", "Budgeting", "Variance Analysis", "Financial Reporting", "P&L Analysis"],
+    atsNote:
+      "Mirror the posting — write \"financial planning and analysis (FP&A)\" once then repeat \"FP&A\" in bullets — list forecasting, financial modeling, variance analysis and management reporting, and keep the format simple and text-based.",
+  },
+  "risk-manager": {
+    include:
+      "Contact details, a professional summary, work experience, education, a skills section, a dedicated certifications section (FRM/CRM) with full name and acronym, plus risk-specific sections (regulatory compliance frameworks, risk technology) and key projects with quantified outcomes.",
+    length:
+      "One to two pages — keep risk analysis, frameworks and your strongest risk initiatives on page one, list certifications in a dedicated section, and quantify outcomes on key projects.",
+    hardSkills: ["Risk analysis & assessment", "Operational & financial risk", "ERM frameworks (Basel/COSO/ISO 31000)", "Regulatory compliance", "Statistical modeling", "Data reporting", "Risk technology systems"],
+    softSkills: ["Analytical thinking", "Stakeholder engagement", "Communication", "Problem solving", "Decision-making"],
+    atsKeywords: ["Risk Management", "Risk Assessment", "Operational Risk", "Regulatory Compliance", "ERM", "FRM", "Internal Controls"],
+    atsNote:
+      "Weave keywords through the summary, skills and experience (\"operational risk\", \"regulatory compliance\", \"ERM\", \"Basel\", \"ISO 31000\"), list FRM/CRM with full name and acronym in a certifications section, and quantify key-project outcomes.",
+  },
+  "business-intelligence-analyst": {
+    include:
+      "Contact details (with LinkedIn), a professional summary, a dedicated technical-skills section (SQL, BI platforms, data modeling), work experience with quantified impact, a projects section, and education.",
+    length:
+      "One to two pages — keep SQL, your BI platform and data-modeling skills in a dedicated section near the top, and quantify impact (e.g. processing time reduced, reporting automated).",
+    hardSkills: ["SQL", "Power BI / Tableau / QlikView", "Data warehousing", "ETL", "Data modeling", "Python / R", "DAX & data visualization"],
+    softSkills: ["Analytical thinking", "Problem solving", "Communication", "Attention to detail", "Project management"],
+    atsKeywords: ["Business Intelligence", "SQL", "Power BI", "Tableau", "Data Warehousing", "ETL", "Data Modeling"],
+    atsNote:
+      "Mirror the posting's tools exactly — if it says \"Power BI\" or \"Tableau\", write that, not just \"BI tools\" — keep a dedicated technical-skills section, and quantify impact (e.g. \"reduced data-processing time 40% by optimising SQL queries\").",
+  },
 };
 
 const BY_SLUG = ROLE_CV_CONTENT;
