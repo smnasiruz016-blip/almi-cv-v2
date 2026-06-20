@@ -180,6 +180,133 @@ export const ROLE_CV_CONTENT: Record<string, RoleCvContent> = {
     atsKeywords: ["Product Roadmap", "Product Strategy", "Agile", "JIRA", "Go-to-Market", "User Stories", "Stakeholder Management", "KPIs"],
     atsNote: "Include tool-specific keywords (Jira, Amplitude, Productboard) — missing them scores 30+ points lower on ATS scans; spell certifications out in full (CSM, PSPO).",
   },
+  // ── Batch 2 (sourced via live SERP 2026: Indeed, enhancv, beamjobs, ResumeWorded, ResumeAdapter) ──
+  doctor: {
+    include:
+      "A hybrid academic/clinical résumé — header, a professional summary, licensure and board certifications (USMLE/MBBS, state) in their own section, clinical Experience with measurable patient outcomes, Education and training, research/publications where relevant, and separated hard and soft skills.",
+    length: "Use reverse-chronological or hybrid format and focus on results, patient outcomes and systems improvement — avoid academic-detail overload.",
+    hardSkills: ["Patient care", "Clinical diagnosis", "Board-certified procedures", "EHR (Epic)", "Treatment planning", "Multidisciplinary collaboration"],
+    softSkills: ["Communication", "Empathy", "Teamwork", "Leadership"],
+    atsKeywords: ["Patient Care", "Board Certified", "Clinical", "Diagnosis", "EHR", "USMLE", "Treatment Planning"],
+    atsNote: "Recruiters scan for clinical competence, board certifications and measurable outcomes — avoid generic \"dedicated/passionate\" (on 90% of rejected physician resumes) and keep licensure current and visible.",
+  },
+  pharmacist: {
+    include:
+      "Contact details, a summary (years, setting, licensure, strongest credential), Experience with clinical and operational metrics, Education (PharmD), a Licensure section (state license number, NABP), Certifications (BCPS, immunization, MTM, BLS/ACLS), and Skills.",
+    length: "Clean single-column format — list your state license and NABP number prominently; employers verify before interviews.",
+    hardSkills: ["Medication Therapy Management", "Drug Utilization Review", "Prescription Verification", "Compounding", "Patient Counseling", "Clinical Pharmacy", "Pharmacy software (Epic Willow / Cerner)"],
+    softSkills: ["Communication", "Attention to detail", "Compliance", "Patient care"],
+    atsKeywords: ["Medication Therapy Management", "Patient Counseling", "Drug Utilization Review", "Clinical Pharmacy", "Compounding", "NAPLEX", "Compliance"],
+    atsNote: "These keywords appear in 90%+ of pharmacist postings — use 25–35 matched to the role; 97%+ of pharmacy employers filter with ATS first.",
+  },
+  "mechanical-engineer": {
+    include:
+      "A summary, a Skills section grouped by category (CAD/CAE, Analysis methods, Manufacturing processes, Programming), Experience framed around projects (scope, role, tools, measurable outcome), Certifications and Education.",
+    length: "One to two pages — weave tools into project bullets (e.g. \"developed a fluid-flow model in SolidWorks\").",
+    hardSkills: ["SolidWorks", "CATIA", "AutoCAD", "ANSYS", "FEA", "CFD", "GD&T (ASME Y14.5)", "DFM", "MATLAB"],
+    softSkills: ["Problem solving", "Project management", "Communication", "Teamwork"],
+    atsKeywords: ["SolidWorks", "GD&T", "FEA", "AutoCAD", "Thermodynamics", "DFM", "CATIA", "ANSYS"],
+    atsNote: "Name specific CAD software (SOLIDWORKS, CATIA), not generic \"CAD\" — ATS scans for exact matches like \"SolidWorks\" and \"GD&T\"; cite standards (ASME Y14.5, ISO 9001).",
+  },
+  "electrical-engineer": {
+    include:
+      "A summary, a Skills section by category (Design software, Hardware, Standards, Methodologies), Experience showing results, Certifications and Education.",
+    length: "One to two pages — list 8–12 skills, prioritizing those named in the posting.",
+    hardSkills: ["AutoCAD Electrical", "Altium", "ETAP", "PLC (Allen-Bradley / Siemens)", "Power systems", "Circuit design", "PCB design", "MATLAB", "Testing & commissioning"],
+    softSkills: ["Critical thinking", "Technical writing", "Active listening", "Problem solving"],
+    atsKeywords: ["Circuit Design", "Power Systems", "PLC", "AutoCAD", "PCB Design", "ETAP", "NEC", "MATLAB"],
+    atsNote: "Use exact tool/standard names (Altium, ETAP, NEC, IEEE, UL) — generic \"circuit design\" without the specific tools the posting names makes you invisible to the ATS.",
+  },
+  "financial-analyst": {
+    include:
+      "A summary, a Skills section (modeling + analysis + tools), Experience with metric-driven bullets, Certifications (e.g. CFA), and Education.",
+    length: "Usually one page — customize the skills section to each posting.",
+    hardSkills: ["Financial Modeling (DCF, 3-statement)", "Variance Analysis", "Budget Forecasting", "Advanced Excel", "Financial Reporting", "GAAP", "SQL", "Power BI / Tableau", "FP&A"],
+    softSkills: ["Analytical thinking", "Communication", "Attention to detail", "Presentation"],
+    atsKeywords: ["Financial Modeling", "Variance Analysis", "Excel", "Forecasting", "FP&A", "GAAP", "DCF", "Financial Reporting"],
+    atsNote: "The #1 rejection cause is missing financial-modeling, Excel and variance-analysis keywords — use 25–35 matched to the posting and quantify (e.g. cut forecast variance 12%→3%).",
+  },
+  electrician: {
+    include:
+      "A summary stating your license level and years, a Licenses & Certifications section (Journeyman/Master, OSHA), Experience describing scope of work and building types, a Skills section, and quantified achievements.",
+    length: "Short, sharp and keyword-focused — only relevant experience and skills.",
+    hardSkills: ["NEC code compliance", "Conduit bending", "Commercial / industrial wiring", "Circuit design", "Blueprint reading", "Lockout/Tagout", "EV / renewable infrastructure"],
+    softSkills: ["Safety awareness", "Problem solving", "Teamwork", "Reliability"],
+    atsKeywords: ["NEC Compliance", "Electrical Installation", "Commercial Wiring", "OSHA", "Conduit", "Troubleshooting", "Journeyman"],
+    atsNote: "State your license level immediately (e.g. \"Licensed Journeyman\") and include \"NEC Compliance\"/\"Commercial Wiring\" + OSHA/Lockout-Tagout — without them even a Master Electrician gets filtered.",
+  },
+  chef: {
+    include:
+      "A 2–3 sentence summary (experience level and specialties), Experience with achievements and impact, an Education & Certifications section (ServSafe, HACCP), and a Skills section grouped by category (Culinary, Kitchen Management, Safety, Cuisine types).",
+    length: "One to two pages — focus on quantifiable results, not duties.",
+    hardSkills: ["Menu development", "Food cost control", "Kitchen operations", "Inventory management", "HACCP", "Food safety", "Scheduling", "Vendor management"],
+    softSkills: ["Leadership", "Time management", "Creativity", "Communication"],
+    atsKeywords: ["Menu Development", "Food Safety", "Inventory Management", "Kitchen Management", "Food Cost Control", "HACCP", "ServSafe"],
+    atsNote: "ServSafe and HACCP are non-negotiable for most kitchen roles — list them inline; avoid tables/graphics ATS can't parse.",
+  },
+  "administrative-assistant": {
+    include:
+      "A summary, a Skills section (software + organizational), Experience with quantified achievements, Certifications (CAP, MOS), and Education.",
+    length: "Concise — include 20–30 keywords matched to the posting, using its exact phrasing.",
+    hardSkills: ["Microsoft Office (Word/Excel/PowerPoint/Outlook)", "Calendar management", "Scheduling", "Data entry", "Travel coordination", "Expense reporting", "Google Workspace"],
+    softSkills: ["Communication", "Discretion", "Time management", "Multitasking", "Prioritization"],
+    atsKeywords: ["Microsoft Office", "Calendar Management", "Scheduling", "Data Entry", "Travel Coordination", "Expense Reporting", "Confidentiality"],
+    atsNote: "These appear in 90%+ of admin postings — quantify (e.g. \"coordinated 60+ meetings/week for 5 executives with 99% accuracy\") rather than \"managed calendars\".",
+  },
+  dentist: {
+    include:
+      "A summary, a Licensure & Certifications section of its own (INBDE, ADEX, state, DEA, BLS/ACLS) — recruiters read these first, Experience with measurable outcomes, Education, and 10–15 skills grouped (clinical + interpersonal).",
+    length: "One to two pages.",
+    hardSkills: ["Restorative dentistry", "Endodontics", "Prosthodontics", "Radiography", "Patient care", "CBCT treatment planning", "Charting software"],
+    softSkills: ["Patient communication", "Attention to detail", "Team collaboration"],
+    atsKeywords: ["Restorative Dentistry", "Patient Care", "Radiography", "Endodontics", "Prophylaxis", "Prosthodontics", "Oral Health"],
+    atsNote: "Put licensure/certifications (INBDE, ADEX) in a separate section so ATS parses the credentials; quantify (e.g. \"500+ restorative procedures, 95% satisfaction\").",
+  },
+  architect: {
+    include:
+      "Contact details with a portfolio link, a summary (design approach, certifications, key projects), a Skills section (technical + soft), 2–4 Key Projects (role, tools, outcome), Certifications (RA, LEED AP, NCARB) and Education.",
+    length: "Clean single-column with standard headings — put the portfolio link at the top.",
+    hardSkills: ["Revit", "AutoCAD", "BIM", "3D rendering", "Sustainable Design (LEED)", "Construction Documentation", "Adobe Suite", "Zoning knowledge"],
+    softSkills: ["Creativity", "Communication", "Project management", "Collaboration"],
+    atsKeywords: ["BIM", "Revit", "AutoCAD", "Sustainable Design", "LEED AP", "Construction Documentation", "Project Management"],
+    atsNote: "Keep it single-column with standard headings (ATS can't read graphics/icons); include RA/LEED AP/NCARB credentials and quantify (e.g. \"cut design time 25%\").",
+  },
+  "operations-manager": {
+    include:
+      "A summary, a Skills section (methodologies + management + supply chain), Experience built around operational KPIs, and Education.",
+    length: "Simple one-column format — include 25–35 keywords matched to the posting.",
+    hardSkills: ["Lean Six Sigma", "Process Improvement", "KPI Management", "Supply Chain Management", "Inventory Management", "Budget Management", "ERP systems", "Vendor Management"],
+    softSkills: ["Leadership", "Strategic planning", "Stakeholder management", "Problem solving"],
+    atsKeywords: ["Process Improvement", "Lean Six Sigma", "KPI Management", "Supply Chain", "Inventory Management", "Budget Management", "ERP"],
+    atsNote: "Missing \"Process Improvement\", \"Lean Six Sigma\" or \"KPI Management\" can instantly disqualify; ops hiring is metric-driven — show throughput, cost reductions ($ and %), SLA/defect rates.",
+  },
+  "content-writer": {
+    include:
+      "A profile summary (SEO, storytelling, content strategy), Experience with measurable results, a Skills section (writing specialties + tools), a portfolio link with 3–5 samples, and Certifications.",
+    length: "Usually one page — put keywords from the posting in your summary.",
+    hardSkills: ["SEO writing", "Copywriting", "Blog / long-form content", "WordPress", "Google Analytics", "SEMrush / Ahrefs", "Content strategy", "Editing"],
+    softSkills: ["Creativity", "Research", "Communication", "Adaptability"],
+    atsKeywords: ["SEO Content Writing", "Copywriting", "Content Strategy", "WordPress", "Google Analytics", "SEMrush", "Content Calendar"],
+    atsNote: "Include SEO + analytics tool names (Google Analytics, SEMrush, Ahrefs) and a portfolio link; show metrics per piece (traffic, rankings) and mirror the posting's exact terms.",
+  },
+  "ux-designer": {
+    include:
+      "A summary, a Skills section in labeled categories (UX, UI, Tools, Research) totalling ~18–25, Experience with STAR-method bullets that reference portfolio case studies, a portfolio link, and Education.",
+    length: "Stick to a proven single-column template — save the creativity for your portfolio.",
+    hardSkills: ["User Research", "Wireframing", "Prototyping", "Figma", "Design Systems", "Usability Testing", "Accessibility (WCAG)", "Information Architecture"],
+    softSkills: ["Communication", "Collaboration", "Problem solving", "Empathy"],
+    atsKeywords: ["User Research", "Wireframing", "Prototyping", "Figma", "Design Systems", "Usability Testing", "UX", "UI"],
+    atsNote: "List exact tool names (Figma, Sketch, Adobe XD) — \"design tools\" is invisible to ATS; organize 18–25 skills by category and reference portfolio case studies in your bullets.",
+  },
+  "devops-engineer": {
+    include:
+      "A summary, a Skills section (cloud + containers + CI/CD + IaC + observability), Experience with quantified pipeline/infrastructure results, Certifications (AWS DevOps, CKA, Terraform Associate), and Education.",
+    length: "Clean format, standard fonts, no graphics.",
+    hardSkills: ["CI/CD", "Docker", "Kubernetes", "AWS / GCP / Azure", "Terraform", "Jenkins / GitHub Actions", "Ansible", "Linux", "Python / Bash", "Prometheus / Grafana"],
+    softSkills: ["Problem solving", "Collaboration", "Incident response", "Communication"],
+    atsKeywords: ["CI/CD", "Docker", "Kubernetes", "AWS", "Terraform", "Jenkins", "Ansible", "Infrastructure as Code"],
+    atsNote: "Core keywords (CI/CD, Docker, Kubernetes, AWS, Terraform) are must-haves — missing more than two filters you out; name your cloud + CI/CD platform explicitly and quantify (e.g. \"cut deployment time 20%\").",
+  },
 };
 
 const BY_SLUG = ROLE_CV_CONTENT;
