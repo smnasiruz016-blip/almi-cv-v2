@@ -3732,6 +3732,162 @@ export const ROLE_CV_CONTENT: Record<string, RoleCvContent> = {
     atsNote:
       "Order sections to match the post's priorities and address the person specification directly, group clinical skills clearly, and list your last five years of CPD, audits and publications.",
   },
+  // ── Batch 28 (sourced via live SERP 2026: LiveCareer, MinistryBoost, ResumeBuilder, Resumaker, JobHero, QwikResume, ResumeWorded, ResumeAdapter, Enhancv, Indeed, Medium/Reshtei) ──
+  // Priorities: faith leaders (map to ReligiousTraditional template), medical, tech, therapy, sales, PM.
+  "imam": {
+    include:
+      "Contact details, a professional summary, an education section (Islamic studies, Quran memorization, theology/jurisprudence), religious-leadership experience, a skills section, and languages (Arabic, Urdu, English).",
+    length:
+      "One to two pages — keep your Islamic-studies credentials and Quran/Arabic proficiency high, and show your community and pastoral-leadership experience.",
+    hardSkills: ["Leading congregational prayers (Salah)", "Delivering sermons (Khutbah)", "Quran & hadith knowledge", "Islamic jurisprudence (Fiqh)", "Classical Arabic", "Religious education", "Community & youth programmes"],
+    softSkills: ["Public speaking", "Pastoral care", "Mediation", "Empathy", "Community leadership"],
+    atsKeywords: ["Imam", "Islamic Studies", "Quran", "Khutbah", "Pastoral Care", "Arabic", "Community Leadership"],
+    atsNote:
+      "Lead with your Islamic-studies credentials (madrasa/seminary, Quran memorization, Fiqh) and Arabic proficiency, and show community engagement (sermons, religious education, youth programmes, dispute mediation).",
+  },
+  "pastor": {
+    include:
+      "Contact details, a 2–3 sentence summary capturing your calling and leadership style, ministerial experience in reverse chronological order (with specialties), secular work experience, education, and a brief statement of faith and call to ministry.",
+    length:
+      "One to two pages — translate ministry outcomes into measurable results (attendance growth, volunteer teams, groups launched, budget managed), and keep a brief statement of faith and call to ministry.",
+    hardSkills: ["Preaching & teaching", "Pastoral counseling", "Strategic planning", "Volunteer recruitment & development", "Community outreach", "Budget management", "Church software (Planning Center)"],
+    softSkills: ["Communication", "Leadership", "Empathy", "Organization", "Initiative"],
+    atsKeywords: ["Pastor", "Preaching", "Pastoral Care", "Ministry", "Counseling", "Community Outreach", "Discipleship"],
+    atsNote:
+      "Show pastoral heart alongside leadership skill, include a brief statement of faith and call to ministry, and quantify outcomes (attendance growth, volunteer teams built, small groups launched, baptisms, budget managed).",
+  },
+  "priest": {
+    include:
+      "Contact details, a summary or objective, religious-leadership experience, education (theology/religious studies, M.Div. or seminary), a skills section, and additional sections (languages, memberships, publications).",
+    length:
+      "One to two pages — keep your seminary education and liturgical and pastoral experience high, and demonstrate community engagement.",
+    hardSkills: ["Leading religious services & liturgy", "Administering sacraments", "Preaching & homiletics", "Pastoral care & counseling", "Religious education", "Community outreach", "Theology & doctrine"],
+    softSkills: ["Compassion", "Communication", "Active listening", "Leadership", "Discretion"],
+    atsKeywords: ["Priest", "Liturgy", "Sacraments", "Pastoral Care", "Preaching", "Community Outreach", "Theology"],
+    atsNote:
+      "Highlight liturgy, the sacraments and pastoral care, keep your seminary education (M.Div. or equivalent) prominent, and show community engagement and counseling experience.",
+  },
+  "rabbi": {
+    include:
+      "Contact details, a professional summary, education and ordination (seminary), religious-leadership experience including life-cycle events and teaching, a core-competencies section, and languages.",
+    length:
+      "One to two pages — keep your ordination and pastoral and teaching experience high, and include specific life-cycle events (weddings, b'nai mitzvah, funerals).",
+    hardSkills: ["Leading worship services", "Pastoral care & counseling", "Jewish law, customs & texts", "Life-cycle events", "Religious teaching (children & adults)", "Community building", "Hebrew & liturgy"],
+    softSkills: ["Public speaking", "Leadership", "Empathy", "Networking", "Communication"],
+    atsKeywords: ["Rabbi", "Jewish Studies", "Pastoral Care", "Worship Services", "Torah", "Community Building", "Hebrew"],
+    atsNote:
+      "Keep your ordination and seminary training prominent, show deep knowledge of Jewish law and texts, and include specific life-cycle events (weddings, b'nai mitzvah, funerals) and teaching experience.",
+  },
+  "mufti": {
+    include:
+      "Contact details, a professional summary, an education section (Alim/Ifta qualification, Islamic jurisprudence), religious-leadership and teaching experience, a skills section, and languages (Arabic, Urdu, English).",
+    length:
+      "One to two pages — keep your Ifta/Alim credentials and jurisprudence expertise high, and show teaching and fatwa-issuing or advisory experience.",
+    hardSkills: ["Islamic jurisprudence (Fiqh)", "Fatwa (legal opinion) issuance", "Quran & hadith scholarship", "Classical Arabic", "Religious teaching", "Verbal reasoning", "Comparative jurisprudence"],
+    softSkills: ["Scholarly rigour", "Communication", "Ethical judgement", "Patience", "Advisory skills"],
+    atsKeywords: ["Mufti", "Islamic Jurisprudence", "Fiqh", "Fatwa", "Islamic Studies", "Arabic", "Sharia"],
+    atsNote:
+      "Emphasise your Ifta/Alim qualification and command of Islamic jurisprudence (Fiqh), Quran and hadith, and Classical Arabic; show fatwa-issuing, advisory and teaching experience.",
+  },
+  "internal-medicine-doctor": {
+    include:
+      "Contact details, a summary, education and training, licensure and board certification (ABIM), clinical experience, and a skills section (six to ten skills, hard plus soft).",
+    length:
+      "A physician CV is multi-page; keep board certification (ABIM) and your strongest clinical experience on page one, and quantify panels and outcomes.",
+    hardSkills: ["Adult primary & acute care", "Chronic-disease management (diabetes, hypertension)", "Diagnostic & lab interpretation", "Treatment planning", "Preventive medicine", "EHR (Epic / Cerner)", "Care coordination"],
+    softSkills: ["Clinical judgement", "Communication", "Empathy", "Teamwork", "Attention to detail"],
+    atsKeywords: ["Internal Medicine", "Board Certified", "Chronic Disease Management", "Diagnosis", "Patient Care", "Preventive Medicine", "ABIM"],
+    atsNote:
+      "List board certification (ABIM) and licence, mirror the posting's terms (\"chronic disease management\", \"diagnosis\", \"preventive medicine\"), and quantify panel size and quality outcomes.",
+  },
+  "obstetrician": {
+    include:
+      "Contact details, a summary, education and residency, board certification or eligibility (OB-GYN) and an unrestricted licence in a visible section, clinical and surgical experience with delivery and procedure volumes, and a skills section.",
+    length:
+      "A physician CV is multi-page; keep board certification, licence and your delivery and surgical experience on page one, and quantify deliveries and procedures.",
+    hardSkills: ["Labour & delivery management", "Prenatal & postnatal care", "Fetal monitoring", "Caesarean section", "High-risk pregnancy care", "Minimally invasive surgery", "EMR documentation"],
+    softSkills: ["Composure under pressure", "Communication", "Empathy", "Team leadership", "Decision-making"],
+    atsKeywords: ["Obstetrics", "Board Certified", "Labor and Delivery", "Prenatal Care", "Cesarean Section", "Fetal Monitoring", "ACOG"],
+    atsNote:
+      "Make board certification or eligibility (OB-GYN) and an unrestricted licence visible and current, mirror the posting's terms (\"labour and delivery\", \"fetal monitoring\", \"high-risk pregnancy\"), and quantify deliveries and procedures.",
+  },
+  "physical-therapist": {
+    include:
+      "Contact details, a professional summary, education (DPT first), a licensure-and-certifications section (with licence numbers and expiry), professional experience with quantified achievements, a skills section organised by category, and professional development.",
+    length:
+      "One to two pages — use standard headings (\"Professional Experience\", \"Licensure & Certifications\"), keep your DPT and licence high, and use 3–5 outcome-focused bullets per role.",
+    hardSkills: ["Patient assessment & evaluation", "Manual therapy", "Gait & balance training", "Therapeutic exercise", "Orthopedic & neuro rehabilitation", "Treatment planning", "EHR documentation"],
+    softSkills: ["Empathy", "Communication", "Patience", "Teamwork", "Motivation"],
+    atsKeywords: ["Physical Therapy", "Rehabilitation", "Manual Therapy", "Patient Care", "Gait Training", "Therapeutic Exercise", "DPT"],
+    atsNote:
+      "Use natural keywords (\"rehabilitation\", \"manual therapy\", \"patient care\"), list your DPT and state licence with number and expiry, organise skills by category, and quantify functional-outcome improvements.",
+  },
+  "software-developer": {
+    include:
+      "A professional summary, a dedicated skills section with exact-match technical keywords, work experience and projects with keyword-rich, outcome-based bullets, and education.",
+    length:
+      "One page for 0–5 years, two for senior — place keywords inside experience and project bullets that show what you did, the tool you used and the result, with strong action verbs.",
+    hardSkills: ["JavaScript / Python / Java", "React / Node.js / Django", "REST & GraphQL APIs", "SQL & NoSQL", "Git", "Docker & CI/CD", "Testing (TDD)"],
+    softSkills: ["Problem solving", "Communication", "Collaboration", "Code review", "Ownership"],
+    atsKeywords: ["JavaScript", "Python", "Java", "React", "Node.js", "REST API", "SQL", "Git"],
+    atsNote:
+      "Read the posting for the skills named in the title and requirements, place exact-match keywords in a dedicated skills section, and prove them inside project/experience bullets (what you did, the tool, the result).",
+  },
+  "mobile-app-developer": {
+    include:
+      "A header, a summary or objective using the exact target title (iOS/Android Developer), work experience with metrics, education, a skills section grouped by category, a certifications section, and an app-portfolio/projects section.",
+    length:
+      "One to two pages — use the exact job title from the posting, group skills by category (platforms, languages, integration), and quantify app performance, crash rates and user adoption.",
+    hardSkills: ["iOS / Android", "Swift / Kotlin / Java", "API integration & web services", "Mobile UI/UX", "OOP & design patterns", "Performance optimization", "Git & CI/CD"],
+    softSkills: ["Collaboration", "Communication", "Attention to detail", "Problem solving", "Adaptability"],
+    atsKeywords: ["iOS", "Android", "Swift", "Kotlin", "Java", "Mobile Development", "API Integration"],
+    atsNote:
+      "Use exact titles (\"iOS Developer\", \"Android Developer\") to pass ATS filters, group skills by category (platforms, languages, integration), and quantify app performance, crash rate, release speed and user adoption.",
+  },
+  "system-administrator": {
+    include:
+      "A 4–5 line professional summary, a technical-skills matrix grouped by category (OS, virtualization, cloud, security) at the top, work experience with quantifiable achievements, a certifications section, and education.",
+    length:
+      "One to two pages in chronological format — display the skills matrix prominently, include 25–35 relevant keywords from the posting, and quantify uptime and resolution improvements.",
+    hardSkills: ["Windows Server & Linux", "Active Directory", "PowerShell / Bash", "Virtualization (VMware/Hyper-V)", "Backup & disaster recovery", "Patch management & monitoring", "Cloud (AWS/Azure)"],
+    softSkills: ["Problem solving", "Communication", "Attention to detail", "Time management", "Reliability"],
+    atsKeywords: ["System Administration", "Windows Server", "Linux", "Active Directory", "PowerShell", "Virtualization", "Backup and Recovery"],
+    atsNote:
+      "Display a categorised skills matrix at the top (OS, virtualization, cloud, security), use exact tool names (Windows Server, Active Directory, VMware), and include certifications (MCSA, CompTIA Server+, Azure Administrator); quantify uptime.",
+  },
+  "licensed-massage-therapist": {
+    include:
+      "Contact details, a summary, education, a skills section (hard plus soft), work experience, and a certifications section listing your licence and modality training.",
+    length:
+      "One page — keep your licence and massage modalities high, list specialist modality training, and show client retention and rebookings.",
+    hardSkills: ["Swedish massage", "Deep-tissue massage", "Trigger-point therapy", "Sports massage", "Client assessment", "Treatment planning", "Body mechanics & safety"],
+    softSkills: ["Active listening", "Communication", "Empathy", "Adaptability", "Physical stamina"],
+    atsKeywords: ["Massage Therapy", "Swedish Massage", "Deep Tissue", "Trigger Point Therapy", "Sports Massage", "Client Assessment", "Licensed Massage Therapist"],
+    atsNote:
+      "List your state licence and any board certification (NCBTMB), name the modalities you practise (Swedish, deep tissue, trigger point, sports), and show client retention and continuing education.",
+  },
+  "sales-development-representative": {
+    include:
+      "Contact details, a professional summary, work experience with metrics, education, and a skills section listing tools and processes (CRM, outbound) — in standard ATS-friendly sections.",
+    length:
+      "One page — keep lead generation, prospecting and CRM high, and quantify dials/day, meetings booked, conversion rates and quota attainment.",
+    hardSkills: ["Lead generation", "Outbound prospecting & cold calling", "Lead qualification", "CRM (Salesforce, HubSpot)", "Email sequencing", "Demo booking", "Pipeline management"],
+    softSkills: ["Communication", "Resilience", "Active listening", "Time management", "Persistence"],
+    atsKeywords: ["Sales Development", "Lead Generation", "Cold Calling", "CRM", "Salesforce", "Prospecting", "B2B Sales"],
+    atsNote:
+      "Use terms like \"lead generation\", \"sales prospecting\", \"cold calling\" and \"CRM\", name your tools (Salesforce, HubSpot), and quantify dials/day, meetings booked, open rates and quota attainment.",
+  },
+  "technical-project-manager": {
+    include:
+      "Contact details, a professional summary, a technical-skills section (languages, methodologies, tools), project highlights with metrics, professional experience, and a dedicated certifications section (PMP, Scrum, cloud).",
+    length:
+      "One to two pages — keep Agile, stakeholder management and your strongest delivery on page one, reference certifications in the summary, and quantify scope, budget and timeline outcomes.",
+    hardSkills: ["Project management (Agile/Scrum/Waterfall)", "Technical delivery", "Risk & change management", "Stakeholder management", "Budget & resource management", "Jira / Confluence", "Cross-functional leadership"],
+    softSkills: ["Leadership", "Communication", "Problem solving", "Conflict resolution", "Decision-making"],
+    atsKeywords: ["Technical Project Management", "Agile", "Scrum", "PMP", "Stakeholder Management", "Risk Management", "Jira"],
+    atsNote:
+      "Include the keywords in nearly every posting (Project Management, Agile, Scrum, PMP, stakeholder management, Jira), list PMP/Scrum and any cloud certs in a dedicated section, and quantify scope, budget and timelines.",
+  },
 };
 
 const BY_SLUG = ROLE_CV_CONTENT;
