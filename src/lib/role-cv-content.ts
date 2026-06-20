@@ -1446,6 +1446,132 @@ export const ROLE_CV_CONTENT: Record<string, RoleCvContent> = {
     atsKeywords: ["LLMs", "RAG", "LangChain", "Vector Database", "MLOps", "PyTorch", "Model Deployment", "Hugging Face"],
     atsNote: "Mirror exact phrasing — if the job says 'LangChain', write 'LangChain' (not 'LLM orchestration framework'); lead with production metrics (latency, throughput, cost) and include the MLOps layer (monitoring, CI/CD for ML, drift detection) that seniors are screened for.",
   },
+  "brand-manager": {
+    include:
+      "A summary, a Skills section (strategy + research + campaigns + tools), and Experience anchored to revenue, brand-health and budget metrics.",
+    length: "One to two pages; clean single-column layout, no graphics or tables.",
+    hardSkills: ["Brand strategy", "Market research", "Competitive analysis", "Positioning & messaging", "Campaign management", "P&L management", "Consumer insights", "GA4 / SEMrush / HubSpot"],
+    softSkills: ["Strategic thinking", "Cross-functional leadership", "Communication", "Creativity"],
+    atsKeywords: ["Brand Strategy", "Campaign Management", "Market Research", "Positioning", "Consumer Insights", "P&L Management", "Go-to-Market", "Brand Management"],
+    atsNote: "Use the channel/tool ATS keywords (Google Ads, Meta Business Suite, HubSpot, GA4, SEMrush) and state budget size you've owned ($50K/month, $500K annually); quantify brand-health metrics — awareness, preference, share of voice, conversion lift.",
+  },
+  "product-marketing-manager": {
+    include:
+      "A 2-3 sentence summary, a Skills section (GTM + positioning + enablement), and Experience tied to launch and adoption metrics.",
+    length: "One to two pages; simple format, no tables/graphics, keywords matched to the posting.",
+    hardSkills: ["Go-to-market (GTM) strategy", "Product positioning", "Messaging", "Competitive intelligence", "Sales enablement", "Launch execution", "Customer interviews", "Marketing analytics"],
+    softSkills: ["Strategic thinking", "Cross-functional collaboration", "Storytelling", "Communication"],
+    atsKeywords: ["Go-to-Market", "Product Positioning", "Messaging", "Sales Enablement", "Competitive Intelligence", "Launch Execution", "Product Marketing", "Customer Insights"],
+    atsNote: "Naturally include both strategic (Go-to-Market, Product Positioning, Competitive Intelligence) and tactical keywords (Sales Enablement, Launch Execution, Customer Interviews); quantify launch impact, adoption and pipeline influence.",
+  },
+  "digital-marketing-manager": {
+    include:
+      "A summary, a prominent Skills section (the top 5 appear in 80%+ of postings), and Experience using metrics not adjectives.",
+    length: "One to two pages; single-column, Calibri/Arial 11pt, no tables/graphics.",
+    hardSkills: ["SEO", "SEM / PPC", "Email marketing", "Social media", "Analytics (GA4)", "Content strategy", "Marketing automation", "ROI analysis"],
+    softSkills: ["Creativity", "Problem solving", "Communication", "Data-driven decision making"],
+    atsKeywords: ["SEO", "SEM", "Email Marketing", "Social Media", "Google Analytics", "Marketing Automation", "Content Strategy", "ROI Analysis"],
+    atsNote: "Lead with the five keywords in 80%+ of postings (SEO, SEM, Email Marketing, Social Media, Analytics) in a prominent skills section, name your stack (GA4, HubSpot, Marketo, SEMrush) and use metrics ('increased revenue by 35%', not 'improved performance').",
+  },
+  "email-marketing-specialist": {
+    include:
+      "A data-driven summary (years + program scale), a Skills section (ESP/automation + segmentation + HTML), and Experience with revenue and deliverability metrics.",
+    length: "One to two pages; standard headings, platform names spelled out for ATS.",
+    hardSkills: ["Email strategy & lifecycle automation", "ESPs (Klaviyo, Mailchimp, HubSpot)", "Salesforce Marketing Cloud / Marketo", "HTML email design", "A/B testing", "Segmentation", "Deliverability & list hygiene", "Analytics"],
+    softSkills: ["Data-driven thinking", "Attention to detail", "Communication", "Testing mindset"],
+    atsKeywords: ["Email Marketing", "Marketing Automation", "HTML Email", "Salesforce Marketing Cloud", "A/B Testing", "Segmentation", "Klaviyo", "Deliverability"],
+    atsNote: "Name your specific ESP/automation platform (Klaviyo, Salesforce Marketing Cloud, HubSpot, Marketo) to clear screening and show depth (deliverability, list hygiene, segmentation); quantify revenue, open/click rate and deliverability score.",
+  },
+  "community-manager": {
+    include:
+      "A summary, a balanced Skills section (social tools + engagement + analytics), certifications, and Experience with numbers in 70%+ of bullets.",
+    length: "One to two pages; clean ATS-safe layout, role-specific keywords.",
+    hardSkills: ["Social media management", "Community engagement", "Content creation", "Social tools (Hootsuite, Sprout Social, Buffer)", "Data analysis", "Platform expertise (IG, TikTok, LinkedIn)", "Content calendars", "Moderation"],
+    softSkills: ["Communication", "Empathy", "Conflict resolution", "Collaboration"],
+    atsKeywords: ["Social Media Management", "Community Engagement", "Content Strategy", "Community Growth", "Hootsuite", "Sprout Social", "Engagement Rate", "Marketing Campaigns"],
+    atsNote: "Integrate 'community engagement' and 'marketing campaigns' and name your tools (Hootsuite, Sprout Social, Buffer); put numbers in at least 70% of bullets (engagement rate, follower growth, conversion) and add CCM or Facebook Blueprint certs.",
+  },
+  "influencer-marketing-manager": {
+    include:
+      "A summary, a Skills section (campaign strategy + platforms + analytics), a section on 2-4 standout creator campaigns, and Experience with brand-lift metrics.",
+    length: "One to two pages; bold headers + bullets, no tables/graphics.",
+    hardSkills: ["Influencer outreach & vetting", "Campaign strategy", "Content partnerships (YouTube/IG/TikTok)", "Contract negotiation", "Campaign tracking", "Engagement-rate analysis", "Content calendars", "Tools (CapCut, Hootsuite)"],
+    softSkills: ["Relationship building", "Communication", "Project management", "Negotiation"],
+    atsKeywords: ["Influencer Marketing", "Influencer Outreach", "Campaign Strategy", "Content Strategy", "Engagement Rate", "TikTok", "Brand Partnerships", "Campaign Tracking"],
+    atsNote: "Include platform and tactic keywords (TikTok, Instagram Reels, Influencer Outreach, Engagement Rate, Content Calendar) and lead bullets with Achieved/Led/Managed; quantify reach, engagement rate and brand-lift from your partnerships.",
+  },
+  "public-relations-specialist": {
+    include:
+      "A summary naming specialization + a headline win + tool keywords, a Skills section (8-10 hard, 6-7 soft), and a section on 2-4 standout campaigns.",
+    length: "One to two pages; mirror the posting's exact tools/terminology.",
+    hardSkills: ["Media relations & journalist outreach", "Press-release & pitch writing", "Media monitoring (Meltwater, Cision)", "Crisis communication", "Brand messaging", "Digital PR / SEO-driven PR", "Event management", "Social media communications"],
+    softSkills: ["Relationship building", "Strategic thinking", "Composure under pressure", "Storytelling"],
+    atsKeywords: ["Media Relations", "Press Release Writing", "Media Pitching", "Brand Messaging", "Crisis Communication", "Media Monitoring", "Digital PR", "Online Reputation Management"],
+    atsNote: "Use the terms in 80%+ of PR postings (Digital PR, SEO-driven PR, online reputation management) and name your monitoring tools (Meltwater, Cision); show a media-placement track record with named publications and measurable impressions.",
+  },
+  "market-research-analyst": {
+    include:
+      "A summary, a Skills section (methods + analytics + tools), and Experience weaving a keyword into every quantified achievement.",
+    length: "One to two pages; clean single-column, standard headings.",
+    hardSkills: ["Survey design", "Quantitative & qualitative research", "Statistical analysis (SPSS, SAS)", "Data analysis (Excel, SQL)", "Data visualization (Tableau, Power BI)", "Competitive analysis", "Segmentation", "Report writing"],
+    softSkills: ["Analytical thinking", "Presentation", "Attention to detail", "Stakeholder management"],
+    atsKeywords: ["Market Research", "Survey Design", "Data Analysis", "Consumer Insights", "Quantitative Research", "SPSS", "Competitive Analysis", "Statistical Analysis"],
+    atsNote: "Name your analytical tools (SPSS, SAS, Tableau, Power BI, SQL) and methods (focus groups, segmentation, trend forecasting), and weave a keyword into each achievement ('Led research that increased efficiency by 30%').",
+  },
+  "marketing-analyst": {
+    include:
+      "A summary containing the exact job title, a Skills section led by the 2026 priority tools, and Experience with measurable campaign outcomes.",
+    length: "One to two pages; repeat a primary skill 2-3 times across summary/skills/bullets.",
+    hardSkills: ["Google Analytics (GA4)", "SQL", "Tableau / Power BI", "A/B testing", "Attribution modeling", "PPC analytics", "Marketing automation", "ROI analysis"],
+    softSkills: ["Analytical thinking", "Communication", "Problem solving", "Data storytelling"],
+    atsKeywords: ["GA4", "SQL", "Tableau", "A/B Testing", "Attribution Modeling", "Marketing Analytics", "ROI Analysis", "PPC"],
+    atsNote: "The highest-priority 2026 keywords are GA4, SQL, Tableau/Power BI, A/B testing and attribution modeling; put the exact job title in your summary (it makes an interview ~10x likelier) and repeat a primary skill 2-3 times across the resume.",
+  },
+  "art-director": {
+    include:
+      "A portfolio link at the top (a broken/missing link is an instant filter), a summary, a Skills section (tools + brand + direction), and outcome-anchored Experience.",
+    length: "One to two pages; strong section headers, white space, clutter-free.",
+    hardSkills: ["Art direction", "Adobe Creative Suite", "Figma", "Brand identity", "Design systems", "Visual storytelling", "Motion graphics", "Campaign management"],
+    softSkills: ["Creative leadership", "Communication", "Collaboration", "Problem solving"],
+    atsKeywords: ["Art Direction", "Adobe Creative Suite", "Brand Identity", "Creative Direction", "Visual Design", "Design Systems", "Figma", "Campaign Management"],
+    atsNote: "Place your portfolio link at the top or right after your name — a missing or broken link is an immediate filter; include 'Adobe Creative Suite', 'brand strategy', 'visual storytelling' and anchor every bullet to an outcome (conversion lift, on-time launch, reduced revisions).",
+  },
+  "creative-director": {
+    include:
+      "A robust Skills section with posting keywords, a summary, and Experience that keeps creative achievements and business outcomes focal.",
+    length: "One to two pages; strong headers and white space; balance visuals with readability.",
+    hardSkills: ["Brand strategy", "Campaign development", "Art direction", "Adobe Creative Suite", "Video production", "UX/UI", "Creative strategy", "Content marketing"],
+    softSkills: ["Creative leadership", "Strategic thinking", "Mentoring", "Decision making"],
+    atsKeywords: ["Brand Strategy", "Campaign Development", "Creative Direction", "Art Direction", "Team Leadership", "Creative Strategy", "Content Marketing", "Adobe Creative Suite"],
+    atsNote: "Blend artistic, marketing, leadership and technical keywords from the posting (brand strategy, campaign development, cross-functional leadership) and start bullets with Led/Directed/Concepted/Launched (not 'Responsible for'); quantify campaign performance and revenue.",
+  },
+  "illustrator": {
+    include:
+      "A portfolio link in the header, a summary, a Skills section (10-15, the top 5 in 80%+ of postings first), and Experience with action verbs.",
+    length: "One to two pages; ATS weights the skills section, so order by relevance.",
+    hardSkills: ["Illustration", "Digital art", "Drawing", "Adobe Creative Suite (Illustrator, Photoshop)", "Concept art", "Storyboarding", "Vector art", "Design theory"],
+    softSkills: ["Creativity", "Storytelling", "Problem solving", "Collaboration"],
+    atsKeywords: ["Illustration", "Digital Art", "Drawing", "Adobe Creative Suite", "Adobe Illustrator", "Concept Art", "Vector Art", "Storytelling"],
+    atsNote: "Lead with the five keywords in 80%+ of postings (Illustration, Digital Art, Drawing, Adobe Creative Suite, Creativity) and put a portfolio link (Behance/Instagram/site) in the header; use verbs like designed/conceptualized/collaborated.",
+  },
+  "photographer": {
+    include:
+      "A portfolio URL near your name, a summary, a Skills section grouped (Technical/Software/Specialties/Business), and Experience with quantified impact.",
+    length: "One to two pages; group skills into clear categories for scanning.",
+    hardSkills: ["Studio & location lighting", "Composition", "Adobe Lightroom & Photoshop", "Retouching & color correction", "Portrait / product / event photography", "DSLR & mirrorless", "Capture One", "Image licensing"],
+    softSkills: ["Artistic vision", "Client management", "Networking", "Attention to detail"],
+    atsKeywords: ["Photography", "Adobe Lightroom", "Photoshop", "Photo Editing", "Studio Lighting", "Retouching", "Composition", "Visual Storytelling"],
+    atsNote: "Put the portfolio URL near your name (it's your strongest asset) and name tools/genres (Lightroom, Photoshop, Capture One, portrait/product/event); quantify impact ('500+ product images that boosted conversions 12%').",
+  },
+  "videographer": {
+    include:
+      "A portfolio/reel link, a summary, a Skills section grouped (Camera/Editing/Lighting/Audio) with named gear and codecs, and Experience with hard numbers.",
+    length: "One to two pages; keep soft skills out of the skills section — show them in experience.",
+    hardSkills: ["Cinematography", "Adobe Premiere Pro / DaVinci Resolve", "Lighting setups (three-point, LED)", "Audio recording (boom, lavalier)", "Motion graphics", "Color grading", "Camera operation (Sony FS7, Canon C300)", "Post-production (ProRes, H.264/265)"],
+    softSkills: ["Creativity", "Collaboration", "Communication", "Deadline discipline"],
+    atsKeywords: ["Videography", "Cinematography", "Adobe Premiere Pro", "Post-Production", "Lighting", "Motion Graphics", "DaVinci Resolve", "Color Grading"],
+    atsNote: "Name specific software and gear (Adobe Premiere Pro, not 'video editing'; Sony FS7, ProRes, H.265) and group skills by Camera/Editing/Lighting/Audio; quantify turnaround, output volume and engagement — keep soft skills out of the skills list.",
+  },
 };
 
 const BY_SLUG = ROLE_CV_CONTENT;
