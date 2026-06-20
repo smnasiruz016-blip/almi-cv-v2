@@ -1950,6 +1950,132 @@ export const ROLE_CV_CONTENT: Record<string, RoleCvContent> = {
     atsKeywords: ["Environmental Science", "GIS", "Environmental Monitoring", "NEPA Compliance", "Environmental Impact Assessment", "Water Quality", "Field Sampling", "Environmental Compliance"],
     atsNote: "Include GIS/ArcGIS, environmental monitoring and the regulatory frameworks the posting names (NEPA, CEQA, Clean Water Act); fieldwork is foundational, so show proper protocol/chain-of-custody execution and use 15-25 matched keywords.",
   },
+  "restaurant-manager": {
+    include:
+      "A summary, a Skills section grouped (operations + financial + team), certifications (ServSafe), and Experience with P&L-grade metrics.",
+    length: "One to two pages; mirror the posting's exact terms (e.g. 'inventory management').",
+    hardSkills: ["P&L management", "Inventory & cost control", "Staff scheduling & training", "POS systems (Toast, Square, Micros)", "Reservation platforms (OpenTable, Resy)", "Menu pricing", "Health & safety compliance", "Vendor relations"],
+    softSkills: ["Leadership", "Conflict resolution", "Communication", "Decision making"],
+    atsKeywords: ["Restaurant Management", "P&L Management", "Inventory Control", "Staff Scheduling", "Cost Management", "POS Systems", "ServSafe", "Customer Service"],
+    atsNote: "Show P&L drivers like cover counts, average check and labor-cost % with the metric discipline of any P&L owner; name your POS/reservation/scheduling systems and add ServSafe Manager + TIPS certifications.",
+  },
+  "concierge": {
+    include:
+      "A hybrid format leading with a strong skills section (guest relations + PMS + languages), and Experience with a quantified satisfaction metric.",
+    length: "One to two pages; reference 2-3 signature platforms hiring managers recognize.",
+    hardSkills: ["Guest relations", "Opera PMS", "Reservation management (OpenTable)", "Itinerary & excursion planning", "Transportation coordination", "Complaint resolution", "Local knowledge", "Language proficiency"],
+    softSkills: ["Attention to detail", "Discretion", "Communication", "Adaptability"],
+    atsKeywords: ["Concierge", "Guest Relations", "Opera PMS", "Customer Service", "Reservation Management", "Conflict Resolution", "Front Desk Operations", "Guest Satisfaction"],
+    atsNote: "Lead with guest relations, Opera PMS and conflict resolution, and reference signature tools (Opera PMS, OpenTable); include a quantified achievement ('98% guest satisfaction across 12,000 service requests at a five-star property').",
+  },
+  "front-desk-agent": {
+    include:
+      "A summary, a prominent bulleted Skills section (PMS + check-in + cash handling), and Experience with shift-volume and satisfaction metrics.",
+    length: "One to two pages; standard headings ('Employment History', 'Skills').",
+    hardSkills: ["Guest check-in / check-out", "Property management systems (Opera PMS, Fosse, RoomKey)", "Reservation management", "Cash handling", "Multi-line phone systems", "Complaint resolution", "Upselling", "Loyalty program enrollment"],
+    softSkills: ["Customer service", "Multitasking", "Composure", "Communication"],
+    atsKeywords: ["Front Desk", "Opera PMS", "Guest Check-In", "Reservation Systems", "Cash Handling", "Customer Service", "Guest Satisfaction", "Lobby Operations"],
+    atsNote: "Name your PMS (Opera PMS, Fosse, RoomKey) and include 'cash handling' and 'reservation systems'; quantify check-in volume per shift, guest-satisfaction %, upsell revenue and loyalty-program sign-ups.",
+  },
+  "travel-agent": {
+    include:
+      "A summary, a Skills section near the top (GDS + itinerary + destinations + languages), and Experience with revenue/retention metrics.",
+    length: "One to two pages; avoid tables/images; mirror the GDS the posting names.",
+    hardSkills: ["GDS (Amadeus, Sabre, Galileo)", "Itinerary planning", "Fare calculation", "Booking systems", "Destination knowledge", "CRM platforms", "Travel-segment expertise (corporate/luxury/group)", "Customer service"],
+    softSkills: ["Attention to detail", "Communication", "Problem solving", "Sales"],
+    atsKeywords: ["Travel Booking", "Amadeus", "Sabre", "GDS", "Itinerary Planning", "Customer Service", "Fare Calculation", "Destination Knowledge"],
+    atsNote: "62% of employers name a booking system (Amadeus, Sabre, Galileo) — put yours in a top skills section with destination knowledge and languages; quantify ('280+ corporate accounts, $1.4M annual bookings, 93% retention').",
+  },
+  "tour-guide": {
+    include:
+      "A reverse-chronological summary leading with tour scope (group sizes, regions, languages), a Skills section, and Experience with guest-experience metrics.",
+    length: "One to two pages; avoid keyword stuffing — modern ATS flags unnatural repetition.",
+    hardSkills: ["Itinerary & route planning", "Historical/cultural expertise", "Public speaking", "Group tour operations", "Event coordination", "Booking systems", "First aid", "Language proficiency"],
+    softSkills: ["Charisma", "Communication", "Storytelling", "Problem solving"],
+    atsKeywords: ["Tour Guide", "Customer Service", "Itinerary Planning", "Public Speaking", "Group Tours", "Guest Experience", "Route Planning", "Cultural Knowledge"],
+    atsNote: "Lead with the scope of tours you've run (group sizes, tour types, regions, languages) and use exact keywords (itinerary planning, public speaking, group tour operations); quantify guest experience without stuffing — ATS detects unnatural repetition.",
+  },
+  "agricultural-technician": {
+    include:
+      "A 3-4 sentence summary stating specialty in the first seven words + scale, a Skills section (field/lab + precision-ag + certs), and quantified Experience.",
+    length: "One to two pages; date certifications and refresh tool/imagery versions for 2026.",
+    hardSkills: ["Crop management", "Soil testing & analysis", "Pest control (IPM)", "Irrigation systems", "Precision agriculture / GPS", "GIS & data analysis", "Pesticide application", "Safety protocols"],
+    softSkills: ["Attention to detail", "Problem solving", "Communication", "Reliability"],
+    atsKeywords: ["Agricultural Technician", "Crop Management", "Soil Testing", "Pest Control", "Precision Agriculture", "Irrigation", "Pesticide Application", "Data Analysis"],
+    atsNote: "State your specialty (soil/crop/livestock/precision/irrigation) in the first seven words and quantify scale (acres, plots, samples/week); front-load Pesticide Applicator/CCA certs — many ATS filters key on exact certification strings.",
+  },
+  "veterinary-assistant": {
+    include:
+      "A summary, embedded keywords throughout experience (not a separate list), clinical/animal-care skills, and software you've used.",
+    length: "One to two pages; include the exact title 'Veterinary Assistant' for ATS.",
+    hardSkills: ["Animal restraint & handling", "Surgical assistance", "Medication administration", "Sample collection & phlebotomy", "Veterinary software (Cornerstone, ezyVet, IDEXX Neo)", "Lab work (microscopy, hematology)", "Wound dressing", "Emergency care"],
+    softSkills: ["Compassion", "Communication", "Time management", "Teamwork"],
+    atsKeywords: ["Veterinary Assistant", "Animal Care", "Animal Restraint", "Medication Administration", "Animal Handling", "Phlebotomy", "Client Communication", "Emergency Care"],
+    atsNote: "Put the exact title 'Veterinary Assistant' on the page and embed keywords (animal restraint, medication administration, phlebotomy) inside experience rather than a bare list; name your practice software (Cornerstone, ezyVet, IDEXX Neo).",
+  },
+  "fleet-manager": {
+    include:
+      "A summary, a Skills section (fleet ops + maintenance + compliance + telematics), and Experience with uptime and cost metrics.",
+    length: "One to two pages; match the posting's exact terms (fleet maintenance software, etc.).",
+    hardSkills: ["Fleet operations management", "Preventive maintenance planning", "Fleet maintenance software / telematics", "GPS & route optimization", "DOT/regulatory compliance", "Budget & cost control", "Vendor management", "Safety management"],
+    softSkills: ["Leadership", "Attention to detail", "Problem solving", "Communication"],
+    atsKeywords: ["Fleet Management", "Preventive Maintenance", "Fleet Operations", "Regulatory Compliance", "Logistics Management", "Cost Reduction", "Telematics", "DOT Compliance"],
+    atsNote: "Include 'fleet maintenance software', 'preventive maintenance' and 'regulatory compliance' from the posting and show transportation-law knowledge; quantify uptime gains, cost reductions and safety improvements ('+25%').",
+  },
+  "customs-officer": {
+    include:
+      "A summary (years + specialization + biggest proof point), a Skills section (compliance + inspection + risk), and Experience with quantified enforcement results.",
+    length: "One to two pages; strong action verbs (inspect, conduct, seize, train).",
+    hardSkills: ["Customs & border regulations", "Cargo & baggage inspection", "Document examination", "Risk assessment", "Fraud detection", "Contraband seizure", "Entry-process management", "Surveillance technology"],
+    softSkills: ["Integrity", "Attention to detail", "Communication", "Decision making"],
+    atsKeywords: ["Customs", "Border Security", "Regulatory Compliance", "Risk Assessment", "Inspection", "Document Examination", "Fraud Detection", "Enforcement"],
+    atsNote: "Show knowledge of customs/border-security law and use exact keywords (regulatory compliance, risk assessment, document examination); use action verbs (inspect, conduct, seize) and quantify inspections, seizures and processing volumes.",
+  },
+  "facilities-manager": {
+    include:
+      "A summary, a Skills section grouped by category (building systems + operations + maintenance + software), certifications, and Experience with cost/uptime metrics.",
+    length: "One to two pages; group skills into clear categories for skimming.",
+    hardSkills: ["Facility management (FM)", "Building operations", "Preventive maintenance", "HVAC / electrical / plumbing systems", "Space planning", "Vendor & contract management", "Building Management System (BMS)", "HSE / fire & life safety compliance"],
+    softSkills: ["Leadership", "Problem solving", "Communication", "Adaptability"],
+    atsKeywords: ["Facilities Management", "Building Operations", "Preventive Maintenance", "HVAC", "Space Planning", "Vendor Management", "Contract Negotiation", "Health & Safety"],
+    atsNote: "Group skills (Building Systems / Operations / Maintenance / Software) and use posting keywords (facilities management, building operations, preventive maintenance, HVAC); add Certified Facility Manager (CFM) / OSHA and quantify cost savings and uptime.",
+  },
+  "office-manager": {
+    include:
+      "A 2-3 sentence summary, a Skills section (15-25 keywords), evidence of leadership, and Experience with quantified savings/productivity.",
+    length: "One to two pages; weave keywords into a compelling intro and bullets.",
+    hardSkills: ["Office operations", "Vendor management", "Budget administration", "Facilities coordination", "Onboarding", "Microsoft Office Suite", "Calendar & scheduling", "Records management"],
+    softSkills: ["Communication", "Interpersonal skills", "Attention to detail", "Cross-functional leadership"],
+    atsKeywords: ["Office Operations", "Vendor Management", "Budget Administration", "Facilities Coordination", "Onboarding", "Microsoft Office", "Office Administration", "Scheduling"],
+    atsNote: "Use 15-25 matched keywords led by Office Operations, Vendor Management and Budget Administration (highest-frequency: communication, MS Office, interpersonal); show leadership instances and quantify money saved / productivity gained.",
+  },
+  "personal-assistant": {
+    include:
+      "A summary, a 6-10 item Skills section (executive support + tools), and Experience with quantified accomplishments using the posting's exact terms.",
+    length: "One to two pages; mirror terms like 'confidentiality' and 'support high-level executives'.",
+    hardSkills: ["Calendar management", "Travel coordination", "Meeting preparation", "Expense reports (Concur)", "Microsoft Office (advanced Excel/PowerPoint)", "Google Workspace", "Executive communication", "Project coordination"],
+    softSkills: ["Discretion", "Organization", "Time management", "Adaptability"],
+    atsKeywords: ["Executive Support", "Calendar Management", "Travel Coordination", "Confidentiality", "Microsoft Office", "Expense Reports", "Meeting Preparation", "Administrative Support"],
+    atsNote: "Use the listing's exact terms ('confidentiality', 'support high-level executives', 'proactively resolve issues') and name tools (Concur, advanced Excel/PowerPoint, Google Workspace); quantify your accomplishments.",
+  },
+  "virtual-assistant": {
+    include:
+      "A summary, a categorized Skills section (admin + communication + technical), remote 'trust signals', and Experience with quantified output.",
+    length: "One to two pages; simple layout, keywords verbatim from the job ad.",
+    hardSkills: ["Data entry", "Calendar & email management", "Travel arrangements", "CRM software", "Project management tools (Asana, Trello)", "Social media scheduling", "Customer service", "Basic HTML"],
+    softSkills: ["Self-starter", "Async communication", "Time management", "Confidentiality"],
+    atsKeywords: ["Virtual Assistant", "Calendar Management", "CRM Management", "Data Entry", "Email Management", "Social Media Scheduling", "Travel Logistics", "Administrative Support"],
+    atsNote: "Infuse keywords verbatim (missing 'CRM management', 'travel logistics' or 'social media scheduling' filters you out) and add remote trust signals ('async communication', 'self-starter', 'confidentiality'); specify tools precisely (Excel: Pivot Tables, VLOOKUP).",
+  },
+  "data-entry-clerk": {
+    include:
+      "A summary emphasizing accuracy and speed, a Skills section (software + accuracy + speed), and Experience with volume and error-rate metrics.",
+    length: "One to two pages; match software names exactly to the posting.",
+    hardSkills: ["Data entry (10-key, typing speed)", "Microsoft Excel (data validation)", "Database software", "Salesforce / CRM data entry", "Records management", "Data verification & QA", "Invoice processing", "Document scanning"],
+    softSkills: ["Accuracy", "Attention to detail", "Time management", "Reliability"],
+    atsKeywords: ["Data Entry", "Data Accuracy", "Typing Speed", "Microsoft Excel", "Data Validation", "Database Management", "Records Management", "10-Key"],
+    atsNote: "Match software names exactly to the posting and quantify everything — records/day, error rate, backlog cleared, audit pass rate ('250+ records/day into Salesforce at 99.8% accuracy'; '150 invoices/week, backlog −50%').",
+  },
 };
 
 const BY_SLUG = ROLE_CV_CONTENT;
