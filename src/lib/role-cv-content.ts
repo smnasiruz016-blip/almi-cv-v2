@@ -561,6 +561,133 @@ export const ROLE_CV_CONTENT: Record<string, RoleCvContent> = {
     atsKeywords: ["Machine Operation", "CNC", "Blueprint Reading", "OSHA", "Lockout/Tagout", "Preventive Maintenance", "Safety Compliance", "Production"],
     atsNote: "Embed role-specific keywords (\"machine operator\", \"CNC\") plus safety terms (OSHA, LOTO, PPE); list OSHA/CNC certifications and quantify reliability and output.",
   },
+  // ── Batch 5 (sourced via live SERP 2026: Indeed, enhancv, beamjobs, ResumeWorded, ResumeAdapter) ──
+  copywriter: {
+    include:
+      "A summary, a Skills section (featured in both the skills list and your work history), Experience with results, a prominent portfolio link, and Education.",
+    length: "Reverse-chronological — use keywords from the posting.",
+    hardSkills: ["Website copywriting", "SEO writing", "Content strategy", "Brand voice", "Email copy", "Social media copy", "Market research", "Editing"],
+    softSkills: ["Creativity", "Adaptability", "Communication", "Research"],
+    atsKeywords: ["Copywriting", "Content Strategy", "SEO", "Brand Identity", "Website Copy", "Email Marketing", "Market Research"],
+    atsNote: "Recruiters check your portfolio for versatility — add the link prominently; feature skills in both the skills section and work history, mirroring the posting's keywords.",
+  },
+  "seo-specialist": {
+    include:
+      "A summary that leads with organic-traffic growth and ranking gains, a Technical Skills section (8–10 hard + 6–7 soft), Experience, and Education.",
+    length: "Clean single column, standard fonts — add the exact title \"SEO Specialist\".",
+    hardSkills: ["Technical SEO", "Keyword research", "On-page optimization", "Link building", "Google Search Console", "GA4", "Ahrefs / SEMrush", "Screaming Frog", "Schema markup", "Core Web Vitals"],
+    softSkills: ["Analytical thinking", "Attention to detail", "Communication", "Problem solving"],
+    atsKeywords: ["Technical SEO", "Keyword Research", "On-Page Optimization", "Link Building", "Google Search Console", "Core Web Vitals", "Schema Markup", "Organic Traffic"],
+    atsNote: "Add the exact title \"SEO Specialist\" to clear screeners; lead with organic-traffic growth % and keyword-ranking improvements; mirror SEO tool names (Ahrefs, SEMrush, GSC) from the posting.",
+  },
+  "account-manager": {
+    include:
+      "A professional summary (core strengths + measurable outcomes), a Skills section with the top 8–10 visible, Experience with metrics, Certifications, and Education.",
+    length: "Single column with standard fonts.",
+    hardSkills: ["Account management", "Client retention", "CRM (Salesforce / HubSpot)", "Upselling", "Relationship building", "Sales", "Customer success", "Negotiation"],
+    softSkills: ["Communication", "Problem solving", "Leadership", "Collaboration"],
+    atsKeywords: ["Account Management", "Client Retention", "CRM", "Salesforce", "Customer Success", "Upselling", "Relationship Building", "Negotiation"],
+    atsNote: "Ensure your top 8–10 skills are clearly visible (ATS prioritizes skills matching); name your CRM (Salesforce/HubSpot) and quantify retention, upsell and revenue.",
+  },
+  "business-development-manager": {
+    include:
+      "A tailored summary, Experience with quantified outcomes, a Skills section of 10–15 aligned to the posting, and Certifications.",
+    length: "Single column — avoid tables/graphics.",
+    hardSkills: ["Business development", "Strategic partnerships", "Lead generation", "Market analysis", "Pipeline management", "Negotiation", "Proposal writing", "Salesforce"],
+    softSkills: ["Communication", "Networking", "Stakeholder management", "Strategic thinking"],
+    atsKeywords: ["Business Development", "Strategic Partnerships", "Lead Generation", "Pipeline Management", "Revenue Growth", "Market Analysis", "Negotiation", "ARR"],
+    atsNote: "The first five (Business Development, Sales, Relationship Building, Negotiation, Market Analysis) are in 80%+ of postings; 95%+ of SaaS/tech firms filter on ATS — missing \"ARR\", \"Strategic Partnerships\" or \"Salesforce\" disqualifies; quantify (e.g. \"qualified 250+ opportunities\").",
+  },
+  "financial-advisor": {
+    include:
+      "Licenses & Certifications up front (CFP / CFA / Series 7 / Series 66), a summary, a Skills section near the top (certs + planning + CRM), Experience with AUM/retention metrics, and a compliance statement per role.",
+    length: "Hybrid format — strongest credentials at the top, clear work history below.",
+    hardSkills: ["Financial planning", "Portfolio management", "Retirement planning", "Wealth management", "Asset allocation", "CRM software", "Series 7 / 66", "CFP"],
+    softSkills: ["Communication", "Relationship building", "Analytical thinking", "Integrity"],
+    atsKeywords: ["Financial Planning", "Portfolio Management", "Wealth Management", "Retirement Planning", "Series 7", "CFP", "Asset Allocation", "Fiduciary"],
+    atsNote: "Lead with licenses/certs (CFP, CFA, Series 7, Series 66 — recruiters screen these first); use standard abbreviations + full name once; quantify AUM growth, client acquisition and retention, and add a compliance statement (e.g. \"zero U4 disclosures\").",
+  },
+  "loan-officer": {
+    include:
+      "A summary leading with production numbers, your NMLS number, a Skills section (LOS + product knowledge + compliance), and Experience with close/pull-through rates.",
+    length: "Mirror the posting's exact phrasing.",
+    hardSkills: ["Mortgage origination", "Underwriting", "NMLS", "Loan Origination Systems (Encompass / Calyx)", "FHA / VA / Conventional", "TRID / RESPA", "Pipeline management", "DU / LP"],
+    softSkills: ["Sales & relationship building", "Communication", "Financial analysis", "Attention to detail"],
+    atsKeywords: ["Mortgage Origination", "Underwriting", "NMLS", "Encompass", "FHA", "VA", "Pipeline Management", "TRID"],
+    atsNote: "List your NMLS number (the first thing a mortgage employer checks); missing \"NMLS\", \"Loan Origination\" or \"Pipeline Management\" disqualifies; lead with production (\"originated $45M annually\") + close/pull-through rates.",
+  },
+  "insurance-agent": {
+    include:
+      "A summary, a Licenses section (P&C and L&H by full name + abbreviation), a Skills section (lines of business + CRM/AMS), and Experience with production metrics.",
+    length: "Use keywords naturally — ATS flags keyword stuffing.",
+    hardSkills: ["Policy sales", "Client relationship management", "Underwriting", "Lines of business (Auto / Home / Life / Commercial)", "CRM/AMS (Applied Epic / EZLynx / Salesforce)", "Retention"],
+    softSkills: ["Communication", "Relationship building", "Negotiation", "Attention to detail"],
+    atsKeywords: ["Policy Sales", "Client Relationship Management", "Underwriting", "Life Insurance", "Property and Casualty", "Retention", "Applied Epic"],
+    atsNote: "List state licenses (P&C, L&H) by full name + abbreviation and each line of business separately (Auto, Home, Life — distinct ATS categories); show written premium, policy count and retention; name your AMS (Applied Epic/EZLynx).",
+  },
+  barista: {
+    include:
+      "A summary, a Skills section (espresso + POS + service), Experience with quantified results, and Education, in reverse-chronological order.",
+    length: "Emphasize transferable skills (customer service, multitasking).",
+    hardSkills: ["Espresso preparation", "Drink customization", "Milk steaming", "POS systems", "Cash handling", "Station cleanliness", "Opening / closing duties"],
+    softSkills: ["Customer service", "Teamwork", "Multitasking", "Communication"],
+    atsKeywords: ["Customer Service", "Espresso Preparation", "POS Systems", "Cash Handling", "Food Safety", "Barista", "Drink Customization"],
+    atsNote: "Large coffee chains screen with ATS — use the posting's keywords; emphasize transferable skills and quantify (satisfaction ratings, sales contribution).",
+  },
+  "security-guard": {
+    include:
+      "A summary (situational awareness, de-escalation), a credentials section (guard card / state license — required in all 50 states), a Skills section (surveillance + access control), and Experience with metrics.",
+    length: "Mirror the posting's terms for surveillance, access control and patrol.",
+    hardSkills: ["Surveillance", "Access control (Lenel / CCURE / Genetec)", "CCTV monitoring", "Incident report writing", "Patrolling", "Emergency response", "CPR / AED"],
+    softSkills: ["Situational awareness", "De-escalation", "Communication under pressure", "Attention to detail"],
+    atsKeywords: ["Surveillance", "Access Control", "CCTV", "Incident Reporting", "Patrolling", "Physical Security", "De-escalation"],
+    atsNote: "Put your guard card / state license (type, issuer, expiry) where a recruiter sees it in seconds; without \"Access Control\", \"Patrolling\" or \"Incident Reporting\" you're filtered instantly.",
+  },
+  "truck-driver": {
+    include:
+      "A Licenses & Certifications section (CDL class + endorsements), a summary, a Skills section (compliance + equipment + technology), and Experience with safety metrics.",
+    length: "Mirror the posting's exact terms.",
+    hardSkills: ["CDL Class A / B", "Endorsements (HazMat / Tanker / Doubles)", "DOT / FMCSA compliance", "Hours of Service", "Pre-trip inspection", "ELD", "Equipment (Flatbed / Reefer)", "GPS / TMS"],
+    softSkills: ["Reliability", "Time management", "Communication", "Attention to detail"],
+    atsKeywords: ["CDL Class A", "HAZMAT", "DOT Compliance", "Hours of Service", "Pre-Trip Inspection", "ELD", "Tractor-Trailer", "FMCSA"],
+    atsNote: "97%+ of carriers filter with ATS — state your CDL class + endorsements and \"DOT Compliance\"/\"Hours of Service\"; quantify on-time delivery and accident-free miles.",
+  },
+  "medical-assistant": {
+    include:
+      "A professional profile with the exact title \"Medical Assistant\", a Skills section (clinical + administrative), Certifications (CMA / RMA / CCMA / BLS), EHR systems, HIPAA, and Experience.",
+    length: "Simple, clearly-labeled sections.",
+    hardSkills: ["Phlebotomy", "Vital signs", "Injections", "EKG", "Appointment scheduling", "Insurance verification", "ICD-10 / CPT coding", "EHR (Epic / Cerner)"],
+    softSkills: ["Communication", "Attention to detail", "Empathy", "Teamwork"],
+    atsKeywords: ["Medical Assistant", "Vital Signs", "Phlebotomy", "EHR", "Appointment Scheduling", "HIPAA", "EKG", "CMA"],
+    atsNote: "Add the exact title \"Medical Assistant\" to pass screeners; list certification (CMA/RMA/CCMA) and EHR (Epic/Cerner); HIPAA-compliance keywords rank high.",
+  },
+  phlebotomist: {
+    include:
+      "A 2–3 sentence summary (certification + setting + a standout achievement), a Skills section (collection techniques), Certifications (CPT / PBT, full name + acronym), and compliance (HIPAA / OSHA).",
+    length: "25–35 keywords matched to the posting.",
+    hardSkills: ["Venipuncture", "Capillary / butterfly collection", "Specimen processing / labeling", "Patient identification", "Blood collection", "Infection control", "Medical terminology"],
+    softSkills: ["Attention to detail", "Communication", "Compassion", "Reliability"],
+    atsKeywords: ["Venipuncture", "Blood Collection", "Specimen Processing", "Patient Identification", "Infection Control", "Phlebotomy", "CPT", "PBT"],
+    atsNote: "Most employers (LabCorp, Quest) require certification — include CPT (NHA) / PBT (ASCP) full name + acronym; show success rates (draw accuracy) and HIPAA/OSHA awareness; pediatric/geriatric/mobile experience is a 2026 premium signal.",
+  },
+  "occupational-therapist": {
+    include:
+      "A summary, a Clinical Skills section (settings + populations worked), Education and Licensure (registered OT where required), Certifications (NDT / ATP), and Experience.",
+    length: "Mirror the posting's language.",
+    hardSkills: ["OT evaluation", "Treatment planning", "ADL / IADL training", "Sensory integration", "Discharge planning", "Care coordination", "EMR", "Telehealth"],
+    softSkills: ["Empathy", "Communication", "Team collaboration", "Patience"],
+    atsKeywords: ["Occupational Therapy", "ADL Training", "Patient Assessment", "Treatment Planning", "Sensory Integration", "Rehabilitation", "Discharge Planning", "EMR"],
+    atsNote: "Mirror posting language (\"ADL retraining\", \"discharge planning\", \"sensory integration\"); include \"registered occupational therapist\" if the job requires it, plus your license and certs (NDT, ATP).",
+  },
+  "social-worker": {
+    include:
+      "A summary, credentials/licenses near the top (LCSW / LMSW / MSW), a Skills section (case management + assessment + populations), and Experience with quantified outcomes.",
+    length: "Keep to one page (ATS often rejects longer); reverse-chronological.",
+    hardSkills: ["Case management", "Crisis intervention", "Psychosocial assessment", "Treatment planning", "Motivational interviewing", "CBT", "Discharge planning", "EHR"],
+    softSkills: ["Empathy", "Communication", "Advocacy", "Cultural competence"],
+    atsKeywords: ["Case Management", "Crisis Intervention", "Psychosocial Assessment", "LCSW", "MSW", "Treatment Planning", "EHR", "Caseload Management"],
+    atsNote: "Place licenses (LCSW, LMSW, MSW) near the top — an unlicensed candidate is filtered before a human reviews; quantify outcomes (caseload size, readmission reductions, PHQ-9 improvements).",
+  },
 };
 
 const BY_SLUG = ROLE_CV_CONTENT;
