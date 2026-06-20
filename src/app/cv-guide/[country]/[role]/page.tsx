@@ -8,7 +8,8 @@ import { getCountryBySlug } from "@/lib/countries";
 import { getRoleBySlug } from "@/lib/roles";
 import { getConvention, hasVerifiedConvention } from "@/lib/cv-conventions";
 import { OriginCvGuide } from "@/components/cv-origin-guide";
-import { findCvOrigin, isCvOriginIndexable, indefiniteArticle } from "@/lib/cv-origin-localization";
+import { findCvOrigin, isCvOriginIndexable, indefiniteArticle, getLocalizedOrigin } from "@/lib/cv-origin-localization";
+import { getRoleCvContent, isRoleCountryIndexable } from "@/lib/role-cv-content";
 
 // The [role] segment doubles as the origin segment when prefixed "from-"
 // (e.g. /cv-guide/united-kingdom/from-pakistan). No role slug starts with
@@ -62,20 +63,22 @@ export async function generateMetadata({
 
   const r = getRoleBySlug(role);
   if (!c || !r) return {};
-  // SEO consolidation (stopgap): the role dimension here is a name token over
-  // country-level CV-convention data, so the ~50k role×country pages are thin
-  // near-duplicates of the richer /cv-guide/[country] hub. They canonicalise
-  // up to that hub and are kept out of the sitemap, concentrating crawl budget
-  // on the country hubs + the /templates/role/[roleSlug] role hubs (which keep
-  // the role-keyword surface). The page still renders for users. Reversible if
-  // a verified role-content dataset is added later.
-  const canonicalUrl = `${SITE_ORIGIN}/cv-guide/${c.slug}`;
+  // Where the role has a SOURCED CV-content entry AND the country is a curated CV
+  // destination, the page carries genuine role+country substance (sourced Q&A +
+  // country conventions + localized block) → SELF-canonical + indexed + in the
+  // sitemap. Otherwise it stays a thin near-duplicate that canonicalises UP to
+  // the country hub and out of the sitemap (real-data-or-noindex).
+  const indexable = isRoleCountryIndexable(r.slug, c.slug);
+  const canonicalUrl = indexable
+    ? `${SITE_ORIGIN}/cv-guide/${c.slug}/${r.slug}`
+    : `${SITE_ORIGIN}/cv-guide/${c.slug}`;
   const title = buildTitle(r.name, c.name);
   const description = buildDescription(r.name, c.name);
   return {
     title,
     description,
     alternates: { canonical: canonicalUrl },
+    robots: indexable ? undefined : { index: false, follow: true },
     openGraph: { title, description, url: canonicalUrl, type: "website", siteName: "AlmiCV" },
     twitter: { card: "summary_large_image", title, description },
   };
@@ -105,6 +108,12 @@ export default async function CvGuidePage({
   const convention = getConvention(c.slug);
   if (!convention) notFound();
   const isVerified = hasVerifiedConvention(c.slug);
+
+  // Sourced role-CV content (PART 2) + the country's localized origin essentials —
+  // the real, role-specific + country-specific substance that makes this page
+  // genuinely answer the searcher (not a name-swapped near-duplicate).
+  const roleContent = getRoleCvContent(r.slug);
+  const loc = getLocalizedOrigin(c.slug);
 
   const user = await getCurrentUser();
   const isLoggedIn = Boolean(user);
@@ -163,8 +172,8 @@ export default async function CvGuidePage({
             </h1>
             {/* 3. AI intro */}
             <p className="text-base sm:text-lg text-plum-soft leading-relaxed max-w-3xl">
-              AlmiCV&apos;s AI tailors your {r.name} CV to job descriptions in {c.name}. Transform
-              your CV into many designs, adjust colors and fonts anytime — new designs added
+              AlmiCV&apos;s AI tailors your {r.name} CV to job descriptions in {c.name}. Restyle
+              your CV across many designs, adjust colors and fonts anytime — new designs added
               every day. Built around conventions {c.name} employers expect.
             </p>
           </header>
@@ -210,6 +219,77 @@ export default async function CvGuidePage({
               AlmiCV translates to {c.primaryLanguage} with built-in AI.
             </p>
           </section>
+
+          {/* 5b. SOURCED role-CV content — what people actually ask about a
+              {role} CV (sections, length, skills, ATS keywords). Real research,
+              not invented; the substance that makes this page answer the searcher. */}
+          {roleContent && (
+            <section className="mb-12 rounded-xl border border-peach bg-white p-6 sm:p-8" aria-labelledby="rolecv-title">
+              <h2 id="rolecv-title" className="text-xl sm:text-2xl font-semibold tracking-tight text-plum mb-4">
+                What a {r.name} CV should include
+              </h2>
+              <div className="space-y-4 text-sm sm:text-base text-plum-soft leading-relaxed max-w-3xl">
+                <p><strong className="text-plum">What to include:</strong> {roleContent.include}</p>
+                <p><strong className="text-plum">How long it should be:</strong> {roleContent.length}</p>
+                <div>
+                  <p className="font-semibold text-plum mb-1.5">Skills {c.name} employers look for</p>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-1.5">
+                    <div>
+                      <p className="text-xs uppercase tracking-wide text-plum-soft mb-1">Clinical / hard skills</p>
+                      <ul className="flex flex-wrap gap-1.5">
+                        {roleContent.hardSkills.map((s) => (
+                          <li key={s} className="rounded-full border border-peach bg-cream-soft px-2.5 py-0.5 text-xs text-plum">{s}</li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div>
+                      <p className="text-xs uppercase tracking-wide text-plum-soft mb-1">Soft skills</p>
+                      <ul className="flex flex-wrap gap-1.5">
+                        {roleContent.softSkills.map((s) => (
+                          <li key={s} className="rounded-full border border-peach bg-cream-soft px-2.5 py-0.5 text-xs text-plum">{s}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <p className="font-semibold text-plum mb-1.5">ATS keywords recruiters search</p>
+                  <ul className="flex flex-wrap gap-1.5 mb-2">
+                    {roleContent.atsKeywords.map((k) => (
+                      <li key={k} className="rounded-full border border-coral/40 bg-coral-soft/30 px-2.5 py-0.5 text-xs text-coral-deep font-medium">{k}</li>
+                    ))}
+                  </ul>
+                  <p className="text-xs text-plum-soft">{roleContent.atsNote}</p>
+                </div>
+                <p className="text-xs text-plum-soft">Guidance is sourced and general — confirm role-specific and {c.name} licensing requirements with the official body before you rely on them.</p>
+              </div>
+            </section>
+          )}
+
+          {/* 5c. Localized origin essentials — the country-specific block (costs,
+              credential body, where people go, the real native-script search
+              terms). From the 191-origin FROM-set; null for non-localized countries. */}
+          {loc && (
+            <section className="mb-12 rounded-xl border border-peach bg-cream-soft p-6 sm:p-8" aria-labelledby="local-title">
+              <h2 id="local-title" className="text-xl sm:text-2xl font-semibold tracking-tight text-plum mb-4">
+                For {r.name}s applying from {c.name}
+              </h2>
+              <dl className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3 text-sm">
+                <div><dt className="text-xs uppercase tracking-wide text-plum-soft">Costs in</dt><dd className="text-plum">{loc.currency}</dd></div>
+                <div><dt className="text-xs uppercase tracking-wide text-plum-soft">Credentials</dt><dd className="text-plum">{loc.credentialBody}</dd></div>
+                <div><dt className="text-xs uppercase tracking-wide text-plum-soft">Where {c.name} candidates go</dt><dd className="text-plum">{loc.topDestinations.join(", ")}</dd></div>
+                <div><dt className="text-xs uppercase tracking-wide text-plum-soft">Apply from</dt><dd className="text-plum">{loc.cities.join(", ")}</dd></div>
+              </dl>
+              <div className="mt-4">
+                <p className="text-xs uppercase tracking-wide text-plum-soft mb-1.5">How people in {c.name} search</p>
+                <ul className="flex flex-wrap gap-1.5">
+                  {loc.localizedQueries.map((q) => (
+                    <li key={q} className="rounded-full border border-peach bg-white px-2.5 py-0.5 text-xs text-plum">{q}</li>
+                  ))}
+                </ul>
+              </div>
+            </section>
+          )}
 
           {/* 6. Role AI 3-card */}
           <section className="mb-12" aria-labelledby="ai-features-title">

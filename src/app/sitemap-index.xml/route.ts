@@ -9,16 +9,13 @@
  * Submit /sitemap-index.xml to Google Search Console once after deploy.
  */
 
-const SITE_ORIGIN = "https://almicv.almiworld.com";
+import { SITE_ORIGIN, numCvSitemapChunks } from "@/lib/cv-sitemap-urls";
 
-// The cv-guide/[country]/[role] grid was removed from the sitemap (it
-// canonicalises up to /cv-guide/[country]); the canonical surface (~650 URLs)
-// now fits in chunk 0 alone.
-const NUM_SITEMAPS = 1;
-
+// Chunk count derived from the shared URL builder → the index never drifts from
+// the actual /sitemap/N.xml chunks, and auto-grows as the grid un-thins.
 export function GET() {
   const now = new Date().toISOString();
-  const entries = Array.from({ length: NUM_SITEMAPS }, (_, i) =>
+  const entries = Array.from({ length: numCvSitemapChunks() }, (_, i) =>
     `  <sitemap>
     <loc>${SITE_ORIGIN}/sitemap/${i}.xml</loc>
     <lastmod>${now}</lastmod>

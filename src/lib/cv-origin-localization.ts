@@ -26,14 +26,19 @@ import {
   ORIGINS as SHARED_ORIGINS,
   indefiniteArticle as sharedIndefiniteArticle,
 } from "@smnasiruz016-blip/almi-data";
+import { EXTRA_ORIGINS, getLocalizedOrigin } from "./origins-extra";
 
 export type CvOrigin = { slug: string; name: string; flag: string };
 
-// The 10 researched origins — identity now READ from the shared data layer
-// (@smnasiruz016-blip/almi-data) instead of an inlined copy. Order preserved;
-// verified identical to the prior inlined list. The CV ATS copy-templates below
-// stay local (product voice); only the shared FACTS move.
-export const CV_ORIGINS: CvOrigin[] = SHARED_ORIGINS.map((o) => ({
+// Localized origin essentials (currency / cities / agencies / native-script
+// search queries) for the 181 sourced origins — re-exported so the role×country
+// and origin pages can surface the per-country block. Parity with TOEFL/IELTS/PTE.
+export { getLocalizedOrigin };
+
+// The full 191-origin FROM set — 10 base shared origins (almi-data) + 181 sourced
+// localized (origins-extra.ts, ported identical to TOEFL/IELTS/PTE). Identity
+// (slug/name/flag) here; the localized essentials come from getLocalizedOrigin.
+export const CV_ORIGINS: CvOrigin[] = [...SHARED_ORIGINS, ...EXTRA_ORIGINS].map((o) => ({
   slug: o.slug,
   name: o.name,
   flag: o.flag,
