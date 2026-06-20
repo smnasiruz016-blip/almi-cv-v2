@@ -2952,6 +2952,162 @@ export const ROLE_CV_CONTENT: Record<string, RoleCvContent> = {
     atsNote:
       "Lead with security strategy and risk in the executive summary, name your frameworks (ISO 27001, SOC 2, GDPR, NIST), and place CISSP/CISM/CISA in a certifications section; quantify risk reduced, audits passed and programmes led.",
   },
+  // ── Batch 23 (sourced via live SERP 2026: ResumeWorded, TealHQ, Enhancv, ResumeMentor, ResumeAdapter, VisualCV, Huntr, QwikResume, Indeed, Jobscan) ──
+  // Priorities: tech/cloud, digital marketing, beauty/wellness, medical, finance, exec, education.
+  "azure-architect": {
+    include:
+      "A professional summary, a technical-skills section categorised (Cloud Technologies, Leadership & Communication), work experience with quantified impact, a projects section, a dedicated certifications section (Azure Solutions Architect Expert, with dates), and education.",
+    length:
+      "One to two pages in a hybrid format — keep your strongest Azure services and certification high on page one, put the most relevant skill category first, and quantify every achievement.",
+    hardSkills: ["Azure (VMs, AKS, Functions, VNet)", "ARM / Bicep / Terraform", "Cloud architecture & migration", "Microservices & serverless", "CI/CD (Azure DevOps)", "Security & identity (Entra ID)", "Networking & high availability"],
+    softSkills: ["Problem solving", "Communication", "Stakeholder management", "Decision-making", "Documentation"],
+    atsKeywords: ["Azure", "Solutions Architect", "AKS", "Azure Functions", "Bicep / Terraform", "Cloud Migration", "Azure DevOps"],
+    atsNote:
+      "Name the exact Azure services the posting lists (AKS, Functions, VNet, Entra ID), put \"Microsoft Certified: Azure Solutions Architect Expert\" in a dedicated section with dates, and lead with the skill category the job emphasises.",
+  },
+  "game-developer": {
+    include:
+      "A professional summary starting with your title and years, a skills section grouped by category (languages, engines, tools), work experience with neatly organised bullets, a projects/shipped-titles section, and education and certifications.",
+    length:
+      "One page for 0–5 years, two for senior — lead with your engine and language strengths, connect them to shipped outcomes, and keep a single-column layout the ATS can parse.",
+    hardSkills: ["Unity", "Unreal Engine", "C# / C++", "Gameplay systems", "3D graphics & physics", "AI / pathfinding", "Optimization & profiling"],
+    softSkills: ["Problem solving", "Collaboration", "Creativity", "Communication", "Attention to detail"],
+    atsKeywords: ["Unity", "Unreal Engine", "C++", "C#", "Game Design", "Gameplay Programming", "Optimization"],
+    atsNote:
+      "Mirror the job's engine, language and gameplay terms exactly (Unity, Unreal Engine, C++, C#) — ATS routes on them — and group 10–15 skills by category (languages, engines, tools); connect engine work to shipped-title outcomes.",
+  },
+  "enterprise-architect": {
+    include:
+      "A professional summary, a skills section spotlighting solution design, frameworks and leadership, work experience with quantified delivery, education, and certifications (TOGAF) where relevant.",
+    length:
+      "Two pages is acceptable — keep enterprise architecture, frameworks (TOGAF) and IT strategy high on page one, indicate proficiency without subjective terms, and save as a PDF.",
+    hardSkills: ["Enterprise architecture", "TOGAF / Zachman frameworks", "Solution architecture", "IT strategy", "Systems integration", "Requirements analysis", "Cloud (AWS/Azure)"],
+    softSkills: ["Strategic thinking", "Stakeholder communication", "Technical leadership", "Problem solving", "Collaboration"],
+    atsKeywords: ["Enterprise Architecture", "TOGAF", "Solution Architecture", "IT Strategy", "Integration", "Requirements Analysis", "Cloud"],
+    atsNote:
+      "Use the posting's exact phrasing (\"enterprise architecture\", \"TOGAF\", \"solution architecture\", \"IT strategy\"), spotlight solution design and stakeholder communication, and indicate proficiency without subjective words like \"expert\".",
+  },
+  "embedded-systems-developer": {
+    include:
+      "A professional summary, a technical-skills section immediately after it grouped by category (languages, MCU/MPU, protocols, RTOS/OS, tools), a projects section showing hardware/software stacks, work experience in reverse chronological order, and education.",
+    length:
+      "One to two pages — keep a categorised skills section at the top, follow with a projects section (vital for embedded roles), and pair each language with the platform you used it on.",
+    hardSkills: ["Embedded C / C++", "RTOS", "Microcontrollers (ARM Cortex-M)", "Device drivers", "Protocols (SPI, I2C, UART, CAN)", "Hardware debugging (JTAG/SWD)", "Firmware optimization"],
+    softSkills: ["Problem solving", "Attention to detail", "Collaboration", "Analytical thinking", "Documentation"],
+    atsKeywords: ["Embedded C", "RTOS", "Microcontrollers", "Device Drivers", "ARM Cortex-M", "JTAG", "Firmware"],
+    atsNote:
+      "Listing \"C\" alone is not enough — pair languages with platforms (\"C on ARM Cortex-M\"), name your protocols (SPI, I2C, UART, CAN) and debug tools (JTAG, logic analyzers), and lead with a categorised technical-skills section.",
+  },
+  "digital-marketing-specialist": {
+    include:
+      "Contact details (with LinkedIn/portfolio), a professional summary, a technical-skills section segmented by platform, work experience featuring measurable campaign results, and education.",
+    length:
+      "One to two pages — keep SEO, PPC, analytics and your strongest measurable campaigns high on page one, and integrate keywords inside campaign/achievement bullets, not isolated lists.",
+    hardSkills: ["SEO & SEM", "PPC campaign management", "Google Analytics (GA4)", "Email marketing automation", "Conversion rate optimization (CRO)", "A/B testing", "SEMrush / Ahrefs / HubSpot"],
+    softSkills: ["Creativity", "Analytical thinking", "Communication", "Problem solving", "Time management"],
+    atsKeywords: ["SEO", "PPC", "Google Analytics", "Social Media Marketing", "Email Marketing", "Conversion Rate Optimization", "SEM"],
+    atsNote:
+      "Use the posting's exact terms (SEO, PPC, CRO, GA4) and name your tools (Google Ads, SEMrush, HubSpot, Mailchimp), and quantify outcomes (e.g. \"increased organic traffic 30% in 3 months\").",
+  },
+  "content-marketing-manager": {
+    include:
+      "Contact details, a professional summary, a skills section mixing hard skills, tools and methodologies with management soft skills, work experience in chronological format with quantified results, and education.",
+    length:
+      "One to two pages — use a chronological format (ATS parses it best), keep content strategy, SEO and your strongest results on page one, and make sure your target title appears in the summary or skills.",
+    hardSkills: ["Content strategy", "SEO content", "Editorial calendar management", "Copywriting", "Marketing automation (HubSpot/Marketo)", "Analytics (GA4, SEMrush, Ahrefs)", "Brand voice"],
+    softSkills: ["Team leadership", "Communication", "Storytelling", "Cross-functional alignment", "Budget oversight"],
+    atsKeywords: ["Content Marketing", "Content Strategy", "SEO", "Editorial Calendar", "Copywriting", "Marketing Automation", "Analytics"],
+    atsNote:
+      "Use terms like \"content marketing\", \"editorial strategy\", \"SEO content\" and \"content performance\" naturally in the summary, skills and bullets, name your tools (GA4, HubSpot, SEMrush), and keep a clean single-column chronological layout.",
+  },
+  "growth-hacker": {
+    include:
+      "Contact details, a concise three-sentence summary positioning you as someone who drives measurable growth, a skills section grouped by category (analytics, A/B testing, automation), work experience describing impact, and education.",
+    length:
+      "One to two pages in a single-column layout — list growth-specific platforms (Mixpanel, Amplitude, Optimizely) before general tools, group skills by category, and quantify CAC, LTV and conversion gains.",
+    hardSkills: ["Growth experimentation & A/B testing", "Conversion rate optimization (CRO)", "Funnel & cohort analysis", "Lifecycle marketing", "Analytics (GA4, Mixpanel, Amplitude)", "SQL / Python", "Marketing automation"],
+    softSkills: ["Analytical thinking", "Curiosity", "Communication", "Creativity", "Problem solving"],
+    atsKeywords: ["Growth Marketing", "A/B Testing", "Conversion Rate Optimization", "CAC", "LTV", "Funnel Optimization", "Product-Led Growth"],
+    atsNote:
+      "Position yourself as someone who drives measurable growth (not just runs campaigns), list growth platforms (Mixpanel, Amplitude, Optimizely) before general tools, and quantify CAC, LTV, ROAS and conversion gains in your bullets.",
+  },
+  "hair-stylist": {
+    include:
+      "Contact details, a professional summary, a skills section blending hard and soft skills, work experience with measurable detail, education, and a certifications section (state cosmetology licence, specialist certifications).",
+    length:
+      "One page — tailor a focused skills section to the salon's needs, keep your cutting, colouring and client-service strengths high, and list your cosmetology licence prominently.",
+    hardSkills: ["Cutting & layering", "Colouring & highlights", "Chemical treatments (keratin, perms)", "Blow-dry & styling", "Client consultation", "Hair & scalp care", "POS / booking systems"],
+    softSkills: ["Customer service", "Creativity", "Communication", "Time management", "Attention to detail"],
+    atsKeywords: ["Hair Styling", "Hair Colouring", "Cutting", "Chemical Treatments", "Client Consultation", "Cosmetology License", "Customer Service"],
+    atsNote:
+      "Tailor the skills section to each salon's wording (\"balayage\", \"keratin\", \"layer cuts\"), list your state cosmetology licence and any specialist certifications (with issuer and date), and keep a clean single-column layout.",
+  },
+  "beautician": {
+    include:
+      "Contact details, a summary, a skills section (treatment knowledge plus customer-service soft skills), work experience with title, salon, dates and accomplishments, and a certifications section.",
+    length:
+      "One page — use consistent section labels (Summary, Skills, Experience, Certifications), keep your treatment specialisms and client-service strengths high, and quantify retail sales and client retention.",
+    hardSkills: ["Facials & skin care", "Waxing & threading", "Manicure & pedicure", "Lash & brow treatments", "Make-up application", "Product & retail sales", "Hygiene & safety standards"],
+    softSkills: ["Customer service", "Communication", "Rapport building", "Time management", "Attention to detail"],
+    atsKeywords: ["Beauty Treatments", "Skin Care", "Waxing", "Facials", "Make-up Application", "Customer Service", "Cosmetology"],
+    atsNote:
+      "Name your treatment specialisms the way the salon does (\"facials\", \"lash extensions\", \"chemical peels\"), list industry certifications, and show retail-sales and client-retention numbers alongside your service skills.",
+  },
+  "clinical-pharmacist": {
+    include:
+      "Contact details, a professional summary, a skills section (clinical and technical), work experience showing responsibility, skill and outcome, an education section (PharmD), and a certifications section (BPS specialty, BLS/ACLS, state licence).",
+    length:
+      "One to two pages — keep your PharmD, BPS specialty and strongest clinical experience on page one, and write bullets that pair a responsibility and skill with a quantified outcome.",
+    hardSkills: ["Medication therapy management", "Pharmacotherapy", "Drug utilization review", "Patient counseling", "Compounding & dispensing", "Pharmacy software", "Medication safety"],
+    softSkills: ["Critical thinking", "Communication", "Attention to detail", "Collaboration", "Patient advocacy"],
+    atsKeywords: ["Clinical Pharmacist", "Medication Therapy Management", "Pharmacotherapy", "Drug Utilization Review", "Patient Counseling", "Medication Safety", "BPS"],
+    atsNote:
+      "Use language that aligns with the posting (\"medication therapy management\", \"pharmacotherapy\", \"drug utilization review\"), and list your PharmD, BPS specialty (e.g. Ambulatory Care) and BLS/ACLS with issuer and date.",
+  },
+  "ent-specialist": {
+    include:
+      "Contact details, a professional summary, education and training (ENT residency, any sub-specialty fellowship), board certification (Otolaryngology) and licences, surgical and clinical experience with procedures, a skills section, and memberships (AAO).",
+    length:
+      "A physician CV is multi-page; keep board certification, licence and your surgical experience on page one, and name procedures and quantify volumes.",
+    hardSkills: ["Endoscopic sinus surgery", "Tonsillectomy & septoplasty", "Thyroidectomy", "Audiometric testing", "Allergy testing", "Laser treatments", "EMR (Epic / Cerner)"],
+    softSkills: ["Patient communication", "Precision", "Critical thinking under pressure", "Teamwork", "Time management"],
+    atsKeywords: ["Otolaryngology", "Board Certified", "Endoscopic Sinus Surgery", "Tonsillectomy", "Septoplasty", "Audiometric Testing", "Patient Care"],
+    atsNote:
+      "List board certification (American Board of Otolaryngology) and licence, and name procedures the way postings do (\"endoscopic sinus surgery\", \"tonsillectomy\", \"septoplasty\"); quantify surgical volumes.",
+  },
+  "forensic-analyst": {
+    include:
+      "Contact details, a professional summary, a skills section (forensic tools plus analytical and ethical soft skills), work experience tailored to the posting, education, and a certifications section (GCFA/EnCE/CFCE).",
+    length:
+      "One to two pages with standard section titles — tailor the skills section to the job, keep your forensic tools and chain-of-custody experience high on page one, and quantify cases and outcomes.",
+    hardSkills: ["Digital forensics (EnCase, FTK)", "Data analysis & recovery", "Chain-of-custody procedures", "Evidence preservation", "Investigative techniques", "SQL & database analysis", "Report writing"],
+    softSkills: ["Attention to detail", "Problem solving", "Communication", "Ethical compliance", "Confidentiality"],
+    atsKeywords: ["Forensic Analysis", "Digital Forensics", "EnCase", "FTK", "Chain of Custody", "Data Analysis", "Evidence Preservation"],
+    atsNote:
+      "Incorporate the posting's exact terms (\"data analysis\", \"investigative techniques\") and tools (EnCase, FTK), list certifications (GCFA, EnCE, CFCE) in a dedicated section, and quantify cases handled and outcomes.",
+  },
+  "chief-marketing-officer": {
+    include:
+      "Contact details, a professional summary, a categorised skills section separating technical (analytics, marketing automation) from strategic and interpersonal competencies, executive experience with revenue-growth metrics, a leadership section, and education.",
+    length:
+      "Two pages for a CMO — structure it chronologically, lead with revenue-growth metrics and brand examples, and categorise skills (technical vs strategic vs leadership) tailored to the posting.",
+    hardSkills: ["Marketing strategy", "Brand management", "Marketing automation & analytics", "Demand generation", "Digital marketing", "Budget management", "Go-to-market strategy"],
+    softSkills: ["Strategic leadership", "Cross-functional leadership", "Communication", "Decision-making", "Team development"],
+    atsKeywords: ["Marketing Strategy", "Brand Management", "Demand Generation", "Marketing Automation", "Go-to-Market Strategy", "Revenue Growth", "Digital Marketing"],
+    atsNote:
+      "Incorporate the posting's keywords into the summary, experience and skills, categorise skills (technical vs strategic vs leadership), and quantify revenue growth, pipeline and brand metrics; leave out skills that are simply expected.",
+  },
+  "high-school-teacher": {
+    include:
+      "Contact details, a professional summary, a skills section (subject expertise plus teaching soft skills), teaching experience in reverse chronological order with classroom detail, a certifications section (state licence, subject endorsements), and education.",
+    length:
+      "One to two pages — keep your subject specialisation, advanced-coursework instruction and licence high on page one, and quantify outcomes (pass rates, exam scores, student growth).",
+    hardSkills: ["Subject-matter expertise", "Lesson planning & curriculum delivery", "Classroom management", "Assessment & feedback", "AP/IB curriculum", "College & career readiness", "Standardized-test preparation"],
+    softSkills: ["Communication", "Patience", "Adaptability", "Leadership", "Collaboration with families"],
+    atsKeywords: ["High School Teacher", "Lesson Planning", "Classroom Management", "Curriculum Development", "Assessment", "AP/IB", "Differentiated Instruction"],
+    atsNote:
+      "List your state teaching licence and subject endorsements in a dedicated section, mirror the posting's terms (\"classroom management\", \"differentiated instruction\", \"AP/IB\"), and quantify outcomes (pass rates, exam scores, student growth).",
+  },
 };
 
 const BY_SLUG = ROLE_CV_CONTENT;
