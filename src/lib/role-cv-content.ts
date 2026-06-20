@@ -6204,6 +6204,468 @@ export const ROLE_CV_CONTENT: Record<string, RoleCvContent> = {
     atsNote:
       "Name your automation platforms (HubSpot, Marketo, Pardot) and CRM in the skills section so hiring managers see qualifications at a glance; quantify lead, conversion and campaign results, and keep the file a clean text-based PDF/DOCX for parsing.",
   },
+  "qa": {
+    include:
+      "QA summary, testing types and tools, defect and coverage record, automation/manual scope, Agile/CI exposure, certifications (ISTQB), and education.",
+    length:
+      "One page early-career; two pages where there is automation-lead or QA-management scope.",
+    hardSkills: [
+      "Manual and exploratory testing",
+      "Test-case design and execution",
+      "Regression and UAT testing",
+      "Defect tracking (JIRA, Bugzilla)",
+      "Test management (TestRail)",
+      "API testing (Postman) and SQL",
+      "Automation (Selenium) and Agile",
+    ],
+    softSkills: [
+      "Attention to detail",
+      "Analytical thinking",
+      "Clear communication",
+      "Time management",
+      "Collaboration with developers",
+    ],
+    atsKeywords: [
+      "quality assurance",
+      "manual testing",
+      "regression testing",
+      "test cases",
+      "JIRA",
+      "Selenium",
+      "API testing",
+    ],
+    atsNote:
+      "ATS matches literally — use the posting's exact terms (Selenium, JIRA, regression testing) and list tools/frameworks as bullets near the top; open each experience bullet with an action verb and a measurable outcome (defects caught, coverage, release quality).",
+  },
+  "facebook-ads-specialist": {
+    include:
+      "Paid-social summary, platform and budget record, efficiency metrics (ROAS, CPA, CTR), audience and creative testing, pixel/tracking work, analytics tools, and education.",
+    length:
+      "One page early-career; two pages where there is large-budget or multi-account scope.",
+    hardSkills: [
+      "Facebook/Meta Ads Manager",
+      "Paid social campaign management",
+      "Audience targeting and segmentation",
+      "Pixel implementation and conversion tracking",
+      "Creative and A/B testing",
+      "Budget and bid management",
+      "Analytics (GA4) and reporting",
+    ],
+    softSkills: [
+      "Data-driven judgment",
+      "Experimentation mindset",
+      "Creative collaboration",
+      "Clear reporting",
+      "Commercial focus",
+    ],
+    atsKeywords: [
+      "Facebook Ads",
+      "paid social",
+      "Meta Ads Manager",
+      "ROAS",
+      "audience targeting",
+      "conversion tracking",
+      "campaign management",
+    ],
+    atsNote:
+      "Use specific terms — \"Facebook Ads\", \"paid social\", \"ROAS\" — not generic \"online advertising\"; name the platforms (Meta Ads Manager, GA4) and quantify spend managed, ROAS/CPA moved and conversion lift on structured bullet points.",
+  },
+  "nursery-assistant": {
+    include:
+      "Profile, childcare-experience summary, early-years duties and safeguarding, qualifications (CACHE/NVQ/BTEC Early Years), DBS status, and education.",
+    length:
+      "One page — concise, with childcare experience and qualifications clear.",
+    hardSkills: [
+      "Early-years care and supervision",
+      "Activity and play planning",
+      "Safeguarding and child protection",
+      "Meal preparation and hygiene",
+      "Observation and record keeping",
+      "Early-years curriculum (EYFS) support",
+      "First aid",
+    ],
+    softSkills: [
+      "Patience",
+      "Warmth and nurturing",
+      "Communication with parents",
+      "Multitasking",
+      "Teamwork",
+    ],
+    atsKeywords: [
+      "nursery assistant",
+      "early years",
+      "childcare",
+      "safeguarding",
+      "EYFS",
+      "child development",
+      "CACHE",
+    ],
+    atsNote:
+      "Employers screen for an early-years/childcare qualification (CACHE, NVQ, BTEC) and DBS status — make both visible; list around 8 skills, note safeguarding and First Aid, and give concrete examples of the care and activities you delivered.",
+  },
+  "courier": {
+    include:
+      "Profile, delivery-experience summary, route and volume record, driving licence and clean record, vehicle handling, customer-service strengths, and any certifications.",
+    length:
+      "One page — lead with a measurable delivery achievement and clear skills.",
+    hardSkills: [
+      "Route planning and GPS navigation",
+      "Safe driving and traffic-law knowledge",
+      "Package handling and sorting",
+      "Vehicle inspection and basic maintenance",
+      "Proof-of-delivery and scanning systems",
+      "Time and schedule management",
+      "Load securing",
+    ],
+    softSkills: [
+      "Punctuality",
+      "Customer service",
+      "Reliability",
+      "Problem-solving",
+      "Independence",
+    ],
+    atsKeywords: [
+      "courier",
+      "delivery driver",
+      "route navigation",
+      "time management",
+      "customer service",
+      "package handling",
+      "safe driving",
+    ],
+    atsNote:
+      "Employers want a clean driving record, licence (and CDL where relevant) and punctuality — state these clearly; place a skills section near the top and quantify deliveries per day, on-time rate and area covered on the experience bullets.",
+  },
+  "shipping-clerk": {
+    include:
+      "Profile, shipping/receiving record, systems and equipment used, accuracy and volume metrics, safety and certifications (forklift), and education.",
+    length:
+      "One page — reverse-chronological with a measurable achievement in the summary.",
+    hardSkills: [
+      "Shipping and receiving",
+      "Order picking and packing",
+      "Inventory and stock control",
+      "Scanners, scales and forklifts",
+      "Shipping software and documentation",
+      "Carrier and freight coordination",
+      "Basic math and record keeping",
+    ],
+    softSkills: [
+      "Accuracy",
+      "Multitasking",
+      "Communication",
+      "Teamwork",
+      "Reliability",
+    ],
+    atsKeywords: [
+      "shipping clerk",
+      "shipping and receiving",
+      "inventory control",
+      "order fulfillment",
+      "forklift",
+      "logistics",
+      "warehouse",
+    ],
+    atsNote:
+      "ATS matching is literal — copy 5–8 exact phrases the posting repeats into your skills and bullets; separate hard skills (forklift, scanners, shipping software) from soft skills and quantify volume shipped, accuracy and on-time rate.",
+  },
+  "production-operative": {
+    include:
+      "Profile, production-line and equipment record, quality and safety practice, output/accuracy metrics, sector certifications (HACCP, COSHH, FLT, Manual Handling), and education.",
+    length:
+      "One page — concise, with relevant certifications and a measurable achievement.",
+    hardSkills: [
+      "Production-line and machine operation",
+      "Quality control and inspection",
+      "Health-and-safety procedures",
+      "Assembly and packing",
+      "Manual handling",
+      "Basic machine maintenance",
+      "Stock and materials handling",
+    ],
+    softSkills: [
+      "Reliability",
+      "Teamwork",
+      "Attention to detail",
+      "Stamina",
+      "Adaptability",
+    ],
+    atsKeywords: [
+      "production operative",
+      "machine operation",
+      "quality control",
+      "health and safety",
+      "manual handling",
+      "assembly",
+      "manufacturing",
+    ],
+    atsNote:
+      "Employers screen for line/equipment experience and safety certifications (HACCP, COSHH, FLT, Manual Handling) — list them clearly; tailor the skills to the specific role and quantify output, quality and safety record on the bullets.",
+  },
+  "kitchen-assistant": {
+    include:
+      "Profile, kitchen-support record, food-prep and hygiene duties, equipment handling, food-hygiene certificate, teamwork in fast-paced service, and education.",
+    length:
+      "One page — lead with hospitality experience and a food-hygiene certificate.",
+    hardSkills: [
+      "Food preparation and portioning",
+      "Food-safety and hygiene standards",
+      "Kitchen-equipment operation",
+      "Cleaning and sanitation",
+      "Stock rotation and storage",
+      "Dishwashing and station setup",
+      "Service support under pressure",
+    ],
+    softSkills: [
+      "Teamwork",
+      "Time management",
+      "Adaptability",
+      "Communication",
+      "Reliability",
+    ],
+    atsKeywords: [
+      "kitchen assistant",
+      "food preparation",
+      "food safety",
+      "food hygiene",
+      "sanitation",
+      "kitchen equipment",
+      "hospitality",
+    ],
+    atsNote:
+      "A Food Hygiene Certificate (Level 2+) is effectively required — put it on the resume; emphasize food prep, sanitation and teamwork in fast-paced service, and include any transferable customer-service or fast-paced retail experience if new to catering.",
+  },
+  "makeup-artist-beauty": {
+    include:
+      "Portfolio link, skills summary, techniques and product knowledge, projects/clients with results, professional development and certifications, affiliations, and education.",
+    length:
+      "One page — the portfolio carries the visual proof; keep the resume concise and skill-led.",
+    hardSkills: [
+      "Makeup application (bridal, editorial, special-occasion)",
+      "Airbrushing and contouring",
+      "Color theory and product knowledge",
+      "Skin prep and facial anatomy",
+      "Tools and equipment handling",
+      "Basic hair styling",
+      "Sanitation and hygiene",
+    ],
+    softSkills: [
+      "Client rapport",
+      "Creativity",
+      "Communication",
+      "Attention to detail",
+      "Time management",
+    ],
+    atsKeywords: [
+      "makeup artist",
+      "makeup application",
+      "airbrushing",
+      "color theory",
+      "bridal makeup",
+      "client consultation",
+      "beauty",
+    ],
+    atsNote:
+      "A curated portfolio link is essential — it is the proof of talent; lead with a skills summary, list techniques and products by name, add a projects section with client outcomes, and include workshops/certifications and any professional affiliations.",
+  },
+  "sports-massage-therapist": {
+    include:
+      "Professional summary, qualifications and certifications (ITEC/VTCT Level 3+, Sports Massage Level 4, CPR), modalities, client-experience record, and testimonials.",
+    length:
+      "One page early-career; two pages where there is clinic, sports-team or multi-setting experience.",
+    hardSkills: [
+      "Sports and deep-tissue massage",
+      "Pre- and post-event massage",
+      "Trigger-point and myofascial release",
+      "Taping and strapping",
+      "Anatomy, physiology and kinesiology",
+      "Soft-tissue injury management",
+      "Treatment planning and notes",
+    ],
+    softSkills: [
+      "Client rapport",
+      "Professional ethics",
+      "Attentiveness",
+      "Communication",
+      "Stamina",
+    ],
+    atsKeywords: [
+      "sports massage therapist",
+      "deep tissue massage",
+      "myofascial release",
+      "trigger point therapy",
+      "kinesiology",
+      "soft tissue",
+      "sports injury",
+    ],
+    atsNote:
+      "Qualification proves legal ability to practice — put your Level 3 Diploma (ITEC/VTCT) and any Level 4 Sports Massage and CPR in a clear certifications section, list your modalities by name and support them with client experience and testimonials.",
+  },
+  "meditation-instructor": {
+    include:
+      "Teaching summary, modalities and traditions, classes/workshops/retreats led, certifications (MBSR, mindfulness), personal-practice record, student outcomes, and education.",
+    length:
+      "One page — lead with certification and a concrete teaching record.",
+    hardSkills: [
+      "Guided meditation instruction",
+      "Mindfulness (MBSR) techniques",
+      "Breathwork and relaxation methods",
+      "Individual and group class instruction",
+      "Workshop and retreat facilitation",
+      "Session and curriculum design",
+      "Anatomy and safety awareness",
+    ],
+    softSkills: [
+      "Calm presence",
+      "Empathy",
+      "Active listening",
+      "Clear communication",
+      "Relationship building",
+    ],
+    atsKeywords: [
+      "meditation instructor",
+      "guided meditation",
+      "mindfulness",
+      "MBSR",
+      "class instruction",
+      "breathwork",
+      "group instruction",
+    ],
+    atsNote:
+      "List certification (MBSR, mindfulness teacher training, institution, hours) in a dedicated section near the top and note an established personal practice; quantify classes, workshops, retreats and student retention using a Context-Action-Result framing.",
+  },
+  "sound-healer": {
+    include:
+      "Practitioner summary, instruments and modalities, sound-bath and session record, certifications (Sound Healing Level 1/2 Diploma), client outcomes, and education.",
+    length:
+      "One page — lead with certification and a concrete session record.",
+    hardSkills: [
+      "Tibetan and crystal singing bowls",
+      "Gongs, chimes and tuning forks",
+      "Sound-bath facilitation",
+      "Group and individual sessions",
+      "Therapeutic tuning-fork technique",
+      "Rhythm and dynamic flow (frame drums)",
+      "Audio equipment for virtual sessions",
+    ],
+    softSkills: [
+      "Calm presence",
+      "Empathy",
+      "Active listening",
+      "Ethical practice",
+      "Client rapport",
+    ],
+    atsKeywords: [
+      "sound healer",
+      "sound healing",
+      "singing bowls",
+      "sound bath",
+      "tuning forks",
+      "gong",
+      "deep relaxation",
+    ],
+    atsNote:
+      "List your Sound Healing certification (Level 1/2 Diploma) in a dedicated section and name the instruments you work with (singing bowls, gongs, tuning forks); quantify sound baths and client sessions led, and note any virtual-session audio setup.",
+  },
+  "producer": {
+    include:
+      "Production summary, projects and formats with results, budget and crew scope, distribution/finance work, awards and affiliations (PGA), portfolio link, and education.",
+    length:
+      "One to two pages — lead with notable productions and quantified scope.",
+    hardSkills: [
+      "Budget creation and production finance",
+      "Scheduling and production control",
+      "Crew hiring and management",
+      "Contract negotiation",
+      "Stakeholder and talent management",
+      "Distribution and release strategy",
+      "Post-production coordination",
+    ],
+    softSkills: [
+      "Commercial judgment",
+      "Organisation",
+      "Leadership",
+      "Creative thinking",
+      "Clear communication",
+    ],
+    atsKeywords: [
+      "producer",
+      "production management",
+      "budget management",
+      "contract negotiation",
+      "crew management",
+      "post-production",
+      "distribution",
+    ],
+    atsNote:
+      "A producer's skills section should read like the operating toolkit behind a production — budget creation, hiring, contract negotiation, distribution; categorize hard skills with role-specific soft skills, quantify budgets and crew scope, and link a portfolio plus any PGA affiliation.",
+  },
+  "office-clerk": {
+    include:
+      "Profile, clerical-duties record, software and data-entry skills (with typing speed), scheduling and filing work, communication strengths, certifications, and education.",
+    length:
+      "One page — ATS-clean, standard headings, a clear skills section.",
+    hardSkills: [
+      "Microsoft Office (Word, Excel, Outlook)",
+      "Data entry and typing speed",
+      "Filing and records management",
+      "Calendar and scheduling support",
+      "Phone and reception handling",
+      "Correspondence and document prep",
+      "Basic bookkeeping support",
+    ],
+    softSkills: [
+      "Organisation",
+      "Time management",
+      "Communication",
+      "Attention to detail",
+      "Discretion",
+    ],
+    atsKeywords: [
+      "office clerk",
+      "data entry",
+      "Microsoft Office",
+      "filing",
+      "scheduling",
+      "administrative support",
+      "record keeping",
+    ],
+    atsNote:
+      "The ATS reads the skills section first — label sections plainly (\"Skills\", \"Employment history\") and use the posting's exact terms; if your typing speed is above 50 WPM list it directly (e.g. \"Data Entry, 65 WPM, 99% accuracy\").",
+  },
+  "operations-coordinator": {
+    include:
+      "Operations summary, processes and projects coordinated, tools and systems, cross-functional and vendor work, KPI/efficiency results, certifications, and education.",
+    length:
+      "One page early-career; two pages where there is multi-team or multi-site coordination.",
+    hardSkills: [
+      "Process and project coordination",
+      "Scheduling and resource planning",
+      "Vendor and supplier coordination",
+      "Data analysis and reporting",
+      "ERP and tools (Excel, Asana)",
+      "Inventory and supply-chain support",
+      "Documentation and SOPs",
+    ],
+    softSkills: [
+      "Organisation",
+      "Problem-solving",
+      "Clear communication",
+      "Prioritisation",
+      "Cross-functional collaboration",
+    ],
+    atsKeywords: [
+      "operations coordinator",
+      "project coordination",
+      "process improvement",
+      "data analysis",
+      "scheduling",
+      "supply chain",
+      "team coordination",
+    ],
+    atsNote:
+      "Tailor the skills to the posting's exact terms (tools, methodologies) and weave them into achievements rather than listing them; quantify the impact (e.g. \"improved completion rate 15% using Asana\") and keep the layout clean — no tables or text boxes.",
+  },
 };
 
 const BY_SLUG = ROLE_CV_CONTENT;
