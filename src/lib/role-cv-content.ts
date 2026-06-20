@@ -2202,6 +2202,132 @@ export const ROLE_CV_CONTENT: Record<string, RoleCvContent> = {
     atsKeywords: ["Dermatology", "Board Certified", "Skin Cancer Treatment", "Dermatology Procedures", "Laser Therapy", "Patient Care", "Skin Biopsy", "Teledermatology"],
     atsNote: "Include American Board of Dermatology certification and state license, and use keywords like 'dermatology procedures', 'skin cancer treatment' and 'laser therapy'; name dermatoscope/EMR proficiency and use a reverse-chronological ATS-safe layout.",
   },
+  "account-executive": {
+    include:
+      "A summary, a 6-8 item Skills section (sales motion + CRM + methodology), and Experience where every bullet carries a number.",
+    length: "One to two pages; tailor to the posting, ATS weights the skills section.",
+    hardSkills: ["B2B sales", "Pipeline management", "Quota attainment", "Salesforce CRM", "Prospecting & cold calling", "Contract negotiation", "Sales methodology (MEDDPICC, Challenger)", "Subscription / SaaS sales"],
+    softSkills: ["Consultative selling", "Communication", "Resilience", "Relationship building"],
+    atsKeywords: ["Account Executive", "B2B Sales", "Quota Attainment", "Pipeline Management", "Salesforce", "Contract Negotiation", "Revenue Growth", "Client Acquisition"],
+    atsNote: "Every bullet must include a number — quota attainment %, revenue closed, deal size, pipeline coverage, close rate; name your CRM (Salesforce) and methodology (MEDDPICC, Challenger), and include 'customer success'/'subscription sales' for SaaS roles.",
+  },
+  "regional-sales-manager": {
+    include:
+      "A summary, a Skills section (sales leadership + CRM/tools + territory), and Experience quantifying regional growth and quota.",
+    length: "One to two pages; use specific terms (sales forecasting, territory management), not broad ones.",
+    hardSkills: ["Sales management & coaching", "Territory planning", "B2B / consultative selling", "Contract negotiation", "Sales forecasting", "CRM (Salesforce, HubSpot)", "Performance management", "Market development"],
+    softSkills: ["Leadership", "Communication", "Strategic thinking", "Coaching"],
+    atsKeywords: ["Regional Sales Manager", "Territory Management", "Sales Management", "Team Leadership", "Sales Forecasting", "Salesforce", "Contract Negotiation", "Revenue Growth"],
+    atsNote: "Use powerful territory keywords ('territory management', 'geographic expansion', 'market development') and name CRM/tools (Salesforce, Gong, Sales Navigator); quantify regional sales %, quota beats and market-share expansion.",
+  },
+  "inside-sales-representative": {
+    include:
+      "A summary, a Skills section (CRM + prospecting + closing), and role-relevant Experience bullets that surface the keywords in context.",
+    length: "One to two pages; weave 'inside sales', 'lead qualification', 'pipeline' naturally.",
+    hardSkills: ["Cold calling", "Lead qualification", "Pipeline management", "Salesforce / HubSpot CRM", "Email outreach", "Product demos", "Quota achievement", "Sales analytics"],
+    softSkills: ["Communication", "Persistence", "Active listening", "Problem solving"],
+    atsKeywords: ["Inside Sales", "CRM", "Cold Calling", "Pipeline Management", "Lead Qualification", "Salesforce", "Quota Achievement", "Product Demos"],
+    atsNote: "Use 'inside sales', 'lead qualification', 'CRM', 'pipeline' and 'closing' naturally in summary, skills and bullets; name the exact CRM the posting repeats (e.g. Salesforce) — but only skills you can speak to in interview.",
+  },
+  "key-account-manager": {
+    include:
+      "A summary with top keywords up front, a Skills section (account growth + negotiation + CRM), and Experience pairing each keyword with a metric.",
+    length: "One to two pages; ATS weights the top — keywords in summary, titles, first bullets.",
+    hardSkills: ["Key account management", "Strategic account planning", "Executive relationship management", "Contract negotiation", "Upselling & cross-selling", "Client retention", "QBR facilitation", "Salesforce / SAP"],
+    softSkills: ["Relationship building", "Consultative selling", "Communication", "Strategic thinking"],
+    atsKeywords: ["Key Account Management", "Account Planning", "Client Retention", "Revenue Growth", "Contract Negotiation", "Upselling", "Relationship Management", "Salesforce"],
+    atsNote: "Put the top keywords (key account management, executive relationship management, revenue growth, QBR) in your summary and first bullets — ATS weights the top; pair each with an outcome/metric/scope, and name CRM/ERP (Salesforce, SAP, Dynamics).",
+  },
+  "enterprise-account-executive": {
+    include:
+      "A summary naming complex-sales keywords, a 10-15 item Skills section (enterprise motion + methodology + stack), and metric-rich Experience.",
+    length: "One to two pages; mirror exact methodology/platform names from the posting.",
+    hardSkills: ["Enterprise sales", "Complex deal management", "C-suite / multi-threaded selling", "Solution & value selling", "Long sales cycles", "Sales methodology (MEDDIC, Challenger, SPIN)", "Salesforce + Outreach/Gong/Clari", "Forecasting"],
+    softSkills: ["Executive presence", "Consultative selling", "Resilience", "Cross-functional collaboration"],
+    atsKeywords: ["Enterprise Sales", "Strategic Selling", "C-Suite Selling", "Complex Deal Management", "Solution Selling", "MEDDIC", "Salesforce", "Revenue Growth"],
+    atsNote: "Put 'complex sales cycles', 'C-level relationships' and 'solution selling' in your summary, list a methodology (MEDDIC/Challenger/SPIN) and the stack (Salesforce, Outreach, Gong, Clari); quantify ('grew territory 30%, 10 new logos in 12 months').",
+  },
+  "business-development-representative": {
+    include:
+      "A tight 2-3 line summary, 4-6 quantified bullets per role, and a Skills section surfacing high-signal outbound terms + your stack.",
+    length: "One to two pages; numbers on every accomplishment.",
+    hardSkills: ["Outbound prospecting", "Cold calling & cold email", "Email sequencing", "Lead qualification", "CRM (Salesforce, HubSpot)", "Engagement platforms (Outreach, SalesLoft)", "Prospecting tools (ZoomInfo, Sales Navigator)", "Pipeline generation"],
+    softSkills: ["Communication", "Resilience", "Objection handling", "Teamwork"],
+    atsKeywords: ["Business Development", "Outbound Prospecting", "Cold Calling", "Pipeline Generation", "Lead Qualification", "Salesforce", "Quota Attainment", "Social Selling"],
+    atsNote: "Surface high-signal terms (Outbound Prospecting, Cold Email, Cold Calling, Pipeline Generation) and name your stack (Salesforce/HubSpot, Outreach/SalesLoft, ZoomInfo, Gong); attach numbers to every line ('qualified 250+ opportunities', '100 new clients').",
+  },
+  "talent-acquisition-specialist": {
+    include:
+      "A summary with 5-7 high-priority keywords, a Skills section (full-cycle + ATS tools + analytics), and Experience with time-to-fill and pipeline metrics.",
+    length: "One to two pages; include the exact title 'Talent Acquisition Specialist'.",
+    hardSkills: ["Full-cycle recruiting", "Boolean sourcing", "High-volume / technical recruiting", "ATS (Greenhouse, Workday, Lever)", "LinkedIn Recruiter", "Stakeholder management", "Employer branding", "Recruitment analytics"],
+    softSkills: ["Communication", "Relationship building", "Adaptability", "Negotiation"],
+    atsKeywords: ["Talent Acquisition", "Full-Cycle Recruiting", "Sourcing", "ATS", "High-Volume Recruiting", "Greenhouse", "Stakeholder Management", "Time-to-Fill"],
+    atsNote: "Put the exact title and 5-7 keywords in the summary ('full-cycle recruiting, Boolean sourcing, Greenhouse ATS'); add 2026 high-value terms (AI sourcing, predictive analytics, DEI) and quantify reduced time-to-fill and diverse-pipeline gains.",
+  },
+  "hr-business-partner": {
+    include:
+      "A concise summary with strategic keywords, a Skills section (strategic HR + change + HRIS), and Experience with engagement/retention metrics.",
+    length: "One to two pages; single-column, no tables/graphics.",
+    hardSkills: ["Strategic HR / talent strategy", "Organizational design & development", "Change management", "Workforce planning", "Succession planning", "Performance management", "Employee relations", "HRIS (Workday, SAP SuccessFactors)"],
+    softSkills: ["Stakeholder management", "Coaching", "Business acumen", "Communication"],
+    atsKeywords: ["HR Business Partner", "Strategic HR", "Organizational Development", "Change Management", "Workforce Planning", "Succession Planning", "Stakeholder Management", "Employee Relations"],
+    atsNote: "Include the strategic baseline keywords (Stakeholder Management, Succession Planning, Organizational Design, Change Management, Data-Driven Insights) — a resume full of 'benefits administration' but missing these gets screened as 'too junior'; quantify engagement-score gains.",
+  },
+  "it-project-manager": {
+    include:
+      "A summary stating methodology + certification + delivery scale in the first 4 lines, a Skills section, and Experience embedding keywords in context.",
+    length: "One to two pages; the summary is the most heavily weighted ATS section.",
+    hardSkills: ["Project planning", "Agile / Scrum / Waterfall", "Risk management", "Budget & timeline management", "Stakeholder management", "Jira / MS Project / Smartsheet", "Cross-functional team leadership", "Change management"],
+    softSkills: ["Leadership", "Communication", "Problem solving", "Negotiation"],
+    atsKeywords: ["Project Management", "Agile", "Scrum", "PMP", "Stakeholder Management", "Risk Management", "Jira", "Budget Management"],
+    atsNote: "Put methodology + certification (PMP/PRINCE2/CSM) + delivery scale (budget, team size) in the first 4 lines; copy multi-word phrases exactly ('Agile methodology') and embed keywords in context ('managed portfolio in Jira' beats a bare 'Jira').",
+  },
+  "procurement-officer": {
+    include:
+      "A summary, a Skills section (sourcing + negotiation + software), and Experience with quantified savings and compliance metrics.",
+    length: "One to two pages; 97% of firms use ATS — exact keywords are mandatory.",
+    hardSkills: ["Strategic sourcing", "Vendor management", "Contract negotiation", "Spend analysis", "RFP/RFQ management", "Cost reduction", "Supplier relationship management", "SAP Ariba / Oracle"],
+    softSkills: ["Negotiation", "Analytical thinking", "Communication", "Stakeholder management"],
+    atsKeywords: ["Procurement", "Strategic Sourcing", "Vendor Management", "Contract Negotiation", "Spend Analysis", "RFP Management", "Cost Reduction", "Supply Chain"],
+    atsNote: "Missing 'Strategic Sourcing', 'Spend Analysis' or 'Contract Negotiation' can auto-disqualify you; name your e-procurement software (SAP Ariba, Oracle) and quantify cost savings, efficiency and compliance metrics.",
+  },
+  "branch-manager": {
+    include:
+      "A summary, a Skills section mixing operations + leadership + (for banking) regulatory terms, and Experience with revenue and compliance metrics.",
+    length: "One to two pages; review the posting and match keywords closely.",
+    hardSkills: ["Branch operations", "Sales coaching", "Customer relationship management", "Risk management", "Staff development", "P&L / performance management", "Core banking systems / CRM", "AML / KYC (banking)"],
+    softSkills: ["Leadership", "Communication", "Problem solving", "Relationship building"],
+    atsKeywords: ["Branch Operations", "Sales Coaching", "Risk Management", "Customer Relationship Management", "Team Leadership", "P&L Management", "Staff Development", "Compliance"],
+    atsNote: "Use 'branch operations', 'sales coaching' and 'risk management' (add AML/KYC, credit scoring, core banking for banks); quantify revenue growth, deposit/loan volume, audit results and customer-satisfaction or wait-time improvements.",
+  },
+  "plant-manager": {
+    include:
+      "A 3-5 sentence summary quantifying impact, a Skills section (manufacturing + lean + ERP), certifications, and metric-rich Experience.",
+    length: "One to two pages; mirror the posting's terms (Lean Manufacturing, team leadership).",
+    hardSkills: ["Manufacturing operations", "Lean Six Sigma implementation", "Quality assurance & control", "Root cause analysis", "Financial/P&L management", "Safety compliance (OSHA)", "ERP (SAP, Oracle)", "Process optimization"],
+    softSkills: ["Leadership", "Problem solving", "Communication", "Team development"],
+    atsKeywords: ["Plant Management", "Manufacturing Operations", "Lean Manufacturing", "Process Optimization", "Quality Control", "Cost Reduction", "Safety Compliance", "Team Leadership"],
+    atsNote: "Feature 'Lean Manufacturing', 'process optimization', 'cost reduction' and 'team development', and name ERP (SAP, Oracle); add CMRP/CPE and quantify throughput, cost savings, safety records and OEE with action verbs (Achieved, Led).",
+  },
+  "assembler": {
+    include:
+      "A summary, a Skills section (assembly techniques + tools + QC), and Experience quantifying units/hour, defect rate and on-time work orders.",
+    length: "One page; fill with industry keywords (mechanical assembly, blueprints).",
+    hardSkills: ["Mechanical assembly", "Blueprint / technical-document reading", "Soldering / PCB assembly", "Power & hand tools", "Quality control inspection", "Assembly line operation", "Lean manufacturing", "Fastening / fitting"],
+    softSkills: ["Attention to detail", "Physical stamina", "Teamwork", "Reliability"],
+    atsKeywords: ["Assembly", "Mechanical Assembly", "Blueprint Reading", "Soldering", "Quality Control", "Lean Manufacturing", "Power Tools", "Production"],
+    atsNote: "Fill the resume with industry keywords (mechanical assembly, AutoCAD, blueprints, soldering for electronics) and name tools (AutoCAD, SAP ERP); quantify units assembled/hour, defect rates and on-time work-order completion.",
+  },
+  "quality-control-inspector": {
+    include:
+      "A summary (title + years + industry), a Skills section (measurement tools + methods + standards), certifications, and Experience with defect/savings metrics.",
+    length: "One to two pages; standard headings, keywords from the posting.",
+    hardSkills: ["Inspection & reporting", "Calipers / micrometers / CMM", "GD&T", "ISO 9001 auditing", "Root cause analysis", "Six Sigma", "Quality audits", "Final product release"],
+    softSkills: ["Attention to detail", "Analytical thinking", "Communication", "Integrity"],
+    atsKeywords: ["Quality Control", "Quality Assurance", "Inspection", "GD&T", "ISO 9001", "Calipers", "Root Cause Analysis", "Six Sigma"],
+    atsNote: "Name your measurement tools (calipers, micrometers, CMM) and methods (GD&T, ISO 9001 auditing, Six Sigma) exactly, and state your industry (manufacturing, aerospace, food); quantify defect-detection improvements, scrap reduction and dollars saved.",
+  },
 };
 
 const BY_SLUG = ROLE_CV_CONTENT;
