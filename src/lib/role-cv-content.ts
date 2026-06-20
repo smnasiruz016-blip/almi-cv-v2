@@ -3420,6 +3420,162 @@ export const ROLE_CV_CONTENT: Record<string, RoleCvContent> = {
     atsNote:
       "Review the posting for required credentials (CPR, First Aid, CDA, ECE) and display them in the summary and education, and balance hard skills (child development, safety procedures) with soft skills (patience, communication).",
   },
+  // ── Batch 26 (sourced via live SERP 2026: ResumeWorded, TealHQ, QwikResume, LiveCareer, Resumaker, Enhancv, ResumeGenius, Zety, Resume.io, VisualCV, Indeed) ──
+  // Priorities: pharmacy, mental health, beauty/wellness, education, fintech, finance, ops, support, logistics.
+  "dispensing-assistant": {
+    include:
+      "Contact details at the top, a professional summary highlighting your qualifications, a strong experience section (dispensing, inventory, customer service), an education section (vocational training), and a skills section.",
+    length:
+      "One page — list around a dozen relevant skills, keep dispensing accuracy and customer service high, and quantify prescriptions processed and accuracy.",
+    hardSkills: ["Medication dispensing", "Prescription processing & verification", "Inventory & stock control", "Secure medication storage", "Order documentation", "Payment processing", "Pharmaceutical terminology"],
+    softSkills: ["Attention to detail", "Communication", "Empathy", "Reliability", "Teamwork"],
+    atsKeywords: ["Pharmacy", "Dispensing", "Prescription Processing", "Inventory Management", "Stock Control", "Customer Service", "Medication"],
+    atsNote:
+      "Use specific terms (\"prescription verification\", \"dispensing\", \"stock control\") and pair medication knowledge with customer-service skills; quantify prescriptions processed and dispensing accuracy.",
+  },
+  "compounding-pharmacist": {
+    include:
+      "Contact details, a professional summary, a professional licence and certifications section, a pharmaceutical-skills section, relevant experience, continuing education, and patient-care and counseling skills.",
+    length:
+      "One to two pages — keep your licence, USP compounding standards and sterile-compounding experience high, and quantify accuracy and safety outcomes.",
+    hardSkills: ["Sterile & non-sterile compounding", "USP <795>/<797> standards", "Pharmaceutical calculations", "Quality assurance", "Regulatory compliance", "Pharmaceutical documentation", "Inventory management"],
+    softSkills: ["Attention to detail", "Communication", "Problem solving", "Collaboration", "Patient safety focus"],
+    atsKeywords: ["Compounding", "Sterile Compounding", "USP 797", "Pharmaceutical Calculations", "Quality Assurance", "Regulatory Compliance", "Patient Safety"],
+    atsNote:
+      "Name the standards and techniques exactly (\"sterile compounding\", \"USP <797>\", \"quality assurance\"), list your licence and PCAB/ACA certifications, and quantify accuracy and patient-safety outcomes.",
+  },
+  "counseling-psychologist": {
+    include:
+      "Contact details, a professional summary, education, experience (Context-Action-Result framework), a skills section, a licences/certifications section, publications/presentations, and professional affiliations.",
+    length:
+      "Up to two pages, clean and well-sectioned — display your licensure and credentials prominently, and use the CAR framework to show achievements.",
+    hardSkills: ["Psychotherapy", "Cognitive behavioural therapy (CBT)", "Psychological assessment", "Treatment planning", "Crisis intervention", "Group facilitation", "Trauma-informed care"],
+    softSkills: ["Empathy", "Active listening", "Communication", "Ethics", "Client advocacy"],
+    atsKeywords: ["Psychotherapy", "Cognitive Behavioral Therapy", "Treatment Planning", "Crisis Intervention", "Assessment", "Trauma-Informed Care", "Licensed"],
+    atsNote:
+      "Display licensure and credentials prominently (licensing is often required to practice), and include keywords like \"psychotherapy\", \"CBT\", \"treatment planning\" and \"trauma-informed care\" via the Context-Action-Result framework.",
+  },
+  "behavioral-health-technician": {
+    include:
+      "Contact details, a summary tailored to behavioural health, a certifications section (RBT first, with issue and expiry dates), a skills section, work experience, and education.",
+    length:
+      "One to two pages — list your RBT certification with status and dates, keep data-collection and behaviour-intervention skills high, and show collaboration with BCBAs.",
+    hardSkills: ["Applied behaviour analysis (ABA)", "Behaviour-intervention plans", "Data collection & analysis", "Skill acquisition programmes", "Crisis de-escalation", "Progress documentation", "Family communication"],
+    softSkills: ["Patience", "Empathy", "Consistency", "Communication", "Teamwork"],
+    atsKeywords: ["Registered Behavior Technician", "RBT", "Applied Behavior Analysis", "ABA", "Data Collection", "Behavior Intervention", "BCBA"],
+    atsNote:
+      "List your BACB-registered RBT certification with issue and expiry dates first — it is the credential employers scan for — and show data collection, ABA intervention and collaboration with BCBAs.",
+  },
+  "nail-technician": {
+    include:
+      "Contact details, a professional summary, a skills section mixing technical and customer-service skills, work experience, and a dedicated certifications-and-licences section (licence first).",
+    length:
+      "One page — lead with your nail-technician licence, keep manicure/pedicure and gel/acrylic skills high, and quantify rebookings and retail sales.",
+    hardSkills: ["Manicures & pedicures", "Gel & acrylic application", "Nail art & airbrush", "Sanitation & hygiene", "Nail-product knowledge", "Treatment application", "Retail & upselling"],
+    softSkills: ["Customer service", "Communication", "Attention to detail", "Time management", "Creativity"],
+    atsKeywords: ["Nail Technician", "Manicure", "Pedicure", "Gel & Acrylic", "Nail Art", "Sanitation", "Customer Service"],
+    atsNote:
+      "Put your nail-technician licence first in a dedicated certifications section, mix technical skills (gel, acrylic, nail art) with customer service, and quantify rebookings and retail sales.",
+  },
+  "reflexologist": {
+    include:
+      "Contact details, a professional summary opening with years and notable achievements, an experience section, a skills section, an education section, and a certifications heading (with awarding body and year).",
+    length:
+      "One to two pages — open with an impact summary, keep your reflexology techniques and certifications high, and list CPD courses under their own heading.",
+    hardSkills: ["Foot & hand reflexology", "Reflexology techniques (RLD/MRM)", "Client assessment & intake", "Treatment planning", "Anatomy & physiology", "Hygiene & safety", "Holistic wellness advice"],
+    softSkills: ["Communication", "Empathy", "Attention to detail", "Client care", "Professionalism"],
+    atsKeywords: ["Reflexology", "Holistic Therapy", "Client Assessment", "Treatment Planning", "Foot Reflexology", "Wellness", "Certified Reflexologist"],
+    atsNote:
+      "Open with an impact statement (years, achievements), name your reflexology methods and any specialist training (RLD, MRM), and list certifications with awarding body and year under their own heading.",
+  },
+  "esl": {
+    include:
+      "Contact details, a professional summary leading with teaching years and student-achievement metrics, a teaching-experience section, education, a certifications section (TEFL/TESOL/CELTA), and a skills section.",
+    length:
+      "One to two pages — present TEFL/TESOL/CELTA prominently with in-class hours, keep teaching methodology and classroom management high, and quantify student-proficiency improvement.",
+    hardSkills: ["ESL/EFL teaching methodology", "Grammar & pronunciation instruction", "Curriculum & lesson planning", "Classroom management", "Language assessment", "Cultural sensitivity", "Educational technology"],
+    softSkills: ["Communication", "Patience", "Adaptability", "Creativity", "Cross-cultural awareness"],
+    atsKeywords: ["ESL", "TEFL", "TESOL", "Lesson Planning", "Classroom Management", "Curriculum Development", "Language Assessment"],
+    atsNote:
+      "Present TEFL/TESOL/CELTA prominently with the certification name, issuer, date and in-class hours, mirror the posting's methodology terms, and quantify student-proficiency improvement.",
+  },
+  "education-coordinator": {
+    include:
+      "Contact details, a professional summary, an experience section with quantified results, education and certifications, and a skills section using exact posting keywords.",
+    length:
+      "One to two pages with standard headings — incorporate posting keywords (\"curriculum development\", \"student engagement\", \"program evaluation\"), and quantify impact (e.g. productivity +25%).",
+    hardSkills: ["Curriculum development", "Program coordination & evaluation", "Student engagement", "Educational assessment", "Training-workshop delivery", "Scheduling & logistics", "Stakeholder communication"],
+    softSkills: ["Organization", "Communication", "Problem solving", "Leadership", "Collaboration"],
+    atsKeywords: ["Curriculum Development", "Program Coordination", "Student Engagement", "Educational Assessment", "Program Evaluation", "Training", "Stakeholder Communication"],
+    atsNote:
+      "Use standard headings and naturally incorporate the posting's keywords (\"curriculum development\", \"student engagement\", \"program evaluation\"), and quantify impact with numbers rather than vague phrasing.",
+  },
+  "forex-trader": {
+    include:
+      "Contact details, a summary, work experience as the centrepiece with strategies and results, education, a skills section (technical plus analytical), and additional sections (certifications, projects).",
+    length:
+      "One to two pages — keep technical analysis, risk management and your trading platforms high, and quantify P&L, win rate and risk-adjusted returns.",
+    hardSkills: ["Technical & fundamental analysis", "Risk & leverage management", "Currency-pair analysis", "Trading platforms (MetaTrader)", "Bloomberg Terminal", "Trade execution", "Market research"],
+    softSkills: ["Discipline", "Emotional resilience", "Rapid decision-making", "Analytical thinking", "Attention to detail"],
+    atsKeywords: ["Forex Trading", "Technical Analysis", "Risk Management", "Currency Pairs", "MetaTrader", "Market Analysis", "Trade Execution"],
+    atsNote:
+      "Highlight technical analysis and risk management, name your platforms (MetaTrader, Bloomberg Terminal), and quantify P&L, win rate and risk-adjusted returns; show the discipline the role demands.",
+  },
+  "crypto-trader": {
+    include:
+      "Contact details, a summary stating years and key achievements, a work-experience section with quantified returns, an education section, and a skills section mixing technical and soft skills.",
+    length:
+      "One to two pages — keep trading strategies, exchange experience and risk management high, and quantify portfolio returns versus benchmarks.",
+    hardSkills: ["Cryptocurrency trading strategies", "Exchange & order-book analysis", "Technical analysis", "Risk management", "Wallet & key management", "Arbitrage strategies", "On-chain & market data"],
+    softSkills: ["Discipline", "Analytical thinking", "Decision-making under pressure", "Emotional resilience", "Attention to detail"],
+    atsKeywords: ["Cryptocurrency Trading", "Technical Analysis", "Risk Management", "Trading Strategies", "Arbitrage", "Blockchain", "Market Analysis"],
+    atsNote:
+      "Name the exchanges and strategies you use (spot, futures, arbitrage), pair technical analysis with risk and key management, and quantify portfolio returns against market benchmarks.",
+  },
+  "payroll-officer": {
+    include:
+      "Contact details, a professional summary naming your payroll platforms and headcount, a technical-skills section (8–10) plus interpersonal skills, an experience section with quantified accomplishments, and education.",
+    length:
+      "One to two pages — open by stating headcount, payroll frequency and platforms (ADP, Workday, UKG), keep payroll processing and tax compliance high, and quantify accuracy and on-time filings.",
+    hardSkills: ["Payroll processing (multi-state)", "Payroll tax compliance", "ADP / Paychex / Workday / UKG", "Garnishments & deductions", "Time & attendance integration", "GL payroll reconciliation", "Advanced Excel"],
+    softSkills: ["Accuracy under deadline", "Confidentiality", "Communication", "Organization", "Problem resolution"],
+    atsKeywords: ["Payroll Processing", "Payroll", "Payroll Tax Compliance", "ADP", "Workday", "Reconciliation", "HRIS"],
+    atsNote:
+      "Open the summary with headcount, payroll frequency and platforms (ADP Workforce Now, Workday, UKG) for keyword alignment, and quantify accuracy and on-time filings (e.g. \"bi-weekly payroll for 1,200 employees, zero late filings over 4 years\").",
+  },
+  "contracts-manager": {
+    include:
+      "Contact details, a recommended summary, a skills section, a professional-experience section, a projects section where applicable, and education and certifications — in reverse-chronological order.",
+    length:
+      "One to two pages — keep contract negotiation, lifecycle management and compliance high, mirror the posting's language, and quantify contract value and savings.",
+    hardSkills: ["Contract negotiation", "Contract lifecycle management", "Contract drafting", "Risk management", "Legal compliance", "Vendor & procurement management", "CLM software"],
+    softSkills: ["Attention to detail", "Communication", "Negotiation", "Analytical thinking", "Stakeholder management"],
+    atsKeywords: ["Contract Management", "Contract Negotiation", "Contract Lifecycle Management", "Procurement", "Compliance", "Risk Management", "Vendor Management"],
+    atsNote:
+      "Mirror the posting's terms (\"contract negotiation\", \"vendor management\", \"contract lifecycle management\", \"compliance\"), avoid headers/footers/tables that confuse the ATS, and quantify contract value and savings.",
+  },
+  "call-centre-agent": {
+    include:
+      "Contact details, a professional summary, an experience section in reverse chronological order with quantified results, a skills section (communication, conflict handling, CRM use), and education.",
+    length:
+      "One page — keep call handling, CRM and customer-satisfaction strengths high, mirror the posting's terminology, and quantify CSAT, call volume and resolution rate.",
+    hardSkills: ["Call handling", "CRM systems", "Active listening", "Conflict resolution", "Call logging", "Telephony platforms", "Order & complaint processing"],
+    softSkills: ["Communication", "Empathy", "Patience", "Time management", "Problem solving"],
+    atsKeywords: ["Call Center", "Customer Service", "CRM", "Call Handling", "Conflict Resolution", "Active Listening", "Customer Satisfaction"],
+    atsNote:
+      "Mix customer-facing strengths (conflict resolution, empathy) with tools (CRM, telephony, call logging), mirror the posting's terms, and quantify outcomes (e.g. \"95% customer-satisfaction rating over 12 months\").",
+  },
+  "driver": {
+    include:
+      "Contact details, a professional summary, a skills section (driving skills plus a clean record), work experience, and a licences-and-certifications section listing your licence class and endorsements (never the licence number).",
+    length:
+      "One page — list your licence class and endorsements (CDL, HME, passenger) in a dedicated section, keep safe-driving and route skills high, and show a clean safety record.",
+    hardSkills: ["Safe & defensive driving", "Route planning & GPS navigation", "Vehicle inspection & maintenance checks", "Load handling", "Logbook & compliance", "Traffic-regulation adherence", "Time management"],
+    softSkills: ["Reliability", "Attention to detail", "Communication", "Patience", "Customer service"],
+    atsKeywords: ["Professional Driver", "Defensive Driving", "Route Planning", "Vehicle Inspection", "CDL", "Safety Record", "Logistics"],
+    atsNote:
+      "List your licence class and endorsements (CDL, HME, passenger, tanker) in a dedicated certifications section and a clean safety record, but never include the licence number; mirror the posting's vehicle and route terms.",
+  },
 };
 
 const BY_SLUG = ROLE_CV_CONTENT;
