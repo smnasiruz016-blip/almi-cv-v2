@@ -3576,6 +3576,162 @@ export const ROLE_CV_CONTENT: Record<string, RoleCvContent> = {
     atsNote:
       "List your licence class and endorsements (CDL, HME, passenger, tanker) in a dedicated certifications section and a clean safety record, but never include the licence number; mirror the posting's vehicle and route terms.",
   },
+  // ── Batch 27 (sourced via live SERP 2026: VisualCV, ResumeWorded, Resumaker, QwikResume, LiveCareer, ZipRecruiter, Enhancv, Indeed, TealHQ, BPS, GMC) ──
+  // Priorities: faith, pharmacy specialties, beauty/wellness, finance/ops, public service, hospitality, animal care, medical.
+  "chaplain": {
+    include:
+      "Contact details, a professional summary, education and certifications (Clinical Pastoral Education, denominational endorsement), pastoral experience, a skills section, and volunteer or outreach activities.",
+    length:
+      "One to two pages — keep your CPE and endorsement prominent, lead with pastoral-care and crisis-intervention experience, and show the settings you have served.",
+    hardSkills: ["Pastoral care", "Spiritual guidance & counseling", "Crisis intervention", "Grief & bereavement support", "Worship & ritual leadership", "Interfaith ministry", "Confidentiality"],
+    softSkills: ["Empathy", "Active listening", "Compassion", "Communication", "Conflict resolution"],
+    atsKeywords: ["Pastoral Care", "Spiritual Care", "Chaplaincy", "Crisis Intervention", "Counseling", "Clinical Pastoral Education", "Grief Support"],
+    atsNote:
+      "List Clinical Pastoral Education (CPE) units and your denominational endorsement, and mirror the posting's terms (\"pastoral care\", \"spiritual care\", \"crisis intervention\"); show the settings served (hospital, hospice, military).",
+  },
+  "oncology-pharmacist": {
+    include:
+      "Contact details, a professional summary, a board-certification section (BCOP), a clinical-skills section, oncology experience with quantified outcomes, education and residency, and continuing education.",
+    length:
+      "One to two pages — keep BCOP and your oncology-pharmacotherapy experience on page one, and quantify regimens managed and outcomes.",
+    hardSkills: ["Oncology pharmacotherapy", "Chemotherapy preparation & dispensing", "Treatment-protocol design", "Drug-interaction management", "Patient education & monitoring", "Sterile compounding", "Clinical documentation"],
+    softSkills: ["Attention to detail", "Communication", "Critical thinking", "Collaboration", "Patient advocacy"],
+    atsKeywords: ["Oncology Pharmacy", "BCOP", "Chemotherapy", "Pharmacotherapy", "Treatment Protocols", "Drug Interactions", "Patient Education"],
+    atsNote:
+      "Put BCOP (Board Certified Oncology Pharmacist) prominently and name oncology-specific terms (\"chemotherapy\", \"pharmacotherapy\", \"treatment protocols\"); quantify regimens managed and patient-outcome improvements.",
+  },
+  "pediatric-pharmacist": {
+    include:
+      "Contact details, a professional summary, a core-skills section emphasising paediatric pharmacology and dosing, work experience with quantified outcomes, education and licensure, and certifications (PALS, paediatric pharmacy).",
+    length:
+      "One to two pages — emphasise paediatric medications and dosing, keep licensure and certifications high, and quantify outcomes and parent/team communication.",
+    hardSkills: ["Pediatric pharmacology & dosing", "Medication therapy management", "Compounding for paediatrics", "Drug-interaction review", "Patient & parent education", "PALS", "Clinical documentation"],
+    softSkills: ["Communication", "Compassion", "Attention to detail", "Teamwork", "Problem solving"],
+    atsKeywords: ["Pediatric Pharmacy", "Pediatric Dosing", "Medication Therapy Management", "Pharmacology", "PALS", "Patient Education", "Compounding"],
+    atsNote:
+      "Emphasise paediatric medications and dosing, list licensure plus PALS and any paediatric-pharmacy certification, and show clear communication with parents and care teams; quantify outcomes.",
+  },
+  "lash-technician": {
+    include:
+      "Contact details, a professional summary, a skills section (lash techniques plus customer service), a work-experience section in reverse chronological order, an education section (cosmetology/lash training), and a certifications section.",
+    length:
+      "One page — keep classic/volume/hybrid technique skills and your certifications high, and quantify retention and rebookings.",
+    hardSkills: ["Classic, volume & hybrid lashes", "Lash mapping & customization", "Adhesive selection", "Lash lifts & tints", "Sanitation standards", "Eye anatomy & safety", "Retail & upselling"],
+    softSkills: ["Customer service", "Attention to detail", "Communication", "Patience", "Time management"],
+    atsKeywords: ["Lash Technician", "Eyelash Extensions", "Volume Lashes", "Lash Mapping", "Sanitation", "Customer Service", "Lash Lift"],
+    atsNote:
+      "Name the techniques (classic, volume, hybrid, lash mapping) and any certification (e.g. Xtreme Lashes) in a dedicated section, pair them with customer service, and quantify client retention and rebookings.",
+  },
+  "beauty-artist": {
+    include:
+      "Contact details, a professional summary, a skills section near the top (technical plus interpersonal), a portfolio link, work experience, education, and a certifications section.",
+    length:
+      "One to two pages — keep a skills section and portfolio link high, name your speciality (bridal, editorial, SFX), and quantify client volume, retention and revenue.",
+    hardSkills: ["Makeup application & artistry", "Airbrushing & contouring", "Colour theory", "Skin preparation", "Special-effects (SFX) makeup", "Product knowledge", "Hygiene standards"],
+    softSkills: ["Creativity", "Customer service", "Communication", "Attention to detail", "Adaptability"],
+    atsKeywords: ["Makeup Artist", "Makeup Application", "Airbrushing", "Color Theory", "Bridal Makeup", "Special Effects", "Skin Preparation"],
+    atsNote:
+      "Place a skills section (color theory, airbrushing, SFX) near the top with a portfolio link, name your speciality (bridal, editorial, special effects), and quantify client volume, retention and revenue.",
+  },
+  "holistic-healer": {
+    include:
+      "Contact details, a summary or objective, a skills/highlights section, a certifications section, and a description of experience — formatted for easy navigation.",
+    length:
+      "One to two pages — keep client-assessment and wellness-planning skills high, list your holistic certifications, and show measurable client progress.",
+    hardSkills: ["Client assessment", "Wellness & treatment planning", "Therapeutic techniques", "Nutrition & health education", "Holistic modalities (Reiki, yoga)", "Mind-body practices", "Case documentation"],
+    softSkills: ["Empathy", "Communication", "Active listening", "Motivation", "Organization"],
+    atsKeywords: ["Holistic Health", "Wellness Planning", "Client Assessment", "Therapeutic Techniques", "Nutrition", "Health Coaching", "Mind-Body"],
+    atsNote:
+      "Highlight client assessment, wellness planning and therapeutic techniques, list certifications (holistic/integrative medicine, CPR/AED, Mental Health First Aid), and show measurable client progress.",
+  },
+  "ayurvedic-practitioner": {
+    include:
+      "Contact details, a summary, an education-and-training section (formal credentials, Panchakarma/yoga qualifications), a skills section, clinical experience, and languages (Sanskrit/regional).",
+    length:
+      "One to two pages — keep your formal Ayurvedic credentials and diagnostic skills high, and list languages where they help client communication.",
+    hardSkills: ["Ayurvedic diagnostics (Nadi Pariksha)", "Doshic assessment", "Herbal formulations", "Panchakarma therapies", "Diet & lifestyle planning", "Ayurvedic pharmacology", "Client counseling"],
+    softSkills: ["Communication", "Empathy", "Diagnostic reasoning", "Patience", "Client care"],
+    atsKeywords: ["Ayurveda", "Ayurvedic Medicine", "Panchakarma", "Herbal Formulations", "Doshic Assessment", "Holistic Health", "Wellness"],
+    atsNote:
+      "List your formal Ayurvedic training (hours/credits, NAMA certification where applicable) and diagnostic skills (Nadi Pariksha, Doshic assessment), and note languages (Sanskrit/regional) that aid client communication.",
+  },
+  "accounts-assistant": {
+    include:
+      "Contact details, a summary statement, an experience section, education, and a keyword-rich skills section using exact posting phrasing.",
+    length:
+      "One to two pages — keep invoicing, reconciliation and accounting software high, mirror the posting's exact wording, and quantify accuracy and volume.",
+    hardSkills: ["Invoicing", "Bank reconciliation", "Accounts payable & receivable", "Ledger maintenance", "Microsoft Excel", "Accounting software (Sage/QuickBooks/SAP)", "Data entry"],
+    softSkills: ["Attention to detail", "Communication", "Accuracy", "Organization", "Time management"],
+    atsKeywords: ["Accounts Assistant", "Invoicing", "Reconciliation", "Accounts Payable", "Bank Reconciliation", "Sage", "Microsoft Excel"],
+    atsNote:
+      "Mirror the posting's exact phrasing (the ATS rarely recognises synonyms) — \"invoicing\", \"reconciling\", \"accounts payable\" — name your software (Sage, QuickBooks, Excel), and open bullets with action verbs.",
+  },
+  "inventory-controller": {
+    include:
+      "A professional summary, a skills section grouped under an inventory/supply-chain category, work experience in problem-solution-result format with quantified achievements, and credentials and education.",
+    length:
+      "One to two pages — group 10–15 skills by category, keep inventory management, cycle counting and ERP high, and quantify stock-accuracy and shrinkage improvements.",
+    hardSkills: ["Inventory management", "Cycle counting & audits", "Stock reconciliation", "Demand forecasting", "ERP / WMS (SAP, Oracle)", "Barcode & RFID", "Data analysis"],
+    softSkills: ["Attention to detail", "Problem solving", "Organization", "Team collaboration", "Communication"],
+    atsKeywords: ["Inventory Management", "Cycle Counting", "ERP", "Stock Reconciliation", "Forecasting", "Warehouse Management", "Inventory Control"],
+    atsNote:
+      "Emphasise ATS terms (\"inventory management\", \"cycle counting\", \"ERP systems\", \"stock accuracy\"), name your systems (SAP, Oracle, WMS), and quantify stock-accuracy and shrinkage improvements with the problem-solution-result format.",
+  },
+  "civil-servant": {
+    include:
+      "Contact details, a personal statement, work experience in reverse chronological order, education, a skills section (technical plus soft), and certifications.",
+    length:
+      "One to two pages in a chronological format — order sections to match the post's priorities, mirror the job description's keywords, and quantify policy and service outcomes.",
+    hardSkills: ["Policy analysis", "Public administration", "Stakeholder & government relations", "Research & briefing", "Programme delivery", "Budget & compliance", "Report writing"],
+    softSkills: ["Communication", "Analytical thinking", "Teamwork", "Empathy", "Integrity"],
+    atsKeywords: ["Public Administration", "Policy Analysis", "Government Relations", "Stakeholder Management", "Public Policy", "Programme Delivery", "Research"],
+    atsNote:
+      "Government bodies often use ATS — mirror the job description's keywords (\"policy analysis\", \"public administration\", \"stakeholder management\"), order sections to the post's priorities, and quantify policy and service outcomes.",
+  },
+  "catering-assistant": {
+    include:
+      "Contact details, a professional summary, work experience, education, and a skills section (after experience) covering food preparation, food safety and customer service.",
+    length:
+      "One page — keep food preparation, food safety and customer service high, pull as many relevant skills as possible from the listing, and show reliability.",
+    hardSkills: ["Food preparation", "Food safety & HACCP", "Allergen management", "Service & plating", "Cleaning & sanitation", "Till operation", "Stock handling"],
+    softSkills: ["Communication", "Teamwork", "Reliability", "Multitasking", "Customer service"],
+    atsKeywords: ["Catering", "Food Preparation", "Food Safety", "Food Handling", "Customer Service", "HACCP", "Sanitation"],
+    atsNote:
+      "Pull relevant skills from the listing (\"food preparation\", \"food safety\", \"food handler\"), include HACCP and allergen awareness, and show reliability and teamwork; place the skills section after experience.",
+  },
+  "animal-care-specialist": {
+    include:
+      "Contact details, a summary, a focused skills section aligned with the posting, work experience, education, and any relevant certifications.",
+    length:
+      "One to two pages — keep animal handling, health assessment and welfare skills high, emphasise your passion for animals, and tailor skills to the posting.",
+    hardSkills: ["Animal handling & restraint", "Health assessment & monitoring", "Feeding & nutritional care", "Kennel & enclosure management", "Vaccination support", "Animal-management software", "Sanitation & welfare standards"],
+    softSkills: ["Compassion", "Communication", "Problem solving", "Attention to detail", "Reliability"],
+    atsKeywords: ["Animal Care", "Animal Handling", "Health Assessment", "Kennel Management", "Animal Welfare", "Nutrition", "Customer Service"],
+    atsNote:
+      "Keep the skills section focused and aligned with the posting (\"animal handling\", \"health assessment\", \"kennel management\"), highlight relevant certifications, and convey genuine passion for animal welfare.",
+  },
+  "caretaker": {
+    include:
+      "Contact details, a summary, a skills section organised by category (patient care, medical support), work experience, education, and a certifications section (First Aid, CPR).",
+    length:
+      "One to two pages — balance hard skills (mobility assistance, vital signs, medication) with soft skills (compassion, communication), and add a languages line where the role needs it.",
+    hardSkills: ["Personal care & hygiene assistance", "Mobility support", "Vital-signs monitoring", "Medication assistance", "Health & record documentation", "Meal preparation", "Use of medical equipment"],
+    softSkills: ["Compassion", "Communication", "Active listening", "Patience", "Problem solving"],
+    atsKeywords: ["Caregiving", "Personal Care", "Mobility Assistance", "Vital Signs", "Medication Administration", "First Aid/CPR", "Patient Care"],
+    atsNote:
+      "Organise skills by category (\"Patient Care\", \"Medical Support\"), list First Aid/CPR certifications, tailor to the posting, and add a languages line when the facility serves diverse clients.",
+  },
+  "hospital-consultant": {
+    include:
+      "Personal details, education, work and clinical experience, a skills section (hard plus soft), certifications, publications, continuing professional development, and references — ordered to the post's priorities.",
+    length:
+      "Keep a focused CV (1–2 pages for the summary CV; a full medical CV may run longer) — order sections to match the post, address the person specification, and list five years of CPD.",
+    hardSkills: ["Specialist clinical practice", "Diagnosis & treatment planning", "Clinical governance", "Audit & quality improvement", "Teaching & supervision", "Multidisciplinary teamwork", "Research"],
+    softSkills: ["Leadership", "Communication", "Decision-making", "Empathy", "Collaboration"],
+    atsKeywords: ["Consultant", "Clinical Governance", "Diagnosis", "Treatment Planning", "Audit", "Continuing Professional Development", "Multidisciplinary"],
+    atsNote:
+      "Order sections to match the post's priorities and address the person specification directly, group clinical skills clearly, and list your last five years of CPD, audits and publications.",
+  },
 };
 
 const BY_SLUG = ROLE_CV_CONTENT;
