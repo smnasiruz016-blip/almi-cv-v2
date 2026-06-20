@@ -1068,6 +1068,132 @@ export const ROLE_CV_CONTENT: Record<string, RoleCvContent> = {
     atsKeywords: ["Adobe Premiere Pro", "After Effects", "DaVinci Resolve", "Color Grading", "Video Editing", "Motion Graphics", "Final Cut Pro", "Post-Production"],
     atsNote: "Name your editing software (Premiere Pro, After Effects, DaVinci Resolve) and put 2-3 tools/techniques in each experience bullet so the ATS catches them; include a reel link and quantify views, turnaround or output volume.",
   },
+  "cashier": {
+    include:
+      "A short summary, a Skills section (register + inventory + compliance hard skills plus customer-facing soft skills), and Experience with quantified accuracy/volume.",
+    length: "One page; clean ATS-safe layout, skills list under the summary.",
+    hardSkills: ["Cash handling", "POS system operation", "Returns processing", "Loss prevention", "ID verification", "Basic math", "Inventory management", "Coupon redemption"],
+    softSkills: ["Customer service", "Accuracy", "Reliability", "Communication"],
+    atsKeywords: ["Cash Handling", "Point-of-Sale", "Customer Service", "Register Operations", "Loss Prevention", "Returns Processing", "Transaction Accuracy", "POS"],
+    atsNote: "Use both 'point-of-sale' and 'POS' (ATS matching is literal) and name the register/POS system if the posting does; quantify cash handled, customers per shift and your accuracy rate.",
+  },
+  "retail-sales-associate": {
+    include:
+      "A targeted 2-4 line summary (retail niche + years + a standout strength), a Skills section matching the posting, and Experience with quantified sales results.",
+    length: "One page; clean formatting, keywords tailored to each role.",
+    hardSkills: ["Point-of-sale systems", "Visual merchandising", "Inventory management", "Upselling & cross-selling", "Product knowledge", "Stock replenishment", "Loss prevention", "Mobile checkout"],
+    softSkills: ["Customer service", "Communication", "Persuasion", "Teamwork"],
+    atsKeywords: ["Retail Sales", "Customer Service", "Point of Sale", "Visual Merchandising", "Inventory Management", "Upselling", "Product Knowledge", "Sales Goals"],
+    atsNote: "Name specific POS systems (NCR, Toshiba) since retailers list them in postings, and put your sales numbers on the page — percentage increase in sales or loyalty-member sign-ups; mirror the posting's exact terms.",
+  },
+  "cleaner": {
+    include:
+      "A summary emphasizing role-specific skills (e.g. eco-friendly practices), a Skills section, and Experience with measurable achievements; a combination format works well.",
+    length: "One to two pages; run it through an ATS checker for keyword/format gaps.",
+    hardSkills: ["Floor care (mopping, vacuuming, sweeping)", "Sanitation & disinfection", "Cleaning chemical knowledge", "Material safety data sheets (MSDS)", "Heavy equipment operation", "Dusting", "Inventory of supplies", "Waste disposal"],
+    softSkills: ["Attention to detail", "Reliability", "Independence", "Time management"],
+    atsKeywords: ["Cleaning Experience", "Janitor", "Sanitation", "Mopping", "Vacuuming", "Disinfection", "Safety Compliance", "Customer Service"],
+    atsNote: "Lead with the top employer keywords (Cleaning Experience, Janitor, Mopping, Sanitation) and reference MSDS/chemical knowledge; quantify square footage covered and any inspection scores.",
+  },
+  "cook": {
+    include:
+      "A summary that names stations + a measurable achievement + certification, a Skills section grouped by technique, and Experience using standard headings.",
+    length: "One page, single-column; standard headings ('Professional Experience', not 'Kitchen Journey').",
+    hardSkills: ["Station setup & mise en place", "Knife skills", "Grill / sauté / fry / roast methods", "Food safety & sanitation (ServSafe)", "Recipe execution", "Portion control", "Kitchen equipment operation"],
+    softSkills: ["Speed & efficiency", "Teamwork", "Attention to detail", "Physical stamina"],
+    atsKeywords: ["Line Cooking", "Knife Skills", "Food Safety", "ServSafe", "Mise en Place", "Station Management", "Portion Control", "Sanitation"],
+    atsNote: "Use standard section headings (ATS rejects 'Culinary Adventures') and weave the posting's exact phrases ('scratch cooking', 'banquet experience', a cuisine) naturally; list ServSafe and quantify covers per service.",
+  },
+  "caregiver": {
+    include:
+      "A profile highlighting hands-on care + populations served, a Certifications section (CPR/First Aid/CNA), a Skills section (clinical + soft), and Experience with outcomes.",
+    length: "One to two pages; simple labeled sections for ATS parsing.",
+    hardSkills: ["Personal care & hygiene assistance", "Medication management", "Vital signs monitoring", "Mobility & transfer assistance", "Meal preparation", "Dementia care", "Infection control", "EHR documentation"],
+    softSkills: ["Empathy", "Patience", "Communication", "Adaptability"],
+    atsKeywords: ["Personal Care", "Medication Management", "Dementia Care", "Patient Care", "Mobility Assistance", "Vital Signs", "CPR Certified", "Care Coordination"],
+    atsNote: "Name the populations and specialized care you've handled (dementia, special-needs) and list CPR/First Aid/CNA up front (they raise pay $2-5/hr); quantify clients cared for, satisfaction ratings and incident reductions.",
+  },
+  "home-health-aide": {
+    include:
+      "A profile, an Education & Certifications section led by HHA/CHHA, a Skills section (teachable clinical tasks + soft skills), and Experience with patient-outcome metrics.",
+    length: "One to two pages; simple, clearly labeled sections; action verbs.",
+    hardSkills: ["Activities of daily living (ADL) support", "Vital signs (blood pressure)", "Wound dressing changes", "Hoyer lift operation", "Medication reminders", "Meal preparation", "Mobility assistance", "Light housekeeping"],
+    softSkills: ["Compassion", "Patience", "Communication", "Reliability"],
+    atsKeywords: ["Home Health Aide", "HHA", "CNA", "CPR Certified", "Patient Care", "Activities of Daily Living", "Vital Signs", "Mobility Assistance"],
+    atsNote: "List your HHA/CHHA license (or CNA/CPR) prominently — it's the first screen; use exact teachable-task keywords (Hoyer lift, blood pressure, dressing changes) and quantify patients cared for and condition improvements.",
+  },
+  "nursing-assistant": {
+    include:
+      "A summary led by your credential, an Education section (ATS reads it first), a Skills section (clinical + interpersonal), and Experience with action verbs and metrics.",
+    length: "One to two pages; standard section titles, no tables or images.",
+    hardSkills: ["Activities of daily living (ADL) care", "Vital signs", "Hoyer lift", "Infection control", "Patient hygiene & bathing", "Mobility & transfers", "EHR charting", "Phlebotomy basics"],
+    softSkills: ["Compassion", "Active listening", "Teamwork", "Stress management"],
+    atsKeywords: ["Certified Nursing Assistant", "CNA", "Patient Care", "HIPAA Compliant", "Infection Control", "Vital Signs", "Activities of Daily Living", "CPR Certification"],
+    atsNote: "Write 'Certified Nursing Assistant' in full on at least one line (not only 'CNA') and include NNAAP score + supervised clinical hours; use explicit keywords ('HIPAA Compliant', 'Hoyer Lift Experienced', 'Infection Control').",
+  },
+  "massage-therapist": {
+    include:
+      "A 2-4 sentence summary led by your LMT license + modalities + settings, a Licenses & Certifications section, a Skills/modalities list, and Experience with action verbs.",
+    length: "One to two pages; standard headings, no tables/columns/graphics.",
+    hardSkills: ["Swedish massage", "Deep tissue", "Neuromuscular therapy", "Myofascial release", "Hot stone", "Lymphatic drainage", "Prenatal massage", "SOAP documentation"],
+    softSkills: ["Client communication", "Empathy", "Physical stamina", "Professionalism"],
+    atsKeywords: ["LMT", "Licensed Massage Therapist", "Deep Tissue", "Swedish Massage", "Myofascial Release", "Hot Stone", "Lymphatic Drainage", "Client Retention"],
+    atsNote: "List your state LMT license with number plus every modality you're trained in — spa/clinic ATS filter for specific technique keywords ('hot stone', 'lymphatic drainage'); lead the summary with session volume and client-retention rate.",
+  },
+  "hairdresser": {
+    include:
+      "A summary, a Licenses section (cosmetology + specialty certs), a Skills section (cutting/coloring/styling), and a list of signature services with client feedback.",
+    length: "One page; match the posting's exact service terms.",
+    hardSkills: ["Hair cutting", "Hair coloring (balayage, highlights)", "Hair styling", "Extensions", "Bridal styling", "Chemical treatments", "Hair straightening", "Client consultations"],
+    softSkills: ["Customer service", "Communication", "Creativity", "Anticipating client needs"],
+    atsKeywords: ["Hairstylist", "Cosmetology", "Hair Cutting", "Hair Coloring", "Balayage", "Hair Extensions", "Customer Service", "Salon"],
+    atsNote: "Lead with 'Hairstylist' and 'Cosmetology' (the highest-frequency keywords) plus your license; detail signature services (balayage, extensions, bridal) and match the posting's exact terms ('hairstyling', 'facial treatments').",
+  },
+  "makeup-artist": {
+    include:
+      "A hybrid format leading with a focused Skills section, then reverse-chronological experience, plus a portfolio link of 8-12 labeled looks.",
+    length: "One to two pages; strongest technical skills near the top for ATS + recruiters.",
+    hardSkills: ["Airbrush makeup", "Color theory & matching", "Bridal makeup", "Special effects (SFX)", "Theatrical/film & TV makeup", "Contouring & highlighting", "Corrective makeup", "Sanitation practices"],
+    softSkills: ["Client consultation", "Communication", "Collaboration", "Adaptability"],
+    atsKeywords: ["Makeup Artist", "Airbrush Makeup", "Color Theory", "Bridal Makeup", "Special Effects Makeup", "Sanitation", "Client Consultation", "Photo Shoot Makeup"],
+    atsNote: "Lead with technical skills (airbrush, color theory, sanitation) so ATS registers them, and pair the resume with a portfolio of 8-12 labeled looks across skin tones; quantify bookings per month, repeat clients and named publication features.",
+  },
+  "dental-hygienist": {
+    include:
+      "A summary led by your RDH credential + years, an Education section (ATS reads it first to confirm state standards), and a Skills section keyed to the posting.",
+    length: "One to two pages; simple labeled sections, action verbs, no images.",
+    hardSkills: ["Ultrasonic & hand scaling", "Digital radiography", "Air polishing", "Intraoral photography", "Periodontal charting", "Local anesthesia administration", "Sterilization", "Dental practice-management software"],
+    softSkills: ["Patient communication", "Empathy", "Detail orientation", "Team collaboration"],
+    atsKeywords: ["RDH", "Dental Hygiene", "Digital Radiography", "Ultrasonic Scaling", "Periodontal Charting", "Local Anesthesia", "Sterilization", "Patient Education"],
+    atsNote: "Lead with RDH licensure (plus DANB, local-anesthesia and nitrous-oxide certs where applicable) and write skills exactly as the posting lists them; education is parsed first, so keep it clear, and quantify patients seen per day.",
+  },
+  "veterinary-technician": {
+    include:
+      "A summary led by your RVT/LVT/CVT credential + VTNE, a Skills section (clinical procedures), and Experience quantifying caseload and species.",
+    length: "One to two pages; plain bullet lists, left-aligned, no tables/columns/graphics.",
+    hardSkills: ["Anesthesia monitoring", "Venipuncture / phlebotomy", "IV catheter placement", "Radiography", "Dental prophylaxis", "Lab diagnostics", "Surgical assisting", "Patient handling"],
+    softSkills: ["Compassion", "Composure", "Communication", "Teamwork"],
+    atsKeywords: ["CVT", "RVT", "VTNE", "Anesthesia Monitoring", "Venipuncture", "Radiography", "Dental Prophylaxis", "IV Catheter Placement"],
+    atsNote: "Lead with your RVT/LVT/CVT credential and VTNE, and use exact job-post keywords ('anesthesia monitoring', 'dental prophylaxis') naturally — don't keyword-stuff, ATS flags it; quantify surgeries assisted and anesthesia cases per week.",
+  },
+  "bank-teller": {
+    include:
+      "A summary, a Skills section (cash operations + named platforms + compliance), Education/certifications, and a short achievements section (challenge-action-result).",
+    length: "One to two pages; name specific platforms rather than 'banking software'.",
+    hardSkills: ["Cash handling & drawer balancing", "Teller platforms (Fiserv, Jack Henry, FIS)", "Check processing & verification", "Currency transaction reporting", "Counterfeit detection", "Account opening", "Wire transfers", "Cross-selling"],
+    softSkills: ["Attention to detail", "Customer service", "Integrity", "Time management"],
+    atsKeywords: ["Cash Handling", "Drawer Balancing", "Customer Transactions", "Financial Services", "Fraud Detection", "Account Management", "Fiserv", "Regulatory Compliance"],
+    atsNote: "Name your teller platform (Fiserv, Jack Henry, FIS, nCino) rather than generic 'banking software' to lift your ATS match; include 'cash handling', 'fraud detection' and 'currency transaction reporting', and quantify drawer accuracy and cross-sells.",
+  },
+  "claims-adjuster": {
+    include:
+      "A clear summary using core claims keywords, a Skills section (investigation + software + insurance terms), a Licensing section, and quantified Experience.",
+    length: "One to two pages; single-column, no graphics/tables — 97% of insurers use ATS.",
+    hardSkills: ["Claims investigation", "Damage assessment", "Policy interpretation", "Xactimate", "Subrogation", "Liability assessment", "Fraud detection", "Negotiation & settlement"],
+    softSkills: ["Analytical judgment", "Communication", "Negotiation", "Attention to detail"],
+    atsKeywords: ["Claims Investigation", "Damage Assessment", "Policy Interpretation", "Xactimate", "Subrogation", "Liability Assessment", "Property & Casualty", "Fraud Detection"],
+    atsNote: "Missing exact terms like 'Liability Assessment', 'Subrogation' or 'Guidewire'/'Xactimate' can auto-disqualify you; include your state adjuster license and certifications (AIC, CPCU) and quantify claims handled and cycle-time/cost outcomes.",
+  },
 };
 
 const BY_SLUG = ROLE_CV_CONTENT;
