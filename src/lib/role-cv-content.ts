@@ -1824,6 +1824,132 @@ export const ROLE_CV_CONTENT: Record<string, RoleCvContent> = {
     atsKeywords: ["Molecular Biology", "PCR", "Cell Culture", "Gene Sequencing", "Flow Cytometry", "Experimental Design", "Data Analysis", "Statistical Modeling"],
     atsNote: "Feature the posting's exact terms (PCR analysis, cell-based assays, statistical modeling) and name your specialty (molecular biology, environmental science, drug discovery); list publications/talks and quantify your research impact.",
   },
+  "lecturer": {
+    include:
+      "A summary, a Skills section (teaching + research + LMS), Publications/Funding, and Experience quantifying teaching impact in every bullet.",
+    length: "One to two pages (or a longer academic CV); name LMS and citation styles.",
+    hardSkills: ["Curriculum development", "Lecture delivery", "Research methodologies", "Student assessment & design", "LMS (Canvas, Blackboard, Moodle)", "Academic writing (APA/MLA/Chicago)", "Academic advising", "e-Learning technologies"],
+    softSkills: ["Public speaking", "Mentorship", "Communication", "Collaboration"],
+    atsKeywords: ["Curriculum Development", "Learning Management Systems", "Student Assessment", "Research Methodologies", "Academic Advising", "Lecturing", "Course Design", "Higher Education"],
+    atsNote: "Use exact keywords (curriculum development, learning management systems, student assessment) and name your LMS (Canvas, Blackboard, Moodle); quantify pass rates, retention gains, evaluation scores and published/funded work in every bullet.",
+  },
+  "tutor": {
+    include:
+      "A summary naming subjects and approach, a Skills section (subjects + methods + software), and Experience leading with measurable score gains.",
+    length: "One to two pages; mirror the posting's subjects, tools and methodologies.",
+    hardSkills: ["Subject-matter expertise", "Lesson planning", "Test preparation", "Differentiated instruction", "Progress assessment", "Online tutoring platforms", "Curriculum alignment", "Study-skills coaching"],
+    softSkills: ["Patience", "Communication", "Empathy", "Enthusiasm"],
+    atsKeywords: ["Tutoring", "Lesson Planning", "Test Preparation", "Subject-Matter Expertise", "Differentiated Instruction", "Student Assessment", "Academic Support", "Curriculum"],
+    atsNote: "Name the specific subjects you tutor and any educational software/methodologies (exactly as the posting lists them), and lead with quantified results ('improved student scores by 30%', not 'taught students').",
+  },
+  "teaching-assistant": {
+    include:
+      "A 2-3 line summary (grade level + standout strength + certification), a Skills section grouped (instructional + classroom mgmt + tech), and Experience quantifying the classroom.",
+    length: "One to two pages; include the exact title 'Teaching Assistant' for ATS.",
+    hardSkills: ["Lesson-plan preparation", "Classroom management", "Small-group instruction", "IEP support", "Differentiated instruction", "Behavior management", "Data tracking", "EdTech (Google Classroom, Seesaw, ClassDojo)"],
+    softSkills: ["Patience", "Collaboration", "Organization", "Communication"],
+    atsKeywords: ["Teaching Assistant", "Classroom Management", "Differentiated Instruction", "Behavior Management", "IEP Support", "Small-Group Instruction", "Lesson Planning", "Student Support"],
+    atsNote: "Put the exact title 'Teaching Assistant' on the page and use sought terms ('differentiated instruction', 'behavior management') plus your platforms (Google Classroom, Seesaw, ClassDojo); quantify students supported, grade levels and reading/math gains.",
+  },
+  "special-education-teacher": {
+    include:
+      "An opener naming caseload type + IEP experience + a measurable improvement, a focused 4-7 skill set, and reverse-chronological Experience.",
+    length: "One to two pages; mirror the posting's methodology keywords (IEP, ABA).",
+    hardSkills: ["Individualized education plans (IEP)", "Differentiated instruction", "Applied behavior analysis (ABA)", "Crisis intervention", "Adaptive teaching strategies", "Progress monitoring", "Behavior intervention plans", "Education law (IDEA)"],
+    softSkills: ["Compassion", "Patience", "Collaboration", "Communication"],
+    atsKeywords: ["Special Education", "IEP", "Individualized Education Plan", "Differentiated Instruction", "ABA", "Crisis Intervention", "Behavior Intervention", "Inclusion"],
+    atsNote: "Spell out 'Individualized Education Plan (IEP)' and include ABA, crisis intervention and differentiated instruction; open with caseload type and at least one measurable student/behavior improvement, and note specializations (autism spectrum, behavioral analysis).",
+  },
+  "librarian": {
+    include:
+      "A summary quantifying your impact, a Skills section (ILS + cataloging + reference), the MLS credential, and Experience with measurable outcomes.",
+    length: "One to two pages; clean single-column, Arial/Calibri 10-12pt.",
+    hardSkills: ["Integrated library systems (Koha, Alma, SirsiDynix)", "Cataloging & metadata (MARC, Dublin Core)", "Collection development", "Reference & research services", "Information literacy instruction", "OCLC Connexion", "Authority control", "Database management"],
+    softSkills: ["Service orientation", "Organization", "Communication", "Intellectual curiosity"],
+    atsKeywords: ["Cataloging", "Reference Services", "Integrated Library System", "Collection Development", "MARC", "Information Literacy", "Metadata", "MLS"],
+    atsNote: "Lead with cataloging, reference services and your ILS (Koha, Alma, SirsiDynix), and feature the MLS degree (Certified Archivist if held); quantify program attendance, reference response times, catalog accuracy and backlog reductions.",
+  },
+  "instructional-designer": {
+    include:
+      "A summary, a Skills section (authoring tools + models + LMS), a portfolio link, and Experience with quantified learning outcomes and SME collaboration.",
+    length: "One to two pages; 97% of firms use ATS — exact keyword match beats portfolio alone.",
+    hardSkills: ["ADDIE / SAM", "Articulate Storyline / Rise 360", "Adobe Captivate", "LMS / SCORM / xAPI", "Needs analysis", "Bloom's Taxonomy / Kirkpatrick", "Adult learning theory", "Camtasia"],
+    softSkills: ["Collaboration", "Project management", "Communication", "Creativity"],
+    atsKeywords: ["Instructional Design", "E-Learning", "Articulate Storyline", "ADDIE", "Learning Management Systems", "Curriculum Design", "Adult Learning Theory", "SCORM"],
+    atsNote: "Include exact methodologies (ADDIE, SAM, Bloom's Taxonomy) and authoring tools (Articulate Storyline, Captivate, Rise 360) in both skills and experience — without them you're invisible even with a great portfolio; quantify completion rates and time-to-competency.",
+  },
+  "academic-advisor": {
+    include:
+      "A summary, a Skills section (systems + advising), a Certifications section, and Experience with quantified retention and student-outcome gains.",
+    length: "One to two pages; name your student information systems for ATS.",
+    hardSkills: ["Student advising", "Degree audits", "Case management", "Student information systems (Banner, PeopleSoft, DegreeWorks)", "Retention strategy", "Career counseling", "Data analysis", "LMS management"],
+    softSkills: ["Active listening", "Communication", "Empathy", "Conflict resolution"],
+    atsKeywords: ["Academic Advising", "Degree Audits", "Student Retention", "Case Management", "Student Success", "Banner", "DegreeWorks", "Student Information Systems"],
+    atsNote: "Name your student information systems (Banner, PeopleSoft, DegreeWorks) for ATS matching and include 'degree audits', 'retention strategy' and 'student success'; quantify retention rate gains and student outcomes.",
+  },
+  "physics-teacher": {
+    include:
+      "A summary, a Skills section (pedagogy + lab + EdTech), and Experience replacing duties with measurable score gains.",
+    length: "One to two pages; use full term 'Physics Teacher' and the posting's keywords.",
+    hardSkills: ["Lesson planning", "Classroom management", "Laboratory instruction & safety", "Differentiated instruction", "Project-based learning", "Practical exam preparation", "Simulation software", "Educational technology (Google Classroom, Kahoot)"],
+    softSkills: ["Explaining complex topics simply", "Patience", "Communication", "Critical thinking"],
+    atsKeywords: ["Physics", "Lesson Planning", "Classroom Management", "Laboratory Skills", "Differentiated Instruction", "Project-Based Learning", "STEM Education", "Student Assessment"],
+    atsNote: "Use 'lesson planning' and 'classroom management' from the posting plus 'practical exam preparation' and lab/simulation tools; replace duties with measurable results ('improved student scores by 30%').",
+  },
+  "chemistry-teacher": {
+    include:
+      "A summary, a Skills section (pedagogy + lab safety + tools), and Experience quantifying student success and lab-safety record.",
+    length: "One to two pages; blend hard lab skills with interpersonal skills, mirror the posting.",
+    hardSkills: ["Lesson planning", "Laboratory instruction & safety", "Curriculum development", "Differentiated instruction", "STEM education", "Rubric development", "Assessment tools", "EdTech (Google Classroom, Moodle)"],
+    softSkills: ["Presentation", "Patience", "Communication", "Classroom management"],
+    atsKeywords: ["Chemistry", "Lesson Planning", "Laboratory Safety", "Curriculum Development", "Differentiated Instruction", "STEM Education", "Classroom Management", "Student Assessment"],
+    atsNote: "Match keywords like 'lesson planning' and 'laboratory safety' to the posting and quantify lab outcomes ('coordinated labs for 450 students annually, zero safety violations'); use strong action verbs and student-success rates.",
+  },
+  "biology-teacher": {
+    include:
+      "A summary, a Skills section (pedagogy + scientific communication + EdTech), and Experience with quantified assessment gains and lab-incident reductions.",
+    length: "One to two pages; bullet points scannable, keywords from the posting.",
+    hardSkills: ["Lesson planning", "Laboratory safety", "Curriculum development", "Student assessment", "Differentiated instruction", "Field studies", "Scientific communication", "Educational technology"],
+    softSkills: ["Communication", "Patience", "Cultural sensitivity", "Resilience"],
+    atsKeywords: ["Biology", "Lesson Planning", "Laboratory Safety", "Curriculum Development", "Student Assessment", "Differentiated Instruction", "STEM Education", "Classroom Management"],
+    atsNote: "Use ATS-friendly keywords (lesson planning, laboratory safety, student assessment, curriculum development) and quantify impact — assessment gains, pass rates, lab-incident reduction, advanced-coursework participation.",
+  },
+  "mathematics-teacher": {
+    include:
+      "A summary, a Skills section (math domains + EdTech + pedagogy), professional memberships, and Experience with quantified outcomes.",
+    length: "One to two pages; use full term 'Mathematics Teacher', simple layout, no tables.",
+    hardSkills: ["Algebra / Calculus / Geometry / Statistics", "Lesson planning", "Differentiated instruction", "Formative assessment", "Curriculum development", "Inquiry-based / project-based learning", "EdTech (Desmos, GeoGebra, Google Classroom)", "Data-driven instruction"],
+    softSkills: ["Adaptability", "Communication", "Patience", "Dedication"],
+    atsKeywords: ["Mathematics", "Algebra", "Calculus", "Curriculum Development", "Differentiated Instruction", "Student Assessment", "Lesson Planning", "Formative Assessment"],
+    atsNote: "Use the full term 'Mathematics Teacher' (not 'Math Teacher') and the posting's exact words (algebra, curriculum development, student assessment) plus tools (Desmos, GeoGebra); quantify outcomes ('positive feedback from 90% of students/parents').",
+  },
+  "computer-science-teacher": {
+    include:
+      "A summary, a Skills section (languages + pedagogy + platforms), certifications, and Experience with learning-gain and adoption metrics.",
+    length: "One to two pages; name the languages and platforms exactly.",
+    hardSkills: ["Python / Java / C++", "Curriculum development", "Classroom management", "Project-based learning", "Scratch / robotics", "STEM education", "GitHub Classroom", "Digital literacy"],
+    softSkills: ["Communication", "Patience", "Adaptability", "Mentorship"],
+    atsKeywords: ["Computer Science", "Python", "Curriculum Development", "Classroom Management", "Project-Based Learning", "STEM Education", "Coding", "Programming"],
+    atsNote: "Name languages and tools (Python, Scratch, Robotics, GitHub Classroom) exactly as the posting lists them; quantify learning gains, pass-rate growth, reduced grading time and student-built apps used by real users.",
+  },
+  "research-scientist": {
+    include:
+      "A summary, a Skills section (techniques + instrumentation + programming + compliance), a Publications section with journal names, and quantified Experience.",
+    length: "One to two pages (or a longer academic CV) — use a CV if publication-heavy.",
+    hardSkills: ["Experimental design", "Data analysis (R, Python)", "Lab techniques & instrumentation", "Statistical methods", "Scientific writing", "Grant writing", "GLP / GMP compliance", "Project management"],
+    softSkills: ["Analytical thinking", "Collaboration", "Communication", "Rigor"],
+    atsKeywords: ["Research", "Experimental Design", "Data Analysis", "Scientific Writing", "Statistical Methods", "Lab Techniques", "Grant Writing", "Publications"],
+    atsNote: "Use the standard title 'Research Scientist' (not a creative one) and the posting's keywords (experimental design, data analysis, R/Python) naturally — ATS flags stuffing; name journals and quantify sample sizes, grant amounts and impact factors.",
+  },
+  "environmental-scientist": {
+    include:
+      "A headline establishing the target role, a Skills section (GIS + fieldwork + regulatory + lab), and Experience showing scope, outcomes and operating context.",
+    length: "One to two pages; 15-25 keywords matched to the posting.",
+    hardSkills: ["GIS / ArcGIS", "Environmental monitoring & sampling", "NEPA / CEQA compliance", "Environmental impact assessment", "Water quality & groundwater analysis", "Field sampling (chain of custody)", "Laboratory techniques", "Environmental consulting"],
+    softSkills: ["Analytical thinking", "Attention to detail", "Communication", "Problem solving"],
+    atsKeywords: ["Environmental Science", "GIS", "Environmental Monitoring", "NEPA Compliance", "Environmental Impact Assessment", "Water Quality", "Field Sampling", "Environmental Compliance"],
+    atsNote: "Include GIS/ArcGIS, environmental monitoring and the regulatory frameworks the posting names (NEPA, CEQA, Clean Water Act); fieldwork is foundational, so show proper protocol/chain-of-custody execution and use 15-25 matched keywords.",
+  },
 };
 
 const BY_SLUG = ROLE_CV_CONTENT;
