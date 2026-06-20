@@ -307,6 +307,133 @@ export const ROLE_CV_CONTENT: Record<string, RoleCvContent> = {
     atsKeywords: ["CI/CD", "Docker", "Kubernetes", "AWS", "Terraform", "Jenkins", "Ansible", "Infrastructure as Code"],
     atsNote: "Core keywords (CI/CD, Docker, Kubernetes, AWS, Terraform) are must-haves — missing more than two filters you out; name your cloud + CI/CD platform explicitly and quantify (e.g. \"cut deployment time 20%\").",
   },
+  // ── Batch 3 (sourced via live SERP 2026: Indeed, enhancv, beamjobs, ResumeWorded, ResumeAdapter) ──
+  "data-scientist": {
+    include:
+      "Standard, parseable sections — Professional Summary, a flat comma-separated Technical Skills section, Experience, Projects and Education (industry format, not an academic CV; ATS parsers misclassify Publications/Research headings).",
+    length: "Aim for ~70% keyword overlap with the job description; every experience bullet a quantified outcome.",
+    hardSkills: ["Python", "SQL", "R", "Machine Learning", "TensorFlow", "PyTorch", "scikit-learn", "Spark", "Statistical Modeling", "NLP"],
+    softSkills: ["Problem solving", "Communication", "Data storytelling", "Collaboration"],
+    atsKeywords: ["Python", "SQL", "Machine Learning", "TensorFlow", "PyTorch", "Statistical Modeling", "NLP", "Deep Learning"],
+    atsNote: "ATS clears when keyword overlap with the posting is ~70%+; list skills flat and comma-separated (Python, pandas, scikit-learn) so each is an independent keyword, and quantify every bullet.",
+  },
+  "sales-representative": {
+    include:
+      "A positioning summary (years + vertical + quota attainment + primary tools), a Skills section (CRM + methodologies + tools), Experience that shows quota history year by year, and Education.",
+    length: "One page under five years, up to two pages for 10+ — use chronological/combination format (a functional resume hides your quota timeline and raises suspicion).",
+    hardSkills: ["Quota attainment", "Pipeline management", "Prospecting", "CRM (Salesforce / HubSpot)", "Cold calling", "Sales forecasting", "Account management", "Territory management"],
+    softSkills: ["Negotiation", "Communication", "Relationship building", "Resilience"],
+    atsKeywords: ["Quota Attainment", "Pipeline", "CRM", "Salesforce", "Prospecting", "New Business Development", "Account Management", "Revenue Growth"],
+    atsNote: "List your CRM (Salesforce/HubSpot) or you're filtered at 90%+ of corporate sales roles; recruiters scan the first 7 seconds for quota %, revenue and CRM.",
+  },
+  lawyer: {
+    include:
+      "A professional profile, Experience, a Skills section, Education, Certifications, and a dedicated Bar Admissions section (jurisdiction + year), in reverse-chronological order.",
+    length: "Plain text with simple headings — no tables (ATS treats table cells inconsistently); show impact with metrics.",
+    hardSkills: ["Litigation", "Corporate Law", "Contract Drafting", "Legal Research (Westlaw / LexisNexis)", "Negotiation", "Due Diligence", "Compliance", "M&A"],
+    softSkills: ["Analytical thinking", "Communication", "Attention to detail"],
+    atsKeywords: ["Litigation", "Corporate Law", "Contract Drafting", "Legal Research", "Westlaw", "Negotiation", "Compliance", "Due Diligence"],
+    atsNote: "Put bar admission(s) in a dedicated section (e.g. \"New York, 2020\"); 95%+ of firms filter with ATS — missing practice-area terms (\"M&A\", \"Securities\", \"Westlaw\") disqualifies even elite credentials.",
+  },
+  "cybersecurity-analyst": {
+    include:
+      "A summary naming your SIEM tools, a Skills section (those you hold) with the rest proven in bullets, a Certifications section (CISSP / Security+ / CEH), STAR-method Experience, and Education.",
+    length: "20–30 keywords matched to the posting — every security keyword tied to a measurable outcome.",
+    hardSkills: ["SIEM (Splunk / QRadar)", "Incident response", "Vulnerability assessment", "Threat detection", "Network security", "Firewalls / IDS-IPS", "Log analysis", "MITRE ATT&CK", "Penetration testing"],
+    softSkills: ["Analytical thinking", "Attention to detail", "Communication", "Problem solving"],
+    atsKeywords: ["SIEM", "Incident Response", "Threat Detection", "Vulnerability Assessment", "SOC Operations", "MITRE ATT&CK", "CompTIA Security+", "Splunk"],
+    atsNote: "CISSP, Security+ and CEH are the most-scanned security keywords — put them in a dedicated section; include 20–30 tools/frameworks matched to the posting, each tied to a measurable outcome.",
+  },
+  "full-stack-developer": {
+    include:
+      "A summary stating your stack (e.g. React, Node.js, PostgreSQL), a Skills section grouped (Frontend, Backend, Databases, DevOps, Testing), Experience with measurable results, Projects and Education.",
+    length: "Single column — carry BOTH front-end and back-end keywords.",
+    hardSkills: ["JavaScript / TypeScript", "React", "Node.js / Express", "Python / Django", "PostgreSQL / MongoDB", "REST APIs / GraphQL", "Docker", "Git", "CI/CD"],
+    softSkills: ["Problem solving", "Communication", "Collaboration", "Adaptability"],
+    atsKeywords: ["React", "TypeScript", "Node.js", "JavaScript", "PostgreSQL", "REST API", "Docker", "GraphQL"],
+    atsNote: "Your resume must carry both front-end (React, TypeScript, CSS) and back-end (Node.js, PostgreSQL, Docker) keywords; if the posting names React/Node/PostgreSQL, make those appear in your bullets and quantify (uptime, response time, user growth).",
+  },
+  "nurse-practitioner": {
+    include:
+      "Licensure and certifications at the top/header, a summary, a dedicated credentials section (APRN license + state, national board cert e.g. FNP-BC/AGPCNP-BC, DEA registration, prescriptive-authority status), quantified Experience, Skills and Education.",
+    length: "15–25 keywords matched to the posting.",
+    hardSkills: ["Advanced clinical assessment", "Differential diagnosis", "Prescribing", "Patient management", "Chronic disease management", "EHR (Epic / Cerner)", "Prescriptive authority"],
+    softSkills: ["Patient-centered care", "Communication", "Critical thinking", "Collaboration"],
+    atsKeywords: ["Autonomous Practice", "Prescriptive Authority", "Differential Diagnosis", "Patient Assessment", "Epic EHR", "AANP/ANCC Certified", "DEA Licensed", "FNP"],
+    atsNote: "Place APRN license, board certification (FNP-BC, AGPCNP-BC), DEA and prescriptive-authority status at the top for immediate verification; quantify (e.g. \"panel of 1,200 patients, 20–22/day\").",
+  },
+  "supply-chain-manager": {
+    include:
+      "A summary, a Skills section (procurement + logistics + S&OP + ERP), Experience built on results (not responsibilities), Certifications (CSCP / MCIPS / Six Sigma), and Education.",
+    length: "Single-column with standard headings — include 25–35 keywords matched to the posting.",
+    hardSkills: ["Supply Chain Management", "Procurement", "Inventory Management", "Demand Planning", "Logistics", "S&OP", "SAP / ERP", "Vendor Management", "Cost Reduction"],
+    softSkills: ["Leadership", "Negotiation", "Strategic planning", "Problem solving"],
+    atsKeywords: ["Supply Chain Management", "Procurement", "Inventory Management", "Demand Forecasting", "Logistics", "SAP", "ERP", "S&OP"],
+    atsNote: "The top failure is listing responsibilities instead of results — show OTIF, cost reductions, order accuracy and fulfilment speed; 25–35 keywords matched, single-column layout.",
+  },
+  "secondary-school-teacher": {
+    include:
+      "A profile, Experience with results, Education and Certifications (subject credential/QTS, safeguarding), a Skills section (instruction + soft, 10–15), and your subject expertise.",
+    length: "One to two pages — use the posting's exact phrasing (e.g. \"classroom management\"), not synonyms.",
+    hardSkills: ["Subject-matter expertise", "Lesson planning", "Differentiation", "Assessment", "Behaviour management", "Curriculum delivery", "Safeguarding", "IEP collaboration"],
+    softSkills: ["Communication", "Student engagement", "Adaptability", "Pastoral care"],
+    atsKeywords: ["Lesson Planning", "Classroom Management", "Differentiation", "Assessment", "Curriculum", "Subject Knowledge", "Safeguarding", "QTS"],
+    atsNote: "Name your subject expertise and teaching credential/QTS (recruiters filter for explicit credentials); show measurable results (e.g. test-score gains), not just duties.",
+  },
+  "executive-assistant": {
+    include:
+      "A summary, a Skills section (C-suite support + software + board-level terms), Experience with quantified impact, and Education.",
+    length: "15–25 keywords matched to the posting.",
+    hardSkills: ["C-suite support", "Calendar management", "Board meeting preparation", "Travel coordination", "Expense reporting (Concur)", "Microsoft Office", "Project coordination"],
+    softSkills: ["Discretion / confidentiality", "Time management", "Communication", "Prioritization"],
+    atsKeywords: ["C-Suite Support", "Calendar Management", "Board Meeting Preparation", "Travel Coordination", "Concur", "Microsoft Office", "Confidentiality"],
+    atsNote: "Board-level terms (\"board of directors\", \"governance documents\", \"executive confidentiality\", \"NDA protocols\") signal seniority; include 15–25 matched keywords and quantify executive support.",
+  },
+  receptionist: {
+    include:
+      "A summary, a Skills section (front-office software + interpersonal), Experience with measurable results, and Education.",
+    length: "Concise and customized to the listing.",
+    hardSkills: ["Front desk operations", "Multi-line phone handling", "Appointment scheduling", "MS Office", "Data entry", "CRM", "Cash handling"],
+    softSkills: ["Communication", "Phone etiquette", "Organization", "Professionalism"],
+    atsKeywords: ["Front Office", "Customer Service", "Scheduling", "Multi-line Phone", "Microsoft Office", "Administrative", "Data Entry"],
+    atsNote: "Tailor to the sector — hotels: Opera PMS, guest satisfaction; medical: patient scheduling, insurance verification, EMR, HIPAA; use the posting's exact keywords and quantify.",
+  },
+  "social-media-manager": {
+    include:
+      "A Professional Summary, a Core Skills section, Career History, a social-media project portfolio (campaigns), and Certifications.",
+    length: "Single column, standard fonts; use action verbs (launched, collaborated, promoted).",
+    hardSkills: ["Social Media Management", "Content Creation", "Analytics", "Copywriting", "Community Engagement", "Paid Social", "Visual Design", "Scheduling tools"],
+    softSkills: ["Creativity", "Communication", "Crisis management", "Adaptability"],
+    atsKeywords: ["Social Media Marketing", "Content Creation", "Analytics", "Community Engagement", "Digital Marketing", "Copywriting", "Instagram", "Facebook"],
+    atsNote: "The first five (Social Media Management, Content Creation, Community Engagement, Analytics, Copywriting) are in 80%+ of postings — prioritize them; show measurable results (\"increased conversions 145%\", \"managed 50+ accounts\").",
+  },
+  "dental-assistant": {
+    include:
+      "A summary, a Skills section (chairside + radiography + sterilization), Experience (radiographs, patient education, sterilization), and Certifications (CDA, BLS, X-ray certification).",
+    length: "Match the posting's keywords rather than listing every possible skill.",
+    hardSkills: ["Chairside assistance", "Dental radiography (X-ray)", "Sterilization / infection control", "Patient education", "Dental records", "Treatment planning support", "CPR / First Aid"],
+    softSkills: ["Communication", "Attention to detail", "Team collaboration", "Empathy"],
+    atsKeywords: ["Chairside Assistance", "Dental Radiography", "Sterilization", "Infection Control", "Patient Care", "X-ray", "CDA"],
+    atsNote: "List certifications — Certified Dental Assistant (CDA), BLS, and especially X-ray certification (it raises earning potential and is often filtered for).",
+  },
+  "scrum-master": {
+    include:
+      "A summary, a Skills section (Scrum events + tools), Certifications prominently (CSM / PSM / SAFe), Experience with quantified impact, and Education.",
+    length: "Single column — include 20–30 keywords matched to the posting.",
+    hardSkills: ["Scrum", "Agile", "Kanban", "Sprint Planning", "Retrospectives", "Backlog Refinement", "Jira", "Confluence", "Continuous Improvement"],
+    softSkills: ["Facilitation", "Coaching", "Servant leadership", "Conflict resolution"],
+    atsKeywords: ["Scrum", "Agile", "Sprint Planning", "Backlog Refinement", "JIRA", "Retrospective", "CSM", "Kanban"],
+    atsNote: "Missing \"Sprint Planning\", \"Backlog Refinement\" or \"JIRA\" can disqualify even with years of Agile; put certifications (CSM, PSM, SAFe) prominently — they're often hard ATS filters.",
+  },
+  "it-support-specialist": {
+    include:
+      "A summary (support specialization + years), a Technical Skills section by category (Ticketing, OS, Tools, Remote, Networking), Certifications (CompTIA A+, ITIL) in both the skills and certifications sections, and Experience with metrics.",
+    length: "Keyword-matched to the posting.",
+    hardSkills: ["Technical support", "Troubleshooting", "Active Directory", "Windows Server", "Ticketing (ServiceNow / Jira)", "Microsoft 365", "Networking (TCP/IP, DNS, DHCP)", "ITIL"],
+    softSkills: ["Customer communication", "Problem solving", "Patience", "Teamwork"],
+    atsKeywords: ["Technical Support", "Troubleshooting", "Active Directory", "Help Desk", "ServiceNow", "ITIL", "Windows", "Networking"],
+    atsNote: "List certifications (CompTIA A+, ITIL) in BOTH the certifications and skills sections for ATS visibility; quantify first-call resolution, tickets/day, CSAT and mean-time-to-resolution.",
+  },
 };
 
 const BY_SLUG = ROLE_CV_CONTENT;
