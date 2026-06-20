@@ -5,6 +5,8 @@
 // banned-verb clean. Added in batches like the origin set; a role becomes
 // self-canonical + indexable only once it has an entry here (real-data-or-noindex).
 
+import { COUNTRIES_SERVED } from "@/lib/countries";
+
 export type RoleCvContent = {
   /** What a [role] CV should include — the sections. */
   include: string;
@@ -814,6 +816,132 @@ export const ROLE_CV_CONTENT: Record<string, RoleCvContent> = {
     atsKeywords: ["Reporting", "News Writing", "Data Journalism", "SEO", "Content Management Systems", "Editing", "Multimedia", "Sourcing"],
     atsNote: "Weave a few keywords from the posting into your summary and show a strong portfolio of published clips; add emerging skills (podcast production, AI content curation, data journalism) to appeal to digital newsrooms.",
   },
+  "radiologic-technologist": {
+    include:
+      "A summary opening with your ARRT registration and modalities, a Certifications & Licensure section, a Skills section (modalities + PACS/RIS + safety), and Experience with quantified imaging volume.",
+    length: "One to two pages, reverse-chronological; clean single-column ATS-safe layout.",
+    hardSkills: ["Radiographic positioning", "Fluoroscopy / C-arm", "CT scanning", "Contrast media administration", "PACS / RIS", "Radiation dose optimization (ALARA)", "Portable imaging", "QA"],
+    softSkills: ["Patient communication", "Composure", "Attention to detail", "Team collaboration"],
+    atsKeywords: ["ARRT", "RT(R)", "Diagnostic Imaging", "X-Ray", "CT Scan", "PACS", "Radiation Safety", "Radiographic Positioning"],
+    atsNote: "Lead with your ARRT registration (credential number + expiry) and primary modalities — it's the first thing imaging recruiters search; name the equipment you've run (GE, Siemens, Philips, Canon) and use 'RT(R)' plus 'radiologic technologist'.",
+  },
+  "respiratory-therapist": {
+    include:
+      "Your CRT/RRT credential next to your name, a Licensure & Certifications section (RRT, BLS, ACLS, PALS), a Skills section (ventilation + diagnostics + therapies), and Experience with clinical settings.",
+    length: "One to two pages; list degree, certificate and state license in Education/Licensure.",
+    hardSkills: ["Mechanical ventilation", "Airway management", "ABG analysis", "Pulmonary function tests", "Aerosol medication", "CPAP/BiPAP therapy", "Cardiopulmonary therapies"],
+    softSkills: ["Clinical judgment", "Communication", "Composure under pressure", "Teamwork"],
+    atsKeywords: ["RRT", "Mechanical Ventilation", "ABG Analysis", "Airway Management", "BiPAP", "Pulmonary Function", "BLS", "ACLS"],
+    atsNote: "Put RRT (the nationally recognized gold standard) and state licensure next to your name; include exact job-ad terms like 'ABG analysis' and 'nebulizer therapy', and list BLS/ACLS/PALS.",
+  },
+  "surgical-technologist": {
+    include:
+      "A summary, a Certifications section (CST + BLS), a Skills section (sterile technique + instrumentation + OR setup), and Experience with procedures assisted and specialties.",
+    length: "One page, reverse-chronological; well-structured for ATS scanning.",
+    hardSkills: ["Sterile technique", "Surgical instrumentation", "Operating room setup", "Instrument sterilization", "Infection control", "Specimen handling", "EHR management"],
+    softSkills: ["Attention to detail", "Team collaboration", "Composure", "Adaptability"],
+    atsKeywords: ["CST", "Sterile Technique", "Surgical Instrumentation", "Operating Room", "Infection Control", "BLS", "Surgical Procedures", "Aseptic Technique"],
+    atsNote: "Lead with CST and BLS (hospitals filter on certification first); use industry-standard terms (sterile technique, surgical instrumentation, OR setup) and quantify procedures assisted and specialties covered.",
+  },
+  "lab-technician": {
+    include:
+      "A summary, certifications (e.g. MLT(ASCP)) listed prominently, a Skills section (departments + instruments + LIS), and Experience with quantified testing volume and turnaround.",
+    length: "One to two pages; clean single-column layout — no tables or multi-column.",
+    hardSkills: ["Clinical chemistry", "Hematology", "Microbiology", "Blood banking", "Pipetting", "PCR", "Quality control", "LIMS / LIS"],
+    softSkills: ["Accuracy", "Attention to detail", "Time management", "Communication"],
+    atsKeywords: ["MLT(ASCP)", "Clinical Chemistry", "Hematology", "Microbiology", "PCR", "LIMS", "Quality Control", "CLIA"],
+    atsNote: "List the full certification name (MLT(ASCP)) at the top, name specific analyzer brands and your LIS by name, and use regulatory keywords (CLIA, CAP, GLP); quantify testing volume, accuracy and turnaround times.",
+  },
+  "clinical-research-associate": {
+    include:
+      "A summary, a Skills section led by GCP and monitoring systems, a Regulatory section, and Experience with trial phases, therapeutic areas and sites monitored.",
+    length: "One to two pages; detail is everything — show you understand the regulatory environment.",
+    hardSkills: ["Good Clinical Practice (ICH-GCP)", "Clinical site monitoring", "CTMS", "EDC (Medidata Rave, REDCap)", "Protocol adherence", "Regulatory submissions", "Risk-based monitoring", "Query resolution"],
+    softSkills: ["Attention to detail", "Communication", "Organization", "Stakeholder management"],
+    atsKeywords: ["GCP", "Clinical Monitoring", "CTMS", "EDC", "Protocol Adherence", "IRB Submission", "Clinical Trials", "Data Integrity"],
+    atsNote: "Include exact compliance keywords (GCP, IRB Submission, Protocol Adherence) — missing them reads as a compliance risk; name EDC/CTMS platforms (Medidata Rave, REDCap) and your therapeutic areas.",
+  },
+  "maintenance-technician": {
+    include:
+      "A summary, a Skills section grouped by category (electrical/mechanical/controls + tools + software), certifications, and Experience with uptime and downtime metrics.",
+    length: "One to two pages; list 10-15 skills grouped by category.",
+    hardSkills: ["Preventive maintenance", "PLC (Siemens, Allen Bradley)", "Hydraulics & pneumatics", "Electrical troubleshooting", "VFD troubleshooting", "HVAC systems", "CMMS", "Welding"],
+    softSkills: ["Problem solving", "Communication", "Teamwork", "Reliability"],
+    atsKeywords: ["Preventive Maintenance", "PLC", "Troubleshooting", "Hydraulic Systems", "CMMS", "Electrical Troubleshooting", "Pneumatics", "VFD"],
+    atsNote: "Manufacturing employers specifically want to see PLC programming (name Siemens / Allen Bradley) and hydraulic-systems experience; quantify uptime gains, reduced downtime hours and on-time PM completion.",
+  },
+  "hvac-technician": {
+    include:
+      "A summary, your EPA 608 level near the top, a Certifications section (NATE, OSHA), a Skills section (systems + diagnostics + brands), and Experience with quantified callbacks/efficiency.",
+    length: "One to two pages; clean ATS-friendly format — avoid tables and graphics.",
+    hardSkills: ["HVAC installation & repair", "Refrigerant recovery", "Load calculations", "Split systems / RTU", "Heat pumps & mini-splits", "Electrical troubleshooting", "Ductwork design", "Building automation (BAS)"],
+    softSkills: ["Diagnostics", "Customer service", "Reliability", "Communication"],
+    atsKeywords: ["EPA 608 Universal", "Refrigerant Recovery", "Troubleshooting", "RTU", "Split Systems", "Load Calculations", "Heat Pump", "NATE"],
+    atsNote: "Place your EPA Section 608 level (Type I/II/III/Universal — Universal preferred) and NATE near the top; include brand experience (Carrier, Trane, Lennox, York, Rheem) and use 25-30 keywords matching the posting.",
+  },
+  "carpenter": {
+    include:
+      "A tailored summary, detailed work experience with quantified outcomes, a Skills section aligned to the posting, and certifications (OSHA 10/30).",
+    length: "One page if under 10 years; reverse-chronological, simple ATS-safe layout (no tables/columns/images).",
+    hardSkills: ["Framing (rough carpentry)", "Finish carpentry", "Blueprint reading", "Layout & measuring", "Cabinetry", "Site safety", "Power & hand tools", "Estimating"],
+    softSkills: ["Precision", "Reliability", "Teamwork", "Problem solving"],
+    atsKeywords: ["Framing", "Finish Carpentry", "Blueprint Reading", "OSHA 10/30", "Layout", "Site Safety", "Rough Carpentry", "Commercial/Residential"],
+    atsNote: "Match keywords from the posting (framing, finish carpentry, blueprint reading, OSHA 10/30, residential vs commercial); save as a simple .docx/PDF with standard headings and quantify projects completed.",
+  },
+  "logistics-coordinator": {
+    include:
+      "A summary, a Skills section grouped under Supply Chain / Logistics Operations / Transportation, and Experience weaving keywords into quantified results (on-time delivery, cost).",
+    length: "One to two pages; mirror the posting's exact systems and terms.",
+    hardSkills: ["Freight coordination", "Inventory management", "Order fulfillment", "Transportation management (TMS)", "Warehouse operations (WMS)", "Route planning", "Carrier selection", "SAP / Oracle SCM"],
+    softSkills: ["Organization", "Communication", "Problem solving", "Vendor management"],
+    atsKeywords: ["Supply Chain", "Freight Coordination", "Inventory Management", "TMS", "WMS", "Order Fulfillment", "SAP", "On-Time Delivery"],
+    atsNote: "Name the systems you've run by brand (SAP, Oracle SCM, Manhattan WMS, Blue Yonder, TMS) and weave them into experience bullets, not just a keyword list; quantify on-time-delivery and cost improvements.",
+  },
+  "data-engineer": {
+    include:
+      "A summary (one line scope, one stack, one business value), a Skills section of 10-15 prioritized tools, and Experience using Action + System + Keyword + Result bullets.",
+    length: "One to two pages; specify databases by name, not generic 'database management'.",
+    hardSkills: ["Apache Spark", "Python", "SQL", "ETL/ELT", "Apache Kafka", "AWS", "Airflow", "Data warehousing (Snowflake/BigQuery)", "Docker"],
+    softSkills: ["Problem solving", "Collaboration", "Communication", "Ownership"],
+    atsKeywords: ["Apache Spark", "ETL", "Python", "SQL", "Kafka", "AWS", "Data Pipelines", "Data Warehousing"],
+    atsNote: "Use specific tool names to clear ATS (name MySQL/MongoDB, Spark, Kafka — not just 'database'); a keyword proven in an Experience bullet outranks the same word in a bare Skills list. Start bullets with built/structured/streamlined.",
+  },
+  "machine-learning-engineer": {
+    include:
+      "A summary foregrounding deployment outcomes, a Skills section of 20-30 keywords matching the posting, and Experience showing production ownership (serving, monitoring, scaling).",
+    length: "One to two pages; lead with production/MLOps, not just 'analysis'.",
+    hardSkills: ["Python", "PyTorch", "MLOps", "Model deployment / serving", "Kubernetes & Docker", "LLMs / RAG", "MLflow", "Drift detection & monitoring"],
+    softSkills: ["Problem solving", "Collaboration", "Communication", "Ownership"],
+    atsKeywords: ["PyTorch", "MLOps", "Model Deployment", "Kubernetes", "LLMs", "RAG", "Latency Optimization", "Model Serving"],
+    atsNote: "PyTorch is the single most important 2026 framework keyword; without MLOps, Kubernetes, Latency Optimization or Model Serving, ATS files you as a 'Data Scientist' not an 'ML Engineer' — foreground deployment and monitoring.",
+  },
+  "cloud-architect": {
+    include:
+      "A summary led by quantified platform achievements, a Skills section (platforms + IaC + security), a Certifications section with renewal dates, and Experience with cost/uptime metrics.",
+    length: "One to two pages; mirror both platform-specific terms and broad concepts from the posting.",
+    hardSkills: ["AWS", "Azure", "Google Cloud", "Terraform / CloudFormation", "Kubernetes", "Cloud security (IAM, CSPM)", "Ansible", "Cloud migration"],
+    softSkills: ["Architecture judgment", "Cross-team collaboration", "Communication", "Cost optimization"],
+    atsKeywords: ["AWS", "Azure", "Terraform", "Kubernetes", "Cloud Security Architecture", "IAM", "Infrastructure as Code", "Cloud Migration"],
+    atsNote: "Lead with quantified achievements across named platforms (AWS/Azure/GCP) and list certs (AWS Solutions Architect, Azure, GCP Professional Cloud Architect) with renewal dates; include both platform terms ('Azure Policy') and broad concepts ('governance guardrails').",
+  },
+  "database-administrator": {
+    include:
+      "A title containing the DBA keyword (ATS scans it first), a Skills section grouped by engine, and Experience with tuning, backup and migration outcomes.",
+    length: "One to two pages; hard-skill-heavy mix with a few job-critical soft skills.",
+    hardSkills: ["SQL", "Microsoft SQL Server", "Oracle Database", "PL/SQL", "Performance tuning", "Backup & recovery (RMAN)", "Database migration", "Cloud databases (RDS/Aurora, Azure SQL)"],
+    softSkills: ["Problem solving", "Attention to detail", "Communication", "On-call reliability"],
+    atsKeywords: ["Database Administration", "SQL", "Oracle Database", "PL/SQL", "Performance Tuning", "RMAN", "Backup and Recovery", "Database Migration"],
+    atsNote: "Put the DBA/engine keyword in your title (ATS scans the title first); group skills by engine (Oracle 19c, SQL Server, MySQL) and include 'performance tuning', 'backup procedures' and 'database migration' / 'cloud databases'.",
+  },
+  "network-administrator": {
+    include:
+      "A summary, a Certifications section (CCNA, Network+), a Skills section (technologies + hardware + tools), and Experience with measurable reliability gains.",
+    length: "One to two pages; clear headings (Skills, Experience, Certifications) for ATS parsing.",
+    hardSkills: ["TCP/IP, DNS, DHCP, VPN", "Routing & switching", "Firewall configuration", "VLANs", "Network troubleshooting", "Monitoring (SolarWinds, Wireshark)", "Scripting (Python, PowerShell)", "LAN/WAN"],
+    softSkills: ["Problem solving", "Communication", "Reliability", "Documentation"],
+    atsKeywords: ["CCNA", "TCP/IP", "Routing and Switching", "Firewall Configuration", "VLAN", "Network Troubleshooting", "VPN", "LAN/WAN"],
+    atsNote: "List CCNA / CompTIA Network+ in a clear Certifications section and use Cisco-specific terms ('Cisco router configuration', 'switch configuration'); quantify impact like 'reduced network downtime by 40%'.",
+  },
 };
 
 const BY_SLUG = ROLE_CV_CONTENT;
@@ -825,32 +953,26 @@ export function hasRoleCvContent(roleSlug: string): boolean {
 }
 export const ROLE_CV_CONTENT_SLUGS: string[] = Object.keys(ROLE_CV_CONTENT);
 
-// ── Curated CV-destination countries (founder gate, real-data-or-noindex) ────
-// The ~40 markets where CV norms genuinely differ and CV/resume search demand is
-// real: anglophone + European (Europass) + Gulf (photo) + the largest origin
-// markets. A role×country grid cell is self-canonical + indexed only when the
-// role has sourced content AND the country is in this set — keeps the grid from
-// becoming 99k near-duplicates (the AlmiPrep 26k→4k lesson).
-export const CURATED_CV_COUNTRIES: readonly string[] = [
-  // Anglophone
-  "united-states", "united-kingdom", "canada", "australia", "new-zealand", "ireland",
-  // Europe (Europass / distinct conventions)
-  "germany", "france", "netherlands", "spain", "italy", "sweden", "switzerland",
-  "belgium", "austria", "poland", "portugal", "norway", "denmark", "finland",
-  // Gulf / Middle East (photo conventions, migration)
-  "united-arab-emirates", "saudi-arabia", "qatar", "oman", "kuwait", "bahrain",
-  // Largest origin markets / high CV demand
-  "india", "pakistan", "bangladesh", "philippines", "nigeria", "kenya",
-  "south-africa", "egypt", "singapore", "malaysia", "indonesia", "japan", "brazil",
-];
+// ── CV-destination countries: EVERY country we serve (family standing rule) ──
+// AlmiWorld rule: every product covers every country, FROM and TO — same as the
+// test-prep products' 191 sourced/localized origins. The grid country set is the
+// full COUNTRIES_SERVED (193), NOT a curated subset. The real-data-or-noindex
+// gate now lives entirely on the ROLE side: a role×country cell is self-canonical
+// + indexed once the ROLE has sourced CV content (genuine ATS/skills/length
+// substance) — and 171 of the 193 also carry a sourced localized "applying from"
+// block (currency/cities/agencies/credential body). Un-sourced roles stay noindex.
+// (Earlier this was capped at 39 curated countries — that silently shrank AlmiCV
+// below the family rule; corrected to the full 193 on 2026-06-20.)
+export const CV_GRID_COUNTRIES: readonly string[] = COUNTRIES_SERVED.map((c) => c.slug);
 
-const CURATED_SET = new Set(CURATED_CV_COUNTRIES);
-export function isCuratedCvCountry(slug: string): boolean {
-  return CURATED_SET.has(slug);
+const SERVED_SET = new Set(CV_GRID_COUNTRIES);
+export function isServedCvCountry(slug: string): boolean {
+  return SERVED_SET.has(slug);
 }
 
-/** Grid gate: a role×country page is self-canonical + indexable only where the
- *  role has sourced CV content AND the country is a curated CV destination. */
+/** Grid gate: a role×country page is self-canonical + indexable where the role
+ *  has sourced CV content AND the country is one we serve (all 193). The country
+ *  side never blocks a real country — the role content is the substance gate. */
 export function isRoleCountryIndexable(roleSlug: string, countrySlug: string): boolean {
-  return hasRoleCvContent(roleSlug) && isCuratedCvCountry(countrySlug);
+  return hasRoleCvContent(roleSlug) && isServedCvCountry(countrySlug);
 }

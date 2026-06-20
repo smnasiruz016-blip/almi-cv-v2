@@ -3,7 +3,7 @@ import { COUNTRY_LANDING } from "@/lib/country-landing";
 import { COUNTRIES_SERVED } from "@/lib/countries";
 import { JOB_ROLES } from "@/lib/roles";
 import { CV_ORIGINS, CV_ORIGIN_DESTINATIONS } from "@/lib/cv-origin-localization";
-import { ROLE_CV_CONTENT_SLUGS, CURATED_CV_COUNTRIES } from "@/lib/role-cv-content";
+import { ROLE_CV_CONTENT_SLUGS, CV_GRID_COUNTRIES } from "@/lib/role-cv-content";
 
 export const SITE_ORIGIN = "https://almicv.almiworld.com";
 
@@ -37,9 +37,10 @@ export function buildAllCvUrls(): MetadataRoute.Sitemap {
   for (const c of COUNTRIES_SERVED) out.push({ url: `${SITE_ORIGIN}/cv-guide/${c.slug}`, lastModified: now, changeFrequency: "weekly", priority: 0.8 });
   // Origin × destination CV guides — now the full 191-origin FROM-set.
   for (const dest of CV_ORIGIN_DESTINATIONS) for (const o of CV_ORIGINS) out.push({ url: `${SITE_ORIGIN}/cv-guide/${dest}/from-${o.slug}`, lastModified: now, changeFrequency: "weekly", priority: 0.7 });
-  // Role × country grid — ONLY the un-thinned cells: a role with sourced CV
-  // content × a curated CV-destination country (self-canonical + indexed).
-  for (const role of ROLE_CV_CONTENT_SLUGS) for (const country of CURATED_CV_COUNTRIES) out.push({ url: `${SITE_ORIGIN}/cv-guide/${country}/${role}`, lastModified: now, changeFrequency: "weekly", priority: 0.6 });
+  // Role × country grid — the un-thinned cells: a role with sourced CV content ×
+  // EVERY served country (193, family standing rule). Self-canonical + indexed.
+  // At full 514 roles this is 514 × 193 ≈ 99k cells; the 45k auto-chunk handles it.
+  for (const role of ROLE_CV_CONTENT_SLUGS) for (const country of CV_GRID_COUNTRIES) out.push({ url: `${SITE_ORIGIN}/cv-guide/${country}/${role}`, lastModified: now, changeFrequency: "weekly", priority: 0.6 });
 
   return out;
 }
