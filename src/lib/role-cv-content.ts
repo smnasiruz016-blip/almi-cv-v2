@@ -2484,6 +2484,162 @@ export const ROLE_CV_CONTENT: Record<string, RoleCvContent> = {
     atsNote:
       "Use the posting's frequent terms — \"tax planning\", \"compliance\", \"client consultation\" — name your tax software (Drake, Lacerte, ProSeries) and list CPA/EA/CTP in a dedicated section; avoid graphics that large accounting firms' ATS cannot parse.",
   },
+  // ── Batch 20 (sourced via live SERP 2026: QwikResume, Resumaker, ResumeWorded, ResumeMentor, Indeed, Wozber, ZipRecruiter, Enhancv, VisualCV, CyberDefenders, Huntr) ──
+  // Priorities: remaining physician specialties, finance, emerging fintech/cyber, technician.
+  "cardiothoracic-surgeon": {
+    include:
+      "Contact details, a professional summary, education and training placed prominently (medical degree, general-surgery residency, cardiothoracic fellowship), board certifications and licences with dates, surgical experience listing procedures (CABG, valve repair/replacement, thoracic aortic surgery, minimally invasive and robotic cardiac surgery) with case volumes and outcomes, a skills section, and research, publications and affiliations.",
+    length:
+      "A surgeon's CV runs multiple pages; keep board certification, licence and your strongest cardiothoracic experience on page one, and quantify procedures performed and outcomes.",
+    hardSkills: ["Coronary artery bypass grafting (CABG)", "Valve repair & replacement", "Thoracic aortic surgery", "Minimally invasive & robotic cardiac surgery", "Lung & esophageal resection", "Pre & post-operative critical care", "Cardiac diagnostics"],
+    softSkills: ["Leadership", "Composure under pressure", "Precision", "Communication", "Teamwork"],
+    atsKeywords: ["Cardiothoracic Surgery", "Board Certified", "CABG", "Valve Replacement", "Minimally Invasive Surgery", "ACLS/BLS", "Patient Outcomes"],
+    atsNote:
+      "Name the procedures exactly as postings phrase them (\"CABG\", \"valve repair\", \"minimally invasive cardiac surgery\") and lead with board certification (ABTS) and licence; quantify case volumes and outcomes.",
+  },
+  "endocrinologist": {
+    include:
+      "Contact details, a professional summary, education and training, board certification (e.g. Endocrinology, Diabetes & Metabolism) and licences, clinical experience, a focused skills section (six to ten skills), and research, publications and professional affiliations (e.g. the Endocrine Society).",
+    length:
+      "A physician CV is multi-page; keep board certification, licence and your strongest clinical experience on page one, and list six to ten focused skills rather than an exhaustive list.",
+    hardSkills: ["Diabetes management", "Thyroid disorders & ultrasound", "Fine-needle aspiration biopsy", "Hormone & metabolic evaluation", "Osteoporosis management", "Insulin therapy", "EHR documentation"],
+    softSkills: ["Patient communication", "Empathy", "Critical thinking", "Collaboration", "Attention to detail"],
+    atsKeywords: ["Endocrinology", "Board Certified", "Diabetes Management", "Thyroid Disorders", "Metabolism", "Patient Care", "ABIM"],
+    atsNote:
+      "List board certification (ABIM, Endocrinology, Diabetes & Metabolism) and licence first, and mirror the posting's clinical terms (\"diabetes management\", \"thyroid\", \"metabolic\"); keep to six to ten focused skills.",
+  },
+  "gastroenterologist": {
+    include:
+      "Contact details, a professional summary, education and training (internal-medicine residency, GI fellowship), board certification and licences, clinical experience emphasising endoscopic procedures, a skills section, and research, publications and memberships (ACG, AGA).",
+    length:
+      "Use a multi-page physician CV; keep board certification, licence and your endoscopic and clinical experience on page one, and quantify procedure volumes.",
+    hardSkills: ["Colonoscopy", "Upper GI endoscopy", "ERCP", "Polypectomy & biopsy", "GI disorder diagnosis & treatment", "Sigmoidoscopy", "EHR documentation"],
+    softSkills: ["Patient communication", "Attention to detail", "Empathy", "Collaboration", "Composure"],
+    atsKeywords: ["Gastroenterology", "Board Certified", "Colonoscopy", "Endoscopy", "ERCP", "Patient Care", "ABIM"],
+    atsNote:
+      "Name the endoscopic procedures the way postings do (\"colonoscopy\", \"upper GI endoscopy\", \"ERCP\") and lead with board certification (ABIM, Gastroenterology) and licence; quantify procedure volumes.",
+  },
+  "nephrologist": {
+    include:
+      "Contact details, a professional summary, education and training, board certification (Nephrology) and licences, clinical experience covering dialysis and chronic kidney disease, a skills section, and research, publications and presentations.",
+    length:
+      "A physician CV is multi-page; keep board certification, licence and your dialysis and CKD experience on page one, and quantify patient panels and outcomes.",
+    hardSkills: ["Dialysis management (HD/PD)", "Chronic kidney disease management", "Transplant nephrology", "Electrolyte & acid-base management", "Hypertension management", "Kidney biopsy", "EHR documentation"],
+    softSkills: ["Patient communication", "Critical thinking", "Empathy", "Collaboration", "Attention to detail"],
+    atsKeywords: ["Nephrology", "Board Certified", "Dialysis", "Chronic Kidney Disease", "Transplant", "Patient Care", "ABIM"],
+    atsNote:
+      "Lead with board certification (ABIM, Nephrology) and licence, and mirror the posting's terms (\"dialysis\", \"chronic kidney disease\", \"transplant\"); pair clinical skills with patient-management context and quantify panels.",
+  },
+  "urologist": {
+    include:
+      "Contact details, a professional summary, education and training (urology residency, any fellowship), board certification (ABU) and licences with dates, surgical and clinical experience with procedures and volumes, a skills section, and research, publications and affiliations.",
+    length:
+      "Use a multi-page physician CV; keep board certification, licence and your surgical experience on page one, and quantify successful procedures and outcomes.",
+    hardSkills: ["Endoscopic urological surgery", "Robotic-assisted surgery", "Kidney stone treatment", "Urodynamics", "Prostate & bladder procedures", "Male infertility management", "EHR documentation"],
+    softSkills: ["Patient communication", "Precision", "Empathy", "Collaboration", "Composure"],
+    atsKeywords: ["Urology", "Board Certified", "Robotic Surgery", "Urodynamics", "Kidney Stone Treatment", "Patient Care", "ABU"],
+    atsNote:
+      "Name procedures and techniques exactly (\"robotic-assisted surgery\", \"urodynamics\", \"kidney stone treatment\") and list board certification (ABU) and licence with current dates; quantify procedures performed.",
+  },
+  "neurosurgeon": {
+    include:
+      "Contact details, a professional summary, education and training, licensure and board certification (ABNS) in a dedicated section, clinical and surgical experience with specific procedures and surgical volume, a skills section, research and publications, and any teaching or academic roles.",
+    length:
+      "A neurosurgeon CV runs multiple pages; keep board certification, licence and your strongest surgical experience on page one, and quantify surgical volume for complex procedures.",
+    hardSkills: ["Craniotomy & tumor resection", "Spinal fusion & decompression", "Aneurysm clipping", "Deep brain stimulation", "Cerebrovascular surgery", "Neurosurgical patient assessment", "EHR documentation"],
+    softSkills: ["Precision", "Composure under pressure", "Leadership", "Communication", "Decision-making"],
+    atsKeywords: ["Neurosurgery", "Board Certified", "Craniotomy", "Spinal Fusion", "Tumor Resection", "ATLS/BLS", "ABNS"],
+    atsNote:
+      "Detail specific procedures (\"deep brain stimulation\", \"aneurysm clipping\", \"spinal fusion\") rather than generic terms, lead with board certification (ABNS) and fellowship, and quantify surgical volume for complex cases.",
+  },
+  "investment-analyst": {
+    include:
+      "Contact details, a professional summary, a skills section blending hard skills (financial modeling, valuation, Excel) with soft skills, work experience in reverse chronological order with quantified results, education, and certifications (CFA) placed prominently.",
+    length:
+      "One to two pages — keep financial modeling, valuation and your strongest coverage or deal experience high on page one, and quantify returns and outcomes.",
+    hardSkills: ["Financial modeling (DCF/LBO)", "Valuation", "Equity research", "Advanced Excel (VLOOKUP, pivot tables)", "Variance & financial analysis", "Capital markets", "Bloomberg / Capital IQ / FactSet"],
+    softSkills: ["Analytical thinking", "Attention to detail", "Communication", "Problem solving", "Decision-making"],
+    atsKeywords: ["Financial Modeling", "Valuation", "Equity Research", "DCF", "Advanced Excel", "Portfolio Management", "CFA"],
+    atsNote:
+      "Excel and modeling terms (VLOOKUP, pivot tables, DCF, financial modeling) appear in 95%+ of analyst job descriptions — mirror the posting's exact phrases, name your data tools (Bloomberg, Capital IQ, FactSet), and quantify returns.",
+  },
+  "equity-trader": {
+    include:
+      "Contact details, a professional summary stating your trading focus and years, a skills section with both hard and soft skills, work experience highlighting quantified results (portfolio managed, returns), and certifications (Series 7, CFA).",
+    length:
+      "One page is typical — lead with your trading focus and quantified results (returns, volumes, risk metrics), and keep your strongest experience and licences high on page one.",
+    hardSkills: ["Equity trading", "Algorithmic trading", "Risk management", "Market & technical analysis", "Bloomberg Terminal", "Order execution", "Liquidity & hedging strategies"],
+    softSkills: ["Decision-making under pressure", "Analytical thinking", "Discipline", "Communication", "Attention to detail"],
+    atsKeywords: ["Equity Trading", "Risk Management", "Algorithmic Trading", "Bloomberg Terminal", "Market Analysis", "Series 7", "CFA"],
+    atsNote:
+      "Use the posting's exact terms (\"algorithmic trading\", \"risk management\", \"liquidity\") and name your platforms (Bloomberg Terminal); list Series 7/CFA and quantify portfolio size, returns and risk metrics.",
+  },
+  "controller": {
+    include:
+      "Contact details, a professional summary, a skills section grouped into categories (10–15 skills, technical plus leadership), work experience with accomplishment-focused bullets, education, and certifications (CPA).",
+    length:
+      "One to two pages — group at least ten skills by category, keep financial reporting, controls and consolidation high on page one, and show achievements (process improvements, savings, accuracy) rather than only duties.",
+    hardSkills: ["Financial reporting", "Internal controls", "Month-end & year-end close", "Budgeting & forecasting", "GAAP / IFRS", "Financial consolidation", "SAP / ERP", "Variance analysis"],
+    softSkills: ["Team leadership", "Communication", "Problem solving", "Stakeholder collaboration", "Attention to detail"],
+    atsKeywords: ["Financial Reporting", "Internal Controls", "Forecasting", "GAAP", "Financial Consolidation", "Variance Analysis", "CPA"],
+    atsNote:
+      "Incorporate the posting's exact terms (\"financial analysis\", \"budget management\", \"cost control\"), list 10–15 categorised skills, and use a single-column layout with standard headers; quantify process improvements and savings.",
+  },
+  "external-auditor": {
+    include:
+      "Contact details with CPA/CIA status, a professional summary identifying your audit specialisation and years, a skills section (GAAP/IFRS, audit software, controls), work experience in reverse chronological order with metrics, certifications placed near education, and education.",
+    length:
+      "One to two pages in reverse-chronological order — put CPA/CIA status in the summary and near education, and keep audit-planning and controls experience high on page one.",
+    hardSkills: ["Audit planning", "GAAP & IFRS", "Internal controls evaluation", "Risk assessment", "Compliance testing", "Data analytics", "ACL / audit software"],
+    softSkills: ["Analytical thinking", "Communication", "Ethical decision-making", "Time management", "Objectivity"],
+    atsKeywords: ["External Audit", "Audit Planning", "GAAP", "Internal Controls", "Risk Assessment", "Compliance", "CPA"],
+    atsNote:
+      "Emphasise ATS terms (\"audit planning\", \"GAAP\", \"data analytics\", \"internal controls\"), place CPA/CIA near education where recruiters expect them, and quantify results (hours saved, error rates reduced, clean opinions).",
+  },
+  "crypto-analyst": {
+    include:
+      "Contact details, a professional summary, a focused skills section (ten or fewer) covering blockchain-analysis tools, data analysis and market analysis, work experience with quantified results, education, and compliance awareness (AML/KYC).",
+    length:
+      "One to two pages — keep ten or fewer high-impact skills (on-chain analysis, data tools, market analysis) on page one, and quantify your analysis impact.",
+    hardSkills: ["On-chain analysis (Etherscan, Chainalysis)", "Cryptocurrency market analysis", "Data analysis (Python, SQL)", "Tokenomics", "Financial modeling", "Data visualization (Tableau/Power BI)", "AML/KYC awareness"],
+    softSkills: ["Analytical thinking", "Attention to detail", "Communication", "Curiosity", "Problem solving"],
+    atsKeywords: ["Cryptocurrency", "Blockchain Analysis", "On-Chain Analysis", "Market Analysis", "Tokenomics", "Python", "Financial Modeling"],
+    atsNote:
+      "Include the posting's exact terms (\"blockchain\", \"cryptocurrency market analysis\", \"on-chain\") and name your tools (Chainalysis, Etherscan, Python); keep to ten or fewer skills and quantify your analysis impact.",
+  },
+  "defi-analyst": {
+    include:
+      "Contact details, a professional summary, a dedicated skills section covering DeFi protocols, on-chain metrics and financial analysis, work experience with quantified results, education, and compliance awareness (AML/KYC).",
+    length:
+      "One to two pages — lead with DeFi-protocol and on-chain experience and your strongest quantified analysis, and keep technical skills grouped on page one.",
+    hardSkills: ["DeFi protocols (lending, yield farming)", "On-chain metrics & tokenomics", "DCF & financial modeling", "Data analysis (Python, SQL)", "Technical analysis", "Smart-contract literacy", "AML/KYC awareness"],
+    softSkills: ["Analytical thinking", "Attention to detail", "Curiosity", "Communication", "Problem solving"],
+    atsKeywords: ["DeFi", "Decentralized Finance", "On-Chain Analysis", "Tokenomics", "Financial Modeling", "Python", "Smart Contracts"],
+    atsNote:
+      "Mirror the posting's terms (\"DeFi protocols\", \"on-chain\", \"tokenomics\", \"yield farming\") and name your stack (Python, SQL, Dune/Etherscan); group skills in a dedicated section and quantify protocol-analysis impact.",
+  },
+  "soc-analyst": {
+    include:
+      "Contact details, certifications in the header (Security+, CISSP, CEH), a professional summary, a skills section naming SIEM and security tools exactly, work experience with quantified incident metrics, a certifications section, and education.",
+    length:
+      "One to two pages — put your security certifications in the summary, skills and certifications sections, keep SIEM and incident-response experience high on page one, and quantify incidents handled and response-time improvements.",
+    hardSkills: ["SIEM (Splunk, QRadar, ArcSight)", "Incident response", "Threat detection & hunting", "Log analysis", "EDR & IDS/IPS", "Network security", "Threat intelligence"],
+    softSkills: ["Analytical thinking", "Attention to detail", "Communication", "Composure under pressure", "Teamwork"],
+    atsKeywords: ["SOC", "SIEM", "Splunk", "Incident Response", "Threat Detection", "Log Analysis", "Security+", "CISSP"],
+    atsNote:
+      "ATS systems match exact tool names — if the posting says \"Splunk\", write \"Splunk\", not just \"SIEM\" — and place Security+, CISSP or CEH in your summary, skills and certifications sections; quantify incidents handled and response-time improvements.",
+  },
+  "ekg-technician": {
+    include:
+      "Contact details, a professional summary, a certifications section (Certified EKG Technician — NHA/CET, BLS), a skills section, work experience, and education.",
+    length:
+      "One page — list your EKG certification and BLS prominently, keep a dedicated skills section near the top, and quantify procedure volumes and patient throughput.",
+    hardSkills: ["EKG/ECG administration", "EKG interpretation", "Electrode placement", "Cardiac monitoring (Holter/stress)", "Equipment setup & calibration", "Vital signs", "Medical terminology"],
+    softSkills: ["Patient care", "Attention to detail", "Communication", "Reliability", "Composure"],
+    atsKeywords: ["EKG", "ECG", "Cardiac Monitoring", "Electrode Placement", "Patient Care", "BLS", "Certified EKG Technician"],
+    atsNote:
+      "Name your certification exactly (Certified EKG Technician — NHA/CET) and BLS, and mirror clinical terms (\"electrode placement\", \"cardiac monitoring\", \"Holter\"); a dedicated certifications section differentiates you and parses cleanly.",
+  },
 };
 
 const BY_SLUG = ROLE_CV_CONTENT;
