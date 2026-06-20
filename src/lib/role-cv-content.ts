@@ -2796,6 +2796,162 @@ export const ROLE_CV_CONTENT: Record<string, RoleCvContent> = {
     atsNote:
       "Mirror the posting's tools exactly — if it says \"Power BI\" or \"Tableau\", write that, not just \"BI tools\" — keep a dedicated technical-skills section, and quantify impact (e.g. \"reduced data-processing time 40% by optimising SQL queries\").",
   },
+  // ── Batch 22 (sourced via live SERP 2026: ResumeAdapter, ResumeWorded, TealHQ, Enhancv, Zety, QwikResume, Indeed, ZipRecruiter, Resumaker, Wiz, VisualCV) ──
+  // Priorities: tech/cloud/security, remaining physician specialties, trades, fintech/markets, execs.
+  "backend-developer": {
+    include:
+      "A short professional summary, a skills section (10–15 skills ordered by relevance), work experience with achievement-focused bullets, a projects section, and education.",
+    length:
+      "One page for 0–5 years, two pages for senior roles — keep your core stack (languages, databases, APIs) high on page one and focus on relevant projects and measurable achievements, not every technology you have touched.",
+    hardSkills: ["Node.js / Python / Java", "SQL & NoSQL (PostgreSQL, MongoDB, Redis)", "REST & GraphQL APIs", "Microservices", "Docker & Kubernetes", "Caching & query optimization", "CI/CD"],
+    softSkills: ["Problem solving", "Communication", "Collaboration", "Code review", "Ownership"],
+    atsKeywords: ["Node.js", "Python", "SQL", "REST API", "Microservices", "Docker", "Kubernetes", "PostgreSQL"],
+    atsNote:
+      "The top skills (Node.js, Python, SQL, APIs, databases) appear in 80%+ of backend postings — put them high in a dedicated skills section and echo the same terms inside outcome-based bullets; ATS contextual matching scores keywords-in-sentences higher than isolated lists.",
+  },
+  "frontend-developer": {
+    include:
+      "A short professional summary, a skills section grouped into logical buckets (10–15 skills by relevance), work experience with outcome-based bullets, a projects section, and education.",
+    length:
+      "One page for 0–5 years, two pages for senior — anchor React/JavaScript/TypeScript at the top and reinforce the same terms inside experience bullets and projects.",
+    hardSkills: ["React / Next.js", "JavaScript (ES6+)", "TypeScript", "HTML & CSS", "State management", "Reusable component design", "Testing (Jest/RTL)"],
+    softSkills: ["Problem solving", "Communication", "Collaboration", "Attention to detail", "Ownership"],
+    atsKeywords: ["React", "JavaScript", "TypeScript", "CSS", "HTML", "Next.js", "REST API"],
+    atsNote:
+      "React, JavaScript, CSS, HTML and TypeScript appear in 80%+ of frontend postings — list the exact technologies from the job description (even the React version, which some ATS filter on) and reinforce them inside specific, quantified bullets rather than keyword lists.",
+  },
+  "aws-solutions-architect": {
+    include:
+      "A professional summary, a skills section covering cloud architecture and AWS services, a dedicated certifications section (AWS Certified Solutions Architect, with dates), work experience with quantified impact, and education.",
+    length:
+      "One to two pages — keep cloud architecture, core AWS services and your certification high on page one, and quantify every achievement (cost savings, latency, uptime, deployment speed).",
+    hardSkills: ["AWS (EC2, S3, Lambda, VPC)", "CloudFormation / IaC", "Cloud architecture & migration", "Serverless computing", "CI/CD", "Security best practices", "Networking & high availability"],
+    softSkills: ["Problem solving", "Communication", "Stakeholder management", "Decision-making", "Documentation"],
+    atsKeywords: ["AWS", "Solutions Architect", "EC2", "S3", "Lambda", "CloudFormation", "Cloud Migration", "Serverless"],
+    atsNote:
+      "Name the exact AWS services and frameworks the posting lists (EC2, S3, Lambda, VPC, CloudFormation), put your AWS Certified Solutions Architect credential in a dedicated section with dates, and quantify cost savings, latency, uptime and deployment speed.",
+  },
+  "cybersecurity-engineer": {
+    include:
+      "A professional summary highlighting expertise and certifications, a dedicated skills section (tools, frameworks, methodologies), work experience with quantified impact, a certifications section, and education.",
+    length:
+      "One to two pages — place certifications, frameworks and platform names in the summary, skills section and first bullets of recent roles, where early visibility is highest.",
+    hardSkills: ["Penetration testing & ethical hacking", "Vulnerability assessment & management", "SIEM (Splunk, QRadar)", "Network & application security", "Incident response", "Firewalls & IDS/IPS", "NIST / ISO 27001 / OWASP"],
+    softSkills: ["Analytical thinking", "Attention to detail", "Communication", "Problem solving", "Composure under pressure"],
+    atsKeywords: ["Cybersecurity", "Network Security", "Penetration Testing", "Vulnerability Assessment", "SIEM", "Incident Response", "CISSP"],
+    atsNote:
+      "If a posting says \"vulnerability assessment\", use that exact phrase, and name your tools and frameworks (Splunk, Burp Suite, NIST, ISO 27001, MITRE ATT&CK); place CISSP/CEH/Security+ in the summary, skills and certifications sections.",
+  },
+  "chief-technology-officer": {
+    include:
+      "An executive summary, a categorised core-competencies section balancing technical depth with leadership and business skills, experience with quantified business and technology impact, education, and certifications where relevant.",
+    length:
+      "Two pages for a CTO — lead with a strong executive summary and up to ten overlapping skills matched to the posting, then experience that quantifies impact (revenue, scale, cost, team size).",
+    hardSkills: ["Technology strategy & roadmap", "Architecture & platform scaling", "Cloud & infrastructure", "Engineering leadership", "Budget & vendor management", "Data & analytics", "Emerging tech (AI, IoT)"],
+    softSkills: ["Strategic leadership", "Communication", "Decision-making", "Business planning", "Team development"],
+    atsKeywords: ["Technology Strategy", "Engineering Leadership", "Cloud", "Scalability", "Digital Transformation", "Budget Management", "Roadmap"],
+    atsNote:
+      "Mark the skills that overlap with the posting and include up to ten, balancing technical depth (cloud, architecture, data) with leadership and budget ownership; quantify business impact (revenue, scale, cost, team size).",
+  },
+  "emergency-medicine-doctor": {
+    include:
+      "Contact details, a professional summary, education and fellowship, licensure and board certification, clinical experience, a skills section (six to ten skills), and research, teaching, memberships and continuing medical education.",
+    length:
+      "A physician CV is multi-page; keep licensure and board certification (ABEM) and your strongest emergency and critical-care experience on page one, and quantify patient volumes and acuity.",
+    hardSkills: ["Emergency & trauma care", "ACLS / ATLS / PALS", "Critical care", "Triage & rapid diagnosis", "Procedural skills (intubation, central lines)", "EMR (Epic / Cerner)", "Resuscitation"],
+    softSkills: ["Decision-making under pressure", "Communication", "Composure", "Teamwork", "Empathy"],
+    atsKeywords: ["Emergency Medicine", "Board Certified", "ACLS/ATLS", "Trauma Care", "Critical Care", "Triage", "ABEM"],
+    atsNote:
+      "List board certification (ABEM) and licence, and mirror the posting's terms (\"trauma care\", \"critical care\", \"triage\") with ACLS/ATLS/PALS current; quantify patient volume and acuity, and name your EMR (Epic, Cerner).",
+  },
+  "family-medicine-doctor": {
+    include:
+      "Contact details, a professional summary, education and residency, board certification and any areas of focus, clinical experience, a skills section blending clinical proficiency and interpersonal skills, and certifications and memberships.",
+    length:
+      "A physician CV is multi-page; keep board certification and your strongest primary-care experience on page one, and quantify panel size and quality outcomes.",
+    hardSkills: ["Primary & preventive care", "Chronic disease management", "Patient education", "Pediatric & adult care", "Minor procedures", "EMR documentation", "Care coordination"],
+    softSkills: ["Patient communication", "Empathy", "Critical thinking", "Collaboration", "Attention to detail"],
+    atsKeywords: ["Family Medicine", "Board Certified", "Primary Care", "Chronic Disease Management", "Preventive Medicine", "Patient Care", "ABFM"],
+    atsNote:
+      "Lead with board certification (ABFM) and licence, and mirror the posting's terms (\"chronic disease management\", \"preventive medicine\", \"patient education\"); quantify panel size and quality measures.",
+  },
+  "gynecologist": {
+    include:
+      "Contact details, a professional summary, education and residency, board certification or eligibility (Obstetrics & Gynecology) and an unrestricted licence in a visible section, clinical and surgical experience, a skills section, and research, leadership and affiliations (ACOG).",
+    length:
+      "A physician CV is multi-page; keep board certification, licence and your strongest clinical and surgical experience on page one, and quantify deliveries and procedures.",
+    hardSkills: ["Obstetrics & gynecology", "Prenatal & postnatal care", "Gynecologic surgery", "Minimally invasive surgery", "High-risk pregnancy management", "Reproductive health", "EMR documentation"],
+    softSkills: ["Patient communication", "Empathy", "Composure under pressure", "Team leadership", "Attention to detail"],
+    atsKeywords: ["Obstetrics and Gynecology", "Board Certified", "Gynecologic Surgery", "Prenatal Care", "Minimally Invasive Surgery", "Patient Care", "ACOG"],
+    atsNote:
+      "Make board certification or eligibility (OB-GYN) and an unrestricted licence visible and current, and name procedures the way postings do (\"gynecologic surgery\", \"minimally invasive surgery\", \"prenatal care\"); quantify deliveries and procedures.",
+  },
+  "bricklayer": {
+    include:
+      "A summary statement, a skills and certifications section, work experience with measurable detail, educational background and apprenticeships, and a dedicated certifications section (OSHA, safety training).",
+    length:
+      "One page — list at least five core bricklaying skills, quantify with project sizes and years, and keep your safety certifications and apprenticeship visible.",
+    hardSkills: ["Bricklaying patterns (Flemish/header bond)", "Mortar mixing & types", "Trowel work", "Blueprint reading", "Scaffolding", "Quality control", "Masonry tools"],
+    softSkills: ["Attention to detail", "Reliability", "Teamwork", "Physical stamina", "Time management"],
+    atsKeywords: ["Bricklaying", "Masonry", "Mortar Mixing", "Blueprint Reading", "Scaffolding", "OSHA", "Quality Control"],
+    atsNote:
+      "List the patterns and methods a posting names (\"Flemish bond\", \"mortar mixing\", \"blueprint reading\") and put OSHA/safety training in a dedicated certifications section with dates and issuer; quantify with project sizes and years.",
+  },
+  "cad-technician": {
+    include:
+      "A professional summary, a technical-skills section (CAD software and standards), a design-specialties section where relevant, work experience describing how you applied skills with measurable results, and education with certifications.",
+    length:
+      "One page — keep your CAD software (AutoCAD, Revit, SolidWorks) and standards high on page one, and describe how you applied them on real projects with measurable results rather than only listing them.",
+    hardSkills: ["AutoCAD", "Revit / Civil 3D", "SolidWorks", "3D modeling", "Technical drawing", "Engineering documentation", "ISO standards compliance"],
+    softSkills: ["Attention to detail", "Communication", "Problem solving", "Time management", "Collaboration"],
+    atsKeywords: ["AutoCAD", "Revit", "SolidWorks", "3D Modeling", "Technical Drawing", "Engineering Documentation", "Blueprint Reading"],
+    atsNote:
+      "Name the exact CAD software and standards the posting lists (AutoCAD, Revit, Civil 3D, SolidWorks, ISO), and rather than only listing skills, describe how you applied them on real projects with measurable results.",
+  },
+  "commodities-trader": {
+    include:
+      "A short headline or professional summary, a skills section with industry-specific keywords, work experience with quantified achievements (using action verbs), an interests section, and education.",
+    length:
+      "One to two pages — lead with a clear summary, keep market analysis and risk management high on page one, and quantify volumes, P&L and outcomes.",
+    hardSkills: ["Market analysis", "Risk management", "Futures & options trading", "Hedging strategies", "Arbitrage", "Trading platforms", "Fundamental & technical analysis"],
+    softSkills: ["Decision-making under pressure", "Negotiation", "Attention to detail", "Adaptability", "Team collaboration"],
+    atsKeywords: ["Commodities Trading", "Market Analysis", "Risk Management", "Futures Trading", "Hedging", "Arbitrage", "Trading Strategies"],
+    atsNote:
+      "Include the posting's exact terms (\"market analysis\", \"risk management\", \"hedging\", \"futures trading\") and industry terms (\"liquidity\", \"arbitrage\"), and quantify achievements (e.g. trading volume up 25%, P&L impact).",
+  },
+  "hedge-fund-manager": {
+    include:
+      "A summary stating what you bring to the firm, a core-competencies section with industry keywords, work experience with quantified outcomes, education, and a skills section emphasising portfolio and risk management.",
+    length:
+      "Two pages is acceptable at this level — lead with a strong summary, keep portfolio management, risk management and your strongest returns on page one, and quantify AUM, returns and risk metrics.",
+    hardSkills: ["Portfolio management", "Risk management", "Investment analysis", "Alternative investments", "Macro-economic analysis", "Technical analysis", "Fundraising & LP relations"],
+    softSkills: ["Analytical thinking", "Decision-making", "Communication", "Relationship building", "Composure under pressure"],
+    atsKeywords: ["Hedge Funds", "Portfolio Management", "Risk Management", "Alternative Investments", "Investment Analysis", "Asset Management", "Fundraising"],
+    atsNote:
+      "Use industry keywords (\"hedge funds\", \"alternative investments\", \"portfolio management\", \"risk management\") in a core-competencies section, and quantify AUM, returns, alpha and risk metrics in your experience bullets.",
+  },
+  "brand-strategist": {
+    include:
+      "A professional summary highlighting your specialty areas, a skills section organised by category and matched to the posting, work experience in problem-solution-result format with quantified achievements, and credentials and education.",
+    length:
+      "One to two pages — keep brand strategy, positioning and your strongest campaigns on page one, organise skills by category, and quantify outcomes (awareness, share, engagement).",
+    hardSkills: ["Brand strategy", "Brand positioning", "Market & consumer insights", "Creative strategy", "Marketing strategy", "Content strategy", "Brand identity"],
+    softSkills: ["Strategic thinking", "Communication", "Storytelling", "Collaboration", "Presentation"],
+    atsKeywords: ["Brand Strategy", "Brand Positioning", "Market Analysis", "Consumer Insights", "Creative Strategy", "Marketing Strategy", "Content Strategy"],
+    atsNote:
+      "Incorporate the posting's exact terms (\"brand positioning\", \"market analysis\", \"consumer insights\", \"content strategy\"), organise skills by category, and write problem-solution-result bullets that quantify awareness, share and engagement.",
+  },
+  "chief-information-security-officer": {
+    include:
+      "An executive summary, a categorised skills section (technical plus leadership), professional experience with quantified risk and security outcomes, a certifications section, education, and notable achievements.",
+    length:
+      "Two pages for a CISO — lead with an executive summary on security strategy and risk, keep risk management, governance and incident response high on page one, and quantify risk reduced and programmes led.",
+    hardSkills: ["Security strategy & governance", "Risk management", "Incident response", "Security architecture", "Cloud security (AWS/Azure/GCP)", "Compliance (GDPR, ISO 27001, SOC 2)", "Third-party risk management"],
+    softSkills: ["Strategic leadership", "Board communication", "Decision-making under pressure", "Negotiation", "Team mentorship"],
+    atsKeywords: ["Information Security", "Risk Management", "Security Governance", "Incident Response", "Compliance", "Cloud Security", "CISSP"],
+    atsNote:
+      "Lead with security strategy and risk in the executive summary, name your frameworks (ISO 27001, SOC 2, GDPR, NIST), and place CISSP/CISM/CISA in a certifications section; quantify risk reduced, audits passed and programmes led.",
+  },
 };
 
 const BY_SLUG = ROLE_CV_CONTENT;
