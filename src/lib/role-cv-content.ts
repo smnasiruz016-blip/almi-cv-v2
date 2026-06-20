@@ -3264,6 +3264,162 @@ export const ROLE_CV_CONTENT: Record<string, RoleCvContent> = {
     atsNote:
       "Match your skills to the listing's wording (\"test preparation\", \"differentiated instruction\", \"subject-matter expertise\"), highlight digital-tool and online-platform proficiency, and quantify student improvement (grades, exam scores).",
   },
+  // ── Batch 25 (sourced via live SERP 2026: ResumeWorded, TealHQ, Enhancv, ResumeGenius, VisualCV, ZipRecruiter, ResumeMentor, Indeed, Resumaker, QwikResume, Medium/Reshtei) ──
+  // Priorities: execs, tech/security, marketing/comms, nursing/care, science, hospitality, creative, HR/finance, support, childcare.
+  "chief-information-officer": {
+    include:
+      "A professional summary, a categorised core-competencies section (technical depth plus executive soft skills), leadership experience with quantified impact, notable-projects and technology-initiative sections, and education and certifications.",
+    length:
+      "Two pages for a CIO — break the skills section into categories the hiring manager can scan, keep IT strategy and your strongest initiatives high on page one, and quantify budget, scale and business impact.",
+    hardSkills: ["IT strategy & governance", "Enterprise architecture", "IT service management (ITIL)", "Cloud computing", "Cybersecurity oversight", "Technology budget management", "ERP / CRM & data"],
+    softSkills: ["Strategic leadership", "Board communication", "Emotional intelligence", "Decision-making", "Team development"],
+    atsKeywords: ["IT Strategy", "IT Management", "Enterprise Architecture", "Digital Transformation", "Cloud Computing", "ITIL", "Budget Management"],
+    atsNote:
+      "Break skills into scannable categories, keep only skills relevant to the posting, and weave IT-strategy terms (IT service management, enterprise architecture, digital transformation) into experience with quantified budget, scale and board-level impact.",
+  },
+  "cloud-project-manager": {
+    include:
+      "Contact details, a professional summary, a key-skills section (hard plus soft), an achievements section with tangible outcomes, work experience, and a separate certifications section (PMP, cloud certs).",
+    length:
+      "One to two pages — keep PMP/cloud certifications and your strongest delivery on page one, mirror the posting's skills, and quantify scope, budget and timeline outcomes.",
+    hardSkills: ["Project management (Agile/Waterfall)", "Cloud infrastructure & networking", "Risk & change management", "Stakeholder communication", "Vendor & resource management", "Deliverables tracking", "Gantt / Jira / Kanban"],
+    softSkills: ["Cross-functional leadership", "Communication", "Problem solving", "Organization", "Decision-making"],
+    atsKeywords: ["Project Management", "PMP", "Agile", "Cloud Infrastructure", "Risk Management", "Stakeholder Communication", "Change Management"],
+    atsNote:
+      "Mirror the posting's terms (PMP, Agile, risk management, stakeholder communication) plus cloud specifics (cloud networking, infrastructure), put certifications in a separate section with issuer and date, and quantify scope, budget and timelines.",
+  },
+  "cryptographer": {
+    include:
+      "An IT-security summary, work experience with security duties and quantified achievements, an education section with relevant mathematics and cryptography coursework, a skills section, and certifications and clearances.",
+    length:
+      "One to two pages — keep cryptographic algorithms, encryption and your strongest projects on page one, reference a clean GitHub of cryptography work, and quantify impact (transactions secured, vulnerabilities reduced).",
+    hardSkills: ["Cryptographic algorithms", "Data encryption", "Algorithm design", "NIST standards", "Python / C / C++", "Cryptographic libraries (OpenSSL)", "Number theory & discrete math"],
+    softSkills: ["Problem solving", "Communication", "Attention to detail", "Ethical judgement", "Analytical thinking"],
+    atsKeywords: ["Cryptography", "Encryption", "Cryptographic Algorithms", "Algorithm Design", "NIST", "Python", "Information Security"],
+    atsNote:
+      "Include the role's critical keywords (\"cryptography\", \"data encryption\", \"cryptographic algorithms\", \"NIST standards\"), list languages and libraries (Python, C/C++, OpenSSL), and quantify impact (transactions secured, vulnerabilities reduced).",
+  },
+  "digital-marketer": {
+    include:
+      "Contact details (with portfolio), a professional summary with niche-tailored keywords, a skills section listing tools and platforms in bullets, work experience with quantified results, education, and a certifications section.",
+    length:
+      "One to two pages — use standard headings the ATS understands, avoid graphics/skill-bars it cannot read, and quantify results (traffic, ROI, conversions).",
+    hardSkills: ["SEO & SEM", "PPC & online advertising", "Campaign management", "Social media marketing", "Email marketing", "Analytics (GA4)", "Marketing tools (SEMrush, HubSpot, Mailchimp)"],
+    softSkills: ["Creativity", "Analytical thinking", "Communication", "Adaptability", "Problem solving"],
+    atsKeywords: ["Digital Marketing", "SEO", "PPC", "Campaign Management", "Social Media Marketing", "Google Analytics", "Email Marketing"],
+    atsNote:
+      "Tailor keywords to your niche (SEO: \"on-page SEO\", \"keyword mapping\"; PPC: \"Google Ads\", \"CTR optimization\"), name your tools, avoid icons/skill-bars ATS can't read, and quantify (e.g. \"organic traffic +35%\", \"ad ROI +25%\").",
+  },
+  "communications-director": {
+    include:
+      "Contact details, a professional summary, a skills section with proficiency levels, leadership-and-management experience with quantified impact, work experience, and education.",
+    length:
+      "Two pages for a director — show evidence of leading projects and people, integrate keywords into achievements, and use metrics (engagement, media placements, reach).",
+    hardSkills: ["Strategic communications", "Corporate & internal communications", "Public & media relations", "Crisis communications", "Content strategy", "Reputation management", "Comms tools (Sprinklr, Hootsuite)"],
+    softSkills: ["Leadership", "Strategic thinking", "Communication", "Stakeholder management", "Decision-making"],
+    atsKeywords: ["Strategic Communications", "Corporate Communications", "Media Relations", "Crisis Communications", "Public Relations", "Content Strategy", "Reputation Management"],
+    atsNote:
+      "Use the posting's exact terms (\"internal communications\", \"crisis communications\", \"media relations\"), list tools with proficiency levels, show leadership evidence, and quantify with metrics (engagement +35%, media placements secured).",
+  },
+  "hospice-nurse": {
+    include:
+      "Contact details, a professional summary with empathy and metrics, a skills section organised by category, work experience with quantified outcomes, education, and a certifications section (CHPN, ACLS/CPR).",
+    length:
+      "One to two pages — organise skills by category (palliative care, pain management, family support), keep CHPN and your strongest end-of-life experience high, and quantify patients served.",
+    hardSkills: ["Palliative & end-of-life care", "Pain & symptom management", "Patient & family education", "Care planning", "Grief & bereavement support", "Medication management", "EHR documentation"],
+    softSkills: ["Compassion", "Empathy", "Communication", "Emotional resilience", "Teamwork"],
+    atsKeywords: ["Hospice Care", "Palliative Care", "Pain Management", "End-of-Life Care", "Patient Education", "CHPN", "Symptom Management"],
+    atsNote:
+      "Organise skills by category (palliative care, pain management, family support), list CHPN/ACHPN and CPR/ACLS with issuer and date, and quantify experience (years, patients served) alongside the compassion the role demands.",
+  },
+  "healthcare-assistant": {
+    include:
+      "Contact details, a professional profile, a skills section balancing hard and soft skills, work experience describing patients and tasks, education, and additional sections (volunteer care, languages, references).",
+    length:
+      "One to two pages — keep patient-care, infection-control and vital-signs skills high, describe the patient types and tasks you handled, and lead with transferable strengths if you are early-career.",
+    hardSkills: ["Personal & patient care", "Vital signs", "Infection control", "Mobility & manual handling", "Feeding & hygiene support", "Observation & reporting", "Record keeping"],
+    softSkills: ["Communication", "Empathy", "Teamwork", "Patience", "Working under pressure"],
+    atsKeywords: ["Healthcare Assistant", "Patient Care", "Vital Signs", "Infection Control", "Personal Care", "Manual Handling", "Record Keeping"],
+    atsNote:
+      "Balance hard skills (vital signs, infection control, manual handling) with soft skills (empathy, communication), mirror the posting's wording, and — if early-career — lead with transferable strengths and any care volunteering.",
+  },
+  "food-scientist": {
+    include:
+      "Contact details, a summary, professional experience, education, a skills section (after experience), and optional sections for publications, presentations and professional memberships.",
+    length:
+      "One to two pages — tailor the skills section to the posting, keep food safety, quality and process development high, and use bullets with measurable outcomes.",
+    hardSkills: ["Food safety & quality assurance", "HACCP & regulatory compliance", "Sensory evaluation", "Process development", "Food chemistry & microbiology", "Lab analysis (HPLC, GC-MS)", "Statistical analysis (Minitab/JMP)"],
+    softSkills: ["Scientific communication", "Cross-functional collaboration", "Project management", "Attention to detail", "Problem solving"],
+    atsKeywords: ["Food Science", "Food Safety", "HACCP", "Quality Assurance", "Sensory Evaluation", "Product Development", "Regulatory Compliance"],
+    atsNote:
+      "Tailor the skills section to the posting (HACCP, FSMA, SQF, sensory evaluation, process development) and name your lab and analysis tools (HPLC, GC-MS, Minitab); use bullets with measurable outcomes.",
+  },
+  "food-beverage-manager": {
+    include:
+      "A professional summary, work experience in reverse chronological order focused on quantifiable results, a skills section mixing technical, tools and soft skills, and education with certifications.",
+    length:
+      "One to two pages — read the posting for repeated requirements (\"inventory management\", \"staff training\"), weave them in naturally, and quantify revenue, cost and guest-satisfaction outcomes.",
+    hardSkills: ["F&B operations", "Inventory & cost control", "Menu development & engineering", "POS systems (MICROS)", "Banquet & event management", "P&L management", "Health & safety (ServSafe)"],
+    softSkills: ["Leadership", "Customer service", "Communication", "Problem solving", "Team development"],
+    atsKeywords: ["Food and Beverage", "Hospitality Management", "Inventory Management", "Cost Control", "Menu Development", "P&L Management", "Customer Service"],
+    atsNote:
+      "Incorporate terms that repeat in the posting (\"inventory management\", \"cost control\", \"menu engineering\", \"ServSafe\"), name your POS (MICROS), and quantify revenue, cost reduction and guest-satisfaction outcomes.",
+  },
+  "fashion-designer": {
+    include:
+      "A professional summary, a skills section (technical plus software), a portfolio section with a link or QR code to 3–5 standout pieces, work experience in reverse chronological order, education, and a certifications section.",
+    length:
+      "One to two pages — keep a prominent skills section and a portfolio link high on page one, and lead with your most recent work and any speciality (sustainable design, trend forecasting).",
+    hardSkills: ["Sketching & illustration", "Pattern-making & draping", "Fabric & textile knowledge", "Adobe Creative Suite", "CLO 3D", "Trend forecasting", "Garment construction"],
+    softSkills: ["Creativity", "Communication", "Attention to detail", "Collaboration", "Time management"],
+    atsKeywords: ["Fashion Design", "Pattern Making", "Sketching", "Adobe Creative Suite", "CLO 3D", "Trend Forecasting", "Textiles"],
+    atsNote:
+      "List technical talents (sketching, pattern-making, draping) and software (Adobe Creative Suite, CLO 3D) in a dedicated section, include a portfolio link/QR to 3–5 pieces, and flag any speciality (sustainable design, trend forecasting).",
+  },
+  "compensation-benefits-analyst": {
+    include:
+      "Contact details, a professional summary, a skills section grouped by category (compensation, benefits administration, HRIS), work experience with action-verb bullets, and education and certifications.",
+    length:
+      "One to two pages — group up to 10–15 skills by category, keep compensation planning, job evaluation and HRIS high, and quantify programmes administered and savings.",
+    hardSkills: ["Compensation planning & structures", "Benefits administration (401k, HSA/FSA, COBRA)", "Job evaluation & analysis", "HRIS (PeopleSoft/Workday)", "Market benchmarking", "Advanced Excel", "Compliance"],
+    softSkills: ["Analytical thinking", "Attention to detail", "Communication", "Discretion", "Problem solving"],
+    atsKeywords: ["Compensation", "Benefits Administration", "Job Evaluation", "HRIS", "Compensation Planning", "Market Benchmarking", "Compliance"],
+    atsNote:
+      "Group skills by category (compensation structures, benefits administration, HRIS), include keywords like \"job evaluation\", \"market benchmarking\" and your HRIS (PeopleSoft, Workday), and open each bullet with a strong action verb.",
+  },
+  "corporate-development-manager": {
+    include:
+      "Contact details, a professional summary, a skills section grouping related keywords (M&A, financial analysis), an experience section with achievements and metrics, and education and certifications.",
+    length:
+      "One to two pages — combine an action verb, a keyword and a quantifiable result in each bullet, and keep M&A, due diligence and valuation high on page one.",
+    hardSkills: ["Mergers & acquisitions", "Due diligence & deal execution", "Financial modeling & valuation", "Post-merger integration", "Strategic planning", "Deal structuring", "Corporate finance"],
+    softSkills: ["Analytical thinking", "Negotiation", "Communication", "Project management", "Stakeholder management"],
+    atsKeywords: ["Mergers & Acquisitions", "Due Diligence", "Financial Modeling", "Valuation", "Strategic Planning", "Deal Execution", "Corporate Finance"],
+    atsNote:
+      "Group related keywords (\"M&A: due diligence, deal execution, post-merger integration\"; \"Financial: valuation, modeling, corporate finance\"), and write bullets that combine an action verb, a keyword and a quantifiable result.",
+  },
+  "customer-support-specialist": {
+    include:
+      "Contact details, a professional summary, a skills section mixing tools and soft skills tailored to the posting, work experience in reverse chronological order with quantified results, and education.",
+    length:
+      "One to two pages — keep ticket-resolution and communication skills high, name your support platforms exactly, and quantify CSAT, resolution time and ticket volume.",
+    hardSkills: ["Ticket resolution", "CRM & helpdesk (Zendesk, Intercom, Salesforce Service Cloud)", "Live chat & email support", "Issue escalation", "Knowledge-base management", "Troubleshooting", "Phone support"],
+    softSkills: ["Active listening", "Communication", "Conflict resolution", "Empathy", "Time management"],
+    atsKeywords: ["Customer Support", "Ticket Resolution", "Zendesk", "Customer Satisfaction", "Issue Escalation", "Conflict Resolution", "Service Quality"],
+    atsNote:
+      "Use terms like \"customer support\", \"ticket resolution\" and \"issue escalation\" naturally, and name platforms exactly (Zendesk, Salesforce Service Cloud, Intercom) rather than \"helpdesk software\"; quantify CSAT, resolution time and volume.",
+  },
+  "childcare-worker": {
+    include:
+      "Contact details prominently, a summary, a skills section balancing hard and soft skills, work experience, and a certifications section (CPR/First Aid, CDA, ECE) shown in the summary and education.",
+    length:
+      "One to two pages in a hybrid format — display required certifications (CPR, First Aid, CDA) prominently, and use clear headings and bullets for child-development and safety skills.",
+    hardSkills: ["Child development knowledge", "Safety & emergency procedures", "Educational activity planning", "Pediatric first aid", "Behaviour guidance", "Parent communication", "Documentation & record keeping"],
+    softSkills: ["Patience", "Communication", "Creativity", "Teamwork", "Organization"],
+    atsKeywords: ["Childcare", "Child Development", "Early Childhood Education", "CPR/First Aid", "Activity Planning", "Parental Communication", "Safety Procedures"],
+    atsNote:
+      "Review the posting for required credentials (CPR, First Aid, CDA, ECE) and display them in the summary and education, and balance hard skills (child development, safety procedures) with soft skills (patience, communication).",
+  },
 };
 
 const BY_SLUG = ROLE_CV_CONTENT;
