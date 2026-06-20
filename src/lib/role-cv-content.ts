@@ -1194,6 +1194,132 @@ export const ROLE_CV_CONTENT: Record<string, RoleCvContent> = {
     atsKeywords: ["Claims Investigation", "Damage Assessment", "Policy Interpretation", "Xactimate", "Subrogation", "Liability Assessment", "Property & Casualty", "Fraud Detection"],
     atsNote: "Missing exact terms like 'Liability Assessment', 'Subrogation' or 'Guidewire'/'Xactimate' can auto-disqualify you; include your state adjuster license and certifications (AIC, CPCU) and quantify claims handled and cycle-time/cost outcomes.",
   },
+  "underwriter": {
+    include:
+      "A summary, a Skills section grouped (underwriting + risk + product lines), a Certifications section (CPCU, AU), and Experience showing loss-ratio and retention outcomes.",
+    length: "One to two pages; group skills into categories for readability.",
+    hardSkills: ["Risk assessment", "Policy analysis", "Loss ratio analysis", "Catastrophe modeling", "Reinsurance", "Premium determination", "Regulatory compliance", "Property & casualty / life product knowledge"],
+    softSkills: ["Analytical judgment", "Negotiation", "Attention to detail", "Decision making"],
+    atsKeywords: ["Underwriting", "Risk Assessment", "Loss Ratio Analysis", "Policy Administration", "Regulatory Compliance", "Claims Management", "CPCU", "Customer Retention"],
+    atsNote: "97% of insurers use ATS — missing 'Underwriting', 'Loss Ratio Analysis' or 'Risk Assessment' can auto-disqualify you; name your line of business (auto/home/P&C/life), list CPCU or AU, and quantify loss-ratio and retention outcomes.",
+  },
+  "esthetician": {
+    include:
+      "A summary, a Licenses & Certifications section, a Skills section leading with technical treatments + tools, and Experience with quantified retail/rebooking results.",
+    length: "One to two pages; mirror the posting's exact treatment terms.",
+    hardSkills: ["Facials & skin analysis", "Chemical peels", "Microdermabrasion", "Waxing", "Microneedling", "Light therapy", "Sanitation protocols", "Skincare product knowledge"],
+    softSkills: ["Client communication", "Empathetic listening", "Attention to detail", "Retail sales"],
+    atsKeywords: ["Esthetician", "Skincare", "Chemical Peels", "Microdermabrasion", "Waxing", "Skin Analysis", "Sanitation", "Product Knowledge"],
+    atsNote: "Name your license (Licensed Esthetician, Certified Laser Technician) and use the posting's exact treatment words (microdermabrasion, chemical peels, waxing); quantify rebooking rate and retail product sales.",
+  },
+  "barber": {
+    include:
+      "Contact, a three-line summary, a Licenses & Certifications section in the top third (barber license, Barbicide, BBP), Experience with named shops + numbers, and a Skills section.",
+    length: "One page, single-column; save as PDF named with your full name + role.",
+    hardSkills: ["Fades & tapers", "Straight-razor shaves", "Beard trimming & lineups", "Precision haircutting", "Hair styling", "Color techniques", "POS / Booksy", "Retail product sales"],
+    softSkills: ["Client consultation", "Customer service", "Creativity", "Reliability"],
+    atsKeywords: ["Barber", "Fades", "Straight-Razor Shave", "Beard Trimming", "Precision Haircutting", "Cosmetology", "Client Consultation", "Customer Service"],
+    atsNote: "Put your state barber license + Barbicide/OSHA BBP in the top third, and lead every experience bullet with a verb and a number (cuts per shift, rebook %, Booksy stars, retail $); weave in 'precision haircutting' and 'client consultation'.",
+  },
+  "medical-receptionist": {
+    include:
+      "A summary, a Skills section (front-desk + EHR systems + compliance), and Experience weaving keywords into quantified workload (patients checked in, calls handled).",
+    length: "One to two pages; clean labeled sections, tailored to the posting.",
+    hardSkills: ["Appointment scheduling", "Electronic health records (Epic, Cerner, Athenahealth)", "Patient registration", "Medical billing & coding basics", "Insurance verification", "Medical terminology", "HIPAA compliance", "Data entry"],
+    softSkills: ["Multitasking", "Calm under pressure", "Communication", "Customer service"],
+    atsKeywords: ["Medical Receptionist", "EHR", "Appointment Scheduling", "Patient Registration", "Medical Terminology", "HIPAA Compliance", "Insurance Verification", "Medical Records"],
+    atsNote: "Name the EHR/EMR you've used (Epic, Cerner, Athenahealth) and use the posting's exact terms ('patient scheduling', 'medical records management'); quantify patient volume, call load and scheduling accuracy.",
+  },
+  "optician": {
+    include:
+      "A Professional Summary led by ABO status, a Skills section (dispensing + measurement + software), a Certifications section, and Experience with sales and accuracy metrics.",
+    length: "One to two pages; standard headings, concise bullet points, ATS-safe layout.",
+    hardSkills: ["Prescription interpretation", "Frame & lens fitting", "PD measurement", "Visual acuity testing", "Optical equipment operation", "Optical software (Eyefinity, VisionWeb)", "Insurance (EyeMed, VSP)", "Frame adjustment"],
+    softSkills: ["Customer service", "Attention to detail", "Communication", "Time management"],
+    atsKeywords: ["Optician", "ABO", "NCLE", "Dispensing", "Frame Fitting", "Lens Fitting", "PD Measurement", "Contact Lenses"],
+    atsNote: "Lead with ABO (and NCLE) certification and include exact dispensing keywords (frame fitting, lens fitting, PD measurement) plus the vision-plan/software names (EyeMed, VSP, Eyefinity); quantify dispensing accuracy and sales.",
+  },
+  "audiologist": {
+    include:
+      "A 2-3 sentence summary, an Education & Credentials section (Au.D., ASHA, state license — ATS filters on these), and a Skills section grouped by diagnostics/amplification/software.",
+    length: "One to two pages; standard headings, Calibri/Arial 10-12pt, no multi-column.",
+    hardSkills: ["Audiometric testing", "Hearing aid fitting", "Real ear measurement", "Cerumen management", "Tinnitus management", "Fitting platforms (NOAH, Phonak Target, Inspire)", "Vestibular assessment", "EHR"],
+    softSkills: ["Patient communication", "Empathy", "Critical thinking", "Analytical thinking"],
+    atsKeywords: ["Audiologist", "Au.D.", "ASHA", "Audiometric Testing", "Hearing Aid Fitting", "Real Ear Measurement", "NOAH", "Diagnostics"],
+    atsNote: "List Au.D., ASHA certification and state license by exact abbreviation (employers filter on them), and name fitting platforms/tests (NOAH, Phonak Target, real ear measurement) — mirror the posting's exact phrasing.",
+  },
+  "midwife": {
+    include:
+      "A summary establishing your clinical identity, a Certifications/Education section (CNM or Licensed Midwife), a Skills section (clinical + education), and Experience with caseload metrics.",
+    length: "One to two pages; no tables/graphics; action verbs (managed, provided, coordinated).",
+    hardSkills: ["Labor & delivery support", "Prenatal & postpartum care", "Maternal care", "Newborn assessment", "VBAC support", "Patient/prenatal education", "Evidence-based practice", "Obstetric assessment"],
+    softSkills: ["Empathy", "Active listening", "Composure under pressure", "Teamwork"],
+    atsKeywords: ["Certified Nurse-Midwife", "CNM", "Labor and Delivery", "Maternal Care", "Prenatal Care", "VBAC", "Patient Education", "Evidence-Based Practice"],
+    atsNote: "Include your exact credential ('Certified Nurse-Midwife (CNM)' or 'Licensed Midwife') and the posting's keywords ('labor and delivery', 'maternal care', 'VBAC', 'evidence-based practice'); quantify births attended and caseload.",
+  },
+  "paramedic": {
+    include:
+      "A 3-4 sentence summary quantifying your impact, a Certifications section using exact abbreviations, and a Skills section (clinical + soft) with measurable Experience.",
+    length: "One to two pages; EMS portals parse credential abbreviations exactly.",
+    hardSkills: ["Advanced life support (ALS)", "Patient assessment", "Airway management", "IV/IO access", "Cardiac monitoring & 12-lead", "Medication administration", "Trauma care", "MCI triage"],
+    softSkills: ["Crisis management", "Composure under pressure", "Teamwork", "Communication"],
+    atsKeywords: ["NREMT-P", "Paramedic", "ACLS", "PALS", "CPR/BLS", "Patient Assessment", "Airway Management", "ALS"],
+    atsNote: "Write credentials exactly as agencies parse them — 'NREMT-P' not 'National Registry Paramedic' — and list ACLS/PALS/ITLS/PHTLS; mirror the posting and attach measurable results (response times, calls per shift) to every bullet.",
+  },
+  "clinical-psychologist": {
+    include:
+      "A 3-4 sentence summary with the exact job title, a Licensure section, a Skills section (assessments + therapeutic approaches + software), and quantified Experience.",
+    length: "One to two pages; include the exact title 'Clinical Psychologist' to clear screeners.",
+    hardSkills: ["Psychological assessment", "Psychotherapy", "Cognitive behavioral therapy (CBT)", "DBT / ACT", "Suicide risk assessment", "Treatment planning", "Evidence-based interventions", "EHR / SPSS"],
+    softSkills: ["Empathy", "Active listening", "Clinical judgment", "Interdisciplinary collaboration"],
+    atsKeywords: ["Clinical Psychology", "Psychological Assessment", "Cognitive Behavioral Therapy", "Psychotherapy", "Treatment Planning", "Evidence-Based Interventions", "Licensed Clinical Psychologist", "HIPAA"],
+    atsNote: "Use the full phrase 'cognitive behavioral therapy' (not just CBT) and put the exact title 'Clinical Psychologist' and 'Licensed Clinical Psychologist' on the page; name modalities and assessments that match the posting and quantify caseload.",
+  },
+  "therapist": {
+    include:
+      "Licensure on a plain line under your name (exact state title), a summary stating who/how/outcomes you treat, a Skills section naming every modality, and quantified Experience.",
+    length: "One to two pages; ATS relies on literal matches — repeat the posting's phrasing verbatim.",
+    hardSkills: ["CBT", "DBT", "EMDR", "Motivational interviewing (MI)", "ACT", "Trauma-informed care", "Treatment planning", "Risk assessment & safety planning"],
+    softSkills: ["Empathy", "Active listening", "Rapport building", "Cultural competence"],
+    atsKeywords: ["Licensed Professional Counselor", "LPC", "LMHC", "CBT", "DBT", "EMDR", "Trauma-Informed Care", "Treatment Planning"],
+    atsNote: "Lead with the exact state license the requisition names (LPC, LMHC, LCMHC, LPCC) + state + license number under your name; name every evidence-based modality (CBT, DBT, EMDR) and specify populations/diagnoses, quantifying caseload ('28 weekly sessions').",
+  },
+  "firefighter": {
+    include:
+      "A tailored summary, a Skills section (10-15, grouped technical + soft), a Certifications section, and Experience with quantified outcomes.",
+    length: "One to two pages; Arial/Calibri 10-12pt, mirror the posting's keywords.",
+    hardSkills: ["Fire suppression", "Search & rescue", "SCBA & PPE operation", "HazMat response", "EMS (EMT/Paramedic)", "Apparatus operation", "Ventilation", "Vehicle extrication (Jaws of Life)"],
+    softSkills: ["Courage", "Physical fitness", "Teamwork", "Quick decision making"],
+    atsKeywords: ["Fire Suppression", "Search and Rescue", "HazMat", "EMT", "Firefighter I & II", "SCBA", "Incident Command", "NFPA"],
+    atsNote: "List Firefighter I & II, EMT, HazMat Operations and NFPA certifications (missing ones get you filtered) and mirror the posting's keywords; group 10-15 skills by category and quantify response outcomes.",
+  },
+  "police-officer": {
+    include:
+      "A summary, a Skills section (operations + investigation + systems), a Certifications section (POST, CIT), and Experience with quantified, accomplishment-driven bullets.",
+    length: "One to two pages; clean ATS-safe layout, no images.",
+    hardSkills: ["Patrol operations", "Criminal investigation", "Community policing", "De-escalation & crisis intervention", "Report writing & legal documentation", "Evidence collection", "Traffic enforcement", "CAD / RMS systems"],
+    softSkills: ["Integrity", "Decision making under pressure", "Communication", "Active listening"],
+    atsKeywords: ["Law Enforcement", "Patrol", "Criminal Investigation", "Community Policing", "De-escalation", "Report Writing", "POST Certified", "Crisis Intervention"],
+    atsNote: "Include POST certification, CIT training and SFST/FTO/SWAT credentials by name — missing them filters you out — and use exact terms (community policing, de-escalation, evidence collection); name CAD/RMS systems and quantify outcomes.",
+  },
+  "customer-success-manager": {
+    include:
+      "A tailored summary, a Skills section (CX strategy + platforms + retention), a Certifications section, and Experience with quantified churn/renewal outcomes.",
+    length: "One to two pages; clean layout, no images; mirror the posting's exact terms.",
+    hardSkills: ["Customer onboarding", "Churn analysis & reduction", "Renewal & expansion management", "CX strategy", "Salesforce", "Gainsight / Totango", "Account health scoring", "Product adoption"],
+    softSkills: ["Relationship building", "Communication", "Conflict resolution", "Cross-functional leadership"],
+    atsKeywords: ["Customer Success", "Churn Reduction", "Customer Retention", "Onboarding", "SaaS", "Salesforce", "Gainsight", "Renewals"],
+    atsNote: "If the posting says 'churn analysis' or 'customer onboarding', put those exact terms in your skills; name CS platforms (Salesforce, Gainsight, Totango) and quantify churn reduction %, renewal/expansion $ and adoption gains.",
+  },
+  "sales-engineer": {
+    include:
+      "A summary on cross-functional sales collaboration, a Skills section (10-15 technical + tools), certifications, and pre-sales Experience bullets that name deal context + tool + outcome.",
+    length: "One to two pages; keep summary and skills consistent so ATS matches both.",
+    hardSkills: ["Solution architecture", "Product demonstrations", "Requirements gathering", "Technical documentation", "Pre-sales engineering", "SQL / Python", "Cloud (AWS, Kubernetes, Docker)", "SaaS solutions"],
+    softSkills: ["Presentation", "Client communication", "Discovery", "Collaboration"],
+    atsKeywords: ["Sales Engineering", "Pre-Sales", "Solution Architecture", "Product Demonstrations", "Requirements Gathering", "SaaS", "Technical Documentation", "Cloud Computing"],
+    atsNote: "Reflect the same technical skills in both summary and skills section for ATS consistency; make each pre-sales bullet pull triple duty (deal context + tool/method + outcome) and mirror posting phrases like 'present technical information clearly'.",
+  },
 };
 
 const BY_SLUG = ROLE_CV_CONTENT;
