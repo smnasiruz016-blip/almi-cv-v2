@@ -2082,6 +2082,347 @@ export const FREE_CV_CONTENT: Record<string, FreeCvContent> = {
       "Foreigners generally need a work permit sponsored by the employer — check official Taiwanese sources before relying on any route.",
     localJobSites: ["104 Job Bank", "1111 Job Bank", "JobsDB", "LinkedIn"],
   },
+  indonesia: {
+    localTerm: "CV",
+    currency: "the Indonesian rupiah (IDR, Rp)",
+    searchContext:
+      "In Indonesia the document is the CV, and a free maker matters to a large young workforce applying into manufacturing, services, and the digital economy.",
+    jobMarket:
+      "Indonesia has a large economy — manufacturing, commodities, a fast-growing digital and startup sector, and services — with a big young workforce.",
+    cities: ["Jakarta", "Surabaya", "Bandung", "Medan", "Bekasi"],
+    formatNotes: [
+      "A CV is reverse-chronological and runs one to two pages.",
+      "A photo is commonly included, following regional practice.",
+      "Completing a full profile matters, as recruiters assess profile completeness on the platforms.",
+      "A keyword-aware layout helps with the platforms' matching tools.",
+    ],
+    workRouteNote:
+      "Foreigners generally need an employer-sponsored work permit (RPTKA) and KITAS — check official Indonesian sources before relying on any route.",
+    localJobSites: ["Jobstreet", "Glints", "Kalibrr", "LinkedIn", "Indeed"],
+  },
+  philippines: {
+    localTerm: "résumé (CV is used for academic and research roles)",
+    currency: "the Philippine peso (PHP, ₱)",
+    searchContext:
+      "In the Philippines the document is the résumé, and a free maker matters to graduates, BPO workers, and the many overseas Filipino workers preparing applications.",
+    jobMarket:
+      "The Philippines is a global business-process outsourcing hub, alongside services, healthcare, IT, and significant overseas Filipino worker (OFW) migration.",
+    cities: ["Manila", "Quezon City", "Cebu", "Davao", "Makati"],
+    formatNotes: [
+      "A résumé typically runs two to three pages.",
+      "Fresh graduates list their OJT (on-the-job training).",
+      "Licensed professions name the PRC license with its validity.",
+      "It commonly ends with three character references.",
+    ],
+    workRouteNote:
+      "Foreigners coming in generally need an Alien Employment Permit (AEP) and work visa — check official Philippine sources before relying on any route.",
+    localJobSites: ["JobStreet", "Kalibrr", "LinkedIn", "Indeed", "Bossjob"],
+  },
+  vietnam: {
+    localTerm: "CV",
+    currency: "the Vietnamese đồng (VND, ₫)",
+    searchContext:
+      "In Vietnam the document is the CV, and a free maker matters to a young workforce in a fast-growing manufacturing and tech economy.",
+    jobMarket:
+      "Vietnam is a fast-growing manufacturing and export hub (electronics, textiles), plus IT, tourism, and services.",
+    cities: ["Ho Chi Minh City", "Hanoi", "Da Nang", "Hai Phong", "Can Tho"],
+    formatNotes: [
+      "A CV is reverse-chronological and runs one to two pages.",
+      "A passport-sized photo is a major requirement — professional, dark attire, no beauty filters.",
+      "Vietnamese is expected for local roles, English for international ones.",
+      "Save it as a PDF to preserve formatting.",
+    ],
+    workRouteNote:
+      "Foreigners generally need a work permit arranged by the employer — check official Vietnamese sources before relying on any route.",
+    localJobSites: ["VietnamWorks", "TopCV", "LinkedIn", "Indeed"],
+  },
+  thailand: {
+    localTerm: "résumé",
+    currency: "the Thai baht (THB, ฿)",
+    searchContext:
+      "In Thailand the document is the résumé, and a free maker matters to graduates and workers in tourism, manufacturing, and services.",
+    jobMarket:
+      "Thailand's economy spans tourism and hospitality, manufacturing (automotive, electronics), agriculture, and services.",
+    cities: ["Bangkok", "Nonthaburi", "Chiang Mai", "Pattaya", "Phuket"],
+    formatNotes: [
+      "A résumé is reverse-chronological and runs one to two pages.",
+      "A professional photo is commonly included, following regional practice.",
+      "Thai is used for local roles, English for international and tourism roles.",
+      "The major boards offer tracking-system-friendly templates.",
+    ],
+    workRouteNote:
+      "Foreigners generally need a work permit and Non-B visa arranged by the employer — check official Thai sources before relying on any route.",
+    localJobSites: ["JobsDB", "JobThai", "LinkedIn", "Indeed"],
+  },
+  malaysia: {
+    localTerm: "resume (CV for academic roles)",
+    currency: "the Malaysian ringgit (MYR, RM)",
+    searchContext:
+      "In Malaysia the document is the resume, and a free maker matters to a multilingual workforce applying into electronics, finance, and shared services.",
+    jobMarket:
+      "Malaysia's economy spans manufacturing (electronics), palm oil and commodities, finance, shared services, and tourism, with a multilingual workforce.",
+    cities: ["Kuala Lumpur", "George Town", "Johor Bahru", "Ipoh", "Kuching"],
+    formatNotes: [
+      "A resume is no more than two pages, one for new graduates.",
+      "A photo is generally expected, though it is optional.",
+      "English is widely used, with Malay common for local roles.",
+      "It is reverse-chronological.",
+    ],
+    workRouteNote:
+      "Foreigners generally need an Employment Pass sponsored by the employer — check official Malaysian sources before relying on any route.",
+    localJobSites: ["JobStreet", "Maukerja", "LinkedIn", "Indeed"],
+  },
+  singapore: {
+    localTerm: "résumé (CV is used interchangeably)",
+    currency: "the Singapore dollar (SGD, S$)",
+    searchContext:
+      "In Singapore the document is the résumé, and a free maker matters to a heavily international workforce in finance, tech, and professional services.",
+    jobMarket:
+      "Singapore is a global business and finance hub — banking, tech, biotech, logistics, and professional services — and heavily international.",
+    cities: ["Central Business District", "Jurong", "Tampines", "Woodlands", "Changi"],
+    formatNotes: [
+      "A résumé is concise, one to two pages, and a little more detailed than US resumes.",
+      "A professional photo is common practice, unlike many Western markets.",
+      "Tailor it to the role with keywords from the posting.",
+      "PDF is the usual format.",
+    ],
+    workRouteNote:
+      "Foreigners generally need an Employment Pass or S Pass sponsored by the employer; employers must advertise on MyCareersFuture for 14 days first — check official MOM sources before relying on any route.",
+    localJobSites: ["MyCareersFuture", "JobStreet", "LinkedIn", "Indeed"],
+  },
+  myanmar: {
+    localTerm: "CV",
+    currency: "the Myanmar kyat (MMK, K)",
+    searchContext:
+      "In Myanmar the document is the CV, and a free maker matters to graduates and workers in a market where NGOs and international organisations are notable employers.",
+    jobMarket:
+      "Myanmar's economy spans agriculture, manufacturing (garments), trade, and services; the formal market has been disrupted, with NGOs and international organisations among employers.",
+    cities: ["Yangon", "Mandalay", "Naypyidaw", "Bago", "Mawlamyine"],
+    formatNotes: [
+      "A CV is reverse-chronological.",
+      "English or Burmese is used depending on the role — a Burmese version can help.",
+      "It runs one to two pages.",
+      "Keep it concise and clear.",
+    ],
+    workRouteNote: null,
+    localJobSites: ["JobNet.com.mm", "MyJobs.com.mm", "JobsInYangon.com", "LinkedIn"],
+  },
+  brunei: {
+    localTerm: "CV",
+    currency: "the Brunei dollar (BND, B$), interchangeable with the Singapore dollar",
+    searchContext:
+      "In Brunei the document is the CV, and a free maker matters to graduates and workers in oil, the public sector, and services.",
+    jobMarket:
+      "Brunei's economy is dominated by oil and gas, alongside a large public sector, Islamic finance, and services.",
+    cities: ["Bandar Seri Begawan", "Kuala Belait", "Seria", "Tutong"],
+    formatNotes: [
+      "A CV is in English or Malay, depending on the role.",
+      "It details education, work history, skills, and achievements.",
+      "References from previous employers or character referees are commonly included.",
+      "It is reverse-chronological.",
+    ],
+    workRouteNote:
+      "Foreigners generally need an employment pass / work permit arranged by the employer — check official Bruneian sources before relying on any route.",
+    localJobSites: ["JobCentre Brunei", "JobsBrunei.com", "BruneiWork.com", "LinkedIn"],
+  },
+  cambodia: {
+    localTerm: "CV",
+    currency: "the Cambodian riel (KHR), with the US dollar widely used",
+    searchContext:
+      "In Cambodia the document is the CV, and a free maker matters to graduates and workers in garments, tourism, and services.",
+    jobMarket:
+      "Cambodia's economy is led by garments and footwear manufacturing, tourism, construction, agriculture, and a growing services sector.",
+    cities: ["Phnom Penh", "Siem Reap", "Battambang", "Sihanoukville"],
+    formatNotes: [
+      "A CV is reverse-chronological.",
+      "Include only key personal details (name, phone, professional email) and avoid marital status or age unless requested.",
+      "English is common for international and NGO roles, Khmer for local ones.",
+      "List relevant skills and achievements.",
+    ],
+    workRouteNote:
+      "Foreigners generally need a work permit and employment card arranged by the employer — check official Cambodian sources before relying on any route.",
+    localJobSites: ["CamHR", "Pelprek", "Bong Thom", "LinkedIn"],
+  },
+  laos: {
+    localTerm: "CV",
+    currency: "the Lao kip (LAK)",
+    searchContext:
+      "In Laos the document is the CV, and a free maker matters to graduates and workers in hydropower, tourism, and development organisations.",
+    jobMarket:
+      "Laos's economy is built on hydropower, mining, agriculture, tourism, and a growing services sector, with many roles tied to regional investment and development organisations.",
+    cities: ["Vientiane", "Pakse", "Savannakhet", "Luang Prabang"],
+    formatNotes: [
+      "A CV is reverse-chronological.",
+      "Lao is used for local roles, English for international and ASEAN-facing employers.",
+      "Keep it concise and clear.",
+      "List languages and relevant skills.",
+    ],
+    workRouteNote:
+      "Foreigners generally need a work permit and stay permit arranged by the employer — check official Lao sources before relying on any route.",
+    localJobSites: ["108.jobs", "CVConnect", "LinkedIn"],
+  },
+  "timor-leste": {
+    localTerm: "CV",
+    currency: "the US dollar (USD, $)",
+    searchContext:
+      "In Timor-Leste the document is the CV, and a free maker matters in a market where oil, the public sector, and NGOs are the main employers.",
+    jobMarket:
+      "Timor-Leste's economy rests on oil and gas, agriculture (notably coffee), the public sector, and a large NGO, UN, and development presence.",
+    cities: ["Dili", "Baucau", "Maliana", "Suai"],
+    formatNotes: [
+      "Employers often expect a photo, marital status, and sometimes religion for certain roles.",
+      "Hiring leans on relationships, so the references section matters.",
+      "Fluency in Tetum or Portuguese is valued for government and community roles.",
+      "Applications often include a cover letter and certificates.",
+    ],
+    workRouteNote:
+      "Foreigners generally need a work visa and permit arranged by the employer — check official Timor-Leste sources before relying on any route.",
+    localJobSites: ["Timor.Work", "JobsInTimorLeste.com", "UN Jobs (international roles)", "ReliefWeb"],
+  },
+  kazakhstan: {
+    localTerm: "résumé (резюме)",
+    currency: "the Kazakhstani tenge (KZT, ₸)",
+    searchContext:
+      "In Kazakhstan the document is a résumé, and a free maker matters to graduates and workers in oil, mining, finance, and a growing tech sector.",
+    jobMarket:
+      "Kazakhstan's economy is led by oil and gas and mining, with finance, agriculture, logistics, and a growing tech sector; Russian-English bilingualism is valued.",
+    cities: ["Almaty", "Astana", "Shymkent", "Karaganda", "Aktobe"],
+    formatNotes: [
+      "A résumé is reverse-chronological.",
+      "Russian-English bilingualism is among the most sought-after skills.",
+      "The market is relationship-driven, so referrals matter alongside the CV.",
+      "Keep it clear and concise.",
+    ],
+    workRouteNote:
+      "Foreigners generally need an employer-sponsored work permit — check official Kazakhstani sources before relying on any route.",
+    localJobSites: ["hh.kz", "Enbek.kz", "Rabota.kz", "LinkedIn"],
+  },
+  uzbekistan: {
+    localTerm: "résumé (rezyume)",
+    currency: "the Uzbekistani soʻm (UZS)",
+    searchContext:
+      "In Uzbekistan the document is a résumé, and a free maker matters to a young workforce applying into manufacturing, gas, and a growing IT sector.",
+    jobMarket:
+      "Uzbekistan's economy spans cotton and textiles, natural gas, manufacturing, and a growing IT sector (the IT Park initiative), with a young workforce.",
+    cities: ["Tashkent", "Samarkand", "Namangan", "Andijan", "Bukhara"],
+    formatNotes: [
+      "A professional passport-style headshot is expected, usually top-right.",
+      "CVs often include more personal detail than Western ones — full name (with patronymic), nationality, and marital status.",
+      "Post-Soviet formality is common.",
+      "List languages with levels.",
+    ],
+    workRouteNote:
+      "Foreigners generally need an employer-sponsored work permit — check official Uzbek sources before relying on any route.",
+    localJobSites: ["hh.uz", "UzJobs", "RESUME.UZ", "LinkedIn"],
+  },
+  georgia: {
+    localTerm: "CV",
+    currency: "the Georgian lari (GEL, ₾)",
+    searchContext:
+      "In Georgia the document is the CV, and a free maker matters to graduates, workers, and the many remote workers based in Tbilisi.",
+    jobMarket:
+      "Georgia's economy spans tourism, agriculture and wine, logistics and transit, banking, and a growing IT sector, with Tbilisi a regional hub for remote workers.",
+    cities: ["Tbilisi", "Batumi", "Kutaisi", "Rustavi"],
+    formatNotes: [
+      "A CV is reverse-chronological.",
+      "Georgian and English are both commonly used, and the main boards offer English versions.",
+      "Keep it concise and clear.",
+      "List languages with levels.",
+    ],
+    workRouteNote:
+      "Nationals of many countries can stay and work relatively easily, but rules vary — check official Georgian sources before relying on any route.",
+    localJobSites: ["HR.ge", "Jobs.ge", "CV.ge", "LinkedIn"],
+  },
+  azerbaijan: {
+    localTerm: "CV",
+    currency: "the Azerbaijani manat (AZN, ₼)",
+    searchContext:
+      "In Azerbaijan the document is the CV, and a free maker matters to graduates and workers in oil, construction, and services.",
+    jobMarket:
+      "Azerbaijan's economy is dominated by oil and gas, with construction, agriculture, logistics, and a growing services sector.",
+    cities: ["Baku", "Ganja", "Sumqayit", "Mingachevir"],
+    formatNotes: [
+      "A CV is reverse-chronological.",
+      "Fluency in Azerbaijani or Russian is a major advantage for local firms, with English valued internationally.",
+      "A concise, scannable format with metrics reads best.",
+      "It is best to avoid boastful language.",
+    ],
+    workRouteNote:
+      "Foreigners generally need an employer-sponsored work permit — check official Azerbaijani sources before relying on any route.",
+    localJobSites: ["HelloJob.az", "Boss.az", "JobSearch.az", "LinkedIn"],
+  },
+  armenia: {
+    localTerm: "CV",
+    currency: "the Armenian dram (AMD, ֏)",
+    searchContext:
+      "In Armenia the document is the CV, and a free maker matters to graduates and workers in a fast-growing tech sector and a strong diaspora network.",
+    jobMarket:
+      "Armenia has a fast-growing IT and tech sector, alongside services, manufacturing, agriculture, and tourism, with a strong diaspora network.",
+    cities: ["Yerevan", "Gyumri", "Vanadzor", "Vagharshapat"],
+    formatNotes: [
+      "A CV is reverse-chronological.",
+      "Armenian and English are used, often alongside Russian.",
+      "The main portals offer online CV builders.",
+      "Keep it concise and clear; list languages.",
+    ],
+    workRouteNote:
+      "Foreigners generally need a residence and work permit — check official Armenian sources before relying on any route.",
+    localJobSites: ["Staff.am", "Job.am", "CareerCenter.am", "LinkedIn"],
+  },
+  kyrgyzstan: {
+    localTerm: "résumé (резюме)",
+    currency: "the Kyrgyzstani som (KGS)",
+    searchContext:
+      "In Kyrgyzstan the document is a résumé, and a free maker matters to a young workforce in agriculture, mining, and services.",
+    jobMarket:
+      "Kyrgyzstan's economy spans agriculture, mining (notably gold), services, and remittances from workers abroad, with a young workforce.",
+    cities: ["Bishkek", "Osh", "Jalal-Abad", "Karakol"],
+    formatNotes: [
+      "CVs often include marital status, passport details, and a photo, unlike Western resumes.",
+      "Russian or Kyrgyz fluency is a major plus.",
+      "Networking matters, so listing two or three local referees with mobile numbers helps.",
+      "It is reverse-chronological.",
+    ],
+    workRouteNote:
+      "Foreigners generally need a work permit arranged by the employer — check official Kyrgyz sources before relying on any route.",
+    localJobSites: ["headhunter.kg", "Lalafo", "LinkedIn"],
+  },
+  tajikistan: {
+    localTerm: "résumé (резюме)",
+    currency: "the Tajikistani somoni (TJS)",
+    searchContext:
+      "In Tajikistan the document is a résumé, and a free maker matters in a market shaped by hydropower, agriculture, and large-scale labour migration.",
+    jobMarket:
+      "Tajikistan's economy is powered by hydropower and agriculture, which employs much of the workforce, with significant labour migration and remittances.",
+    cities: ["Dushanbe", "Khujand", "Bokhtar", "Kulob"],
+    formatNotes: [
+      "A reverse-chronological but formal, text-heavy format with clear section headers is preferred.",
+      "CVs traditionally include personal details such as age and marital status.",
+      "Russian fluency is often essential.",
+      "List languages with levels.",
+    ],
+    workRouteNote:
+      "Foreigners generally need a work permit arranged by the employer — check official Tajik sources before relying on any route.",
+    localJobSites: ["Indeed", "the UN jobs portal", "DevelopmentAid (development roles)", "LinkedIn"],
+  },
+  turkmenistan: {
+    localTerm: "résumé (резюме)",
+    currency: "the Turkmenistani manat (TMT)",
+    searchContext:
+      "In Turkmenistan the document is a résumé, and a free maker matters to workers in oil, gas, construction, and the large state sector.",
+    jobMarket:
+      "Turkmenistan's economy is dominated by oil, gas, and a large state sector, with construction, agriculture (cotton), and education; demand spans specialists, drivers, and laborers.",
+    cities: ["Ashgabat", "Türkmenabat", "Daşoguz", "Mary"],
+    formatNotes: [
+      "A structured one-to-two-page format with clear sections is preferred.",
+      "Include a professional headshot, birthdate, marital status, and nationality, which are standard expectations.",
+      "Use full job titles and formal language.",
+      "Sector-specific terms (for example, the Galkynysh gas field) signal local awareness.",
+    ],
+    workRouteNote:
+      "Foreigners generally need a work permit arranged by the employer — check official Turkmen sources before relying on any route.",
+    localJobSites: ["Business Turkmenistan (business.com.tm)", "the government employment portal", "Indeed", "LinkedIn"],
+  },
 };
 
 export function getFreeCvContent(slug: string): FreeCvContent | undefined {
