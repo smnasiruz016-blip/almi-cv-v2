@@ -1119,6 +1119,384 @@ export const FREE_CV_CONTENT: Record<string, FreeCvContent> = {
       "Nordic citizens can work freely; others, including EU citizens, need a work and residence permit — check official Faroese sources before relying on any route.",
     localJobSites: ["starv.fo (ALS)", "JobIsland.com", "EURAXESS (research roles)", "Indeed"],
   },
+  poland: {
+    localTerm: "CV",
+    currency: "the Polish złoty (PLN, zł)",
+    searchContext:
+      "In Poland the document is the CV, and a free maker matters to students, graduates, and the many people applying into IT, shared-services, and manufacturing roles.",
+    jobMarket:
+      "Poland has a large EU economy with major IT and shared-services centres, manufacturing, logistics, and a big outsourcing sector.",
+    cities: ["Warsaw", "Kraków", "Wrocław", "Poznań", "Gdańsk", "Łódź"],
+    formatNotes: [
+      "The top lists name, contact, city (no full address), and a LinkedIn link.",
+      "A photo in the top-right is widely expected (about 3 x 4 cm), though not legally required.",
+      "The RODO (GDPR) data-processing consent clause at the bottom is effectively mandatory — employers cannot process a CV without it.",
+      "It is reverse-chronological.",
+    ],
+    workRouteNote:
+      "Non-EU nationals generally need a work permit and national (D) visa — check official Polish government sources before relying on any route.",
+    localJobSites: ["Pracuj.pl", "OLX Praca", "LinkedIn", "Indeed"],
+  },
+  russia: {
+    localTerm: "résumé (резюме)",
+    currency: "the Russian rouble (RUB, ₽)",
+    searchContext:
+      "In Russia the document is a résumé (резюме), and a free maker matters to students, graduates, and workers in a large, largely Russian-language market.",
+    jobMarket:
+      "Russia's economy spans energy, manufacturing, IT, and services, with a hiring market that is largely domestic and Russian-language.",
+    cities: ["Moscow", "Saint Petersburg", "Novosibirsk", "Yekaterinburg", "Kazan"],
+    formatNotes: [
+      "A résumé is usually detailed and written in Russian, with English for international firms.",
+      "A photo and date of birth are commonly included.",
+      "It uses a clear, concise structure with skills and experience.",
+      "References are sometimes expected.",
+    ],
+    workRouteNote:
+      "Internationals usually need a work permit or Highly Qualified Specialist (HQS) permit arranged by the employer — check official Russian sources before relying on any route.",
+    localJobSites: ["hh.ru (HeadHunter)", "SuperJob", "Avito Rabota", "Rabota.ru"],
+  },
+  ukraine: {
+    localTerm: "CV (резюме)",
+    currency: "the Ukrainian hryvnia (UAH, ₴)",
+    searchContext:
+      "In Ukraine the document is a CV (резюме), and a free maker matters to students, graduates, and the large IT and remote-work workforce.",
+    jobMarket:
+      "Ukraine's economy is strong in IT and software outsourcing, agriculture, and services; the war has reshaped the market, with significant remote and diaspora work.",
+    cities: ["Kyiv", "Kharkiv", "Lviv", "Dnipro", "Odesa"],
+    formatNotes: [
+      "Europass is recognised, but employers expect a detailed two-to-three-page document.",
+      "A professional, passport-style photo is standard.",
+      "It is typically written in the past tense.",
+      "Measurable, quantifiable results are emphasised.",
+    ],
+    workRouteNote:
+      "Internationals generally need a work permit arranged by the employer — check official Ukrainian sources before relying on any route.",
+    localJobSites: ["Work.ua", "Robota.ua", "Djinni (IT roles)", "LinkedIn"],
+  },
+  "czech-republic": {
+    localTerm: "CV (životopis)",
+    currency: "the Czech koruna (CZK, Kč)",
+    searchContext:
+      "In the Czech Republic the document is a CV (životopis), and a free maker matters to students, graduates, and internationals applying into manufacturing, IT, and services.",
+    jobMarket:
+      "The Czech economy is strong in manufacturing (automotive), IT and shared services, engineering, and tourism, with low unemployment.",
+    cities: ["Prague", "Brno", "Ostrava", "Plzeň", "Olomouc"],
+    formatNotes: [
+      "A clear, predictable structure helps recruiters and tracking systems scan quickly.",
+      "Personal information often includes date of birth, a photo, and nationality.",
+      "A three-to-five-sentence professional summary follows the personal details.",
+      "A Language Skills section with proficiency levels is expected; the CV is reverse-chronological.",
+    ],
+    workRouteNote:
+      "Non-EU nationals generally need an Employee Card or EU Blue Card — check official Czech sources before relying on any route.",
+    localJobSites: ["Jobs.cz", "Prace.cz", "Profesia.cz", "LinkedIn", "Indeed"],
+  },
+  romania: {
+    localTerm: "CV",
+    currency: "the Romanian leu (RON)",
+    searchContext:
+      "In Romania the document is the CV, and a free maker matters to students, graduates, and the large IT and outsourcing workforce.",
+    jobMarket:
+      "Romania's economy is strong in IT and outsourcing, automotive manufacturing, agriculture, and services, with a notable tech sector in Bucharest, Cluj-Napoca, and Timișoara.",
+    cities: ["Bucharest", "Cluj-Napoca", "Timișoara", "Iași", "Constanța"],
+    formatNotes: [
+      "Europass is expected for entry-level and public-sector roles.",
+      "Many private recruiters find Europass dated and prefer a cleaner, mobile-friendly layout.",
+      "A CV runs one to two pages and is reverse-chronological.",
+      "Languages are worth listing with levels.",
+    ],
+    workRouteNote:
+      "Non-EU nationals generally need a work permit and long-stay visa — check official Romanian (IGI) sources before relying on any route.",
+    localJobSites: ["eJobs", "BestJobs", "OLX Locuri de Muncă", "LinkedIn", "Indeed"],
+  },
+  hungary: {
+    localTerm: "CV (önéletrajz)",
+    currency: "the Hungarian forint (HUF, Ft)",
+    searchContext:
+      "In Hungary the document is a CV (önéletrajz), and a free maker matters to students, graduates, and internationals applying into manufacturing and shared-services roles.",
+    jobMarket:
+      "Hungary's economy is led by automotive and manufacturing, shared-services centres, IT, and tourism, with many international firms around Budapest.",
+    cities: ["Budapest", "Debrecen", "Szeged", "Miskolc", "Győr"],
+    formatNotes: [
+      "A CV is no more than two pages.",
+      "Most HR specialists expect a photo and may find its absence odd.",
+      "Nationality and work-permit status are worth including where relevant.",
+      "Language skills are valued, and modest, error-free phrasing matters.",
+    ],
+    workRouteNote:
+      "Non-EU nationals generally need a work / residence permit (or EU Blue Card) — check official Hungarian sources before relying on any route.",
+    localJobSites: ["Profession.hu", "CVonline.hu", "LinkedIn", "Indeed"],
+  },
+  bulgaria: {
+    localTerm: "CV",
+    currency: "the euro (EUR, €), which replaced the Bulgarian lev on 1 January 2026",
+    searchContext:
+      "In Bulgaria the document is the CV, and a free maker matters to students, graduates, and the growing IT and outsourcing workforce.",
+    jobMarket:
+      "Bulgaria's economy is strong in IT and outsourcing, manufacturing, tourism, and agriculture, with a growing tech sector in Sofia and Plovdiv.",
+    cities: ["Sofia", "Plovdiv", "Varna", "Burgas", "Ruse"],
+    formatNotes: [
+      "The Europass format is recommended and commonly expected.",
+      "A brief cover letter is usually requested alongside the CV.",
+      "A CV runs one to two pages and is reverse-chronological.",
+      "Languages are worth listing with levels.",
+    ],
+    workRouteNote:
+      "Non-EU nationals generally need a work / single permit (or EU Blue Card) — check official Bulgarian sources before relying on any route.",
+    localJobSites: ["jobs.bg", "zaplata.bg", "JobTiger", "LinkedIn", "Indeed"],
+  },
+  croatia: {
+    localTerm: "CV (životopis)",
+    currency: "the euro (EUR, €)",
+    searchContext:
+      "In Croatia the document is a CV (životopis), and a free maker matters to students, graduates, and the many workers in a tourism-heavy economy.",
+    jobMarket:
+      "Croatia's economy leans on tourism as a major pillar, alongside shipbuilding, manufacturing, IT, and agriculture.",
+    cities: ["Zagreb", "Split", "Rijeka", "Osijek", "Zadar"],
+    formatNotes: [
+      "The Europass format is commonly used.",
+      "A CV runs one to two pages and is reverse-chronological.",
+      "A photo is often included, following regional practice.",
+      "Languages are worth listing with levels.",
+    ],
+    workRouteNote:
+      "Non-EU nationals generally need a residence and work permit — check official Croatian sources before relying on any route.",
+    localJobSites: ["MojPosao", "Posao.hr", "LinkedIn", "Indeed"],
+  },
+  slovakia: {
+    localTerm: "CV (životopis)",
+    currency: "the euro (EUR, €)",
+    searchContext:
+      "In Slovakia the document is a CV (životopis), and a free maker matters to students, graduates, and internationals applying into manufacturing and shared-services roles.",
+    jobMarket:
+      "Slovakia is a major automotive manufacturer (one of the largest car producers per capita), with strengths also in electronics, IT, and shared services.",
+    cities: ["Bratislava", "Košice", "Žilina", "Nitra", "Prešov"],
+    formatNotes: [
+      "The Europass or Profesia CV template is commonly used.",
+      "A brief, one-page cover letter usually accompanies the CV.",
+      "It is reverse-chronological.",
+      "Languages are worth listing with levels.",
+    ],
+    workRouteNote:
+      "Non-EU nationals generally need a single permit or EU Blue Card — check official Slovak sources before relying on any route.",
+    localJobSites: ["Profesia.sk", "LinkedIn", "Indeed"],
+  },
+  slovenia: {
+    localTerm: "CV (življenjepis)",
+    currency: "the euro (EUR, €)",
+    searchContext:
+      "In Slovenia the document is a CV (življenjepis), and a free maker matters to students, graduates, and internationals applying into manufacturing, pharma, and IT.",
+    jobMarket:
+      "Slovenia's economy is strong in manufacturing, automotive components, pharmaceuticals, IT, and tourism.",
+    cities: ["Ljubljana", "Maribor", "Celje", "Kranj", "Koper"],
+    formatNotes: [
+      "The Europass format is commonly used.",
+      "Applications are usually in Slovenian, with some employers open to English, German, or Italian.",
+      "A CV plus cover letter is expected.",
+      "It is reverse-chronological.",
+    ],
+    workRouteNote:
+      "Non-EU nationals generally need a single residence-and-work permit or EU Blue Card — check official Slovenian sources before relying on any route.",
+    localJobSites: ["MojeDelo", "the public employment service (ZRSZ)", "LinkedIn", "Indeed"],
+  },
+  estonia: {
+    localTerm: "CV",
+    currency: "the euro (EUR, €)",
+    searchContext:
+      "In Estonia the document is the CV, and a free maker matters to students, graduates, and internationals applying into a digital-first tech economy.",
+    jobMarket:
+      "Estonia has a digital-first economy with a strong tech and startup sector (e-Estonia), plus manufacturing, logistics, and services.",
+    cities: ["Tallinn", "Tartu", "Narva", "Pärnu"],
+    formatNotes: [
+      "Estonian CVs value efficiency, clarity, and directness.",
+      "A professional headshot is common and often expected, unlike in the UK or US.",
+      "Apply in the language of the advertisement.",
+      "List languages (Estonian, English, Russian); the CV is reverse-chronological.",
+    ],
+    workRouteNote:
+      "Non-EU nationals generally need a work-eligible residence permit or EU Blue Card — check official Estonian sources before relying on any route.",
+    localJobSites: ["CV Keskus", "CV.ee", "the public employment fund (Töötukassa)", "LinkedIn"],
+  },
+  lithuania: {
+    localTerm: "CV",
+    currency: "the euro (EUR, €)",
+    searchContext:
+      "In Lithuania the document is the CV, and a free maker matters to students, graduates, and internationals applying into fintech and shared-services roles.",
+    jobMarket:
+      "Lithuania's economy is strong in fintech and shared services, manufacturing, logistics, and a growing tech sector in Vilnius and Kaunas.",
+    cities: ["Vilnius", "Kaunas", "Klaipėda", "Šiauliai", "Panevėžys"],
+    formatNotes: [
+      "Europass is widely accepted, and the CV runs up to two pages.",
+      "A photo is optional.",
+      "A separate language-skills section is valued.",
+      "English suits international firms and Lithuanian local employers; the CV is reverse-chronological.",
+    ],
+    workRouteNote:
+      "Non-EU nationals generally need a work permit or EU Blue Card — check official Lithuanian sources before relying on any route.",
+    localJobSites: ["CVbankas", "CV-Online (cvonline.lt)", "CVmarket", "LinkedIn"],
+  },
+  latvia: {
+    localTerm: "CV",
+    currency: "the euro (EUR, €)",
+    searchContext:
+      "In Latvia the document is the CV, and a free maker matters to students, graduates, and internationals applying into services, logistics, and IT around Riga.",
+    jobMarket:
+      "Latvia's economy is led by services, logistics and transit, manufacturing, IT, and finance, centred on Riga.",
+    cities: ["Riga", "Daugavpils", "Liepāja", "Jelgava", "Jūrmala"],
+    formatNotes: [
+      "Adapt the CV to Latvian and European (Europass) norms.",
+      "It runs up to two pages and is reverse-chronological.",
+      "List languages (Latvian, Russian, English).",
+      "A photo is commonly included, following regional practice.",
+    ],
+    workRouteNote:
+      "Non-EU nationals generally need a work-eligible residence permit or EU Blue Card — check official Latvian (NVA / OCMA) sources before relying on any route.",
+    localJobSites: ["CV.lv (CV-Online)", "VisiDarbi.lv", "the State Employment Agency (NVA)", "LinkedIn"],
+  },
+  serbia: {
+    localTerm: "CV (biografija)",
+    currency: "the Serbian dinar (RSD)",
+    searchContext:
+      "In Serbia the document is a CV (biografija), and a free maker matters to students, graduates, and the fast-growing IT and outsourcing workforce.",
+    jobMarket:
+      "Serbia's economy is strong in IT and outsourcing (a fast-growing sector), manufacturing, agriculture, and services.",
+    cities: ["Belgrade", "Novi Sad", "Niš", "Kragujevac", "Subotica"],
+    formatNotes: [
+      "A CV is usually a PDF, often in English for international and IT roles.",
+      "It runs one to two pages and is reverse-chronological.",
+      "A photo is commonly included, following regional practice.",
+      "Languages are worth listing with levels.",
+    ],
+    workRouteNote:
+      "Non-nationals generally need a work permit and temporary residence — check official Serbian sources before relying on any route.",
+    localJobSites: ["Poslovi Infostud", "HelloWorld.rs (IT roles)", "LinkedIn", "Indeed"],
+  },
+  albania: {
+    localTerm: "CV",
+    currency: "the Albanian lek (ALL, L)",
+    searchContext:
+      "In Albania the document is the CV, and a free maker matters to students, graduates, and workers moving into services, tourism, and outsourcing roles.",
+    jobMarket:
+      "Albania's economy is led by services, tourism, agriculture, textiles and footwear, and a growing call-centre and outsourcing sector.",
+    cities: ["Tirana", "Durrës", "Vlorë", "Shkodër", "Elbasan"],
+    formatNotes: [
+      "A CV is usually written in Albanian, though English is valued in the business community.",
+      "It is reverse-chronological and runs one to two pages.",
+      "Qualifications, skills, internships, and volunteer work are worth emphasising.",
+      "Languages are worth listing with levels.",
+    ],
+    workRouteNote:
+      "Non-nationals generally need a work and residence permit — check official Albanian sources before relying on any route.",
+    localJobSites: ["Duapune.com", "Kastori", "the National Employment Agency (puna.gov.al)", "LinkedIn"],
+  },
+  belarus: {
+    localTerm: "résumé (рэзюмэ)",
+    currency: "the Belarusian rouble (BYN, Br)",
+    searchContext:
+      "In Belarus the document is a résumé, and a free maker matters to students, graduates, and workers in IT, manufacturing, and services.",
+    jobMarket:
+      "Belarus has a notable IT and software export sector, alongside manufacturing, agriculture, and services, in a largely Russian-language market.",
+    cities: ["Minsk", "Gomel", "Mogilev", "Vitebsk", "Brest"],
+    formatNotes: [
+      "A résumé is formatted for A4, the standard size.",
+      "Belarusian and Russian are official languages, and proficiency in either is an advantage.",
+      "A clear, professional structure is expected.",
+      "It is reverse-chronological.",
+    ],
+    workRouteNote:
+      "Foreigners generally need a work permit arranged by the employer — check official Belarusian sources before relying on any route.",
+    localJobSites: ["rabota.by", "praca.by", "Jooble"],
+  },
+  "bosnia-and-herzegovina": {
+    localTerm: "CV",
+    currency: "the convertible mark (BAM, KM)",
+    searchContext:
+      "In Bosnia and Herzegovina the document is the CV, and a free maker matters to students, graduates, and a workforce with strong diaspora ties.",
+    jobMarket:
+      "The economy spans services, manufacturing and metals, agriculture, and a growing IT and outsourcing sector, with significant diaspora remittances.",
+    cities: ["Sarajevo", "Banja Luka", "Tuzla", "Zenica", "Mostar"],
+    formatNotes: [
+      "Bosnian, Croatian, or Serbian is an advantage, though English is widely accepted in multinationals.",
+      "A CV runs one to two pages and is reverse-chronological.",
+      "A photo is commonly included.",
+      "Languages are worth listing with levels.",
+    ],
+    workRouteNote:
+      "Non-nationals generally need a work permit and residence — check official sources before relying on any route.",
+    localJobSites: ["Posao.ba", "MojPosao.ba", "Poslovi Infostud", "LinkedIn"],
+  },
+  kosovo: {
+    localTerm: "CV",
+    currency: "the euro (EUR, €)",
+    searchContext:
+      "In Kosovo the document is the CV, and a free maker matters to a young population facing high unemployment and many first-time jobseekers.",
+    jobMarket:
+      "Kosovo has a young population with high unemployment; services, trade, construction, agriculture, and a growing IT sector lead hiring, and diaspora remittances are significant.",
+    cities: ["Pristina", "Prizren", "Peja", "Gjakova", "Mitrovica"],
+    formatNotes: [
+      "A CV is usually in Albanian, with English valued for international roles.",
+      "It runs one to two pages and is reverse-chronological.",
+      "Given the young workforce, skills and any internships are worth emphasising.",
+      "Languages are worth listing with levels.",
+    ],
+    workRouteNote:
+      "Non-nationals generally need a work permit — check official Kosovo sources before relying on any route.",
+    localJobSites: ["KosovaJob", "Kastori", "Portal Pune", "LinkedIn"],
+  },
+  moldova: {
+    localTerm: "CV",
+    currency: "the Moldovan leu (MDL, L)",
+    searchContext:
+      "In Moldova the document is the CV, and a free maker matters to students, graduates, and a workforce shaped by significant labour emigration.",
+    jobMarket:
+      "Moldova's economy is led by agriculture and food processing, services, a growing IT sector, and significant labour emigration with remittances.",
+    cities: ["Chișinău", "Bălți", "Tiraspol", "Cahul"],
+    formatNotes: [
+      "A CV is usually in Romanian or Russian, with English for international and IT roles.",
+      "It runs one to two pages and is reverse-chronological.",
+      "The main job boards offer free, tracking-system-friendly templates.",
+      "Languages are worth listing with levels.",
+    ],
+    workRouteNote:
+      "Non-nationals generally need a work and residence permit — check official Moldovan sources before relying on any route.",
+    localJobSites: ["Rabota.md", "Delucru.md", "999.md", "LinkedIn"],
+  },
+  montenegro: {
+    localTerm: "CV (biografija)",
+    currency: "the euro (EUR, €)",
+    searchContext:
+      "In Montenegro the document is a CV, and a free maker matters to workers in a small, tourism-driven economy.",
+    jobMarket:
+      "Montenegro's economy is dominated by tourism, alongside construction, IT, healthcare, and trade.",
+    cities: ["Podgorica", "Nikšić", "Herceg Novi", "Bar", "Budva"],
+    formatNotes: [
+      "A full application typically includes a cover (motivation) letter, a CV with a photo, and supporting documents.",
+      "Diplomas, references, and language certificates are often attached.",
+      "For creative roles, a more visual format is accepted.",
+      "It is reverse-chronological.",
+    ],
+    workRouteNote:
+      "Non-nationals generally need a work and residence permit — check official Montenegrin sources (and the Employment Agency, zzzcg.org) before relying on any route.",
+    localJobSites: ["the Employment Agency of Montenegro (zzzcg.org)", "Jooble", "LinkedIn"],
+  },
+  "north-macedonia": {
+    localTerm: "CV",
+    currency: "the Macedonian denar (MKD)",
+    searchContext:
+      "In North Macedonia the document is the CV, and a free maker matters to students, graduates, and workers in manufacturing, IT, and services.",
+    jobMarket:
+      "North Macedonia's economy is led by manufacturing, agriculture, textiles, and a growing IT and services sector, with foreign-investment manufacturing zones around Skopje.",
+    cities: ["Skopje", "Bitola", "Kumanovo", "Tetovo", "Ohrid"],
+    formatNotes: [
+      "A CV is usually in the European (Europass) format, translated into Macedonian or English.",
+      "It runs one to two pages and is reverse-chronological.",
+      "Languages are worth listing with levels.",
+      "A photo is commonly included, following regional practice.",
+    ],
+    workRouteNote:
+      "Non-nationals generally need a work permit — check official North Macedonian sources before relying on any route.",
+    localJobSites: ["Vrabotuvanje.com.mk", "MojPosao", "LinkedIn"],
+  },
 };
 
 export function getFreeCvContent(slug: string): FreeCvContent | undefined {
