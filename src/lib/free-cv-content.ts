@@ -2423,6 +2423,240 @@ export const FREE_CV_CONTENT: Record<string, FreeCvContent> = {
       "Foreigners generally need a work permit arranged by the employer — check official Turkmen sources before relying on any route.",
     localJobSites: ["Business Turkmenistan (business.com.tm)", "the government employment portal", "Indeed", "LinkedIn"],
   },
+  australia: {
+    localTerm: "resume (CV is used interchangeably)",
+    currency: "the Australian dollar (AUD, A$)",
+    searchContext:
+      "In Australia the document is the resume, and a free maker matters to students, graduates, and skilled migrants applying into a services-led market.",
+    jobMarket:
+      "Australia has a services-led economy — healthcare, education, construction, mining, and finance — with a strong skilled-migration program.",
+    cities: ["Sydney", "Melbourne", "Brisbane", "Perth", "Adelaide"],
+    formatNotes: [
+      "A resume runs two to three pages.",
+      "No photo, date of birth, or marital status is included, partly for anti-discrimination compliance.",
+      "It is reverse-chronological and lists referees.",
+      "A tracking-system-friendly layout with standard fonts and keywords reads best.",
+    ],
+    workRouteNote:
+      "Non-citizens generally need a skilled or employer-sponsored visa — check the official Department of Home Affairs before relying on any route.",
+    localJobSites: ["Seek", "Indeed", "LinkedIn", "Jora"],
+  },
+  "new-zealand": {
+    localTerm: "CV",
+    currency: "the New Zealand dollar (NZD, NZ$)",
+    searchContext:
+      "In New Zealand the document is the CV, and a free maker matters to students, graduates, and migrants applying into services, agriculture, and construction.",
+    jobMarket:
+      "New Zealand's economy spans services, agriculture and food, construction, healthcare, and tourism, with active skilled-migration pathways.",
+    cities: ["Auckland", "Wellington", "Christchurch", "Hamilton", "Tauranga"],
+    formatNotes: [
+      "A CV is reverse-chronological.",
+      "A cover letter is expected unless you are told otherwise.",
+      "No photo is included, following British and EU-style norms.",
+      "Save it as a PDF and list referees.",
+    ],
+    workRouteNote:
+      "Non-citizens generally need a skilled or accredited-employer work visa — check the official Immigration New Zealand before relying on any route.",
+    localJobSites: ["Seek", "Trade Me Jobs", "LinkedIn", "Indeed"],
+  },
+  fiji: {
+    localTerm: "CV",
+    currency: "the Fijian dollar (FJD, FJ$)",
+    searchContext:
+      "In Fiji the document is the CV, and a free maker matters to graduates and workers in tourism, services, and the regional Pacific market.",
+    jobMarket:
+      "Fiji's largest sector is tourism, alongside sugar and agriculture, services, and a regional hub role for the Pacific.",
+    cities: ["Suva", "Lautoka", "Nadi", "Labasa"],
+    formatNotes: [
+      "A CV is usually a maximum of two pages.",
+      "Capture employment history with dates, duration, and reasons for leaving.",
+      "References go at the end, and irrelevant earlier work is best dropped.",
+      "Certified copies of qualifications are often required with applications.",
+    ],
+    workRouteNote:
+      "Foreigners generally need a work permit arranged by the employer — check official Fijian (Immigration) sources before relying on any route.",
+    localJobSites: ["My Jobs Fiji", "HRmonise", "the Fiji Government Recruitment Portal", "LinkedIn"],
+  },
+  "papua-new-guinea": {
+    localTerm: "CV",
+    currency: "the Papua New Guinean kina (PGK, K)",
+    searchContext:
+      "In Papua New Guinea the document is the CV, and a free maker matters to graduates and workers in mining, energy, and the public sector.",
+    jobMarket:
+      "Papua New Guinea's economy is led by mining, oil and gas (LNG), agriculture, and a large public and NGO sector; it is the South Pacific's largest economy by population.",
+    cities: ["Port Moresby", "Lae", "Mount Hagen", "Madang"],
+    formatNotes: [
+      "A CV is in English or Tok Pisin depending on the role.",
+      "It includes personal details, an objective, education, employment, skills, and references.",
+      "A photo is not commonly included.",
+      "Bulleted achievements make it easier to read.",
+    ],
+    workRouteNote:
+      "Foreigners generally need a work permit and entry visa arranged by the employer — check official PNG sources before relying on any route.",
+    localJobSites: ["PNGworkForce.com", "PngJobSeek", "Wan PNG", "LinkedIn"],
+  },
+  samoa: {
+    localTerm: "CV",
+    currency: "the Samoan tala (WST, T)",
+    searchContext:
+      "In Samoa the document is the CV, and a free maker matters to graduates and workers in agriculture, tourism, and the public sector.",
+    jobMarket:
+      "Samoa's economy spans agriculture, fishing, tourism, and a large public sector, with significant remittances from the diaspora.",
+    cities: ["Apia", "Vaitele", "Salelologa"],
+    formatNotes: [
+      "A recently updated CV (within the last 12 months) is expected.",
+      "Provide three referees with full contact details.",
+      "Certified copies of qualifications are often required.",
+      "It is reverse-chronological and concise.",
+    ],
+    workRouteNote:
+      "Foreigners generally need a work permit or foreign-employment approval — check official Samoan sources before relying on any route.",
+    localJobSites: ["My Jobs Samoa", "the Samoa Public Service Commission (psc.gov.ws)", "LinkedIn"],
+  },
+  tonga: {
+    localTerm: "CV",
+    currency: "the Tongan paʻanga (TOP, T$)",
+    searchContext:
+      "In Tonga the document is the CV, and a free maker matters to graduates and workers in agriculture, tourism, and the public sector.",
+    jobMarket:
+      "Tonga's economy spans agriculture, fishing, tourism, and a large public sector, and remittances are a major part of the economy.",
+    cities: ["Nuku'alofa", "Neiafu", "Haveluloto"],
+    formatNotes: [
+      "A CV is reverse-chronological and usually emailed with a cover letter.",
+      "It includes education, experience, skills, and referees.",
+      "Keep it concise.",
+      "Certified copies of qualifications are often required.",
+    ],
+    workRouteNote:
+      "Foreigners generally need a work permit arranged by the employer — check official Tongan sources before relying on any route.",
+    localJobSites: ["Tonga Employment Network (jobseektonga.gov.to)", "Matangi Tonga (vacancies)", "the Public Service Commission", "JobIsland.com"],
+  },
+  vanuatu: {
+    localTerm: "CV",
+    currency: "the Vanuatu vatu (VUV, VT)",
+    searchContext:
+      "In Vanuatu the document is the CV, and a free maker matters to workers in tourism, agriculture, and seasonal labour schemes to Australia and New Zealand.",
+    jobMarket:
+      "Vanuatu's economy spans tourism, agriculture, and offshore financial services, with a large public and NGO sector and significant seasonal labour migration to Australia and New Zealand.",
+    cities: ["Port Vila", "Luganville"],
+    formatNotes: [
+      "English (or French) resumes are widely accepted.",
+      "Include personal details, education, employment history, skills, and references.",
+      "Tailor it to the role and update it regularly.",
+      "It is reverse-chronological.",
+    ],
+    workRouteNote:
+      "Foreigners generally need a work permit and residence permit arranged by the employer — check official Vanuatu sources before relying on any route.",
+    localJobSites: ["Vanuatu Wok", "Wok i Kik", "VatuJobs", "Employment Vanuatu"],
+  },
+  "solomon-islands": {
+    localTerm: "CV",
+    currency: "the Solomon Islands dollar (SBD, SI$)",
+    searchContext:
+      "In the Solomon Islands the document is the CV, and a free maker matters in a small market built on agriculture, fishing, and a sizeable development sector.",
+    jobMarket:
+      "The Solomon Islands economy rests on agriculture, fishing, and forestry, with tourism, retail, and services, and a significant NGO and development presence.",
+    cities: ["Honiara", "Auki", "Gizo", "Munda"],
+    formatNotes: [
+      "English (or Solomon Islands Pijin) resumes are accepted, and should be well-written and error-free.",
+      "It is reverse-chronological.",
+      "Networking is crucial in the local market.",
+      "For IT roles, tracking-system-friendly keywords help.",
+    ],
+    workRouteNote:
+      "Foreigners generally need a work permit and visa arranged by the employer — check official Solomon Islands sources before relying on any route.",
+    localJobSites: ["Pasifiki HR", "the SIG Services vacancies portal", "the UN jobs portal", "LinkedIn"],
+  },
+  kiribati: {
+    localTerm: "CV",
+    currency: "the Australian dollar (AUD, A$)",
+    searchContext:
+      "In Kiribati the document is the CV, and a free maker matters in a small market where the public sector and overseas seafaring work are central.",
+    jobMarket:
+      "Kiribati has a small economy based on fishing licences, copra, the public sector, and overseas seasonal work and seafaring, with remittances an important part of income.",
+    cities: ["South Tarawa", "Betio", "Bairiki"],
+    formatNotes: [
+      "A CV is reverse-chronological.",
+      "English is widely used for formal applications.",
+      "Keep it concise, with education, experience, and referees.",
+      "The government portal is the main route for local roles.",
+    ],
+    workRouteNote:
+      "Foreigners generally need a work permit arranged by the employer — check official Kiribati (Ministry of Employment) sources before relying on any route.",
+    localJobSites: ["Employment Kiribati (employment.gov.ki)", "the UN jobs portal", "LinkedIn"],
+  },
+  "marshall-islands": {
+    localTerm: "résumé / CV",
+    currency: "the US dollar (USD, $)",
+    searchContext:
+      "In the Marshall Islands the document is the résumé or CV, and a free maker matters in a small market with strong US ties.",
+    jobMarket:
+      "The Marshall Islands economy rests on fishing and marine resources, the public sector, US-linked roles (notably on Kwajalein Atoll), education, and healthcare.",
+    cities: ["Majuro", "Ebeye", "Kwajalein"],
+    formatNotes: [
+      "A résumé is reverse-chronological.",
+      "English is standard, and US-style conventions are common given close US ties.",
+      "Government roles use standard application forms.",
+      "Keep it concise.",
+    ],
+    workRouteNote:
+      "Work eligibility varies — US citizens have specific access under the Compact of Free Association, while others need a permit — check official Marshall Islands sources before relying on any route.",
+    localJobSites: ["PSC RMI (pscrmi.net)", "the Marine Resources Authority (MIMRA) vacancies", "Indeed", "Jooble"],
+  },
+  micronesia: {
+    localTerm: "résumé / CV",
+    currency: "the US dollar (USD, $)",
+    searchContext:
+      "In the Federated States of Micronesia the document is the résumé or CV, and a free maker matters in a small, public-sector-led market with strong US ties.",
+    jobMarket:
+      "Micronesia's economy rests on the public sector, fishing and marine resources, education, and US-linked roles under the Compact of Free Association.",
+    cities: ["Palikir", "Kolonia", "Weno", "Tofol"],
+    formatNotes: [
+      "A résumé is reverse-chronological.",
+      "English is standard.",
+      "Government roles follow standard application procedures through the Personnel Office.",
+      "UN roles use the P11 form rather than a CV; keep it concise.",
+    ],
+    workRouteNote:
+      "Work eligibility varies by nationality, with specific access for US citizens under the Compact — check official FSM sources before relying on any route.",
+    localJobSites: ["the FSM Personnel Office (personnel.gov.fm)", "the College of Micronesia jobs portal", "Indeed", "the UN jobs portal"],
+  },
+  nauru: {
+    localTerm: "CV",
+    currency: "the Australian dollar (AUD, A$)",
+    searchContext:
+      "In Nauru the document is the CV, and a free maker matters in a very small market centred on the public sector.",
+    jobMarket:
+      "Nauru has a very small economy centred on the public sector, phosphate-related activity, fishing licences, and regional processing arrangements.",
+    cities: ["Yaren", "Denigomodu", "Aiwo"],
+    formatNotes: [
+      "A CV is reverse-chronological.",
+      "English is standard.",
+      "Government roles use downloadable application forms emailed with supporting documents.",
+      "Keep it concise, with referees.",
+    ],
+    workRouteNote:
+      "Foreigners generally need a work permit arranged by the employer — check official Nauru sources before relying on any route.",
+    localJobSites: ["the Nauru Department of Human Resources (nauruhr.gov.nr)", "Indeed", "the UN jobs portal"],
+  },
+  tuvalu: {
+    localTerm: "CV",
+    currency: "the Australian dollar (AUD, A$), used alongside Tuvaluan coins",
+    searchContext:
+      "In Tuvalu the document is the CV, and a free maker matters in one of the world's smallest economies, where the public sector and seafaring dominate.",
+    jobMarket:
+      "Tuvalu has a very small economy (population around 11,000) built on fishing and maritime industries, the public sector, seafaring, and emerging climate-adaptation projects.",
+    cities: ["Funafuti", "Vaiaku"],
+    formatNotes: [
+      "Clear contact details, including a local address or P.O. box, help.",
+      "For government roles, a voter ID or national registration number may be needed.",
+      "It is reverse-chronological.",
+      "Keep it concise and aligned to local priorities.",
+    ],
+    workRouteNote:
+      "Foreigners generally need a work permit arranged by the employer — check official Tuvaluan sources before relying on any route.",
+    localJobSites: ["JobIsland.com", "the UN jobs portal", "DevelopmentAid (development roles)", "Indeed"],
+  },
 };
 
 export function getFreeCvContent(slug: string): FreeCvContent | undefined {
