@@ -4,6 +4,7 @@ import { COUNTRIES_SERVED } from "@/lib/countries";
 import { JOB_ROLES } from "@/lib/roles";
 import { CV_ORIGINS, CV_ORIGIN_DESTINATIONS } from "@/lib/cv-origin-localization";
 import { ROLE_CV_CONTENT_SLUGS, CV_GRID_COUNTRIES } from "@/lib/role-cv-content";
+import { hasFreeCvContent } from "@/lib/free-cv-content";
 
 export const SITE_ORIGIN = "https://almicv.almiworld.com";
 
@@ -35,6 +36,9 @@ export function buildAllCvUrls(): MetadataRoute.Sitemap {
   for (const c of COUNTRY_LANDING) out.push({ url: `${SITE_ORIGIN}/jobs/${c.slug}`, lastModified: now, changeFrequency: "weekly", priority: 0.7 });
   // /cv-guide/[country] hubs (193).
   for (const c of COUNTRIES_SERVED) out.push({ url: `${SITE_ORIGIN}/cv-guide/${c.slug}`, lastModified: now, changeFrequency: "weekly", priority: 0.8 });
+  // /free-cv-maker/[country] transactional landing pages — self-canonical, listed
+  // only where sourced content exists (mirrors the page's hasFreeCvContent gate).
+  for (const c of COUNTRIES_SERVED) if (hasFreeCvContent(c.slug)) out.push({ url: `${SITE_ORIGIN}/free-cv-maker/${c.slug}`, lastModified: now, changeFrequency: "weekly", priority: 0.8 });
   // Origin × destination CV guides — now the full 191-origin FROM-set.
   for (const dest of CV_ORIGIN_DESTINATIONS) for (const o of CV_ORIGINS) out.push({ url: `${SITE_ORIGIN}/cv-guide/${dest}/from-${o.slug}`, lastModified: now, changeFrequency: "weekly", priority: 0.7 });
   // Role × country grid — the un-thinned cells: a role with sourced CV content ×
