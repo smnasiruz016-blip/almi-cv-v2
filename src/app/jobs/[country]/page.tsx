@@ -10,6 +10,16 @@ import { Container } from "@/components/ui/container";
 import { Section } from "@/components/ui/section";
 import { COUNTRY_LANDING, SLUG_TO_COUNTRY } from "@/lib/country-landing";
 import { fetchJobSitesForCountry } from "@/lib/job-sites";
+import { getFreeCvContent } from "@/lib/free-cv-content";
+import {
+  CvMasterPriceTrap,
+  CvMasterInvisibleGate,
+  CvMasterFeatures,
+  CvMasterPricing,
+  CvMasterFaq,
+  CvMasterShamool,
+  type FaqItem,
+} from "@/components/cv-master";
 
 const SITE_ORIGIN = "https://almicv.almiworld.com";
 
@@ -52,6 +62,23 @@ export default async function CountryJobsPage({
   if (!entry) notFound();
 
   const sites = await fetchJobSitesForCountry(entry.iso);
+  const fcc = getFreeCvContent(entry.slug);
+
+  // Localized FAQ — REAL sourced country data ahead of the shared master FAQ.
+  const localizedFaq: FaqItem[] = [
+    ...(fcc?.localJobSites?.length
+      ? [{
+          q: `Which job sites should I use in ${entry.name}?`,
+          a: `Widely used in ${entry.name}: ${fcc.localJobSites.join(", ")}. Pair them with an ATS-ready CV from AlmiCV so you apply with a resume that passes the filters.`,
+        }]
+      : []),
+    ...(fcc?.workRouteNote
+      ? [{
+          q: `What is the main work route for international applicants in ${entry.name}?`,
+          a: fcc.workRouteNote,
+        }]
+      : []),
+  ];
 
   const ldjson = {
     "@context": "https://schema.org",
@@ -109,6 +136,11 @@ export default async function CountryJobsPage({
               paired with AlmiCV&apos;s live editor and ATS-ready templates so
               you apply with a CV that gets the call.
             </p>
+            <p className="mx-auto mt-4 max-w-xl text-base text-plum-soft">
+              Right now, a robot (an ATS) is deleting your CV before a human in{" "}
+              {entry.name} ever reads it — not because you&apos;re not good enough,
+              but because your CV doesn&apos;t speak its language. AlmiCV fixes that.
+            </p>
             <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
               <Link
                 href="/signup"
@@ -130,6 +162,14 @@ export default async function CountryJobsPage({
           </div>
         </Container>
       </Section>
+
+      {/* MASTER price trap + invisible gate */}
+      <div className="bg-cream">
+        <div className="mx-auto w-full max-w-5xl px-6 pt-16">
+          <CvMasterPriceTrap />
+          <CvMasterInvisibleGate />
+        </div>
+      </div>
 
       <Section className="bg-cream-soft py-20">
         <Container>
@@ -158,6 +198,15 @@ export default async function CountryJobsPage({
         </Container>
       </Section>
 
+      {/* MASTER features + pricing + FAQ */}
+      <div className="bg-cream">
+        <div className="mx-auto w-full max-w-5xl px-6 py-16">
+          <CvMasterFeatures />
+          <CvMasterPricing />
+          <CvMasterFaq extra={localizedFaq} />
+        </div>
+      </div>
+
       <Section className="bg-plum py-24">
         <Container>
           <div className="mx-auto max-w-2xl text-center">
@@ -181,6 +230,13 @@ export default async function CountryJobsPage({
           </div>
         </Container>
       </Section>
+
+      {/* MASTER Shamool pledge line */}
+      <div className="bg-cream">
+        <div className="mx-auto w-full max-w-5xl px-6 py-12">
+          <CvMasterShamool />
+        </div>
+      </div>
 
       <Footer />
 
