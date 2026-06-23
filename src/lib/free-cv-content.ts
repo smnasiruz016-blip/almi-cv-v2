@@ -2926,6 +2926,596 @@ export const FREE_CV_CONTENT: Record<string, FreeCvContent> = {
       "Foreigners generally need a work permit arranged by the employer — check official Namibian sources before relying on any route.",
     localJobSites: ["Jobs Namibia", "NaJobs", "Namijob.com", "Careers24"],
   },
+  angola: {
+    localTerm: "CV (currículo)",
+    currency: "the Angolan kwanza (AOA, Kz)",
+    searchContext:
+      "In Angola the document is the CV (currículo), and a free maker matters to graduates and workers in oil, construction, and services.",
+    jobMarket:
+      "Angola's economy is dominated by oil and gas, alongside diamonds, construction, agriculture, and services.",
+    cities: ["Luanda", "Huambo", "Lobito", "Benguela", "Lubango"],
+    formatNotes: [
+      "Portuguese is official, with English accepted in the business and oil sector.",
+      "It is reverse-chronological.",
+      "A Portuguese version helps for local-facing roles.",
+      "Tailor it to the role.",
+    ],
+    workRouteNote:
+      "Foreigners generally need a work visa and permit arranged by the employer — check official Angolan sources before relying on any route.",
+    localJobSites: ["Jobartis", "emprego.co.ao", "LinkedIn"],
+  },
+  mozambique: {
+    localTerm: "CV (currículo)",
+    currency: "the Mozambican metical (MZN, MT)",
+    searchContext:
+      "In Mozambique the document is the CV (currículo), and a free maker matters to graduates and workers in extractives, services, and the NGO sector.",
+    jobMarket:
+      "Mozambique's economy spans agriculture, extractives (coal, gas), services, and a large NGO and development sector.",
+    cities: ["Maputo", "Matola", "Beira", "Nampula", "Chimoio"],
+    formatNotes: [
+      "A CV is in Portuguese.",
+      "It is often submitted in Word with certifications attached.",
+      "It is reverse-chronological; the main boards offer free templates and PDF export.",
+      "Tailor it to the role.",
+    ],
+    workRouteNote:
+      "Foreigners generally need a work permit (DIRE) arranged by the employer — check official Mozambican sources before relying on any route.",
+    localJobSites: ["MMO Emprego", "TodasVagas", "the UN jobs portal", "LinkedIn"],
+  },
+  mauritius: {
+    localTerm: "CV",
+    currency: "the Mauritian rupee (MUR, Rs)",
+    searchContext:
+      "In Mauritius the document is the CV, and a free maker matters to a bilingual workforce in finance, tourism, and BPO.",
+    jobMarket:
+      "Mauritius's economy spans financial services, tourism, BPO and ICT, textiles, and a growing fintech sector, in a bilingual English-French market.",
+    cities: ["Port Louis", "Beau Bassin-Rose Hill", "Vacoas-Phoenix", "Curepipe", "Quatre Bornes"],
+    formatNotes: [
+      "A CV can be in English, French, or Creole — English or French is recommended for professional settings.",
+      "It is reverse-chronological.",
+      "Include qualifications, experience, skills, references, and personal details.",
+      "Tailor it to the company's language preference.",
+    ],
+    workRouteNote:
+      "Foreigners generally need an occupation or work permit — check official Mauritian sources before relying on any route.",
+    localJobSites: ["myjob.mu", "Jobs.mu", "Motravay", "the Mauritius government jobs portal"],
+  },
+  madagascar: {
+    localTerm: "CV",
+    currency: "the Malagasy ariary (MGA, Ar)",
+    searchContext:
+      "In Madagascar the document is the CV, and a free maker matters to graduates and workers in agriculture, textiles, and a growing offshore/BPO sector.",
+    jobMarket:
+      "Madagascar's economy spans agriculture, textiles, mining, tourism, and a growing offshore and BPO sector serving French-speaking markets.",
+    cities: ["Antananarivo", "Toamasina", "Antsirabe", "Mahajanga", "Fianarantsoa"],
+    formatNotes: [
+      "A CV is in French, or English depending on the role.",
+      "It is reverse-chronological.",
+      "The main portals let you create and send a CV and set alerts.",
+      "A cover letter is commonly expected; list languages.",
+    ],
+    workRouteNote:
+      "Foreigners generally need a work permit and visa arranged by the employer — check official Malagasy sources before relying on any route.",
+    localJobSites: ["PortalJob Madagascar", "JobMada", "LinkedIn"],
+  },
+  malawi: {
+    localTerm: "CV",
+    currency: "the Malawian kwacha (MWK, K)",
+    searchContext:
+      "In Malawi the document is the CV, and a free maker matters to graduates and workers in agriculture, services, and a large NGO sector.",
+    jobMarket:
+      "Malawi's economy spans agriculture (notably tobacco), services, and a large NGO and development sector.",
+    cities: ["Lilongwe", "Blantyre", "Mzuzu", "Zomba"],
+    formatNotes: [
+      "A CV is concise (one to two pages) with clear headings and bullet points.",
+      "A common order is personal info, professional profile, experience, education, skills, and optional references.",
+      "Use standard fonts at 11-12 point.",
+      "Include a Malawian mobile number and city or district.",
+    ],
+    workRouteNote:
+      "Foreigners generally need a temporary employment permit (TEP) — check official Malawian sources before relying on any route.",
+    localJobSites: ["Ntchito.com", "Malawijob.com", "Online Job Malawi", "LinkedIn"],
+  },
+  gabon: {
+    localTerm: "CV",
+    currency: "the Central African CFA franc (XAF, FCFA)",
+    searchContext:
+      "In Gabon the document is the CV, and a free maker matters to graduates and workers in oil, timber, and mining.",
+    jobMarket:
+      "Gabon's economy is dominated by oil and gas, timber, and mining (manganese), with services and a large public sector.",
+    cities: ["Libreville", "Port-Gentil", "Franceville", "Oyem"],
+    formatNotes: [
+      "A CV is in French unless the listing asks otherwise.",
+      "A cover letter is commonly required.",
+      "The French-style CV includes a photo, date of birth, and nationality, plus a short opening paragraph.",
+      "Knowledge of the oil, timber, and mining sectors is valued.",
+    ],
+    workRouteNote:
+      "Foreigners generally need a work contract and permit — check official Gabonese sources before relying on any route.",
+    localJobSites: ["Emploi.ga", "Indeed", "LinkedIn"],
+  },
+  benin: {
+    localTerm: "CV",
+    currency: "the West African CFA franc (XOF, FCFA)",
+    searchContext:
+      "In Benin the document is the CV, and a free maker matters to graduates and workers in agriculture, trade, and a growing digital sector.",
+    jobMarket:
+      "Benin's economy spans agriculture (cotton), trade and the Port of Cotonou, services, and a growing digital sector.",
+    cities: ["Cotonou", "Porto-Novo", "Parakou", "Abomey-Calavi", "Djougou"],
+    formatNotes: [
+      "French is primary, with English for international firms.",
+      "A CV is concise, organised, and professional.",
+      "Tailor it with specific examples of your competencies.",
+      "A cover letter and references are commonly included.",
+    ],
+    workRouteNote:
+      "Foreigners generally need a work permit — check official Beninese sources before relying on any route.",
+    localJobSites: ["EmploiBenin.com", "JobBenin", "the government opportunities portal", "LinkedIn"],
+  },
+  togo: {
+    localTerm: "CV",
+    currency: "the West African CFA franc (XOF, FCFA)",
+    searchContext:
+      "In Togo the document is the CV, and a free maker matters to graduates and workers in trade, agriculture, and services.",
+    jobMarket:
+      "Togo's economy spans agriculture, phosphates, trade and the Port of Lomé, and services, as a regional logistics hub.",
+    cities: ["Lomé", "Sokodé", "Kara", "Kpalimé", "Atakpamé"],
+    formatNotes: [
+      "French is official, with English valued in digital, commerce, and NGO sectors.",
+      "A CV is one to two pages at most.",
+      "Local languages (Ewe, Kabyè) can be an asset.",
+      "A motivation letter to HR is usual alongside the CV.",
+    ],
+    workRouteNote:
+      "Foreigners generally need a work permit — check official Togolese sources before relying on any route.",
+    localJobSites: ["Emploi.tg", "EmploiTogo.info", "RMO Job Center", "LinkedIn"],
+  },
+  mali: {
+    localTerm: "CV",
+    currency: "the West African CFA franc (XOF, FCFA)",
+    searchContext:
+      "In Mali the document is the CV, and a free maker matters to graduates and workers in agriculture, gold mining, and the NGO sector.",
+    jobMarket:
+      "Mali's economy spans agriculture (cotton), gold mining, services, and a large NGO and development sector, with the formal market concentrated in Bamako.",
+    cities: ["Bamako", "Sikasso", "Ségou", "Mopti", "Kayes"],
+    formatNotes: [
+      "A CV is in French.",
+      "A PDF CV with a professional photo is the norm on local portals.",
+      "It is reverse-chronological.",
+      "A motivation letter is usual; tailor it to the role.",
+    ],
+    workRouteNote:
+      "Foreigners generally need a work permit — check official Malian sources before relying on any route.",
+    localJobSites: ["Maliemploi.org", "Malibaara.com", "EmploiMali.com", "LinkedIn"],
+  },
+  "burkina-faso": {
+    localTerm: "CV",
+    currency: "the West African CFA franc (XOF, FCFA)",
+    searchContext:
+      "In Burkina Faso the document is the CV, and a free maker matters to graduates and workers in agriculture, mining, and the NGO sector.",
+    jobMarket:
+      "Burkina Faso's economy spans agriculture (cotton), gold mining, services, and a large NGO and development sector, with Ouagadougou the main hub.",
+    cities: ["Ouagadougou", "Bobo-Dioulasso", "Koudougou", "Ouahigouya"],
+    formatNotes: [
+      "A CV is in French, with English a plus for multinationals.",
+      "It is reverse-chronological.",
+      "A motivation letter is usual; tailor it to the role.",
+      "List languages with levels.",
+    ],
+    workRouteNote:
+      "Foreigners generally need a work permit — check official Burkinabè sources before relying on any route.",
+    localJobSites: ["Emploiburkina.com", "BFEmploi.com", "ICI-PE", "LinkedIn"],
+  },
+  niger: {
+    localTerm: "CV",
+    currency: "the West African CFA franc (XOF, FCFA)",
+    searchContext:
+      "In Niger the document is the CV, and a free maker matters to graduates and workers in mining, agriculture, and international cooperation.",
+    jobMarket:
+      "Niger's economy spans agriculture and livestock, uranium and oil mining, international cooperation and NGOs, and telecoms.",
+    cities: ["Niamey", "Zinder", "Maradi", "Agadez", "Tahoua"],
+    formatNotes: [
+      "A CV is in French; a bilingual French/English version helps for multinationals.",
+      "Adapt it to oil-sector and humanitarian-sector standards.",
+      "It is reverse-chronological.",
+      "A motivation letter is usual.",
+    ],
+    workRouteNote:
+      "Foreigners generally need a work permit — check official Nigerien sources before relying on any route.",
+    localJobSites: ["Nigerjob.net", "NigerEmploi.com", "Connexion Carrière", "LinkedIn"],
+  },
+  guinea: {
+    localTerm: "CV",
+    currency: "the Guinean franc (GNF, FG)",
+    searchContext:
+      "In Guinea the document is the CV, and a free maker matters to graduates and workers in mining, agriculture, and the NGO sector.",
+    jobMarket:
+      "Guinea's economy is dominated by mining (bauxite, gold, iron ore), with agriculture, services, and a large NGO presence.",
+    cities: ["Conakry", "Nzérékoré", "Kankan", "Kindia", "Labé"],
+    formatNotes: [
+      "A CV is in French.",
+      "It is reverse-chronological.",
+      "A CV and motivation letter are usually emailed.",
+      "Tailor it to the role; list languages.",
+    ],
+    workRouteNote:
+      "Foreigners generally need a work permit — check official Guinean sources before relying on any route.",
+    localJobSites: ["Emploiguinee.com", "Guineebaara.com", "DigiJob Guinée", "LinkedIn"],
+  },
+  "democratic-republic-of-the-congo": {
+    localTerm: "CV",
+    currency: "the Congolese franc (CDF), with the US dollar widely used",
+    searchContext:
+      "In the DR Congo the document is the CV, and a free maker matters to graduates and workers in mining and the very large humanitarian sector.",
+    jobMarket:
+      "The DR Congo's economy is dominated by mining (copper, cobalt), with agriculture, services, and a very large NGO, UN, and humanitarian sector.",
+    cities: ["Kinshasa", "Lubumbashi", "Mbuji-Mayi", "Kananga", "Goma"],
+    formatNotes: [
+      "A CV is in French, or English depending on the role.",
+      "Diplomas should be translated into French.",
+      "It is reverse-chronological.",
+      "A cover letter specific to the role is expected; list languages.",
+    ],
+    workRouteNote:
+      "Foreigners generally need a work permit and visa arranged by the employer — check official DRC sources before relying on any route.",
+    localJobSites: ["Mediacongo.net", "Emploi.cd", "ReliefWeb (NGO and UN roles)", "LinkedIn"],
+  },
+  "republic-of-the-congo": {
+    localTerm: "CV",
+    currency: "the Central African CFA franc (XAF, FCFA)",
+    searchContext:
+      "In the Republic of the Congo the document is the CV, and a free maker matters to graduates and workers in oil, forestry, and services.",
+    jobMarket:
+      "The Republic of the Congo's economy is dominated by oil, with forestry, services, and a public and NGO sector, concentrated in Brazzaville and Pointe-Noire.",
+    cities: ["Brazzaville", "Pointe-Noire", "Dolisie", "Nkayi"],
+    formatNotes: [
+      "A CV is in French and no more than two pages, one for beginners.",
+      "Include a WhatsApp number and professional email, and a two-to-three-sentence professional summary.",
+      "List experience with concrete achievements, newest first.",
+      "Religion, ethnicity, and marital status are not needed.",
+    ],
+    workRouteNote:
+      "Foreigners generally need a work permit — check official Congolese sources before relying on any route.",
+    localJobSites: ["Emploi.cg", "ACPE (the national employment agency)", "Afriqueemplois", "LinkedIn"],
+  },
+  lesotho: {
+    localTerm: "CV",
+    currency: "the Lesotho loti (LSL, L), pegged to the South African rand",
+    searchContext:
+      "In Lesotho the document is the CV, and a free maker matters to graduates and workers in textiles, agriculture, and the public sector.",
+    jobMarket:
+      "Lesotho's economy spans textiles and garments (a major export), agriculture, the public sector, and labour links to South Africa.",
+    cities: ["Maseru", "Teyateyaneng", "Mafeteng", "Hlotse"],
+    formatNotes: [
+      "A clear chronological or functional CV of one to two pages is usual.",
+      "Include personal info, a professional summary, experience with accomplishments, education, skills, and references.",
+      "English is the primary business language, with some roles requesting Sesotho.",
+      "Community involvement is valued.",
+    ],
+    workRouteNote:
+      "Foreigners generally need a work permit — check official Lesotho sources before relying on any route.",
+    localJobSites: ["Lesotho Job Search", "the Government of Lesotho jobs portal", "ReliefWeb (NGO roles)", "LinkedIn"],
+  },
+  eswatini: {
+    localTerm: "CV",
+    currency: "the Swazi lilangeni (SZL, E), pegged to the South African rand",
+    searchContext:
+      "In Eswatini the document is the CV, and a free maker matters to graduates and workers in agriculture, manufacturing, and government.",
+    jobMarket:
+      "Eswatini's economy spans sugar and agriculture, manufacturing, government, and tourism, with close economic ties to South Africa.",
+    cities: ["Mbabane", "Manzini", "Lobamba", "Nhlangano"],
+    formatNotes: [
+      "A detailed CV with certified academic certificates and transcripts is often required.",
+      "A cover letter is usual.",
+      "It is reverse-chronological.",
+      "English is the business language; keep it clear and well-structured.",
+    ],
+    workRouteNote:
+      "Foreigners generally need a work permit — check official Eswatini sources before relying on any route.",
+    localJobSites: ["Jobs Eswatini", "CA Global (Eswatini)", "Indeed", "LinkedIn"],
+  },
+  liberia: {
+    localTerm: "CV",
+    currency: "the Liberian dollar (LRD, L$), with the US dollar widely used",
+    searchContext:
+      "In Liberia the document is the CV, and a free maker matters in a market where NGOs, the UN, and mining are major employers.",
+    jobMarket:
+      "Liberia's economy spans agriculture, mining (iron ore, gold) and rubber, with a large NGO, UN, and development sector.",
+    cities: ["Monrovia", "Gbarnga", "Buchanan", "Ganta"],
+    formatNotes: [
+      "English is the official language and used for CVs.",
+      "A CV plus cover letter is standard.",
+      "Include a daytime phone and email.",
+      "Many roles are with NGOs and international organisations.",
+    ],
+    workRouteNote:
+      "Foreigners generally need a work permit arranged by the employer — check official Liberian sources before relying on any route.",
+    localJobSites: ["Liberiawork.com", "Liberia HR Jobs", "ReliefWeb (NGO and UN roles)", "LinkedIn"],
+  },
+  "sierra-leone": {
+    localTerm: "CV",
+    currency: "the Sierra Leonean leone (SLE, Le)",
+    searchContext:
+      "In Sierra Leone the document is the CV, and a free maker matters in a market with strong mining, agriculture, and NGO sectors.",
+    jobMarket:
+      "Sierra Leone's economy spans mining (diamonds, rutile), agriculture, fishing, and a large NGO and development sector.",
+    cities: ["Freetown", "Bo", "Kenema", "Makeni"],
+    formatNotes: [
+      "English is the official language and used for CVs.",
+      "A CV plus a covering letter of up to two A4 sides is standard.",
+      "Set out career history with responsibilities and achievements.",
+      "Include a daytime phone and email.",
+    ],
+    workRouteNote:
+      "Foreigners generally need a work permit arranged by the employer — check official Sierra Leonean sources before relying on any route.",
+    localJobSites: ["SierraLeoneJob.com", "Careers SL", "JobSearch SL", "ReliefWeb"],
+  },
+  gambia: {
+    localTerm: "CV",
+    currency: "the Gambian dalasi (GMD, D)",
+    searchContext:
+      "In The Gambia the document is the CV, and a free maker matters in a small economy built on tourism, agriculture, and services.",
+    jobMarket:
+      "The Gambia's economy spans tourism, agriculture (groundnuts), fishing, services, and an NGO presence.",
+    cities: ["Banjul", "Serekunda", "Brikama", "Bakau"],
+    formatNotes: [
+      "English is the official language and used for CVs.",
+      "It is reverse-chronological and concise.",
+      "Public-sector roles use the PSC e-recruitment portal (form 16B) with uploaded certificates.",
+      "Highlight relevant skills and qualifications.",
+    ],
+    workRouteNote:
+      "Foreigners generally need a work permit arranged by the employer — check official Gambian sources before relying on any route.",
+    localJobSites: ["Gamjobs.com", "AccessGambia", "the PSC e-recruitment portal", "LinkedIn"],
+  },
+  mauritania: {
+    localTerm: "CV",
+    currency: "the Mauritanian ouguiya (MRU)",
+    searchContext:
+      "In Mauritania the document is the CV, and a free maker matters to workers in mining, fishing, and the NGO sector.",
+    jobMarket:
+      "Mauritania's economy spans mining (iron ore), fishing, oil and gas, agriculture, and an NGO presence.",
+    cities: ["Nouakchott", "Nouadhibou", "Kiffa", "Rosso"],
+    formatNotes: [
+      "A CV is in French or Arabic, the two main professional languages.",
+      "It is reverse-chronological.",
+      "Tailor it to each role.",
+      "List languages with levels.",
+    ],
+    workRouteNote:
+      "Foreigners generally need a work permit arranged by the employer — check official Mauritanian sources before relying on any route.",
+    localJobSites: ["AfricaOnJobs (Mauritania)", "CA Global", "the UN jobs portal", "LinkedIn"],
+  },
+  chad: {
+    localTerm: "CV",
+    currency: "the Central African CFA franc (XAF, FCFA)",
+    searchContext:
+      "In Chad the document is the CV, and a free maker matters in a market where oil and the humanitarian sector are central.",
+    jobMarket:
+      "Chad's economy is dominated by oil, with agriculture and livestock, and a large humanitarian, NGO, and UN sector.",
+    cities: ["N'Djamena", "Moundou", "Sarh", "Abéché"],
+    formatNotes: [
+      "A CV is in French, with Arabic also official.",
+      "It is reverse-chronological.",
+      "A motivation letter is usual.",
+      "Tailor it to the role; list languages.",
+    ],
+    workRouteNote:
+      "Foreigners generally need a work permit arranged by the employer — check official Chadian sources before relying on any route.",
+    localJobSites: ["Indeed", "the UN jobs portal", "ReliefWeb (NGO roles)", "LinkedIn"],
+  },
+  djibouti: {
+    localTerm: "CV",
+    currency: "the Djiboutian franc (DJF)",
+    searchContext:
+      "In Djibouti the document is the CV, and a free maker matters in a strategic ports-and-logistics hub with a large international presence.",
+    jobMarket:
+      "Djibouti's economy centres on ports and logistics (a strategic regional hub), services, and a significant international and NGO presence.",
+    cities: ["Djibouti City", "Ali Sabieh", "Tadjoura", "Obock"],
+    formatNotes: [
+      "A CV is in French, with Arabic also official.",
+      "It is usually emailed specifying the desired position.",
+      "It is reverse-chronological.",
+      "Tailor it to the role; list languages.",
+    ],
+    workRouteNote:
+      "Foreigners generally need a work permit arranged by the employer — check official Djiboutian sources before relying on any route.",
+    localJobSites: ["Job in Djibouti (jobindjibouti.com)", "CA Global", "the UN jobs portal", "LinkedIn"],
+  },
+  "cape-verde": {
+    localTerm: "CV",
+    currency: "the Cape Verdean escudo (CVE)",
+    searchContext:
+      "In Cape Verde the document is the CV, and a free maker matters in a tourism-led island economy with seasonal hiring.",
+    jobMarket:
+      "Cape Verde's economy is dominated by tourism, alongside fishing, agriculture, public administration, and services, with many seasonal roles.",
+    cities: ["Praia", "Mindelo", "Santa Maria", "Assomada"],
+    formatNotes: [
+      "A CV is in Portuguese (official), with English widely understood.",
+      "It is reverse-chronological and emphasises relevant experience.",
+      "Volunteering is valued, especially in social work, healthcare, and education.",
+      "Cape Verdean Creole or other languages are worth listing.",
+    ],
+    workRouteNote:
+      "Foreigners generally need a work visa and residence permit arranged by the employer — check official Cape Verdean sources before relying on any route.",
+    localJobSites: ["Profdir Cape Verde", "AfricaOnJobs (Cape Verde)", "CA Global", "LinkedIn"],
+  },
+  seychelles: {
+    localTerm: "CV",
+    currency: "the Seychellois rupee (SCR, SR)",
+    searchContext:
+      "In Seychelles the document is the CV, and a free maker matters in a tourism-led island economy.",
+    jobMarket:
+      "Seychelles's economy is dominated by tourism, alongside fishing (tuna), and a growing offshore financial-services sector.",
+    cities: ["Victoria", "Anse Boileau", "Beau Vallon", "Takamaka"],
+    formatNotes: [
+      "A CV is in English, with French and Creole also official.",
+      "It is reverse-chronological and concise.",
+      "The Ministry of Employment lists national vacancies.",
+      "Tailor it to the role.",
+    ],
+    workRouteNote:
+      "Foreigners generally need a Gainful Occupation Permit (GOP) arranged by the employer — check official Seychellois sources before relying on any route.",
+    localJobSites: ["JOBO.sc", "Jobs Seychelles", "the Ministry of Employment vacancies", "LinkedIn"],
+  },
+  somalia: {
+    localTerm: "CV",
+    currency: "the Somali shilling (SOS), with the US dollar also widely used",
+    searchContext:
+      "In Somalia the document is the CV, and a free maker matters in a market where NGOs, the UN, and telecoms are major employers.",
+    jobMarket:
+      "Somalia's economy spans agriculture and livestock, telecoms, remittances, and a very large humanitarian, NGO, and UN sector, with Somaliland having its own market.",
+    cities: ["Mogadishu", "Hargeisa", "Bosaso", "Kismayo", "Garowe"],
+    formatNotes: [
+      "A CV is reverse-chronological.",
+      "English is common for NGO, UN, and private-sector roles, with Somali valued.",
+      "Keep it concise, with skills and achievements.",
+      "Many roles are with international organisations.",
+    ],
+    workRouteNote: null,
+    localJobSites: ["SomaliJobs.com", "JobLink Somalia", "the Somali National Job Portal (jobs.gov.so)", "ReliefWeb"],
+  },
+  "south-sudan": {
+    localTerm: "CV",
+    currency: "the South Sudanese pound (SSP)",
+    searchContext:
+      "In South Sudan the document is the CV, and a free maker matters in a market where humanitarian and UN work is a large part of formal employment.",
+    jobMarket:
+      "South Sudan's formal economy is dominated by oil, with agriculture and a very large humanitarian, NGO, and UN sector.",
+    cities: ["Juba", "Wau", "Malakal", "Bor", "Yei"],
+    formatNotes: [
+      "A CV is reverse-chronological.",
+      "English is the official language and standard for CVs.",
+      "UN roles use the P11 personal-history form rather than a CV.",
+      "Keep it concise, with relevant skills; many roles are humanitarian.",
+    ],
+    workRouteNote: null,
+    localJobSites: ["Southsudanjob.com", "the UN jobs portal", "ReliefWeb", "DevelopmentAid"],
+  },
+  burundi: {
+    localTerm: "CV",
+    currency: "the Burundian franc (BIF, FBu)",
+    searchContext:
+      "In Burundi the document is the CV, and a free maker matters in a market built on agriculture, trade, and a large NGO sector.",
+    jobMarket:
+      "Burundi's economy spans agriculture (coffee, tea), trade, services, and a large NGO and development sector.",
+    cities: ["Bujumbura", "Gitega", "Ngozi", "Rumonge"],
+    formatNotes: [
+      "A CV is in French (official), with English increasingly used in NGO and regional roles.",
+      "It is reverse-chronological.",
+      "Tailor it to the role.",
+      "List languages with levels.",
+    ],
+    workRouteNote:
+      "Foreigners generally need a work permit arranged by the employer — check official Burundian sources before relying on any route.",
+    localJobSites: ["Job in Burundi", "Emploi.bi", "BurundiJobs.bi", "ReliefWeb"],
+  },
+  "central-african-republic": {
+    localTerm: "CV",
+    currency: "the Central African CFA franc (XAF, FCFA)",
+    searchContext:
+      "In the Central African Republic the document is the CV, and a free maker matters in a market where humanitarian and UN work dominates formal employment.",
+    jobMarket:
+      "The Central African Republic has a small formal market shaped by conflict, with agriculture, mining (diamonds, gold), and a very large humanitarian, NGO, and UN sector.",
+    cities: ["Bangui", "Bimbo", "Berbérati", "Carnot"],
+    formatNotes: [
+      "A CV is in French (official).",
+      "It is reverse-chronological.",
+      "Bilingual French/English is desirable for many roles.",
+      "UN roles use the P11 form; keep it concise with relevant skills.",
+    ],
+    workRouteNote: null,
+    localJobSites: ["AfricaOnJobs (CAR)", "ReliefWeb", "the UN jobs portal", "DevelopmentAid"],
+  },
+  eritrea: {
+    localTerm: "CV",
+    currency: "the Eritrean nakfa (ERN)",
+    searchContext:
+      "In Eritrea the document is the CV, and a free maker matters in a small, largely state-led economy.",
+    jobMarket:
+      "Eritrea has a small, largely state-controlled economy based on agriculture and mining, with a significant NGO and diaspora dimension.",
+    cities: ["Asmara", "Keren", "Massawa", "Mendefera"],
+    formatNotes: [
+      "A CV is reverse-chronological.",
+      "English and Tigrinya are working languages, so list both.",
+      "Use bulleted responsibilities and achievements; a photo is not commonly included.",
+      "A tailored cover letter is expected.",
+    ],
+    workRouteNote: null,
+    localJobSites: ["the UN jobs portal", "ReliefWeb", "Expertini (Eritrea)", "LinkedIn"],
+  },
+  comoros: {
+    localTerm: "CV",
+    currency: "the Comorian franc (KMF)",
+    searchContext:
+      "In the Comoros the document is the CV, and a free maker matters in a small island economy where the public sector and agriculture lead.",
+    jobMarket:
+      "The Comoros has a small economy based on agriculture (vanilla, cloves, ylang-ylang), fishing, the public sector, and remittances from a large diaspora.",
+    cities: ["Moroni", "Mutsamudu", "Fomboni", "Domoni"],
+    formatNotes: [
+      "A CV is in French by default, unless the advertisement says otherwise.",
+      "It runs one to two pages with a clean, text-focused layout.",
+      "Error-free French matters, and a professional photo is commonly expected.",
+      "Include nationality and a local (+269) contact.",
+    ],
+    workRouteNote:
+      "Foreigners generally need a work permit arranged by the employer — check official Comorian sources before relying on any route.",
+    localJobSites: ["the UN jobs portal", "ReliefWeb", "Expertini (Comoros)", "LinkedIn"],
+  },
+  "equatorial-guinea": {
+    localTerm: "CV",
+    currency: "the Central African CFA franc (XAF, FCFA)",
+    searchContext:
+      "In Equatorial Guinea the document is the CV, and a free maker matters in Africa's only Spanish-speaking country, where oil and gas dominate.",
+    jobMarket:
+      "Equatorial Guinea's economy is dominated by oil and gas, with agriculture, construction, and public services; it is Africa's only Spanish-speaking country.",
+    cities: ["Malabo", "Bata", "Ebebiyín", "Mongomo"],
+    formatNotes: [
+      "A CV is in Spanish (lead with it for local firms), with French and Portuguese also official.",
+      "It is reverse-chronological, and a professional photo is common for client-facing roles.",
+      "Technical and safety certifications (OSHA, NEBOSH) and language diplomas (DELE) are valued.",
+      "State your city.",
+    ],
+    workRouteNote:
+      "Foreigners generally need a work permit and visa arranged by the employer — check official Equatoguinean sources before relying on any route.",
+    localJobSites: ["AfricaOnJobs (Equatorial Guinea)", "CA Global", "Indeed", "LinkedIn"],
+  },
+  "guinea-bissau": {
+    localTerm: "CV",
+    currency: "the West African CFA franc (XOF, FCFA)",
+    searchContext:
+      "In Guinea-Bissau the document is the CV, and a free maker matters in a small economy built on agriculture and a significant NGO sector.",
+    jobMarket:
+      "Guinea-Bissau's economy spans agriculture (notably cashews), fishing, and a significant NGO and development sector, with a small formal market.",
+    cities: ["Bissau", "Bafatá", "Gabú", "Canchungo"],
+    formatNotes: [
+      "A CV is in Portuguese (official), with Creole, French, or English depending on the role.",
+      "A clean, text-focused (Europass-style) format is safer than creative designs.",
+      "Smaller firms prefer one-page hands-on CVs; international employers expect detailed ones.",
+      "Include references.",
+    ],
+    workRouteNote:
+      "Foreigners generally need a work permit arranged by the employer — check official Bissau-Guinean sources before relying on any route.",
+    localJobSites: ["BueloJobs", "Expertini (Guinea-Bissau)", "the UN jobs portal", "LinkedIn"],
+  },
+  "sao-tome-and-principe": {
+    localTerm: "CV",
+    currency: "the São Tomé and Príncipe dobra (STN, Db)",
+    searchContext:
+      "In São Tomé and Príncipe the document is the CV, and a free maker matters in a small island economy built on agriculture, fishing, and tourism.",
+    jobMarket:
+      "São Tomé and Príncipe has a small island economy based on agriculture (cocoa), fishing, tourism, and the public sector, with some emerging oil interest.",
+    cities: ["São Tomé", "Trindade", "Neves", "Santana"],
+    formatNotes: [
+      "A CV is in Portuguese (official), with English for international and tourism roles.",
+      "It is reverse-chronological and concise.",
+      "UN roles use the P11 form rather than a CV.",
+      "Punctuality and respect are valued in the process.",
+    ],
+    workRouteNote:
+      "Foreigners generally need a work permit arranged by the employer — check official São Toméan sources before relying on any route.",
+    localJobSites: ["Expertini (São Tomé and Príncipe)", "CA Global", "the UN jobs portal", "LinkedIn"],
+  },
 };
 
 export function getFreeCvContent(slug: string): FreeCvContent | undefined {
