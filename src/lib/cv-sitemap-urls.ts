@@ -39,6 +39,9 @@ export function buildAllCvUrls(): MetadataRoute.Sitemap {
   // /free-cv-maker/[country] transactional landing pages — self-canonical, listed
   // only where sourced content exists (mirrors the page's hasFreeCvContent gate).
   for (const c of COUNTRIES_SERVED) if (hasFreeCvContent(c.slug)) out.push({ url: `${SITE_ORIGIN}/free-cv-maker/${c.slug}`, lastModified: now, changeFrequency: "weekly", priority: 0.8 });
+  // /cv-builder/[country] builder/structure landing pages — same data + gate,
+  // distinct ("cv builder in [country]") query angle.
+  for (const c of COUNTRIES_SERVED) if (hasFreeCvContent(c.slug)) out.push({ url: `${SITE_ORIGIN}/cv-builder/${c.slug}`, lastModified: now, changeFrequency: "weekly", priority: 0.8 });
   // Origin × destination CV guides — now the full 191-origin FROM-set.
   for (const dest of CV_ORIGIN_DESTINATIONS) for (const o of CV_ORIGINS) out.push({ url: `${SITE_ORIGIN}/cv-guide/${dest}/from-${o.slug}`, lastModified: now, changeFrequency: "weekly", priority: 0.7 });
   // Role × country grid — the un-thinned cells: a role with sourced CV content ×
