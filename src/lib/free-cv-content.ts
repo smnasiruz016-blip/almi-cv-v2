@@ -1836,6 +1836,252 @@ export const FREE_CV_CONTENT: Record<string, FreeCvContent> = {
       "An employer-sponsored work visa and residence card are required — check official Omani sources before relying on any route.",
     localJobSites: ["Bayt", "GulfTalent", "NaukriGulf", "Gulf Jobs", "LinkedIn"],
   },
+  india: {
+    localTerm: "CV / résumé (a 'biodata' in some traditional sectors)",
+    currency: "the Indian rupee (INR, ₹)",
+    searchContext:
+      "In India the document is the CV or résumé, and a free maker matters to a vast pool of students, graduates, and career-changers applying online at scale.",
+    jobMarket:
+      "India has a vast market spanning IT and software services, business-process outsourcing, finance, manufacturing, and a fast-growing startup scene.",
+    cities: ["Bengaluru", "Mumbai", "Delhi", "Hyderabad", "Pune", "Chennai"],
+    formatNotes: [
+      "Contact details (with +91 and city/state) belong in the body, not headers, which tracking systems often skip.",
+      "Use a summary for experienced candidates and an objective for freshers.",
+      "Skip the photo for IT, MNCs, and startups; include it only when a government or traditional role asks.",
+      "It is reverse-chronological.",
+    ],
+    workRouteNote: null,
+    localJobSites: ["Naukri", "Foundit", "Shine", "LinkedIn", "Indeed"],
+  },
+  pakistan: {
+    localTerm: "CV",
+    currency: "the Pakistani rupee (PKR, Rs)",
+    searchContext:
+      "In Pakistan the document is the CV, and a free maker matters to students, graduates, and the many people preparing applications for local roles and the Gulf.",
+    jobMarket:
+      "Pakistan's economy spans textiles, agriculture, a growing IT and freelancing export sector, banking, and telecoms, with many workers also employed in the Gulf.",
+    cities: ["Karachi", "Lahore", "Islamabad", "Faisalabad", "Rawalpindi"],
+    formatNotes: [
+      "English is the primary language of business and preferred for CVs, though Urdu is the national language.",
+      "Customise the CV to each job with keywords from the posting.",
+      "It is reverse-chronological.",
+      "Many roles are filled through references even when posted online.",
+    ],
+    workRouteNote: null,
+    localJobSites: ["Rozee.pk", "Mustakbil.com", "BrightSpyre", "LinkedIn", "Indeed"],
+  },
+  bangladesh: {
+    localTerm: "CV",
+    currency: "the Bangladeshi taka (BDT, ৳)",
+    searchContext:
+      "In Bangladesh the document is the CV, and a free maker matters to students, graduates, and a large workforce in garments, IT, and services.",
+    jobMarket:
+      "Bangladesh's exports are led by ready-made garments, alongside agriculture, a growing IT and freelancing sector, banking, and NGOs.",
+    cities: ["Dhaka", "Chattogram", "Khulna", "Sylhet", "Rajshahi"],
+    formatNotes: [
+      "A CV should be precise and clear, since recruiters spend seconds on each.",
+      "One to two pages is enough for freshers.",
+      "Use a career summary for experienced candidates and a career objective for freshers.",
+      "Bengali or English is used depending on the role; give accurate information only.",
+    ],
+    workRouteNote: null,
+    localJobSites: ["Bdjobs.com", "LinkedIn", "Indeed", "Jagojobs"],
+  },
+  "sri-lanka": {
+    localTerm: "CV",
+    currency: "the Sri Lankan rupee (LKR, Rs)",
+    searchContext:
+      "In Sri Lanka the document is the CV, and a free maker matters to students, graduates, and the many people in apparel, tourism, and overseas employment.",
+    jobMarket:
+      "Sri Lanka's economy spans apparel and textiles, tourism, tea and agriculture, IT and BPO, and finance, with significant overseas employment.",
+    cities: ["Colombo", "Dehiwala-Mount Lavinia", "Moratuwa", "Negombo", "Kandy"],
+    formatNotes: [
+      "Tailor the CV to the role, highlighting both hard and soft skills.",
+      "It runs one to two pages and is reverse-chronological.",
+      "English is widely used for professional roles.",
+      "The main portals let you upload a CV, photo, and credentials.",
+    ],
+    workRouteNote: null,
+    localJobSites: ["topjobs.lk", "ikman.lk", "XpressJobs", "LinkedIn"],
+  },
+  nepal: {
+    localTerm: "CV",
+    currency: "the Nepalese rupee (NPR, Rs)",
+    searchContext:
+      "In Nepal the document is the CV, and a free maker matters to students, graduates, and a workforce shaped by large outward labour migration.",
+    jobMarket:
+      "Nepal's economy spans agriculture, tourism, remittance-driven services, banking, NGOs and INGOs, and a growing IT sector, with large outward labour migration.",
+    cities: ["Kathmandu", "Pokhara", "Lalitpur", "Biratnagar", "Birgunj"],
+    formatNotes: [
+      "Keep the CV short (one to two pages), clean, and simple.",
+      "It is usually in English unless stated otherwise.",
+      "Include contact, objective, education, experience, skills, and references.",
+      "A keyword-aware, tracking-system-friendly layout helps on the portals.",
+    ],
+    workRouteNote: null,
+    localJobSites: ["MeroJob", "Kumari Job", "JobsNepal", "LinkedIn"],
+  },
+  afghanistan: {
+    localTerm: "CV",
+    currency: "the afghani (AFN, Af)",
+    searchContext:
+      "In Afghanistan the document is the CV, and a free maker matters in a market where NGOs, the UN, and international organisations are major employers.",
+    jobMarket:
+      "Afghanistan has a limited formal market — agriculture, trade, and a large share of jobs tied to NGOs, the UN, and international organisations.",
+    cities: ["Kabul", "Herat", "Kandahar", "Mazar-i-Sharif", "Jalalabad"],
+    formatNotes: [
+      "A CV is written in Dari or Pashto, or in English for NGO and international roles.",
+      "A cover letter is usually required.",
+      "It is reverse-chronological.",
+      "Tailor it to the role with the most relevant qualifications.",
+    ],
+    workRouteNote: null,
+    localJobSites: ["Jobs.af", "ACBAR", "Rozee.af", "the UN jobs portal"],
+  },
+  maldives: {
+    localTerm: "CV",
+    currency: "the Maldivian rufiyaa (MVR)",
+    searchContext:
+      "In the Maldives the document is the CV, and a free maker matters most to people applying into the resort and hospitality sector.",
+    jobMarket:
+      "The Maldives is dominated by luxury tourism (over half of GDP) — resorts, diving, and hospitality — plus fisheries and public services.",
+    cities: ["Malé", "Hulhumalé", "Addu City", "Fuvahmulah"],
+    formatNotes: [
+      "A concise one-to-two-page CV is usual for private-sector roles.",
+      "It often opens with a short career objective, useful for tourism roles.",
+      "A professional headshot is common and often expected in tourism and hospitality.",
+      "English is sufficient for many roles, with basic Dhivehi an advantage locally.",
+    ],
+    workRouteNote:
+      "Foreigners generally need a work permit and employment approval arranged by the employer — check official Maldivian sources before relying on any route.",
+    localJobSites: ["Job-Maldives.com", "Jobsicle.mv", "Career-Maldives.com", "LinkedIn"],
+  },
+  bhutan: {
+    localTerm: "CV",
+    currency: "the ngultrum (BTN, Nu)",
+    searchContext:
+      "In Bhutan the document is the CV, and a free maker matters to graduates and workers in a small but growing market.",
+    jobMarket:
+      "Bhutan's economy is small but growing — high-value tourism, hydropower, agriculture, education, and a developing IT sector, with a large civil service.",
+    cities: ["Thimphu", "Phuntsholing", "Paro", "Gelephu"],
+    formatNotes: [
+      "A comprehensive, detailed CV highlighting relevant skills and qualifications is expected.",
+      "English is predominant for business, with Dzongkha used for some roles.",
+      "It is reverse-chronological.",
+      "Applications are usually a professional email with the CV attached.",
+    ],
+    workRouteNote:
+      "Foreigners generally need a work permit; civil-service roles go through the Zhiyog Recruitment System — check official Bhutanese sources before relying on any route.",
+    localJobSites: ["DziSeldra.com", "the Zhiyog Recruitment System (civil service)", "Indeed", "LinkedIn"],
+  },
+  china: {
+    localTerm: "résumé (简历, jiǎnlì)",
+    currency: "the Chinese yuan (renminbi, CNY, ¥)",
+    searchContext:
+      "In China the document is a résumé (简历), and a free maker matters to a vast, intensely competitive pool of graduates and jobseekers.",
+    jobMarket:
+      "China is the world's second-largest economy, spanning manufacturing, tech and e-commerce, finance, and services, with intense competition especially among graduates.",
+    cities: ["Shanghai", "Beijing", "Shenzhen", "Guangzhou", "Chengdu", "Hangzhou"],
+    formatNotes: [
+      "A photo in ID-photo style, top-right, is standard.",
+      "Use standard Chinese section headers, with keywords in both Chinese and English.",
+      "PDF with a proper text layer parses best in the platforms' tracking systems.",
+      "It is reverse-chronological.",
+    ],
+    workRouteNote:
+      "Foreigners generally need a Z work visa and work permit arranged by the employer — check official Chinese sources before relying on any route.",
+    localJobSites: ["Zhaopin", "Boss Zhipin", "Liepin", "51job"],
+  },
+  "hong-kong": {
+    localTerm: "CV (履歷)",
+    currency: "the Hong Kong dollar (HKD, HK$)",
+    searchContext:
+      "In Hong Kong the document is the CV, and a free maker matters to students, graduates, and professionals in a bilingual, finance-led market.",
+    jobMarket:
+      "Hong Kong is a global financial centre — banking and finance, trade and logistics, professional services, and tech — with bilingual English and Chinese workplaces.",
+    cities: ["Central", "Kowloon", "Causeway Bay", "Tsim Sha Tsui", "Sha Tin"],
+    formatNotes: [
+      "A CV is concise and reverse-chronological, usually one to two pages and longer only for senior professionals.",
+      "A strong summary, achievements with impact, and keywords from the ad help with tracking systems.",
+      "It is written in English or bilingually.",
+      "A photo is not generally required.",
+    ],
+    workRouteNote:
+      "Foreigners generally need an employment visa (such as the GEP) sponsored by the employer — check official Hong Kong Immigration sources before relying on any route.",
+    localJobSites: ["JobsDB", "LinkedIn", "Indeed", "CTgoodjobs"],
+  },
+  japan: {
+    localTerm: "rirekisho (履歴書), paired with a shokumu-keirekisho work-history CV",
+    currency: "the Japanese yen (JPY, ¥)",
+    searchContext:
+      "In Japan the document is the rirekisho, and a free maker matters to graduates and the growing number of foreigners entering a market with labour shortages.",
+    jobMarket:
+      "Japan is a large economy spanning manufacturing, electronics and automotive, tech, finance, and services, with labour shortages opening more roles to foreigners.",
+    cities: ["Tokyo", "Osaka", "Yokohama", "Nagoya", "Fukuoka"],
+    formatNotes: [
+      "The rirekisho is a fixed, government-standardised (JIS) form — creativity in formatting is a disqualifier, not a differentiator.",
+      "A formal photo (chest-up, plain background, jacket) is expected.",
+      "A second document, the shokumu-keirekisho, details work history.",
+      "Some international tech firms accept a single English CV — confirm before applying.",
+    ],
+    workRouteNote:
+      "Foreigners generally need a work visa in an eligible status arranged by the employer — check the official Immigration Services Agency before relying on any route.",
+    localJobSites: ["Rikunabi", "Mynavi", "Doda", "GaijinPot (English-friendly roles)"],
+  },
+  mongolia: {
+    localTerm: "CV",
+    currency: "the Mongolian tögrög (MNT, ₮)",
+    searchContext:
+      "In Mongolia the document is the CV, and a free maker matters to graduates and workers in mining, construction, and a growing IT sector.",
+    jobMarket:
+      "Mongolia's economy is dominated by mining (a major export), with agriculture, construction, tourism, and a growing IT sector.",
+    cities: ["Ulaanbaatar", "Erdenet", "Darkhan", "Choibalsan"],
+    formatNotes: [
+      "A CV is reverse-chronological.",
+      "It is usually in Mongolian, with English for international and mining-sector roles.",
+      "Tailor it to the role and use the portals' CV builders.",
+      "Keep it concise and clear.",
+    ],
+    workRouteNote:
+      "Foreigners generally need a work permit and visa arranged by the employer — check official Mongolian sources before relying on any route.",
+    localJobSites: ["Zangia", "Unegui (jobs section)", "LinkedIn", "Indeed"],
+  },
+  "south-korea": {
+    localTerm: "résumé (이력서, iryeokseo)",
+    currency: "the South Korean won (KRW, ₩)",
+    searchContext:
+      "In South Korea the document is a résumé (이력서), and a free maker matters to graduates and internationals applying into tech, manufacturing, and services.",
+    jobMarket:
+      "South Korea is a tech and manufacturing powerhouse — electronics, automotive, shipbuilding, IT, and entertainment — with large conglomerates (chaebol) alongside a strong SME sector.",
+    cities: ["Seoul", "Busan", "Incheon", "Daegu", "Daejeon"],
+    formatNotes: [
+      "Public-sector and many public enterprises use a blind-hiring standard form (표준이력서) that bans photos, school names, age, and family background.",
+      "Private-sector traditional resumes often include a photo.",
+      "HWP is the safe file format for Korean SMEs, PDF for multinationals and tech.",
+      "The major boards have built-in resume builders.",
+    ],
+    workRouteNote:
+      "Foreigners generally need a work visa (such as E-7) sponsored by the employer — check official Korean (Hi Korea) sources before relying on any route.",
+    localJobSites: ["Saramin", "JobKorea", "LinkedIn", "Albamon (part-time)"],
+  },
+  taiwan: {
+    localTerm: "résumé (履歷, lǚlì), often with a 自傳 self-introduction essay",
+    currency: "the New Taiwan dollar (TWD, NT$)",
+    searchContext:
+      "In Taiwan the document is a résumé (履歷), and a free maker matters to graduates and internationals applying into electronics, IT, and services.",
+    jobMarket:
+      "Taiwan is a global semiconductor and electronics hub, plus machinery, IT, and services.",
+    cities: ["Taipei", "New Taipei", "Taichung", "Kaohsiung", "Tainan"],
+    formatNotes: [
+      "It is written in traditional Chinese characters.",
+      "Most applications flow through 104 Job Bank's structured templates.",
+      "A professional photo is a standard component and notably boosts responses.",
+      "Many employers also require a 自傳 — a one-to-two-page self-introduction essay.",
+    ],
+    workRouteNote:
+      "Foreigners generally need a work permit sponsored by the employer — check official Taiwanese sources before relying on any route.",
+    localJobSites: ["104 Job Bank", "1111 Job Bank", "JobsDB", "LinkedIn"],
+  },
 };
 
 export function getFreeCvContent(slug: string): FreeCvContent | undefined {
