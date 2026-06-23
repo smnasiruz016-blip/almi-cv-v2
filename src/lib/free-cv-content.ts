@@ -705,6 +705,312 @@ export const FREE_CV_CONTENT: Record<string, FreeCvContent> = {
       "Foreign nationals generally need a work and residence authorization — check official sources before relying on any route.",
     localJobSites: ["Vacaturebank.sr", "Jobs.sr", "Werkstraat.com", "Vacatures.sr", "Indeed"],
   },
+  france: {
+    localTerm: "CV (curriculum vitæ)",
+    currency: "the euro (EUR, €)",
+    searchContext:
+      "In France the document is the CV, and a free maker matters to students, recent graduates, and people changing fields who want a clean, correctly formatted document without paying for a template.",
+    jobMarket:
+      "France has a large, diversified economy spanning services, industry, technology, tourism, health, and engineering, with separate hiring tracks for executives (cadres) and other roles.",
+    cities: ["Paris", "Lyon", "Marseille", "Toulouse", "Lille", "Bordeaux"],
+    formatNotes: [
+      "A French CV is on A4 and usually kept to one page, even for experienced candidates, and at most one and a half.",
+      "A photo in the top corner is standard practice but optional, and increasingly left off in modern hiring.",
+      "It is reverse-chronological with a short profile near the top.",
+      "The lettre de motivation (cover letter) is typically a separate document.",
+    ],
+    workRouteNote:
+      "Internationals commonly use the EU Blue Card or a talent-passport work permit — check official French government sources before relying on any route.",
+    localJobSites: ["France Travail", "APEC", "Indeed", "LinkedIn"],
+  },
+  "united-kingdom": {
+    localTerm: "CV",
+    currency: "the pound sterling (GBP, £)",
+    searchContext:
+      "In the UK the document is the CV, and a free maker matters to students, graduates, and career-changers who want a clean two-page CV without paying for a builder.",
+    jobMarket:
+      "The UK has a services-led economy, with strong hiring in finance, technology, healthcare (the NHS), creative industries, and professional services.",
+    cities: ["London", "Manchester", "Birmingham", "Leeds", "Glasgow", "Bristol"],
+    formatNotes: [
+      "A UK CV typically runs to two pages, fuller than the US one-page norm.",
+      "No photo, date of birth, or marital status is included, in line with the Equality Act 2010.",
+      "It opens with a tailored personal statement, then reverse-chronological experience.",
+      "Word (.docx) uploads tend to parse cleanly on the big job boards.",
+    ],
+    workRouteNote:
+      "The Skilled Worker visa is the main route and requires a licensed sponsor — check the official GOV.UK guidance before relying on any route.",
+    localJobSites: ["Reed", "TotalJobs", "Indeed", "CV-Library", "LinkedIn"],
+  },
+  italy: {
+    localTerm: "curriculum vitae (CV)",
+    currency: "the euro (EUR, €)",
+    searchContext:
+      "In Italy the document is the curriculum vitae, and a free maker matters to students, graduates, and career-changers who want a tidy CV without paying for one.",
+    jobMarket:
+      "Italy's economy spans manufacturing, fashion and design, tourism, agriculture and food, and services, with a strong contrast between the industrial north and the south.",
+    cities: ["Rome", "Milan", "Naples", "Turin", "Florence", "Bologna"],
+    formatNotes: [
+      "A CV runs one to two pages; the Europass template is common for public-sector and EU-funded roles.",
+      "Milan startups and international firms tend to prefer a cleaner, modern layout over Europass.",
+      "A photo, date of birth, and place of birth are commonly included.",
+      "A data-processing consent clause (GDPR) at the bottom is expected, and many HR teams require it.",
+    ],
+    workRouteNote:
+      "Internationals commonly use the EU Blue Card or a work permit under the annual Decreto Flussi quota — check official Italian government sources before relying on any route.",
+    localJobSites: ["Indeed", "LinkedIn", "Monster", "the public employment centres (Centri per l'Impiego)"],
+  },
+  spain: {
+    localTerm: "currículum vitae (CV)",
+    currency: "the euro (EUR, €)",
+    searchContext:
+      "In Spain the document is the currículum vitae, and a free maker matters to students, graduates, and the many applicants in a competitive market with high youth unemployment.",
+    jobMarket:
+      "Spain's economy is led by services and tourism, manufacturing, agriculture, and a growing technology scene, with notably high youth unemployment.",
+    cities: ["Madrid", "Barcelona", "Valencia", "Seville", "Bilbao", "Málaga"],
+    formatNotes: [
+      "A CV is usually one to two pages and reverse-chronological.",
+      "A photo is not legally required but is culturally expected, and most recruiters still prefer one.",
+      "A short professional profile at the top is common.",
+      "It is written in Spanish unless the role is international.",
+    ],
+    workRouteNote:
+      "Internationals commonly use the EU Blue Card or a national work authorisation — check official Spanish government sources before relying on any route.",
+    localJobSites: ["InfoJobs", "Infoempleo", "LinkedIn", "Indeed"],
+  },
+  netherlands: {
+    localTerm: "cv",
+    currency: "the euro (EUR, €)",
+    searchContext:
+      "In the Netherlands the document is simply a cv, and a free maker matters to students, graduates, and internationals applying into a heavily English-speaking job market.",
+    jobMarket:
+      "The Netherlands has an open, trade-oriented economy — logistics, agriculture and horticulture, technology, finance, and a large international-business sector, with English common in many workplaces.",
+    cities: ["Amsterdam", "Rotterdam", "The Hague", "Utrecht", "Eindhoven"],
+    formatNotes: [
+      "A Dutch cv is on A4 and runs one to two pages.",
+      "A photo is optional and increasingly omitted, especially in tech and at GDPR-conscious employers.",
+      "Some client-facing sectors still expect a photo.",
+      "The style is factual and concise, in reverse-chronological order.",
+    ],
+    workRouteNote:
+      "Internationals commonly use the Highly Skilled Migrant scheme or EU Blue Card via a recognised sponsor — check the official IND before relying on any route.",
+    localJobSites: ["Indeed", "Nationale Vacaturebank", "LinkedIn"],
+  },
+  switzerland: {
+    localTerm: "CV (Lebenslauf in German, CV in French)",
+    currency: "the Swiss franc (CHF)",
+    searchContext:
+      "In Switzerland the document is a CV (or Lebenslauf), and a free maker matters to students, graduates, and internationals navigating a detailed, dossier-based application culture.",
+    jobMarket:
+      "Switzerland is a high-wage economy with strengths in banking and finance, pharmaceuticals and life sciences, machinery, watchmaking, and IT, across German-, French-, and Italian-speaking regions.",
+    cities: ["Zurich", "Geneva", "Basel", "Bern", "Lausanne"],
+    formatNotes: [
+      "A CV is on A4 and runs one to two pages, with a clean layout and no heavy graphics.",
+      "A professional photo is strongly expected.",
+      "It commonly states work-permit type (B, C, G, or L), date of birth, nationality, and language levels with CEFR ratings.",
+      "Applications are usually a full dossier including the cover letter, diplomas, and employment certificates (Arbeitszeugnisse).",
+    ],
+    workRouteNote:
+      "Non-EU/EFTA nationals face quota-based permits arranged by the employer — check official Swiss government sources before relying on any route.",
+    localJobSites: ["jobs.ch", "jobup.ch", "LinkedIn", "Indeed"],
+  },
+  ireland: {
+    localTerm: "CV",
+    currency: "the euro (EUR, €)",
+    searchContext:
+      "In Ireland the document is the CV, and a free maker matters to students, graduates, and internationals applying into a market full of multinational employers.",
+    jobMarket:
+      "Ireland hosts many multinational technology and pharmaceutical employers, plus finance, healthcare, and agri-food, with strong demand in Dublin's tech and professional-services sector.",
+    cities: ["Dublin", "Cork", "Galway", "Limerick", "Waterford"],
+    formatNotes: [
+      "A concise two-page CV is the standard, though a strong one page works for early-career applicants.",
+      "No photo is used for most professional roles, following British and EU norms.",
+      "It opens with a short profile, then reverse-chronological experience.",
+      "Page two should add real evidence rather than filler.",
+    ],
+    workRouteNote:
+      "Internationals commonly use the Critical Skills or General Employment Permit — check the official Irish government (DETE) guidance before relying on any route.",
+    localJobSites: ["IrishJobs.ie", "Jobs.ie", "Indeed.ie", "LinkedIn", "Recruit Ireland"],
+  },
+  austria: {
+    localTerm: "Lebenslauf (CV)",
+    currency: "the euro (EUR, €)",
+    searchContext:
+      "In Austria the document is a Lebenslauf, and a free maker matters to students, graduates, and people arriving from abroad who want a correctly formatted CV.",
+    jobMarket:
+      "Austria's economy is led by services, tourism, manufacturing, and a strong skilled-trades sector; German is important for most roles.",
+    cities: ["Vienna", "Graz", "Linz", "Salzburg", "Innsbruck"],
+    formatNotes: [
+      "Two pages is standard, one for junior roles and three only for senior or academic profiles.",
+      "A professional photo (Lichtbild) at the top is standard, around 4 x 5 cm.",
+      "Personal details usually include date of birth and nationality.",
+      "Languages are listed with CEFR levels, with German especially valued.",
+    ],
+    workRouteNote:
+      "The Red-White-Red Card is the main skilled-worker route — check official Austrian government sources before relying on any route.",
+    localJobSites: ["karriere.at", "StepStone", "LinkedIn", "Indeed"],
+  },
+  belgium: {
+    localTerm: "CV",
+    currency: "the euro (EUR, €)",
+    searchContext:
+      "In Belgium the document is the CV, and a free maker matters to students, graduates, and internationals navigating a trilingual job market.",
+    jobMarket:
+      "Belgium's economy spans services, the EU institutions, logistics (the port of Antwerp), chemicals, and finance, across a multilingual labour market.",
+    cities: ["Brussels", "Antwerp", "Ghent", "Charleroi", "Liège"],
+    formatNotes: [
+      "The CV language follows the region — Dutch in Flanders, French in Wallonia, French and/or Dutch (often English) in Brussels.",
+      "The Europass format is common, and the CV is usually up to two pages.",
+      "Languages should always be listed with fluency levels.",
+      "It is reverse-chronological with relevant experience emphasised.",
+    ],
+    workRouteNote:
+      "Internationals commonly use the single permit (work and residence) or the EU Blue Card — check the relevant regional authority and official sources before relying on any route.",
+    localJobSites: ["VDAB", "Le Forem", "Actiris", "StepStone", "Indeed", "LinkedIn"],
+  },
+  portugal: {
+    localTerm: "currículo (CV)",
+    currency: "the euro (EUR, €)",
+    searchContext:
+      "In Portugal the document is a currículo, and a free maker matters to students, graduates, and the many people preparing applications both locally and abroad.",
+    jobMarket:
+      "Portugal's economy is led by services and tourism, manufacturing, and a growing tech and startup scene in Lisbon and Porto, alongside significant outward and return migration.",
+    cities: ["Lisbon", "Porto", "Braga", "Coimbra", "Faro"],
+    formatNotes: [
+      "The Europass model is widely valued.",
+      "A currículo runs one to two pages and is reverse-chronological.",
+      "A photo is commonly included, following southern-European practice.",
+      "Languages and their levels are worth listing.",
+    ],
+    workRouteNote:
+      "Internationals commonly use an EU Blue Card or a national work visa / residence permit — check official Portuguese (AIMA) sources before relying on any route.",
+    localJobSites: ["Net-Empregos", "SAPO Emprego", "the IEFP portal", "Indeed", "LinkedIn"],
+  },
+  greece: {
+    localTerm: "CV (βιογραφικό)",
+    currency: "the euro (EUR, €)",
+    searchContext:
+      "In Greece the document is a βιογραφικό (CV), and a free maker matters to students, graduates, and applicants in a market with high youth unemployment.",
+    jobMarket:
+      "Greece's economy rests on tourism and shipping, alongside agriculture, food, and a recovering services sector; youth unemployment has been high.",
+    cities: ["Athens", "Thessaloniki", "Patras", "Heraklion", "Larissa"],
+    formatNotes: [
+      "A CV runs one to two pages and is reverse-chronological.",
+      "The Europass format is common.",
+      "A photo is often included, following southern-European practice.",
+      "Languages are worth listing with levels.",
+    ],
+    workRouteNote:
+      "Internationals commonly use an EU Blue Card or a national work permit — check official Greek government sources before relying on any route.",
+    localJobSites: ["Skywalker.gr", "Kariera.gr", "LinkedIn", "Indeed"],
+  },
+  luxembourg: {
+    localTerm: "CV",
+    currency: "the euro (EUR, €)",
+    searchContext:
+      "In Luxembourg the document is the CV, and a free maker matters to the heavily cross-border, multilingual workforce applying into finance, law, and IT.",
+    jobMarket:
+      "Luxembourg is a finance and EU-institutions hub with a heavily cross-border, multilingual workforce; demand is strong in finance, law, IT, and audit.",
+    cities: ["Luxembourg City", "Esch-sur-Alzette", "Differdange"],
+    formatNotes: [
+      "Tailor the CV to the language of the posting — official languages are Luxembourgish, German, and French, with English common in finance.",
+      "List all languages and their levels, since this is decisive in a multilingual market.",
+      "Keywords matter, as employers use automatic search software.",
+      "Keep it clear and targeted to the role.",
+    ],
+    workRouteNote:
+      "Internationals commonly use an EU Blue Card or a salaried-worker authorisation — check official Luxembourg (ADEM / Guichet.lu) sources before relying on any route.",
+    localJobSites: ["Moovijob", "jobs.lu", "ADEM", "Monster.lu", "LinkedIn"],
+  },
+  malta: {
+    localTerm: "CV",
+    currency: "the euro (EUR, €)",
+    searchContext:
+      "In Malta the document is the CV, and a free maker matters to students, graduates, and the many internationals working in iGaming, finance, and tourism.",
+    jobMarket:
+      "Malta's hiring is driven by iGaming, financial services, tourism and hospitality, IT, and maritime services.",
+    cities: ["Valletta", "Sliema", "St. Julian's", "Birkirkara", "Mosta"],
+    formatNotes: [
+      "A Maltese CV is reverse-chronological.",
+      "English is essential, while Maltese helps for government or customer-facing roles and Italian or German can help in tourism.",
+      "Using keywords from the posting helps.",
+      "It is best to focus on relevant achievements rather than a full career history.",
+    ],
+    workRouteNote:
+      "Non-EU nationals generally need a single permit (work and residence) — check official Maltese (Identità / Jobsplus) sources before relying on any route.",
+    localJobSites: ["Jobsplus", "Keepmeposted", "jobsinmalta.com", "Indeed", "LinkedIn"],
+  },
+  cyprus: {
+    localTerm: "CV (βιογραφικό)",
+    currency: "the euro (EUR, €)",
+    searchContext:
+      "In Cyprus the document is a CV, and a free maker matters to students, graduates, and internationals applying into a competitive, services-led market.",
+    jobMarket:
+      "Cyprus has a services-led economy — tourism, shipping, financial and professional services, and a growing technology sector — concentrated around Nicosia and Limassol.",
+    cities: ["Nicosia", "Limassol", "Larnaca", "Paphos", "Famagusta"],
+    formatNotes: [
+      "A CV runs one to two pages and is reverse-chronological.",
+      "Greek and English are both commonly accepted.",
+      "A detail-oriented, tailored CV is valued by local recruiters.",
+      "Languages are worth listing with levels.",
+    ],
+    workRouteNote:
+      "Non-EU nationals commonly use an EU Blue Card or a national work permit — check official Cypriot government sources before relying on any route.",
+    localJobSites: ["Ergodotisi", "Carierista", "Golden Careers", "LinkedIn", "Indeed"],
+  },
+  andorra: {
+    localTerm: "CV (currículum)",
+    currency: "the euro (EUR, €)",
+    searchContext:
+      "In Andorra the document is a CV, and a free maker matters to seasonal and year-round workers in a small, tourism-driven market.",
+    jobMarket:
+      "Andorra has a small economy built on tourism (especially the ski season), retail, and construction, with many seasonal roles and hospitality in high demand.",
+    cities: ["Andorra la Vella", "Escaldes-Engordany", "Encamp", "Sant Julià de Lòria"],
+    formatNotes: [
+      "The CV is usually in Catalan (the official language), Spanish, or French, depending on the sector.",
+      "It is reverse-chronological.",
+      "Recommendation letters are sometimes added.",
+      "Languages are worth listing, since the market is multilingual.",
+    ],
+    workRouteNote:
+      "A work and residence permit is required, often tied to a seasonal or annual quota — check official Andorran government sources before relying on any route.",
+    localJobSites: ["the government Treball portal (treball.ad)", "Buscofeina", "Indeed", "LinkedIn"],
+  },
+  liechtenstein: {
+    localTerm: "Lebenslauf (CV)",
+    currency: "the Swiss franc (CHF)",
+    searchContext:
+      "In Liechtenstein the document is a Lebenslauf, and a free maker matters to the many cross-border workers applying into finance and precision manufacturing.",
+    jobMarket:
+      "Liechtenstein is a wealthy economy with more jobs than residents — a strong banking and financial sector, precision manufacturing, and services — with many workers commuting from Switzerland and Austria.",
+    cities: ["Vaduz", "Schaan", "Triesen", "Balzers"],
+    formatNotes: [
+      "German is the official language and expected for most roles.",
+      "A structured CV with a cover letter is standard.",
+      "Clean, readable fonts are preferred.",
+      "Languages and qualifications are worth listing clearly.",
+    ],
+    workRouteNote:
+      "Non-EEA and non-Swiss nationals need a work permit, which is quota-limited — check official Liechtenstein sources before relying on any route.",
+    localJobSites: ["Indeed", "LinkedIn", "the national administration jobs portal (llv.li)"],
+  },
+  "san-marino": {
+    localTerm: "curriculum vitae (CV)",
+    currency: "the euro (EUR, €)",
+    searchContext:
+      "In San Marino the document is the curriculum vitae, and a free maker matters to workers in a small economy closely tied to the surrounding Italian region.",
+    jobMarket:
+      "San Marino has a small economy based on tourism, finance, manufacturing, and retail, closely tied to the surrounding Italian region.",
+    cities: ["City of San Marino", "Borgo Maggiore", "Serravalle", "Dogana"],
+    formatNotes: [
+      "A CV is usually written in Italian, with English for some roles.",
+      "It runs one to two pages and is reverse-chronological.",
+      "Following Italian conventions, a photo and personal details are commonly included.",
+      "Languages are worth listing.",
+    ],
+    workRouteNote:
+      "A work permit is required for non-residents — check official San Marino government sources before relying on any route.",
+    localJobSites: ["Indeed", "Jooble", "LinkedIn"],
+  },
 };
 
 export function getFreeCvContent(slug: string): FreeCvContent | undefined {
