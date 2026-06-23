@@ -1497,6 +1497,345 @@ export const FREE_CV_CONTENT: Record<string, FreeCvContent> = {
       "Non-nationals generally need a work permit — check official North Macedonian sources before relying on any route.",
     localJobSites: ["Vrabotuvanje.com.mk", "MojPosao", "LinkedIn"],
   },
+  egypt: {
+    localTerm: "CV (السيرة الذاتية)",
+    currency: "the Egyptian pound (EGP, E£)",
+    searchContext:
+      "In Egypt the document is the CV, and a free maker matters to a large, young labour force — students, graduates, and many people preparing applications for the Gulf.",
+    jobMarket:
+      "Egypt has a large, young labour market spanning tourism, manufacturing, construction, and a growing tech and outsourcing sector, plus significant work migration to the Gulf.",
+    cities: ["Cairo", "Alexandria", "Giza", "Port Said", "Mansoura"],
+    formatNotes: [
+      "A CV is reverse-chronological.",
+      "A photo and personal details such as date of birth are commonly included, following regional practice.",
+      "English CVs are common for multinationals and tech, Arabic for local and blue-collar roles.",
+      "The leading platforms build a structured profile from an uploaded CV.",
+    ],
+    workRouteNote: null,
+    localJobSites: ["Wuzzuf", "Forasna (blue-collar roles)", "LinkedIn", "Bayt", "Indeed Egypt"],
+  },
+  morocco: {
+    localTerm: "CV",
+    currency: "the Moroccan dirham (MAD, DH)",
+    searchContext:
+      "In Morocco the document is the CV, and a free maker matters to students, graduates, and workers in manufacturing, offshoring, and tourism.",
+    jobMarket:
+      "Morocco's economy is strong in automotive and aeronautics manufacturing, offshoring and call centres, tourism, agriculture, and phosphates.",
+    cities: ["Casablanca", "Rabat", "Marrakesh", "Tangier", "Fès"],
+    formatNotes: [
+      "A CV is concise, often one page.",
+      "It is usually in French or Arabic, with English appreciated in IT and tourism; translating into French or Arabic is advisable.",
+      "A formal, professional tone is preferred.",
+      "Languages are worth listing with levels.",
+    ],
+    workRouteNote:
+      "Foreigners generally need a work contract approved by the labour authority (ANAPEC) — check official Moroccan sources before relying on any route.",
+    localJobSites: ["ReKrute", "Emploi.ma", "MarocAnnonces", "Indeed", "LinkedIn"],
+  },
+  turkey: {
+    localTerm: "CV (özgeçmiş)",
+    currency: "the Turkish lira (TRY, ₺)",
+    searchContext:
+      "In Turkey the document is a CV (özgeçmiş), and a free maker matters to a large young workforce applying into manufacturing, tourism, and tech.",
+    jobMarket:
+      "Turkey's economy spans manufacturing, textiles, tourism, construction, and a growing tech sector, with a large young workforce.",
+    cities: ["Istanbul", "Ankara", "İzmir", "Bursa", "Antalya"],
+    formatNotes: [
+      "A CV is one to two pages, one for early-career applicants.",
+      "A photo is generally expected.",
+      "Only city and country are listed, not a full address.",
+      "Modern sans-serif fonts and data-driven content are favoured; the CV is reverse-chronological.",
+    ],
+    workRouteNote:
+      "Foreigners generally need a work permit arranged by the employer — check official Turkish sources before relying on any route.",
+    localJobSites: ["Kariyer.net", "Yenibiriş", "LinkedIn", "Indeed"],
+  },
+  israel: {
+    localTerm: "CV (קורות חיים)",
+    currency: "the Israeli new shekel (ILS, ₪)",
+    searchContext:
+      "In Israel the document is the CV, and a free maker matters to students, graduates, and the large high-tech workforce.",
+    jobMarket:
+      "Israel is a high-tech hub with strong demand in software, cybersecurity, and R&D, plus finance, health, and academia.",
+    cities: ["Tel Aviv", "Jerusalem", "Haifa", "Be'er Sheva", "Herzliya"],
+    formatNotes: [
+      "A CV is concise — usually one page, two for senior profiles.",
+      "It focuses on recent, relevant roles, often cutting older ones.",
+      "A local phone number, professional email, city, and date of birth are commonly included.",
+      "Direct action verbs are preferred over personal pronouns; cover letters are uncommon unless requested.",
+    ],
+    workRouteNote:
+      "Foreigners generally need a work visa (such as B/1) arranged by the employer — check official Israeli sources before relying on any route.",
+    localJobSites: ["AllJobs", "Drushim", "LinkedIn", "the Israeli Employment Service"],
+  },
+  jordan: {
+    localTerm: "CV (السيرة الذاتية)",
+    currency: "the Jordanian dinar (JOD, JD)",
+    searchContext:
+      "In Jordan the document is the CV, and a free maker matters to students, graduates, and workers in services, IT, and the large NGO sector.",
+    jobMarket:
+      "Jordan's economy spans services, IT and digital, healthcare, education, tourism, and a large public sector, and it hosts many regional NGOs.",
+    cities: ["Amman", "Zarqa", "Irbid", "Aqaba"],
+    formatNotes: [
+      "It is worth tailoring the CV to each role.",
+      "A CV is reverse-chronological.",
+      "A photo and personal details are commonly included, following regional practice.",
+      "English CVs are common for multinationals and NGOs, Arabic for local roles.",
+    ],
+    workRouteNote:
+      "Foreigners generally need a work permit arranged by the employer — check official Jordanian sources before relying on any route.",
+    localJobSites: ["Akhtaboot", "Bayt", "LinkedIn", "Indeed"],
+  },
+  algeria: {
+    localTerm: "CV",
+    currency: "the Algerian dinar (DZD, DA)",
+    searchContext:
+      "In Algeria the document is the CV, and a free maker matters to a large young workforce applying into hydrocarbons, construction, and services.",
+    jobMarket:
+      "Algeria's economy is dominated by oil and gas, with construction, agriculture, and services, a large young workforce, and high public-sector employment.",
+    cities: ["Algiers", "Oran", "Constantine", "Annaba", "Blida"],
+    formatNotes: [
+      "A CV can be in Arabic, French, or English depending on the sector.",
+      "Government and traditional sectors prefer Arabic; international and tech roles prefer French or English.",
+      "A photo, marital status, and nationality are commonly included.",
+      "Bilingual Arabic-French proficiency is valued.",
+    ],
+    workRouteNote:
+      "Foreigners generally need a work permit arranged by the employer — check official Algerian sources before relying on any route.",
+    localJobSites: ["Emploitic", "EmploiPartner", "Indeed", "LinkedIn"],
+  },
+  tunisia: {
+    localTerm: "CV",
+    currency: "the Tunisian dinar (TND, DT)",
+    searchContext:
+      "In Tunisia the document is the CV, and a free maker matters to students, graduates, and workers in manufacturing, offshoring, and tourism.",
+    jobMarket:
+      "Tunisia's economy is built on manufacturing (textiles, components), offshoring and call centres, tourism, agriculture, and a growing IT sector.",
+    cities: ["Tunis", "Sfax", "Sousse", "Kairouan", "Bizerte"],
+    formatNotes: [
+      "A CV is usually in Arabic or French, with English accepted in business and tourism.",
+      "It is concise and reverse-chronological.",
+      "A photo is commonly included.",
+      "Languages are worth listing with levels.",
+    ],
+    workRouteNote:
+      "Foreigners generally need a work contract approved by the labour authority — check official Tunisian sources before relying on any route.",
+    localJobSites: ["Tanitjobs", "Keejob", "LinkedIn", "Indeed"],
+  },
+  lebanon: {
+    localTerm: "CV",
+    currency: "the Lebanese pound (LBP), with the US dollar widely used in practice",
+    searchContext:
+      "In Lebanon the document is the CV, and a free maker matters to students, graduates, and the many people preparing applications amid economic crisis and emigration.",
+    jobMarket:
+      "Lebanon's market has been shaped by economic crisis, with NGOs and international organisations, banking, services, and tech among the main employers, and significant emigration.",
+    cities: ["Beirut", "Tripoli", "Sidon", "Jounieh", "Zahlé"],
+    formatNotes: [
+      "A CV is reverse-chronological.",
+      "English or French CVs are common alongside Arabic.",
+      "Startups and NGOs value proof of initiative and portfolios.",
+      "It should be concise and clearly formatted; list languages.",
+    ],
+    workRouteNote:
+      "Foreigners generally need a work permit arranged by the employer — check official Lebanese sources before relying on any route.",
+    localJobSites: ["Bayt", "HireLebanese.com", "Daleel Madani (NGO roles)", "LinkedIn"],
+  },
+  iraq: {
+    localTerm: "CV (السيرة الذاتية)",
+    currency: "the Iraqi dinar (IQD)",
+    searchContext:
+      "In Iraq the document is the CV, and a free maker matters to students, graduates, and workers in oil, construction, and the large humanitarian sector.",
+    jobMarket:
+      "Iraq's economy is dominated by oil and gas, alongside construction, hospitality, IT, and a large humanitarian and NGO sector, with Erbil and Basra as key hubs.",
+    cities: ["Baghdad", "Basra", "Erbil", "Mosul", "Najaf"],
+    formatNotes: [
+      "A CV is reverse-chronological.",
+      "English CVs are common for international firms and NGOs, Arabic for local roles.",
+      "A photo and personal details are commonly included.",
+      "Languages are worth listing with levels.",
+    ],
+    workRouteNote:
+      "Foreigners generally need a work permit and residence arranged by the employer — check official Iraqi sources before relying on any route.",
+    localJobSites: ["Bayt", "Tanqeeb", "Iraq Jobs Scout", "LinkedIn"],
+  },
+  iran: {
+    localTerm: "CV (رزومه)",
+    currency: "the Iranian rial (IRR)",
+    searchContext:
+      "In Iran the document is the CV (رزومه), and a free maker matters to a young, educated workforce applying into oil, manufacturing, and a growing tech scene.",
+    jobMarket:
+      "Iran's economy spans oil and gas, manufacturing, and agriculture, with a young, educated workforce and a growing tech and startup scene in Tehran.",
+    cities: ["Tehran", "Mashhad", "Isfahan", "Karaj", "Shiraz"],
+    formatNotes: [
+      "A photo is standard practice.",
+      "A clear objective tailored to each role is expected.",
+      "Education is listed from the highest degree, with well-known universities an advantage.",
+      "English or other foreign languages are a major asset; Persian is used for roles needing it.",
+    ],
+    workRouteNote:
+      "Foreigners generally need a work permit arranged by the employer — check official Iranian sources before relying on any route.",
+    localJobSites: ["IranTalent", "Jobinja", "Jobvision", "IranJob"],
+  },
+  libya: {
+    localTerm: "CV (السيرة الذاتية)",
+    currency: "the Libyan dinar (LYD, LD)",
+    searchContext:
+      "In Libya the document is the CV, and a free maker matters to workers in oil, services, and post-conflict rebuilding.",
+    jobMarket:
+      "Libya's economy is dominated by oil refining and services amid post-conflict rebuilding, with demand in engineering, healthcare, and IT, concentrated in Tripoli and Benghazi.",
+    cities: ["Tripoli", "Benghazi", "Misrata", "Zawiya"],
+    formatNotes: [
+      "A CV is reverse-chronological.",
+      "Arabic or English is used, depending on the employer.",
+      "A photo and personal details are commonly included.",
+      "It should be concise and professional; list languages.",
+    ],
+    workRouteNote:
+      "Foreigners generally need a work permit and residence arranged by the employer — check official Libyan sources before relying on any route.",
+    localJobSites: ["Bayt", "Libyanjobs.ly", "Tanqeeb", "LinkedIn"],
+  },
+  sudan: {
+    localTerm: "CV (السيرة الذاتية)",
+    currency: "the Sudanese pound (SDG)",
+    searchContext:
+      "In Sudan the document is the CV, and a free maker matters to workers in a market where NGOs, the UN, and the public sector are among the main formal employers.",
+    jobMarket:
+      "Sudan's market has been shaped by conflict, with agriculture, the public sector, and a large humanitarian, NGO, and UN presence among the main formal employers.",
+    cities: ["Khartoum", "Omdurman", "Port Sudan", "Kassala"],
+    formatNotes: [
+      "A CV is written in Arabic (official) or English (business and NGO roles).",
+      "A formal tone with no spelling errors is valued.",
+      "It is reverse-chronological.",
+      "Formal education and certifications are emphasised.",
+    ],
+    workRouteNote: null,
+    localJobSites: ["Sudancareers.com", "Sudanjob.net", "ReliefWeb (NGO and UN roles)", "LinkedIn"],
+  },
+  yemen: {
+    localTerm: "CV (السيرة الذاتية)",
+    currency: "the Yemeni rial (YER)",
+    searchContext:
+      "In Yemen the document is the CV, and a free maker matters in a market shaped by conflict, where humanitarian and relief work is a large part of formal employment.",
+    jobMarket:
+      "Yemen's market has been shaped by prolonged conflict, with a large humanitarian, NGO, and UN sector alongside trade and services; many roles are local or relief-focused.",
+    cities: ["Sana'a", "Aden", "Taiz", "Al Hudaydah", "Mukalla"],
+    formatNotes: [
+      "Include full name, a Yemeni phone number, and governorate, as some employers prioritise local candidates.",
+      "Age, marital status, and a conservative professional photo are optional but common.",
+      "Arabic is essential, with English an advantage for multinational employers.",
+      "Clear, concise formatting focused on achievements is preferred.",
+    ],
+    workRouteNote: null,
+    localJobSites: ["Tanqeeb", "YemenHires", "Yemen HR", "ReliefWeb (relief roles)"],
+  },
+  "united-arab-emirates": {
+    localTerm: "CV",
+    currency: "the UAE dirham (AED, Dh)",
+    searchContext:
+      "In the UAE the document is the CV, and a free maker matters to the heavily expatriate workforce applying into finance, construction, logistics, and hospitality.",
+    jobMarket:
+      "The UAE is a regional business hub — finance, real estate and construction, logistics and aviation, tourism and hospitality, and tech — with a heavily expatriate workforce.",
+    cities: ["Dubai", "Abu Dhabi", "Sharjah", "Ajman", "Al Ain"],
+    formatNotes: [
+      "A single-column, tracking-system-friendly layout with standard headings reads best.",
+      "Visa status is a mandatory field, placed near the top.",
+      "A professional passport-style photo is common, but omit it on government portals (Dubai Careers, TAMM), which reject images.",
+      "PDF preserves layout across recruiter devices.",
+    ],
+    workRouteNote:
+      "An employer-sponsored work visa and Emirates ID are required — check the official UAE government channels (and free-zone authorities) before relying on any route.",
+    localJobSites: ["Bayt", "GulfTalent", "NaukriGulf", "LinkedIn", "Indeed"],
+  },
+  "saudi-arabia": {
+    localTerm: "CV (السيرة الذاتية)",
+    currency: "the Saudi riyal (SAR, SR)",
+    searchContext:
+      "In Saudi Arabia the document is the CV, and a free maker matters to a young workforce and many expatriates applying amid rapid Vision-2030 growth.",
+    jobMarket:
+      "Saudi Arabia's economy combines oil and petrochemicals with rapid Vision-2030 diversification into tourism, entertainment, construction, and tech; Saudization (Nitaqat) shapes hiring.",
+    cities: ["Riyadh", "Jeddah", "Dammam", "Mecca", "Medina"],
+    formatNotes: [
+      "A CV is a maximum of two pages with clear headings.",
+      "A professional photo in conservative business attire is expected.",
+      "Relevant Arabic keywords help, as recruiters often search in Arabic first.",
+      "Stating visa or Iqama status is useful.",
+    ],
+    workRouteNote:
+      "An employer-sponsored work visa and Iqama (residence permit) are required; government roles flow through Jadarat and Taqat — check official Saudi sources before relying on any route.",
+    localJobSites: ["Bayt", "GulfTalent", "Jadarat (government roles)", "NaukriGulf", "LinkedIn"],
+  },
+  qatar: {
+    localTerm: "CV",
+    currency: "the Qatari riyal (QAR, QR)",
+    searchContext:
+      "In Qatar the document is the CV, and a free maker matters to the heavily expatriate workforce applying into gas, construction, and hospitality.",
+    jobMarket:
+      "Qatar's economy is driven by natural gas, construction and infrastructure, finance, aviation, and hospitality, with a heavily expatriate workforce.",
+    cities: ["Doha", "Al Rayyan", "Al Wakrah", "Al Khor"],
+    formatNotes: [
+      "A single-column, reverse-chronological CV with personal details (nationality, visa status, date of birth) near the top is expected.",
+      "It runs one to two pages for freshers and two to three for experienced professionals.",
+      "State visa status — for example, open to relocation if applying from abroad.",
+      "Avoid two-column layouts, which break tracking systems.",
+    ],
+    workRouteNote:
+      "An employer-sponsored work visa and residence permit (QID) are required — check official Qatari sources before relying on any route.",
+    localJobSites: ["Bayt", "GulfTalent", "NaukriGulf", "LinkedIn"],
+  },
+  kuwait: {
+    localTerm: "CV",
+    currency: "the Kuwaiti dinar (KWD, KD)",
+    searchContext:
+      "In Kuwait the document is the CV, and a free maker matters to the heavily expatriate workforce applying into oil, finance, and services.",
+    jobMarket:
+      "Kuwait's economy is dominated by oil, alongside finance, construction, and services; Kuwaitization shapes hiring and the workforce is heavily expatriate.",
+    cities: ["Kuwait City", "Al Ahmadi", "Hawalli", "Salmiya", "Jahra"],
+    formatNotes: [
+      "A GCC-standard CV runs two to three pages, longer for oil and government roles.",
+      "Include full personal details — nationality, visa status, date of birth, and a photo.",
+      "Arabic proficiency matters more than in the UAE or Qatar.",
+      "Include Arabic keywords where the role is bilingual.",
+    ],
+    workRouteNote:
+      "An employer-sponsored work visa and residence (Civil ID) are required — check official Kuwaiti sources before relying on any route.",
+    localJobSites: ["Bayt", "GulfTalent", "Indeed", "LinkedIn"],
+  },
+  bahrain: {
+    localTerm: "CV",
+    currency: "the Bahraini dinar (BHD, BD)",
+    searchContext:
+      "In Bahrain the document is the CV, and a free maker matters to the expatriate-heavy workforce applying into finance, industry, and tourism.",
+    jobMarket:
+      "Bahrain is a regional financial-services centre, alongside aluminium, oil, and a growing tech and tourism sector, with an expatriate-heavy workforce.",
+    cities: ["Manama", "Riffa", "Muharraq", "Hamad Town", "Isa Town"],
+    formatNotes: [
+      "A CV runs one to two pages, one for freshers.",
+      "A single-column layout that mirrors the job posting's keywords reads best.",
+      "Following Gulf norms, personal details and a photo are commonly included.",
+      "PDF is preferred.",
+    ],
+    workRouteNote:
+      "An employer-sponsored work visa and residence permit are required — check official Bahraini sources before relying on any route.",
+    localJobSites: ["Bayt", "GulfTalent", "Tanqeeb", "LinkedIn"],
+  },
+  oman: {
+    localTerm: "CV",
+    currency: "the Omani rial (OMR, RO)",
+    searchContext:
+      "In Oman the document is the CV, and a free maker matters to the expatriate workforce and Omani graduates applying into oil, logistics, and tourism.",
+    jobMarket:
+      "Oman's economy spans oil and gas, logistics and ports, tourism, fisheries, and mining; Omanization shapes hiring.",
+    cities: ["Muscat", "Salalah", "Sohar", "Nizwa", "Sur"],
+    formatNotes: [
+      "A concise CV, ideally one page, customised to each job's keywords.",
+      "A single-column layout reads best for tracking systems.",
+      "A photo is common though not mandatory.",
+      "Include nationality and visa status.",
+    ],
+    workRouteNote:
+      "An employer-sponsored work visa and residence card are required — check official Omani sources before relying on any route.",
+    localJobSites: ["Bayt", "GulfTalent", "NaukriGulf", "Gulf Jobs", "LinkedIn"],
+  },
 };
 
 export function getFreeCvContent(slug: string): FreeCvContent | undefined {
