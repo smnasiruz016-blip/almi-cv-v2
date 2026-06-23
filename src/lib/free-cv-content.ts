@@ -1011,6 +1011,114 @@ export const FREE_CV_CONTENT: Record<string, FreeCvContent> = {
       "A work permit is required for non-residents — check official San Marino government sources before relying on any route.",
     localJobSites: ["Indeed", "Jooble", "LinkedIn"],
   },
+  sweden: {
+    localTerm: "CV",
+    currency: "the Swedish krona (SEK, kr)",
+    searchContext:
+      "In Sweden the document is the CV, and a free maker matters to students, graduates, and internationals applying into a heavily English-speaking tech and engineering market.",
+    jobMarket:
+      "Sweden's economy is strong in technology and startups, manufacturing and engineering, life sciences, and a large public sector, with widespread English in many workplaces.",
+    cities: ["Stockholm", "Gothenburg", "Malmö", "Uppsala", "Linköping"],
+    formatNotes: [
+      "A concise one-page A4 CV is the aim, though this is flexible by role.",
+      "The personnummer (personal ID number) is left off the CV and shared later if needed.",
+      "The style is clean and factual, in reverse-chronological order.",
+      "Skills and quantified results read better than long descriptions.",
+    ],
+    workRouteNote:
+      "Non-EU nationals need a work permit tied to a job offer — check the official Swedish Migration Agency (Migrationsverket) before relying on any route.",
+    localJobSites: ["Platsbanken (Arbetsförmedlingen)", "Indeed", "LinkedIn", "Blocket Jobb"],
+  },
+  denmark: {
+    localTerm: "CV",
+    currency: "the Danish krone (DKK, kr)",
+    searchContext:
+      "In Denmark the document is the CV, and a free maker matters to students, graduates, and internationals applying into life sciences, shipping, and tech.",
+    jobMarket:
+      "Denmark is strong in life sciences and pharma, shipping and logistics, renewable energy, IT, and design, with many international roles around Copenhagen.",
+    cities: ["Copenhagen", "Aarhus", "Odense", "Aalborg", "Esbjerg"],
+    formatNotes: [
+      "A Danish CV focuses on projects and results, not just titles and degrees.",
+      "It runs one to two pages.",
+      "A photo can be included, though some major platforms hide it from recruiters.",
+      "The style is concise and factual, in reverse-chronological order.",
+    ],
+    workRouteNote:
+      "Skilled workers commonly use the Pay Limit or Positive List schemes — check the official Workindenmark / SIRI sources before relying on any route.",
+    localJobSites: ["Jobindex", "JobNet", "Workindenmark", "LinkedIn", "Indeed"],
+  },
+  norway: {
+    localTerm: "CV",
+    currency: "the Norwegian krone (NOK, kr)",
+    searchContext:
+      "In Norway the document is the CV, and a free maker matters to students, graduates, and internationals applying into a high-wage market.",
+    jobMarket:
+      "Norway's economy is built on oil and gas, maritime, seafood, renewable energy, and a large public sector, with high wages and strong work-life balance.",
+    cities: ["Oslo", "Bergen", "Trondheim", "Stavanger", "Drammen"],
+    formatNotes: [
+      "A CV runs one to two pages and is concise and direct.",
+      "It is normal to include date of birth and nationality, and a professional photo is common though not mandatory.",
+      "Norwegian culture values honesty, so it is best to avoid embellishment.",
+      "A short interests section is common.",
+    ],
+    workRouteNote:
+      "Non-EU/EEA nationals need a skilled-worker residence permit — check the official UDI (Norwegian Directorate of Immigration) before relying on any route.",
+    localJobSites: ["Finn.no", "NAV Arbeidsplassen", "Jobbnorge", "LinkedIn", "Indeed"],
+  },
+  finland: {
+    localTerm: "CV",
+    currency: "the euro (EUR, €)",
+    searchContext:
+      "In Finland the document is the CV, and a free maker matters to students, graduates, and internationals applying into technology and engineering roles.",
+    jobMarket:
+      "Finland is strong in technology and gaming, forestry and paper, engineering, and a large public sector, with English common in tech.",
+    cities: ["Helsinki", "Espoo", "Tampere", "Vantaa", "Oulu"],
+    formatNotes: [
+      "A CV is no more than two pages and easy to read.",
+      "It is reverse-chronological, covering employment, education, computer, and language skills.",
+      "Quantified achievements read better than vague descriptions.",
+      "Finnish workplaces value teamwork, so framing wins as collective efforts helps.",
+    ],
+    workRouteNote:
+      "Non-EU nationals need a residence permit for an employed person — check the official Finnish Immigration Service (Migri) before relying on any route.",
+    localJobSites: ["Duunitori", "the public employment service (Työmarkkinatori)", "Oikotie", "LinkedIn", "Indeed"],
+  },
+  iceland: {
+    localTerm: "CV (ferilskrá)",
+    currency: "the Icelandic króna (ISK, kr)",
+    searchContext:
+      "In Iceland the document is the CV, and a free maker matters to students, graduates, and internationals applying into tourism, fisheries, and tech.",
+    jobMarket:
+      "Iceland's economy is led by tourism, fisheries and seafood, renewable energy, aluminium, and a growing tech sector, with many companies operating in English.",
+    cities: ["Reykjavík", "Kópavogur", "Hafnarfjörður", "Akureyri"],
+    formatNotes: [
+      "Icelandic employers prefer brevity — both the CV and cover letter are often kept to one page each.",
+      "A small photo is common and seen as professional.",
+      "References are frequently checked, so up-to-date contacts help.",
+      "English is widely used, though interest in Icelandic is appreciated.",
+    ],
+    workRouteNote:
+      "Non-EEA nationals need a work permit tied to a job — check the official Directorate of Immigration (Útlendingastofnun) before relying on any route.",
+    localJobSites: ["Alfred.is", "Job.is", "Tvinna (creative and tech roles)", "LinkedIn", "Indeed"],
+  },
+  "faroe-islands": {
+    localTerm: "CV",
+    currency: "the Faroese króna, used at par with the Danish krone (DKK)",
+    searchContext:
+      "In the Faroe Islands the document is the CV, and a free maker matters in a small market where many roles are tied to fisheries, shipping, and the public sector.",
+    jobMarket:
+      "The Faroese economy is dominated by fisheries and salmon farming, alongside shipping, public services, and a small but growing tech and tourism sector.",
+    cities: ["Tórshavn", "Klaksvík", "Runavík", "Tvøroyri"],
+    formatNotes: [
+      "A concise, factual CV in line with Nordic norms is expected.",
+      "Faroese or Danish is usual, with English accepted in some roles.",
+      "It runs one to two pages, in reverse-chronological order.",
+      "References are commonly checked.",
+    ],
+    workRouteNote:
+      "Nordic citizens can work freely; others, including EU citizens, need a work and residence permit — check official Faroese sources before relying on any route.",
+    localJobSites: ["starv.fo (ALS)", "JobIsland.com", "EURAXESS (research roles)", "Indeed"],
+  },
 };
 
 export function getFreeCvContent(slug: string): FreeCvContent | undefined {
