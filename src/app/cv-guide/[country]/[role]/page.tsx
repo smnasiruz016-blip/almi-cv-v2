@@ -10,6 +10,17 @@ import { getConvention, hasVerifiedConvention } from "@/lib/cv-conventions";
 import { OriginCvGuide } from "@/components/cv-origin-guide";
 import { findCvOrigin, isCvOriginIndexable, indefiniteArticle, getLocalizedOrigin } from "@/lib/cv-origin-localization";
 import { getRoleCvContent, isRoleCountryIndexable } from "@/lib/role-cv-content";
+import { getFreeCvContent } from "@/lib/free-cv-content";
+import {
+  CvMasterHook,
+  CvMasterPriceTrap,
+  CvMasterInvisibleGate,
+  CvMasterFeatures,
+  CvMasterPricing,
+  CvMasterFaq,
+  CvMasterShamool,
+  type FaqItem,
+} from "@/components/cv-master";
 
 // The [role] segment doubles as the origin segment when prefixed "from-"
 // (e.g. /cv-guide/united-kingdom/from-pakistan). No role slug starts with
@@ -114,9 +125,29 @@ export default async function CvGuidePage({
   // genuinely answer the searcher (not a name-swapped near-duplicate).
   const roleContent = getRoleCvContent(r.slug);
   const loc = getLocalizedOrigin(c.slug);
+  const fcc = getFreeCvContent(c.slug);
 
   const user = await getCurrentUser();
   const isLoggedIn = Boolean(user);
+
+  // Localized FAQ — REAL role + country data prepended to the shared master FAQ.
+  const localizedFaq: FaqItem[] = [
+    ...(roleContent
+      ? [{
+          q: `What should a ${r.name} CV include in ${c.name}?`,
+          a: `${roleContent.include} ${roleContent.length} AlmiCV applies ${c.name} conventions and can translate into ${c.primaryLanguage}.`,
+        }]
+      : [{
+          q: `What does a CV need to look like in ${c.name}?`,
+          a: `${convention.notes} AlmiCV applies these ${c.name} conventions and can translate into ${c.primaryLanguage}.`,
+        }]),
+    ...(fcc?.workRouteNote
+      ? [{
+          q: `What is the main work route for international applicants in ${c.name}?`,
+          a: fcc.workRouteNote,
+        }]
+      : []),
+  ];
 
   const url = `${SITE_ORIGIN}/cv-guide/${c.slug}/${r.slug}`;
   const webApplication = {
@@ -165,18 +196,16 @@ export default async function CvGuidePage({
             </ol>
           </nav>
 
-          {/* 2. H1 */}
-          <header className="mb-6">
-            <h1 className="text-3xl sm:text-5xl font-semibold tracking-tight text-plum mb-4">
-              Build a Professional {r.name} CV for {c.name} in Minutes
-            </h1>
-            {/* 3. AI intro */}
-            <p className="text-base sm:text-lg text-plum-soft leading-relaxed max-w-3xl">
-              AlmiCV&apos;s AI tailors your {r.name} CV to job descriptions in {c.name}. Restyle
-              your CV across many designs, adjust colors and fonts anytime — new designs added
-              every day. Built around conventions {c.name} employers expect.
-            </p>
-          </header>
+          {/* 2. MASTER hook (localized H1 + role/country context) */}
+          <CvMasterHook
+            heading={`Build a Professional ${r.name} CV for ${c.name} in Minutes`}
+            context={`reviewing ${r.name} applications in ${c.name}`}
+            ctaHref={`/signup?role=${r.slug}&country=${c.slug}`}
+          />
+
+          {/* 3. MASTER price trap + invisible gate */}
+          <CvMasterPriceTrap />
+          <CvMasterInvisibleGate />
 
           {/* 4. Templates CTA — Recipe-system pick-by-sector removed in
               PR #53. Direct visitors to the /templates gallery so they
@@ -313,20 +342,9 @@ export default async function CvGuidePage({
             <p className="text-xs text-plum-soft mt-3">AI-generated suggestions — review and verify before submitting to any employer.</p>
           </section>
 
-          {/* 7. Pricing */}
-          <section className="mb-12 rounded-xl border border-peach bg-cream-soft p-6 sm:p-8 text-center" aria-labelledby="pricing-title">
-            <h2 id="pricing-title" className="text-xl sm:text-2xl font-semibold tracking-tight text-plum mb-3">
-              Start free, upgrade when ready
-            </h2>
-            <p className="text-sm sm:text-base text-plum-soft mb-3 max-w-2xl mx-auto">
-              <strong className="text-plum">Free</strong> — 3 CVs, 5 AI assists/month, no signup card required.
-              {" "}<strong className="text-plum">Pro $7/month</strong> — unlimited CVs, unlimited AI, premium templates.
-            </p>
-            <p className="text-xs text-plum-soft mb-4">7-day free trial · No charge during trial</p>
-            <Link href="/pricing" className="inline-block px-5 py-2.5 rounded-md bg-coral text-white font-semibold hover:bg-coral-deep transition-colors">
-              See full pricing →
-            </Link>
-          </section>
+          {/* 7. MASTER features + pricing */}
+          <CvMasterFeatures />
+          <CvMasterPricing />
 
           {/* 8. Real proof */}
           <section className="mb-12" aria-labelledby="proof-title">
@@ -390,7 +408,10 @@ export default async function CvGuidePage({
             </ul>
           </section>
 
-          {/* 11. Final CTA */}
+          {/* 11. MASTER FAQ (localized role/country Qs prepended) */}
+          <CvMasterFaq extra={localizedFaq} />
+
+          {/* 12. Final CTA */}
           <section className="mb-10 text-center" aria-labelledby="cta-title">
             <h2 id="cta-title" className="sr-only">Get started</h2>
             <Link
@@ -401,6 +422,9 @@ export default async function CvGuidePage({
             </Link>
             <p className="text-xs text-plum-soft mt-3">No credit card required to start.</p>
           </section>
+
+          {/* 13. MASTER Shamool pledge line */}
+          <CvMasterShamool />
         </div>
       </main>
       <Footer />
