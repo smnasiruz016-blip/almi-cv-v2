@@ -5,10 +5,20 @@ import { JOB_ROLES, getRoleBySlug } from "@/lib/roles";
 import { suggestTemplate, TEMPLATES } from "@/components/templates/template-registry";
 import { CVPreview } from "@/components/templates/CVPreview";
 import { getCurrentUser } from "@/lib/auth";
+import { getRoleCvContent } from "@/lib/role-cv-content";
 import { SiteHeader } from "@/components/site-header";
 import { Footer } from "@/components/footer";
 import { Container } from "@/components/ui/container";
 import { Section } from "@/components/ui/section";
+import {
+  CvMasterPriceTrap,
+  CvMasterInvisibleGate,
+  CvMasterFeatures,
+  CvMasterPricing,
+  CvMasterFaq,
+  CvMasterShamool,
+  type FaqItem,
+} from "@/components/cv-master";
 
 // PNG sunset: this page used to render PNG screenshots from TemplateImage
 // rows. Now it renders a live React preview of the template that
@@ -61,6 +71,15 @@ export default async function RoleHubPage({
     : `/signup?intent=template&template=${layout.slug}`;
   const ctaLabel = isLoggedIn ? "Use this template" : "Sign up to use this template";
 
+  // Localized FAQ — REAL sourced role data ahead of the shared master FAQ.
+  const roleContent = getRoleCvContent(role.slug);
+  const localizedFaq: FaqItem[] = roleContent
+    ? [{
+        q: `What should a ${role.name} CV include?`,
+        a: `${roleContent.include} ${roleContent.length}`,
+      }]
+    : [];
+
   return (
     <main>
       <SiteHeader isLoggedIn={isLoggedIn} />
@@ -85,6 +104,12 @@ export default async function RoleHubPage({
                 {layout.name}
               </span>{" "}
               is the layout we recommend — {layout.description}
+            </p>
+            <p className="mt-4 text-base text-plum-soft">
+              Right now, a robot (an ATS) is deleting your CV before a human hiring for
+              a {role.name.toLowerCase()} role ever reads it — not because you&apos;re
+              not good enough, but because your CV doesn&apos;t speak its language.
+              AlmiCV fixes that.
             </p>
           </header>
 
@@ -131,6 +156,18 @@ export default async function RoleHubPage({
           </div>
         </Container>
       </Section>
+
+      {/* MASTER copy — price trap, gate, features, pricing, FAQ, Shamool */}
+      <div className="bg-cream">
+        <div className="mx-auto w-full max-w-5xl px-6 py-16">
+          <CvMasterPriceTrap />
+          <CvMasterInvisibleGate />
+          <CvMasterFeatures />
+          <CvMasterPricing />
+          <CvMasterFaq extra={localizedFaq} />
+          <CvMasterShamool />
+        </div>
+      </div>
 
       <Footer />
     </main>
