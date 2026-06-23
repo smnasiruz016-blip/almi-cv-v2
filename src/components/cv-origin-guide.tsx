@@ -11,6 +11,16 @@ import {
   CV_ORIGINS,
   isCvOriginIndexable,
 } from "@/lib/cv-origin-localization";
+import { getFreeCvContent } from "@/lib/free-cv-content";
+import {
+  CvMasterPriceTrap,
+  CvMasterInvisibleGate,
+  CvMasterFeatures,
+  CvMasterPricing,
+  CvMasterFaq,
+  CvMasterShamool,
+  type FaqItem,
+} from "@/components/cv-master";
 
 const SITE_ORIGIN = "https://almicv.almiworld.com";
 
@@ -32,6 +42,21 @@ export function OriginCvGuide({
   const convention = getConvention(c.slug);
   if (!origin || !local || !convention) return null;
   const isVerified = hasVerifiedConvention(c.slug);
+  const fcc = getFreeCvContent(c.slug);
+
+  // Localized FAQ — REAL origin→destination + country data ahead of the master FAQ.
+  const localizedFaq: FaqItem[] = [
+    {
+      q: `How should I present my CV when applying to ${c.name} from ${origin.name}?`,
+      a: `${convention.notes} AlmiCV applies these ${c.name} conventions for you and can translate into ${c.primaryLanguage}.`,
+    },
+    ...(fcc?.workRouteNote
+      ? [{
+          q: `What is the main work route for international applicants in ${c.name}?`,
+          a: fcc.workRouteNote,
+        }]
+      : []),
+  ];
 
   const url = `${SITE_ORIGIN}/cv-guide/${c.slug}/from-${origin.slug}`;
   const webApplication = {
@@ -80,8 +105,8 @@ export function OriginCvGuide({
             </ol>
           </nav>
 
-          {/* 2. H1 + 3. Localized hero sub-hook */}
-          <header className="mb-8">
+          {/* 2. H1 + 3. Localized hero sub-hook + MASTER hook line */}
+          <header className="mb-10">
             <p className="text-sm font-semibold uppercase tracking-wide text-coral-deep mb-2">
               {origin.flag} {origin.name} → {c.name}
             </p>
@@ -91,7 +116,25 @@ export function OriginCvGuide({
             <p className="text-base sm:text-lg text-plum-soft leading-relaxed max-w-3xl">
               {local.subHook}
             </p>
+            <p className="mt-4 text-base sm:text-lg text-plum-soft leading-relaxed max-w-3xl">
+              Right now, a robot (an ATS) is deleting your CV before a human in {c.name}{" "}
+              ever reads it — not because you&apos;re not good enough, but because your CV
+              doesn&apos;t speak its language. AlmiCV fixes that.
+            </p>
+            <div className="mt-6">
+              <Link
+                href={`/signup?country=${c.slug}`}
+                className="inline-block px-7 py-3.5 rounded-md bg-coral text-white text-base font-semibold hover:bg-coral-deep transition-colors"
+              >
+                Open Dashboard — Start Free →
+              </Link>
+              <p className="text-xs text-plum-soft mt-2">Free to start · Pro is $7/month.</p>
+            </div>
           </header>
+
+          {/* 3b. MASTER price trap + invisible gate */}
+          <CvMasterPriceTrap />
+          <CvMasterInvisibleGate />
 
           {/* 4. Origin-specific section (the localized angle) */}
           <section className="mb-12 rounded-xl border border-peach bg-white p-6 sm:p-8" aria-labelledby="origin-title">
@@ -200,6 +243,10 @@ export function OriginCvGuide({
             </div>
           </section>
 
+          {/* 6b. MASTER features + pricing */}
+          <CvMasterFeatures />
+          <CvMasterPricing />
+
           {/* 7. Cross-product 3-card DEEP */}
           <section className="mb-12" aria-label="Other AlmiWorld products">
             <h2 className="text-xl sm:text-2xl font-semibold tracking-tight text-plum mb-5">
@@ -227,6 +274,9 @@ export function OriginCvGuide({
             </ul>
           </section>
 
+          {/* 7b. MASTER FAQ (localized origin→country Qs prepended) */}
+          <CvMasterFaq extra={localizedFaq} />
+
           {/* 8. Final CTA */}
           <section className="mb-10 text-center">
             <Link
@@ -237,6 +287,9 @@ export function OriginCvGuide({
             </Link>
             <p className="text-xs text-plum-soft mt-3">No credit card required to start.</p>
           </section>
+
+          {/* 9. MASTER Shamool pledge line */}
+          <CvMasterShamool />
         </div>
       </main>
       <Footer />
