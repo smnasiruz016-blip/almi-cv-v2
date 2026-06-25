@@ -20,6 +20,7 @@ const ECOSYSTEM_LINKS: ReadonlyArray<{
   },
   { label: "AlmiPrep", href: "https://almiprep.almiworld.com", external: true },
   { label: "AlmiPTE", href: "https://almipte.almiworld.com", external: true },
+  { label: "AlmiDET", href: "https://almidet.almiworld.com", external: true },
   { label: "eBooks", href: "https://almiworld.com/ebooks-2/", external: true },
   { label: "AlmiWorld", href: "https://almiworld.com", external: true },
 ];
