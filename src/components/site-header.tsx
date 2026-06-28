@@ -23,6 +23,8 @@ const ECOSYSTEM_LINKS: ReadonlyArray<{
   { label: "AlmiTOEFL", href: "https://almitoefl.almiworld.com", external: true },
   { label: "AlmiOET", href: "https://almioet.almiworld.com/", external: true },
   { label: "AlmiDET", href: "https://almidet.almiworld.com", external: true },
+  { label: "AlmiCELPIP", href: "https://almicelpip.almiworld.com/", external: true },
+  { label: "AlmiGoethe", href: "https://almigoethe.almiworld.com/", external: true },
   { label: "eBooks", href: "https://almiworld.com/ebooks-2/", external: true },
   { label: "AlmiWorld", href: "https://almiworld.com", external: true },
 ];
