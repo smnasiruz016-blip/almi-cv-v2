@@ -26,6 +26,8 @@ const ECOSYSTEM_LINKS: ReadonlyArray<{
   { label: "AlmiCELPIP", href: "https://almicelpip.almiworld.com/", external: true },
   { label: "AlmiGoethe", href: "https://almigoethe.almiworld.com/", external: true },
   { label: "AlmiFrench", href: "https://almifrench.almiworld.com/", external: true },
+  { label: "AlmiSpanish", href: "https://almispanish.almiworld.com/", external: true },
+  { label: "AlmiJapanese", href: "https://almijapanese.almiworld.com/", external: true },
   { label: "eBooks", href: "https://almiworld.com/ebooks-2/", external: true },
   { label: "AlmiWorld", href: "https://almiworld.com", external: true },
 ];
