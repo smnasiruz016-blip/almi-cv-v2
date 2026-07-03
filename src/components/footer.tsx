@@ -24,7 +24,6 @@ const FOOTER_COLUMNS: FooterColumn[] = [
     links: [
       { label: "AlmiJob", href: "https://almijob.almiworld.com/" },
       { label: "AlmiSalary", href: "https://almisalary.almiworld.com/" },
-      { label: "AlmiCV", href: "https://almicv.almiworld.com/" },
       { label: "AlmiStudy", href: "https://almistudy.almiworld.com/" },
       { label: "AlmiPrep", href: "https://almiprep.almiworld.com/" },
       { label: "AlmiPTE", href: "https://almipte.almiworld.com/" },
