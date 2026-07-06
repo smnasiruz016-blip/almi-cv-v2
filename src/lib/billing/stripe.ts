@@ -101,7 +101,7 @@ export async function createCheckoutSession(input: {
       trial_period_days: TRIAL_PERIOD_DAYS,
       metadata: { userId: input.userId, plan: planLabel },
     },
-    metadata: { userId: input.userId, plan: planLabel },
+    metadata: { userId: input.userId, plan: planLabel, product: "almi-cv" }, // product = routing key for almi-billing-router
     allow_promotion_codes: true,
     success_url: `${baseUrl}${successPath}`,
     cancel_url: `${baseUrl}${cancelPath}`,
