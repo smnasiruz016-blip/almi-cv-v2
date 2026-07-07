@@ -5,31 +5,29 @@ import { useEffect, useRef, useState } from "react";
 import { ArrowRight, Menu, X } from "lucide-react";
 import { Container } from "@/components/ui/container";
 
-const ECOSYSTEM_LINKS: ReadonlyArray<{
-  label: string;
-  href: string;
-  external: boolean;
-}> = [
-  { label: "AlmiCV Home", href: "/", external: false },
-  { label: "AlmiJob", href: "https://almijob.almiworld.com", external: true },
-  { label: "AlmiStudy", href: "https://almistudy.almiworld.com", external: true },
-  {
-    label: "Salary Checker",
-    href: "https://almisalary.almiworld.com",
-    external: true,
-  },
-  { label: "AlmiPrep", href: "https://almiprep.almiworld.com", external: true },
-  { label: "AlmiPTE", href: "https://almipte.almiworld.com", external: true },
-  { label: "AlmiTOEFL", href: "https://almitoefl.almiworld.com", external: true },
-  { label: "AlmiOET", href: "https://almioet.almiworld.com/", external: true },
-  { label: "AlmiDET", href: "https://almidet.almiworld.com", external: true },
-  { label: "AlmiCELPIP", href: "https://almicelpip.almiworld.com/", external: true },
-  { label: "AlmiGoethe", href: "https://almigoethe.almiworld.com/", external: true },
-  { label: "AlmiFrench", href: "https://almifrench.almiworld.com/", external: true },
-  { label: "AlmiSpanish", href: "https://almispanish.almiworld.com/", external: true },
-  { label: "AlmiJapanese", href: "https://almijapanese.almiworld.com/", external: true },
-  { label: "eBooks", href: "https://almiworld.com/ebooks-2/", external: true },
-  { label: "AlmiWorld", href: "https://almiworld.com", external: true },
+// Full canonical AlmiWorld family strip. Every sibling product + network links,
+// with AlmiCV (this site) omitted — its own home is the logo. Rendered inline as
+// real <a> anchors that wrap to 2–3 rows; no dropdown, no overflow clipping.
+const FAMILY_LINKS: ReadonlyArray<{ label: string; href: string }> = [
+  { label: "Home", href: "https://almiworld.com/" },
+  { label: "eBooks", href: "https://almiworld.com/ebooks-2/" },
+  { label: "AlmiJob", href: "https://almijob.almiworld.com/" },
+  { label: "Salary Checker", href: "https://almisalary.almiworld.com/" },
+  { label: "AlmiStudy", href: "https://almistudy.almiworld.com/" },
+  { label: "AlmiPrep", href: "https://almiprep.almiworld.com/" },
+  { label: "AlmiPTE", href: "https://almipte.almiworld.com/" },
+  { label: "AlmiTOEFL", href: "https://almitoefl.almiworld.com/" },
+  { label: "AlmiOET", href: "https://almioet.almiworld.com/" },
+  { label: "AlmiDET", href: "https://almidet.almiworld.com/" },
+  { label: "AlmiCELPIP", href: "https://almicelpip.almiworld.com/" },
+  { label: "AlmiFrench", href: "https://almifrench.almiworld.com/" },
+  { label: "AlmiSpanish", href: "https://almispanish.almiworld.com/" },
+  { label: "AlmiJapanese", href: "https://almijapanese.almiworld.com/" },
+  { label: "AlmiKorean", href: "https://almikorean.almiworld.com/" },
+  { label: "AlmiGoethe", href: "https://almigoethe.almiworld.com/" },
+  { label: "AlmiItalian", href: "https://almiitalian.almiworld.com/" },
+  { label: "Contact Us", href: "https://almiworld.com/contact-us/" },
+  { label: "Shamool Foundation", href: "https://shamoolfoundation.com/" },
 ];
 
 const MENU_LINK_CLASS =
@@ -107,19 +105,6 @@ export function SiteHeader({ isLoggedIn }: { isLoggedIn: boolean }) {
             </Link>
 
             <div className="flex items-center gap-3">
-              {ECOSYSTEM_LINKS.filter(
-                (link) => link.label !== "AlmiCV Home",
-              ).map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hidden text-sm font-medium text-plum-soft transition hover:text-coral md:inline-flex"
-                >
-                  {link.label}
-                </a>
-              ))}
               <Link
                 href="/templates"
                 className="hidden text-sm font-medium text-plum-soft transition hover:text-coral sm:inline-flex"
@@ -174,6 +159,24 @@ export function SiteHeader({ isLoggedIn }: { isLoggedIn: boolean }) {
               </button>
             </div>
           </div>
+
+          {/* Canonical family strip — desktop, wraps to 2–3 rows. */}
+          <nav
+            aria-label="AlmiWorld family"
+            className="hidden flex-wrap items-center gap-x-4 gap-y-1 pb-4 text-base font-semibold text-plum-soft md:flex"
+          >
+            {FAMILY_LINKS.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="transition hover:text-coral"
+              >
+                {link.label}
+              </a>
+            ))}
+          </nav>
         </Container>
 
         {isOpen && (
@@ -186,31 +189,19 @@ export function SiteHeader({ isLoggedIn }: { isLoggedIn: boolean }) {
             className="border-t border-plum/10 bg-cream shadow-lg md:hidden"
           >
             <nav className="flex flex-col gap-1 px-4 py-3">
-              {ECOSYSTEM_LINKS.map((link, index) =>
-                link.external ? (
-                  <a
-                    key={link.href}
-                    ref={index === 0 ? firstLinkRef : undefined}
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={closeMenu}
-                    className={MENU_LINK_CLASS}
-                  >
-                    {link.label}
-                  </a>
-                ) : (
-                  <Link
-                    key={link.href}
-                    ref={index === 0 ? firstLinkRef : undefined}
-                    href={link.href}
-                    onClick={closeMenu}
-                    className={MENU_LINK_CLASS}
-                  >
-                    {link.label}
-                  </Link>
-                ),
-              )}
+              {FAMILY_LINKS.map((link, index) => (
+                <a
+                  key={link.href}
+                  ref={index === 0 ? firstLinkRef : undefined}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={closeMenu}
+                  className={MENU_LINK_CLASS}
+                >
+                  {link.label}
+                </a>
+              ))}
 
               <Link
                 href="/templates"
