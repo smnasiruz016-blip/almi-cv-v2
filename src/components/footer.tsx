@@ -39,6 +39,8 @@ const FOOTER_COLUMNS: FooterColumn[] = [
   {
     title: "Legal & Contact",
     links: [
+      { label: "AlmiDutch", href: "https://almidutch.almiworld.com/" },
+      { label: "AlmiIcelandic", href: "https://almiicelandic.almiworld.com/" },
       { label: "Contact Us", href: "https://almiworld.com/contact-us/" },
       { label: "Refund and Return Policy", href: "https://almiworld.com/refund_returns/" },
       { label: "Privacy Policy", href: "https://almiworld.com/privacy-policy/" },
