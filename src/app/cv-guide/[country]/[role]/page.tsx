@@ -27,7 +27,9 @@ import {
 // "from-", so the dispatch is unambiguous — mirrors AlmiPTE's flywheel nesting.
 const FROM = "from-";
 
-export const revalidate = 86400;
+// Render-once, cache until redeploy: the role×country CV guides render from static
+// in-repo data that only changes on deploy — no periodic ISR re-writes.
+export const revalidate = false;
 export const dynamicParams = true;
 
 const SITE_ORIGIN = "https://almicv.almiworld.com";

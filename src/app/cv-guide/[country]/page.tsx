@@ -20,7 +20,8 @@ import {
   type FaqItem,
 } from "@/components/cv-master";
 
-export const revalidate = 86400;
+// Render-once, cache until redeploy (static in-repo data) — no periodic ISR re-writes.
+export const revalidate = false;
 export const dynamicParams = true;
 
 const SITE_ORIGIN = "https://almicv.almiworld.com";
