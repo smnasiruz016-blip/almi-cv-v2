@@ -2,6 +2,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/db";
 import { createSession, getCurrentUser, hashPassword } from "@/lib/auth";
+import { sendWelcomeEmail } from "@/lib/email";
 import { SubmitButton } from "./SubmitButton";
 
 async function signupAction(formData: FormData) {
@@ -24,6 +25,18 @@ async function signupAction(formData: FormData) {
   });
 
   await createSession(user.id);
+
+  // Welcome email — this app has no separate verification step, so it's sent
+  // once here at account creation. Fire-and-forget: a mail failure must not
+  // fail signup. (Kept before redirect(), which throws NEXT_REDIRECT.)
+  try {
+    await sendWelcomeEmail({ to: user.email, name: user.name });
+  } catch (err) {
+    console.error("[signup] welcome send failed", {
+      message: err instanceof Error ? err.message : String(err),
+    });
+  }
+
   redirect("/dashboard");
 }
 
