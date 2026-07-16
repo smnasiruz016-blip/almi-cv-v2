@@ -1,5 +1,6 @@
 "use client";
 
+import { familyStrip } from "@smnasiruz016-blip/almi-data";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { ArrowRight, Menu, X } from "lucide-react";
@@ -8,34 +9,9 @@ import { Container } from "@/components/ui/container";
 // Full canonical AlmiWorld family strip. Every sibling product + network links,
 // with AlmiCV (this site) omitted — its own home is the logo. Rendered inline as
 // real <a> anchors that wrap to 2–3 rows; no dropdown, no overflow clipping.
-const FAMILY_LINKS: ReadonlyArray<{ label: string; href: string }> = [
-  { label: "Home", href: "https://almiworld.com/" },
-  { label: "eBooks", href: "https://almiworld.com/ebooks-2/" },
-  { label: "AlmiJob", href: "https://almijob.almiworld.com/" },
-  { label: "Salary Checker", href: "https://almisalary.almiworld.com/" },
-  { label: "AlmiStudy", href: "https://almistudy.almiworld.com/" },
-  { label: "AlmiPrep", href: "https://almiprep.almiworld.com/" },
-  { label: "AlmiPTE", href: "https://almipte.almiworld.com/" },
-  { label: "AlmiTOEFL", href: "https://almitoefl.almiworld.com/" },
-  { label: "AlmiOET", href: "https://almioet.almiworld.com/" },
-  { label: "AlmiDET", href: "https://almidet.almiworld.com/" },
-  { label: "AlmiCELPIP", href: "https://almicelpip.almiworld.com/" },
-  { label: "AlmiFrench", href: "https://almifrench.almiworld.com/" },
-  { label: "AlmiSpanish", href: "https://almispanish.almiworld.com/" },
-  { label: "AlmiJapanese", href: "https://almijapanese.almiworld.com/" },
-  { label: "AlmiKorean", href: "https://almikorean.almiworld.com/" },
-  { label: "AlmiGoethe", href: "https://almigoethe.almiworld.com/" },
-  { label: "AlmiPortuguese", href: "https://almiportuguese.almiworld.com/" },
-  { label: "AlmiItalian", href: "https://almiitalian.almiworld.com/" },
-  { label: "AlmiDutch", href: "https://almidutch.almiworld.com/" },
-  { label: "AlmiIcelandic", href: "https://almiicelandic.almiworld.com/" },
-  { label: "AlmiDanish", href: "https://almidanish.almiworld.com/" },
-  { label: "AlmiNorwegian", href: "https://alminorwegian.almiworld.com/" },
-  { label: "AlmiSwedish", href: "https://almiswedish.almiworld.com/" },
-  { label: "AlmiSwiss", href: "https://almiswiss.almiworld.com/" },
-  { label: "Contact Us", href: "https://almiworld.com/contact-us/" },
-  { label: "Shamool Foundation", href: "https://shamoolfoundation.com/" },
-];
+// ⚠️ "cv" is an IDENTITY, not a label — it omits THIS product from its own strip.
+// The list itself lives in @smnasiruz016-blip/almi-data; do not re-inline it.
+const FAMILY_LINKS: ReadonlyArray<{ label: string; href: string }> = familyStrip("cv");
 
 const MENU_LINK_CLASS =
   "flex min-h-[48px] items-center rounded-lg px-3 text-base font-medium text-plum transition-colors hover:bg-coral/10 hover:text-coral focus:outline-none focus:ring-2 focus:ring-coral/40";
