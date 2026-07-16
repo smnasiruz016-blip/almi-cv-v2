@@ -30,6 +30,9 @@ const FAMILY_LINKS: ReadonlyArray<{ label: string; href: string }> = [
   { label: "AlmiDutch", href: "https://almidutch.almiworld.com/" },
   { label: "AlmiIcelandic", href: "https://almiicelandic.almiworld.com/" },
   { label: "AlmiDanish", href: "https://almidanish.almiworld.com/" },
+  { label: "AlmiNorwegian", href: "https://alminorwegian.almiworld.com/" },
+  { label: "AlmiSwedish", href: "https://almiswedish.almiworld.com/" },
+  { label: "AlmiSwiss", href: "https://almiswiss.almiworld.com/" },
   { label: "Contact Us", href: "https://almiworld.com/contact-us/" },
   { label: "Shamool Foundation", href: "https://shamoolfoundation.com/" },
 ];
