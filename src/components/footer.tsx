@@ -1,6 +1,18 @@
 // Family-wide footer — AlmiWorld Global Nav Spec v1 §3. Data-driven: every family
 // product except this site's own is a followed cross-link, strengthening the
 // network's SEO (spec §3 note).
+//
+// The product list is NOT maintained here — it comes from @smnasiruz016-blip/almi-data,
+// so adding a product is one edit there plus a version bump.
+//
+// ⚠️ IT WAS maintained here, and here is what that cost: the Products column was
+// hardcoded and stopped at AlmiItalian, while AlmiDutch, AlmiIcelandic and AlmiDanish
+// had been appended to the "LEGAL & CONTACT" column instead — products filed under a
+// legal heading, live, because that is where there was room. The stale comment above
+// the column still said "All six products" while sixteen were listed. Nothing catches
+// this: it type-checks, it renders, and only a human reading the footer would notice.
+// Products come from footerProducts() now; Legal & Contact holds legal and contact.
+import { footerProducts } from "@smnasiruz016-blip/almi-data";
 
 type FooterLink = { label: string; href: string };
 type FooterColumn = { title: string; links: FooterLink[] };
@@ -15,36 +27,13 @@ const FOOTER_COLUMNS: FooterColumn[] = [
     ],
   },
   {
-    // All six products — one list, shared verbatim across every repo.
+    // ⚠️ "cv" is an IDENTITY, not a label — it omits THIS product from its own list.
     title: "Products",
-    links: [
-      { label: "AlmiJob", href: "https://almijob.almiworld.com/" },
-      { label: "Salary Checker", href: "https://almisalary.almiworld.com/" },
-      { label: "AlmiStudy", href: "https://almistudy.almiworld.com/" },
-      { label: "AlmiPrep", href: "https://almiprep.almiworld.com/" },
-      { label: "AlmiPTE", href: "https://almipte.almiworld.com/" },
-      { label: "AlmiTOEFL", href: "https://almitoefl.almiworld.com/" },
-      { label: "AlmiOET", href: "https://almioet.almiworld.com/" },
-      { label: "AlmiDET", href: "https://almidet.almiworld.com/" },
-      { label: "AlmiCELPIP", href: "https://almicelpip.almiworld.com/" },
-      { label: "AlmiFrench", href: "https://almifrench.almiworld.com/" },
-      { label: "AlmiSpanish", href: "https://almispanish.almiworld.com/" },
-      { label: "AlmiJapanese", href: "https://almijapanese.almiworld.com/" },
-      { label: "AlmiKorean", href: "https://almikorean.almiworld.com/" },
-      { label: "AlmiGoethe", href: "https://almigoethe.almiworld.com/" },
-      { label: "AlmiPortuguese", href: "https://almiportuguese.almiworld.com/" },
-      { label: "AlmiItalian", href: "https://almiitalian.almiworld.com/" },
-    ],
+    links: [...footerProducts("cv")],
   },
   {
     title: "Legal & Contact",
     links: [
-      { label: "AlmiDutch", href: "https://almidutch.almiworld.com/" },
-      { label: "AlmiIcelandic", href: "https://almiicelandic.almiworld.com/" },
-      { label: "AlmiDanish", href: "https://almidanish.almiworld.com/" },
-      { label: "AlmiNorwegian", href: "https://alminorwegian.almiworld.com/" },
-      { label: "AlmiSwedish", href: "https://almiswedish.almiworld.com/" },
-      { label: "AlmiSwiss", href: "https://almiswiss.almiworld.com/" },
       { label: "Contact Us", href: "https://almiworld.com/contact-us/" },
       { label: "Refund and Return Policy", href: "https://almiworld.com/refund_returns/" },
       { label: "Privacy Policy", href: "https://almiworld.com/privacy-policy/" },
