@@ -108,7 +108,7 @@ export default async function CountryHub({
       "@type": "Offer",
       price: "0",
       priceCurrency: "USD",
-      description: "Free plan with 3 CVs and 5 AI assists/month. Pro $12/month.",
+      description: "One plan: $12/month with a 7-day free trial. Cancel anytime.",
     },
   };
   const breadcrumbs = {

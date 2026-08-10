@@ -45,7 +45,7 @@ export function CvMasterHook({
         >
           Open Dashboard — Start Free →
         </Link>
-        <p className="text-xs text-plum-soft mt-2">Free to start · Pro is $12/month.</p>
+        <p className="text-xs text-plum-soft mt-2">7-day free trial, then $12/month.</p>
       </div>
     </header>
   );
@@ -64,7 +64,7 @@ export function CvMasterPriceTrap() {
         paywall.
       </p>
       <p className="mt-3 text-base text-plum leading-relaxed max-w-3xl font-medium">
-        AlmiCV charges $12 flat per month. No download walls. No tricks. We want you to
+        AlmiCV charges $12 flat per month after a 7-day free trial. No download walls. No tricks. We want you to
         stay because we&apos;re good — not because you&apos;re trapped.
       </p>
     </section>
@@ -131,27 +131,26 @@ export function CvMasterFeatures() {
 }
 
 // ── 6. Pricing ───────────────────────────────────────────────────────────────
-const PRICING_ROWS: ReadonlyArray<{ feature: string; free: string; pro: string }> = [
-  { feature: "CVs you can store", free: "Up to 3", pro: "Unlimited" },
-  { feature: "AI assists", free: "5 / month", pro: "Unlimited" },
-  { feature: "Premium layouts", free: "Standard", pro: "All layouts open" },
-  { feature: "Translation", free: "—", pro: "8 major languages" },
-  { feature: "Interview prep", free: "—", pro: "Custom question generator" },
-  { feature: "Billing", free: "$0 forever", pro: "Cancel anytime (Stripe)" },
+const PRICING_ROWS: ReadonlyArray<{ feature: string; pro: string }> = [
+  { feature: "CVs you can store", pro: "Unlimited" },
+  { feature: "AI assists", pro: "Unlimited" },
+  { feature: "Premium layouts", pro: "All layouts open" },
+  { feature: "Translation", pro: "8 major languages" },
+  { feature: "Interview prep", pro: "Custom question generator" },
+  { feature: "Billing", pro: "7-day free trial, then $12/mo — cancel anytime" },
 ];
 
 export function CvMasterPricing() {
   return (
     <section className="mb-12" aria-labelledby="pricing-title">
       <h2 id="pricing-title" className="text-xl sm:text-2xl font-semibold tracking-tight text-plum mb-5">
-        Simple pricing — Free or $12/mo
+        Simple pricing — one plan, $12/mo
       </h2>
       <div className="overflow-x-auto rounded-xl border border-peach bg-white">
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b border-peach text-left">
               <th className="px-4 py-3 font-semibold text-plum">Feature</th>
-              <th className="px-4 py-3 font-semibold text-plum">Free ($0)</th>
               <th className="px-4 py-3 font-semibold text-plum">Pro ($12/mo)</th>
             </tr>
           </thead>
@@ -159,7 +158,6 @@ export function CvMasterPricing() {
             {PRICING_ROWS.map((row) => (
               <tr key={row.feature} className="border-b border-peach/60 last:border-0">
                 <td className="px-4 py-3 text-plum font-medium">{row.feature}</td>
-                <td className="px-4 py-3 text-plum-soft">{row.free}</td>
                 <td className="px-4 py-3 text-plum-soft">{row.pro}</td>
                               </tr>
             ))}
@@ -180,7 +178,7 @@ const MASTER_FAQ: ReadonlyArray<FaqItem> = [
   },
   {
     q: "Is AlmiCV really free to start?",
-    a: "Yes. You can build, preview, and test your layout at no cost. Pro is a flat $12 — no hidden download walls, no weekly renewals. What you see is what you pay.",
+    a: "You get 7 days free with a card on file, then a flat $12/month — no hidden download walls, no weekly renewals. Cancel inside the trial and you pay nothing.",
   },
   {
     q: "Will the AI make my CV sound robotic?",

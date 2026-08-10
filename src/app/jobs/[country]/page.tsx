@@ -157,7 +157,7 @@ export default async function CountryJobsPage({
               </Link>
             </div>
             <p className="mt-5 text-sm text-plum-faint">
-              Free to start · No credit card · 3 CVs included
+              7-day free trial · $12/month · Cancel anytime
             </p>
           </div>
         </Container>

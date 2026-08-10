@@ -15,16 +15,16 @@ const COPY: Record<Props["reason"], { title: string; default: string }> = {
   AI_LIMIT_REACHED: {
     title: "AI limit reached",
     default:
-      "You've used all 5 free AI calls this month. Upgrade to Pro for unlimited AI assists across rewrite, tailor, summary, cover letters, and chat.",
+      "Start your 7-day free trial for unlimited AI assists across rewrite, tailor, summary, cover letters, and chat.",
   },
   CV_LIMIT_REACHED: {
     title: "CV limit reached",
     default:
-      "Free plan is limited to 3 CVs. Upgrade to Pro for unlimited CVs and unlock every premium template.",
+      "Start your 7-day free trial for unlimited CVs and every premium template — $12/month after, cancel anytime.",
   },
   PRO_REQUIRED: {
-    title: "Pro feature",
-    default: "This feature is available on Pro. Upgrade to unlock.",
+    title: "Subscribers only",
+    default: "Start your 7-day free trial to use this — $12/month after, cancel anytime.",
   },
 };
 

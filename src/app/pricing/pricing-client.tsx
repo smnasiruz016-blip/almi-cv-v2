@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { ArrowRight, Check, Loader2, Sparkles } from "lucide-react";
+import { Check, Loader2, Sparkles } from "lucide-react";
 
 type PlanKey = "FREE" | "PRO_MONTHLY" | "PRO_YEARLY";
 
@@ -13,13 +13,6 @@ type Props = {
   billingEnabled: boolean;
 };
 
-const FREE_FEATURES = [
-  "Up to 3 CVs",
-  "5 AI assists / month",
-  "Free templates",
-  "PDF export",
-  "Resume score checker",
-];
 
 const PRO_FEATURES = [
   "Unlimited CVs",
@@ -149,65 +142,15 @@ export function PricingClient({
         </div>
       )}
 
-      <div className="mx-auto mt-10 grid max-w-3xl gap-6 md:grid-cols-2">
-        {/* FREE */}
-        <div className="flex flex-col rounded-2xl border border-plum/10 bg-white p-6 shadow-warm-card">
-          <div>
-            <h2 className="text-base font-semibold text-plum">Free</h2>
-            <p className="mt-1 text-xs text-plum-soft">
-              Perfect for getting started
-            </p>
-            <p className="mt-4 font-display text-4xl font-bold text-plum">
-              $0
-              <span className="ml-1 text-sm font-normal text-plum-soft">
-                /month
-              </span>
-            </p>
-          </div>
-          <ul className="mt-5 flex-1 space-y-2.5 text-sm text-plum">
-            {FREE_FEATURES.map((f) => (
-              <li key={f} className="flex items-start gap-2">
-                <Check className="mt-0.5 h-4 w-4 shrink-0 text-mint" />
-                <span>{f}</span>
-              </li>
-            ))}
-          </ul>
-          <div className="mt-6">
-            {isLoggedIn && currentPlan === "FREE" ? (
-              <button
-                type="button"
-                disabled
-                className="inline-flex w-full items-center justify-center rounded-pill border border-plum/15 bg-cream-soft px-5 py-2.5 text-sm font-medium text-plum-soft"
-              >
-                Current plan
-              </button>
-            ) : isLoggedIn ? (
-              <Link
-                href="/dashboard"
-                className="inline-flex w-full items-center justify-center rounded-pill border border-plum/20 bg-white px-5 py-2.5 text-sm font-semibold text-plum transition-colors hover:bg-cream-soft"
-              >
-                Back to dashboard
-              </Link>
-            ) : (
-              <Link
-                href="/signup"
-                className="inline-flex w-full items-center justify-center gap-2 rounded-pill border border-plum/20 bg-white px-5 py-2.5 text-sm font-semibold text-plum transition-colors hover:bg-cream-soft"
-              >
-                Sign up free
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-            )}
-          </div>
-        </div>
-
+      <div className="mx-auto mt-10 max-w-sm">
         {/* PRO MONTHLY */}
         <div className="flex flex-col rounded-2xl border border-plum/10 bg-white p-6 shadow-warm-card">
           <div>
             <div className="flex items-center gap-2">
               <Sparkles className="h-4 w-4 text-coral" />
-              <h2 className="text-base font-semibold text-plum">Pro</h2>
+              <h2 className="text-base font-semibold text-plum">AlmiCV Pro</h2>
             </div>
-            <p className="mt-1 text-xs text-plum-soft">7-day free trial</p>
+            <p className="mt-1 text-xs text-plum-soft">7-day free trial · cancel anytime</p>
             <p className="mt-4 font-display text-4xl font-bold text-plum">
               $12
               <span className="ml-1 text-sm font-normal text-plum-soft">

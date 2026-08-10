@@ -78,7 +78,7 @@ export default async function DashboardPage() {
             }`}
           >
             <Sparkles className="h-3.5 w-3.5" />
-            {isPro ? "Pro plan" : "Free plan"}
+            {isPro ? "Pro plan" : "No active plan"}
           </span>
           {!isPro && (
             <Link

@@ -26,14 +26,22 @@ export type PlanKey = "FREE" | "PRO_MONTHLY" | "PRO_YEARLY";
 export type PlanConfig = {
   cvLimit: number;
   aiCallsPerMonth: number;
-  templatesAccess: "free_only" | "all";
+  templatesAccess: "none" | "all";
 };
 
+// FREE is no longer a PLAN. It is the name of the no-subscription state:
+// signed up, trial not started (or lapsed/cancelled). It grants nothing --
+// every number here is 0 and templatesAccess is "none". The single plan is
+// $12/month with a 7-day card-upfront trial; `trialing` counts as PRO_MONTHLY
+// via isProActive(), so a trialling user gets the full product from minute one.
+//
+// Do NOT restore non-zero values here to "be generous" -- these zeros ARE the
+// paywall. Every gate (AI, templates, CV creation) reads them.
 export const PLANS: Record<PlanKey, PlanConfig> = {
   FREE: {
-    cvLimit: 3,
-    aiCallsPerMonth: 5,
-    templatesAccess: "free_only",
+    cvLimit: 0,
+    aiCallsPerMonth: 0,
+    templatesAccess: "none",
   },
   PRO_MONTHLY: {
     cvLimit: Infinity, // unlimited CVs on Pro (count >= Infinity is never true)
@@ -48,7 +56,7 @@ export const PLANS: Record<PlanKey, PlanConfig> = {
 };
 
 export const PLAN_DISPLAY_NAME: Record<PlanKey, string> = {
-  FREE: "Free",
+  FREE: "No active plan",
   PRO_MONTHLY: "Pro",
   // Legacy label — only ever shown to subscribers who bought the retired
   // yearly plan before the move to a single $12/month price.

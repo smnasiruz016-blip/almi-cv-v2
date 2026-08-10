@@ -1,7 +1,5 @@
 import { prisma } from "@/lib/db";
-import { isBillingEnabled, isProActive, PLANS } from "@/lib/billing/plans";
-
-const RESET_WINDOW_MS = 30 * 24 * 60 * 60 * 1000;
+import { isBillingEnabled, isProActive } from "@/lib/billing/plans";
 
 export type AIAccessResult =
   | { ok: true; plan: "FREE" | "PRO" }
@@ -13,10 +11,14 @@ export type AIAccessResult =
     };
 
 /**
- * Gate every AI server action. Counts on call (not on success) — failed
- * AI calls still consume quota. Trade-off accepted: simpler code, no
- * race conditions, no need to instrument every AI feature file. If users
- * complain post-launch we can manually restore counts.
+ * Gate every AI server action. There is no free quota any more: AI is
+ * subscription-only, and `trialing` counts as active, so a user on the 7-day
+ * card-upfront trial has full access from minute one.
+ *
+ * The old rolling 30-day counter (5 free calls) is gone along with the free
+ * tier. aiCallsThisMonth / aiCallsResetAt are left on the User model and are
+ * simply no longer written -- dropping columns is a separate migration and
+ * would break nothing but is not worth coupling to a pricing change.
  */
 export async function requireAIAccess(
   userId: string | null,
@@ -29,9 +31,9 @@ export async function requireAIAccess(
     };
   }
 
-  // Dry-run mode: billing not yet enabled → don't enforce caps.
-  // Otherwise existing free users would silently get throttled to 5
-  // AI calls / 30 days with no upgrade path until launch day.
+  // Dry-run escape hatch: if billing is misconfigured (flag off or no price),
+  // do not lock everyone out of a live product. This is the ONLY path to AI
+  // without a subscription, and it is a config state, not a plan.
   if (!isBillingEnabled()) {
     return { ok: true, plan: "FREE" };
   }
@@ -43,8 +45,6 @@ export async function requireAIAccess(
       subscriptionCurrentPeriodEnd: true,
       subscriptionPlan: true,
       compProUntil: true,
-      aiCallsThisMonth: true,
-      aiCallsResetAt: true,
     },
   });
 
@@ -61,33 +61,14 @@ export async function requireAIAccess(
     return { ok: true, plan: "PRO" };
   }
 
-  // Free tier: rolling 30-day window.
-  const now = Date.now();
-  const needsReset =
-    !user.aiCallsResetAt ||
-    now - user.aiCallsResetAt.getTime() > RESET_WINDOW_MS;
-
-  const currentCount = needsReset ? 0 : user.aiCallsThisMonth;
-  const limit = PLANS.FREE.aiCallsPerMonth;
-
-  if (currentCount >= limit) {
-    return {
-      ok: false,
-      error: `You have used all ${limit} free AI calls this month. Upgrade to Pro for unlimited AI.`,
-      reason: "limit",
-      code: "AI_LIMIT_REACHED",
-    };
-  }
-
-  // Increment in the same write that resets the window if needed.
-  await prisma.user.update({
-    where: { id: userId },
-    data: needsReset
-      ? { aiCallsThisMonth: 1, aiCallsResetAt: new Date() }
-      : { aiCallsThisMonth: { increment: 1 } },
-  });
-
-  return { ok: true, plan: "FREE" };
+  // No subscription, no trial: refuse. Callers surface this as an upgrade
+  // prompt, never a crash -- existing free-tier users hit a paywall, not a 500.
+  return {
+    ok: false,
+    error: "Start your 7-day free trial to use AI features.",
+    reason: "not_pro",
+    code: "PRO_REQUIRED",
+  };
 }
 
 /**
