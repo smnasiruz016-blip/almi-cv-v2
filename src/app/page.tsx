@@ -25,7 +25,7 @@ export const revalidate = 3600;
 // so this string fully replaces it — no double-brand suffix.
 const HOME_TITLE = "AI Resume Builder with Real ATS Score | AlmiCV";
 const HOME_DESC =
-  "Free AI resume builder with a real ATS score. Beat the filter with the right keywords and templates — for $7/mo, no download traps. Build your CV now.";
+  "Free AI resume builder with a real ATS score. Beat the filter with the right keywords and templates — for $12/mo, no download traps. Build your CV now.";
 
 export const metadata: Metadata = {
   title: HOME_TITLE,
@@ -42,7 +42,7 @@ const CTA_LABEL = "Build my CV — free";
 const TRUST = [
   "A real ATS score — not a vanity number",
   "AI that keeps your voice — never robotic filler",
-  "$7/mo flat — no download paywall",
+  "$12/mo flat — no download paywall",
   "Unlimited CVs — one tailored for every job",
 ];
 
@@ -94,7 +94,7 @@ const FAQS = [
   },
   {
     q: "Is AlmiCV really a free resume builder?",
-    a: "Yes. Build free. Pro is $7/month — no download paywall, no weekly-billing trick. What you see is what you pay.",
+    a: "Yes. Build free. Pro is $12/month — no download paywall, no weekly-billing trick. What you see is what you pay.",
   },
   {
     q: "How is AlmiCV cheaper than resume.io and Zety?",
@@ -211,7 +211,7 @@ function HeroSection({ isLoggedIn }: { isLoggedIn: boolean }) {
               <PrimaryCTA isLoggedIn={isLoggedIn} />
             </div>
             <p className="mt-5 text-sm text-plum-faint">
-              Free to start. Pro is $7/month — a fraction of what resume.io
+              Free to start. Pro is $12/month — a fraction of what resume.io
               (~$30 every 4 weeks, ~$389/year) and Zety charge. No download
               traps. No weekly-billing tricks.
             </p>
@@ -411,10 +411,10 @@ function PricingSection({
             Start free. Build and preview at no cost.
           </h2>
           <p className="mt-3 text-base leading-7 text-plum-soft">
-            Pro is $7/month (or $60/year): unlimited CVs, full AI, real ATS
+            Pro is $12/month: unlimited CVs, full AI, real ATS
             scoring, and every premium template. resume.io charges around $30
             every 4 weeks — roughly $389 a year. Zety bills you weekly and locks
-            your download behind a paywall. We charge $7, flat, with no tricks —
+            your download behind a paywall. We charge $12, flat, with no tricks —
             because we&apos;d rather you stayed for being good than for being
             trapped.
           </p>

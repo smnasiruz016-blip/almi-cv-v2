@@ -3,7 +3,7 @@ import { getCurrentUser } from "@/lib/auth";
 import {
   isBillingEnabled,
   priceIdToPlanLabel,
-  type StripePriceId,
+  STRIPE_PRICE_MONTHLY,
 } from "@/lib/billing/plans";
 import { createCheckoutSession } from "@/lib/billing/stripe";
 
@@ -26,18 +26,22 @@ export async function POST(request: Request): Promise<NextResponse> {
     );
   }
 
-  let body: { priceId?: string; returnTo?: string };
+  let body: { plan?: string; returnTo?: string };
   try {
     body = (await request.json()) as {
-      priceId?: string;
+      plan?: string;
       returnTo?: string;
     };
   } catch {
     return NextResponse.json({ error: "Invalid request" }, { status: 400 });
   }
 
-  const priceId = (body.priceId ?? "").trim();
-  if (!priceId || !priceIdToPlanLabel(priceId)) {
+  // The browser names a PLAN, never a Stripe price ID — the server resolves it.
+  // This is the family pattern (see almi-prep-v2) and it is what lets the price
+  // live in a server-only env var: the client has no price ID to leak, to go
+  // stale, or to swap for the retired $60/year one.
+  const priceId = body.plan === "monthly" ? STRIPE_PRICE_MONTHLY : "";
+  if (!priceIdToPlanLabel(priceId)) {
     return NextResponse.json(
       { error: "Invalid plan selection" },
       { status: 400 },
@@ -61,7 +65,7 @@ export async function POST(request: Request): Promise<NextResponse> {
       userId: user.id,
       email: user.email,
       name: user.name,
-      priceId: priceId as StripePriceId,
+      priceId,
       returnTo: safeReturn,
     });
     return NextResponse.json({ url: result.url });

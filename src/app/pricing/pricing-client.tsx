@@ -3,8 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { ArrowRight, Check, Loader2, Sparkles, Star } from "lucide-react";
-import { STRIPE_PRICES } from "@/lib/billing/plans";
+import { ArrowRight, Check, Loader2, Sparkles } from "lucide-react";
 
 type PlanKey = "FREE" | "PRO_MONTHLY" | "PRO_YEARLY";
 
@@ -30,8 +29,6 @@ const PRO_FEATURES = [
   "Interview Prep generator",
   "Priority support",
 ];
-
-const YEARLY_HIGHLIGHT = "Save $24 / year";
 
 function CtaButton({
   loading,
@@ -78,15 +75,10 @@ export function PricingClient({
   // same-origin path on the server side; we send it raw.
   const returnTo = searchParams.get("return");
 
-  const [loadingPlan, setLoadingPlan] = useState<
-    "PRO_MONTHLY" | "PRO_YEARLY" | null
-  >(null);
+  const [loadingPlan, setLoadingPlan] = useState<"PRO_MONTHLY" | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  const handleCheckout = async (
-    plan: "PRO_MONTHLY" | "PRO_YEARLY",
-    priceId: string,
-  ) => {
+  const handleCheckout = async () => {
     setError(null);
     if (!isLoggedIn) {
       const next = returnTo
@@ -102,12 +94,12 @@ export function PricingClient({
       router.push(returnTo ?? "/account");
       return;
     }
-    setLoadingPlan(plan);
+    setLoadingPlan("PRO_MONTHLY");
     try {
       const res = await fetch("/api/billing/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ priceId, returnTo }),
+        body: JSON.stringify({ plan: "monthly", returnTo }),
       });
       const data = (await res.json().catch(() => ({}))) as {
         url?: string;
@@ -157,7 +149,7 @@ export function PricingClient({
         </div>
       )}
 
-      <div className="mt-10 grid gap-6 md:grid-cols-3">
+      <div className="mx-auto mt-10 grid max-w-3xl gap-6 md:grid-cols-2">
         {/* FREE */}
         <div className="flex flex-col rounded-2xl border border-plum/10 bg-white p-6 shadow-warm-card">
           <div>
@@ -213,11 +205,11 @@ export function PricingClient({
           <div>
             <div className="flex items-center gap-2">
               <Sparkles className="h-4 w-4 text-coral" />
-              <h2 className="text-base font-semibold text-plum">Pro Monthly</h2>
+              <h2 className="text-base font-semibold text-plum">Pro</h2>
             </div>
             <p className="mt-1 text-xs text-plum-soft">7-day free trial</p>
             <p className="mt-4 font-display text-4xl font-bold text-plum">
-              $7
+              $12
               <span className="ml-1 text-sm font-normal text-plum-soft">
                 /month
               </span>
@@ -255,9 +247,7 @@ export function PricingClient({
                 variant="secondary"
                 loading={loadingPlan === "PRO_MONTHLY"}
                 disabled={loadingPlan !== null}
-                onClick={() =>
-                  void handleCheckout("PRO_MONTHLY", STRIPE_PRICES.PRO_MONTHLY)
-                }
+                onClick={() => void handleCheckout()}
               >
                 Start 7-day free trial
               </CtaButton>
@@ -265,71 +255,6 @@ export function PricingClient({
           </div>
         </div>
 
-        {/* PRO YEARLY */}
-        <div className="relative flex flex-col rounded-2xl border-2 border-coral bg-white p-6 shadow-warm-card-hover">
-          <span className="absolute -top-3 left-1/2 inline-flex -translate-x-1/2 items-center gap-1 rounded-pill bg-coral px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-white">
-            <Star className="h-3 w-3 fill-current" />
-            Best value · {YEARLY_HIGHLIGHT}
-          </span>
-          <div className="mt-2">
-            <div className="flex items-center gap-2">
-              <Sparkles className="h-4 w-4 text-coral" />
-              <h2 className="text-base font-semibold text-plum">Pro Yearly</h2>
-            </div>
-            <p className="mt-1 text-xs text-plum-soft">
-              7-day free trial · save 28%
-            </p>
-            <p className="mt-4 font-display text-4xl font-bold text-plum">
-              $60
-              <span className="ml-1 text-sm font-normal text-plum-soft">
-                /year
-              </span>
-            </p>
-            <p className="mt-1 text-xs text-plum-soft">
-              That's $5/month, billed annually.
-            </p>
-          </div>
-          <ul className="mt-5 flex-1 space-y-2.5 text-sm text-plum">
-            {PRO_FEATURES.map((f) => (
-              <li key={f} className="flex items-start gap-2">
-                <Check className="mt-0.5 h-4 w-4 shrink-0 text-mint" />
-                <span>{f}</span>
-              </li>
-            ))}
-          </ul>
-          <div className="mt-6">
-            {isPro && currentPlan === "PRO_YEARLY" ? (
-              <Link
-                href="/account"
-                className="inline-flex w-full items-center justify-center rounded-pill border border-plum/15 bg-cream-soft px-5 py-2.5 text-sm font-medium text-plum"
-              >
-                Current plan · Manage
-              </Link>
-            ) : isPro ? (
-              <Link
-                href="/account"
-                className="inline-flex w-full items-center justify-center gap-2 rounded-pill border border-plum/20 bg-white px-5 py-2.5 text-sm font-semibold text-plum transition-colors hover:bg-cream-soft"
-              >
-                Manage subscription
-              </Link>
-            ) : !billingEnabled ? (
-              <CtaButton variant="primary" disabled onClick={() => {}}>
-                Coming soon — launching in days
-              </CtaButton>
-            ) : (
-              <CtaButton
-                variant="primary"
-                loading={loadingPlan === "PRO_YEARLY"}
-                disabled={loadingPlan !== null}
-                onClick={() =>
-                  void handleCheckout("PRO_YEARLY", STRIPE_PRICES.PRO_YEARLY)
-                }
-              >
-                Start 7-day free trial
-              </CtaButton>
-            )}
-          </div>
-        </div>
       </div>
 
       <div className="mt-10 text-center">

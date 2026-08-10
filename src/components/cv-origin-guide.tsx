@@ -70,7 +70,7 @@ export function OriginCvGuide({
       "@type": "Offer",
       price: "0",
       priceCurrency: "USD",
-      description: "Free plan with 3 CVs and 5 AI assists/month. Pro $7/month.",
+      description: "Free plan with 3 CVs and 5 AI assists/month. Pro $12/month.",
     },
   };
   const breadcrumbs = {
@@ -128,7 +128,7 @@ export function OriginCvGuide({
               >
                 Open Dashboard — Start Free →
               </Link>
-              <p className="text-xs text-plum-soft mt-2">Free to start · Pro is $7/month.</p>
+              <p className="text-xs text-plum-soft mt-2">Free to start · Pro is $12/month.</p>
             </div>
           </header>
 

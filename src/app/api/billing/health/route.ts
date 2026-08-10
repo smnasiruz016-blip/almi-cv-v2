@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
-import { STRIPE_PRICES } from "@/lib/billing/plans";
+import { STRIPE_PRICE_MONTHLY } from "@/lib/billing/plans";
 
 // Read-only billing self-check. Exposes NO secret values — only key MODE
 // (live/test), boolean validity, and price IDs. Any value that is not a clean
@@ -21,19 +21,12 @@ const safeId = (v: string): string =>
 export async function GET() {
   const key = process.env.STRIPE_SECRET_KEY ?? "";
   const mode = keyMode(key);
-  // Validate the price IDs checkout ACTUALLY uses — pinned in plans.ts
-  // (STRIPE_PRICES), the single source of truth — plus any env-var overrides if
-  // set. Previously this probed only STRIPE_PRICE_ID_* env vars, which CV does
-  // not set (prices are hardcoded in plans.ts), so `ok` was falsely false even
-  // though checkout worked fine off the pinned IDs.
-  const present: Record<string, string> = {
-    PRO_MONTHLY: STRIPE_PRICES.PRO_MONTHLY,
-    PRO_YEARLY: STRIPE_PRICES.PRO_YEARLY,
-  };
-  for (const v of ["STRIPE_PRICE_ID_MONTHLY", "STRIPE_PRICE_ID_YEARLY", "STRIPE_PRICE_ID"] as const) {
-    const val = process.env[v];
-    if (val) present[v] = val;
-  }
+  // Validate the price checkout ACTUALLY uses. There is now exactly one:
+  // STRIPE_PRICE_ID_MONTHLY, the $12/month price. The old hardcoded
+  // STRIPE_PRICES pair is gone, and the retired yearly price is deliberately
+  // not probed — nothing can sell it any more.
+  const present: Record<string, string> = {};
+  if (STRIPE_PRICE_MONTHLY) present.PRO_MONTHLY = STRIPE_PRICE_MONTHLY;
 
   const out: Record<string, unknown> = {
     keyPresent: Boolean(key),

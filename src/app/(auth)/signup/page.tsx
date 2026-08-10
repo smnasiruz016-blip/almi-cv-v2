@@ -53,7 +53,7 @@ export default async function SignupPage({
     <div className="rounded-2xl border border-peach/30 bg-white p-8 shadow-warm-card-hover">
       <h1 className="text-3xl text-plum">Create your account</h1>
       <p className="mt-2 text-sm text-plum-soft">
-        Start building polished CVs in minutes — free, no credit card.
+        Then $12/month. Cancel anytime.
       </p>
 
       {error === "taken" && (

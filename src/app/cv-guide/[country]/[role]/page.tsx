@@ -46,7 +46,7 @@ function buildTitle(roleName: string, countryName: string): string {
 }
 
 function buildDescription(roleName: string, countryName: string): string {
-  return `Build a professional ${roleName} CV for ${countryName} — AI-tailored, ATS-optimized, in any language. Free to start, Pro $7/mo on AlmiCV.`;
+  return `Build a professional ${roleName} CV for ${countryName} — AI-tailored, ATS-optimized, in any language. Free to start, Pro $12/mo on AlmiCV.`;
 }
 
 export async function generateMetadata({
@@ -64,7 +64,7 @@ export async function generateMetadata({
     if (!c || !origin || !isCvOriginIndexable(c.slug, originSlug)) return {};
     const canonicalUrl = `${SITE_ORIGIN}/cv-guide/${c.slug}/from-${origin.slug}`;
     const title = `${c.name} CV from ${origin.name} (${YEAR}) — Free, ATS-Ready · AlmiCV`;
-    const description = `Build ${indefiniteArticle(c.name)} ${c.name}-ready, ATS-friendly CV from ${origin.name} — AI-tailored to ${c.name} conventions, in any language. Free to start, Pro $7/mo on AlmiCV.`;
+    const description = `Build ${indefiniteArticle(c.name)} ${c.name}-ready, ATS-friendly CV from ${origin.name} — AI-tailored to ${c.name} conventions, in any language. Free to start, Pro $12/mo on AlmiCV.`;
     return {
       title,
       description,
@@ -163,7 +163,7 @@ export default async function CvGuidePage({
       "@type": "Offer",
       price: "0",
       priceCurrency: "USD",
-      description: "Free plan with 3 CVs and 5 AI assists/month. Pro $7/month.",
+      description: "Free plan with 3 CVs and 5 AI assists/month. Pro $12/month.",
     },
   };
   const breadcrumbs = {

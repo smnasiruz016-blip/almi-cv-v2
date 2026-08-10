@@ -97,6 +97,11 @@ export async function createCheckoutSession(input: {
     mode: "subscription",
     customer: customerId,
     line_items: [{ price: input.priceId, quantity: 1 }],
+    // Stripe's default here is already "always", so this changes nothing at
+    // runtime — it is pinned so nobody later assumes a $0 trial skips card
+    // capture. "if_required" would start the trial with no card on file and
+    // nothing to charge on day 8, which breaks the whole model.
+    payment_method_collection: "always",
     subscription_data: {
       trial_period_days: TRIAL_PERIOD_DAYS,
       metadata: { userId: input.userId, plan: planLabel },

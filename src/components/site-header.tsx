@@ -119,7 +119,7 @@ export function SiteHeader({ isLoggedIn }: { isLoggedIn: boolean }) {
                     href="/signup"
                     className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-pill bg-coral px-5 py-3 text-sm font-semibold text-white shadow-warm-card transition hover:-translate-y-0.5 hover:bg-coral-deep focus:outline-none focus:ring-4 focus:ring-coral/30"
                   >
-                    Get started — free
+                    Start 7-day free trial
                     <ArrowRight className="h-4 w-4" />
                   </Link>
                 </>
@@ -222,7 +222,7 @@ export function SiteHeader({ isLoggedIn }: { isLoggedIn: boolean }) {
                     onClick={closeMenu}
                     className="mt-2 inline-flex min-h-[48px] items-center justify-center gap-2 rounded-pill bg-coral px-5 py-3 text-sm font-semibold text-white shadow-warm-card transition hover:bg-coral-deep focus:outline-none focus:ring-4 focus:ring-coral/30"
                   >
-                    Get started — free
+                    Start 7-day free trial
                     <ArrowRight className="h-4 w-4" />
                   </Link>
                 </>

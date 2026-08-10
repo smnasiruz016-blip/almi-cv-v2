@@ -8,7 +8,9 @@
     "start": "next start",
     "smoke:roles": "node scripts/smoke-test-roles.mjs",
     "lint": "eslint",
-    "postinstall": "prisma generate"
+    "postinstall": "prisma generate",
+    "verify:price": "node scripts/verify-stripe-price.mjs",
+    "prebuild": "node scripts/verify-stripe-price.mjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.91.1",
