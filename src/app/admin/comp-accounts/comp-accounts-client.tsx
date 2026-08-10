@@ -288,7 +288,7 @@ export function CompAccountsClient({
             This will immediately remove Pro access for{" "}
             <span className="font-semibold">{revokeTarget?.email}</span>. Their
             CVs and data are not affected, but they revert to Free-tier limits
-            (3 CVs, 5 AI calls/month) on next request.
+            (no CV creation, no AI) on next request.
           </p>
           <div className="flex justify-end gap-2">
             <button

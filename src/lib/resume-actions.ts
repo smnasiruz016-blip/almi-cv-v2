@@ -86,15 +86,22 @@ export async function createResume(
   // why caps are disabled until launch flag flips).
   if (isBillingEnabled()) {
     const limit = PLANS[plan].cvLimit;
-    const count = await prisma.resume.count({ where: { userId: user.id } });
-    if (count >= limit) {
-      const isFree = plan === "FREE";
+    // limit is 0 for the no-subscription state, so this refuses before any DB
+    // count: creating a CV now requires a trial or subscription.
+    if (limit <= 0) {
       return {
         ok: false,
         code: "CV_LIMIT_REACHED",
-        error: isFree
-          ? `Free plan is limited to ${limit} CVs. Upgrade to Pro for unlimited CVs.`
-          : `${PLAN_DISPLAY_NAME[plan]} is limited to ${limit} CVs. Please delete an existing CV to create a new one.`,
+        error:
+          "Start your 7-day free trial to create a CV — $12/month after, cancel anytime.",
+      };
+    }
+    const count = await prisma.resume.count({ where: { userId: user.id } });
+    if (count >= limit) {
+      return {
+        ok: false,
+        code: "CV_LIMIT_REACHED",
+        error: `${PLAN_DISPLAY_NAME[plan]} is limited to ${limit} CVs. Please delete an existing CV to create a new one.`,
       };
     }
   }

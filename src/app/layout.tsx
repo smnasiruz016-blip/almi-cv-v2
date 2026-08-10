@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "AlmiCV — Beautiful CVs, Built Right",
     description:
-      "AI-powered CV builder with premium templates, ATS scoring, and tailoring. Free to start, $7/month for unlimited AI — 7-day free trial.",
+      "AI-powered CV builder with premium templates, ATS scoring, and tailoring. Free to start, $12/month for unlimited AI — 7-day free trial.",
     siteName: "AlmiCV",
     type: "website",
   },
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "AlmiCV — Beautiful CVs, Built Right",
     description:
-      "AI-powered CV builder with premium templates, ATS scoring, and tailoring. Free to start, $7/month for unlimited AI — 7-day free trial.",
+      "AI-powered CV builder with premium templates, ATS scoring, and tailoring. Free to start, $12/month for unlimited AI — 7-day free trial.",
   },
 };
 

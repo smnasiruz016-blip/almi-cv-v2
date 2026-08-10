@@ -18,7 +18,11 @@ export function userCanAccessTier(
   plan: PlanKey,
   tier: "free" | "premium",
 ): boolean {
-  if (tier === "free") return true;
+  // The template's own "free"/"premium" tier no longer decides access -- there
+  // is no free plan to grant it to. Every template, both tiers, needs an active
+  // subscription or trial. The tier field survives only as a catalogue label
+  // (which templates we present as the premium-looking ones).
+  void tier;
   return PLANS[plan].templatesAccess === "all";
 }
 
@@ -38,7 +42,7 @@ export function userCanAccessTemplate(
   return userCanAccessTier(plan, template.tier);
 }
 
-/** Convenience for anon visitors — they're on FREE. */
+/** Convenience for anon visitors — no subscription, so no template access. */
 export function anonCanAccessTier(tier: "free" | "premium"): boolean {
   return userCanAccessTier("FREE", tier);
 }

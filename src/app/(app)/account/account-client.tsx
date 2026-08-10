@@ -56,7 +56,7 @@ function statusBadge(
 ): { label: string; className: string } {
   if (!status || !proActive) {
     return {
-      label: "Free plan",
+      label: "No active plan",
       className: "bg-plum/10 text-plum",
     };
   }

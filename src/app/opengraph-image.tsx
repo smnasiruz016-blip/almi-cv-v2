@@ -3,7 +3,7 @@ import { readFile } from "fs/promises";
 import path from "path";
 
 export const alt =
-  "AlmiCV — AI-powered CV builder. Premium templates, ATS scoring, $7/month with a 7-day free trial.";
+  "AlmiCV — AI-powered CV builder. Premium templates, ATS scoring, $12/month with a 7-day free trial.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 

@@ -7,7 +7,7 @@ import { PricingClient } from "./pricing-client";
 export const metadata: Metadata = {
   title: "Pricing · AlmiCV",
   description:
-    "Free forever for up to 3 CVs. Upgrade to Pro for unlimited AI, premium templates, and 10 CV slots — $7/month or $60/year with a 7-day free trial.",
+    "One plan: $12/month with a 7-day free trial. Unlimited CVs, unlimited AI, every premium template. Cancel anytime.",
   alternates: { canonical: "https://almicv.almiworld.com/pricing" },
 };
 
@@ -36,11 +36,11 @@ export default async function PricingPage() {
             ✨ Pricing
           </span>
           <h1 className="mt-4 text-4xl font-semibold tracking-tight text-plum md:text-5xl">
-            Simple plans, premium polish
+            One plan, everything included
           </h1>
           <p className="mx-auto mt-3 max-w-xl text-base leading-7 text-plum-soft">
-            Start free. Upgrade when you're ready for unlimited AI, more CV
-            slots, and every premium template.
+            One plan, everything included: unlimited CVs, unlimited AI and every
+            premium template. 7-day free trial, then $12/month. Cancel anytime.
           </p>
         </header>
 

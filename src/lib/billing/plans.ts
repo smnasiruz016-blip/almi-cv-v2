@@ -1,28 +1,47 @@
 import type { User } from "@prisma/client";
 
-// Stripe Price IDs — pinned to Live mode prices created out-of-band.
-// Server-side validated; never trust a priceId coming from the browser.
-export const STRIPE_PRICES = {
-  PRO_MONTHLY: "price_1TSp04Q5pPhPaj6V3PJX0SC3",
-  PRO_YEARLY: "price_1TSp5TQ5pPhPaj6VBD0Zujwy",
-} as const;
+// AlmiCV is on the family standard: ONE price, $12/month, 7-day card-upfront
+// trial. The old $7/month + $60/year pair is retired.
+//
+// The price ID now comes from env like every other product in the family. It
+// used to be a hardcoded live `price_…` string, which meant a price change
+// required a code change — exactly the trap that lets displayed copy and the
+// real Stripe price drift apart. `scripts/verify-stripe-price.mjs` asserts the
+// configured price really is $12/month recurring; `npm run verify:price`.
+export const STRIPE_PRICE_MONTHLY = process.env.STRIPE_PRICE_ID_MONTHLY ?? "";
 
-export type StripePriceId =
-  (typeof STRIPE_PRICES)[keyof typeof STRIPE_PRICES];
+/** Single source of truth for every "$12" that appears in copy. */
+export const MONTHLY_PRICE_DISPLAY = "$12";
+/** What verify-stripe-price asserts against the live Stripe price object. */
+export const MONTHLY_PRICE_CENTS = 1200;
 
+export type StripePriceId = string;
+
+// PRO_YEARLY is no longer purchasable — it is kept ONLY so existing yearly
+// subscribers keep Pro access and keep seeing a correct plan name on /account.
+// Nothing offers it for sale: it is absent from the checkout allowlist and
+// from the pricing page. Do not reintroduce it as a buyable plan.
 export type PlanKey = "FREE" | "PRO_MONTHLY" | "PRO_YEARLY";
 
 export type PlanConfig = {
   cvLimit: number;
   aiCallsPerMonth: number;
-  templatesAccess: "free_only" | "all";
+  templatesAccess: "none" | "all";
 };
 
+// FREE is no longer a PLAN. It is the name of the no-subscription state:
+// signed up, trial not started (or lapsed/cancelled). It grants nothing --
+// every number here is 0 and templatesAccess is "none". The single plan is
+// $12/month with a 7-day card-upfront trial; `trialing` counts as PRO_MONTHLY
+// via isProActive(), so a trialling user gets the full product from minute one.
+//
+// Do NOT restore non-zero values here to "be generous" -- these zeros ARE the
+// paywall. Every gate (AI, templates, CV creation) reads them.
 export const PLANS: Record<PlanKey, PlanConfig> = {
   FREE: {
-    cvLimit: 3,
-    aiCallsPerMonth: 5,
-    templatesAccess: "free_only",
+    cvLimit: 0,
+    aiCallsPerMonth: 0,
+    templatesAccess: "none",
   },
   PRO_MONTHLY: {
     cvLimit: Infinity, // unlimited CVs on Pro (count >= Infinity is never true)
@@ -37,9 +56,11 @@ export const PLANS: Record<PlanKey, PlanConfig> = {
 };
 
 export const PLAN_DISPLAY_NAME: Record<PlanKey, string> = {
-  FREE: "Free",
-  PRO_MONTHLY: "Pro Monthly",
-  PRO_YEARLY: "Pro Yearly",
+  FREE: "No active plan",
+  PRO_MONTHLY: "Pro",
+  // Legacy label — only ever shown to subscribers who bought the retired
+  // yearly plan before the move to a single $12/month price.
+  PRO_YEARLY: "Pro Yearly (legacy)",
 };
 
 const ACTIVE_STATUSES = new Set(["trialing", "active"]);
@@ -105,9 +126,11 @@ export function getUserPlan(user: Pick<
  */
 export function priceIdToPlanLabel(
   priceId: string,
-): "pro_monthly" | "pro_yearly" | null {
-  if (priceId === STRIPE_PRICES.PRO_MONTHLY) return "pro_monthly";
-  if (priceId === STRIPE_PRICES.PRO_YEARLY) return "pro_yearly";
+): "pro_monthly" | null {
+  // Only the $12/month price is purchasable. The retired yearly price is
+  // deliberately NOT accepted here, so a stale client that still posts the old
+  // price ID gets rejected at checkout instead of quietly selling $60/year.
+  if (priceId && priceId === STRIPE_PRICE_MONTHLY) return "pro_monthly";
   return null;
 }
 
@@ -124,5 +147,14 @@ export function priceIdToPlanLabel(
  * once the upgrade path is live.
  */
 export function isBillingEnabled(): boolean {
-  return process.env.NEXT_PUBLIC_BILLING_ENABLED === "true";
+  // The price ID is now part of the condition. Before, billing could be "on"
+  // with no configured price, which would 500 at checkout; now an unset price
+  // simply keeps the flow disabled.
+  //
+  // NOTE: NEXT_PUBLIC_BILLING_ENABLED is inlined at BUILD time. Flipping it in
+  // Vercel needs a fresh build to take effect.
+  return (
+    process.env.NEXT_PUBLIC_BILLING_ENABLED === "true" &&
+    Boolean(STRIPE_PRICE_MONTHLY)
+  );
 }

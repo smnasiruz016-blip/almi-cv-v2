@@ -36,7 +36,7 @@ function buildTitle(name: string): string {
 }
 
 function buildDescription(name: string): string {
-  return `Build a ${name}-ready CV for any role with AlmiCV — local conventions, AI-tailored, ATS-optimized. Free to start, Pro $7/mo.`;
+  return `Build a ${name}-ready CV for any role with AlmiCV — local conventions, AI-tailored, ATS-optimized. Free to start, Pro $12/mo.`;
 }
 
 export async function generateMetadata({
@@ -108,7 +108,7 @@ export default async function CountryHub({
       "@type": "Offer",
       price: "0",
       priceCurrency: "USD",
-      description: "Free plan with 3 CVs and 5 AI assists/month. Pro $7/month.",
+      description: "One plan: $12/month with a 7-day free trial. Cancel anytime.",
     },
   };
   const breadcrumbs = {
