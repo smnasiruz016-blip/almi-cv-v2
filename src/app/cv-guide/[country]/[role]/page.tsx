@@ -42,11 +42,11 @@ type Params = { country: string; role: string };
 const YEAR = new Date().getFullYear();
 
 function buildTitle(roleName: string, countryName: string): string {
-  return `${roleName} CV for ${countryName} (${YEAR}) — Free & ATS-Ready · AlmiCV`;
+  return `${roleName} CV for ${countryName} (${YEAR}) — ATS-Ready · AlmiCV`;
 }
 
 function buildDescription(roleName: string, countryName: string): string {
-  return `Build a professional ${roleName} CV for ${countryName} — AI-tailored, ATS-optimized, in any language. Free to start, Pro $12/mo on AlmiCV.`;
+  return `Build a professional ${roleName} CV for ${countryName} — AI-tailored, ATS-optimized, in any language. 7-day free trial, then $12/mo on AlmiCV.`;
 }
 
 export async function generateMetadata({
@@ -63,8 +63,8 @@ export async function generateMetadata({
     const origin = findCvOrigin(originSlug);
     if (!c || !origin || !isCvOriginIndexable(c.slug, originSlug)) return {};
     const canonicalUrl = `${SITE_ORIGIN}/cv-guide/${c.slug}/from-${origin.slug}`;
-    const title = `${c.name} CV from ${origin.name} (${YEAR}) — Free, ATS-Ready · AlmiCV`;
-    const description = `Build ${indefiniteArticle(c.name)} ${c.name}-ready, ATS-friendly CV from ${origin.name} — AI-tailored to ${c.name} conventions, in any language. Free to start, Pro $12/mo on AlmiCV.`;
+    const title = `${c.name} CV from ${origin.name} (${YEAR}) — ATS-Ready · AlmiCV`;
+    const description = `Build ${indefiniteArticle(c.name)} ${c.name}-ready, ATS-friendly CV from ${origin.name} — AI-tailored to ${c.name} conventions, in any language. 7-day free trial, then $12/mo on AlmiCV.`;
     return {
       title,
       description,
@@ -420,9 +420,9 @@ export default async function CvGuidePage({
               href={`/signup?role=${r.slug}&country=${c.slug}`}
               className="inline-block px-8 py-4 rounded-md bg-coral text-white text-lg font-semibold hover:bg-coral-deep transition-colors"
             >
-              Build Your {r.name} CV Free →
+              Start 7-day free trial →
             </Link>
-            <p className="text-xs text-plum-soft mt-3">No credit card required to start.</p>
+            <p className="text-xs text-plum-soft mt-3">7-day free trial, then $12/month.</p>
           </section>
 
           {/* 13. MASTER Shamool pledge line */}

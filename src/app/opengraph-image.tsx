@@ -90,7 +90,7 @@ export default async function OpenGraphImage() {
               display: "flex",
             }}
           >
-            AI-powered CV builder · Free to start · 7-day Pro trial
+            AI-powered CV builder · 7-day free trial · $12/month
           </div>
         </div>
 
