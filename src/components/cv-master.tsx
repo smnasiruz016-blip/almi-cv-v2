@@ -43,7 +43,7 @@ export function CvMasterHook({
           href={ctaHref}
           className="inline-block px-7 py-3.5 rounded-md bg-coral text-white text-base font-semibold hover:bg-coral-deep transition-colors"
         >
-          Open Dashboard — Start Free →
+          Open Dashboard — Start 7-day free trial →
         </Link>
         <p className="text-xs text-plum-soft mt-2">7-day free trial, then $12/month.</p>
       </div>
@@ -177,7 +177,7 @@ const MASTER_FAQ: ReadonlyArray<FaqItem> = [
     a: "It scores your CV the way modern ATS software does and shows you exactly what to fix — starting with the biggest filter: matching your job title to the role.",
   },
   {
-    q: "Is AlmiCV really free to start?",
+    q: "Is there a free trial?",
     a: "You get 7 days free with a card on file, then a flat $12/month — no hidden download walls, no weekly renewals. Cancel inside the trial and you pay nothing.",
   },
   {

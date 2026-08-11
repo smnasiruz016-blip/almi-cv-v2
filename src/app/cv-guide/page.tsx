@@ -167,9 +167,9 @@ export default async function CvGuideIndex() {
               href="/signup"
               className="inline-block px-8 py-4 rounded-md bg-coral text-white text-lg font-semibold hover:bg-coral-deep transition-colors"
             >
-              Build Your CV Free →
+              Start 7-day free trial →
             </Link>
-            <p className="text-xs text-plum-soft mt-3">No credit card required. Transform your CV into many designs — new added every day.</p>
+            <p className="text-xs text-plum-soft mt-3">7-day free trial, then $12/month. Cancel anytime.</p>
           </section>
         </div>
       </main>

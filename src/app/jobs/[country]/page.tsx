@@ -41,7 +41,7 @@ export async function generateMetadata({
   const entry = SLUG_TO_COUNTRY[country];
   if (!entry) return {};
   const title = `Find Jobs in ${entry.name} — ATS-Ready CV Builder · AlmiCV`;
-  const description = `Hand-picked job sites for ${entry.name}, paired with AlmiCV's ATS-ready CV builder. Find your next role and apply with a polished resume — free to start.`;
+  const description = `Hand-picked job sites for ${entry.name}, paired with AlmiCV's ATS-ready CV builder. Find your next role and apply with a polished resume. 7-day free trial, then $12/month.`;
   const path = `/jobs/${entry.slug}`;
   return {
     title,
@@ -146,7 +146,7 @@ export default async function CountryJobsPage({
                 href="/signup"
                 className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-pill bg-coral px-5 py-3 text-sm font-semibold text-white shadow-warm-card transition hover:-translate-y-0.5 hover:bg-coral-deep focus:outline-none focus:ring-4 focus:ring-coral/30"
               >
-                Build your CV — free
+                Start 7-day free trial
                 <ArrowRight className="h-4 w-4" />
               </Link>
               <Link
@@ -190,7 +190,7 @@ export default async function CountryJobsPage({
                 href="/signup"
                 className="mt-6 inline-flex min-h-[44px] items-center justify-center gap-2 rounded-pill bg-coral px-5 py-3 text-sm font-semibold text-white shadow-warm-card transition hover:-translate-y-0.5 hover:bg-coral-deep"
               >
-                Start your CV — free
+                Start 7-day free trial
                 <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
@@ -223,7 +223,7 @@ export default async function CountryJobsPage({
                 href="/signup"
                 className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-pill bg-coral px-6 py-3 text-sm font-semibold text-white shadow-warm-card transition hover:-translate-y-0.5 hover:bg-coral-deep"
               >
-                Start your CV — free
+                Start 7-day free trial
                 <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
