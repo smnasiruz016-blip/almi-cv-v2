@@ -1,5 +1,5 @@
 // ============================================================================
-// AlmiCV Template Registry — 147 production templates
+// AlmiCV Template Registry — Production Catalog
 // ----------------------------------------------------------------------------
 // Single source of truth. Order matters: suggestTemplate() returns the FIRST
 // template whose suggestedRoles includes the requested roleSlug. More-specific
@@ -11,6 +11,9 @@
 
 import type { ComponentType } from "react";
 import type { TemplateProps } from "./types";
+
+// Next-Gen Dynamic Role Templates
+import { DevOpsPipelineTemplate } from "./DevOpsPipelineTemplate";
 
 // Batch 1 (10)
 import ClassicSerif from "./ClassicSerif";
@@ -34,11 +37,7 @@ import EducationWarm from "./EducationWarm";
 import SalesModern from "./SalesModern";
 import ServiceFriendly from "./ServiceFriendly";
 import CreativePortfolio from "./CreativePortfolio";
-// Batch 3 (10) — Claude Design pseudo-CVData shape. Runtime adapter in
-// src/lib/cd-adapter.ts converts AlmiCV CVData → CD's shape at the
-// editor/print boundary. The casts below lie to TS so the registry
-// presents a uniform ComponentType<TemplateProps> regardless of which
-// shape each template actually consumes internally.
+// Batch 3 (10) — Claude Design pseudo-CVData shape.
 import LegalFormal from "./batch3/LegalFormal";
 import FinancePrecise from "./batch3/FinancePrecise";
 import FinanceElite from "./batch3/FinanceElite";
@@ -50,8 +49,6 @@ import AviationPrecise from "./batch3/AviationPrecise";
 import HospitalityElegant from "./batch3/HospitalityElegant";
 import LinguistMultilingual from "./batch3/LinguistMultilingual";
 // Batch 4 (7) — Claude Design 2026-05-27. Schema-canonical: consume production
-// CVData directly with no adapter (no asTemplate cast). Helpers (BulletsRender
-// et al.) live in ./types alongside the helpers used by Batch 1+2.
 import IceBlueGlass from "./IceBlueGlass";
 import AdminFluid from "./AdminFluid";
 import CyberEmerald from "./CyberEmerald";
@@ -231,10 +228,6 @@ import SustainMeshESG from "./SustainMeshESG";
 import BrutalistCreativeTech from "./BrutalistCreativeTech";
 import GradientMeshGrowth from "./GradientMeshGrowth";
 
-// asTemplate — narrow cast used only for Batch 3 components whose data
-// prop is CD's pseudo-CVData. Editor + print routes pipe data through
-// toCDShape() before passing to these components, so the cast is sound
-// at runtime even though the static types disagree.
 const asTemplate = <T>(c: T) => c as unknown as ComponentType<TemplateProps>;
 
 export type TemplateCategory =
@@ -257,7 +250,6 @@ export type TemplateCategory =
   | "education-warm"
   | "sales"
   | "service"
-  // Batch 3 — new vertical specialists
   | "legal"
   | "finance"
   | "people-hr"
@@ -267,7 +259,6 @@ export type TemplateCategory =
   | "aviation"
   | "hospitality-elegant"
   | "linguist"
-  // Design System kit (2) — 2026-06-06: new vertical/niche categories
   | "agriculture"
   | "automotive"
   | "broadcast"
@@ -289,7 +280,6 @@ export type TemplateCategory =
   | "customer-support"
   | "travel"
   | "warehouse"
-  // Design System kit (3) — 2026-06-10: new vertical/niche categories
   | "culinary"
   | "fitness"
   | "library"
@@ -301,37 +291,24 @@ export interface TemplateMeta {
   slug: string;
   name: string;
   description: string;
-  /** Short hook for template cards. Defaults to first sentence of description
-   *  via getTagline() — no need to set per entry unless overriding. */
   tagline?: string;
   category: TemplateCategory;
   component: ComponentType<TemplateProps>;
   atsSafe: boolean;
   supportsPhoto: boolean;
-  /** Tier gating. Defaults to "free" via getTier(). All 20 ship Free for v1. */
   tier?: "free" | "premium";
-  /** ISO 8601 datetime added to catalog. Defaults via getAddedAt() to the
-   *  v1 ship date (2026-05-26) for the original 20. New templates should set
-   *  their own. */
   addedAt?: string;
-  /** Role slugs that are a visual fit. Drives suggestTemplate(). */
   suggestedRoles: string[];
-  /** Broader industry buckets (used when no role match). */
   suggestedIndustries: string[];
-  /** Pinned theme palettes — exposed in the editor as a quick-switch. */
   themes?: string[];
 }
 
-/** v1 ship date for the original 20 templates. New templates added later
- *  should set `addedAt` explicitly so the bridge layer can sort accurately. */
 const V1_BASE_MS = Date.parse("2026-05-26T00:00:00.000Z");
 
-/** Tier with default. */
 export function getTier(t: TemplateMeta): "free" | "premium" {
   return t.tier ?? "free";
 }
 
-/** Short tagline — uses .tagline if set, else first sentence of description. */
 export function getTagline(t: TemplateMeta): string {
   if (t.tagline) return t.tagline;
   const firstSentence = t.description.split(/[.!?](?=\s|$)/)[0]?.trim();
@@ -342,9 +319,26 @@ export function getTagline(t: TemplateMeta): string {
 // TEMPLATES — order = priority for suggestTemplate()
 // ============================================================================
 export const TEMPLATES: TemplateMeta[] = [
+  // Next-Gen Dynamic Engine Template
+  {
+    slug: "devops-pipeline-pro",
+    name: "DevOps Pipeline Pro",
+    description: "High-contrast terminal layout with real-time CSS palette bindings, CI/CD history line, and tech stack tags.",
+    category: "developer",
+    component: DevOpsPipelineTemplate as unknown as ComponentType<TemplateProps>,
+    atsSafe: true,
+    supportsPhoto: true,
+    addedAt: "2026-08-14T00:00:00.000Z",
+    suggestedRoles: [
+      "devops-engineer", "cloud-engineer", "site-reliability-engineer",
+      "platform-engineer", "infrastructure-engineer", "kubernetes-engineer",
+      "software-engineer", "systems-architect"
+    ],
+    suggestedIndustries: ["technology", "cloud", "devops"],
+    themes: ["midnight", "forest", "navy"],
+  },
 
   // ---- Specialist verticals (most specific first) ----
-
   {
     slug: "religious-traditional",
     name: "Religious Traditional",
@@ -365,12 +359,6 @@ export const TEMPLATES: TemplateMeta[] = [
     suggestedIndustries: ["religious", "faith-based", "spiritual"],
     themes: ["forest", "ivory", "wine"],
   },
-
-  // ---- Batch 4 specialists (Claude Design, 2026-05-27). Schema-canonical:
-  //      consume production CVData directly, no adapter, no cast. Placed
-  //      above Batch 3 + broad fallbacks so they win for surgeons,
-  //      pharmacists, massage therapists, IT PMs, admin assistants,
-  //      office managers, and secondary-school teachers. ----
 
   {
     slug: "medical-surgical",
@@ -493,13 +481,6 @@ export const TEMPLATES: TemplateMeta[] = [
     suggestedIndustries: ["administration", "office-support"],
     themes: ["sky", "slate"],
   },
-
-  // ---- Batch 3 specialists (Claude Design, 2026-05-26). Placed here so
-  //      they win the suggestTemplate() lookup against broader Batch 1+2
-  //      fallbacks (classic-serif for legal/finance, modern-two-column
-  //      for HR, healthcare for veterinary, warm-creative for hospitality,
-  //      etc.). Each component takes CD's pseudo-CVData internally;
-  //      lib/cd-adapter.ts converts at the editor/print boundary. ----
 
   {
     slug: "legal-formal",
@@ -944,8 +925,6 @@ export const TEMPLATES: TemplateMeta[] = [
     themes: ["coral", "linen", "sand"],
   },
 
-  // ---- Hospitality split: back-of-house (WarmCreative) vs front-of-house (ServiceFriendly) ----
-
   {
     slug: "warm-creative",
     name: "Warm Creative",
@@ -995,8 +974,6 @@ export const TEMPLATES: TemplateMeta[] = [
     themes: ["coral", "linen", "ivory"],
   },
 
-  // ---- Education split: warm classroom (EducationWarm) vs scholarly (Academic) ----
-
   {
     slug: "education-warm",
     name: "Education Warm",
@@ -1045,8 +1022,6 @@ export const TEMPLATES: TemplateMeta[] = [
     themes: ["wine", "ivory", "plum"],
   },
 
-  // ---- Creative split: portfolio (CreativePortfolio) vs leadership (CreativeDirector) ----
-
   {
     slug: "creative-portfolio",
     name: "Creative Portfolio",
@@ -1094,8 +1069,6 @@ export const TEMPLATES: TemplateMeta[] = [
     themes: ["plum", "wine", "midnight"],
   },
 
-  // ---- Business / management ----
-
   {
     slug: "sales-modern",
     name: "Sales Modern",
@@ -1122,11 +1095,7 @@ export const TEMPLATES: TemplateMeta[] = [
     themes: ["coral", "plum", "wine"],
   },
 
-  // ──────── Expansion batch (2026-06-01): 38 new templates. Placed above the
-  //          generic fallbacks (corporate-blue / modern-two-column /
-  //          classic-serif) so new specialists outrank only the catch-alls,
-  //          never the existing tuned specialists above. ────────
-{
+  {
     slug: "spa-zen-watercolor", name: "Spa Zen Watercolor",
     description: "White + soft mint/teal watercolor waves + lotus motifs. Calm, airy, light alternative for spa & wellness.",
     category: "beauty", component: SpaZenWatercolor,
@@ -1616,8 +1585,6 @@ export const TEMPLATES: TemplateMeta[] = [
     themes: ["coral", "plum", "sand", "linen"],
   },
 
-  // ---- Default fallback (last in the array — catches anything not matched above) ----
-
   {
     slug: "classic-serif",
     name: "Classic Serif",
@@ -1645,7 +1612,7 @@ export const TEMPLATES: TemplateMeta[] = [
     themes: ["plum", "navy", "wine", "charcoal"],
   },
 
-  // ---- Batch 12 — Design System kit (1): soft/feminine family + verticals (added 2026-06-06) ----
+  // ---- Batch 12 — Design System kit (1): soft/feminine family + verticals ----
   {
     slug: "watercolor-blush", name: "Watercolor Blush",
     description: "Soft pink/blush watercolor washes, elegant serif + script name, photo block. Feminine & premium.",
@@ -1817,8 +1784,8 @@ export const TEMPLATES: TemplateMeta[] = [
     suggestedIndustries: ["retail", "customer-service", "hospitality"],
     themes: ["coral", "forest", "ivory"],
   },
-  // ==== Design System kit (2) — 2026-06-06: 30 new vertical/niche templates ====
 
+  // ==== Design System kit (2) — 2026-06-06: 30 new vertical/niche templates ====
   {
     addedAt: "2026-06-06T00:00:00.000Z",
     slug: "agriculture-field", name: "Agriculture Field",
@@ -2210,9 +2177,7 @@ export const TEMPLATES: TemplateMeta[] = [
     suggestedIndustries: ["warehousing", "supply-chain", "logistics"],
   },
 
-
   // ════════════ Design System kit (3) — 2026-06-10: 40 new vertical/niche templates ════════════
-
   {
     slug: "baker-pastry", name: "Baker Pastry",
     description: "Warm flour cream + cocoa + wheat/whisk motif + artisan serif. For bakers, pastry chefs & cake decorators.",
@@ -2226,7 +2191,6 @@ export const TEMPLATES: TemplateMeta[] = [
     suggestedIndustries: ["bakery", "pastry", "food-service"],
     themes: ["sand", "wine", "ivory"],
   },
-
   {
     slug: "bank-finance-ops", name: "Bank Finance Ops",
     description: "Crisp white + forest green + gold pinstripe + ledger-style rows. For bank branch & finance operations staff.",
@@ -2241,7 +2205,6 @@ export const TEMPLATES: TemplateMeta[] = [
     suggestedIndustries: ["banking", "finance-operations", "financial-services"],
     themes: ["forest", "sand", "ivory"],
   },
-
   {
     slug: "concierge-luxe", name: "Concierge Luxe",
     description: "Midnight teal + champagne + key motif + refined serif + service list. For concierges & private service.",
@@ -2256,7 +2219,6 @@ export const TEMPLATES: TemplateMeta[] = [
     suggestedIndustries: ["luxury-hospitality", "private-service", "hotels"],
     themes: ["midnight", "forest", "sand"],
   },
-
   {
     slug: "courier-route", name: "Courier Route",
     description: "Navy + amber route-map pins + dashed delivery timeline + record tiles. For drivers & last-mile couriers.",
@@ -2271,7 +2233,6 @@ export const TEMPLATES: TemplateMeta[] = [
     suggestedIndustries: ["delivery", "logistics", "transportation"],
     themes: ["navy", "sand"],
   },
-
   {
     slug: "cyber-gradient-iso", name: "Cyber Gradient Iso",
     description: "Violet→cyan gradient sidebar + isometric security line-art + white content cards. Modern light cyber look.",
@@ -2286,7 +2247,6 @@ export const TEMPLATES: TemplateMeta[] = [
     suggestedIndustries: ["cybersecurity", "information-security", "technology"],
     themes: ["plum", "sky"],
   },
-
   {
     slug: "cyber-shield-light", name: "Cyber Shield Light",
     description: "Sky-blue + white rounded card + neon photo ring + shield/lock illustration + gradient bars. Friendly light cyber look.",
@@ -2301,7 +2261,6 @@ export const TEMPLATES: TemplateMeta[] = [
     suggestedIndustries: ["cybersecurity", "it-security", "technology"],
     themes: ["sky", "navy", "ivory"],
   },
-
   {
     slug: "data-admin-mono", name: "Data Admin Mono",
     description: "White + big black sans name + circle photo + thin teal rules. Ultra-clean ATS-safe for DBAs & IT ops.",
@@ -2316,7 +2275,6 @@ export const TEMPLATES: TemplateMeta[] = [
     suggestedIndustries: ["data", "it-operations", "technology"],
     themes: ["slate", "sky", "ivory"],
   },
-
   {
     slug: "devops-pipeline", name: "DevOps Pipeline",
     description: "Slate + electric green CI/CD pipeline stages + mono accents + metric tiles. For DevOps, SRE & platform engineers.",
@@ -2331,7 +2289,6 @@ export const TEMPLATES: TemplateMeta[] = [
     suggestedIndustries: ["devops", "cloud", "infrastructure"],
     themes: ["charcoal", "midnight", "emerald"],
   },
-
   {
     slug: "dispatcher-radio", name: "Dispatcher Radio",
     description: "Dark slate + amber radio-wave motif + channel chips + metric tiles. Calm authority for emergency comms.",
@@ -2346,7 +2303,6 @@ export const TEMPLATES: TemplateMeta[] = [
     suggestedIndustries: ["emergency-services", "public-safety", "operations"],
     themes: ["charcoal", "midnight"],
   },
-
   {
     slug: "edu-gradient-pills", name: "Edu Gradient Pills",
     description: "Deep navy + orange→gold gradient pill section bars + glow photo ring + wave footer. Playful-dark for education coordinators.",
@@ -2362,7 +2318,6 @@ export const TEMPLATES: TemplateMeta[] = [
     suggestedIndustries: ["education", "academic-administration", "library"],
     themes: ["midnight", "coral", "sand"],
   },
-
   {
     slug: "esports-stream", name: "Esports Stream",
     description: "Near-black + electric violet/cyan + hexagon photo + angular stat tiles. For esports players, streamers & casters.",
@@ -2377,7 +2332,6 @@ export const TEMPLATES: TemplateMeta[] = [
     suggestedIndustries: ["esports", "gaming", "streaming"],
     themes: ["midnight", "plum"],
   },
-
   {
     slug: "flight-instructor-sky", name: "Flight Instructor Sky",
     description: "Sky gradient + climb-path line + cloud accents + log-book stat tiles. Light look for flight instructors & CFIs.",
@@ -2392,7 +2346,6 @@ export const TEMPLATES: TemplateMeta[] = [
     suggestedIndustries: ["aviation-training", "flight-school", "aviation"],
     themes: ["sky", "navy", "ivory"],
   },
-
   {
     slug: "florist-bloom", name: "Florist Bloom",
     description: "Cream + rose/sage + hand-drawn bloom motifs + arch photo. Soft botanical for florists & garden designers.",
@@ -2407,7 +2360,6 @@ export const TEMPLATES: TemplateMeta[] = [
     suggestedIndustries: ["floristry", "gardening", "landscaping"],
     themes: ["wine", "sage", "ivory"],
   },
-
   {
     slug: "hr-talent-warm", name: "HR Talent Warm",
     description: "Soft apricot header + rounded photo + people-dots motif + plum accents. Warm people-first look for HR & recruiting.",
@@ -2422,7 +2374,6 @@ export const TEMPLATES: TemplateMeta[] = [
     suggestedIndustries: ["human-resources", "recruiting", "people-operations"],
     themes: ["plum", "coral", "ivory"],
   },
-
   {
     slug: "holo-premium-light", name: "Holo Premium Light",
     description: "Soft pearl + holographic pastel sheen corners + thin gold rules + elegant serif. Premium light for senior professionals.",
@@ -2437,7 +2388,6 @@ export const TEMPLATES: TemplateMeta[] = [
     suggestedIndustries: ["consulting", "executive", "professional-services"],
     themes: ["ivory", "sand", "linen"],
   },
-
   {
     slug: "lab-tech-dark", name: "Lab Tech Dark",
     description: "Deep teal-black + cyan/violet beaker + specimen grid + glow bars. Dramatic dark for lab professionals.",
@@ -2452,7 +2402,6 @@ export const TEMPLATES: TemplateMeta[] = [
     suggestedIndustries: ["laboratory", "diagnostics", "science"],
     themes: ["midnight", "emerald"],
   },
-
   {
     slug: "librarian-neon-wave", name: "Librarian Neon Wave",
     description: "Deep navy + sweeping blue/white wave + neon hexagon photo + bold white sections. For librarians & information specialists.",
@@ -2467,7 +2416,6 @@ export const TEMPLATES: TemplateMeta[] = [
     suggestedIndustries: ["library", "information-management", "education"],
     themes: ["navy", "midnight", "sky"],
   },
-
   {
     slug: "medical-neon-hud", name: "Medical Neon HUD",
     description: "Deep ink + neon cyan corner brackets + glow photo ring + teal hero panel + glowing timeline. Dramatic option for specialist physicians.",
@@ -2482,7 +2430,6 @@ export const TEMPLATES: TemplateMeta[] = [
     suggestedIndustries: ["medicine", "specialist-medicine", "healthcare"],
     themes: ["midnight", "navy"],
   },
-
   {
     slug: "mobile-dev-duotone", name: "Mobile Dev Duotone",
     description: "White + teal/orange duotone + app project cards + KPI footer band. For mobile app developers.",
@@ -2497,7 +2444,6 @@ export const TEMPLATES: TemplateMeta[] = [
     suggestedIndustries: ["mobile-development", "software", "apps"],
     themes: ["forest", "coral", "ivory"],
   },
-
   {
     slug: "museum-curator", name: "Museum Curator",
     description: "Gallery white + stone + plinth-frame photo + classical serif + exhibit labels. For curators & conservators.",
@@ -2512,7 +2458,6 @@ export const TEMPLATES: TemplateMeta[] = [
     suggestedIndustries: ["museums", "galleries", "cultural-heritage"],
     themes: ["sand", "linen", "ivory"],
   },
-
   {
     slug: "neon-circuit-dev", name: "Neon Circuit Dev",
     description: "Deep blue→violet circuit board + glow name + neon ring dials sidebar + white panel. Bold dark for full-stack devs.",
@@ -2526,7 +2471,6 @@ export const TEMPLATES: TemplateMeta[] = [
     suggestedIndustries: ["software", "web-development", "technology"],
     themes: ["midnight", "navy", "plum"],
   },
-
   {
     slug: "neuro-clean-light", name: "Neuro Clean Light",
     description: "Ice white card + gradient photo ring + pale blue dot timeline + publications section. Light clinical for physicians.",
@@ -2541,7 +2485,6 @@ export const TEMPLATES: TemplateMeta[] = [
     suggestedIndustries: ["medicine", "healthcare", "clinical-research"],
     themes: ["sky", "ivory", "slate"],
   },
-
   {
     slug: "nurse-glass-pastel", name: "Nurse Glass Pastel",
     description: "Icy pastel blue + glassmorphism card + floating orbs/capsule + donut dials. Soft modern look for nursing.",
@@ -2556,7 +2499,6 @@ export const TEMPLATES: TemplateMeta[] = [
     suggestedIndustries: ["nursing", "healthcare", "clinical-care"],
     themes: ["sky", "ivory"],
   },
-
   {
     slug: "nursery-meadow", name: "Nursery Meadow",
     description: "White + layered green/yellow meadow waves + rounded yellow photo frame + daisies + smiling sun. For nursery & early years.",
@@ -2571,7 +2513,6 @@ export const TEMPLATES: TemplateMeta[] = [
     suggestedIndustries: ["childcare", "early-education", "nursery"],
     themes: ["forest", "sand", "ivory"],
   },
-
   {
     slug: "optometrist-vision", name: "Optometrist Vision",
     description: "White + iris blue/violet + eye/lens motif + acuity-chart accent. For optometrists & eye-care staff.",
@@ -2585,7 +2526,6 @@ export const TEMPLATES: TemplateMeta[] = [
     suggestedIndustries: ["eye-care", "optometry", "healthcare"],
     themes: ["sky", "plum", "ivory"],
   },
-
   {
     slug: "paralegal-brief", name: "Paralegal Brief",
     description: "White + oxblood + ruled brief-document margin line + case-file tabs. Crisp legal-support look.",
@@ -2600,7 +2540,6 @@ export const TEMPLATES: TemplateMeta[] = [
     suggestedIndustries: ["legal", "legal-support", "law"],
     themes: ["wine", "slate", "ivory"],
   },
-
   {
     slug: "paramedic-pulse", name: "Paramedic Pulse",
     description: "Navy + emergency red + star-of-life + pulse line + readiness chips. Bold urgent look for EMS.",
@@ -2615,7 +2554,6 @@ export const TEMPLATES: TemplateMeta[] = [
     suggestedIndustries: ["emergency-services", "ems", "healthcare"],
     themes: ["navy", "wine"],
   },
-
   {
     slug: "photo-real-estate", name: "Photo Real Estate",
     description: "White + charcoal + sky accent + viewfinder corner frame + property-grid shoots. For property & aerial photographers.",
@@ -2630,7 +2568,6 @@ export const TEMPLATES: TemplateMeta[] = [
     suggestedIndustries: ["photography", "real-estate-media", "drone-services"],
     themes: ["slate", "sky", "ivory"],
   },
-
   {
     slug: "security-shield", name: "Security Shield",
     description: "Charcoal + steel blue + shield badge + vigilance chips. For security guards & loss prevention.",
@@ -2645,7 +2582,6 @@ export const TEMPLATES: TemplateMeta[] = [
     suggestedIndustries: ["security", "protective-services", "facilities"],
     themes: ["charcoal", "navy"],
   },
-
   {
     slug: "skill-radar-navy", name: "Skill Radar Navy",
     description: "Navy sidebar + circle photo + pentagon radar skill chart + geometric accents. Infographic look for web developers.",
@@ -2660,7 +2596,6 @@ export const TEMPLATES: TemplateMeta[] = [
     suggestedIndustries: ["web-development", "software", "technology"],
     themes: ["navy", "coral", "sand"],
   },
-
   {
     slug: "social-worker-bridge", name: "Social Worker Bridge",
     description: "Warm white + dusty blue + terracotta + bridge/connection motif. For social workers & case managers.",
@@ -2675,7 +2610,6 @@ export const TEMPLATES: TemplateMeta[] = [
     suggestedIndustries: ["social-services", "community", "welfare"],
     themes: ["sky", "coral", "ivory"],
   },
-
   {
     slug: "sports-coach-field", name: "Sports Coach Field",
     description: "Pitch-green header with tactic-board arrows + stat tiles + badge chips. For sports coaches & PE teachers.",
@@ -2690,7 +2624,6 @@ export const TEMPLATES: TemplateMeta[] = [
     suggestedIndustries: ["sports", "coaching", "education"],
     themes: ["forest", "midnight"],
   },
-
   {
     slug: "synthwave-grid", name: "Synthwave Grid",
     description: "Black→sunset horizon + neon pink perspective grid + glow photo ring + white content cards. Retro-futuristic for UI designers.",
@@ -2705,7 +2638,6 @@ export const TEMPLATES: TemplateMeta[] = [
     suggestedIndustries: ["design", "digital-art", "creative"],
     themes: ["midnight", "plum", "wine"],
   },
-
   {
     slug: "tattoo-ink", name: "Tattoo Ink",
     description: "Black + parchment + gold old-school banner + ink flourish. Bold editorial for tattoo & studio artists.",
@@ -2719,7 +2651,6 @@ export const TEMPLATES: TemplateMeta[] = [
     suggestedIndustries: ["tattoo", "body-art", "studio"],
     themes: ["charcoal", "midnight", "wine"],
   },
-
   {
     slug: "teacher-sunshine", name: "Teacher Sunshine",
     description: "Warm cream + sunny yellow/sky waves + sun-ray photo ring + crayon chips. Light playful for primary teachers.",
@@ -2734,7 +2665,6 @@ export const TEMPLATES: TemplateMeta[] = [
     suggestedIndustries: ["primary-education", "education", "teaching"],
     themes: ["sand", "sky", "ivory"],
   },
-
   {
     slug: "teal-code-timeline", name: "Teal Code Timeline",
     description: "Teal header band + circle photo + code watermarks + dot timeline + skill bars + footer contact band. ATS-safe dev look.",
@@ -2749,7 +2679,6 @@ export const TEMPLATES: TemplateMeta[] = [
     suggestedIndustries: ["software", "web-development", "technology"],
     themes: ["forest", "sky", "slate"],
   },
-
   {
     slug: "translator-global", name: "Translator Global",
     description: "White + indigo + globe/speech-bubble motif + language proficiency bars. For translators & interpreters.",
@@ -2764,7 +2693,6 @@ export const TEMPLATES: TemplateMeta[] = [
     suggestedIndustries: ["translation", "localization", "language-services"],
     themes: ["navy", "sky", "ivory"],
   },
-
   {
     slug: "utility-lineworker", name: "Utility Lineworker",
     description: "Slate blue + high-vis yellow + power-line motif + safety stripe. For lineworkers & utility field crew.",
@@ -2779,7 +2707,6 @@ export const TEMPLATES: TemplateMeta[] = [
     suggestedIndustries: ["utilities", "power", "telecommunications"],
     themes: ["slate", "navy"],
   },
-
   {
     slug: "vet-tech-paws", name: "Vet Tech Paws",
     description: "Soft cream + teal + paw-print trail + organic blob photo + care chips. Warm look for veterinary support.",
@@ -2794,7 +2721,6 @@ export const TEMPLATES: TemplateMeta[] = [
     suggestedIndustries: ["veterinary", "animal-care", "pet-services"],
     themes: ["forest", "coral", "ivory"],
   },
-
   {
     slug: "warm-minimal-dials", name: "Warm Minimal Dials",
     description: "Cream + terracotta/sage + big serif name + donut percentage dials + dot timeline. Warm infographic for generalist tech.",
@@ -3370,16 +3296,12 @@ export const TEMPLATES: TemplateMeta[] = [
     suggestedIndustries: ["marketing", "growth", "saas"],
     themes: ["plum", "blush", "violet"],
   },
-
 ];
 
 // ============================================================================
 // Helpers
 // ============================================================================
 
-/** Memoized addedAt — staggers V1 templates by 1 minute per registry index
- *  so the homepage sort (addedAt desc) preserves registry order without ties.
- *  Built once at module load after TEMPLATES is initialized. */
 const ADDED_AT_CACHE: Map<string, string> = (() => {
   const m = new Map<string, string>();
   for (let i = 0; i < TEMPLATES.length; i++) {
@@ -3391,7 +3313,6 @@ const ADDED_AT_CACHE: Map<string, string> = (() => {
   return m;
 })();
 
-/** addedAt with default. */
 export function getAddedAt(t: TemplateMeta): string {
   return t.addedAt ?? ADDED_AT_CACHE.get(t.slug) ?? new Date(V1_BASE_MS).toISOString();
 }
@@ -3405,11 +3326,6 @@ export function defaultTemplate(): TemplateMeta {
   return TEMPLATES.find((t) => t.slug === "classic-serif") ?? TEMPLATES[TEMPLATES.length - 1];
 }
 
-/**
- * Suggest a template for a freshly uploaded Canva PNG. Drives the /admin
- * upload pipeline (auto-tag the layout — admin can override) and the
- * /cv/new flow (auto-pick a layout when the user clicks a PNG).
- */
 export function suggestTemplate(opts: {
   roleSlug?: string;
   industrySlug?: string;
@@ -3432,8 +3348,6 @@ export function templatesByCategory(category: TemplateCategory): TemplateMeta[] 
   return TEMPLATES.filter((t) => t.category === category);
 }
 
-/** Flat map of every supported role -> templateSlug. Use this for one-time
- *  backfill across the 246 TemplateImage rows. */
 export function getAllRoleMappings(): Record<string, string> {
   const map: Record<string, string> = {};
   for (const t of TEMPLATES) {
@@ -3444,7 +3358,6 @@ export function getAllRoleMappings(): Record<string, string> {
   return map;
 }
 
-/** Total number of unique roles covered. */
 export function getCoveredRoleCount(): number {
   const seen = new Set<string>();
   for (const t of TEMPLATES) for (const r of t.suggestedRoles) seen.add(r);
