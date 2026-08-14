@@ -32,11 +32,11 @@ type Params = { country: string };
 const YEAR = new Date().getFullYear();
 
 function buildTitle(name: string): string {
-  return `${name} CV Guide (${YEAR}) — Free, ATS-Ready Builder · AlmiCV`;
+  return `${name} CV Guide (${YEAR}) — ATS-Ready CV Builder · AlmiCV`;
 }
 
 function buildDescription(name: string): string {
-  return `Build a ${name}-ready CV for any role with AlmiCV — local conventions, AI-tailored, ATS-optimized. Free to start, Pro $12/mo.`;
+  return `Build a ${name}-ready CV for any role with AlmiCV — local conventions, AI-tailored, ATS-optimized. 7-day free trial, then $12/mo.`;
 }
 
 export async function generateMetadata({
@@ -326,9 +326,9 @@ export default async function CountryHub({
               href={`/signup?country=${c.slug}`}
               className="inline-block px-8 py-4 rounded-md bg-coral text-white text-lg font-semibold hover:bg-coral-deep transition-colors"
             >
-              Build Your {c.name} CV Free →
+              Start 7-day free trial →
             </Link>
-            <p className="text-xs text-plum-soft mt-3">No credit card required to start.</p>
+            <p className="text-xs text-plum-soft mt-3">7-day free trial, then $12/month.</p>
           </section>
 
           {/* 9. MASTER Shamool pledge line */}

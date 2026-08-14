@@ -24,7 +24,7 @@ export const revalidate = 3600;
 
 export const metadata = {
   title: "CV templates · AlmiCV",
-  description: `${TEMPLATES.length} production-ready CV templates — pick a layout and start your CV in under a minute. ATS-safe, A4-print-ready, free to start.`,
+  description: `${TEMPLATES.length} production-ready CV templates — pick a layout and start your CV in under a minute. ATS-safe and A4-print-ready.`,
   alternates: { canonical: "https://almicv.almiworld.com/templates" },
 };
 
@@ -44,7 +44,7 @@ export default async function TemplatesPage() {
             </h1>
             <p className="mt-4 text-lg text-plum-soft">
               {TEMPLATES.length} industry-tailored layouts — every one ATS-safe, A4-print-ready,
-              and free to start. Click any card to open the editor.
+              and included in the subscription. Click any card to open the editor.
             </p>
           </header>
 

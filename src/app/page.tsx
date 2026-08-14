@@ -36,7 +36,7 @@ export const metadata: Metadata = {
 };
 
 // One primary CTA, repeated down the page (per the copy spec).
-const CTA_LABEL = "Build my CV — free";
+const CTA_LABEL = "Start 7-day free trial";
 
 // Honest trust statements (no invented numbers/reviews) — from the copy.
 const TRUST = [
@@ -211,9 +211,9 @@ function HeroSection({ isLoggedIn }: { isLoggedIn: boolean }) {
               <PrimaryCTA isLoggedIn={isLoggedIn} />
             </div>
             <p className="mt-5 text-sm text-plum-faint">
-              Free to start. Pro is $12/month — a fraction of what resume.io
-              (~$30 every 4 weeks, ~$389/year) and Zety charge. No download
-              traps. No weekly-billing tricks.
+              Pro is $12/month — a fraction of what resume.io (~$30 every 4
+              weeks, ~$389/year) and Zety charge. 7-day free trial, cancel
+              anytime. No download traps. No weekly-billing tricks.
             </p>
           </div>
           <HeroPreview />
