@@ -10,13 +10,13 @@ export function DevOpsPipelineTemplate({
   data: CVData;
   paginated?: boolean;
 }) {
-  const basics = data?.basics || ({} as any);
-  const experience = data?.experience || [];
-  const education = data?.education || [];
-  const skills = Array.isArray(data?.skills)
-    ? data.skills.map((s: any) => (typeof s === "string" ? s : s.name || ""))
+  const basics: any = (data as any)?.basics || {};
+  const experience: any[] = (data as any)?.experience || [];
+  const education: any[] = (data as any)?.education || [];
+  const skills: string[] = Array.isArray((data as any)?.skills)
+    ? (data as any).skills.map((s: any) => (typeof s === "string" ? s : s?.name || ""))
     : [];
-  const certifications = data?.certifications || [];
+  const certifications: any[] = (data as any)?.certifications || [];
 
   return (
     <div
