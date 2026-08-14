@@ -320,7 +320,56 @@ export function getTagline(t: TemplateMeta): string {
 // ============================================================================
 // TEMPLATES — order = priority for suggestTemplate()
 // ============================================================================
-export const TEMPLATES: TemplateMeta[] = [
+export const TEMPLATES: TemplateMeta[] = [{
+    slug: "ai-ml-architect",
+    name: "AI & Machine Learning Architect",
+    description: "Neural matrix layout with parameter/latency KPI metrics, model deployment pipeline, and arXiv publication blocks.",
+    category: "developer",
+    component: AiMlResearchArchitect as unknown as ComponentType<TemplateProps>,
+    atsSafe: true,
+    supportsPhoto: true,
+    addedAt: "2026-08-14T23:00:00.000Z",
+    suggestedRoles: [
+      "ai-engineer", "machine-learning-engineer", "mlops-engineer",
+      "ai-researcher", "deep-learning-scientist", "nlp-engineer", "computer-vision-engineer"
+    ],
+    suggestedIndustries: ["artificial-intelligence", "software", "data-science"],
+    themes: ["midnight", "forest", "plum"],
+  },
+
+  {
+    slug: "nurse-icu-pro",
+    name: "Nurse ICU Clinical Pro",
+    description: "Clinical patient care layout with ECG cardiac waveform divider, BLS/ACLS license pills, and clinical competencies.",
+    category: "nursing",
+    component: NurseICUPro as unknown as ComponentType<TemplateProps>,
+    atsSafe: true,
+    supportsPhoto: true,
+    addedAt: "2026-08-14T22:30:00.000Z",
+    suggestedRoles: [
+      "registered-nurse", "icu-nurse", "er-nurse", "nurse-practitioner",
+      "clinical-nurse", "pediatric-nurse", "surgical-nurse", "charge-nurse"
+    ],
+    suggestedIndustries: ["healthcare", "nursing", "clinical-medicine"],
+    themes: ["sky", "forest", "ivory"],
+  },
+
+  {
+    slug: "legal-partner-luxe",
+    name: "Legal Chambers Executive",
+    description: "Classical serif masthead with bar admissions badge, notable litigation matters, and judicial records.",
+    category: "legal",
+    component: LegalPartnerLuxe as unknown as ComponentType<TemplateProps>,
+    atsSafe: true,
+    supportsPhoto: true,
+    addedAt: "2026-08-14T22:00:00.000Z",
+    suggestedRoles: [
+      "attorney", "lawyer", "general-counsel", "litigation-partner",
+      "corporate-counsel", "solicitor", "barrister", "legal-director"
+    ],
+    suggestedIndustries: ["legal", "corporate-law", "litigation"],
+    themes: ["wine", "charcoal", "ivory"],
+  },
   // Next-Gen Dynamic Engine Template
   {
     slug: "devops-pipeline-pro",
