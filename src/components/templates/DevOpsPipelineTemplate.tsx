@@ -20,6 +20,16 @@ export function DevOpsPipelineTemplate({
   const languages: any[] = (data as any)?.languages || [];
 
   const displayRole = basics.role?.trim() || "DevOps & Cloud Systems Engineer";
+  const fullName = basics.fullName?.trim() || "Your Name";
+
+  // Generate initials for the avatar placeholder (e.g., "John Doe" -> "JD")
+  const initials = fullName
+    .split(" ")
+    .filter(Boolean)
+    .map((word: string) => word[0])
+    .join("")
+    .substring(0, 2)
+    .toUpperCase() || "YN";
 
   return (
     <div
@@ -37,20 +47,32 @@ export function DevOpsPipelineTemplate({
             </div>
 
             <h1 className="text-3xl font-extrabold tracking-tight">
-              {basics.fullName || "Your Full Name"}
+              {fullName}
             </h1>
             <p className="text-sm font-semibold uppercase tracking-wider text-[var(--almi-primary,#10b981)]">
               {displayRole}
             </p>
           </div>
 
-          {basics.photoUrl && (
-            <img
-              src={basics.photoUrl}
-              alt={basics.fullName || "Avatar"}
-              className="h-20 w-20 rounded-xl object-cover border-2 border-[var(--almi-primary,#10b981)] shadow-sm"
-            />
-          )}
+          {/* Photo Slot / Interactive Avatar Placeholder */}
+          <div className="relative group shrink-0">
+            {basics.photoUrl ? (
+              <img
+                src={basics.photoUrl}
+                alt={fullName}
+                className="h-24 w-24 rounded-xl object-cover border-2 border-[var(--almi-primary,#10b981)] shadow-md transition-transform"
+              />
+            ) : (
+              <div className="h-24 w-24 rounded-xl border-2 border-dashed border-[var(--almi-primary,#10b981)]/60 bg-[var(--almi-primary,#10b981)]/10 flex flex-col items-center justify-center text-center p-2 shadow-sm transition-all hover:bg-[var(--almi-primary,#10b981)]/20">
+                <span className="text-lg font-bold text-[var(--almi-primary,#10b981)] tracking-wider">
+                  {initials}
+                </span>
+                <span className="text-[9px] uppercase tracking-tighter opacity-70 font-sans mt-0.5">
+                  + Photo
+                </span>
+              </div>
+            )}
+          </div>
         </div>
 
         {/* Contact Links Bar */}
