@@ -8,7 +8,9 @@
 // Adding a new template = drop a .tsx file in this folder, import below, add
 // one entry to TEMPLATES. No other code changes.
 // ============================================================================
-
+import { NurseICUPro } from "./NurseICUPro";
+import { LegalPartnerLuxe } from "./LegalPartnerLuxe";
+import { AiMlResearchArchitect } from "./AiMlResearchArchitect";
 import type { ComponentType } from "react";
 import type { TemplateProps } from "./types";
 
