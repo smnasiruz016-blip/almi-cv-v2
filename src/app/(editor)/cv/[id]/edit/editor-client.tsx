@@ -21,6 +21,7 @@ import { CVEditorSidebar } from "@/components/editor/CVEditorSidebar";
 import { GenerateCoverLetterModal } from "@/components/editor/GenerateCoverLetterModal";
 import { TranslateCvModal } from "@/components/editor/TranslateCvModal";
 import { ChatLauncher } from "@/components/chat/ChatLauncher";
+import { ThemeCustomizer, type ThemeConfig } from "@/components/editor/ThemeCustomizer";
 import { updateResume } from "@/lib/resume-actions";
 import { downloadCvPdf } from "@/lib/download-pdf";
 import { useToast } from "@/components/ui/Toast";
@@ -59,6 +60,17 @@ export function EditorClient({
   const [coverLetterOpen, setCoverLetterOpen] = useState(false);
   const [translateOpen, setTranslateOpen] = useState(false);
   const [activeTab, setActiveTab] = useState<"edit" | "preview">("edit");
+
+  // Dynamic Theme & Typography state
+  const [theme, setTheme] = useState<ThemeConfig>({
+    primary: "#1e3a8a",
+    secondary: "#3b82f6",
+    background: "#ffffff",
+    textColor: "#0f172a",
+    fontFamily: "font-sans",
+    fontSizeScale: "scale-base",
+  });
+
   const isInitialMount = useRef(true);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const prevStatusRef = useRef<SaveStatus>("saved");
@@ -93,18 +105,13 @@ export function EditorClient({
     setSaveStatus("idle");
     if (timerRef.current) clearTimeout(timerRef.current);
     timerRef.current = setTimeout(() => {
-      void saveNow().catch(() => {
-        // saveNow already sets status to "error" and console.errors; the
-        // re-throw is for callers of flushSave, not the autosave timer.
-      });
+      void saveNow().catch(() => {});
     }, 1500);
     return () => {
       if (timerRef.current) clearTimeout(timerRef.current);
     };
   }, [saveNow]);
 
-  // "Saved ✓" indicator on the Save button: only fire on a real
-  // saving→saved transition, never on initial mount or idle→saved no-ops.
   useEffect(() => {
     const wasInProgress = prevStatusRef.current === "saving";
     prevStatusRef.current = saveStatus;
@@ -133,10 +140,6 @@ export function EditorClient({
     document.title = cvName ? `${cvName} - AlmiCV` : "AlmiCV";
   }, [cvName]);
 
-  // Auto-rename: when the CV is still using the placeholder title and the
-  // user has filled in their name, promote the name into the title. Only
-  // fires while the title is the untouched default — once the user edits
-  // the title themselves, this stops interfering.
   useEffect(() => {
     if (cvName !== "Untitled CV") return;
     const fullName = cvData.basics?.fullName?.trim();
@@ -180,10 +183,7 @@ export function EditorClient({
               type="button"
               disabled={saveStatus === "saving"}
               onClick={() => {
-                void flushSave().catch(() => {
-                  // saveNow already set status to "error" and the button
-                  // will re-render as "Retry" — no toast needed.
-                });
+                void flushSave().catch(() => {});
               }}
               className={`inline-flex items-center gap-2 rounded-pill px-4 py-2 text-sm font-medium text-white transition-colors focus:outline-none focus:ring-4 disabled:opacity-70 ${
                 saveStatus === "error"
@@ -257,8 +257,6 @@ export function EditorClient({
                 if (downloading) return;
                 setDownloading(true);
                 try {
-                  // Flush any in-flight edits so puppeteer reads the latest
-                  // version from the DB, not a stale snapshot.
                   setSaveStatus("saving");
                   await updateResume(resumeId, { title: cvName, data: cvData });
                   setSaveStatus("saved");
@@ -336,6 +334,12 @@ export function EditorClient({
           }`}
         >
           <div className="p-6">
+            {/* Real-Time Theme & Typography Customizer Engine */}
+            <ThemeCustomizer
+              theme={theme}
+              onChange={(updated) => setTheme((prev) => ({ ...prev, ...updated }))}
+            />
+
             <CVEditorSidebar data={cvData} onChange={setCvData} />
           </div>
         </aside>
@@ -349,11 +353,6 @@ export function EditorClient({
           <p className="print-hide mb-3 text-xs uppercase tracking-widest text-plum-soft">
             Live preview · A4
           </p>
-          {/* Blank-CV escape hatch. New CVs and never-touched drafts are
-           *  seeded server-side, but a CV the user has edited down to empty
-           *  (isDraft already false) is intentionally not auto-refilled —
-           *  that would fight a deliberate clear and re-appear on every
-           *  reload. Offer an explicit one-click fill instead. */}
           {isBlankCV(cvData) && (
             <div className="print-hide mb-4 w-full max-w-[600px] rounded-lg border border-plum/15 bg-white px-4 py-3 text-center">
               <p className="mb-2 text-sm text-plum-soft">
@@ -370,7 +369,15 @@ export function EditorClient({
               </button>
             </div>
           )}
-          <div className="print-target w-full max-w-[600px]">
+          <div 
+            className={`print-target w-full max-w-[600px] transition-all duration-150 ${theme.fontFamily}`}
+            style={{
+              ["--almi-primary" as any]: theme.primary,
+              ["--almi-secondary" as any]: theme.secondary,
+              ["--almi-bg" as any]: theme.background,
+              ["--almi-text" as any]: theme.textColor,
+            }}
+          >
             {/* Batch 3 templates consume CD's pseudo-CVData shape; adapt
              *  at the boundary. Batch 1+2 templates take CVData directly. */}
             <TemplateComponent
