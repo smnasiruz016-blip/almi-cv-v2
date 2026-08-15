@@ -35,9 +35,7 @@ export function EditorialArchBlush({
       className="w-full bg-[var(--almi-bg,#faf8f5)] text-[var(--almi-text,#1e293b)] font-sans transition-colors duration-150 p-8 shadow-sm"
       style={{ minHeight: paginated ? "1120px" : "auto" }}
     >
-      {/* Top Header with Arch Photo Frame */}
       <div className="flex items-center gap-6 pb-6 border-b border-[var(--almi-primary,#d97706)]/25 mb-6">
-        {/* Canva-Style Arch Photo */}
         <div className="shrink-0">
           {basics.photoUrl ? (
             <div className="h-28 w-24 rounded-t-full rounded-b-xl overflow-hidden border-2 border-[var(--almi-primary,#d97706)] shadow-md">
@@ -55,7 +53,6 @@ export function EditorialArchBlush({
           )}
         </div>
 
-        {/* Title & Social Header */}
         <div className="flex-1 space-y-1.5">
           <div className="text-[10px] uppercase tracking-[0.25em] text-[var(--almi-primary,#d97706)] font-bold">
             Curated Resume
@@ -76,9 +73,7 @@ export function EditorialArchBlush({
         </div>
       </div>
 
-      {/* 2-Column Asymmetric Layout */}
       <div className="grid grid-cols-12 gap-7">
-        {/* Left Column (4-Col): Summary & Skills */}
         <div className="col-span-4 space-y-6 border-r border-[var(--almi-primary,#d97706)]/15 pr-5">
           {basics.summary && (
             <section>
@@ -141,7 +136,6 @@ export function EditorialArchBlush({
           )}
         </div>
 
-        {/* Right Column (8-Col): Experience & Achievements */}
         <div className="col-span-8 space-y-6">
           <section>
             <h2 className="text-xs font-bold uppercase tracking-widest text-[var(--almi-primary,#d97706)] mb-3 font-serif">
