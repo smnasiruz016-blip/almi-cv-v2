@@ -8,6 +8,10 @@
 // Adding a new template = drop a .tsx file in this folder, import below, add
 // one entry to TEMPLATES. No other code changes.
 // ============================================================================
+import { EditorialArchBlush } from "./EditorialArchBlush";
+import { ModernDarkContrast } from "./ModernDarkContrast";
+import { WarmCreativeMagazine } from "./WarmCreativeMagazine";
+import { SoftPastelFloatingCards } from "./SoftPastelFloatingCards";
 import { NurseICUPro } from "./NurseICUPro";
 import { LegalPartnerLuxe } from "./LegalPartnerLuxe";
 import { AiMlResearchArchitect } from "./AiMlResearchArchitect";
@@ -321,6 +325,61 @@ export function getTagline(t: TemplateMeta): string {
 // TEMPLATES — order = priority for suggestTemplate()
 // ============================================================================
 export const TEMPLATES: TemplateMeta[] = [{
+  {
+    slug: "editorial-arch-blush",
+    name: "Editorial Arch Blush",
+    description: "Canva-style pastel layout featuring an arched portrait frame, luxury serif titles, and asymmetric 2-column split.",
+    category: "creative",
+    component: EditorialArchBlush as unknown as ComponentType<TemplateProps>,
+    atsSafe: true,
+    supportsPhoto: true,
+    addedAt: "2026-08-15T19:00:00.000Z",
+    suggestedRoles: ["creative-director", "brand-strategist", "copywriter", "marketing-lead", "stylist"],
+    suggestedIndustries: ["creative", "marketing", "media", "fashion"],
+    themes: ["amber", "rose", "forest"],
+  },
+
+  {
+    slug: "modern-dark-contrast",
+    name: "Modern Dark Contrast",
+    description: "Solid full-bleed slate sidebar with neon emerald accents, executive career milestones, and clean grid structure.",
+    category: "executive",
+    component: ModernDarkContrast as unknown as ComponentType<TemplateProps>,
+    atsSafe: true,
+    supportsPhoto: true,
+    addedAt: "2026-08-15T18:30:00.000Z",
+    suggestedRoles: ["cto", "vp-engineering", "director", "architect", "tech-lead"],
+    suggestedIndustries: ["technology", "executive", "engineering"],
+    themes: ["charcoal", "emerald", "navy"],
+  },
+
+  {
+    slug: "warm-creative-magazine",
+    name: "Warm Creative Magazine",
+    description: "Terracotta warm color block with rating-dots skills, editorial serif display, and circular portrait frame.",
+    category: "portfolio",
+    component: WarmCreativeMagazine as unknown as ComponentType<TemplateProps>,
+    atsSafe: true,
+    supportsPhoto: true,
+    addedAt: "2026-08-15T18:00:00.000Z",
+    suggestedRoles: ["art-director", "photographer", "curator", "visual-designer", "freelancer"],
+    suggestedIndustries: ["arts", "design", "publishing"],
+    themes: ["amber", "wine", "charcoal"],
+  },
+
+  {
+    slug: "soft-pastel-floating-cards",
+    name: "Soft Pastel Floating Cards",
+    description: "Modern startup HR layout with floating rounded cards, soft drop shadows, and friendly approachable styling.",
+    category: "operations",
+    component: SoftPastelFloatingCards as unknown as ComponentType<TemplateProps>,
+    atsSafe: true,
+    supportsPhoto: true,
+    addedAt: "2026-08-15T17:30:00.000Z",
+    suggestedRoles: ["hr-partner", "people-ops", "operations-manager", "talent-acquisition", "scrum-master"],
+    suggestedIndustries: ["human-resources", "startups", "operations"],
+    themes: ["plum", "sky", "emerald"],
+  },
     slug: "ai-ml-architect",
     name: "AI & Machine Learning Architect",
     description: "Neural matrix layout with parameter/latency KPI metrics, model deployment pipeline, and arXiv publication blocks.",
