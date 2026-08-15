@@ -8,9 +8,9 @@ export function ModernDarkContrast({ data, paginated }: TemplateProps) {
   const experience: any[] = (data?.experience as any[]) || [];
   const education: any[] = (data?.education as any[]) || [];
   const rawSkills: any[] = (data?.skills as any[]) || [];
-  const skills: string[] = rawSkills.map((s: any) =>
-    typeof s === "string" ? s : s?.name || ""
-  ).filter(Boolean);
+  const skills: string[] = rawSkills
+    .map((s: any) => (typeof s === "string" ? s : s?.name || ""))
+    .filter(Boolean);
   const certifications: any[] = (data as any)?.certifications || [];
   const languages: any[] = (data as any)?.languages || [];
 
