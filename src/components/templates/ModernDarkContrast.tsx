@@ -4,15 +4,15 @@ import React from "react";
 import type { TemplateProps } from "./types";
 
 export function ModernDarkContrast({ data, paginated }: TemplateProps) {
-  const basics = data?.basics || ({} as any);
-  const experience = data?.experience || [];
-  const education = data?.education || [];
+  const basics: any = data?.basics || {};
+  const experience: any[] = (data?.experience as any[]) || [];
+  const education: any[] = (data?.education as any[]) || [];
   const rawSkills: any[] = (data?.skills as any[]) || [];
   const skills: string[] = rawSkills.map((s: any) =>
     typeof s === "string" ? s : s?.name || ""
   ).filter(Boolean);
-  const certifications = (data as any)?.certifications || [];
-  const languages = (data as any)?.languages || [];
+  const certifications: any[] = (data as any)?.certifications || [];
+  const languages: any[] = (data as any)?.languages || [];
 
   const displayRole = basics.role?.trim() || "Chief Technology Officer / VP Eng";
   const fullName = basics.fullName?.trim() || "Your Name";
