@@ -8,6 +8,10 @@
 // Adding a new template = drop a .tsx file in this folder, import below, add
 // one entry to TEMPLATES. No other code changes.
 // ============================================================================
+import type { ComponentType } from "react";
+import type { TemplateProps } from "./types";
+
+// Next-Gen Canva-Quality Dynamic Templates
 import { EditorialArchBlush } from "./EditorialArchBlush";
 import { ModernDarkContrast } from "./ModernDarkContrast";
 import { WarmCreativeMagazine } from "./WarmCreativeMagazine";
@@ -15,10 +19,6 @@ import { SoftPastelFloatingCards } from "./SoftPastelFloatingCards";
 import { NurseICUPro } from "./NurseICUPro";
 import { LegalPartnerLuxe } from "./LegalPartnerLuxe";
 import { AiMlResearchArchitect } from "./AiMlResearchArchitect";
-import type { ComponentType } from "react";
-import type { TemplateProps } from "./types";
-
-// Next-Gen Dynamic Role Templates
 import { DevOpsPipelineTemplate } from "./DevOpsPipelineTemplate";
 
 // Batch 1 (10)
@@ -32,6 +32,7 @@ import CyberGrid from "./CyberGrid";
 import CorporateBlue from "./CorporateBlue";
 import WarmCreative from "./WarmCreative";
 import ReligiousTraditional from "./ReligiousTraditional";
+
 // Batch 2 (10)
 import TradesIndustrial from "./TradesIndustrial";
 import RealEstateElegant from "./RealEstateElegant";
@@ -43,6 +44,7 @@ import EducationWarm from "./EducationWarm";
 import SalesModern from "./SalesModern";
 import ServiceFriendly from "./ServiceFriendly";
 import CreativePortfolio from "./CreativePortfolio";
+
 // Batch 3 (10) — Claude Design pseudo-CVData shape.
 import LegalFormal from "./batch3/LegalFormal";
 import FinancePrecise from "./batch3/FinancePrecise";
@@ -54,6 +56,7 @@ import VeterinaryCaring from "./batch3/VeterinaryCaring";
 import AviationPrecise from "./batch3/AviationPrecise";
 import HospitalityElegant from "./batch3/HospitalityElegant";
 import LinguistMultilingual from "./batch3/LinguistMultilingual";
+
 // Batch 4 (7) — Claude Design 2026-05-27. Schema-canonical: consume production
 import IceBlueGlass from "./IceBlueGlass";
 import AdminFluid from "./AdminFluid";
@@ -62,6 +65,7 @@ import WellnessGolden from "./WellnessGolden";
 import MedicalSurgical from "./MedicalSurgical";
 import CloudLight from "./CloudLight";
 import PharmacyPastel from "./PharmacyPastel";
+
 // ---- Expansion batch (2026-06-01): 38 new templates ----
 import ArchitectIsometric from "./ArchitectIsometric";
 import AviationHUD from "./AviationHUD";
@@ -91,6 +95,7 @@ import TeacherChalk from "./TeacherChalk";
 import TealCleanSplit from "./TealCleanSplit";
 import TradesVolt from "./TradesVolt";
 import UXPortfolioGrid from "./UXPortfolioGrid";
+
 // Batch 12 (12) — Design System kit (1): soft/feminine family + verticals
 import WatercolorBlush from "./WatercolorBlush";
 import BotanicalSage from "./BotanicalSage";
@@ -104,6 +109,7 @@ import OrganicBlobGray from "./OrganicBlobGray";
 import RedAccentClean from "./RedAccentClean";
 import TherapyCalm from "./TherapyCalm";
 import RetailVibrant from "./RetailVibrant";
+
 // Design System kit (2) — 2026-06-06: 30 new vertical/niche templates
 import AgricultureField from "./AgricultureField";
 import ArchPhotoBlue from "./ArchPhotoBlue";
@@ -135,6 +141,7 @@ import SupportHeadset from "./SupportHeadset";
 import TimelineSpineNavy from "./TimelineSpineNavy";
 import TravelCompass from "./TravelCompass";
 import WarehouseOps from "./WarehouseOps";
+
 // Design System kit (3) — 2026-06-10: 40 new vertical/niche templates
 import BakerPastry from "./BakerPastry";
 import BankFinanceOps from "./BankFinanceOps";
@@ -176,6 +183,7 @@ import TranslatorGlobal from "./TranslatorGlobal";
 import UtilityLineworker from "./UtilityLineworker";
 import VetTechPaws from "./VetTechPaws";
 import WarmMinimalDials from "./WarmMinimalDials";
+
 // ---- Design templates request kit (56) — 2026-06-20 ----
 import MidnightCyan from "./MidnightCyan";
 import CoralSunset from "./CoralSunset";
@@ -291,7 +299,9 @@ export type TemplateCategory =
   | "library"
   | "mobile"
   | "nursing"
-  | "photography";
+  | "photography"
+  | "portfolio"
+  | "executive";
 
 export interface TemplateMeta {
   slug: string;
@@ -324,7 +334,7 @@ export function getTagline(t: TemplateMeta): string {
 // ============================================================================
 // TEMPLATES — order = priority for suggestTemplate()
 // ============================================================================
-export const TEMPLATES: TemplateMeta[] = [{
+export const TEMPLATES: TemplateMeta[] = [
   {
     slug: "editorial-arch-blush",
     name: "Editorial Arch Blush",
@@ -380,6 +390,8 @@ export const TEMPLATES: TemplateMeta[] = [{
     suggestedIndustries: ["human-resources", "startups", "operations"],
     themes: ["plum", "sky", "emerald"],
   },
+
+  {
     slug: "ai-ml-architect",
     name: "AI & Machine Learning Architect",
     description: "Neural matrix layout with parameter/latency KPI metrics, model deployment pipeline, and arXiv publication blocks.",
@@ -429,6 +441,7 @@ export const TEMPLATES: TemplateMeta[] = [{
     suggestedIndustries: ["legal", "corporate-law", "litigation"],
     themes: ["wine", "charcoal", "ivory"],
   },
+
   // Next-Gen Dynamic Engine Template
   {
     slug: "devops-pipeline-pro",
