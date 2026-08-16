@@ -5,13 +5,16 @@ import { revalidatePath } from "next/cache";
 import { requireUser } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 import { getStripeClient } from "@/lib/billing/stripe";
-import { isBillingEnabled, priceIdToPlanLabel } from "@/lib/billing/plans";
+import {
+  ACTIVE_STATUSES,
+  isBillingEnabled,
+  priceIdToPlanLabel,
+} from "@/lib/billing/plans";
 
 export type SyncResult =
   | { ok: true; status: string | null }
   | { ok: false; error: string };
 
-const ACTIVE_STATUSES = new Set(["trialing", "active"]);
 const TRIAL_STATUSES = new Set(["trialing"]);
 
 function toDateOrNull(unixSeconds: number | null | undefined): Date | null {

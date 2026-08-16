@@ -12,7 +12,8 @@
     "verify:price": "node scripts/verify-stripe-price.mjs",
     "prebuild": "node scripts/verify-stripe-price.mjs && tsx scripts/verify-paywall.ts && tsx scripts/verify-sanitize.ts",
     "verify:paywall": "tsx scripts/verify-paywall.ts",
-    "verify:sanitize": "tsx scripts/verify-sanitize.ts"
+    "verify:sanitize": "tsx scripts/verify-sanitize.ts",
+    "verify:tiles": "tsx --env-file=.env.local scripts/verify-account-tiles.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.91.1",

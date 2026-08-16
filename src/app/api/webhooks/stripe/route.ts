@@ -3,7 +3,11 @@ import type Stripe from "stripe";
 import { getStripeClient } from "@/lib/billing/stripe";
 import { verifyRouterSignature } from "@/lib/router-auth";
 import { prisma } from "@/lib/db";
-import { isBillingEnabled, priceIdToPlanLabel } from "@/lib/billing/plans";
+import {
+  ACTIVE_STATUSES,
+  isBillingEnabled,
+  priceIdToPlanLabel,
+} from "@/lib/billing/plans";
 import { sendSubscriptionConfirmationEmail } from "@/lib/email";
 
 // Stripe needs the raw request body for signature verification — must
@@ -12,7 +16,6 @@ export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
 
 const TRIAL_STATUSES = new Set(["trialing"]);
-const ACTIVE_STATUSES = new Set(["trialing", "active"]);
 
 function logPrefix(): string {
   return isBillingEnabled() ? "[stripe-webhook]" : "[stripe-webhook DRY-RUN]";

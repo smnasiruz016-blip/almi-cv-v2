@@ -5,7 +5,8 @@ type AdminSection =
   | "comp-accounts"
   | "reviews"
   | "templates"
-  | "accounts";
+  | "accounts"
+  | "costs";
 
 const TABS: {
   key: AdminSection;
@@ -25,6 +26,14 @@ const TABS: {
     key: "accounts",
     href: "/admin/accounts",
     label: "👥 Accounts",
+    founderOnly: true,
+  },
+  // Founder-only: AI spend is the founder's own money, and the page names the
+  // account behind every dollar.
+  {
+    key: "costs",
+    href: "/admin/costs",
+    label: "💸 Costs",
     founderOnly: true,
   },
 ];

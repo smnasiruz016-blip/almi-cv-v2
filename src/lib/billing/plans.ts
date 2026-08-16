@@ -63,7 +63,27 @@ export const PLAN_DISPLAY_NAME: Record<PlanKey, string> = {
   PRO_YEARLY: "Pro Yearly (legacy)",
 };
 
-const ACTIVE_STATUSES = new Set(["trialing", "active"]);
+/**
+ * The Stripe subscription statuses that grant access. THE single definition.
+ *
+ * This lived in four places — here, the admin accounts page (as an array), the
+ * account sync action, and the Stripe webhook — each an independent
+ * `["trialing", "active"]`. They agreed, which is exactly what makes that shape
+ * dangerous: nothing fails when one of them is edited and the others are not,
+ * and the first symptom is an admin screen showing "Pro" for a user the product
+ * refuses to let in.
+ *
+ * Exported as a Set so membership tests stay O(1) and read as `.has(status)`;
+ * spread it (`[...ACTIVE_STATUSES]`) where Prisma wants an array for `in`.
+ *
+ * NOTE FOR ANY SQL THAT USES THIS: status alone is NOT the access rule.
+ * isProActive() also requires `subscriptionCurrentPeriodEnd` in the future, so a
+ * query filtering on status only will over-count. Mirror both clauses.
+ */
+export const ACTIVE_STATUSES: ReadonlySet<string> = new Set([
+  "trialing",
+  "active",
+]);
 
 type ProUserShape = Pick<
   User,
