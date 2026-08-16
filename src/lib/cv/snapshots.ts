@@ -5,6 +5,7 @@ import { Prisma } from "@prisma/client";
 import { prisma } from "@/lib/db";
 import { requireUser } from "@/lib/auth";
 import type { CVData } from "@/lib/cv-types";
+import { sanitizeResumeData } from "@/lib/sanitize-resume";
 
 export type SnapshotResult<T> =
   | { ok: true; data: T }
@@ -35,7 +36,11 @@ export async function saveSnapshot(
     await prisma.resume.update({
       where: { id },
       data: {
-        lastSnapshot: snapshot as unknown as Prisma.InputJsonValue,
+        // security: sanitise at the data boundary — a snapshot is a full
+        // client-supplied CVData, and restoreSnapshot writes it straight back
+        // into `data`, so an unsanitised snapshot is the same hole one step
+        // removed.
+        lastSnapshot: sanitizeResumeData(snapshot) as unknown as Prisma.InputJsonValue,
         lastSnapshotAt: now,
       },
     });
@@ -95,7 +100,11 @@ export async function restoreSnapshot(
     await prisma.resume.update({
       where: { id: row.id },
       data: {
-        data: row.lastSnapshot as unknown as Prisma.InputJsonValue,
+        // security: sanitise at the data boundary. saveSnapshot cleans on the
+        // way in, so this is belt-and-braces for a snapshot written before that
+        // existed — restoring one is a write into `data`, and it should not be
+        // the one path that reintroduces what the rest of the code removed.
+        data: sanitizeResumeData(row.lastSnapshot) as unknown as Prisma.InputJsonValue,
         lastSnapshot: Prisma.DbNull,
         lastSnapshotAt: null,
       },

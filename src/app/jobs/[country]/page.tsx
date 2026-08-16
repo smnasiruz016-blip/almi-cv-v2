@@ -1,3 +1,4 @@
+import { ldJsonSafe } from "@/lib/ldjson";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -107,7 +108,7 @@ export default async function CountryJobsPage({
         : []),
     ],
   };
-  const ldjsonSafe = JSON.stringify(ldjson).replace(/</g, "\\u003c");
+  const ldjsonSafe = ldJsonSafe(ldjson);
 
   return (
     <main>

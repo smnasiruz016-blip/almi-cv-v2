@@ -13,6 +13,8 @@ import { userCanAccessTier } from "@/lib/billing/template-access";
 import { getTemplate, isKnownTemplate } from "@/lib/templates";
 import type { CVData, LanguageCode } from "@/lib/cv-types";
 import { SAMPLE_CV_DATA } from "@/lib/cv-sample";
+// security: sanitise at the data boundary — see src/lib/sanitize-resume.ts
+import { sanitizeResumeData } from "@/lib/sanitize-resume";
 import type { TranslatedCV } from "@/lib/ai/translate-cv-shared";
 import type { Prisma } from "@prisma/client";
 
@@ -133,7 +135,9 @@ export async function createResume(
       templateSlug: template,
       templateTier: tier === "premium" ? "PREMIUM" : "FREE",
       isDraft: true,
-      data: seeded as unknown as Prisma.InputJsonValue,
+      // security: sanitise at the data boundary — `seed` is caller-supplied
+      // (the PNG-import path), so it reaches here without passing the editor.
+      data: sanitizeResumeData(seeded) as unknown as Prisma.InputJsonValue,
     },
   });
   return { ok: true, id: resume.id };
@@ -212,7 +216,9 @@ export async function updateResume(
     data: {
       ...(updates.title !== undefined && { title: updates.title }),
       ...(updates.data !== undefined && {
-        data: updates.data as unknown as Prisma.InputJsonValue,
+        // security: sanitise at the data boundary. The editor sanitises too,
+        // but that is a formatting nicety — a crafted POST never touches it.
+        data: sanitizeResumeData(updates.data) as unknown as Prisma.InputJsonValue,
       }),
       isDraft: false,
     },
@@ -336,7 +342,10 @@ export async function createTranslatedResume(input: {
         templateKey: source.templateKey,
         templateSlug: source.templateSlug,
         isDraft: false,
-        data: mergedData as unknown as Prisma.InputJsonValue,
+        // security: sanitise at the data boundary. This payload is model
+        // output, and the model was shown the source CV — anything injected
+        // there can come back through the translation.
+        data: sanitizeResumeData(mergedData) as unknown as Prisma.InputJsonValue,
       },
     });
 
@@ -365,7 +374,10 @@ export async function duplicateResume(id: string): Promise<string> {
       templateKey: source.templateKey,
       templateSlug: source.templateSlug,
       isDraft: false,
-      data: source.data as unknown as Prisma.InputJsonValue,
+      // security: sanitise at the data boundary. The source row may predate
+      // this fix, so a duplicate is the moment to clean it rather than to
+      // copy the problem forward.
+      data: sanitizeResumeData(source.data) as unknown as Prisma.InputJsonValue,
     },
   });
   revalidatePath("/dashboard");

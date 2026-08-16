@@ -1,3 +1,4 @@
+import { ldJsonSafe } from "@/lib/ldjson";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -181,8 +182,8 @@ export default async function CvGuidePage({
     <>
       <SiteHeader isLoggedIn={isLoggedIn} />
       <main className="bg-cream">
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webApplication) }} />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: ldJsonSafe(webApplication) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: ldJsonSafe(breadcrumbs) }} />
 
         <div className="mx-auto w-full max-w-5xl px-6 py-10 sm:py-14">
           {/* 1. Breadcrumb */}

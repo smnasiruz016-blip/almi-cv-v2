@@ -9,6 +9,7 @@
 // ============================================================================
 
 import React from "react";
+import { sanitizeRichText } from "@/lib/rich-text";
 
 // ============================================================================
 // CVData — canonical shape. Matches your live database / editor types.
@@ -231,7 +232,19 @@ export function RichTextRender({
 }) {
   if (!html || !html.trim()) return null;
   // @ts-ignore — dynamic element
-  return <As className={className} style={style} dangerouslySetInnerHTML={{ __html: html }} />;
+  // security: this component is named RichTextRender and its doc comment said
+  // it rendered "safely", but it passed raw HTML straight through — shadowing
+  // the real sanitiser of the same name in @/lib/rich-text. Ten templates
+  // import THIS one. Delegating to the shared allowlist is the whole fix; the
+  // data boundary (src/lib/sanitize-resume.ts) is the primary defence and this
+  // is the second layer.
+  return (
+    <As
+      className={className}
+      style={style}
+      dangerouslySetInnerHTML={{ __html: sanitizeRichText(html) }}
+    />
+  );
 }
 
 /** Look up a translated section label. Falls back to the English default. */

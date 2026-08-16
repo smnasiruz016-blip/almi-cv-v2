@@ -7,6 +7,7 @@
 // Theme: AlmiCV family cream/coral/plum (NOT black/gold — that's only the global
 // footer chrome). No banned verbs, no "guaranteed", no "recruiter-vetted".
 
+import { ldJsonSafe } from "@/lib/ldjson";
 import Link from "next/link";
 
 const START_FREE_HREF = "/signup";
@@ -202,7 +203,7 @@ export function CvMasterFaq({ extra = [] }: { extra?: ReadonlyArray<FaqItem> }) 
   };
   return (
     <section className="mb-12" aria-labelledby="faq-title">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: ldJsonSafe(jsonLd) }} />
       <h2 id="faq-title" className="text-xl sm:text-2xl font-semibold tracking-tight text-plum mb-5">
         Questions answered
       </h2>
