@@ -127,7 +127,7 @@ export function OriginCvGuide({
                 href={`/signup?country=${c.slug}`}
                 className="inline-block px-7 py-3.5 rounded-md bg-coral text-white text-base font-semibold hover:bg-coral-deep transition-colors"
               >
-                Open Dashboard — Start Free →
+                Open Dashboard — Start 7-day free trial →
               </Link>
               <p className="text-xs text-plum-soft mt-2">7-day free trial, then $12/month.</p>
             </div>
@@ -284,9 +284,9 @@ export function OriginCvGuide({
               href={`/signup?country=${c.slug}`}
               className="inline-block px-8 py-4 rounded-md bg-coral text-white text-lg font-semibold hover:bg-coral-deep transition-colors"
             >
-              Build Your {c.name} CV Free →
+              Start 7-day free trial →
             </Link>
-            <p className="text-xs text-plum-soft mt-3">No credit card required to start.</p>
+            <p className="text-xs text-plum-soft mt-3">7-day free trial, then $12/month.</p>
           </section>
 
           {/* 9. MASTER Shamool pledge line */}

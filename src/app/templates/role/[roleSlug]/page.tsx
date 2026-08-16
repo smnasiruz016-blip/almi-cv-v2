@@ -44,7 +44,7 @@ export async function generateMetadata({
   const { roleSlug } = await params;
   const role = getRoleBySlug(roleSlug);
   if (!role) return { title: "CV templates · AlmiCV" };
-  const title = `${role.name} CV Template — Free & ATS-Ready · AlmiCV`;
+  const title = `${role.name} CV Template — ATS-Ready · AlmiCV`;
   const description = `Start your ${role.name} CV in under a minute with a free, ATS-ready template. AI writing, live ATS score, any language. Pro $12/mo.`;
   return {
     title,
@@ -143,7 +143,7 @@ export default async function RoleHubPage({
                 </p>
                 <p className="mt-1 text-sm text-plum-soft">
                   Browse all {TEMPLATES.length} templates and pick any layout — every one is
-                  ATS-safe, A4-print-ready, and free to start.
+                  ATS-safe, A4-print-ready, and included in the subscription.
                 </p>
                 <Link
                   href="/templates"
