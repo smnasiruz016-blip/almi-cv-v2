@@ -2,11 +2,11 @@ import type { Metadata } from "next";
 import { ScoreClient } from "./score-client";
 
 export const metadata: Metadata = {
-  title: "Resume Score Checker — Free, No Signup · AlmiCV",
+  title: "Resume Score Checker · AlmiCV",
   description:
-    "Get an instant 0-100 resume quality score with personalized improvement tips. Free, no signup required.",
+    "Get an instant 0-100 resume quality score with personalized improvement tips. Sign in to run it — your 7-day free trial includes AI scoring, then $12/month, cancel anytime.",
   openGraph: {
-    title: "Free Resume Score Checker · AlmiCV",
+    title: "Resume Score Checker · AlmiCV",
     description:
       "Paste your resume, get an instant 0-100 score across keywords, action verbs, format, and length — plus one actionable tip.",
     type: "website",
@@ -20,7 +20,7 @@ export default function ResumeScorePage() {
       <section className="mx-auto w-full max-w-2xl px-6 pb-20 pt-14 md:pt-20">
         <header className="text-center">
           <span className="inline-flex items-center gap-1.5 rounded-pill bg-coral-soft/50 px-3 py-1 text-xs font-medium text-coral-deep">
-            ✨ Free · No signup
+            ✨ Included in your 7-day free trial
           </span>
           <h1 className="mt-4 text-4xl font-semibold tracking-tight text-plum md:text-5xl">
             Resume Score Checker

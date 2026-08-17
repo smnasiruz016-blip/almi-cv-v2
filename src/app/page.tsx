@@ -25,7 +25,7 @@ export const revalidate = 3600;
 // so this string fully replaces it — no double-brand suffix.
 const HOME_TITLE = "AI Resume Builder with Real ATS Score | AlmiCV";
 const HOME_DESC =
-  "Free AI resume builder with a real ATS score. Beat the filter with the right keywords and templates — for $12/mo, no download traps. Build your CV now.";
+  "AI resume builder with a real ATS score. Beat the filter with the right keywords and templates — 7-day free trial, then $12/mo, no download traps. Build your CV now.";
 
 export const metadata: Metadata = {
   title: HOME_TITLE,

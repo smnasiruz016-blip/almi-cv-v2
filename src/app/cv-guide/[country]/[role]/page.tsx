@@ -364,11 +364,12 @@ export default async function CvGuidePage({
           {/* 9. ATS */}
           <section className="mb-12 rounded-xl border border-peach bg-white p-6 sm:p-8" aria-labelledby="ats-title">
             <h2 id="ats-title" className="text-xl sm:text-2xl font-semibold tracking-tight text-plum mb-3">
-              Free Resume Score Checker for {r.name}
+              Resume Score Checker for {r.name}
             </h2>
             <p className="text-sm sm:text-base text-plum-soft leading-relaxed max-w-2xl mb-4">
               Paste your resume, get an instant 0-100 score with personalized improvement tips
-              across keywords, action verbs, format, and length. Free, no signup.
+              across keywords, action verbs, format, and length. Sign in to run it — your
+              7-day free trial includes AI scoring, then $12/month, cancel anytime.
             </p>
             <Link href="/resume-score" className="inline-block px-5 py-2.5 rounded-md border border-coral text-coral-deep font-semibold hover:bg-coral-soft/30 transition-colors">
               Check your resume →
