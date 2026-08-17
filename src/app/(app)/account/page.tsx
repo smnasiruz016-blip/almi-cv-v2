@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { requireUser } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 import {
+  getAccessLevel,
   getCompProDaysRemaining,
   getUserPlan,
   isBillingEnabled,
@@ -9,6 +10,7 @@ import {
   isProActive,
   PLAN_DISPLAY_NAME,
   PLANS,
+  TRIAL_AI_CALL_LIMIT,
 } from "@/lib/billing/plans";
 import { AccountClient } from "./account-client";
 import { syncSubscriptionStatusAction } from "./actions";
@@ -50,10 +52,20 @@ export default async function AccountPage({
   const billingEnabled = isBillingEnabled();
 
   const limits = PLANS[plan];
+
+  // AI usage is the ONE label that cannot be read off `plan`. getUserPlan maps
+  // trialing and active alike to PRO_MONTHLY, whose aiCallsPerMonth is
+  // Infinity — so a plan-based label told trialling users "Unlimited" while the
+  // gate was actually allowing them 5 calls. Read the access level instead,
+  // from the same function requireAIAccess() uses, so the number a user sees
+  // and the number they get come from one source.
+  const accessLevel = dbUser ? getAccessLevel(dbUser) : "none";
   const aiUsageLabel =
-    plan === "FREE"
-      ? `${dbUser?.aiCallsThisMonth ?? 0} of ${limits.aiCallsPerMonth} this month`
-      : "Unlimited";
+    accessLevel === "paid"
+      ? "Unlimited"
+      : accessLevel === "trialing"
+        ? `${dbUser?.aiCallsThisMonth ?? 0} of ${TRIAL_AI_CALL_LIMIT} during your trial — unlimited once your subscription starts`
+        : "Not included — start your 7-day free trial";
 
   return (
     <div className="mx-auto max-w-3xl space-y-8">
