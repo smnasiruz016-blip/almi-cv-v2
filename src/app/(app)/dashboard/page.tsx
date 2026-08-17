@@ -16,7 +16,7 @@ import { LimitWatcher } from "@/components/billing/LimitWatcher";
 import { ReviewCard } from "@/components/reviews/ReviewCard";
 import {
   getUserPlan,
-  isProActive,
+  hasFullAccess,
   PLAN_DISPLAY_NAME,
 } from "@/lib/billing/plans";
 import {
@@ -24,6 +24,7 @@ import {
   fetchJobSitesForCountry,
   type JobSite,
 } from "@/lib/job-sites";
+import { isOwner } from "@/lib/owner";
 import type { CVData } from "@/lib/cv-types";
 
 const ISO_TO_NAME: Record<string, string> = {
@@ -50,7 +51,10 @@ function relativeTime(date: Date) {
 export default async function DashboardPage() {
   const user = await requireUser();
   const resumes = await listResumes();
-  const isPro = isProActive(user);
+  // GATE: drives the plan pill and the "Upgrade to Pro" CTA. hasFullAccess, so
+  // the owner is not shown an upgrade prompt for their own product.
+  const isPro = hasFullAccess(user);
+  const owner = isOwner(user.email);
   const planLabel = PLAN_DISPLAY_NAME[getUserPlan(user)];
 
   const mostRecentLocation = (resumes[0]?.data as CVData | undefined)?.basics
@@ -78,7 +82,7 @@ export default async function DashboardPage() {
             }`}
           >
             <Sparkles className="h-3.5 w-3.5" />
-            {isPro ? "Pro plan" : "No active plan"}
+            {owner ? "Owner — full access" : isPro ? "Pro plan" : "No active plan"}
           </span>
           {!isPro && (
             <Link

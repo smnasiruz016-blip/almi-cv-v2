@@ -3,7 +3,7 @@ import { prisma } from "@/lib/db";
 import { requireUser } from "@/lib/auth";
 import { getResume } from "@/lib/resume-actions";
 import { getSnapshot } from "@/lib/cv/snapshots";
-import { isProActive } from "@/lib/billing/plans";
+import { hasFullAccess } from "@/lib/billing/plans";
 import { userCanAccessTemplate } from "@/lib/billing/template-access";
 import { EditorClient } from "./editor-client";
 import { SAMPLE_CV_DATA, isBlankCV } from "@/lib/cv-sample";
@@ -59,7 +59,9 @@ export default async function EditCVPage({
       initialData={resumeData}
       templateSlug={slug}
       hasSnapshot={hasSnapshot}
-      isPro={isProActive(user)}
+      // GATE: drives the "Upgrade to Pro" prompt in the editor, so the owner
+      // must read true or they are nagged to buy their own product.
+      isPro={hasFullAccess(user)}
     />
   );
 }
