@@ -107,6 +107,46 @@ export function isProActive(user: ProUserShape): boolean {
 }
 
 /**
+ * How many AI calls a user gets during the 7-day trial. A "taste", not a tier:
+ * the trial grants the FULL product for building, editing and downloading CVs
+ * (isProActive stays true, so cvLimit and templates are untouched) — only AI
+ * narrows, because AI is the one feature with a per-call vendor cost.
+ */
+export const TRIAL_AI_CALL_LIMIT = 5;
+
+export type AccessLevel = "none" | "trialing" | "paid";
+
+/**
+ * Billing state as the AI gate needs it: the same question isProActive() asks,
+ * but with `trialing` and `active` told apart instead of merged.
+ *
+ * Deliberately built ON TOP of isProActive() rather than beside it. isProActive
+ * already owns the period-end rule and the comp short-circuit; re-deriving
+ * either here would create a second date rule that drifts the first time one is
+ * edited. So this function contributes exactly one new fact — which side of the
+ * trial/paid line an already-active user is on — and borrows everything else.
+ *
+ * Consequence worth naming: a comped user reads "paid" and gets unlimited AI.
+ * That is intended (comps are for beta testers and support), but it does mean a
+ * comp grant is a real cost lever, not just a UI courtesy.
+ */
+export function getAccessLevel(user: ProUserShape): AccessLevel {
+  // Comp first, matching isProActive's own ordering: a comped user is "paid"
+  // even with no Stripe subscription at all (subscriptionStatus === null).
+  if (isComped(user)) return "paid";
+
+  // Not active by the shared rule -> no AI. This single call covers all three
+  // "none" cases: no status, a non-active status (past_due/canceled/incomplete),
+  // and an expired or missing period end — including an "active" status whose
+  // period has run out.
+  if (!isProActive(user)) return "none";
+
+  // isProActive has now proved: status is in ACTIVE_STATUSES and the period end
+  // is in the future. Only the trial/paid split is left to decide.
+  return user.subscriptionStatus === "trialing" ? "trialing" : "paid";
+}
+
+/**
  * True when the user is on an active comp grant (compProUntil in the future).
  * Use this in the UI to distinguish comp users from real subscribers.
  */

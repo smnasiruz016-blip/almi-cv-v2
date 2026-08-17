@@ -10,9 +10,10 @@
     "lint": "eslint",
     "postinstall": "prisma generate",
     "verify:price": "node scripts/verify-stripe-price.mjs",
-    "prebuild": "node scripts/verify-stripe-price.mjs && tsx scripts/verify-paywall.ts && tsx scripts/verify-sanitize.ts",
+    "prebuild": "node scripts/verify-stripe-price.mjs && tsx scripts/verify-paywall.ts && tsx scripts/verify-sanitize.ts && tsx scripts/verify-ai-gate.ts",
     "verify:paywall": "tsx scripts/verify-paywall.ts",
     "verify:sanitize": "tsx scripts/verify-sanitize.ts",
+    "verify:ai-gate": "tsx scripts/verify-ai-gate.ts",
     "verify:tiles": "tsx --env-file=.env.local scripts/verify-account-tiles.ts"
   },
   "dependencies": {
