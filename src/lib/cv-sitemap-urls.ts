@@ -2,7 +2,11 @@ import type { MetadataRoute } from "next";
 import { COUNTRY_LANDING } from "@/lib/country-landing";
 import { COUNTRIES_SERVED } from "@/lib/countries";
 import { JOB_ROLES } from "@/lib/roles";
-import { CV_ORIGINS, CV_ORIGIN_DESTINATIONS } from "@/lib/cv-origin-localization";
+import {
+  CV_ORIGINS,
+  CV_ORIGIN_DESTINATIONS,
+  isCvOriginIndexable,
+} from "@/lib/cv-origin-localization";
 import {
   ROLE_CV_CONTENT_SLUGS,
   CV_GRID_COUNTRIES,
@@ -27,10 +31,10 @@ const STATIC_ROUTES: ReadonlyArray<{ path: string; cf: MetadataRoute.Sitemap[num
 
 // Shared by the chunk route + the index handler.
 //
-// WHAT "GATE-ENFORCED" MEANS HERE, precisely. Only the role×country loop is
-// gated, by isRoleCountryIndexable(). The other surfaces — static, role hubs,
-// /jobs/[country], /cv-guide/[country] hubs, and origin×destination — are
-// emitted unconditionally and are NOT filtered by any gate.
+// WHICH LOOPS ARE GATED, precisely — keep this list correct or delete it.
+//   GATED:   role×country     by isRoleCountryIndexable()
+//   GATED:   origin×dest      by isCvOriginIndexable()
+//   UNGATED: static, role hubs, /jobs/[country], /cv-guide/[country] hubs
 //
 // This comment used to read "only index-worthy URLs (gate-enforced)" while every
 // loop was unconditional, including the ~99k role×country grid. That was not a
@@ -51,8 +55,15 @@ export function buildAllCvUrls(): MetadataRoute.Sitemap {
   for (const c of COUNTRIES_SERVED) out.push({ url: `${SITE_ORIGIN}/cv-guide/${c.slug}`, lastModified: now, changeFrequency: "weekly", priority: 0.8 });
   // NOTE: the free-cv-maker / cv-builder / ai-cv-builder advertise pages moved to
   // the hub (world.almiworld.com) — they are NOT served from this subdomain.
-  // Origin × destination CV guides — now the full 191-origin FROM-set.
-  for (const dest of CV_ORIGIN_DESTINATIONS) for (const o of CV_ORIGINS) out.push({ url: `${SITE_ORIGIN}/cv-guide/${dest}/from-${o.slug}`, lastModified: now, changeFrequency: "weekly", priority: 0.7 });
+  // Origin × destination CV guides — GATED by isCvOriginIndexable, which now
+  // also requires a BUILDER for that origin. Only 10 of the 191 origins have
+  // written content; the rest 404 (previously they 500'd, and every one of them
+  // was being submitted here). Submitting a URL that 404s is a crawl budget
+  // spent on nothing, so the sitemap and the gate must agree.
+  for (const dest of CV_ORIGIN_DESTINATIONS)
+    for (const o of CV_ORIGINS)
+      if (isCvOriginIndexable(dest, o.slug))
+        out.push({ url: `${SITE_ORIGIN}/cv-guide/${dest}/from-${o.slug}`, lastModified: now, changeFrequency: "weekly", priority: 0.7 });
   // Role × country grid — GATED, and the gate is the whole point of this loop.
   // A cell ships only where the role has sourced CV content AND the country has
   // a hand-verified convention (COUNTRY_OVERRIDES). Unverified countries render

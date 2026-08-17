@@ -38,11 +38,25 @@ export { getLocalizedOrigin };
 // The full 191-origin FROM set — 10 base shared origins (almi-data) + 181 sourced
 // localized (origins-extra.ts, ported identical to TOEFL/IELTS/PTE). Identity
 // (slug/name/flag) here; the localized essentials come from getLocalizedOrigin.
-export const CV_ORIGINS: CvOrigin[] = [...SHARED_ORIGINS, ...EXTRA_ORIGINS].map((o) => ({
-  slug: o.slug,
-  name: o.name,
-  flag: o.flag,
-}));
+// DEDUPED BY SLUG, first occurrence wins (shared list before extras).
+//
+// The two source lists overlap — `ghana` is in both — and a bare spread kept
+// both copies: 192 entries for 191 countries. Nothing crashed; the sitemap
+// simply emitted /cv-guide/{dest}/from-ghana twice for all 10 destinations,
+// which is exactly the 10 duplicate URLs found in the live sitemap.
+//
+// Deduping HERE rather than at the sitemap loop is deliberate: CV_ORIGINS is
+// consumed by the page, the gate and the sitemap, so a fix in one consumer
+// would leave the others still seeing a doubled list.
+export const CV_ORIGINS: CvOrigin[] = (() => {
+  const bySlug = new Map<string, CvOrigin>();
+  for (const o of [...SHARED_ORIGINS, ...EXTRA_ORIGINS]) {
+    if (!bySlug.has(o.slug)) {
+      bySlug.set(o.slug, { slug: o.slug, name: o.name, flag: o.flag });
+    }
+  }
+  return [...bySlug.values()];
+})();
 
 // v1 destination markets these origins actually send CVs to (anglophone + Gulf
 // + Germany). Origin pages render + index only for these; other served
@@ -360,7 +374,17 @@ export function findCvOrigin(slug: string): CvOrigin | undefined {
 export function isCvOriginIndexable(destSlug: string, originSlug: string): boolean {
   return (
     (CV_ORIGIN_DESTINATIONS as readonly string[]).includes(destSlug) &&
-    ORIGIN_BY_SLUG.has(originSlug)
+    ORIGIN_BY_SLUG.has(originSlug) &&
+    // A BUILDER MUST EXIST. Without this clause the gate said yes for all 192
+    // origins while BUILDERS had 10, so getCvOriginLocalization() called
+    // undefined(...) and 1,810 live URLs returned HTTP 500 — all of them
+    // submitted in the sitemap. The comment above already promised "everything
+    // else 404s"; this is the line that makes that true.
+    //
+    // Being in ORIGIN_BY_SLUG means "we know this country". Having a builder
+    // means "we have written its content". Only the second one can be checked
+    // against the thing that actually renders, which is why it belongs here.
+    Object.prototype.hasOwnProperty.call(BUILDERS, originSlug)
   );
 }
 
