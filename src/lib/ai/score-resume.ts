@@ -4,6 +4,8 @@ import { getAnthropicClient } from "@/lib/ai/anthropic-client";
 import { z } from "zod";
 import { headers } from "next/headers";
 import { MODELS } from "@/lib/ai/models";
+import { getCurrentUser } from "@/lib/auth";
+import { requireAIAccess } from "@/lib/ai/access";
 
 const RATE_LIMIT_PER_DAY = 30;
 const DAY_MS = 24 * 60 * 60 * 1000;
@@ -31,8 +33,30 @@ export type ScoreBreakdown = {
 
 export type ScoreResumeResult =
   | { ok: true; score: ScoreBreakdown }
-  | { ok: false; error: string };
+  | {
+      ok: false;
+      error: string;
+      /** Lets the client show a sign-in link vs an upgrade link vs a plain
+       *  error, instead of rendering every refusal as a failure. */
+      // Mirrors AIAccessResult["code"] plus AUTH_REQUIRED. AI_LIMIT_REACHED is
+      // the retired free-tier code — kept so this union stays a superset of what
+      // the gate can actually return, rather than casting the difference away.
+      code?:
+        | "AUTH_REQUIRED"
+        | "PRO_REQUIRED"
+        | "TRIAL_AI_LIMIT_REACHED"
+        | "AI_LIMIT_REACHED";
+    };
 
+// NOT LOAD-BEARING — defence in depth only, deliberately kept after the real
+// gate rather than instead of it.
+//
+// This Map lives in module scope, which on serverless means PER INSTANCE: it
+// is empty on every cold start and is not shared between concurrent instances
+// or regions. A caller who spreads requests across instances is limited by
+// nothing here. It was the ONLY guard on this action until the paywall gate
+// below was added, which is exactly why it read as protection and was not.
+// Keep it as a cheap brake on a single hot instance; never rely on it.
 const rateLimitMap = new Map<string, number[]>();
 
 function checkIpRateLimit(ip: string): boolean {
@@ -157,6 +181,26 @@ export async function scoreResume(input: {
       return {
         ok: false,
         error: "Daily limit reached — try again tomorrow",
+      };
+    }
+
+    // THE PAYWALL GATE. /resume-score is on the same terms as every other AI
+    // feature: sign in, 7-day trial with 5 AI credits, then $12/month.
+    //
+    // It runs LAST of the free checks and immediately before the model call, on
+    // purpose: requireAIAccess SPENDS a trial credit, so it must not run for a
+    // request that length validation or the IP brake would have rejected anyway.
+    //
+    // getCurrentUser (nullable) rather than requireUser (throws): this action is
+    // reachable from a public page, and requireAIAccess(null) already returns
+    // the "Please sign in" refusal. No new auth path is introduced.
+    const user = await getCurrentUser();
+    const access = await requireAIAccess(user?.id ?? null);
+    if (!access.ok) {
+      return {
+        ok: false,
+        error: access.error,
+        code: access.reason === "auth" ? "AUTH_REQUIRED" : access.code,
       };
     }
 

@@ -120,6 +120,9 @@ export function ScoreClient() {
   const [text, setText] = useState("");
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState<string | null>(null);
+  // Which CTA the refusal deserves: a signed-out visitor needs a sign-in link,
+  // an unsubscribed one needs the trial, an exhausted trial needs neither.
+  const [gate, setGate] = useState<"auth" | "upgrade" | null>(null);
   const [score, setScore] = useState<ScoreBreakdown | null>(null);
 
   const trimmedLen = text.trim().length;
@@ -134,9 +137,17 @@ export function ScoreClient() {
       const result = await scoreResume({ resumeText: text.trim() });
       if (!result.ok) {
         setError(result.error || "Something went wrong — try again");
+        setGate(
+          result.code === "AUTH_REQUIRED"
+            ? "auth"
+            : result.code === "PRO_REQUIRED"
+              ? "upgrade"
+              : null,
+        );
         setStatus("idle");
         return;
       }
+      setGate(null);
       setScore(result.score);
       setStatus("result");
     } catch (err) {
@@ -150,6 +161,7 @@ export function ScoreClient() {
     setText("");
     setScore(null);
     setError(null);
+    setGate(null);
     setStatus("idle");
   };
 
@@ -257,7 +269,27 @@ export function ScoreClient() {
           role="alert"
           className="rounded-xl border border-coral/30 bg-cream-soft px-4 py-3 text-sm text-coral-deep"
         >
-          {error}
+          <p>{error}</p>
+          {gate === "auth" && (
+            <p className="mt-2">
+              <Link href="/login?next=/resume-score" className="font-semibold underline">
+                Sign in
+              </Link>{" "}
+              or{" "}
+              <Link href="/signup" className="font-semibold underline">
+                start your 7-day free trial
+              </Link>{" "}
+              — then $12/month, cancel anytime.
+            </p>
+          )}
+          {gate === "upgrade" && (
+            <p className="mt-2">
+              <Link href="/signup" className="font-semibold underline">
+                Start your 7-day free trial
+              </Link>{" "}
+              — then $12/month, cancel anytime.
+            </p>
+          )}
         </div>
       )}
 
