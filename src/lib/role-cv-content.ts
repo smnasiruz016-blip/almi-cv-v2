@@ -6,6 +6,9 @@
 // self-canonical + indexable only once it has an entry here (real-data-or-noindex).
 
 import { COUNTRIES_SERVED } from "@/lib/countries";
+// One definition of "which countries are hand-verified" — imported, never
+// copied. cv-conventions.ts does not import this module, so there is no cycle.
+import { hasVerifiedConvention } from "@/lib/cv-conventions";
 
 export type RoleCvContent = {
   /** What a [role] CV should include — the sections. */
@@ -6925,9 +6928,34 @@ export function isServedCvCountry(slug: string): boolean {
   return SERVED_SET.has(slug);
 }
 
-/** Grid gate: a role×country page is self-canonical + indexable where the role
- *  has sourced CV content AND the country is one we serve (all 193). The country
- *  side never blocks a real country — the role content is the substance gate. */
+/**
+ * Grid gate: a role×country page is self-canonical + indexable only where the
+ * role has sourced CV content AND the country has a HAND-VERIFIED convention.
+ *
+ * THE COUNTRY SIDE NOW BLOCKS. It used to be `isServedCvCountry()`, which was a
+ * tautology: the sitemap iterated CV_GRID_COUNTRIES and then asked whether each
+ * country was in CV_GRID_COUNTRIES, so the gate could never reject a single
+ * cell. A gate that cannot say no is documentation, not a gate.
+ *
+ * What changed is the substance test. For a country with no entry in
+ * COUNTRY_OVERRIDES, buildConventions() string-swaps the country name into its
+ * REGION's template — so every unverified sibling in a region renders the same
+ * advice with a different noun. Those cells are near-duplicates by construction,
+ * and shipping ~84k of them to Google is a cost with no corresponding content.
+ *
+ * THE PROMOTION PATH IS DATA, NOT CODE. Add a country to COUNTRY_OVERRIDES in
+ * cv-conventions.ts with real sourced conventions and every role×that-country
+ * page becomes indexable on the next deploy — no change here, no second list to
+ * keep in step. `hasVerifiedConvention` is imported rather than re-derived for
+ * exactly that reason: "which countries are verified" must have one definition.
+ *
+ * De-indexing only. These pages still render — see cv-guide/[country]/[role],
+ * where this flag drives robots + canonical, never a 404.
+ */
 export function isRoleCountryIndexable(roleSlug: string, countrySlug: string): boolean {
-  return hasRoleCvContent(roleSlug) && isServedCvCountry(countrySlug);
+  return (
+    hasRoleCvContent(roleSlug) &&
+    isServedCvCountry(countrySlug) &&
+    hasVerifiedConvention(countrySlug)
+  );
 }
