@@ -22,7 +22,7 @@
 //
 // Run directly: npx tsx scripts/verify-ai-gate.ts
 
-import { readFileSync } from "node:fs";
+import { readFileSync, readdirSync } from "node:fs";
 import {
   getAccessLevel,
   hasFullAccess,
@@ -289,6 +289,87 @@ check(
 check(
   "no hardcoded numeric limit in the query (must use the constant)",
   !/aiCallsThisMonth:\s*\{\s*lt:\s*\d+\s*\}/.test(src),
+);
+
+
+// --------------- 10. EVERY model-caller is gated (the structural check) ------
+//
+// WHY THIS EXISTS. /api/ai and /resume-score were both ungated paths to a paid
+// model, and both were found BY ACCIDENT, one at a time, weeks apart. A third
+// would have been found the same way. Enumerating callers turns "did anyone
+// remember to gate it" from a habit into a build failure.
+//
+// It walks src/ with fs only — no DB, no network — so it stays safe in prebuild.
+console.log("\n10. every module that calls a model also imports the access gate");
+
+const SRC_ROOT = new URL("../src/", import.meta.url);
+
+// Modules that legitimately touch the model API WITHOUT importing the gate.
+// Anything not listed here MUST import it, or the build fails.
+const GATE_EXEMPT: Record<string, string> = {
+  "lib/ai/anthropic-client.ts":
+    "the shared client itself — it is what gated callers call; gating it here would be circular",
+};
+
+// A file "calls a model" if it does any of these.
+const CALLS_MODEL = [
+  /ANTHROPIC_API_KEY/,
+  /api\.anthropic\.com/,
+  /getAnthropicClient\s*\(/,
+  /new\s+Anthropic\s*\(/,
+  /@anthropic-ai\/sdk/,
+];
+// Must be a REAL import statement from the gate module, not merely the string
+// appearing somewhere. The first version of this matched /require(AIAccess)/
+// anywhere in the file, so deleting the import left the call site and the
+// surrounding comments still matching and the check stayed green through the
+// sabotage. A detector that a comment can satisfy is not a detector.
+const IMPORTS_GATE =
+  /import\s*\{[^}]*require(?:AIAccess|ProAccess)[^}]*\}\s*from\s*["']@\/lib\/ai\/access["']/;
+
+function walk(dir: URL, rel = ""): string[] {
+  const out: string[] = [];
+  for (const entry of readdirSync(dir, { withFileTypes: true })) {
+    if (entry.name === "node_modules" || entry.name.startsWith(".")) continue;
+    const childRel = rel ? `${rel}/${entry.name}` : entry.name;
+    if (entry.isDirectory()) {
+      out.push(...walk(new URL(`${entry.name}/`, dir), childRel));
+    } else if (/\.(ts|tsx)$/.test(entry.name)) {
+      out.push(childRel);
+    }
+  }
+  return out;
+}
+
+const allFiles = walk(SRC_ROOT);
+const modelCallers: string[] = [];
+const ungated: string[] = [];
+
+for (const rel of allFiles) {
+  const body = readFileSync(new URL(rel, SRC_ROOT), "utf8");
+  if (!CALLS_MODEL.some((re) => re.test(body))) continue;
+  modelCallers.push(rel);
+  if (rel in GATE_EXEMPT) continue;
+  if (!IMPORTS_GATE.test(body)) ungated.push(rel);
+}
+
+console.log(`     scanned ${allFiles.length} files · ${modelCallers.length} touch the model API`);
+for (const rel of modelCallers) {
+  const why = GATE_EXEMPT[rel];
+  console.log(`       ${why ? "exempt " : "gated  "} ${rel}${why ? `  — ${why}` : ""}`);
+}
+check(
+  "every model-calling module imports the access gate (or is an explained exemption)",
+  ungated.length === 0,
+  ungated.length ? `UNGATED: ${ungated.join(", ")}` : "",
+);
+// An exemption for a file that no longer exists is a stale excuse — fail on it
+// so the allowlist cannot quietly outlive its reason.
+const staleExempt = Object.keys(GATE_EXEMPT).filter((f) => !modelCallers.includes(f));
+check(
+  "no stale entries in the exemption allowlist",
+  staleExempt.length === 0,
+  staleExempt.length ? `stale: ${staleExempt.join(", ")}` : "",
 );
 
 // ------------------------------------------------------------------ result --

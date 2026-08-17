@@ -4,7 +4,8 @@ import { STRIPE_PRICE_MONTHLY } from "@/lib/billing/plans";
 
 // Read-only billing self-check. Exposes NO secret values — only key MODE
 // (live/test), boolean validity, and price IDs. Any value that is not a clean
-// `price_…` id is redacted, so a mis-pasted secret can never be echoed.
+// The price id is MASKED and a non-price value is dropped entirely, so neither
+// the live billing config nor a mis-pasted secret can be echoed.
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
@@ -15,8 +16,19 @@ function keyMode(k: string): string {
   return "unknown";
 }
 
-const safeId = (v: string): string =>
-  /^price_[A-Za-z0-9]+$/.test(v) ? v : "REDACTED_NON_PRICE_VALUE";
+// Two separate jobs, and the old one-liner only did the first:
+//   1. a value that is NOT a price id (a mis-pasted sk_live_… secret) is
+//      replaced wholesale — it must never be echoed by an unauthenticated route
+//   2. a value that IS a price id is MASKED. It was previously returned in full
+//      while the file's own comment claimed it was redacted. A Stripe price id
+//      is not itself a secret — it appears in client-side checkout — but a
+//      public endpoint should not be a free directory of live billing config,
+//      and a comment that promises redaction must be true.
+// Enough of the id survives to identify which price is configured.
+const safeId = (v: string): string => {
+  if (!/^price_[A-Za-z0-9]+$/.test(v)) return "REDACTED_NON_PRICE_VALUE";
+  return v.length <= 12 ? "price_…" : `${v.slice(0, 8)}…${v.slice(-4)}`;
+};
 
 export async function GET() {
   const key = process.env.STRIPE_SECRET_KEY ?? "";
