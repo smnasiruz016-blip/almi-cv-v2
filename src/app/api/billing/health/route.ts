@@ -2,10 +2,14 @@ import { NextResponse } from "next/server";
 import Stripe from "stripe";
 import { STRIPE_PRICE_MONTHLY } from "@/lib/billing/plans";
 
-// Read-only billing self-check. Exposes NO secret values — only key MODE
-// (live/test), boolean validity, and price IDs. Any value that is not a clean
-// The price id is MASKED and a non-price value is dropped entirely, so neither
-// the live billing config nor a mis-pasted secret can be echoed.
+// Read-only billing self-check, OWNER-ONLY. Guarded by ADMIN_API_SECRET
+// (header x-admin-secret) — FAIL-CLOSED: if the secret is unset it always 401s,
+// so it is never open by default.
+//
+// Exposes no secret values even to an authorised caller: only key MODE
+// (live/test) and booleans. The price id is MASKED and any value that is not a
+// clean `price_…` id is dropped entirely, so neither the live billing config
+// nor a mis-pasted secret can be echoed.
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
@@ -30,7 +34,22 @@ const safeId = (v: string): string => {
   return v.length <= 12 ? "price_…" : `${v.slice(0, 8)}…${v.slice(-4)}`;
 };
 
-export async function GET() {
+export async function GET(req: Request) {
+  // Same fail-closed guard as /api/admin/stats: if ADMIN_API_SECRET is unset
+  // this always 401s, so the endpoint is never open by default. Deliberately
+  // the SAME scheme rather than a second one — two auth schemes is how one of
+  // them ends up weaker.
+  //
+  // Gated because nothing automated consumes it: AlmiMonitor polls /api/status
+  // and /api/pulse/family, not this. It is documented in almi-billing-router as
+  // manual verification tooling, and that use survives — the founder has the
+  // secret. What does not survive is an unauthenticated endpoint confirming to
+  // anyone that the live Stripe key is present and valid.
+  const secret = process.env.ADMIN_API_SECRET;
+  if (!secret || req.headers.get("x-admin-secret") !== secret) {
+    return NextResponse.json({ error: "unauthorized" }, { status: 401 });
+  }
+
   const key = process.env.STRIPE_SECRET_KEY ?? "";
   const mode = keyMode(key);
   // Validate the price checkout ACTUALLY uses. There is now exactly one:
