@@ -1,5 +1,11 @@
 import type { User } from "@prisma/client";
-import { getUserPlan, isProActive, PLANS, type PlanKey } from "./plans";
+import {
+  getUserPlan,
+  hasFullAccess,
+  PLANS,
+  type AccessUserShape,
+  type PlanKey,
+} from "./plans";
 import { getTemplate } from "@/lib/templates";
 
 /**
@@ -34,9 +40,14 @@ export function userCanAccessTemplate(
     | "subscriptionCurrentPeriodEnd"
     | "subscriptionPlan"
     | "compProUntil"
+    | "email"
   >,
   slug: string,
 ): boolean {
+  // GATE, so it uses hasFullAccess: the owner sees every template tier with no
+  // subscription. Checked before getUserPlan because getUserPlan is built on
+  // isProActive, which deliberately does not know about owners.
+  if (hasFullAccess(user)) return true;
   const plan = getUserPlan(user);
   const template = getTemplate(slug);
   return userCanAccessTier(plan, template.tier);
@@ -58,7 +69,14 @@ export function planAndProFor(
     | "subscriptionCurrentPeriodEnd"
     | "subscriptionPlan"
     | "compProUntil"
+    | "email"
   >,
 ): { plan: PlanKey; isPro: boolean } {
-  return { plan: getUserPlan(user), isPro: isProActive(user) };
+  // isPro here drives paywall logic per this module's docstring, so it is a
+  // GATE and uses hasFullAccess. `plan` stays getUserPlan: it is a label, and
+  // labelling the owner "Pro" is exactly the lie TASK 4 removes.
+  return { plan: getUserPlan(user), isPro: hasFullAccess(user) };
 }
+
+/** Re-exported so gate call sites can name the shape they need to select. */
+export type { AccessUserShape };

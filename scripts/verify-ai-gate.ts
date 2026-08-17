@@ -25,6 +25,7 @@
 import { readFileSync } from "node:fs";
 import {
   getAccessLevel,
+  hasFullAccess,
   TRIAL_AI_CALL_LIMIT,
   type AccessLevel,
 } from "../src/lib/billing/plans";
@@ -49,11 +50,26 @@ const user = (
   status: string | null,
   periodEnd: Date | null,
   comp: Date | null = null,
+  email = "someone@example.com",
 ) => ({
   subscriptionStatus: status,
   subscriptionCurrentPeriodEnd: periodEnd,
   compProUntil: comp,
+  email,
 });
+
+// Owner list is INJECTED, never read from process.env. If this script depended
+// on OWNER_EMAILS being set, it would pass or fail for reasons unrelated to the
+// code — and in prebuild it would be unset, so the owner assertions would
+// silently test nothing.
+const OWNER_EMAIL = "owner@example.com";
+const stubIsOwner = (email: string | null | undefined): boolean =>
+  (email ?? "").trim().toLowerCase() === OWNER_EMAIL;
+const owner = (
+  status: string | null = null,
+  periodEnd: Date | null = null,
+  comp: Date | null = null,
+) => user(status, periodEnd, comp, OWNER_EMAIL);
 
 // ------------------------------------------------------- 1. level mapping ---
 console.log("\n1. getAccessLevel maps billing state to an access level");
@@ -205,6 +221,50 @@ check(
   `exhausted message states the real limit (${TRIAL_AI_CALL_LIMIT})`,
   TRIAL_EXHAUSTED_MESSAGE.includes(String(TRIAL_AI_CALL_LIMIT)),
   TRIAL_EXHAUSTED_MESSAGE,
+);
+
+// ------------------------------------------------------ 9. owner access -----
+console.log("\n9. the owner has complete access, with no subscription of any kind");
+for (const [label, u] of [
+  ["owner + NO subscription at all", owner()],
+  ["owner + trialing (owner wins over the 5-call cap)", owner("trialing", future)],
+  ["owner + EXPIRED subscription", owner("active", past)],
+  ["owner + canceled", owner("canceled", past)],
+  ["owner + expired comp", owner(null, null, past)],
+] as const) {
+  check(`${label} -> "paid"`, getAccessLevel(u, stubIsOwner) === "paid", getAccessLevel(u, stubIsOwner));
+  check(`${label} -> hasFullAccess`, hasFullAccess(u, stubIsOwner));
+}
+
+// Unlimited means the counter is never consulted. decideAIAccess is handed NO
+// claim object for a paid level, so if the owner path ever started metering,
+// this would stop returning unlimited.
+const ownerDecision = decideAIAccess({
+  billingEnabled: true,
+  level: getAccessLevel(owner(), stubIsOwner),
+});
+check(
+  "owner AI is unlimited (remaining === null, no counter increment)",
+  ownerDecision.ok === true && ownerDecision.remaining === null,
+  ownerDecision.ok === true ? String(ownerDecision.remaining) : "refused",
+);
+
+console.log("\n   non-owners are completely unaffected by the owner rule");
+for (const [label, u, want] of [
+  ["non-owner trialing still trialing", user("trialing", future), "trialing"],
+  ["non-owner active still paid", user("active", future), "paid"],
+  ["non-owner no-sub still none", user(null, null), "none"],
+  ["non-owner expired still none", user("active", past), "none"],
+] as const) {
+  check(`${label} -> "${want}"`, getAccessLevel(u, stubIsOwner) === want, getAccessLevel(u, stubIsOwner));
+}
+check(
+  "a non-owner does NOT get hasFullAccess without a subscription",
+  hasFullAccess(user(null, null), stubIsOwner) === false,
+);
+check(
+  "hasFullAccess still true for an ordinary active subscriber",
+  hasFullAccess(user("active", future), stubIsOwner) === true,
 );
 
 // --------------------------------- 8. the pure rule matches the real query ---

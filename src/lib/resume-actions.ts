@@ -5,6 +5,7 @@ import { prisma } from "@/lib/db";
 import { requireUser } from "@/lib/auth";
 import {
   getUserPlan,
+  hasFullAccess,
   isBillingEnabled,
   PLAN_DISPLAY_NAME,
   PLANS,
@@ -71,11 +72,17 @@ export async function createResume(
       subscriptionCurrentPeriodEnd: true,
       subscriptionPlan: true,
       compProUntil: true,
+      // Needed by hasFullAccess: owner status is decided by email, not by any
+      // subscription column.
+      email: true,
     },
   });
+  // Both gates below are skipped wholesale for the owner: every template tier,
+  // unlimited CVs. This is a GATE, hence hasFullAccess rather than isProActive.
+  const fullAccess = planUser ? hasFullAccess(planUser) : false;
   const plan = planUser ? getUserPlan(planUser) : "FREE";
   const tier = getTemplate(template).tier;
-  if (!userCanAccessTier(plan, tier)) {
+  if (!fullAccess && !userCanAccessTier(plan, tier)) {
     return {
       ok: false,
       code: "TEMPLATE_REQUIRES_PRO",
@@ -86,7 +93,7 @@ export async function createResume(
 
   // Enforce CV cap unless billing is in dry-run mode (see plans.ts for
   // why caps are disabled until launch flag flips).
-  if (isBillingEnabled()) {
+  if (isBillingEnabled() && !fullAccess) {
     const limit = PLANS[plan].cvLimit;
     // limit is 0 for the no-subscription state, so this refuses before any DB
     // count: creating a CV now requires a trial or subscription.

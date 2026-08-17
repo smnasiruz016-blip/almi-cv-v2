@@ -25,8 +25,8 @@ import type { Prisma } from "@prisma/client";
 import { requireFounder } from "@/lib/founder";
 import { prisma } from "@/lib/db";
 import { isComped, isProActive } from "@/lib/billing/plans";
+import { isOwner } from "@/lib/owner";
 import {
-  compActive,
   planWhere,
   PLAN_STATUSES,
   type PlanStatus,
@@ -95,7 +95,7 @@ export default async function AccountsAdminPage({
     ) as Prisma.UserWhereInput[],
   };
 
-  const [users, matching, total, compCount, proCount, freeCount] =
+  const [users, matching, total, compCount, proCount, freeCount, ownerCount] =
     await Promise.all([
       prisma.user.findMany({
         where,
@@ -122,9 +122,14 @@ export default async function AccountsAdminPage({
       // The tiles describe the whole user base, not the current query — so they
       // stay a stable reference point while you filter the table under them.
       prisma.user.count(),
-      prisma.user.count({ where: compActive(now) }),
+      // planWhere("comp"), not compActive(), so the owner is carved out of this
+      // bucket the same way it is carved out of Pro and Free. Using the raw
+      // predicate here would double-count an owner who also holds a comp grant
+      // and break Free + Pro + Comp + Owner == Total.
+      prisma.user.count({ where: planWhere("comp", now) }),
       prisma.user.count({ where: planWhere("pro", now) }),
       prisma.user.count({ where: planWhere("free", now) }),
+      prisma.user.count({ where: planWhere("owner", now) }),
     ]);
 
   const pages = Math.max(1, Math.ceil(matching / PAGE_SIZE));
@@ -144,7 +149,7 @@ export default async function AccountsAdminPage({
     return s ? `/admin/accounts?${s}` : "/admin/accounts";
   };
 
-  const tileTotal = freeCount + proCount + compCount;
+  const tileTotal = freeCount + proCount + compCount + ownerCount;
 
   return (
     <div className="space-y-6">
@@ -162,12 +167,13 @@ export default async function AccountsAdminPage({
           <Users className="h-4 w-4 text-coral" />
           Account totals
         </h2>
-        <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
+        <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-5">
           {[
             { label: "Total", value: total },
             { label: "Free", value: freeCount },
             { label: "Pro", value: proCount },
             { label: "Comp", value: compCount },
+            { label: "Owner", value: ownerCount },
           ].map((s) => (
             <div
               key={s.label}
@@ -188,7 +194,7 @@ export default async function AccountsAdminPage({
             rendering numbers that do not add up. */}
         {tileTotal !== total && (
           <p className="mt-3 rounded-xl border border-coral/40 bg-coral/10 px-4 py-3 text-sm text-coral-deep">
-            ⚠️ Free + Pro + Comp = {tileTotal}, but the total is {total}. The plan
+            ⚠️ Free + Pro + Comp + Owner = {tileTotal}, but the total is {total}. The plan
             predicates disagree with each other — treat these counts as untrusted
             until it is fixed.
           </p>
@@ -233,6 +239,7 @@ export default async function AccountsAdminPage({
             <option value="free">Free</option>
             <option value="pro">Pro</option>
             <option value="comp">Comp</option>
+            <option value="owner">Owner</option>
           </select>
         </div>
         <button
@@ -283,9 +290,12 @@ export default async function AccountsAdminPage({
               </thead>
               <tbody>
                 {users.map((u) => {
-                  // Same predicates as the SQL above, applied per row.
-                  const comped = isComped(u);
-                  const pro = !comped && isProActive(u);
+                  // Same predicates as the SQL above, applied per row — and in
+                  // the same precedence order, so a row lands in exactly the
+                  // bucket its tile counted it in.
+                  const owner = isOwner(u.email);
+                  const comped = !owner && isComped(u);
+                  const pro = !owner && !comped && isProActive(u);
                   const lastActive = getLastActive(
                     u.sessions[0]?.expiresAt,
                     u.updatedAt,
@@ -302,7 +312,11 @@ export default async function AccountsAdminPage({
                         {formatDate(u.createdAt)}
                       </td>
                       <td className="py-2 pr-3 text-xs">
-                        {comped ? (
+                        {owner ? (
+                          <span className="inline-flex items-center gap-1 rounded-pill bg-plum/10 px-2 py-0.5 text-plum">
+                            ★ Owner
+                          </span>
+                        ) : comped ? (
                           <span className="inline-flex items-center gap-1 rounded-pill bg-coral/10 px-2 py-0.5 text-coral-deep">
                             🎁 Comp
                           </span>

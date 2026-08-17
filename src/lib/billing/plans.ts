@@ -1,4 +1,5 @@
 import type { User } from "@prisma/client";
+import { isOwner } from "@/lib/owner";
 
 // AlmiCV is on the family standard: ONE price, $12/month, 7-day card-upfront
 // trial. The old $7/month + $60/year pair is retired.
@@ -116,6 +117,37 @@ export const TRIAL_AI_CALL_LIMIT = 5;
 
 export type AccessLevel = "none" | "trialing" | "paid";
 
+/** The extra field the owner-aware helpers need beyond ProUserShape. */
+export type AccessUserShape = ProUserShape & Pick<User, "email">;
+
+/**
+ * Injection seam for the owner test. Production callers never pass it — they
+ * get isOwner, which reads OWNER_EMAILS. It exists so verify-ai-gate.ts can
+ * prove owner behaviour at build time without depending on an env var being
+ * set, which would make the gate pass or fail for reasons unrelated to code.
+ */
+export type OwnerCheck = (email: string | null | undefined) => boolean;
+
+/**
+ * Can this user use the product in full — every template, unlimited CVs?
+ *
+ * OWNER IS DELIBERATELY *NOT* FOLDED INTO isProActive(), and this separation is
+ * load-bearing rather than fussiness. isProActive() is what the admin accounts
+ * tiles, plan-where.ts SQL and the HQ stats endpoint use to COUNT paying
+ * subscribers. If owner leaked into it, the dashboard would report the owner as
+ * a paying customer — a fake revenue number, and revenue is the one figure that
+ * has to be trustworthy.
+ *
+ * So the split is: PRODUCT GATES call hasFullAccess(); COUNTING CODE keeps
+ * calling isProActive(). Do not "simplify" these into one function.
+ */
+export function hasFullAccess(
+  user: AccessUserShape,
+  isOwnerFn: OwnerCheck = isOwner,
+): boolean {
+  return isOwnerFn(user.email) || isProActive(user);
+}
+
 /**
  * Billing state as the AI gate needs it: the same question isProActive() asks,
  * but with `trialing` and `active` told apart instead of merged.
@@ -130,8 +162,16 @@ export type AccessLevel = "none" | "trialing" | "paid";
  * That is intended (comps are for beta testers and support), but it does mean a
  * comp grant is a real cost lever, not just a UI courtesy.
  */
-export function getAccessLevel(user: ProUserShape): AccessLevel {
-  // Comp first, matching isProActive's own ordering: a comped user is "paid"
+export function getAccessLevel(
+  user: AccessUserShape,
+  isOwnerFn: OwnerCheck = isOwner,
+): AccessLevel {
+  // Owner first, above everything: the owner account has complete product
+  // access with no subscription, no trial cap and no expiry. Returning "paid"
+  // is all that is needed, because requireAIAccess keys on the level.
+  if (isOwnerFn(user.email)) return "paid";
+
+  // Comp next, matching isProActive's own ordering: a comped user is "paid"
   // even with no Stripe subscription at all (subscriptionStatus === null).
   if (isComped(user)) return "paid";
 

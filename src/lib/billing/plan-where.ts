@@ -16,6 +16,7 @@
 
 import type { Prisma } from "@prisma/client";
 import { ACTIVE_STATUSES } from "./plans";
+import { getOwnerEmails } from "@/lib/owner";
 
 /** compProUntil in the future — the comp half of isProActive(). */
 export const compActive = (now: Date): Prisma.UserWhereInput => ({
@@ -64,6 +65,7 @@ export const notSubActive = (now: Date): Prisma.UserWhereInput => ({
  *  never both claim the same account. */
 export const trialActive = (now: Date): Prisma.UserWhereInput => ({
   AND: [
+    notOwnerRow(),
     notComped(now),
     { subscriptionStatus: "trialing", subscriptionCurrentPeriodEnd: { gt: now } },
   ],
@@ -73,29 +75,64 @@ export const trialActive = (now: Date): Prisma.UserWhereInput => ({
  *  period. */
 export const paidActive = (now: Date): Prisma.UserWhereInput => ({
   AND: [
+    notOwnerRow(),
     notComped(now),
     { subscriptionStatus: "active", subscriptionCurrentPeriodEnd: { gt: now } },
   ],
 });
 
-export type PlanStatus = "all" | "free" | "pro" | "comp";
-export const PLAN_STATUSES: PlanStatus[] = ["all", "free", "pro", "comp"];
+export type PlanStatus = "all" | "free" | "pro" | "comp" | "owner";
+export const PLAN_STATUSES: PlanStatus[] = [
+  "all",
+  "free",
+  "pro",
+  "comp",
+  "owner",
+];
 
 /**
- * The three plan buckets as mutually exclusive WHERE clauses, so counts of each
+ * Owner rows, matched by email because ownership is env-driven (OWNER_EMAILS)
+ * and has no DB column.
+ *
+ * `email` is `String @unique` — non-nullable — so the negated form below cannot
+ * silently drop rows the way a NOT IN over a nullable column would. If the env
+ * var is unset, getOwnerEmails() returns [], `in: []` matches nothing, and
+ * `NOT { in: [] }` matches everything: owner counts as 0 and the other three
+ * buckets are unchanged. That is the correct degenerate behaviour, not a bug.
+ */
+export const isOwnerRow = (): Prisma.UserWhereInput => ({
+  email: { in: getOwnerEmails() },
+});
+
+const notOwnerRow = (): Prisma.UserWhereInput => ({
+  NOT: { email: { in: getOwnerEmails() } },
+});
+
+/**
+ * The four plan buckets as mutually exclusive WHERE clauses, so counts of each
  * sum to the total exactly. Returns undefined for "all" (no filter).
+ *
+ * Owner is carved out of the other three rather than added alongside them.
+ * If it were merely added, an owner who also holds a comp grant would be
+ * counted twice and the tiles would over-sum — and the whole point of these
+ * predicates is that Free + Pro + Comp + Owner == Total is checkable.
+ *
+ * Owner deliberately does NOT flow through isProActive(): the owner is not a
+ * paying subscriber, and reporting them in Pro would be a fake revenue number.
  */
 export function planWhere(
   status: PlanStatus,
   now: Date,
 ): Prisma.UserWhereInput | undefined {
   switch (status) {
+    case "owner":
+      return isOwnerRow();
     case "comp":
-      return compActive(now);
+      return { AND: [notOwnerRow(), compActive(now)] };
     case "pro":
-      return { AND: [notComped(now), subActive(now)] };
+      return { AND: [notOwnerRow(), notComped(now), subActive(now)] };
     case "free":
-      return { AND: [notComped(now), notSubActive(now)] };
+      return { AND: [notOwnerRow(), notComped(now), notSubActive(now)] };
     default:
       return undefined;
   }

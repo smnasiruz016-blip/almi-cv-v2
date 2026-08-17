@@ -12,6 +12,7 @@ import {
   PLANS,
   TRIAL_AI_CALL_LIMIT,
 } from "@/lib/billing/plans";
+import { isOwner } from "@/lib/owner";
 import { AccountClient } from "./account-client";
 import { syncSubscriptionStatusAction } from "./actions";
 
@@ -40,6 +41,8 @@ export default async function AccountPage({
       aiCallsThisMonth: true,
       aiCallsResetAt: true,
       compProUntil: true,
+      // Owner status is decided by email, not by any subscription column.
+      email: true,
     },
   });
 
@@ -67,6 +70,12 @@ export default async function AccountPage({
         ? `${dbUser?.aiCallsThisMonth ?? 0} of ${TRIAL_AI_CALL_LIMIT} during your trial — unlimited once your subscription starts`
         : "Not included — start your 7-day free trial";
 
+  // The owner has no subscription and never will, so every plan name is a
+  // fabrication for them — including "Pro", which would also be the exact lie
+  // the admin tiles are kept honest to avoid. Say what is actually true.
+  const owner = isOwner(dbUser?.email);
+  const planLabel = owner ? "Owner — full access" : PLAN_DISPLAY_NAME[plan];
+
   return (
     <div className="mx-auto max-w-3xl space-y-8">
       <header>
@@ -80,7 +89,7 @@ export default async function AccountPage({
         upgraded={upgraded}
         billingEnabled={billingEnabled}
         plan={plan}
-        planDisplayName={PLAN_DISPLAY_NAME[plan]}
+        planDisplayName={planLabel}
         proActive={proActive}
         comped={comped}
         compDaysRemaining={compDaysRemaining}

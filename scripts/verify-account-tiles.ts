@@ -1,10 +1,14 @@
 // Proves the /admin/accounts plan counts against the real database.
 //
-// THE INVARIANT: Free + Pro + Comp == Total, counted by three independent SQL
-// predicates. It used to hold trivially — Free was computed as
+// THE INVARIANT: Free + Pro + Comp + Owner == Total, counted by four independent
+// SQL predicates. It used to hold trivially — Free was computed as
 // (total - comp - pro), which satisfies the equation by construction and can
-// therefore detect nothing. Counting all four separately is what turns it into
-// a check.
+// therefore detect nothing. Counting all of them separately is what turns it
+// into a check.
+//
+// Owner is a bucket rather than a flavour of Pro on purpose: the owner has full
+// product access but pays nothing, so counting them as Pro would put a fake
+// subscriber on the revenue tile.
 //
 // THE SECOND CHECK, which is the one that actually catches drift: every SQL
 // count is compared against classifying each row in JS with isProActive() /
@@ -45,6 +49,18 @@ const notSubActive = (now: Date): Prisma.UserWhereInput => ({
     { subscriptionCurrentPeriodEnd: { lte: now } },
   ],
 });
+// Owner is matched by email because ownership is env-driven, not a DB column.
+// Independently re-derived here rather than imported, like every other
+// predicate in this file.
+const ownerEmails = (): string[] =>
+  (process.env.OWNER_EMAILS ?? "")
+    .split(",")
+    .map((e) => e.trim().toLowerCase())
+    .filter((e) => e.length > 0);
+const isOwnerRow = (): Prisma.UserWhereInput => ({ email: { in: ownerEmails() } });
+const notOwnerRow = (): Prisma.UserWhereInput => ({
+  NOT: { email: { in: ownerEmails() } },
+});
 
 async function main(): Promise<void> {
   const now = new Date();
@@ -71,20 +87,44 @@ async function main(): Promise<void> {
       : "     => no divergence on this data (the explicit form is still the correct one).",
   );
 
+  // ---------------------------------------------------- owner list present? --
+  // OWNER_EMAILS is env-driven, so this script can only see owners if the var
+  // reached it. When it did not, Owner is 0 for an ENVIRONMENTAL reason, not a
+  // factual one — and a 0 that means "could not tell" must never be printed as
+  // though it means "there are none".
+  const owners = ownerEmails();
+  if (owners.length === 0) {
+    console.log(
+      "\n  ⚠️  OWNER_EMAILS is not set for this run — Owner counts as 0.\n" +
+        "      That is a FALLBACK, not a measurement: any owner rows are being\n" +
+        "      counted in Free/Pro/Comp instead. Re-run with OWNER_EMAILS set to\n" +
+        "      verify the Owner bucket for real.",
+    );
+  } else {
+    console.log(`\n  OWNER_EMAILS supplies ${owners.length} owner email(s).`);
+  }
+
   // -------------------------------------------------------------- SQL tiles --
-  const [total, compCount, proCount, freeCount] = await Promise.all([
+  const [total, compCount, proCount, freeCount, ownerCount] = await Promise.all([
     prisma.user.count(),
-    prisma.user.count({ where: compActive(now) }),
-    prisma.user.count({ where: { AND: [notComped(now), subActive(now)] } }),
-    prisma.user.count({ where: { AND: [notComped(now), notSubActive(now)] } }),
+    prisma.user.count({ where: { AND: [notOwnerRow(), compActive(now)] } }),
+    prisma.user.count({
+      where: { AND: [notOwnerRow(), notComped(now), subActive(now)] },
+    }),
+    prisma.user.count({
+      where: { AND: [notOwnerRow(), notComped(now), notSubActive(now)] },
+    }),
+    prisma.user.count({ where: isOwnerRow() }),
   ]);
 
   console.log("\n1. the invariant, on real rows");
-  console.log(`     Total ${total} · Free ${freeCount} · Pro ${proCount} · Comp ${compCount}`);
+  console.log(
+    `     Total ${total} · Free ${freeCount} · Pro ${proCount} · Comp ${compCount} · Owner ${ownerCount}`,
+  );
   check(
-    "Free + Pro + Comp == Total",
-    freeCount + proCount + compCount === total,
-    `${freeCount} + ${proCount} + ${compCount} = ${freeCount + proCount + compCount}, total ${total}`,
+    "Free + Pro + Comp + Owner == Total",
+    freeCount + proCount + compCount + ownerCount === total,
+    `${freeCount} + ${proCount} + ${compCount} + ${ownerCount} = ${freeCount + proCount + compCount + ownerCount}, total ${total}`,
   );
 
   // ------------------------------------------- SQL vs the per-row predicates --
@@ -102,9 +142,13 @@ async function main(): Promise<void> {
   let jsFree = 0;
   let jsPro = 0;
   let jsComp = 0;
+  let jsOwner = 0;
+  const ownerSet = new Set(ownerEmails());
   const mismatches: string[] = [];
   for (const u of rows) {
-    if (isComped(u)) jsComp++;
+    // Same precedence as the SQL carve-out: owner first, then comp, then pro.
+    if (ownerSet.has(u.email.trim().toLowerCase())) jsOwner++;
+    else if (isComped(u)) jsComp++;
     else if (isProActive(u)) jsPro++;
     else jsFree++;
   }
@@ -114,15 +158,17 @@ async function main(): Promise<void> {
   check("Comp: SQL == badge", compCount === jsComp, `SQL ${compCount}, badge ${jsComp}`);
   check("Pro:  SQL == badge", proCount === jsPro, `SQL ${proCount}, badge ${jsPro}`);
   check("Free: SQL == badge", freeCount === jsFree, `SQL ${freeCount}, badge ${jsFree}`);
+  check("Owner: SQL == badge", ownerCount === jsOwner, `SQL ${ownerCount}, badge ${jsOwner}`);
 
   // ------------------------------------- the status filter returns those rows --
   // Counting right and FILTERING right are different failures; a filter that
   // drops rows still totals correctly in the tiles above.
   console.log("\n3. the status filter returns exactly those rows");
   for (const [label, where, expected] of [
-    ["comp", compActive(now), compCount],
-    ["pro", { AND: [notComped(now), subActive(now)] }, proCount],
-    ["free", { AND: [notComped(now), notSubActive(now)] }, freeCount],
+    ["comp", { AND: [notOwnerRow(), compActive(now)] }, compCount],
+    ["pro", { AND: [notOwnerRow(), notComped(now), subActive(now)] }, proCount],
+    ["free", { AND: [notOwnerRow(), notComped(now), notSubActive(now)] }, freeCount],
+    ["owner", isOwnerRow(), ownerCount],
   ] as [string, Prisma.UserWhereInput, number][]) {
     const got = await prisma.user.findMany({ where, select: { id: true } });
     check(`filter status=${label} returns ${expected} row(s)`, got.length === expected, `got ${got.length}`);
@@ -161,6 +207,7 @@ async function main(): Promise<void> {
     prisma.user.count({
       where: {
         AND: [
+          notOwnerRow(),
           notComped(now),
           { subscriptionStatus: "trialing", subscriptionCurrentPeriodEnd: { gt: now } },
         ],
@@ -169,17 +216,20 @@ async function main(): Promise<void> {
     prisma.user.count({
       where: {
         AND: [
+          notOwnerRow(),
           notComped(now),
           { subscriptionStatus: "active", subscriptionCurrentPeriodEnd: { gt: now } },
         ],
       },
     }),
   ]);
-  console.log(`     free ${freeCount} · trialing ${hqTrial} · billing ${hqBilling} · comp ${compCount}`);
+  console.log(
+    `     free ${freeCount} · trialing ${hqTrial} · billing ${hqBilling} · comp ${compCount} · owner ${ownerCount}`,
+  );
   check(
-    "free + trialing + billing + comp == Total",
-    freeCount + hqTrial + hqBilling + compCount === total,
-    `${freeCount + hqTrial + hqBilling + compCount} vs ${total}`,
+    "free + trialing + billing + comp + owner == Total",
+    freeCount + hqTrial + hqBilling + compCount + ownerCount === total,
+    `${freeCount + hqTrial + hqBilling + compCount + ownerCount} vs ${total}`,
   );
   // trialing + billing must reconstitute Pro, or ACTIVE_STATUSES has grown a
   // third value that the HQ split does not know about.

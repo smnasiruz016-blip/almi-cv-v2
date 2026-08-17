@@ -34,7 +34,7 @@ export async function GET(req: Request) {
   const d7 = new Date(now.getTime() - 7 * 864e5);
   const d30 = new Date(now.getTime() - 30 * 864e5);
 
-  const [accounts, today, s7, s30, trialing, billing, comp, free] =
+  const [accounts, today, s7, s30, trialing, billing, comp, free, owner] =
     await Promise.all([
       prisma.user.count(),
       prisma.user.count({ where: { createdAt: { gte: startToday } } }),
@@ -42,8 +42,11 @@ export async function GET(req: Request) {
       prisma.user.count({ where: { createdAt: { gte: d30 } } }),
       prisma.user.count({ where: trialActive(now) }),
       prisma.user.count({ where: paidActive(now) }),
-      prisma.user.count({ where: compActive(now) }),
+      // planWhere("comp"), not the raw compActive predicate, so the owner is
+      // carved out here exactly as it is in the other buckets.
+      prisma.user.count({ where: planWhere("comp", now) }),
       prisma.user.count({ where: planWhere("free", now) }),
+      prisma.user.count({ where: planWhere("owner", now) }),
     ]);
 
   // `paid` keeps its existing meaning for HQ — everyone with Pro access who is
@@ -59,10 +62,16 @@ export async function GET(req: Request) {
     billing,
     comp,
     free,
-    // The four buckets are mutually exclusive and counted independently, so this
+    // The owner is reported as its own bucket and is NOT folded into paid,
+    // billing or trialing. Folding it in would inflate the subscriber count
+    // with an account that pays nothing — a fake revenue number on the one
+    // dashboard that has to be trustworthy.
+    owner,
+    // The five buckets are mutually exclusive and counted independently, so this
     // is a real check rather than an identity. HQ can assert it instead of
     // trusting the numbers blind.
-    bucketsSumToAccounts: free + trialing + billing + comp === accounts,
+    bucketsSumToAccounts:
+      free + trialing + billing + comp + owner === accounts,
     asOf: now.toISOString(),
   });
 }

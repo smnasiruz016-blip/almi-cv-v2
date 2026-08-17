@@ -2,7 +2,7 @@ import { prisma } from "@/lib/db";
 import type { AccessLevel } from "@/lib/billing/plans";
 import {
   isBillingEnabled,
-  isProActive,
+  hasFullAccess,
   getAccessLevel,
   TRIAL_AI_CALL_LIMIT,
 } from "@/lib/billing/plans";
@@ -136,6 +136,8 @@ export async function requireAIAccess(
       subscriptionCurrentPeriodEnd: true,
       subscriptionPlan: true,
       compProUntil: true,
+      // Owner status is decided by email, not by any subscription column.
+      email: true,
     },
   });
 
@@ -216,6 +218,8 @@ export async function requireProAccess(
       subscriptionCurrentPeriodEnd: true,
       subscriptionPlan: true,
       compProUntil: true,
+      // Owner status is decided by email, not by any subscription column.
+      email: true,
     },
   });
 
@@ -223,10 +227,11 @@ export async function requireProAccess(
     return { ok: false, error: "Account not found.", reason: "auth" };
   }
 
-  // Intentionally still isProActive, not getAccessLevel: this helper gates
-  // whole Pro-only FEATURES, where a trialling user should get full access.
-  // Only per-call AI usage is metered during the trial.
-  if (isProActive(user)) {
+  // GATE, so hasFullAccess: this helper gates whole Pro-only FEATURES, where a
+  // trialling user should get full access and the owner always should. Only
+  // per-call AI usage is metered during the trial, which is why this is not
+  // getAccessLevel.
+  if (hasFullAccess(user)) {
     return { ok: true, plan: "PRO", remaining: null };
   }
 
