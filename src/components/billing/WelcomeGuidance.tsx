@@ -39,6 +39,13 @@ export function WelcomeGuidance({
 }) {
   if (access === "PAID") return null;
   const expired = access === "FREE_EXPIRED";
+  // THREE states, never two — in the copy as well as in the access check.
+  // The footnote and the button below used to key off `expired` alone, which
+  // collapsed "never started" and "active" into one branch: a user who had
+  // already built a CV was still told "your 3 days start when you build your
+  // first CV, not now" beneath a badge saying 3 days left. Same class of defect
+  // as the two access P0s this week — two states rendering as one.
+  const neverStarted = access === "NONE";
 
   return (
     <section className="rounded-2xl border-2 border-gray-900/15 bg-white p-6 shadow-sm sm:p-8">
@@ -86,9 +93,15 @@ export function WelcomeGuidance({
           href={expired ? "/pricing?from=expired" : "/templates"}
           className="inline-flex min-h-[48px] items-center justify-center rounded-md bg-gray-900 px-6 py-3 text-base font-bold text-white hover:bg-gray-800"
         >
-          {expired ? "Start my 7-day free trial" : "Start building free"}
+          {expired
+            ? "Start my 7-day free trial"
+            : neverStarted
+              ? "Start building free"
+              : "Continue building"}
         </Link>
-        {!expired && (
+        {/* Never-started ONLY. A user mid-window has already built a CV, so
+            telling them their days have not started yet is simply false. */}
+        {neverStarted && (
           <p className="mt-2 text-xs text-gray-500">
             Your 3 days start when you build your first CV, not now.
           </p>
