@@ -50,42 +50,14 @@ export interface SectionLabels {
   languages?: string;
   projects?: string;
   awards?: string;
-  [key: string]: string | undefined;
+  [key: string]: any;
 }
 
 export interface TranslatedCV {
-  basics: {
-    fullName?: string;
-    role?: string;
-    email?: string;
-    phone?: string;
-    location?: string;
-    website?: string;
-    linkedin?: string;
-    summary?: string;
-    photoUrl?: string;
-    [key: string]: any;
-  };
-  experience: Array<{
-    id?: string;
-    company?: string;
-    role?: string;
-    startDate?: string;
-    endDate?: string;
-    current?: boolean;
-    bullets?: string[];
-    achievements?: string[];
-    [key: string]: any;
-  }>;
-  education: Array<{
-    id?: string;
-    degree?: string;
-    institution?: string;
-    year?: string;
-    gradYear?: string;
-    [key: string]: any;
-  }>;
-  skills: any[];
+  basics: any;
+  experience: any[];
+  education?: any[];
+  skills?: any[];
   certifications?: any[];
   languages?: any[];
   labels?: SectionLabels;
