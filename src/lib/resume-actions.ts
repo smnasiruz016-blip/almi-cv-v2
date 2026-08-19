@@ -27,8 +27,6 @@ export async function createTranslatedResume(params: {
     }
 
     const sourceData: any = (sourceResume.data as any) || {};
-    const expList: any[] = Array.isArray(t?.experience) ? (t.experience as any[]) : [];
-    const eduList: any[] = Array.isArray(t?.education) ? (t.education as any[]) : [];
 
     const mergedData: any = {
       ...sourceData,
@@ -39,7 +37,7 @@ export async function createTranslatedResume(params: {
         summary: t?.basics?.summary ?? sourceData.basics?.summary ?? "",
       },
       experience: (sourceData.experience ?? []).map((entry: any, idx: number) => {
-        const tr = expList[idx];
+        const tr = t.experience?.[idx];
         if (!tr) return entry;
         return {
           ...entry,
@@ -49,7 +47,7 @@ export async function createTranslatedResume(params: {
         };
       }),
       education: (sourceData.education ?? []).map((entry: any, idx: number) => {
-        const tr = eduList[idx];
+        const tr = t.education?.[idx];
         if (!tr) return entry;
         return {
           ...entry,
