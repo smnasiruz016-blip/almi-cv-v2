@@ -37,6 +37,10 @@ import {
 import { userCanAccessTier, userCanAccessTemplate } from "../src/lib/billing/template-access";
 import { decideAIAccess } from "../src/lib/ai/access";
 import { TEMPLATES, getTier } from "../src/components/templates/template-registry";
+import { createElement } from "react";
+import { renderToStaticMarkup } from "react-dom/server";
+import { WelcomeGuidance } from "../src/components/billing/WelcomeGuidance";
+import type { ProductAccessLevel } from "../src/lib/billing/plans";
 
 type Check = { name: string; got: unknown; want: unknown };
 const checks: Check[] = [];
@@ -164,6 +168,37 @@ eq("comp grant still works", isProActive(comped), true);
 eq("retired $7 price rejected", priceIdToPlanLabel("price_1TSp04Q5pPhPaj6V3PJX0SC3"), null);
 eq("retired $60 price rejected", priceIdToPlanLabel("price_1TSp5TQ5pPhPaj6VBD0Zujwy"), null);
 eq("empty price rejected", priceIdToPlanLabel(""), null);
+
+// =============================================================================
+// 7. THE COPY HAS THREE STATES TOO.
+//
+// Rendered, not grepped: the component is actually rendered in each state and
+// the output inspected. A user mid-window was being shown "Your 3 days start
+// when you build your first CV, not now" underneath a badge reading "3 days
+// left" -- because the footnote keyed off `!expired`, collapsing never-started
+// and active into one branch. That is the same two-states-as-one defect that
+// caused both access P0s this week, in copy rather than in a gate.
+// =============================================================================
+const NEVER_STARTED_FOOTNOTE = "start when you build your first CV";
+const render = (access: ProductAccessLevel, daysLeft: number | null) =>
+  renderToStaticMarkup(createElement(WelcomeGuidance, { access, daysLeft }));
+
+const htmlNone = render("NONE", null);
+const htmlActive = render("FREE_3DAY", 2);
+const htmlExpired = render("FREE_EXPIRED", null);
+const htmlPaid = render("PAID", null);
+
+eq("copy: never-started SHOWS the never-started footnote", htmlNone.includes(NEVER_STARTED_FOOTNOTE), true);
+eq("copy: ACTIVE window must NOT show the never-started footnote", htmlActive.includes(NEVER_STARTED_FOOTNOTE), false);
+eq("copy: EXPIRED must NOT show the never-started footnote", htmlExpired.includes(NEVER_STARTED_FOOTNOTE), false);
+eq("copy: active shows the days-left badge", /days left of free building/.test(htmlActive), true);
+eq("copy: never-started does NOT claim days left", /days left of free building/.test(htmlNone), false);
+eq("copy: never-started button invites a first build", htmlNone.includes("Start building free"), true);
+eq("copy: active button does NOT say 'Start building free'", htmlActive.includes("Start building free"), false);
+eq("copy: expired button offers the trial", htmlExpired.includes("Start my 7-day free trial"), true);
+eq("copy: expired heading says the days finished", htmlExpired.includes("3 free days have finished"), true);
+eq("copy: active heading does NOT say the days finished", htmlActive.includes("3 free days have finished"), false);
+eq("copy: PAID renders nothing", htmlPaid, "");
 
 let failed = 0;
 for (const c of checks) {
