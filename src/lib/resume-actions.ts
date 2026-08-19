@@ -2,7 +2,6 @@
 
 import { prisma } from "@/lib/prisma";
 import { requireAuth } from "@/lib/auth";
-import type { CVData } from "@/lib/cv-types";
 import type { SupportedLanguage, TranslatedCV } from "@/lib/ai/translate-cv-shared";
 
 export async function createTranslatedResume(params: {
@@ -28,17 +27,16 @@ export async function createTranslatedResume(params: {
     }
 
     const sourceData: any = (sourceResume.data as any) || {};
-
-    const expList: any[] = Array.isArray(t.experience) ? t.experience : [];
-    const eduList: any[] = Array.isArray(t.education) ? t.education : [];
+    const expList: any[] = Array.isArray(t?.experience) ? (t.experience as any[]) : [];
+    const eduList: any[] = Array.isArray(t?.education) ? (t.education as any[]) : [];
 
     const mergedData: any = {
       ...sourceData,
       basics: {
         ...sourceData.basics,
-        ...t.basics,
-        fullName: sourceData.basics?.fullName || t.basics?.fullName || "Your Name",
-        summary: t.basics?.summary ?? sourceData.basics?.summary ?? "",
+        ...(t?.basics || {}),
+        fullName: sourceData.basics?.fullName || t?.basics?.fullName || "Your Name",
+        summary: t?.basics?.summary ?? sourceData.basics?.summary ?? "",
       },
       experience: (sourceData.experience ?? []).map((entry: any, idx: number) => {
         const tr = expList[idx];
@@ -59,12 +57,12 @@ export async function createTranslatedResume(params: {
           institution: tr.institution || entry.institution,
         };
       }),
-      skills: Array.isArray(t.skills) && t.skills.length > 0 ? t.skills : sourceData.skills,
-      certifications: Array.isArray(t.certifications) && t.certifications.length > 0 ? t.certifications : sourceData.certifications,
-      languages: Array.isArray(t.languages) && t.languages.length > 0 ? t.languages : sourceData.languages,
+      skills: Array.isArray(t?.skills) && t.skills.length > 0 ? t.skills : sourceData.skills,
+      certifications: Array.isArray(t?.certifications) && t.certifications.length > 0 ? t.certifications : sourceData.certifications,
+      languages: Array.isArray(t?.languages) && t.languages.length > 0 ? t.languages : sourceData.languages,
       labels: {
         ...(sourceData.labels || {}),
-        ...(t.labels || {}),
+        ...(t?.labels || {}),
       },
     };
 
