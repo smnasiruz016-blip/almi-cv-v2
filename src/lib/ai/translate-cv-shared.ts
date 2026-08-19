@@ -12,11 +12,33 @@ export const SUPPORTED_LANGUAGES = [
 
 export type SupportedLanguage = (typeof SUPPORTED_LANGUAGES)[number]["code"];
 
+export const LANGUAGE_NAME: Record<SupportedLanguage, string> = {
+  en: "English",
+  ur: "Urdu (اردو)",
+  ar: "Arabic (العربية)",
+  es: "Spanish (Español)",
+  fr: "French (Français)",
+  de: "German (Deutsch)",
+  it: "Italian (Italiano)",
+  pt: "Portuguese (Português)",
+  zh: "Mandarin Chinese (中文)",
+};
+
+export function isSupportedLanguage(code: string): code is SupportedLanguage {
+  return SUPPORTED_LANGUAGES.some((l) => l.code === code);
+}
+
+export function getLanguageName(code: SupportedLanguage): string {
+  return LANGUAGE_NAME[code] || code;
+}
+
 export interface SectionLabels {
   summary?: string;
   experience?: string;
+  workExperience?: string;
   education?: string;
   skills?: string;
+  competencies?: string;
   contact?: string;
   certifications?: string;
   languages?: string;
@@ -59,7 +81,14 @@ export interface TranslatedCV {
   labels?: SectionLabels;
 }
 
-export function getLanguageName(code: SupportedLanguage): string {
-  const found = SUPPORTED_LANGUAGES.find((l) => l.code === code);
-  return found ? `${found.name} (${found.nativeName})` : code;
-}
+export type TranslateCvResult =
+  | {
+      ok: true;
+      translated: TranslatedCV;
+      languageCode: SupportedLanguage;
+      languageName: string;
+    }
+  | {
+      ok: false;
+      error: string;
+    };
