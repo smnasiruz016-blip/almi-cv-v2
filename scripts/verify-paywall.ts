@@ -115,7 +115,28 @@ eq("expired: no product access", hasProductAccess(expiredWindow, noOwners), fals
 eq("expired: cannot open a template", userCanAccessTemplate(expiredWindow, TEMPLATES[0].slug), false);
 eq("expired: FREE cvLimit is 0", PLANS.FREE.cvLimit, 0);
 eq("expired: FREE templatesAccess is none", PLANS.FREE.templatesAccess, "none");
-eq("never started: no product access until they build", hasProductAccess(neverStarted, noOwners), false);
+
+// =============================================================================
+// 4b. THE DEADLOCK ASSERTION. Read this before changing anything above.
+//
+// The line that used to sit here was:
+//     eq("never started: no product access until they build",
+//        hasProductAccess(neverStarted), false)
+// and it was WRONG. It asserted the bug as correct behaviour, so the gate
+// passed 44/44 while a fresh signup could not create a CV at all. Creating the
+// first CV is what STARTS the window, so requiring an active window in order to
+// create is a deadlock: refused -> clock never set -> refused forever.
+//
+// Section 3 below was not enough on its own: it asserted how the never-started
+// state is LABELLED (NONE, not FREE_EXPIRED) and never asserted what that state
+// can DO. A correct label on a user who cannot use the product is not a pass.
+// =============================================================================
+eq("NEVER STARTED CAN CREATE — the state that starts the clock must not require the clock",
+  hasProductAccess(neverStarted, noOwners), true);
+eq("never started: can open a template (so the create is reachable)",
+  userCanAccessTemplate(neverStarted, TEMPLATES[0].slug), true);
+eq("never started is NOT refused as if expired",
+  hasProductAccess(neverStarted, noOwners) === hasProductAccess(expiredWindow, noOwners), false);
 
 // =============================================================================
 // 5. THE COPY SAYS "EVERY TEMPLATE". Assert that stays true.
