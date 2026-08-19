@@ -50,6 +50,7 @@ export interface SectionLabels {
   languages?: string;
   projects?: string;
   awards?: string;
+  [key: string]: string | undefined;
 }
 
 export interface TranslatedCV {
@@ -63,8 +64,9 @@ export interface TranslatedCV {
     linkedin?: string;
     summary?: string;
     photoUrl?: string;
+    [key: string]: any;
   };
-  experience?: Array<{
+  experience: Array<{
     id?: string;
     company?: string;
     role?: string;
@@ -73,6 +75,7 @@ export interface TranslatedCV {
     current?: boolean;
     bullets?: string[];
     achievements?: string[];
+    [key: string]: any;
   }>;
   education?: Array<{
     id?: string;
@@ -80,11 +83,13 @@ export interface TranslatedCV {
     institution?: string;
     year?: string;
     gradYear?: string;
+    [key: string]: any;
   }>;
-  skills?: string[] | Array<{ name: string; level?: string }>;
-  certifications?: string[] | Array<{ title?: string; name?: string }>;
-  languages?: string[] | Array<{ language?: string; name?: string; fluency?: string; level?: string }>;
+  skills?: any[];
+  certifications?: any[];
+  languages?: any[];
   labels?: SectionLabels;
+  [key: string]: any;
 }
 
 export type TranslateCvResult =
