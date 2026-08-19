@@ -56,6 +56,13 @@ model User {
 
   // Comp Pro access — granted by owner for beta testers / dogfooding.
   // Independent of Stripe state; isProActive() short-circuits true when
+  // 3-day no-card free window (2026-08-19). Set ONCE, when the user creates
+  // their FIRST CV -- not at signup, not on a page view, and not on the
+  // cv/new reuse-redirect (reusing an empty CV is not first use). Null = the
+  // clock has never started, and the offer stays open indefinitely. The
+  // window length lives in code (FREE_ACCESS_DAYS), not in this column.
+  freeAccessStartedAt DateTime?
+
   // compProUntil is in the future, even if subscriptionStatus is null.
   compProUntil  DateTime?
   compGrantedAt DateTime?

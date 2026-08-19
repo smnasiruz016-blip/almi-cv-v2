@@ -2,6 +2,7 @@ import type { User } from "@prisma/client";
 import {
   getUserPlan,
   hasFullAccess,
+  hasProductAccess,
   PLANS,
   type AccessUserShape,
   type PlanKey,
@@ -41,13 +42,16 @@ export function userCanAccessTemplate(
     | "subscriptionPlan"
     | "compProUntil"
     | "email"
+    | "freeAccessStartedAt"
   >,
   slug: string,
 ): boolean {
-  // GATE, so it uses hasFullAccess: the owner sees every template tier with no
-  // subscription. Checked before getUserPlan because getUserPlan is built on
-  // isProActive, which deliberately does not know about owners.
-  if (hasFullAccess(user)) return true;
+  // GATE, so it uses hasProductAccess: the owner sees every template tier with
+  // no subscription, AND a user inside their 3-day no-card window opens every
+  // template. Templates cost nothing to serve, so they are on the free side of
+  // the line. Checked before getUserPlan because getUserPlan is built on
+  // isProActive, which deliberately knows about neither owners nor the window.
+  if (hasProductAccess(user)) return true;
   const plan = getUserPlan(user);
   const template = getTemplate(slug);
   return userCanAccessTier(plan, template.tier);

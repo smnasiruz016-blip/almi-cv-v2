@@ -3,6 +3,8 @@ import { requireUser } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 import {
   getAccessLevel,
+  getProductAccessLevel,
+  getFreeAccessDaysRemaining,
   getCompProDaysRemaining,
   getUserPlan,
   isBillingEnabled,
@@ -13,6 +15,7 @@ import {
   TRIAL_AI_CALL_LIMIT,
 } from "@/lib/billing/plans";
 import { isOwner } from "@/lib/owner";
+import { WelcomeGuidance } from "@/components/billing/WelcomeGuidance";
 import { AccountClient } from "./account-client";
 import { syncSubscriptionStatusAction } from "./actions";
 
@@ -43,6 +46,8 @@ export default async function AccountPage({
       compProUntil: true,
       // Owner status is decided by email, not by any subscription column.
       email: true,
+      // The 3-day no-card window drives the guidance box and the plan label.
+      freeAccessStartedAt: true,
     },
   });
 
@@ -74,10 +79,25 @@ export default async function AccountPage({
   // fabrication for them — including "Pro", which would also be the exact lie
   // the admin tiles are kept honest to avoid. Say what is actually true.
   const owner = isOwner(dbUser?.email);
-  const planLabel = owner ? "Owner — full access" : PLAN_DISPLAY_NAME[plan];
+
+  // Three states, never two. PLAN_DISPLAY_NAME.FREE is "No active plan", which
+  // is wrong for someone actively inside their free window and wrong in a
+  // different way for someone who has not started one.
+  const productAccess = dbUser ? getProductAccessLevel(dbUser) : "NONE";
+  const freeDaysLeft = dbUser ? getFreeAccessDaysRemaining(dbUser) : null;
+  const planLabel = owner
+    ? "Owner — full access"
+    : productAccess === "FREE_3DAY"
+      ? `Free — ${freeDaysLeft === 1 ? "last day" : `${freeDaysLeft} days left`}`
+      : productAccess === "FREE_EXPIRED"
+        ? "Free — 3 days used"
+        : PLAN_DISPLAY_NAME[plan];
 
   return (
     <div className="mx-auto max-w-3xl space-y-8">
+      {/* First thing a new registration sees — signup lands here. */}
+      <WelcomeGuidance access={productAccess} daysLeft={freeDaysLeft} />
+
       <header>
         <h1 className="text-3xl text-plum md:text-4xl">Account</h1>
         <p className="mt-2 text-sm text-plum-soft">
