@@ -24,6 +24,12 @@ export const LANGUAGE_NAME: Record<SupportedLanguage, string> = {
   zh: "Mandarin Chinese (中文)",
 };
 
+export const RTL_LANGUAGES: ReadonlyArray<SupportedLanguage> = ["ur", "ar"];
+
+export function isRTL(lang: SupportedLanguage): boolean {
+  return RTL_LANGUAGES.includes(lang);
+}
+
 export function isSupportedLanguage(code: string): code is SupportedLanguage {
   return SUPPORTED_LANGUAGES.some((l) => l.code === code);
 }
