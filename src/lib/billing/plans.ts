@@ -30,14 +30,27 @@ export type PlanConfig = {
   templatesAccess: "none" | "all";
 };
 
-// FREE is no longer a PLAN. It is the name of the no-subscription state:
-// signed up, trial not started (or lapsed/cancelled). It grants nothing --
-// every number here is 0 and templatesAccess is "none". The single plan is
-// $12/month with a 7-day card-upfront trial; `trialing` counts as PRO_MONTHLY
-// via isProActive(), so a trialling user gets the full product from minute one.
+// FREE is not a PLAN. It is the name of the no-subscription state: signed up,
+// trial not started (or lapsed/cancelled). `trialing` counts as PRO_MONTHLY via
+// isProActive(), so a trialling user gets the full product from minute one.
 //
-// Do NOT restore non-zero values here to "be generous" -- these zeros ARE the
-// paywall. Every gate (AI, templates, CV creation) reads them.
+// READ THIS BEFORE CHANGING A ZERO. As of 2026-08-19 the three zeros no longer
+// mean the same thing, and the old comment ("these zeros ARE the paywall") is
+// now half wrong:
+//
+//   aiCallsPerMonth: 0  -- STILL THE PAYWALL, and the load-bearing one. AI is
+//                          never free at any window state. This is the line the
+//                          whole 3-day strategy rests on: free access is only
+//                          safe because it costs nothing to serve. Restoring a
+//                          non-zero value here puts a metered model call behind
+//                          a no-card door. verify-paywall.ts fails if you do.
+//   cvLimit: 0          -- NOT the paywall any more. It is the EXPIRED-WINDOW
+//   templatesAccess     -- state. A user inside their 3-day window creates CVs
+//                          and opens every template; those gates now ask
+//                          hasProductAccess(), which consults the window first.
+//
+// So: the AI zero is the paywall; the CV and template zeros are the expired
+// state. Do not collapse them back into one idea.
 export const PLANS: Record<PlanKey, PlanConfig> = {
   FREE: {
     cvLimit: 0,
@@ -114,6 +127,71 @@ export function isProActive(user: ProUserShape): boolean {
  * narrows, because AI is the one feature with a per-call vendor cost.
  */
 export const TRIAL_AI_CALL_LIMIT = 5;
+
+// ===================== 3-day no-card free window =====================
+//
+// 2026-08-19. Deliberate network policy change: "3 days free of everything that
+// costs us nothing, then the card for everything that calls a paid model."
+// Not drift -- do not restore card-upfront on CV building.
+//
+// THESE PREDICATES ARE DELIBERATELY SEPARATE FROM getAccessLevel() AND
+// requireAIAccess(). The AI path is untouched by this feature and must stay
+// that way: no window state may ever grant an AI call. If you find yourself
+// wanting to teach getAccessLevel() about the window, stop -- that is the
+// change that would put a paid model behind a no-card door.
+
+/** Length of the no-card window. One constant; the DB stores only the start. */
+export const FREE_ACCESS_DAYS = 3;
+
+type FreeUserShape = Pick<User, "freeAccessStartedAt">;
+
+/** True while the 3-day window is open. */
+export function isFreeWindowActive(user: FreeUserShape): boolean {
+  if (!user.freeAccessStartedAt) return false;
+  return user.freeAccessStartedAt.getTime() + FREE_ACCESS_DAYS * 86_400_000 > Date.now();
+}
+
+/** True ONLY when a window was started and has since run out. "Never started"
+ *  is NOT expired -- collapsing the two deadlocked AlmiPrep for every user. */
+export function isFreeWindowExpired(user: FreeUserShape): boolean {
+  return Boolean(user.freeAccessStartedAt) && !isFreeWindowActive(user);
+}
+
+/** Whole days left (ceil), or null when the window is not running. Null covers
+ *  both "not started" and "expired" -- callers that must tell those apart read
+ *  getProductAccessLevel(), which does. */
+export function getFreeAccessDaysRemaining(user: FreeUserShape): number | null {
+  if (!isFreeWindowActive(user)) return null;
+  const endsAt = user.freeAccessStartedAt!.getTime() + FREE_ACCESS_DAYS * 86_400_000;
+  return Math.ceil((endsAt - Date.now()) / 86_400_000);
+}
+
+/**
+ * Gate for the PRODUCT surface only: creating a CV, opening a template,
+ * downloading. Never for AI.
+ *
+ * A superset of hasFullAccess() -- a paying user must never be refused
+ * something a free-window user is given.
+ */
+export function hasProductAccess(
+  user: AccessUserShape & FreeUserShape,
+  isOwnerFn: OwnerCheck = isOwner,
+): boolean {
+  return hasFullAccess(user, isOwnerFn) || isFreeWindowActive(user);
+}
+
+export type ProductAccessLevel = "NONE" | "FREE_3DAY" | "FREE_EXPIRED" | "PAID";
+
+/** The three non-paid states the UI must tell apart, plus PAID. */
+export function getProductAccessLevel(
+  user: AccessUserShape & FreeUserShape,
+  isOwnerFn: OwnerCheck = isOwner,
+): ProductAccessLevel {
+  if (hasFullAccess(user, isOwnerFn)) return "PAID";
+  if (isFreeWindowActive(user)) return "FREE_3DAY";
+  if (isFreeWindowExpired(user)) return "FREE_EXPIRED";
+  return "NONE";
+}
 
 export type AccessLevel = "none" | "trialing" | "paid";
 

@@ -6,11 +6,13 @@ import { requireUser } from "@/lib/auth";
 import {
   getUserPlan,
   hasFullAccess,
+  hasProductAccess,
   isBillingEnabled,
   PLAN_DISPLAY_NAME,
   PLANS,
 } from "@/lib/billing/plans";
 import { userCanAccessTier } from "@/lib/billing/template-access";
+import { startFreeWindowIfUnstarted } from "@/lib/billing/free-window";
 import { getTemplate, isKnownTemplate } from "@/lib/templates";
 import type { CVData, LanguageCode } from "@/lib/cv-types";
 import { SAMPLE_CV_DATA } from "@/lib/cv-sample";
@@ -75,14 +77,20 @@ export async function createResume(
       // Needed by hasFullAccess: owner status is decided by email, not by any
       // subscription column.
       email: true,
+      // Needed by hasProductAccess: the 3-day window opens CV creation and
+      // templates without a card.
+      freeAccessStartedAt: true,
     },
   });
   // Both gates below are skipped wholesale for the owner: every template tier,
   // unlimited CVs. This is a GATE, hence hasFullAccess rather than isProActive.
   const fullAccess = planUser ? hasFullAccess(planUser) : false;
+  // The PRODUCT gate (create / templates / download) now also opens for an
+  // active 3-day window. The AI gate is untouched and stays subscription-only.
+  const productAccess = planUser ? hasProductAccess(planUser) : false;
   const plan = planUser ? getUserPlan(planUser) : "FREE";
   const tier = getTemplate(template).tier;
-  if (!fullAccess && !userCanAccessTier(plan, tier)) {
+  if (!productAccess && !userCanAccessTier(plan, tier)) {
     return {
       ok: false,
       code: "TEMPLATE_REQUIRES_PRO",
@@ -93,16 +101,17 @@ export async function createResume(
 
   // Enforce CV cap unless billing is in dry-run mode (see plans.ts for
   // why caps are disabled until launch flag flips).
-  if (isBillingEnabled() && !fullAccess) {
+  if (isBillingEnabled() && !productAccess) {
     const limit = PLANS[plan].cvLimit;
-    // limit is 0 for the no-subscription state, so this refuses before any DB
-    // count: creating a CV now requires a trial or subscription.
+    // limit is 0 once the 3-day window has expired (or was never opened AND the
+    // user is not paying) -- the window itself is checked above via
+    // productAccess, so reaching here means there is no window to rely on.
     if (limit <= 0) {
       return {
         ok: false,
         code: "CV_LIMIT_REACHED",
         error:
-          "Start your 7-day free trial to create a CV — $12/month after, cancel anytime.",
+          "Your 3 free days have finished. Start the 7-day trial to carry on — it adds the AI features too.",
       };
     }
     const count = await prisma.resume.count({ where: { userId: user.id } });
@@ -147,6 +156,14 @@ export async function createResume(
       data: sanitizeResumeData(seeded) as unknown as Prisma.InputJsonValue,
     },
   });
+
+  // FIRST USE: start the 3-day clock. Here, beside the row creation, and not in
+  // cv/new/page.tsx -- that page redirects to an existing empty CV instead of
+  // creating a second one, so a write there would fire on a reuse that created
+  // nothing. After the create, so a failed create cannot cost the user a day.
+  // No-op for anyone who already has a window.
+  await startFreeWindowIfUnstarted(user.id);
+
   return { ok: true, id: resume.id };
 }
 
