@@ -177,7 +177,21 @@ export function hasProductAccess(
   user: AccessUserShape & FreeUserShape,
   isOwnerFn: OwnerCheck = isOwner,
 ): boolean {
-  return hasFullAccess(user, isOwnerFn) || isFreeWindowActive(user);
+  if (hasFullAccess(user, isOwnerFn)) return true;
+  // Refuse ONLY a window that was started and has run out.
+  //
+  // "Never started" must NOT be refused. Creating the first CV is what STARTS
+  // the window, so gating creation on an already-active window is a deadlock:
+  // the create is refused, so the clock is never set, so the create is refused
+  // forever. That shipped on AlmiPrep (27/27 users stuck at NULL) and then
+  // shipped again here on 2026-08-19 -- the tier gate in resume-actions.ts
+  // refused a fresh signup before the row existed, and the user was shown the
+  // pricing page instead.
+  //
+  // Do not "tighten" this back to isFreeWindowActive(). A user with no window
+  // yet has nothing to lose by being let in: they own no CVs, and the moment
+  // they create one the clock starts.
+  return !isFreeWindowExpired(user);
 }
 
 export type ProductAccessLevel = "NONE" | "FREE_3DAY" | "FREE_EXPIRED" | "PAID";
