@@ -77,7 +77,7 @@ export interface TranslatedCV {
     achievements?: string[];
     [key: string]: any;
   }>;
-  education?: Array<{
+  education: Array<{
     id?: string;
     degree?: string;
     institution?: string;
@@ -85,7 +85,7 @@ export interface TranslatedCV {
     gradYear?: string;
     [key: string]: any;
   }>;
-  skills?: any[];
+  skills: any[];
   certifications?: any[];
   languages?: any[];
   labels?: SectionLabels;
