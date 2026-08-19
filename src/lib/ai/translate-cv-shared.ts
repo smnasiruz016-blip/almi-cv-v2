@@ -1,73 +1,65 @@
-import type { LanguageCode } from "@/lib/cv-types";
+export const SUPPORTED_LANGUAGES = [
+  { code: "en", name: "English", nativeName: "English" },
+  { code: "ur", name: "Urdu", nativeName: "اردو" },
+  { code: "ar", name: "Arabic", nativeName: "العربية" },
+  { code: "es", name: "Spanish", nativeName: "Español" },
+  { code: "fr", name: "French", nativeName: "Français" },
+  { code: "de", name: "German", nativeName: "Deutsch" },
+  { code: "it", name: "Italian", nativeName: "Italiano" },
+  { code: "pt", name: "Portuguese", nativeName: "Português" },
+  { code: "zh", name: "Mandarin Chinese", nativeName: "中文" },
+] as const;
 
-export type SupportedLanguage = Exclude<LanguageCode, "en">;
+export type SupportedLanguage = (typeof SUPPORTED_LANGUAGES)[number]["code"];
 
-export const SUPPORTED_LANGUAGES: {
-  code: SupportedLanguage;
-  name: string;
-  nativeName: string;
-  rtl: boolean;
-}[] = [
-  { code: "ur", name: "Urdu", nativeName: "اردو", rtl: true },
-  { code: "ar", name: "Arabic", nativeName: "العربية", rtl: true },
-  { code: "de", name: "German", nativeName: "Deutsch", rtl: false },
-  { code: "es", name: "Spanish", nativeName: "Español", rtl: false },
-  { code: "fr", name: "French", nativeName: "Français", rtl: false },
-  { code: "it", name: "Italian", nativeName: "Italiano", rtl: false },
-  { code: "pt", name: "Portuguese", nativeName: "Português", rtl: false },
-  { code: "zh", name: "Mandarin Chinese", nativeName: "中文", rtl: false },
-];
+export interface SectionLabels {
+  summary?: string;
+  experience?: string;
+  education?: string;
+  skills?: string;
+  contact?: string;
+  certifications?: string;
+  languages?: string;
+  projects?: string;
+  awards?: string;
+}
 
-export const LANGUAGE_NAME: Record<SupportedLanguage, string> =
-  Object.fromEntries(SUPPORTED_LANGUAGES.map((l) => [l.code, l.name])) as Record<
-    SupportedLanguage,
-    string
-  >;
-
-export type TranslatedCV = {
+export interface TranslatedCV {
   basics: {
+    fullName?: string;
     role?: string;
+    email?: string;
+    phone?: string;
     location?: string;
+    website?: string;
+    linkedin?: string;
     summary?: string;
+    photoUrl?: string;
   };
-  experience: Array<{
+  experience?: Array<{
+    id?: string;
+    company?: string;
     role?: string;
-    location?: string;
+    startDate?: string;
+    endDate?: string;
+    current?: boolean;
     bullets?: string[];
+    achievements?: string[];
   }>;
-  education: Array<{
+  education?: Array<{
+    id?: string;
     degree?: string;
-    location?: string;
-    notes?: string;
+    institution?: string;
+    year?: string;
+    gradYear?: string;
   }>;
-  skills: string[];
-  projects?: Array<{ description?: string }>;
-  languages?: Array<{ name?: string; level?: string }>;
-  awards?: Array<{ title?: string }>;
-  certifications?: Array<{ name?: string }>;
-  interests?: string[];
-  sectionLabels: {
-    profile: string;
-    experience: string;
-    education: string;
-    skills: string;
-    projects: string;
-    languages: string;
-    awards: string;
-    certifications: string;
-    interests: string;
-  };
-};
+  skills?: string[] | Array<{ name: string; level?: string }>;
+  certifications?: string[] | Array<{ title?: string; name?: string }>;
+  languages?: string[] | Array<{ language?: string; name?: string; fluency?: string; level?: string }>;
+  labels?: SectionLabels;
+}
 
-export type TranslateCvResult =
-  | {
-      ok: true;
-      translated: TranslatedCV;
-      languageCode: SupportedLanguage;
-      languageName: string;
-    }
-  | { ok: false; error: string };
-
-export function isSupportedLanguage(v: unknown): v is SupportedLanguage {
-  return typeof v === "string" && v in LANGUAGE_NAME;
+export function getLanguageName(code: SupportedLanguage): string {
+  const found = SUPPORTED_LANGUAGES.find((l) => l.code === code);
+  return found ? `${found.name} (${found.nativeName})` : code;
 }
