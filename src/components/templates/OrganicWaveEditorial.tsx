@@ -14,8 +14,17 @@ export function OrganicWaveEditorial({ data, paginated }: TemplateProps) {
   const certifications: any[] = (data as any)?.certifications || [];
   const languages: any[] = (data as any)?.languages || [];
 
+  // Dynamic Section Labels with English Fallbacks
+  const labels: any = (data as any)?.labels || {};
+  const lblExperience = labels.experience || labels.workExperience || "Professional Experience";
+  const lblSkills = labels.skills || labels.competencies || "Core Skills";
+  const lblEducation = labels.education || "Education";
+  const lblContact = labels.contact || "Contact";
+  const lblCertifications = labels.certifications || "Certifications & Honors";
+  const lblLanguages = labels.languages || "Languages";
+
   const displayRole = basics.role?.trim() || "Creative Director & Project Lead";
-  const fullName = basics.fullName?.trim() || "Sacha Dubois";
+  const fullName = basics.fullName?.trim() || "Your Name";
 
   const initials =
     fullName
@@ -24,7 +33,7 @@ export function OrganicWaveEditorial({ data, paginated }: TemplateProps) {
       .map((w: string) => w[0])
       .join("")
       .substring(0, 2)
-      .toUpperCase() || "SD";
+      .toUpperCase() || "YN";
 
   return (
     <div
@@ -89,10 +98,10 @@ export function OrganicWaveEditorial({ data, paginated }: TemplateProps) {
             </section>
           )}
 
-          {/* Pill Highlights */}
+          {/* Skills Section */}
           <section className="space-y-2">
             <h2 className="text-xs font-black uppercase tracking-widest text-[#991b1b] border-b-2 border-[#991b1b]/20 pb-1">
-              Compétences
+              {lblSkills}
             </h2>
             <div className="flex flex-wrap gap-1.5 pt-1">
               {(skills.length > 0
@@ -113,11 +122,11 @@ export function OrganicWaveEditorial({ data, paginated }: TemplateProps) {
             </div>
           </section>
 
-          {/* Education Block */}
+          {/* Education Section */}
           {education.length > 0 && (
             <section className="space-y-2.5">
               <h2 className="text-xs font-black uppercase tracking-widest text-[#991b1b] border-b-2 border-[#991b1b]/20 pb-1">
-                Formation
+                {lblEducation}
               </h2>
               <div className="space-y-2 text-xs">
                 {education.map((edu: any, index: number) => (
@@ -133,10 +142,29 @@ export function OrganicWaveEditorial({ data, paginated }: TemplateProps) {
             </section>
           )}
 
+          {/* Languages Section */}
+          {languages.length > 0 && (
+            <section className="space-y-2">
+              <h2 className="text-xs font-black uppercase tracking-widest text-[#991b1b] border-b-2 border-[#991b1b]/20 pb-1">
+                {lblLanguages}
+              </h2>
+              <div className="space-y-1 text-xs text-[#4b5563]">
+                {languages.map((l: any, i: number) => (
+                  <div key={i} className="flex justify-between">
+                    <span>{typeof l === "string" ? l : l.language || l.name}</span>
+                    <span className="text-[#991b1b] font-medium">
+                      {l.fluency || l.level || "Fluent"}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+
           {/* Contact Details */}
           <section className="space-y-1.5 pt-2 border-t border-slate-200 text-xs text-[#4b5563]">
             <h2 className="text-xs font-black uppercase tracking-widest text-[#991b1b] mb-1.5">
-              Contact
+              {lblContact}
             </h2>
             {basics.email && <div>✉️ {basics.email}</div>}
             {basics.phone && <div>📞 {basics.phone}</div>}
@@ -150,7 +178,7 @@ export function OrganicWaveEditorial({ data, paginated }: TemplateProps) {
         <div className="col-span-7 space-y-6">
           <section className="space-y-4">
             <h2 className="text-xs font-black uppercase tracking-widest text-[#991b1b] border-b-2 border-[#991b1b]/20 pb-1">
-              Expérience Professionnelle
+              {lblExperience}
             </h2>
             <div className="space-y-5">
               {experience.map((job: any, i: number) => (
@@ -158,21 +186,21 @@ export function OrganicWaveEditorial({ data, paginated }: TemplateProps) {
                   <span className="absolute -left-[5px] top-1.5 h-2 w-2 rounded-full bg-[#991b1b]" />
                   <div className="flex justify-between items-baseline">
                     <h3 className="text-sm font-black uppercase tracking-tight text-[#111827]">
-                      {job.role || job.title || "Directeur Artistique"}
+                      {job.role || job.title || "Senior Lead"}
                     </h3>
                     <span className="text-[10px] font-bold text-[#991b1b]">
-                      {job.startDate || "2022"} – {job.endDate || "Présent"}
+                      {job.startDate || "2022"} – {job.endDate || "Present"}
                     </span>
                   </div>
                   <div className="text-xs font-bold text-[#b91c1c] uppercase tracking-wide">
-                    {job.company || "Agence Digitale"}
+                    {job.company || "Company Name"}
                   </div>
                   <ul className="text-xs space-y-1 list-disc list-inside text-[#4b5563] pt-1 leading-relaxed">
                     {(
                       job.achievements ||
                       job.bullets || [
-                        "Direction créative sur les campagnes de marque globales et lancements de produits.",
-                        "Gestion d'une équipe de designers et collaboration transverse avec les directeurs de comptes.",
+                        "Led cross-functional teams to deliver key organizational milestones.",
+                        "Streamlined internal processes and managed critical project deliverables.",
                       ]
                     ).map((bullet: string, idx: number) => (
                       <li key={idx}>{bullet}</li>
@@ -183,11 +211,11 @@ export function OrganicWaveEditorial({ data, paginated }: TemplateProps) {
             </div>
           </section>
 
-          {/* Certifications or Honors */}
+          {/* Certifications & Honors Section */}
           {certifications.length > 0 && (
             <section className="space-y-2">
               <h2 className="text-xs font-black uppercase tracking-widest text-[#991b1b] border-b-2 border-[#991b1b]/20 pb-1">
-                Distinctions & Certificats
+                {lblCertifications}
               </h2>
               <div className="grid grid-cols-2 gap-2 text-xs">
                 {certifications.map((cert: any, index: number) => (
