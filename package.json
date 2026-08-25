@@ -10,11 +10,13 @@
     "lint": "eslint",
     "postinstall": "prisma generate",
     "verify:price": "node scripts/verify-stripe-price.mjs",
-    "prebuild": "node scripts/verify-stripe-price.mjs && tsx scripts/verify-paywall.ts && tsx scripts/verify-sanitize.ts && tsx scripts/verify-ai-gate.ts && tsx scripts/verify-no-stat-claims.ts",
+    "prebuild": "node scripts/verify-stripe-price.mjs && tsx scripts/verify-paywall.ts && tsx scripts/verify-sanitize.ts && tsx scripts/verify-ai-gate.ts && tsx scripts/verify-no-stat-claims.ts && tsx scripts/verify-content.mts",
     "verify:paywall": "tsx scripts/verify-paywall.ts",
     "verify:sanitize": "tsx scripts/verify-sanitize.ts",
     "verify:ai-gate": "tsx scripts/verify-ai-gate.ts",
     "verify:no-stat-claims": "tsx scripts/verify-no-stat-claims.ts",
+    "verify:content": "tsx scripts/verify-content.mts",
+    "verify:content:self-test": "tsx scripts/verify-content.mts --self-test",
     "verify:tiles": "tsx --env-file=.env.local scripts/verify-account-tiles.ts"
   },
   "dependencies": {
@@ -34,6 +36,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "framer-motion": "^12.38.0",
+    "gray-matter": "4.0.3",
     "lucide-react": "^1.11.0",
     "next": "16.2.4",
     "puppeteer-core": "^24.42.0",
