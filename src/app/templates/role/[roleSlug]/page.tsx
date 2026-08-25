@@ -1,10 +1,9 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
-import { JOB_ROLES, getRoleBySlug } from "@/lib/roles";
+import { getRoleBySlug } from "@/lib/roles";
 import { suggestTemplate, TEMPLATES } from "@/components/templates/template-registry";
 import { CVPreview } from "@/components/templates/CVPreview";
-import { getCurrentUser } from "@/lib/auth";
 import { getRoleCvContent } from "@/lib/role-cv-content";
 import { SiteHeader } from "@/components/site-header";
 import { Footer } from "@/components/footer";
@@ -29,12 +28,24 @@ import {
 
 export const revalidate = 3600;
 
+// BOUNDED ON DEMAND, NOT PRERENDERED — and the empty array is the mechanism.
+//
+// Until the session read was removed above, this route was dynamic, so the
+// generateStaticParams below never ran and `revalidate` never took effect.
+// Removing the read made both live at once, and the route immediately began
+// prerendering all 514 hubs: +87 MB of build artifacts and +8.6s of static
+// generation, measured in #99 and rejected.
+//
+// Returning [] keeps the caching and drops the prerender: each hub renders on
+// its first request and is then cached for an hour, the same shape the
+// role x country grid uses. dynamicParams must be true for that to be allowed;
+// an unknown slug still 404s, just at request time instead of build time —
+// getRoleBySlug returns undefined and the component calls notFound().
 export async function generateStaticParams() {
-  return JOB_ROLES.map((r) => ({ roleSlug: r.slug }));
+  return [] as Array<{ roleSlug: string }>;
 }
 
-// Reject unknown slugs at build time (they wouldn't pass JOB_ROLES anyway).
-export const dynamicParams = false;
+export const dynamicParams = true;
 
 export async function generateMetadata({
   params,
@@ -60,16 +71,25 @@ export default async function RoleHubPage({
 }: {
   params: Promise<{ roleSlug: string }>;
 }) {
-  const [{ roleSlug }, user] = await Promise.all([params, getCurrentUser()]);
+  // COST FIX (26 Aug): this route no longer reads the session.
+  //
+  // Reading it opted the route out of Next's full route cache, so `revalidate`
+  // never took effect and every crawl of every URL here was a fresh render. The
+  // #99 measurement put that at 15,362 of 15,858 submitted URLs; after waves 1-3
+  // the grid alone is 45,568. /jobs/[country] has always passed isLoggedIn={false}
+  // for exactly this reason.
+  //
+  // The trade-off, accepted deliberately: the header and CTA render their
+  // logged-out variant for everyone, including signed-in visitors. A client-side
+  // session check to restore personalisation is NOT in this PR.
+  const { roleSlug } = await params;
   const role = getRoleBySlug(roleSlug);
   if (!role) notFound();
 
   const layout = suggestTemplate({ roleSlug });
-  const isLoggedIn = Boolean(user);
-  const ctaHref = isLoggedIn
-    ? `/cv/new?template=${layout.slug}`
-    : `/signup?intent=template&template=${layout.slug}`;
-  const ctaLabel = isLoggedIn ? "Use this template" : "Sign up to use this template";
+  const isLoggedIn = false;
+  const ctaHref = `/signup?intent=template&template=${layout.slug}`;
+  const ctaLabel = "Sign up to use this template";
 
   // Localized FAQ — REAL sourced role data ahead of the shared master FAQ.
   const roleContent = getRoleCvContent(role.slug);

@@ -1263,6 +1263,321 @@ const COUNTRY_OVERRIDES: Record<string, VerifiedCountryConvention> = {
       "https://www.spot.uz/ru/2021/01/08/resume/",
     ],
   },
+
+  // ---- WAVE 3 (promoted 2026-08-25) ----------------------------------------
+  // 20 countries researched in wave 3. Same rules as the blocks above: a field the
+  // pack could not verify holds this country's REGIONAL default and says so, and a
+  // weaker sourcing tier is recorded on the entry rather than only in a handoff.
+  // includeGPA fell to the regional default for 12 of these 20 — grade conventions
+  // are simply not documented by most national career services.
+
+  albania: {
+    pageLength: "2-page",
+    includePhoto: "optional", // includePhoto: regional default — pack could not verify (eastern-europe)
+    includeAddress: "full",
+    includeDOB: "common",
+    includeGPA: "optional", // includeGPA: regional default — pack could not verify (eastern-europe)
+    referenceSection: "available-on-request",
+    notes: "Common in Albania: the CV opens with a \"Të dhënat personale\" block carrying datëlindja (date of birth) and adresa e vendbanimit (residential address), Europass-style — duapune.com / merrjep.com.",
+    // sources: established local platforms / career media only — no government/university source located per-field (wave 3)
+    sources: [
+      "https://www.duapune.com/blog/keshilla-mbi-cv/si-te-shkruajme-nje-cv-profesionale",
+      "https://www.merrjep.com/blog/si-te-shkruajme-nje-cv",
+      "https://duapune.com/blog/keshilla-mbi-cv/cfare-perfshihet-ne-nje-shembull-cv",
+      "https://www.portalipunes.al/blogs/2",
+    ],
+  },
+  argentina: {
+    pageLength: "2-page",
+    includePhoto: "optional",
+    includeAddress: "full",
+    includeDOB: "common",
+    includeGPA: "optional", // includeGPA: regional default — pack could not verify (central-south-america)
+    referenceSection: "available-on-request",
+    notes: "Common in Argentina: a max-two-page CV whose datos personales traditionally carry DNI number, date of birth, marital status and nationality per the national employment portal, with photo explicitly optional; references are supplied on request rather than listed, and specialists now push city-only address and DOB-free formats.",
+    sources: [
+      "https://www.argentina.gob.ar/trabajo/preparate",
+      "https://www.perfil.com/noticias/economia/que-poner-en-el-curriculum-datos-obligatorios-recomendaciones-actuales-y-que-conviene-omitir-a35.phtml",
+      "https://www.bumeran.com.ar/blog/buscar-trabajo/curriculum-sin-experiencia-que-poner-y-como-destacarte/",
+    ],
+  },
+  armenia: {
+    pageLength: "2-page",
+    includePhoto: "optional",
+    includeAddress: "avoid",
+    includeDOB: "avoid",
+    includeGPA: "optional", // includeGPA: regional default — pack could not verify (central-asia)
+    referenceSection: "list", // referenceSection: regional default — pack could not verify (central-asia)
+    notes: "Common in Armenia: the market's de-facto style guide is staff.am — a Western-leaning one-to-two-page CV (often in English) whose structure ends at skills/hobbies, with age and home address explicitly kept off (\"տան հասցեն հարկավոր չէ ընդգրկել\" — job.am), unlike classic post-Soviet резюме.",
+    // sources: established local platforms / career media only — no government/university source located per-field (wave 3)
+    sources: [
+      "https://staffmedia.am/career/how-to-write-a-professional-cv",
+      "https://job.am/en/blog/941/inch-grel-rezyumeum-xorhurdner-ashxatanqayin-pordz-chunecogh-usanoghnerin",
+      "https://www.internest.am/1489/ինչպե՞ս-կազմել-ճիշտ-ռեզյումե/",
+      "https://www.accountant.am/ռեզյումեի-օրինակ-․-ինչպե՞ս-կազմել-ռեզ/",
+      "https://www.internest.am/3120/հայերեն-ռեզյումեի-օրինակներ/",
+      "https://job.am/en/blog/941/…",
+      "https://www.internest.am/1489/…",
+    ],
+  },
+  azerbaijan: {
+    pageLength: "2-page",
+    includePhoto: "optional",
+    includeAddress: "full",
+    includeDOB: "common",
+    includeGPA: "optional",
+    referenceSection: "list",
+    notes: "Common in Azerbaijan: the traditional CV still opens with a personal-data block giving date AND place of birth (\"Anadan olma tarixi və doğulduğunuz yer\" — banco.az), and the State Employment Agency pushes jobseekers to its free national builder cv.dma.gov.az (\"CV yarat\"), with CVs circulating in Azerbaijani, Russian or English by employer.",
+    sources: [
+      "https://dma.gov.az/layiheler/sosial-layiheler/cv-yarat",
+      "https://cv.dma.gov.az",
+      "http://unec.edu.az/karyera-merkezi-teqdim-edir-sizin-marketinq-materiallarinizin-hazirlanmasi/",
+      "https://banco.az/az/news/yaxsi-cv-ni-nece-hazirlamaq-olar",
+      "https://qebulol.az/cv/",
+      "https://upperedu.az/ugurlu-cv-yazmaq-ucun-numuneler",
+    ],
+  },
+  "bosnia-and-herzegovina": {
+    pageLength: "2-page",
+    includePhoto: "optional",
+    includeAddress: "full",
+    includeDOB: "common",
+    includeGPA: "optional",
+    referenceSection: "available-on-request",
+    notes: "Common in Bosnia and Herzegovina: CVs follow the Europass-style \"biografija\" promoted by entity employment services (RS service page \"Европски формат биографије / CV\"), and the grade average is quoted on the 10-point scale — YEP's rule of thumb is to list it only above 8.00 for domestic applications (9.00 for abroad).",
+    // sources: established local platforms / career media only — no government/university source located per-field (wave 3)
+    sources: [
+      "http://www.zzzrs.net/index.php/nezaposleni/savjeti/evropski_format_biografije_cv/",
+      "https://cvk.apeiron-uni.eu/content/kako-napisati-cv-biografiju",
+      "https://yep.ba/kako-napisati-cv/",
+      "https://www.poslovi.ba/advice/pisanje-biografije-36",
+    ],
+  },
+  cameroon: {
+    pageLength: "2-page",
+    includePhoto: "required",
+    includeAddress: "full",
+    includeDOB: "common",
+    includeGPA: "optional",
+    referenceSection: "list",
+    notes: "Common in Cameroon: FNE-style identification block with date de naissance, situation de famille (incl. number of children) and adresse complète, plus an expected ID-format photo; CVs run more detailed than international norms.",
+    sources: [
+      "https://hubafrica.co/blog/comment-faire-un-cv-au-cameroun/",
+      "https://africarrieres.com/cameroon/en/guide/pratique/writing-cv",
+      "https://www.fnecm.org/index.php/fr/demarche-de-recherche-dun-emploi/rediger-son-profil",
+    ],
+  },
+  chile: {
+    pageLength: "flexible",
+    includePhoto: "optional",
+    includeAddress: "avoid",
+    includeDOB: "avoid",
+    includeGPA: "optional", // includeGPA: regional default — pack could not verify (central-south-america)
+    referenceSection: "list", // referenceSection: regional default — pack could not verify (central-south-america)
+    notes: "Common in Chile: CV length scales with experience (one page early-career, two beyond ~5 years); guidance is split on the photo — PUC's career guide calls it \"muy importante\" while recruiters advise \"sin foto\" — and modern advice strips RUT, address, marital status and age, in line with Ley 19.739's ban on age/sex conditions in job offers.",
+    sources: [
+      "https://www.ing.uc.cl/vinculacion-con-el-medio/desarrollo-laboral/potencia-tu-carrera/guia-transicion-laboral/herramientas/",
+      "https://www.biobiochile.cl/noticias/servicios/explicado/2023/11/29/sin-foto-y-al-grano-5-consejos-para-un-curriculum-ganador.shtml",
+      "https://www.biobiochile.cl/noticias/servicios/toma-nota/2026/07/13/sence-entrega-10-claves-para-que-tu-curriculum-destaque-en-la-bne-y-otros-portales-laborales.shtml",
+    ],
+  },
+  colombia: {
+    pageLength: "flexible",
+    includePhoto: "optional",
+    includeAddress: "full",
+    includeDOB: "common",
+    includeGPA: "optional", // includeGPA: regional default — pack could not verify (central-south-america)
+    referenceSection: "list",
+    notes: "Common in Colombia: the CV is called \"hoja de vida\", traditionally up to 3 pages, closed with work AND personal references plus the candidate's signature and date; government guidance (SENA) still lists DOB/ID/address while university guidance (Uniandes) now drops photo, address and marital data.",
+    sources: [
+      "https://ape.sena.edu.co/personas/Paginas/OrientacionHojaDeVida%20(1",
+      "https://agora.uniandes.edu.co/como-hacer-una-hoja-de-vida-efectiva/",
+    ],
+  },
+  "cote-d-ivoire": {
+    pageLength: "2-page",
+    includePhoto: "required",
+    includeAddress: "city-only",
+    includeDOB: "common",
+    includeGPA: "optional",
+    referenceSection: "available-on-request",
+    notes: "Common in Cote d Ivoire (Côte d'Ivoire): CV opens with an état-civil block (situation matrimoniale, date/lieu de naissance) and a near-obligatory professional photo; address given as quartier + ville, e.g. \"Cocody, Abidjan\".",
+    sources: [
+      "https://simoon-cv.com/blog/comment-creer-cv-professionnel-cote-ivoire-2026/",
+      "https://modeles-cv.fr/exemples-de-cv/cote-divoire-pays-1ab20",
+      "https://news.educarriere.ci/news-6539-les-5-infos-qu-il-faut-gommer-de-votre-cv.html",
+      "https://www.tresor.gouv.ci/tres/wp-content/uploads/2021/10/CV-DGA-sanogo-correct-2.pdf",
+    ],
+  },
+  ecuador: {
+    pageLength: "flexible",
+    includePhoto: "avoid",
+    includeAddress: "city-only",
+    includeDOB: "avoid",
+    includeGPA: "optional", // includeGPA: regional default — pack could not verify (central-south-america)
+    referenceSection: "list",
+    notes: "Common in Ecuador: the document is a \"hoja de vida\" of one page (two with experience) ending in three named references — professors count for first-timers per ESPOL — while 2026 guidance strips photo, full address, birth date and marital status down to city/province and professional data only.",
+    sources: [
+      "https://empleabilidad.espol.edu.ec/archivos/MANUAL_HOJA_DE_VIDA.pdf",
+      "https://ceproem.espol.edu.ec/archivos/MANUAL_HOJA_DE_VIDA.pdf",
+      "https://www.multitrabajos.com/blog/buscar-trabajo/como-armar-una-hoja-de-vida-en-ecuador-y-que-tener-en-cuenta/",
+      "https://www.expreso.ec/tramites-y-servicios/hoja-vida-2026-datos-eliminar-mejorarla-conseguir-empleo-ecuador-291265.html",
+    ],
+  },
+  kyrgyzstan: {
+    pageLength: "1-page",
+    includePhoto: "avoid",
+    includeAddress: "full",
+    includeDOB: "common",
+    includeGPA: "optional", // includeGPA: regional default — pack could not verify (central-asia)
+    referenceSection: "list",
+    notes: "Common in Kyrgyzstan: the Russian-style одностраничное резюме — the state employment portal tells jobseekers to fit everything on one sheet with date of birth and full postal address, warning that employers skim rather than read each resume (zanyatost.kg).",
+    sources: [
+      "https://zanyatost.kg/Page/PageShow/1010",
+      "https://www.auca.kg/en/career_resumewriting/",
+    ],
+  },
+  latvia: {
+    pageLength: "2-page",
+    includePhoto: "optional",
+    includeAddress: "full",
+    includeDOB: "common",
+    includeGPA: "optional", // includeGPA: regional default — pack could not verify (eastern-europe)
+    referenceSection: "available-on-request",
+    notes: "Common in Latvia: the CV shows dzimšanas gads (birth year) but never the personas kods (state personal ID code), and anything \"kas kaut kādā mērā var būt diskriminējoša\" (in any way potentially discriminatory) is left out (lvportals.lv).",
+    sources: [
+      "https://www.nva.gov.lv/en/registration-cv",
+      "https://lvportals.lv/skaidrojumi/256670-dzives-apraksts-jeb-cv-ka-to-veidot-2013",
+      "https://www.prakse.lv/article/610/5-padomi-ka-uzrakstit-cv-un-motivacijas-vestuli",
+    ],
+  },
+  moldova: {
+    pageLength: "2-page",
+    includePhoto: "optional",
+    includeAddress: "full",
+    includeDOB: "common",
+    includeGPA: "optional",
+    referenceSection: "available-on-request",
+    notes: "Common in Moldova: traditional institutional templates still carry a full personal-data block — \"Data naşterii\", \"Starea civilă\" and full \"Adresă\" (UTM/UPSC models) — while CVs circulate in Romanian or Russian depending on the employer, and grade averages are cited on Moldova's 10-point scale (list only above 8).",
+    sources: [
+      "https://www.cariera.anofm.md/",
+      "https://utm.md/acte_normative/interne/cautareLocMunca.pdf",
+      "https://www.delucru.md/articles/ghid-complet-cum-sa-ti-faci-un-cv-profesionist",
+      "https://piatamuncii.md/ro/blog/sfaturi-utile-pentru-scrierea-unui-curriculum-vitae-cv",
+      "https://old.upsc.md/wp-content/uploads/2017/02/subdiv_centru_ccgc_cv.pdf",
+    ],
+  },
+  "north-macedonia": {
+    pageLength: "2-page",
+    includePhoto: "avoid",
+    includeAddress: "full",
+    includeDOB: "common", // includeDOB: regional default — pack could not verify (eastern-europe)
+    includeGPA: "optional", // includeGPA: regional default — pack could not verify (eastern-europe)
+    referenceSection: "list",
+    notes: "Common in North Macedonia: AVRM (Агенција за вработување) steers jobseekers to the standard European CV format — \"Европскиот формат на CV Ви овозможува Вашите знаења и вештини да ги презентирате во стандардна форма\" (\"The European CV format enables you to present your knowledge and skills in a standard form\") — https://av.gov.mk/makedonski-ns_article-rabotna-biografija-cv.nspx Supporting exclusion quote (vrabotuvanje.com.mk): \"Во биографијата не наведувајте брачен статус, вероисповед и останати небитни податоци\" (\"Do not state marital status, religion and other irrelevant data in the CV\").",
+    sources: [
+      "https://www.vrabotuvanje.com.mk/Sovet/5810/13-tajni-za-100-sovrsheno-CV/51/",
+      "https://www.apliciraj.mk/korisni-soveti-za-sekoj-segmet-na-vasheto-cv/",
+      "https://24hr.mk/11-chekori-za-uspeshno-sostavuvanje-na-kratka-biografija-koi-kje-vi-pomognat-da-ja-dobiete-rabotata-koja-ja-sakate/",
+      "https://www.vrabotuvanje.com.mk/Sovet/426/Eve-shto-NE-SMEE-da-stoi-vo-Vasheto-CV/56/",
+      "https://www.vrabotuvanje.com.mk/Sovet/20739/Vaka-se-pishuva-CV-koga-nemate-rabotno-iskustvo/56/",
+      "https://av.gov.mk/makedonski-ns_article-rabotna-biografija-cv.nspx",
+    ],
+  },
+  peru: {
+    pageLength: "2-page",
+    includePhoto: "optional",
+    includeAddress: "full",
+    includeDOB: "avoid",
+    includeGPA: "optional",
+    referenceSection: "list",
+    notes: "Common in Peru: a max-two-page \"CV\" with photo optional per the Ministry of Labour, three named references, and academic standing shown as \"tercio/quinto superior\" (class-rank bands employers often require); modern guidance (PUCP, platforms) says omit age, marital status and DNI to avoid bias.",
+    sources: [
+      "https://elcomercio.pe/economia/personal/mpte-como-elaborar-un-curriculum-vitae-eficiente-efectivo-y-ganador-noticia/",
+      "https://www.gob.pe/institucion/mtpe/noticias/683144-el-mpte-te-asesora-para-elaborar-un-curriculum-vitae-eficiente-efectivo-y-ganador",
+      "https://cdn01.pucp.education/btpucp/2019/07/19163243/manual_del_usuario1.pdf",
+      "https://www.bumeran.com.pe/blog/buscar-trabajo/que-no-poner-en-tu-curriculum-si-buscas-trabajo/",
+      "https://www.utp.edu.pe/blog/que-significa-decimo-quinto-tercio-superior",
+      "https://investigacion.pucp.edu.pe/wp-content/uploads/2019/08/ejemplo-cv.pdf",
+    ],
+  },
+  senegal: {
+    pageLength: "2-page",
+    includePhoto: "optional",
+    includeAddress: "full",
+    includeDOB: "common",
+    includeGPA: "optional", // includeGPA: regional default — pack could not verify (sub-saharan-africa)
+    referenceSection: "available-on-request",
+    notes: "Common in Senegal: French-style CV with an \"état civil\" block first (age/marital status often shown), an optional but widespread photo, two pages maximum (one page preferred for jeunes diplômés), and references given on request rather than listed.",
+    // sources: established local platforms / career media only — no government/university source located per-field (wave 3)
+    sources: [
+      "https://www.sencampus.com/rediger-cv-efficace/",
+      "https://fournisseursdeservices.com/comment-rediger-un-cv-qui-attire-lattention-des-recruteurs-senegalais-2/",
+      "https://www.emploidakar.com/comment-rediger-son-cv/",
+      "https://modeles-cv.fr/exemples-de-cv/senegal-pays",
+    ],
+  },
+  slovakia: {
+    pageLength: "2-page",
+    includePhoto: "optional",
+    includeAddress: "city-only",
+    includeDOB: "common",
+    includeGPA: "optional", // includeGPA: regional default — pack could not verify (eastern-europe)
+    referenceSection: "available-on-request",
+    notes: "Common in Slovakia: photo and dátum narodenia are still routinely included on CVs sent via profesia.sk, even though ÚPSVaR's EURES guidance treats both as optional and warns against marital-status/nationality details. Supporting exclusion quote (eures.sk): \"Do životopisu nepatria: informácie o rodinnom stave, sexuálnej orientácii, náboženskom presvedčení… zdravotnom stave, tehotenstve\" (\"The CV should not contain: marital status, sexual orientation, religious belief… health status, pregnancy\").",
+    sources: [
+      "https://www.eures.sk/vzor-zivotopisu-a-prakticke-rady-pri-pisani/",
+      "https://blog.profesia.sk/6-najvacsich-chyb-v-zivotopise/",
+      "https://www.profesia.sk/kariera-v-kocke/zivotopis/ako-napisat-dobry-zivotopis/",
+      "https://www.profesia.sk/kariera-v-kocke/zivotopis/referencie/",
+    ],
+  },
+  slovenia: {
+    pageLength: "2-page",
+    includePhoto: "optional",
+    includeAddress: "full",
+    includeDOB: "common",
+    includeGPA: "optional", // includeGPA: regional default — pack could not verify (eastern-europe)
+    referenceSection: "list",
+    notes: "Common in Slovenia: ZRSZ's eSvetovanje stresses \"Ne obstaja ena in edina pravilna oblika življenjepisa\" (no single correct CV format) — a 1–2 page življenjepis with full naslov, optional photo and optional named reference section is the norm.",
+    sources: [
+      "https://esvetovanje.ess.gov.si/KakoKandidiramNaDelovnaMesta/Zivljenjepis/",
+      "https://www.ess.gov.si/iskalci-zaposlitve/delo-v-evropi-eures/iskanje-zaposlitve-v-evropi/mednarodni-zivljenjepis/",
+      "https://www.kariera.si/sl/blog/kako-napisati-zivljenjepis",
+      "https://www.optius.com/iskalci/karierna-svetovalnica/fotografija-v-zivljenjepisu-da-ali-ne/",
+    ],
+  },
+  zambia: {
+    pageLength: "2-page",
+    includePhoto: "avoid",
+    includeAddress: "city-only",
+    includeDOB: "common", // includeDOB: regional default — pack could not verify (sub-saharan-africa)
+    includeGPA: "optional",
+    referenceSection: "list",
+    notes: "Common in Zambia: employers (including government, e.g. the Judiciary) ask for a CV with \"three traceable referees\" — named, contactable references are the norm, often alongside certified copies of certificates.",
+    sources: [
+      "https://gozambiajobs.com/blog/the-ultimate-guide-to-writing-a-resume-in-zambia",
+      "https://cczambia.com/your-cv/",
+      "https://gozambiajobs.com/cv-basics-2/",
+      "https://jobsmuzambia.com/how-to-write-a-winning-cv-for-the-zambian-job-market/",
+      "https://www.greatzambiajobs.com/jobs/job-detail/job-2-General-Worker-Grounds-jss-01-job-at-The-Judiciary-of-Zambia-64530",
+    ],
+  },
+  zimbabwe: {
+    pageLength: "2-page",
+    includePhoto: "avoid",
+    includeAddress: "city-only",
+    includeDOB: "common",
+    includeGPA: "optional",
+    referenceSection: "list",
+    notes: "Common in Zimbabwe: named referees on the CV (institutions like the University of Zimbabwe demand \"three contactable referees\"), O-/A-Level subjects and grades listed when there is no degree, and public-sector applications still expecting date of birth and National I.D. number.",
+    sources: [
+      "https://www.everydayvacancies.co.zw/articles/mastering_the_zimbabwean_cv_guide/",
+      "https://uripapi.com/how-to-write-a-professional-cv-that-gets-you-noticed-in-zimbabwe/",
+      "https://resumeflex.com/how-to-write-a-professional-cv-for-zimbabwe-job-market/",
+      "https://applynow.co.zw/2026/08/18/university-of-zimbabwe-10/",
+    ],
+  },
 };
 
 /**
