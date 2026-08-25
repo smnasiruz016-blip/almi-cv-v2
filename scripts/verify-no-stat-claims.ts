@@ -47,7 +47,7 @@
 // An accompanying source URL on the same line is the documented escape hatch:
 // the objection is to unsourced numbers, not to numbers.
 
-import { readFileSync, existsSync } from "node:fs";
+import { readFileSync, existsSync, readdirSync } from "node:fs";
 import { join, resolve } from "node:path";
 
 const ROOT = resolve(__dirname, "..");
@@ -60,6 +60,13 @@ const SCANNED: ReadonlyArray<{ file: string; why: string }> = [
   { file: "src/lib/cv-conventions.ts", why: "country convention notes rendered on /cv-guide/[country]/[role]" },
   { file: "src/app/page.tsx", why: "the homepage - where the 75% claim lived" },
   { file: "src/components/cv-master.tsx", why: "shared marketing sections on every pSEO page" },
+];
+
+/** The /learn corpus is scanned as a DIRECTORY, not a fixed list: the whole
+ *  point of that system is that guide 26 needs no code change, so a gate that
+ *  named its files would go stale the first time one landed. */
+const SCANNED_DIRS: ReadonlyArray<{ dir: string; ext: string; why: string }> = [
+  { dir: "content/learn", ext: ".md", why: "the /learn guides — long-form pages that quote statistics on purpose" },
 ];
 
 /** THE RULES. Each is a SHAPE - a number bound to a population of employers,
@@ -135,20 +142,77 @@ export function stripComments(src: string): string {
 export type Finding = { file: string; line: number; rule: string; hit: string; context: string };
 
 /** The detector, exported so the controls below can drive it on fixtures. */
+/** ATTRIBUTION, for prose.
+ *
+ *  The /learn guides quote statistics ON PURPOSE — one of them exists to trace
+ *  the "75% of resumes are rejected" myth to a 2014 Forbes contributor piece and
+ *  say where it came from. Banning numbers there would ban the article.
+ *
+ *  What separates that from the defect this gate was built for is ATTRIBUTION:
+ *  the guide says who claims the number. So for markdown the unit of judgement
+ *  is the PARAGRAPH, not the line — these files are hard-wrapped, so a
+ *  line-based scan reads "48% of employers filtering middle-skills" with the
+ *  words "The report says" sitting on the line above, invisible to it.
+ *
+ *  A paragraph is attributed when it quotes, links, or names who says it. That
+ *  last clause is a list of cues, and a list of cues is the thing this file
+ *  elsewhere argues against — so be honest about it: attribution is a linguistic
+ *  act and there is no purely structural test for it. The cues are kept few and
+ *  each is controlled below. A bare assertion carries none of them, which is the
+ *  case that matters. */
+const ATTRIBUTION: readonly RegExp[] = [
+  /["“”]/,                                   // a quotation
+  /^\s*>/m,                                            // a blockquote
+  /\[[^\]]+\]\(https?:\/\//,                          // a markdown link
+  /https?:\/\//,                                       // a bare URL
+  /\b(according to|per)\s+[A-Z]/,                      // "according to Workday"
+  /\b(survey|surveyed|study|studies|report|reports|reported|data|figures|research|headline|traced|analysis)\b/i,
+  /\b[A-Z][\w.'-]*(?:\s+[A-Z][\w.'-]*)*\s+(?:says|said|found|finds|notes|puts|estimates|puts it)\b/,
+];
+
+export function isAttributed(block: string): boolean {
+  return ATTRIBUTION.some((re) => re.test(block));
+}
+
+/** Blank-line-separated blocks, with the 1-based line number each starts on. */
+export function paragraphs(src: string): Array<{ text: string; line: number }> {
+  const NL = String.fromCharCode(10);
+  const lines = src.split(NL);
+  const out: Array<{ text: string; line: number }> = [];
+  let buf: string[] = [];
+  let start = 1;
+  lines.forEach((l, i) => {
+    if (l.trim() === "") {
+      if (buf.length) { out.push({ text: buf.join(" "), line: start }); buf = []; }
+    } else {
+      if (!buf.length) start = i + 1;
+      buf.push(l);
+    }
+  });
+  if (buf.length) out.push({ text: buf.join(" "), line: start });
+  return out;
+}
+
 export function findStatClaims(file: string, src: string): Finding[] {
   const out: Finding[] = [];
-  stripComments(src).split(String.fromCharCode(10)).forEach((line, i) => {
-    if (HAS_SOURCE.test(line)) return;
+  const isProse = file.endsWith(".md");
+  const units = isProse
+    ? paragraphs(src)
+    : stripComments(src).split(String.fromCharCode(10)).map((text, i) => ({ text, line: i + 1 }));
+
+  for (const { text, line } of units) {
+    if (HAS_SOURCE.test(text)) continue;
+    if (isProse && isAttributed(text)) continue;
     for (const rule of RULES) {
-      const m = rule.test(line);
+      const m = rule.test(text);
       if (!m) continue;
       const at = m.index ?? 0;
       out.push({
-        file, line: i + 1, rule: rule.name, hit: m[0].trim(),
-        context: line.slice(Math.max(0, at - 70), Math.min(line.length, at + m[0].length + 70)).trim(),
+        file, line, rule: rule.name, hit: m[0].trim(),
+        context: text.slice(Math.max(0, at - 70), Math.min(text.length, at + m[0].length + 70)).trim(),
       });
     }
-  });
+  }
   return out;
 }
 
@@ -195,6 +259,42 @@ check("SILENT on the Shamool commitment (subject is our sales)",
   findStatClaims("fixture", '<span>25% of our sales go to the Shamool Foundation in Lahore</span>').length === 0);
 check("SILENT on a CSS/SVG value",
   findStatClaims("fixture", 'const seg = [["18%", "#FF4D9D"], ["12%", "#7C5CFF"]];').length === 0);
+// -- prose (.md) controls: attribution is what separates a quoted statistic from
+// -- an asserted one, and a bare assertion must still fire.
+const BARE_MD = "Recruiters are ruthless. 87% of recruiters filter with ATS before a human sees your CV.";
+check("PROSE: FIRES on a bare unattributed statistic in a .md paragraph",
+  findStatClaims("content/learn/x.md", BARE_MD).length === 1);
+check("PROSE: SILENT once the same claim is quoted",
+  findStatClaims("content/learn/x.md",
+    'The vendor guide asserts "87% of recruiters filter with ATS before a human sees your CV."').length === 0);
+check("PROSE: SILENT once the same claim is attributed to a named source",
+  findStatClaims("content/learn/x.md",
+    "HR.com reports that 87% of recruiters filter with ATS before a human sees your CV.").length === 0);
+check("PROSE: SILENT once the same claim carries a markdown link",
+  findStatClaims("content/learn/x.md",
+    "87% of recruiters filter with ATS ([HR.com](https://www.hr.com/x)).").length === 0);
+// The hard-wrap case: this is why prose is judged per PARAGRAPH. Line-by-line,
+// the number and its attribution sit on different lines and the attribution is
+// invisible — which is exactly how the real guides read.
+const WRAPPED = [
+  "The report says \"Almost half the companies surveyed weeded out resumes",
+  "that present such a work gap.\" Its figures put that at 48% of employers",
+  "filtering middle-skills candidates on gaps of more than six months.",
+].join(String.fromCharCode(10));
+check("PROSE: SILENT on a hard-wrapped attributed claim (the line-based scan flagged this)",
+  findStatClaims("content/learn/x.md", WRAPPED).length === 0);
+check("PROSE: a bare claim hard-wrapped the same way STILL fires",
+  findStatClaims("content/learn/x.md",
+    ["Keyword-stuff to beat the robot. 87% of recruiters", "filter with ATS first."].join(String.fromCharCode(10))
+  ).length === 1);
+check("PROSE: paragraphs() splits on blank lines and keeps line numbers",
+  (() => { const ps = paragraphs(["a", "", "b", "c"].join(String.fromCharCode(10)));
+    return ps.length === 2 && ps[1].line === 3; })());
+// A .ts file must keep the LINE-based behaviour: it is not prose, and attribution
+// cues must not buy a role-content string an exemption.
+check("CODE: a .ts statistic is NOT excused by the word 'survey' on the line",
+  findStatClaims("src/lib/x.ts",
+    'atsNote: "Our survey shows 87% of employers filter with ATS.",').length === 1);
 check("SILENT on a claim that carries a source URL",
   findStatClaims("fixture", 'note: "92% of recruiters say ATS do not auto-reject (https://www.hr.com/x)",').length === 0);
 check("SILENT on a line comment that quotes a retired figure",
@@ -214,7 +314,21 @@ for (const { file, why } of SCANNED) {
   check(`${file} carries no unsourced world-statistic  (${why})`, f.length === 0,
     f.map((x) => `line ${x.line} [${x.rule}]: "${x.hit}" in ...${x.context}...`).join("  |  "));
 }
-check("the scan looked at files at all", SCANNED.length > 0, `${SCANNED.length}`);
+for (const { dir, ext, why } of SCANNED_DIRS) {
+  const abs = join(ROOT, dir);
+  if (!existsSync(abs)) { check(`${dir}/ exists`, false, "listed in SCANNED_DIRS but not on disk"); continue; }
+  const files = readdirSync(abs).filter((f) => f.endsWith(ext)).sort();
+  check(`${dir}/ has files to scan — ${files.length}  (${why})`, files.length > 0,
+    "a zero here is an empty corpus, not a clean one");
+  for (const f of files) {
+    const hits = findStatClaims(`${dir}/${f}`, readFileSync(join(abs, f), "utf8"));
+    findings.push(...hits);
+    check(`${dir}/${f}`, hits.length === 0,
+      hits.map((x) => `line ${x.line} [${x.rule}]: "${x.hit}"`).join("  |  "));
+  }
+}
+check("the scan looked at files at all", SCANNED.length + SCANNED_DIRS.length > 0,
+  `${SCANNED.length} files + ${SCANNED_DIRS.length} directories`);
 
 if (findings.length) {
   console.log("\nFINDINGS");
