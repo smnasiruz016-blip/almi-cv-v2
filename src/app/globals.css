@@ -294,3 +294,30 @@ h1, h2, h3, h4, h5, h6 {
     size: A4 portrait;
   }
 }
+
+/* /learn article bodies (react-markdown + remark-gfm output).
+   The repo had no prose class — CV template typography is per-template and the
+   marketing pages style each element inline, neither of which suits a full page
+   of reading. This is scoped to .learn-prose so it cannot leak into either. */
+.learn-prose { color: var(--color-plum-soft); line-height: 1.75; font-size: 1rem; }
+.learn-prose > :first-child { margin-top: 0; }
+.learn-prose h2 { font-size: 1.4rem; font-weight: 600; color: var(--color-plum); margin: 2rem 0 0.6rem; letter-spacing: -0.01em; }
+.learn-prose h3 { font-size: 1.1rem; font-weight: 700; color: var(--color-plum); margin: 1.5rem 0 0.4rem; }
+.learn-prose h4 { font-size: 1rem; font-weight: 700; color: var(--color-coral-deep); margin: 1.2rem 0 0.3rem; }
+.learn-prose p { margin: 0.85rem 0; }
+.learn-prose ul { margin: 0.85rem 0; padding-left: 1.35rem; list-style: disc; }
+.learn-prose ol { margin: 0.85rem 0; padding-left: 1.35rem; list-style: decimal; }
+.learn-prose li { margin: 0.35rem 0; }
+.learn-prose li > ul, .learn-prose li > ol { margin: 0.3rem 0; }
+.learn-prose strong { color: var(--color-plum); font-weight: 700; }
+.learn-prose em { font-style: italic; }
+.learn-prose blockquote { border-left: 3px solid var(--color-coral); padding-left: 1rem; margin: 1rem 0; color: var(--color-plum-faint); }
+.learn-prose blockquote ul, .learn-prose blockquote ol { margin: 0.4rem 0; }
+.learn-prose hr { border: 0; border-top: 1px solid var(--color-peach); margin: 1.75rem 0; }
+.learn-prose a { color: var(--color-coral-deep); text-decoration: underline; }
+.learn-prose code { background: var(--color-peach-soft); padding: 0.05rem 0.3rem; border-radius: 4px; font-size: 0.9em; }
+/* gfm tables — the reason remark-gfm is wired into the article route. */
+.learn-prose table { width: 100%; margin: 1.1rem 0; border-collapse: collapse; font-size: 0.92rem; display: block; overflow-x: auto; }
+.learn-prose th, .learn-prose td { border: 1px solid var(--color-peach); padding: 0.5rem 0.7rem; text-align: left; vertical-align: top; }
+.learn-prose th { background: var(--color-cream-soft); color: var(--color-plum); font-weight: 700; }
+.learn-prose del { text-decoration: line-through; color: var(--color-plum-faint); }

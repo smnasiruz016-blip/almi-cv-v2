@@ -12,6 +12,7 @@ import {
   CV_GRID_COUNTRIES,
   isRoleCountryIndexable,
 } from "@/lib/role-cv-content";
+import { learnUrls } from "@/lib/cv/learn/articles";
 
 export const SITE_ORIGIN = "https://almicv.almiworld.com";
 
@@ -28,6 +29,15 @@ const STATIC_ROUTES: ReadonlyArray<{ path: string; cf: MetadataRoute.Sitemap[num
   { path: "/resume-score", cf: "monthly", p: 0.7 },
   { path: "/cv-guide", cf: "weekly", p: 0.9 },
 ];
+
+/** Fixed publication date for the /learn entries. NOT a wall clock.
+ *
+ *  Constitution ISR standard: a lastModified that moves every build tells Google
+ *  the page changed when it did not, and it makes two builds of identical content
+ *  produce different bytes. Every loop below still uses `now` — changing that is a
+ *  separate decision about a much larger surface and is deliberately NOT bundled
+ *  into this PR. Bump this by hand when the guide set is revised. */
+export const LEARN_LAST_MODIFIED = new Date("2026-08-25T00:00:00.000Z");
 
 // Shared by the chunk route + the index handler.
 //
@@ -78,6 +88,19 @@ export function buildAllCvUrls(): MetadataRoute.Sitemap {
     for (const country of CV_GRID_COUNTRIES)
       if (isRoleCountryIndexable(role, country))
         out.push({ url: `${SITE_ORIGIN}/cv-guide/${country}/${role}`, lastModified: now, changeFrequency: "weekly", priority: 0.6 });
+
+
+  // /learn — the hub and every guide, from the SAME directory scan that feeds
+  // the routes and the hub page. One source of truth, three consumers: add a
+  // second one and you have rebuilt the drift this file exists to prevent.
+  // Constant lastModified, unlike every loop above — see LEARN_LAST_MODIFIED.
+  for (const path of learnUrls())
+    out.push({
+      url: `${SITE_ORIGIN}${path}`,
+      lastModified: LEARN_LAST_MODIFIED,
+      changeFrequency: "weekly",
+      priority: path === "/learn" ? 0.9 : 0.8,
+    });
 
   return out;
 }
