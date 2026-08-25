@@ -18,7 +18,14 @@ export type RoleCvContent = {
   hardSkills: string[];
   softSkills: string[];
   atsKeywords: string[];
-  /** Sourced note on the keywords (e.g. "appear in 85%+ of nursing job descriptions"). */
+  /** Role-specific guidance on the keywords.
+   *
+   *  This field used to be described as a "Sourced note". It was not: the file
+   *  carried four mutually contradictory ATS-adoption figures (97%+, 95%+, 75%+,
+   *  62%) and no source for any of them, which is what retired that word. Keep
+   *  numeric claims about employers, recruiters, postings or ATS out of this
+   *  field unless a source URL travels with them.
+   *  scripts/verify-no-stat-claims.mts fails the build on a reintroduction. */
   atsNote: string;
 };
 
@@ -57,7 +64,7 @@ export const ROLE_CV_CONTENT: Record<string, RoleCvContent> = {
       "EHR",
     ],
     atsNote:
-      "These appear in 85%+ of nursing job descriptions — use 15–25 drawn from the actual posting, integrated naturally, never keyword-stuffed.",
+      "These run through most nursing job descriptions — use 15–25 drawn from the actual posting, integrated naturally, never keyword-stuffed.",
   },
   "software-engineer": {
     include:
@@ -75,7 +82,7 @@ export const ROLE_CV_CONTENT: Record<string, RoleCvContent> = {
     hardSkills: ["General Ledger", "Accounts Payable / Receivable", "Month-End Close", "Reconciliation", "QuickBooks", "SAP", "Oracle / NetSuite", "Excel", "GAAP / IFRS"],
     softSkills: ["Attention to detail", "Confidentiality", "Deadline management", "Communication", "Problem solving"],
     atsKeywords: ["General Ledger", "Accounts Payable", "Reconciliation", "Month-End Close", "QuickBooks", "SAP", "GAAP", "SOX Compliance"],
-    atsNote: "97%+ of companies filter with ATS — match the exact software named in the posting (QuickBooks/SAP/Oracle) and show measurable outcomes, not routine duties.",
+    atsNote: "Employers routinely filter with ATS — match the exact software named in the posting (QuickBooks/SAP/Oracle) and show measurable outcomes, not routine duties.",
   },
   "project-manager": {
     include:
@@ -129,7 +136,7 @@ export const ROLE_CV_CONTENT: Record<string, RoleCvContent> = {
     hardSkills: ["Sales Management", "Revenue Growth", "Quota Attainment", "Pipeline Management", "Salesforce", "HubSpot", "Sales Strategy", "Forecasting", "Territory Planning"],
     softSkills: ["Leadership", "Coaching", "Negotiation", "Communication"],
     atsKeywords: ["Sales Management", "Revenue Growth", "Quota Attainment", "Pipeline Management", "Salesforce", "Forecasting", "Territory Planning", "CRM"],
-    atsNote: "Recruiters scan the first 7 seconds for quota attainment, revenue generated and CRM tools — make those three visible immediately; these keywords appear in 90%+ of sales-manager postings.",
+    atsNote: "A recruiter's first pass looks for quota attainment, revenue generated and CRM tools — make those three visible immediately; these keywords run through sales-manager postings.",
   },
   "customer-service-representative": {
     include:
@@ -156,7 +163,7 @@ export const ROLE_CV_CONTENT: Record<string, RoleCvContent> = {
     hardSkills: ["AutoCAD", "Civil 3D", "Revit", "MicroStation", "Structural Analysis", "Hydraulics", "Surveying", "Geotechnical Engineering", "Building Codes (IBC)"],
     softSkills: ["Project management", "Problem solving", "Communication", "Teamwork"],
     atsKeywords: ["AutoCAD", "Civil 3D", "Structural Analysis", "Geotechnical", "Surveying", "Revit", "Project Management", "Hydraulics"],
-    atsNote: "Use the exact software and codes named in the posting; 97%+ of employers filter with ATS first, so the right keywords decide whether a human ever sees the resume.",
+    atsNote: "Use the exact software and codes named in the posting; employers routinely filter with ATS first, so the right keywords decide whether a human ever sees the resume.",
   },
   teacher: {
     include:
@@ -193,7 +200,7 @@ export const ROLE_CV_CONTENT: Record<string, RoleCvContent> = {
     hardSkills: ["Patient care", "Clinical diagnosis", "Board-certified procedures", "EHR (Epic)", "Treatment planning", "Multidisciplinary collaboration"],
     softSkills: ["Communication", "Empathy", "Teamwork", "Leadership"],
     atsKeywords: ["Patient Care", "Board Certified", "Clinical", "Diagnosis", "EHR", "USMLE", "Treatment Planning"],
-    atsNote: "Recruiters scan for clinical competence, board certifications and measurable outcomes — avoid generic \"dedicated/passionate\" (on 90% of rejected physician resumes) and keep licensure current and visible.",
+    atsNote: "Recruiters scan for clinical competence, board certifications and measurable outcomes — avoid generic \"dedicated/passionate\" and keep licensure current and visible.",
   },
   pharmacist: {
     include:
@@ -202,7 +209,7 @@ export const ROLE_CV_CONTENT: Record<string, RoleCvContent> = {
     hardSkills: ["Medication Therapy Management", "Drug Utilization Review", "Prescription Verification", "Compounding", "Patient Counseling", "Clinical Pharmacy", "Pharmacy software (Epic Willow / Cerner)"],
     softSkills: ["Communication", "Attention to detail", "Compliance", "Patient care"],
     atsKeywords: ["Medication Therapy Management", "Patient Counseling", "Drug Utilization Review", "Clinical Pharmacy", "Compounding", "NAPLEX", "Compliance"],
-    atsNote: "These keywords appear in 90%+ of pharmacist postings — use 25–35 matched to the role; 97%+ of pharmacy employers filter with ATS first.",
+    atsNote: "These keywords run through pharmacist postings — use 25–35 matched to the role; pharmacy employers routinely filter with ATS first.",
   },
   "mechanical-engineer": {
     include:
@@ -256,7 +263,7 @@ export const ROLE_CV_CONTENT: Record<string, RoleCvContent> = {
     hardSkills: ["Microsoft Office (Word/Excel/PowerPoint/Outlook)", "Calendar management", "Scheduling", "Data entry", "Travel coordination", "Expense reporting", "Google Workspace"],
     softSkills: ["Communication", "Discretion", "Time management", "Multitasking", "Prioritization"],
     atsKeywords: ["Microsoft Office", "Calendar Management", "Scheduling", "Data Entry", "Travel Coordination", "Expense Reporting", "Confidentiality"],
-    atsNote: "These appear in 90%+ of admin postings — quantify (e.g. \"coordinated 60+ meetings/week for 5 executives with 99% accuracy\") rather than \"managed calendars\".",
+    atsNote: "These run through admin postings — quantify (e.g. \"coordinated 60+ meetings/week for 5 executives with 99% accuracy\") rather than \"managed calendars\".",
   },
   dentist: {
     include:
@@ -316,11 +323,11 @@ export const ROLE_CV_CONTENT: Record<string, RoleCvContent> = {
   "data-scientist": {
     include:
       "Standard, parseable sections — Professional Summary, a flat comma-separated Technical Skills section, Experience, Projects and Education (industry format, not an academic CV; ATS parsers misclassify Publications/Research headings).",
-    length: "Aim for ~70% keyword overlap with the job description; every experience bullet a quantified outcome.",
+    length: "Mirror the job description's own vocabulary closely; every experience bullet a quantified outcome.",
     hardSkills: ["Python", "SQL", "R", "Machine Learning", "TensorFlow", "PyTorch", "scikit-learn", "Spark", "Statistical Modeling", "NLP"],
     softSkills: ["Problem solving", "Communication", "Data storytelling", "Collaboration"],
     atsKeywords: ["Python", "SQL", "Machine Learning", "TensorFlow", "PyTorch", "Statistical Modeling", "NLP", "Deep Learning"],
-    atsNote: "ATS clears when keyword overlap with the posting is ~70%+; list skills flat and comma-separated (Python, pandas, scikit-learn) so each is an independent keyword, and quantify every bullet.",
+    atsNote: "Match the posting's own vocabulary closely; list skills flat and comma-separated (Python, pandas, scikit-learn) so each is an independent keyword, and quantify every bullet.",
   },
   "sales-representative": {
     include:
@@ -329,7 +336,7 @@ export const ROLE_CV_CONTENT: Record<string, RoleCvContent> = {
     hardSkills: ["Quota attainment", "Pipeline management", "Prospecting", "CRM (Salesforce / HubSpot)", "Cold calling", "Sales forecasting", "Account management", "Territory management"],
     softSkills: ["Negotiation", "Communication", "Relationship building", "Resilience"],
     atsKeywords: ["Quota Attainment", "Pipeline", "CRM", "Salesforce", "Prospecting", "New Business Development", "Account Management", "Revenue Growth"],
-    atsNote: "List your CRM (Salesforce/HubSpot) or you're filtered at 90%+ of corporate sales roles; recruiters scan the first 7 seconds for quota %, revenue and CRM.",
+    atsNote: "List your CRM (Salesforce/HubSpot) or you drop out of most corporate sales screens; a recruiter's first pass looks for quota attainment, revenue and CRM.",
   },
   lawyer: {
     include:
@@ -338,7 +345,7 @@ export const ROLE_CV_CONTENT: Record<string, RoleCvContent> = {
     hardSkills: ["Litigation", "Corporate Law", "Contract Drafting", "Legal Research (Westlaw / LexisNexis)", "Negotiation", "Due Diligence", "Compliance", "M&A"],
     softSkills: ["Analytical thinking", "Communication", "Attention to detail"],
     atsKeywords: ["Litigation", "Corporate Law", "Contract Drafting", "Legal Research", "Westlaw", "Negotiation", "Compliance", "Due Diligence"],
-    atsNote: "Put bar admission(s) in a dedicated section (e.g. \"New York, 2020\"); 95%+ of firms filter with ATS — missing practice-area terms (\"M&A\", \"Securities\", \"Westlaw\") disqualifies even elite credentials.",
+    atsNote: "Put bar admission(s) in a dedicated section (e.g. \"New York, 2020\"); firms routinely filter with ATS — missing practice-area terms (\"M&A\", \"Securities\", \"Westlaw\") disqualifies even elite credentials.",
   },
   "cybersecurity-analyst": {
     include:
@@ -410,7 +417,7 @@ export const ROLE_CV_CONTENT: Record<string, RoleCvContent> = {
     hardSkills: ["Social Media Management", "Content Creation", "Analytics", "Copywriting", "Community Engagement", "Paid Social", "Visual Design", "Scheduling tools"],
     softSkills: ["Creativity", "Communication", "Crisis management", "Adaptability"],
     atsKeywords: ["Social Media Marketing", "Content Creation", "Analytics", "Community Engagement", "Digital Marketing", "Copywriting", "Instagram", "Facebook"],
-    atsNote: "The first five (Social Media Management, Content Creation, Community Engagement, Analytics, Copywriting) are in 80%+ of postings — prioritize them; show measurable results (\"increased conversions 145%\", \"managed 50+ accounts\").",
+    atsNote: "The first five (Social Media Management, Content Creation, Community Engagement, Analytics, Copywriting) run through most postings — prioritize them; show measurable results (\"increased conversions 145%\", \"managed 50+ accounts\").",
   },
   "dental-assistant": {
     include:
@@ -524,11 +531,11 @@ export const ROLE_CV_CONTENT: Record<string, RoleCvContent> = {
   recruiter: {
     include:
       "A summary, a Skills section (sourcing + ATS platforms + methodologies), Experience with hiring metrics, Certifications (SHRM-CP / PHR / AIRS), and Education.",
-    length: "Single column — pick 8–15 genuine keywords (parsers penalize density above ~1.5%).",
+    length: "Single column — pick 8–15 genuine keywords (keyword-stuffing reads as spam to both parsers and people).",
     hardSkills: ["Full-cycle recruiting", "Talent sourcing", "Boolean search", "ATS management (Greenhouse / Lever / Workday)", "Employer branding", "Pipeline management", "LinkedIn Recruiter"],
     softSkills: ["Communication", "Relationship building", "Negotiation", "Organization"],
     atsKeywords: ["Full-Cycle Recruiting", "Talent Sourcing", "Boolean Search", "ATS", "Employer Branding", "Candidate Experience", "Pipeline Management"],
-    atsNote: "Name your ATS/HRIS by version (e.g. \"Greenhouse (admin, 4 yrs), Workday Recruiting\"); these keywords appear in 85%+ of talent-acquisition postings.",
+    atsNote: "Name your ATS/HRIS by version (e.g. \"Greenhouse (admin, 4 yrs), Workday Recruiting\"); these keywords run through talent-acquisition postings.",
   },
   "primary-school-teacher": {
     include:
@@ -601,7 +608,7 @@ export const ROLE_CV_CONTENT: Record<string, RoleCvContent> = {
     hardSkills: ["Business development", "Strategic partnerships", "Lead generation", "Market analysis", "Pipeline management", "Negotiation", "Proposal writing", "Salesforce"],
     softSkills: ["Communication", "Networking", "Stakeholder management", "Strategic thinking"],
     atsKeywords: ["Business Development", "Strategic Partnerships", "Lead Generation", "Pipeline Management", "Revenue Growth", "Market Analysis", "Negotiation", "ARR"],
-    atsNote: "The first five (Business Development, Sales, Relationship Building, Negotiation, Market Analysis) are in 80%+ of postings; 95%+ of SaaS/tech firms filter on ATS — missing \"ARR\", \"Strategic Partnerships\" or \"Salesforce\" disqualifies; quantify (e.g. \"qualified 250+ opportunities\").",
+    atsNote: "The first five (Business Development, Sales, Relationship Building, Negotiation, Market Analysis) run through most postings; SaaS and tech firms routinely filter on ATS — missing \"ARR\", \"Strategic Partnerships\" or \"Salesforce\" disqualifies; quantify (e.g. \"qualified 250+ opportunities\").",
   },
   "financial-advisor": {
     include:
@@ -655,7 +662,7 @@ export const ROLE_CV_CONTENT: Record<string, RoleCvContent> = {
     hardSkills: ["CDL Class A / B", "Endorsements (HazMat / Tanker / Doubles)", "DOT / FMCSA compliance", "Hours of Service", "Pre-trip inspection", "ELD", "Equipment (Flatbed / Reefer)", "GPS / TMS"],
     softSkills: ["Reliability", "Time management", "Communication", "Attention to detail"],
     atsKeywords: ["CDL Class A", "HAZMAT", "DOT Compliance", "Hours of Service", "Pre-Trip Inspection", "ELD", "Tractor-Trailer", "FMCSA"],
-    atsNote: "97%+ of carriers filter with ATS — state your CDL class + endorsements and \"DOT Compliance\"/\"Hours of Service\"; quantify on-time delivery and accident-free miles.",
+    atsNote: "Carriers routinely filter with ATS — state your CDL class + endorsements and \"DOT Compliance\"/\"Hours of Service\"; quantify on-time delivery and accident-free miles.",
   },
   "medical-assistant": {
     include:
@@ -781,7 +788,7 @@ export const ROLE_CV_CONTENT: Record<string, RoleCvContent> = {
     hardSkills: ["Craft cocktail preparation", "Mixology", "Wine & beer knowledge", "POS systems (Toast, Square, Aloha)", "Cash handling & closing", "Inventory management", "Responsible alcohol service"],
     softSkills: ["Customer service", "Conflict resolution", "Teamwork", "Speed under pressure"],
     atsKeywords: ["Bartending", "Mixology", "POS Systems", "Customer Service", "Cash Handling", "Inventory Management", "Responsible Alcohol Service", "Cocktail Preparation"],
-    atsNote: "If a state alcohol permit (or TIPS) is mandatory for the location, place it immediately after the summary so it's visible in the first 6 seconds; use literal job-ad terms and quantify customers served per shift.",
+    atsNote: "If a state alcohol permit (or TIPS) is mandatory for the location, place it immediately after the summary so it survives a quick first skim; use literal job-ad terms and quantify customers served per shift.",
   },
   "housekeeper": {
     include:
@@ -970,7 +977,7 @@ export const ROLE_CV_CONTENT: Record<string, RoleCvContent> = {
     hardSkills: ["Tax preparation", "GAAP", "Tax software (ProSystem fx, Lacerte, UltraTax)", "Financial reporting", "General ledger", "Bank reconciliation", "Month-end close", "Regulatory compliance"],
     softSkills: ["Attention to detail", "Confidentiality", "Integrity", "Deadline management"],
     atsKeywords: ["GAAP", "Tax Preparation", "CPA", "Financial Reporting", "General Ledger", "Bank Reconciliation", "Month-End Close", "Regulatory Compliance"],
-    atsNote: "Surface your CPA and tax-prep software (ProSystem fx, Lacerte, UltraTax) in the summary; GAAP, General Ledger, AP/AR and Bank Reconciliation appear in 90%+ of accounting postings — use the exact terms, not synonyms.",
+    atsNote: "Surface your CPA and tax-prep software (ProSystem fx, Lacerte, UltraTax) in the summary; GAAP, General Ledger, AP/AR and Bank Reconciliation run through accounting postings — use the exact terms, not synonyms.",
   },
   "auditor": {
     include:
@@ -1191,7 +1198,7 @@ export const ROLE_CV_CONTENT: Record<string, RoleCvContent> = {
   "claims-adjuster": {
     include:
       "A clear summary using core claims keywords, a Skills section (investigation + software + insurance terms), a Licensing section, and quantified Experience.",
-    length: "One to two pages; single-column, no graphics/tables — 97% of insurers use ATS.",
+    length: "One to two pages; single-column, no graphics/tables — insurers routinely use ATS.",
     hardSkills: ["Claims investigation", "Damage assessment", "Policy interpretation", "Xactimate", "Subrogation", "Liability assessment", "Fraud detection", "Negotiation & settlement"],
     softSkills: ["Analytical judgment", "Communication", "Negotiation", "Attention to detail"],
     atsKeywords: ["Claims Investigation", "Damage Assessment", "Policy Interpretation", "Xactimate", "Subrogation", "Liability Assessment", "Property & Casualty", "Fraud Detection"],
@@ -1204,7 +1211,7 @@ export const ROLE_CV_CONTENT: Record<string, RoleCvContent> = {
     hardSkills: ["Risk assessment", "Policy analysis", "Loss ratio analysis", "Catastrophe modeling", "Reinsurance", "Premium determination", "Regulatory compliance", "Property & casualty / life product knowledge"],
     softSkills: ["Analytical judgment", "Negotiation", "Attention to detail", "Decision making"],
     atsKeywords: ["Underwriting", "Risk Assessment", "Loss Ratio Analysis", "Policy Administration", "Regulatory Compliance", "Claims Management", "CPCU", "Customer Retention"],
-    atsNote: "97% of insurers use ATS — missing 'Underwriting', 'Loss Ratio Analysis' or 'Risk Assessment' can auto-disqualify you; name your line of business (auto/home/P&C/life), list CPCU or AU, and quantify loss-ratio and retention outcomes.",
+    atsNote: "Insurers routinely use ATS — missing 'Underwriting', 'Loss Ratio Analysis' or 'Risk Assessment' can auto-disqualify you; name your line of business (auto/home/P&C/life), list CPCU or AU, and quantify loss-ratio and retention outcomes.",
   },
   "esthetician": {
     include:
@@ -1330,7 +1337,7 @@ export const ROLE_CV_CONTENT: Record<string, RoleCvContent> = {
     hardSkills: ["Observability & monitoring (Prometheus, Grafana, DataDog)", "Reliability metrics (SLI/SLO/SLA, error budgets)", "Kubernetes", "Terraform / Ansible", "Incident management & post-mortems", "On-call & chaos engineering", "CI/CD (Jenkins, ArgoCD)", "Go / Python"],
     softSkills: ["Incident leadership", "Cross-functional coordination", "Mentoring", "Communication"],
     atsKeywords: ["Site Reliability Engineer", "SRE", "Observability", "SLO", "Kubernetes", "Terraform", "Incident Management", "Error Budgets"],
-    atsNote: "Missing SRE-specific terms ('Observability', 'SLOs', 'Chaos Engineering') gets you rejected before a human looks; aim for 15-25 keywords at 60-80% coverage and quantify SLO attainment, MTTR and on-call outcomes.",
+    atsNote: "Missing SRE-specific terms ('Observability', 'SLOs', 'Chaos Engineering') gets you rejected before a human looks; aim for 15-25 keywords drawn from the posting itself and quantify SLO attainment, MTTR and on-call outcomes.",
   },
   "penetration-tester": {
     include:
@@ -1389,7 +1396,7 @@ export const ROLE_CV_CONTENT: Record<string, RoleCvContent> = {
   "it-manager": {
     include:
       "A summary, keywords embedded in outcome bullets (not a 40-tool list), a Certifications section, and Experience using Problem-Solution-Result.",
-    length: "One to two pages; 15-25 keywords at 60-80% coverage, woven in naturally.",
+    length: "One to two pages; 15-25 keywords drawn from the posting itself, woven in naturally.",
     hardSkills: ["IT infrastructure", "Team & vendor management", "Budget management", "ITIL / service delivery", "Project management", "Security compliance", "Disaster recovery", "Cloud platforms (AWS, Azure)"],
     softSkills: ["Leadership", "Stakeholder engagement", "Change management", "Communication"],
     atsKeywords: ["IT Infrastructure", "Team Management", "ITIL", "Budget Management", "Vendor Management", "Service Delivery", "Active Directory", "Disaster Recovery"],
@@ -1402,7 +1409,7 @@ export const ROLE_CV_CONTENT: Record<string, RoleCvContent> = {
     hardSkills: ["IT strategy", "Digital transformation", "Budget & P&L management", "Vendor management", "IT governance", "Solution architecture", "IT service management", "Security & infrastructure"],
     softSkills: ["Executive leadership", "Strategic thinking", "Stakeholder management", "Communication"],
     atsKeywords: ["IT Strategy", "Digital Transformation", "Team Leadership", "Budget Management", "Vendor Management", "IT Governance", "ServiceNow", "Infrastructure"],
-    atsNote: "97% of firms use ATS — missing 'Active Directory', 'Network Troubleshooting' or 'ServiceNow' disqualifies you; embed 25-35 keywords in outcome bullets (ATS penalizes bare tool lists) and tie achievements to the company's bottom line.",
+    atsNote: "Firms routinely use ATS — missing 'Active Directory', 'Network Troubleshooting' or 'ServiceNow' disqualifies you; embed 25-35 keywords in outcome bullets (ATS penalizes bare tool lists) and tie achievements to the company's bottom line.",
   },
   "help-desk-technician": {
     include:
@@ -1469,12 +1476,12 @@ export const ROLE_CV_CONTENT: Record<string, RoleCvContent> = {
   },
   "digital-marketing-manager": {
     include:
-      "A summary, a prominent Skills section (the top 5 appear in 80%+ of postings), and Experience using metrics not adjectives.",
+      "A summary, a prominent Skills section (lead with the five that run through most postings), and Experience using metrics not adjectives.",
     length: "One to two pages; single-column, Calibri/Arial 11pt, no tables/graphics.",
     hardSkills: ["SEO", "SEM / PPC", "Email marketing", "Social media", "Analytics (GA4)", "Content strategy", "Marketing automation", "ROI analysis"],
     softSkills: ["Creativity", "Problem solving", "Communication", "Data-driven decision making"],
     atsKeywords: ["SEO", "SEM", "Email Marketing", "Social Media", "Google Analytics", "Marketing Automation", "Content Strategy", "ROI Analysis"],
-    atsNote: "Lead with the five keywords in 80%+ of postings (SEO, SEM, Email Marketing, Social Media, Analytics) in a prominent skills section, name your stack (GA4, HubSpot, Marketo, SEMrush) and use metrics ('increased revenue by 35%', not 'improved performance').",
+    atsNote: "Lead with the five keywords that run through most postings (SEO, SEM, Email Marketing, Social Media, Analytics) in a prominent skills section, name your stack (GA4, HubSpot, Marketo, SEMrush) and use metrics ('increased revenue by 35%', not 'improved performance').",
   },
   "email-marketing-specialist": {
     include:
@@ -1510,7 +1517,7 @@ export const ROLE_CV_CONTENT: Record<string, RoleCvContent> = {
     hardSkills: ["Media relations & journalist outreach", "Press-release & pitch writing", "Media monitoring (Meltwater, Cision)", "Crisis communication", "Brand messaging", "Digital PR / SEO-driven PR", "Event management", "Social media communications"],
     softSkills: ["Relationship building", "Strategic thinking", "Composure under pressure", "Storytelling"],
     atsKeywords: ["Media Relations", "Press Release Writing", "Media Pitching", "Brand Messaging", "Crisis Communication", "Media Monitoring", "Digital PR", "Online Reputation Management"],
-    atsNote: "Use the terms in 80%+ of PR postings (Digital PR, SEO-driven PR, online reputation management) and name your monitoring tools (Meltwater, Cision); show a media-placement track record with named publications and measurable impressions.",
+    atsNote: "Use the terms that run through PR postings (Digital PR, SEO-driven PR, online reputation management) and name your monitoring tools (Meltwater, Cision); show a media-placement track record with named publications and measurable impressions.",
   },
   "market-research-analyst": {
     include:
@@ -1550,12 +1557,12 @@ export const ROLE_CV_CONTENT: Record<string, RoleCvContent> = {
   },
   "illustrator": {
     include:
-      "A portfolio link in the header, a summary, a Skills section (10-15, the top 5 in 80%+ of postings first), and Experience with action verbs.",
+      "A portfolio link in the header, a summary, a Skills section (10-15, the five that run through most postings first), and Experience with action verbs.",
     length: "One to two pages; ATS weights the skills section, so order by relevance.",
     hardSkills: ["Illustration", "Digital art", "Drawing", "Adobe Creative Suite (Illustrator, Photoshop)", "Concept art", "Storyboarding", "Vector art", "Design theory"],
     softSkills: ["Creativity", "Storytelling", "Problem solving", "Collaboration"],
     atsKeywords: ["Illustration", "Digital Art", "Drawing", "Adobe Creative Suite", "Adobe Illustrator", "Concept Art", "Vector Art", "Storytelling"],
-    atsNote: "Lead with the five keywords in 80%+ of postings (Illustration, Digital Art, Drawing, Adobe Creative Suite, Creativity) and put a portfolio link (Behance/Instagram/site) in the header; use verbs like designed/conceptualized/collaborated.",
+    atsNote: "Lead with the five keywords that run through most postings (Illustration, Digital Art, Drawing, Adobe Creative Suite, Creativity) and put a portfolio link (Behance/Instagram/site) in the header; use verbs like designed/conceptualized/collaborated.",
   },
   "photographer": {
     include:
@@ -1600,7 +1607,7 @@ export const ROLE_CV_CONTENT: Record<string, RoleCvContent> = {
     hardSkills: ["Regulatory compliance (BSA/AML, KYC, OFAC, SOX, GDPR)", "Risk assessment & control testing", "Transaction monitoring", "Due diligence", "Policy development", "Regulatory reporting", "Compliance auditing", "Gap analysis"],
     softSkills: ["Integrity", "Analytical judgment", "Communication", "Attention to detail"],
     atsKeywords: ["Regulatory Compliance", "AML", "KYC", "Risk Assessment", "SOX Compliance", "BSA", "Transaction Monitoring", "Due Diligence"],
-    atsNote: "Name the regulation, not the category — 'BSA/AML compliance' beats 'financial compliance' — and include regulatory-body tokens (OCC, FDIC, FINRA, SEC); 97% of firms use ATS, so missing 'Regulatory Compliance' or 'SOX' disqualifies you. Add CRCM/AML certs.",
+    atsNote: "Name the regulation, not the category — 'BSA/AML compliance' beats 'financial compliance' — and include regulatory-body tokens (OCC, FDIC, FINRA, SEC); firms routinely use ATS, so missing 'Regulatory Compliance' or 'SOX' disqualifies you. Add CRCM/AML certs.",
   },
   "notary": {
     include:
@@ -1699,7 +1706,7 @@ export const ROLE_CV_CONTENT: Record<string, RoleCvContent> = {
     hardSkills: ["Forensic accounting", "Fraud examination & detection", "Investigative research", "Auditing", "Fraud-detection software (ACL, IDEA)", "Data analytics (Tableau, Power BI)", "e-Discovery", "Regulatory compliance (SOX)"],
     softSkills: ["Ethical judgment", "Critical thinking", "Attention to detail", "Communication"],
     atsKeywords: ["Forensic Accounting", "Fraud Investigation", "Fraud Examination", "Auditing", "Financial Analysis", "Fraud Detection", "Investigative Research", "Internal Controls"],
-    atsNote: "The high-signal keywords are Financial Analysis, Fraud Examination, Auditing and Investigative Research (ATS used by 75%+ of employers); add the CFE credential and lead with caseload scope, jurisdictional reach and investigations owned intake-to-resolution.",
+    atsNote: "The high-signal keywords are Financial Analysis, Fraud Examination, Auditing and Investigative Research (employers routinely screen these with ATS); add the CFE credential and lead with caseload scope, jurisdictional reach and investigations owned intake-to-resolution.",
   },
   "heavy-equipment-operator": {
     include:
@@ -1735,7 +1742,7 @@ export const ROLE_CV_CONTENT: Record<string, RoleCvContent> = {
     hardSkills: ["Structural analysis (SAP2000, ETABS)", "RISA-3D / RAM", "Revit Structure / Tekla (BIM)", "Reinforced concrete design (ACI 318)", "Structural steel design (AISC 360)", "Seismic analysis", "Finite element analysis", "Load calculation"],
     softSkills: ["Analytical judgment", "Attention to detail", "Communication", "Decision making"],
     atsKeywords: ["Structural Engineering", "PE License", "SAP2000", "ETABS", "ACI 318", "AISC 360", "Finite Element Analysis", "Seismic Analysis"],
-    atsNote: "Feature your PE/SE license prominently (70% of structural roles require it) and reference design codes (ACI 318, AISC 360, ASCE 7) to show code-compliant fluency; quantify steel tonnage, span lengths, story count and budget.",
+    atsNote: "Feature your PE/SE license prominently — most structural roles require it — and reference design codes (ACI 318, AISC 360, ASCE 7) to show code-compliant fluency; quantify steel tonnage, span lengths, story count and budget.",
   },
   "project-engineer": {
     include:
@@ -1753,7 +1760,7 @@ export const ROLE_CV_CONTENT: Record<string, RoleCvContent> = {
     hardSkills: ["AutoCAD / Civil 3D", "Structural analysis", "Site planning & setting-out", "Construction management", "Building codes & permitting", "Surveying", "Geotechnical basics", "Quality & materials control"],
     softSkills: ["Critical thinking", "Project management", "Communication", "Problem solving"],
     atsKeywords: ["Civil Engineering", "AutoCAD", "Site Planning", "Construction Management", "Structural Analysis", "Building Codes", "Civil 3D", "Site Supervision"],
-    atsNote: "Lead the skills section with the five terms in 80%+ of civil postings (CAD Design, Project Management, Structural Analysis, Building Codes, Site Analysis) and put your PE near the top if held; only use skills that appear in the posting.",
+    atsNote: "Lead the skills section with the five terms that run through civil postings (CAD Design, Project Management, Structural Analysis, Building Codes, Site Analysis) and put your PE near the top if held; only use skills that appear in the posting.",
   },
   "construction-worker": {
     include:
@@ -1875,7 +1882,7 @@ export const ROLE_CV_CONTENT: Record<string, RoleCvContent> = {
   "instructional-designer": {
     include:
       "A summary, a Skills section (authoring tools + models + LMS), a portfolio link, and Experience with quantified learning outcomes and SME collaboration.",
-    length: "One to two pages; 97% of firms use ATS — exact keyword match beats portfolio alone.",
+    length: "One to two pages; firms routinely use ATS — exact keyword match beats portfolio alone.",
     hardSkills: ["ADDIE / SAM", "Articulate Storyline / Rise 360", "Adobe Captivate", "LMS / SCORM / xAPI", "Needs analysis", "Bloom's Taxonomy / Kirkpatrick", "Adult learning theory", "Camtasia"],
     softSkills: ["Collaboration", "Project management", "Communication", "Creativity"],
     atsKeywords: ["Instructional Design", "E-Learning", "Articulate Storyline", "ADDIE", "Learning Management Systems", "Curriculum Design", "Adult Learning Theory", "SCORM"],
@@ -1987,7 +1994,7 @@ export const ROLE_CV_CONTENT: Record<string, RoleCvContent> = {
     hardSkills: ["GDS (Amadeus, Sabre, Galileo)", "Itinerary planning", "Fare calculation", "Booking systems", "Destination knowledge", "CRM platforms", "Travel-segment expertise (corporate/luxury/group)", "Customer service"],
     softSkills: ["Attention to detail", "Communication", "Problem solving", "Sales"],
     atsKeywords: ["Travel Booking", "Amadeus", "Sabre", "GDS", "Itinerary Planning", "Customer Service", "Fare Calculation", "Destination Knowledge"],
-    atsNote: "62% of employers name a booking system (Amadeus, Sabre, Galileo) — put yours in a top skills section with destination knowledge and languages; quantify ('280+ corporate accounts, $1.4M annual bookings, 93% retention').",
+    atsNote: "Employers commonly name a booking system (Amadeus, Sabre, Galileo) — put yours in a top skills section with destination knowledge and languages; quantify ('280+ corporate accounts, $1.4M annual bookings, 93% retention').",
   },
   "tour-guide": {
     include:
@@ -2289,7 +2296,7 @@ export const ROLE_CV_CONTENT: Record<string, RoleCvContent> = {
   "procurement-officer": {
     include:
       "A summary, a Skills section (sourcing + negotiation + software), and Experience with quantified savings and compliance metrics.",
-    length: "One to two pages; 97% of firms use ATS — exact keywords are mandatory.",
+    length: "One to two pages; firms routinely use ATS — exact keywords are mandatory.",
     hardSkills: ["Strategic sourcing", "Vendor management", "Contract negotiation", "Spend analysis", "RFP/RFQ management", "Cost reduction", "Supplier relationship management", "SAP Ariba / Oracle"],
     softSkills: ["Negotiation", "Analytical thinking", "Communication", "Stakeholder management"],
     atsKeywords: ["Procurement", "Strategic Sourcing", "Vendor Management", "Contract Negotiation", "Spend Analysis", "RFP Management", "Cost Reduction", "Supply Chain"],
@@ -2564,7 +2571,7 @@ export const ROLE_CV_CONTENT: Record<string, RoleCvContent> = {
     softSkills: ["Analytical thinking", "Attention to detail", "Communication", "Problem solving", "Decision-making"],
     atsKeywords: ["Financial Modeling", "Valuation", "Equity Research", "DCF", "Advanced Excel", "Portfolio Management", "CFA"],
     atsNote:
-      "Excel and modeling terms (VLOOKUP, pivot tables, DCF, financial modeling) appear in 95%+ of analyst job descriptions — mirror the posting's exact phrases, name your data tools (Bloomberg, Capital IQ, FactSet), and quantify returns.",
+      "Excel and modeling terms (VLOOKUP, pivot tables, DCF, financial modeling) run through analyst job descriptions — mirror the posting's exact phrases, name your data tools (Bloomberg, Capital IQ, FactSet), and quantify returns.",
   },
   "equity-trader": {
     include:
@@ -2810,7 +2817,7 @@ export const ROLE_CV_CONTENT: Record<string, RoleCvContent> = {
     softSkills: ["Problem solving", "Communication", "Collaboration", "Code review", "Ownership"],
     atsKeywords: ["Node.js", "Python", "SQL", "REST API", "Microservices", "Docker", "Kubernetes", "PostgreSQL"],
     atsNote:
-      "The top skills (Node.js, Python, SQL, APIs, databases) appear in 80%+ of backend postings — put them high in a dedicated skills section and echo the same terms inside outcome-based bullets; ATS contextual matching scores keywords-in-sentences higher than isolated lists.",
+      "The top skills (Node.js, Python, SQL, APIs, databases) run through backend postings — put them high in a dedicated skills section and echo the same terms inside outcome-based bullets; ATS contextual matching scores keywords-in-sentences higher than isolated lists.",
   },
   "frontend-developer": {
     include:
@@ -2821,7 +2828,7 @@ export const ROLE_CV_CONTENT: Record<string, RoleCvContent> = {
     softSkills: ["Problem solving", "Communication", "Collaboration", "Attention to detail", "Ownership"],
     atsKeywords: ["React", "JavaScript", "TypeScript", "CSS", "HTML", "Next.js", "REST API"],
     atsNote:
-      "React, JavaScript, CSS, HTML and TypeScript appear in 80%+ of frontend postings — list the exact technologies from the job description (even the React version, which some ATS filter on) and reinforce them inside specific, quantified bullets rather than keyword lists.",
+      "React, JavaScript, CSS, HTML and TypeScript run through frontend postings — list the exact technologies from the job description (even the React version, which some ATS filter on) and reinforce them inside specific, quantified bullets rather than keyword lists.",
   },
   "aws-solutions-architect": {
     include:
@@ -3968,7 +3975,7 @@ export const ROLE_CV_CONTENT: Record<string, RoleCvContent> = {
     softSkills: ["Communication", "Stakeholder management", "Problem solving", "Decision-making", "Documentation"],
     atsKeywords: ["Solution Architecture", "Cloud Computing", "AWS", "Microservices", "System Architecture", "DevOps", "Technical Design"],
     atsNote:
-      "The top skills (system architecture, technical design, enterprise solutions, cloud platforms, databases) appear in 80%+ of postings — prioritise them and weave them into bullets; list AWS/Azure Solutions Architect certifications.",
+      "The top skills (system architecture, technical design, enterprise solutions, cloud platforms, databases) run through most postings — prioritise them and weave them into bullets; list AWS/Azure Solutions Architect certifications.",
   },
   "granthi": {
     include:
@@ -4258,7 +4265,7 @@ export const ROLE_CV_CONTENT: Record<string, RoleCvContent> = {
     softSkills: ["Attention to detail", "Problem solving", "Communication", "Time management", "Teamwork"],
     atsKeywords: ["Medical Laboratory Science", "Diagnostic Testing", "Quality Control", "ASCP", "PCR", "LIS", "Hematology"],
     atsNote:
-      "Certification is required in ~98% of postings — list ASCP/AMT prominently — and name the techniques the role uses (PCR, mass spectrometry, LIS); quantify accuracy, turnaround and quality outcomes.",
+      "Certification is required by nearly every posting — list ASCP/AMT prominently — and name the techniques the role uses (PCR, mass spectrometry, LIS); quantify accuracy, turnaround and quality outcomes.",
   },
   "retail-pharmacist": {
     include:

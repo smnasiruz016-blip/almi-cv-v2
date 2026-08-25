@@ -251,11 +251,12 @@ function ProblemSection() {
             them to a robot you never see.
           </h2>
           <p className="mt-6 text-lg leading-8 text-plum-soft">
-            Here&apos;s what really happens after you hit “apply”: an Applicant
-            Tracking System (ATS) scans your resume first. If it can&apos;t find
-            the right keywords, or can&apos;t read your formatting, it rejects
-            you — silently. No email. No reason. You assume you weren&apos;t good
-            enough.
+            What actually happens after you hit “apply” is quieter. An Applicant
+            Tracking System (ATS) parses your resume into fields, and a CV that
+            parses badly turns into a half-empty profile a recruiter never sees
+            the best of. Screening questions filter on your answers alone. And a
+            recruiter&apos;s first pass is a skim, not a read. None of it emails
+            you the reason.
           </p>
           <p className="mt-4 text-lg leading-8 text-plum-soft">
             The good news is that this part is fixable. Most large employers run
