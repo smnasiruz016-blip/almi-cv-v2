@@ -248,7 +248,7 @@ function ProblemSection() {
         <div className="mx-auto max-w-3xl">
           <h2 className="text-balance text-4xl font-medium leading-tight text-plum">
             You&apos;re not losing jobs to better candidates. You&apos;re losing
-            them to a robot you never see.
+            them to a document nobody could read properly.
           </h2>
           <p className="mt-6 text-lg leading-8 text-plum-soft">
             What actually happens after you hit “apply” is quieter. An Applicant
