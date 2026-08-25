@@ -638,6 +638,321 @@ const COUNTRY_OVERRIDES: Record<string, VerifiedCountryConvention> = {
       "https://content.mycareersfuture.gov.sg/write-cv-changes-life/",
     ],
   },
+
+  // ---- WAVE 1 (promoted 2026-08-25) ----------------------------------------
+  // 20 countries researched in wave 1. Same rules as the block above: a field the
+  // pack could not verify holds this country's REGIONAL default and says so, and a
+  // weaker sourcing tier is recorded on the entry rather than only in a handoff.
+
+  austria: {
+    pageLength: "2-page",
+    includePhoto: "optional",
+    includeAddress: "full",
+    includeDOB: "common",
+    includeGPA: "optional", // includeGPA: regional default — pack could not verify (western-europe)
+    referenceSection: "list",
+    notes: "Common in Austria: 1–2 page tabellarischer Lebenslauf with a professional photo, full postal address, and usually date of birth; strictly no religion, politics, health or similar sensitive data.",
+    sources: [
+      "https://www.ams.at/arbeitsuchende/richtig-bewerben/ansprechender-lebenslauf",
+      "https://www.karriere.at/c/a/lebenslauf-persoenliche-daten",
+    ],
+  },
+  belgium: {
+    pageLength: "2-page",
+    includePhoto: "optional",
+    includeAddress: "city-only",
+    includeDOB: "common",
+    includeGPA: "optional", // includeGPA: regional default — pack could not verify (western-europe)
+    referenceSection: "available-on-request",
+    notes: "Common in Belgium: 1–2 page CV with name, date of birth and place of residence in the header; photo only if the vacancy asks; Wallonia (Forem) leans one page and full address while Flanders (VDAB) accepts city-only.",
+    sources: [
+      "https://www.vdab.be/jobs/solliciteren/cv/tips-en-voorbeelden",
+      "https://www.vdab.be/opdracht/cv1/hoe_maak_ik_een_CV.pdf",
+      "https://www.actiris.brussels/fr/citoyens/mes-outils-pour-postuler/rediger-mon-cv/",
+      "https://www.leforem.be/actualites/les-indispensables-reussir-cv.html",
+    ],
+  },
+  denmark: {
+    pageLength: "2-page",
+    includePhoto: "optional",
+    includeAddress: "city-only", // includeAddress: regional default — pack could not verify (nordic)
+    includeDOB: "common",
+    includeGPA: "optional", // includeGPA: regional default — pack could not verify (nordic)
+    referenceSection: "available-on-request",
+    notes: "Common in Denmark: a personal \"About me\" block — age, family situation and spare-time interests — because employers read it as a signal of how you will thrive and stay in the job (workindenmark.dk).",
+    sources: [
+      "https://www.studerende.aau.dk/valg-undervejs-og-job/job-og-praktiksoegning/cv",
+      "https://studerende.au.dk/studier/fagportaler/arts/artskarriere/soeg-jobbet/cv",
+      "https://www.hk.dk/karriere/jobsoegningen/maalrettet-cv",
+      "https://www.workindenmark.dk/job-search-in-denmark/your-cv/personal-details-in-your-cv",
+    ],
+  },
+  finland: {
+    pageLength: "2-page",
+    includePhoto: "optional",
+    includeAddress: "city-only",
+    includeDOB: "avoid",
+    includeGPA: "optional", // includeGPA: regional default — pack could not verify (nordic)
+    referenceSection: "list",
+    notes: "Common in Finland: 1–2 page CV with an optional smiling professional photo; omit home address, age and marital status, and end with 1–3 named referees (or \"references on request\").",
+    sources: [
+      "https://studies.helsinki.fi/system/files/inline-files/tyonhaun-opas.pdf",
+      "https://duunitori.fi/tyoelama/tyonhakuopas/ansioluettelo/hyva-ansioluettelo",
+      "https://duunitori.fi/tyoelama/turhat-tiedot-cv",
+      "https://tyomarkkinatori.fi/blogit/asiantuntijan-cv-vinkit",
+      "https://tyomarkkinatori.fi/uutiset/kolme-vinkkia-ansioluettelon-tayttamiseen-2026",
+    ],
+  },
+  ghana: {
+    pageLength: "2-page",
+    includePhoto: "avoid",
+    includeAddress: "city-only",
+    includeDOB: "common", // includeDOB: regional default — pack could not verify (sub-saharan-africa)
+    includeGPA: "optional", // includeGPA: regional default — pack could not verify (sub-saharan-africa)
+    referenceSection: "available-on-request",
+    notes: "Common in Ghana: closing the CV with \"References available upon request\" (2–3 referees supplied when asked); photos are unnecessary outside media/modelling roles, and location is given as suburb + city (e.g. \"East Legon, Accra\") rather than a full home address.",
+    sources: [
+      "https://samuelboadu.com/2025/10/11/how-to-write-a-professional-cv-in-ghana/",
+      "https://resume-example.com/cv/ghana-country",
+      "https://resumeflex.com/how-to-write-a-professional-cv-for-ghana-job-market/",
+      "https://www.jobsearchgh.com/article/5/how-write-cv-ghana-for-job-employment/",
+      "https://www.jobberman.com.gh/discover/cv-references",
+      "https://www.builtfound.org/builtfound-gh/curriculum-vitae-sample-ghana-cv-examples-hire-professional/",
+    ],
+  },
+  indonesia: {
+    pageLength: "flexible",
+    includePhoto: "optional",
+    includeAddress: "city-only",
+    includeDOB: "avoid",
+    includeGPA: "optional",
+    referenceSection: "list", // referenceSection: regional default — pack could not verify (southeast-asia)
+    notes: "Common in Indonesia: a photo is still customary (lumrah) for personal branding, address is given as domisili city only, full date of birth/NIK is now avoided for privacy, and fresh graduates list IPK if above ~3.5.",
+    // sources: established local platforms only — no government/university source located (wave 1)
+    sources: [
+      "https://www.cake.me/resources/resume/contoh-cv-lamaran-kerja",
+      "https://www.cake.me/resources/resume/foto-cv-lamaran-kerja",
+      "https://glints.com/id/lowongan/contoh-cv-lamaran-kerja/",
+      "https://glints.com/id/lowongan/informasi-sensitif-di-cv/",
+      "https://glints.com/id/lowongan/mencantumkan-ipk-di-cv/",
+      "https://news.detik.com/berita/d-8079469/cara-bikin-cv-di-siapkerja-kemnaker-ini-tahapannya",
+    ],
+  },
+  kenya: {
+    pageLength: "2-page",
+    includePhoto: "avoid",
+    includeAddress: "city-only",
+    includeDOB: "avoid",
+    includeGPA: "optional",
+    referenceSection: "list",
+    notes: "Common in Kenya: a closing \"Referees\" section naming 2–3 contacts (typically including a former supervisor); photos, ID numbers, date of birth and full home addresses are left off.",
+    sources: [
+      "https://www.atomcareer.co.ke/best-cv-format-in-kenya/",
+      "https://hrpulse.co.ke/a-perfect-cv-format-best-examples-for-the-kenyan-job-market/",
+      "https://www.corporatestaffing.co.ke/2016/06/sample-cv-for-a-fresh-graduate-in-kenya/",
+      "https://www.corporatestaffing.co.ke/2019/12/cv-samples-in-kenyacv-samples-in-kenya/",
+    ],
+  },
+  malaysia: {
+    pageLength: "2-page",
+    includePhoto: "optional",
+    includeAddress: "full",
+    includeDOB: "common",
+    includeGPA: "optional",
+    referenceSection: "list",
+    notes: "Common in Malaysia: 1–2 page resume with a personal-particulars block (DOB, nationality, address), an optional photo, CGPA shown if above ~3.4, and 2–3 named referees.",
+    sources: [
+      "https://cem.upm.edu.my/article/resume-68509",
+      "https://www.visualcv.com/international/malaysia/",
+      "https://my.jobstreet.com/career-advice/article/the-role-of-a-photo-on-a-resume",
+      "https://my.jobstreet.com/career-advice/article/best-resume-formats-examples-faqs",
+      "https://my.jobstreet.com/career-advice/article/how-to-list-education-on-resume",
+    ],
+  },
+  morocco: {
+    pageLength: "2-page",
+    includePhoto: "optional",
+    includeAddress: "city-only",
+    includeDOB: "common",
+    includeGPA: "optional",
+    referenceSection: "list", // referenceSection: regional default — pack could not verify (mena)
+    notes: "Common in Morocco: French-style CV norms — a professional photo and état civil (date de naissance, often nationality) are generally expected, address is city-only, honours/mentions act as differentiators, and CVs are often prepared in French (with Arabic/English versions for some employers).",
+    sources: [
+      "https://lepetitjournal.com/casablanca/emploi/pratique-comment-rediger-un-cv-marocain-73402",
+      "https://www.jobsquare.ma/blog/52/guide-du-cv-parfait-au-maroc-structure-a-eviter-et-conseils-par-secteur/",
+      "https://africarrieres.com/morocco/en/guide/pratique/writing-cv",
+      "https://tailormycv.app/maroc",
+      "https://vizirio.com/modele-cv-maroc/",
+    ],
+  },
+  nepal: {
+    pageLength: "2-page",
+    includePhoto: "optional",
+    includeAddress: "full",
+    includeDOB: "common",
+    includeGPA: "optional",
+    referenceSection: "list",
+    notes: "Common in Nepal: 1–2 page CV listing both permanent and temporary/current address, date of birth matching legal documents, percentage/CGPA in education, and named references (with permission); photo passport-style only when requested.",
+    // sources: established local platforms only — no government/university source located (wave 1)
+    sources: [
+      "https://www.kumarijob.com/blog/career-tips/how-to-make-a-cv-for-a-job-in-nepal",
+      "https://www.necojobs.com.np/blogs/career-tips/how-to-make-a-cv-for-a-job-in-nepal",
+      "https://froxjob.com/blog/building-a-professional-cv-a-step-by-step-guide-for-job-seekers-in-nepal",
+      "https://merojob.com/blog/guide-to-completing-your-profile-at-merojob/",
+    ],
+  },
+  nigeria: {
+    pageLength: "2-page",
+    includePhoto: "avoid",
+    includeAddress: "city-only",
+    includeDOB: "avoid",
+    includeGPA: "optional",
+    referenceSection: "list",
+    notes: "Common in Nigeria: listing 2–3 named referees with contact details directly on the CV; photos, date of birth, religion, marital status and state of origin are increasingly left off (except for some government roles).",
+    sources: [
+      "https://www.jobberman.com/discover/cv-writing",
+      "https://www.mycvcreator.com/blog/how-to-write-a-cv-for-jobs-in-nigeria-a-comprehensive-guide",
+      "http://nairametrics.com/2021/10/31/7-things-not-needed-on-your-resume-in-nigeria/",
+      "https://nigerianqueries.com/how-to-write-a-cv-in-nigeria/",
+    ],
+  },
+  norway: {
+    pageLength: "2-page",
+    includePhoto: "optional",
+    includeAddress: "full",
+    includeDOB: "common",
+    includeGPA: "optional", // includeGPA: regional default — pack could not verify (nordic)
+    referenceSection: "available-on-request",
+    notes: "Common in Norway: personalia block with fødselsdato and full adresse under the name, and \"Referanser oppgis på forespørsel\" unless the job ad asks for named referees.",
+    sources: [
+      "https://www.ntnu.no/karriere/skrive-cv",
+      "https://utdanning.no/utdanningsvalg_artikkel_slik_skriver_du_cv",
+      "https://arbeidsplassen.nav.no/slik-skriver-du-en-god-cv",
+    ],
+  },
+  poland: {
+    pageLength: "flexible",
+    includePhoto: "optional",
+    includeAddress: "city-only",
+    includeDOB: "avoid",
+    includeGPA: "optional", // includeGPA: regional default — pack could not verify (eastern-europe)
+    referenceSection: "available-on-request",
+    notes: "Common in Poland: CV must end with the RODO consent clause (\"Wyrażam zgodę na przetwarzanie moich danych osobowych… w celu prowadzenia rekrutacji\") — without it recruiters cannot lawfully process the application.",
+    sources: [
+      "https://zielonalinia.gov.pl/CV-w-pigulce-Prosta-recepta-na-zatrudnienie-735",
+      "https://cv.pracuj.pl/poradniki/ile-stron-cv-przygotowac-dowiedz-sie-czy-zyciorys-moze-zajmowac-wiecej-niz-jedna-strone",
+      "https://zielonalinia.gov.pl/zdjecie-w-cv-koniecznosc-czy-zbedna-formalnosc/",
+      "https://interviewme.pl/blog/dane-personalne",
+      "https://cv.pracuj.pl/poradniki/czy-data-urodzenia-w-cv-jest-konieczna",
+      "https://wupkatowice.praca.gov.pl/porady-dla-planujacych-kariere-zawodowa/-/asset_publisher/YXo1gyKQfrEg/content/947977-referencje-dodatek-do-cv-czy-cenne-rekomendacje-",
+      "https://zielonalinia.gov.pl/klauzula-cv-2024-czyli-zgoda-na-przetwarzanie-danych-osobowych/",
+    ],
+  },
+  portugal: {
+    pageLength: "flexible",
+    includePhoto: "optional",
+    includeAddress: "full",
+    includeDOB: "common",
+    includeGPA: "common",
+    referenceSection: "avoid",
+    notes: "Common in Portugal: Europass-style CVs with full personal data — photo slot, full morada, date of birth, nationality and final degree classification (média) are all standard fields.",
+    sources: [
+      "https://www.biblioteca.fct.unl.pt/sites/www.biblioteca.fct.unl.pt/files/documents/pdf/Guias/curriculum_vitae.pdf",
+      "https://www.europass.pt/wp-content/uploads/2024/04/EUROPASS-CV-Guia-de-preenchimento.pdf",
+      "https://www.cvmaker.pt/blog/curriculum-vitae/referencias-num-curriculum-vitae-obrigatorias-ou-opcionais",
+    ],
+  },
+  "sri-lanka": {
+    pageLength: "2-page",
+    includePhoto: "optional",
+    includeAddress: "full",
+    includeDOB: "common",
+    includeGPA: "optional",
+    referenceSection: "list",
+    notes: "Common in Sri Lanka: 1–2 page CV with personal particulars (DOB, sometimes NIC), full address, degree class/GPA, and two named non-related referees; photo only for client-facing roles.",
+    // sources: established local platforms only — no government/university source located (wave 1)
+    sources: [
+      "https://profession.lk/blog/how-to-write-a-cv-for-sri-lankas-job-market-2025-guide/54",
+      "https://blog.ikman.lk/en/what-to-include-in-a-cv-format-in-sri-lanka/",
+      "https://jobmarket.lk/include-a-photo-on-my-cv-for-sri-lankan-jobs/",
+      "https://itpro.lk/resume-guide/",
+    ],
+  },
+  sweden: {
+    pageLength: "2-page",
+    includePhoto: "optional",
+    includeAddress: "full",
+    includeDOB: "avoid",
+    includeGPA: "optional", // includeGPA: regional default — pack could not verify (nordic)
+    referenceSection: "available-on-request",
+    notes: "Common in Sweden: end the CV with \"Referenser lämnas på begäran\" (references on request) rather than naming referees, and keep it to 1–2 pages.",
+    sources: [
+      "https://arbetsformedlingen.se/other-languages/english-engelska/cv-application-and-interview/writing-a-cv",
+      "https://cvmall.se/skriva-cv/personuppgifter",
+      "https://arbetsformedlingen.se/other-languages/english-engelska/cv-application-and-interview/job-references",
+    ],
+  },
+  switzerland: {
+    pageLength: "flexible",
+    includePhoto: "optional",
+    includeAddress: "full",
+    includeDOB: "common",
+    includeGPA: "optional",
+    referenceSection: "available-on-request",
+    notes: "Common in Switzerland: 2–3 page Lebenslauf with professional photo, full postal address, date of birth (and often place of birth/nationality); references are held back and given on request.",
+    sources: [
+      "https://www.secoalv.admin.ch/secoalv/en/home/menue/stellensuchende/fuer-die-stellensuche/bewerbungstipps.html",
+      "https://www.careerservices.uzh.ch/de/ratgeber/bewerbung/bewerbungsdossier/Lebenslauf.html",
+      "https://www.jobs.ch/de/job-coach/bewerbungsfoto-fuer-den-lebenslauf/",
+    ],
+  },
+  thailand: {
+    pageLength: "1-page",
+    includePhoto: "optional",
+    includeAddress: "city-only",
+    includeDOB: "common",
+    includeGPA: "optional",
+    referenceSection: "available-on-request",
+    notes: "Common in Thailand: short 1-page resume (max 2), photo customary but no longer required, age/DOB still widely listed, city-level address, GPA for fresh graduates; references given on request except in government applications.",
+    // sources: established local platforms only — no government/university source located (wave 1)
+    sources: [
+      "https://th.jobsdb.com/career-advice/article/resume-template",
+      "https://www.trueplookpanya.com/learning/detail/17369",
+      "https://iapp.co.th/blog/thai-job-seekers-cv-guide-2026",
+      "https://www.ajarn.com/blogs/stephen-louw/a-suitable-resume",
+    ],
+  },
+  turkey: {
+    pageLength: "2-page",
+    includePhoto: "optional",
+    includeAddress: "full",
+    includeDOB: "common",
+    includeGPA: "optional",
+    referenceSection: "list",
+    notes: "Common in Turkey: a formal professional photo (suit, plain background) and personal details such as doğum tarihi (date of birth) on the özgeçmiş, with about two named referees; 2 pages max, though academic CVs may run longer.",
+    sources: [
+      "https://www.kariyer.net/kariyer-rehberi/ozgecmis-hazirlama-tuyolari-ve-cv-ornegi/",
+      "https://stylingcv.com/blog/cv-hazirlama-2026-turkiyede-profesyonel-ozgecmis-olusturmanin-bastan-sona-rehberi/",
+      "https://resume-example.com/cv/turkish-language",
+    ],
+  },
+  vietnam: {
+    pageLength: "1-page",
+    includePhoto: "required",
+    includeAddress: "full",
+    includeDOB: "common",
+    includeGPA: "optional",
+    referenceSection: "list",
+    notes: "Common in Vietnam: 1-page CV with a formal photo, date of birth and home address in the personal-info block, GPA for fresh graduates, and named referees with phone/email.",
+    // sources: established local platforms only — no government/university source located (wave 1)
+    sources: [
+      "https://www.vietnamworks.com/hrinsider/nha-tuyen-dung-co-danh-gia-cao-cv-tren-2-trang-hay-khong.html",
+      "https://blog.topcv.vn/huong-dan-viet-cv-chi-tiet/",
+      "https://www.vietnamworks.com/hrinsider/huong-dan-viet-va-tai-mau-cv-xin-viec-noi-bat.html",
+      "https://www.topcv.vn/viet-cv-the-nao-cho-chuan",
+      "https://www.vietnamworks.com/hrinsider/cach-viet-trinh-do-hoc-van-trong-cv.html",
+    ],
+  },
 };
 
 /**
