@@ -258,10 +258,10 @@ function ProblemSection() {
             enough.
           </p>
           <p className="mt-4 text-lg leading-8 text-plum-soft">
-            The truth is harsher and far easier to fix: your CV never reached a
-            human at all. Around 75% of resumes are filtered out by ATS software
-            before anyone reads them. Every “we went with another candidate”
-            might really mean a robot threw you out in 6 seconds.
+            The good news is that this part is fixable. Most large employers run
+            your CV through ATS software before a human reads it — and a CV that
+            parses cleanly is the difference between your content being seen and
+            being skipped.
           </p>
           <p className="mt-4 text-lg leading-8 text-plum-soft">
             AlmiCV ends the guessing. Our ATS resume checker scores your CV the
@@ -464,7 +464,7 @@ function FinalCTASection({ isLoggedIn }: { isLoggedIn: boolean }) {
       <Container>
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="text-balance text-4xl font-medium leading-tight text-cream md:text-5xl">
-            Stop letting a robot decide your future in 6 seconds.
+            Stop letting a parsing error decide your future.
           </h2>
           <p className="mx-auto mt-6 max-w-2xl text-lg text-cream/70">
             Build a CV that beats the ATS and reaches a human — and gets you the

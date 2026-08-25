@@ -80,9 +80,9 @@ export function CvMasterInvisibleGate() {
         The invisible gate
       </h2>
       <p className="text-base text-plum-soft leading-relaxed max-w-3xl">
-        Around 75% of resumes are filtered out by ATS software before a human ever
-        sees them. Every silent rejection means a machine threw your document out in
-        seconds — over formatting or missing keywords.
+        Most large employers run your CV through ATS software before a human reads
+        it — and a CV that parses cleanly is the difference between your content
+        being seen and being skipped.
       </p>
       <p className="mt-3 text-base text-plum-soft leading-relaxed max-w-3xl">
         AlmiCV ends the guessing. Our resume checker reviews your document the way
