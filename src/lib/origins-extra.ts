@@ -251,7 +251,7 @@ export const EXTRA_ORIGINS: LocalizedOrigin[] = [
     slug: "uzbekistan", name: "Uzbekistan", flag: "🇺🇿", archetype: "scholarship",
     credentialBody: "Ministry of Higher Education, Science and Innovation — diploma nostrification",
     languageNote: "El-Yurt Umidi requires a valid IELTS/TOEFL (typically IELTS 6.5+ / TOEFL 90+); admission to top-300 universities triggers funding.",
-    topWorry: "Winning the El-Yurt Umidi competition (5–15% acceptance)",
+    topWorry: "Winning the El-Yurt Umidi competitive presidential scholarship (open competition)",
     scholarshipCluster: ["El-Yurt Umidi Foundation", "Erasmus+", "Chevening", "DAAD"],
     currency: "Uzbekistani Som (so'm)",
     cities: ["Tashkent", "Samarkand", "Bukhara"],

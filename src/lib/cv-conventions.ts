@@ -953,6 +953,316 @@ const COUNTRY_OVERRIDES: Record<string, VerifiedCountryConvention> = {
       "https://www.vietnamworks.com/hrinsider/cach-viet-trinh-do-hoc-van-trong-cv.html",
     ],
   },
+
+  // ---- WAVE 2 (promoted 2026-08-25) ----------------------------------------
+  // 20 countries researched in wave 2. Same rules as the blocks above: a field the
+  // pack could not verify holds this country's REGIONAL default and says so, and a
+  // weaker sourcing tier is recorded on the entry rather than only in a handoff.
+  // includeGPA fell to the regional default for 13 of these 20 — grade conventions
+  // are simply not documented by most national career services.
+
+  algeria: {
+    pageLength: "2-page",
+    includePhoto: "optional",
+    includeAddress: "full",
+    includeDOB: "common",
+    includeGPA: "optional",
+    referenceSection: "available-on-request",
+    notes: "Common in Algeria: detailed French-language chronological CVs with full address, date and place of birth, marital status, and often a photo. French-influence note: confirmed — S2: \"Il est également préférable d'écrire votre CV en français\" (preferable to write the CV in French); structure follows French conventions, though longer (2–3 pages tolerated) than the French one-page ideal.",
+    // sources: established local platforms / career media only — no government/university source located per-field (wave 2)
+    sources: [
+      "https://africarrieres.com/algerie/fr/guide/pratique/rediger-cv",
+      "https://modeles-cv.fr/exemples-de-cv/algerie-pays",
+      "https://resume-example.com/cv/algeria",
+    ],
+  },
+  bulgaria: {
+    pageLength: "2-page", // pageLength: regional default — pack could not verify (eastern-europe)
+    includePhoto: "optional",
+    includeAddress: "city-only", // includeAddress: regional default — pack could not verify (eastern-europe)
+    includeDOB: "avoid",
+    includeGPA: "optional",
+    referenceSection: "list",
+    notes: "Common in Bulgaria: Europass CV format recommended (especially for public institutions), passport-style photo widely expected though not mandatory, date of birth/EGN omitted unless requested, references from previous employers listed at the end. No Polish-style GDPR consent clause found in any Bulgarian source.",
+    // sources: established local platforms / career media only — no government/university source located per-field (wave 2)
+    sources: [
+      "https://www.glbulgaria.bg/bg/node/12849",
+      "https://www.karieri.bg/news/34880_kakvo_triabva_da_sudurja_uspeshnoto_cv",
+      "https://bulgariawantsyou.com/bg/news/kak-da-napishete-cv-za-blgarskiya-pazar-na-truda",
+      "https://eures.europa.eu/living-and-working/living-and-working-conditions-europe/living-and-working-conditions-bulgaria_en",
+    ],
+  },
+  croatia: {
+    pageLength: "2-page",
+    includePhoto: "optional",
+    includeAddress: "full",
+    includeDOB: "common",
+    includeGPA: "optional", // includeGPA: regional default — pack could not verify (eastern-europe)
+    referenceSection: "available-on-request",
+    notes: "Common in Croatia: 1–2 page CVs, often in Europass/tabular format promoted by the state employment service HZZ; photo optional, full postal address and date of birth customary, references \"na zahtjev\" (on request).",
+    sources: [
+      "https://www.hzz.hr/usluge/zamolba-i-zivotopis/",
+      "https://razvojkarijere.hzz.hr/zamolba-i-zivotopis/",
+      "https://webarhiv.hzz.hr/print-id-11146.html?id=11146",
+      "https://www.hzz.hr/app/uploads/2022/08/CVInstructions.pdf:",
+      "https://usrk.net.efzg.hr/blog/pripremi-svoj-%C5%BEivotopis:",
+      "https://zivotopis.com.hr/korisni-savjeti/stavljanje-slike-u-zivotopis",
+    ],
+  },
+  "czech-republic": {
+    pageLength: "2-page",
+    includePhoto: "optional",
+    includeAddress: "city-only",
+    includeDOB: "avoid",
+    includeGPA: "optional", // includeGPA: regional default — pack could not verify (eastern-europe)
+    referenceSection: "list",
+    notes: "Common in the Czech Republic (Czechia): structured 1–2 page CV (\"strukturovaný životopis\"), city-only address, photo only if the ad asks, contactable references from previous employers listed, and birth date increasingly omitted; overly personal data (marital status, children) discouraged. No Polish-style GDPR consent clause found in any Czech source.",
+    sources: [
+      "https://kariera.muni.cz/co-nabizime/e-learningove-kurzy/zivotopis-prakticky/struktura-zivotopisu",
+      "https://jobs.pef.czu.cz/jak-spravne-napsat-zivotopis",
+      "https://europass.cz/rady-a-tipy/jak-napsat-zivotopis/co-do-zivotopisu-nepatri",
+      "https://eures.europa.eu/living-and-working/living-and-working-conditions-europe/living-and-working-conditions-czechia_en",
+      "https://kariera.muni.cz/co-nabizime/e-learningove-kurzy/zivotopis-prakticky/sekce-zivotopisu",
+    ],
+  },
+  estonia: {
+    pageLength: "2-page",
+    includePhoto: "optional",
+    includeAddress: "city-only",
+    includeDOB: "common",
+    includeGPA: "optional", // includeGPA: regional default — pack could not verify (eastern-europe)
+    referenceSection: "list",
+    notes: "Common in Estonia: compact 1–2 page CV listing \"elukoht\" as city/county only (exact address and personal ID code discouraged), date of birth still present in standard templates, photo optional, and a \"soovitajad\" (recommenders) section with 2–3 named contacts.",
+    sources: [
+      "https://teadmiseks.ee/dokumendid/cv-koostamine-naidis/:",
+      "https://hr.cv.ee/cv/naidis:",
+      "https://www.cvkeskus.ee/karjaarikeskus/cv-koostamine-samm-sammult-tasuta-cv-naidis:",
+      "https://www.tootukassa.ee/web/sites/default/files/2022-01/cv_naidis_keskharidus%20(2",
+    ],
+  },
+  ethiopia: {
+    pageLength: "flexible",
+    includePhoto: "optional",
+    includeAddress: "full",
+    includeDOB: "common",
+    includeGPA: "optional",
+    referenceSection: "list",
+    notes: "Common in Ethiopia: longer 2–3 page CVs with comprehensive personal details (date of birth, gender, full address) and 2–3 named references listed on the CV.",
+    // sources: established local platforms / career media only — no government/university source located per-field (wave 2)
+    sources: [
+      "https://africarrieres.com/ethiopia/en/guide/pratique/writing-cv",
+      "https://resume-example.com/cv/ethiopia-cv-country",
+    ],
+  },
+  georgia: {
+    pageLength: "2-page",
+    includePhoto: "optional",
+    includeAddress: "city-only",
+    includeDOB: "common",
+    includeGPA: "optional", // includeGPA: regional default — pack could not verify (central-asia)
+    referenceSection: "list",
+    notes: "Common in Georgia: date of birth still appears in the personal-info block, but Georgian HR advice now explicitly drops Soviet-era baggage — no marital status (\"არ არის აუცილებელი ჩვენი ოჯახური მდგომარეობის… მითითება\"), no personal ID number, no precise home address, photo optional, and ideally two named recommenders.",
+    // sources: established local platforms / career media only — no government/university source located per-field (wave 2)
+    sources: [
+      "https://www.marketer.ge/rogor-davcerot-cv/",
+      "https://www.marketer.ge/rogor-davcerot-cv1/",
+      "https://polux.ge/cv-shecdomebi/",
+    ],
+  },
+  greece: {
+    pageLength: "2-page",
+    includePhoto: "optional",
+    includeAddress: "full",
+    includeDOB: "avoid", // includeDOB: regional default — pack could not verify (western-europe)
+    includeGPA: "optional",
+    referenceSection: "list",
+    notes: "Common in Greece: short 1–2 page CV (DYPA/Europass templates widely used), full contact details, optional photo, grades only if advantageous, and 2–3 named references with contact details are acceptable. No Polish-style GDPR consent clause found in any Greek source.",
+    sources: [
+      "https://www.dypa.gov.gr/en/psakhno-ghiabioghrafiko-simioma-1",
+      "https://eures.europa.eu/living-and-working/living-and-working-conditions-europe/living-and-working-conditions-greece_en",
+      "https://career.uoa.gr/viografiko-simeioma/",
+      "https://www.kariera.gr/career-guide/cv-structure",
+    ],
+  },
+  hungary: {
+    pageLength: "2-page",
+    includePhoto: "optional",
+    includeAddress: "full",
+    includeDOB: "common",
+    includeGPA: "optional", // includeGPA: regional default — pack could not verify (eastern-europe)
+    referenceSection: "list",
+    notes: "Common in Hungary: 1–2 page CV in Hungarian (plus English for some posts), passport-style photo widely expected though not mandatory, personal data including birth year/place and home address traditionally listed, hand-signed one-page cover letter for paper applications. No Polish-style GDPR consent clause verified as a Hungarian CV convention (profession.hu notes CV items \"személyes adatnak számít\" — count as personal data — but prescribes no applicant-side clause).",
+    sources: [
+      "https://eures.europa.eu/living-and-working/living-and-working-conditions-europe/living-and-working-conditions-hungary_en",
+      "https://u-szeged.hu/karriernapok/oneletrajz",
+      "https://btk.ppke.hu/az-oneletrajz-keszites-13-mesterfogasa",
+      "https://www.profession.hu/cikk/tevhitek-az-oneletrajzrol",
+      "https://karrier.sze.hu/allaskeresesi-tippek/az-oneletrajzrol",
+    ],
+  },
+  jordan: {
+    pageLength: "flexible",
+    includePhoto: "optional",
+    includeAddress: "city-only",
+    includeDOB: "common",
+    includeGPA: "optional", // includeGPA: regional default — pack could not verify (mena)
+    referenceSection: "list",
+    notes: "Common in Jordan: 1–2 page CVs (Arabic or English) that carry personal details such as date of birth and a named-references section, with photos optional.",
+    // sources: established local platforms / career media only — no government/university source located per-field (wave 2)
+    sources: [
+      "https://resume-example.com/cv/jordan-country",
+      "https://s3.amazonaws.com/akhtaboot_public/mini_cv_guide/CVguide-whitepaper-EN.pdf",
+      "https://resumeflex.com/how-to-write-a-professional-cv-for-jordan-job-market/",
+    ],
+  },
+  kazakhstan: {
+    pageLength: "2-page",
+    includePhoto: "optional",
+    includeAddress: "full",
+    includeDOB: "common",
+    includeGPA: "optional", // includeGPA: regional default — pack could not verify (central-asia)
+    referenceSection: "list",
+    notes: "Common in Kazakhstan: Russian-style резюме norms largely hold — photo and date of birth are expected (the state portal enbek.kz even nudges against photo-less resumes), but enbek.kz now advises dropping marital status (\"Удаляй семейный статус, он интересует только посетителей сайтов знакомств\").",
+    sources: [
+      "https://finance.kz/articles/obrazets-rezyume-na-rabotu-v-rk",
+      "https://merke.hh.kz/article/kak-sostavit-rezyume",
+      "https://www.enbek.kz/ru/node/2227",
+      "https://tou.edu.kz/arm/storage/files/6374c1c8cefca6.78173666.pdf",
+    ],
+  },
+  lebanon: {
+    pageLength: "flexible",
+    includePhoto: "optional",
+    includeAddress: "city-only",
+    includeDOB: "common", // includeDOB: regional default — pack could not verify (mena)
+    includeGPA: "optional",
+    referenceSection: "available-on-request",
+    notes: "Common in Lebanon: concise 1–2 page CVs written in English, French, or Arabic, often with a photo, city-level address, and references kept for on-request. French-influence note: multilingual market — S3: \"le CV peut être rédigé en arabe, en français ou en anglais\"; Anglo-American norms (LAU/AUB) coexist with French-style CVs.",
+    sources: [
+      "https://proresumes.io/resume-guidelines-for-job-seekers-in-lebanon/",
+      "https://www.lau.edu.lb/experience/career-guidance/cv-interview.php",
+      "https://modeles-cv.fr/exemples-de-cv/liban-cv-pays",
+    ],
+  },
+  lithuania: {
+    pageLength: "2-page",
+    includePhoto: "optional",
+    includeAddress: "city-only",
+    includeDOB: "common",
+    includeGPA: "optional", // includeGPA: regional default — pack could not verify (eastern-europe)
+    referenceSection: "available-on-request",
+    notes: "Common in Lithuania: short 1–2 page \"gyvenimo aprašymas\" with a businesslike photo optional, residence given as city, date of birth still customary in the personal-data block, references on request or omitted.",
+    sources: [
+      "https://lsmu.lt/wp-content/uploads/2022/08/kp_gyvenimo_aprasymas-3.pdf:",
+      "https://cvmarket.lt/karjeros-centras/karjeros-pradzia/cv-gyvenimo-aprasymas/kaip-rasyti-cv-gyvenimo-aprasyma:",
+      "https://uzt.lt/jaunimui/patarimai-ieskantiems-darbo/103:",
+      "https://cvekas.lt/kaip-rasyti-cv/:",
+      "https://eures.uzt.lt/...keturi-patarimai",
+    ],
+  },
+  romania: {
+    pageLength: "flexible",
+    includePhoto: "optional",
+    includeAddress: "full",
+    includeDOB: "common",
+    includeGPA: "optional", // includeGPA: regional default — pack could not verify (eastern-europe)
+    referenceSection: "list", // referenceSection: regional default — pack could not verify (eastern-europe)
+    notes: "Common in Romania: CV in Romanian, Europass format recommended by the public employment network; photo optional; full address and date of birth traditionally included; no Polish-style GDPR consent clause verified as a CV convention. GDPR check (verify-don't-assume): no source showed a standardized applicant consent clause like Poland's; Romanian GDPR commentary discusses only general consent principles (e.g. StartGDPR: \"Acordul trebuie să fie liber, specific, explicit, informat…\" — general principle, not a CV clause; https://startgdpr.ro/blog/gdpr-prelucrare-date-cu-sau-fara-consimtamant/), and Romanian legal press advises employers away from consent as a processing basis (juridice.ro). Do NOT add a consent clause by default.",
+    sources: [
+      "https://snspa.ro/studenti/cariera/consiliere-in-cariera/pregatirea-cv-ului/",
+      "https://www.hipo.ro/locuri-de-munca/vizualizareArticol/3809/model-cv",
+      "https://www.hipo.ro/locuri-de-munca/vizualizareArticol/111/Model-de-CV",
+      "https://eures.europa.eu/living-and-working/living-and-working-conditions-europe/living-and-working-conditions-romania_en",
+      "https://startgdpr.ro/blog/gdpr-prelucrare-date-cu-sau-fara-consimtamant/",
+    ],
+  },
+  serbia: {
+    pageLength: "2-page",
+    includePhoto: "optional",
+    includeAddress: "full",
+    includeDOB: "common",
+    includeGPA: "optional",
+    referenceSection: "list",
+    notes: "Common in Serbia: 1–2 page \"radna biografija\" with photo optional, full home address and date of birth in the personal-data block, GPA only if above 8.00, and two named referees.",
+    sources: [
+      "https://poslovi.infostud.com/saveti/Proverite-da-li-ste-pravilno-napisali-biografiju/36:",
+      "https://careers.singidunum.ac.rs/radna-biografija/:",
+      "https://poslovi.infostud.com/saveti/Kako-napisati-CV-biografiju/34:",
+      "https://www.nsz.gov.rs/live/digitalAssets/0/319_radna_sveska_atp1.pdf:",
+    ],
+  },
+  tanzania: {
+    pageLength: "2-page",
+    includePhoto: "optional",
+    includeAddress: "full",
+    includeDOB: "common",
+    includeGPA: "optional", // includeGPA: regional default — pack could not verify (sub-saharan-africa)
+    referenceSection: "list",
+    notes: "Common in Tanzania: CVs list 2-3 named referees with contacts upfront (the government Ajira portal has a mandatory Referees section), and personal details such as date of birth, nationality and marital status remain customary — though modern private-sector guides increasingly advise trimming them.",
+    sources: [
+      "https://resume-example.com/cv/tanzania-country",
+      "https://www.cvchapchap.com/blog/how-to-write-cv-tanzania-2026",
+      "https://resumeflex.com/how-to-write-a-professional-cv-for-tanzania-job-market/",
+      "https://www.ajira.go.tz/baseattachments/generalinfoattachments/2020_02_14_15_56_50Recruitment%20Portal%20User%20Guide%20v%202.1.pdf",
+    ],
+  },
+  tunisia: {
+    pageLength: "1-page",
+    includePhoto: "optional",
+    includeAddress: "avoid",
+    includeDOB: "common",
+    includeGPA: "optional",
+    referenceSection: "available-on-request",
+    notes: "Common in Tunisia: one-page French-style CVs in French or Arabic, stating age, listing diploma honours (\"mention\") when good, references on request. French-influence note: confirmed — S3: \"most recruiters expect CVs written in French or Arabic\"; one-page ideal and \"mention\" grading mirror French CV norms.",
+    // sources: established local platforms / career media only — no government/university source located per-field (wave 2)
+    sources: [
+      "https://www.tanitjobs.com/blog/5/comment-r%C3%A9diger-son-cv-pour-un-emploi-en-tunisie/",
+      "https://blog.afariat.com/guides-et-conseils/comment-rediger-un-cv.html",
+      "https://resume-example.com/cv/tunisia-country",
+    ],
+  },
+  uganda: {
+    pageLength: "2-page",
+    includePhoto: "optional",
+    includeAddress: "city-only",
+    includeDOB: "common",
+    includeGPA: "optional", // includeGPA: regional default — pack could not verify (sub-saharan-africa)
+    referenceSection: "available-on-request",
+    notes: "Common in Uganda: 1–2 page CVs headed with city/district only (not a full address), no photo unless the employer asks, and a referee line that may now simply read \"Referees available on request\" — a notable shift from the older East African habit of listing referees with full contacts.",
+    sources: [
+      "https://protechuganda.com/how-to-write-a-cv-in-uganda/",
+      "https://www.brightermonday.co.ug/discover/how-to-write-a-cv-in-uganda",
+      "https://resume-example.com/cv/uganda-country",
+    ],
+  },
+  ukraine: {
+    pageLength: "2-page",
+    includePhoto: "optional",
+    includeAddress: "city-only",
+    includeDOB: "common",
+    includeGPA: "optional", // includeGPA: regional default — pack could not verify (eastern-europe)
+    referenceSection: "list",
+    notes: "Common in Ukraine: 1–2 page resume with date of birth in the personal-data block, city of residence rather than full street address, photo a personal choice, and a recommendations section naming past managers or mentors.",
+    sources: [
+      "https://www.ukrinform.ua/rubric-kyiv/3365130-stolicna-sluzba-zajnatosti-dala-poradi-ak-napisati-rezume-dla-posuku-roboti.html:",
+      "https://ode.dcz.gov.ua/publikaciya/rezyume-yak-dzherelo-samoreklamy:",
+      "https://kha.dcz.gov.ua/publikaciya/skladannya-rezyume-praktychni-porady:",
+      "https://www.work.ua/articles/resume/1888/:",
+    ],
+  },
+  uzbekistan: {
+    pageLength: "2-page",
+    includePhoto: "optional",
+    includeAddress: "city-only",
+    includeDOB: "common",
+    includeGPA: "optional", // includeGPA: regional default — pack could not verify (central-asia)
+    referenceSection: "available-on-request",
+    notes: "Common in Uzbekistan: Russian-style резюме structure holds — a \"личные данные\" block with date of birth and marital status is standard and a business-style photo is welcomed though not obligatory; keep it under 2 pages with references prepared separately.",
+    sources: [
+      "https://ancor.co.uz/vacancy/advice/kak-pravilno-sostavit-rezyume-struktura-i-sovety/",
+      "https://www.spot.uz/ru/2021/01/08/resume/",
+    ],
+  },
 };
 
 /**
