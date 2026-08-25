@@ -4,7 +4,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Footer } from "@/components/footer";
 import { SiteHeader } from "@/components/site-header";
-import { getCurrentUser } from "@/lib/auth";
 import { getCountryBySlug } from "@/lib/countries";
 import { JOB_ROLES, JOB_ROLES_BY_SECTOR } from "@/lib/roles";
 import { getConvention, hasVerifiedConvention } from "@/lib/cv-conventions";
@@ -24,6 +23,16 @@ import {
 // Render-once, cache until redeploy (static in-repo data) — no periodic ISR re-writes.
 export const revalidate = false;
 export const dynamicParams = true;
+// An empty generateStaticParams is what makes `revalidate` above take effect.
+// Measured, not assumed: with the session read gone but no generateStaticParams
+// at all, this route still served with NO x-nextjs-cache header on repeated
+// requests — Next treats a dynamic route with no param generator as fully
+// dynamic and never writes a cache entry. Returning [] prerenders nothing and
+// opts the route into on-demand caching, which is the whole point of this fix.
+export function generateStaticParams() {
+  return [] as Array<Params>;
+}
+
 
 const SITE_ORIGIN = "https://almicv.almiworld.com";
 
@@ -94,8 +103,18 @@ export default async function CountryHub({
       : []),
   ];
 
-  const user = await getCurrentUser();
-  const isLoggedIn = Boolean(user);
+  // COST FIX (26 Aug): this route no longer reads the session.
+  //
+  // Reading it opted the route out of Next's full route cache, so `revalidate`
+  // never took effect and every crawl of every URL here was a fresh render. The
+  // #99 measurement put that at 15,362 of 15,858 submitted URLs; after waves 1-3
+  // the grid alone is 45,568. /jobs/[country] has always passed isLoggedIn={false}
+  // for exactly this reason.
+  //
+  // The trade-off, accepted deliberately: the header and CTA render their
+  // logged-out variant for everyone, including signed-in visitors. A client-side
+  // session check to restore personalisation is NOT in this PR.
+  const isLoggedIn = false;
 
   const url = `${SITE_ORIGIN}/cv-guide/${c.slug}`;
   const webApplication = {

@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Footer } from "@/components/footer";
 import { SiteHeader } from "@/components/site-header";
-import { getCurrentUser } from "@/lib/auth";
 import { COUNTRIES_SERVED, type Region } from "@/lib/countries";
 import { JOB_ROLES_BY_SECTOR } from "@/lib/roles";
 
@@ -57,8 +56,18 @@ export const metadata: Metadata = {
 };
 
 export default async function CvGuideIndex() {
-  const user = await getCurrentUser();
-  const isLoggedIn = Boolean(user);
+  // COST FIX (26 Aug): this route no longer reads the session.
+  //
+  // Reading it opted the route out of Next's full route cache, so `revalidate`
+  // never took effect and every crawl of every URL here was a fresh render. The
+  // #99 measurement put that at 15,362 of 15,858 submitted URLs; after waves 1-3
+  // the grid alone is 45,568. /jobs/[country] has always passed isLoggedIn={false}
+  // for exactly this reason.
+  //
+  // The trade-off, accepted deliberately: the header and CTA render their
+  // logged-out variant for everyone, including signed-in visitors. A client-side
+  // session check to restore personalisation is NOT in this PR.
+  const isLoggedIn = false;
 
   // Group countries by region for browsing
   const countriesByRegion = new Map<Region, typeof COUNTRIES_SERVED>();
