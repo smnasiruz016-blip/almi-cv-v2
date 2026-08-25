@@ -18,19 +18,15 @@
 //   B. a country-SPECIFIC notes line (names the country, not "the region")
 //   C. at least one source
 //
-// -- WHY THIS IS NOT ARMED IN THE BUILD ---------------------------------------
-// Check C is red for all 29 entries today, and that is the correct reading of
-// reality rather than a bug: the file header claimed the overrides "come from
-// public career-guidance sources cited in PR description", and they do not. PR
-// #34's body cites no source at all — the only URLs in it are a sitemap and a
-// tool footer — and neither commit that touched the file names one. That was
-// checked before the field was added, and no URL was invented to make this
-// green.
+// -- ARMED IN THE BUILD (since the wave-R re-sourcing) -------------------------
+// This shipped unarmed in PR #99, because check C was red for all 29 entries:
+// the file header claimed the overrides "come from public career-guidance
+// sources cited in PR description" and they did not — PR #34 cites none. A gate
+// that can only ever be red is a gate somebody deletes, so it waited.
 //
-// So the script ships unarmed. A gate that can only ever be red is a gate
-// somebody deletes, and deleting it would cost more than the red. Arm it in
-// `prebuild` the day the last source lands; checks A and B pass today and would
-// hold the line on their own if you would rather arm it sooner (--fields-only).
+// All 29 have been re-sourced from research packs with per-field quotes, so the
+// condition is met and this now runs in `prebuild`, before next build. An entry
+// that loses its sources fails the build from here on.
 
 import {
   COUNTRY_OVERRIDE_SLUGS,
