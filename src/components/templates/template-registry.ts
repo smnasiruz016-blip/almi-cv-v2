@@ -1,7 +1,15 @@
 import type { ComponentType } from "react";
 import type { TemplateProps } from "./types";
 
-// New Batch Medical & Healthcare Templates
+// New Batch Commercial & Job-Specific Next-Gen Templates
+import {
+  CyberDevTerminalTemplate,
+  VogueCreativeArchTemplate,
+  AeroFlightCaptainTemplate,
+  LuxeRealEstateTemplate,
+} from "./batch-commercial";
+
+// Batch Medical & Healthcare Templates
 import {
   AstridEmeraldTemplate,
   AuraMidwifeTemplate,
@@ -242,8 +250,6 @@ import SustainMeshESG from "./SustainMeshESG";
 import BrutalistCreativeTech from "./BrutalistCreativeTech";
 import GradientMeshGrowth from "./GradientMeshGrowth";
 
-const asTemplate = <T>(c: T) => c as unknown as ComponentType<TemplateProps>;
-
 export type TemplateCategory =
   | "ats-classic"
   | "professional"
@@ -332,6 +338,58 @@ export function getTagline(t: TemplateMeta): string {
 }
 
 export const TEMPLATES: TemplateMeta[] = [
+  {
+    slug: "cyber-dev-terminal",
+    name: "Cyber Dev Terminal UI",
+    description: "High-impact developer terminal with bash controls, KPI metric tiles, and git commit history branch lines.",
+    category: "developer",
+    component: CyberDevTerminalTemplate as unknown as ComponentType<TemplateProps>,
+    atsSafe: false,
+    supportsPhoto: true,
+    addedAt: "2026-08-16T04:00:00.000Z",
+    suggestedRoles: ["software-engineer", "full-stack-developer", "devops-engineer", "ai-engineer"],
+    suggestedIndustries: ["technology", "software"],
+    themes: ["midnight", "emerald", "navy"],
+  },
+  {
+    slug: "vogue-creative-arch",
+    name: "Vogue Creative Arch",
+    description: "Haute couture editorial layout with roman arch photo portal, classic serif masthead, and swatch color cards.",
+    category: "creative",
+    component: VogueCreativeArchTemplate as unknown as ComponentType<TemplateProps>,
+    atsSafe: false,
+    supportsPhoto: true,
+    addedAt: "2026-08-16T03:50:00.000Z",
+    suggestedRoles: ["creative-director", "art-director", "brand-strategist", "fashion-designer"],
+    suggestedIndustries: ["creative", "fashion", "marketing"],
+    themes: ["wine", "sand", "ivory"],
+  },
+  {
+    slug: "aero-flight-captain",
+    name: "Aero Flight Captain",
+    description: "Cockpit HUD artificial horizon bar, total flight hour counters, and ATPL command license pills.",
+    category: "aviation",
+    component: AeroFlightCaptainTemplate as unknown as ComponentType<TemplateProps>,
+    atsSafe: false,
+    supportsPhoto: true,
+    addedAt: "2026-08-16T03:40:00.000Z",
+    suggestedRoles: ["pilot", "airline-pilot", "captain", "first-officer"],
+    suggestedIndustries: ["aviation", "airline"],
+    themes: ["navy", "charcoal", "sky"],
+  },
+  {
+    slug: "luxe-real-estate",
+    name: "Luxe Real Estate Executive",
+    description: "High-roller luxury realty theme with skyscraper gold crest, $150M+ volume KPI badges, and star ratings.",
+    category: "real-estate",
+    component: LuxeRealEstateTemplate as unknown as ComponentType<TemplateProps>,
+    atsSafe: false,
+    supportsPhoto: true,
+    addedAt: "2026-08-16T03:30:00.000Z",
+    suggestedRoles: ["real-estate-agent", "luxury-real-estate-broker", "property-manager"],
+    suggestedIndustries: ["real-estate", "sales"],
+    themes: ["midnight", "wine", "sand"],
+  },
   {
     slug: "astrid-emerald",
     name: "Astrid Rose Emerald",
@@ -687,7 +745,7 @@ export const TEMPLATES: TemplateMeta[] = [
     name: "Legal Formal",
     description: "Cream base + navy + gold wavy top band, scales watermark. Authority through typography, not heavy darks.",
     category: "legal",
-    component: asTemplate(LegalFormal),
+    component: LegalFormal as unknown as ComponentType<TemplateProps>,
     atsSafe: true,
     supportsPhoto: false,
     suggestedRoles: [
@@ -710,7 +768,7 @@ export const TEMPLATES: TemplateMeta[] = [
     name: "Finance Precise",
     description: "White + forest green + amber. Ledger-line divider, refined grid. For accounting, audit, and tax professionals.",
     category: "finance",
-    component: asTemplate(FinancePrecise),
+    component: FinancePrecise as unknown as ComponentType<TemplateProps>,
     atsSafe: true,
     supportsPhoto: false,
     suggestedRoles: [
@@ -734,7 +792,7 @@ export const TEMPLATES: TemplateMeta[] = [
     name: "Finance Elite",
     description: "Cream + deep teal + rose gold, wavy right-side accent. Achievement-focused — deal size, AUM, returns.",
     category: "finance",
-    component: asTemplate(FinanceElite),
+    component: FinanceElite as unknown as ComponentType<TemplateProps>,
     atsSafe: true,
     supportsPhoto: false,
     suggestedRoles: [
@@ -757,7 +815,7 @@ export const TEMPLATES: TemplateMeta[] = [
     name: "People Warm",
     description: "Cream + coral + sage, top wave divider, network-nodes motif. Approachable but professional for HR & talent.",
     category: "people-hr",
-    component: asTemplate(PeopleWarm),
+    component: PeopleWarm as unknown as ComponentType<TemplateProps>,
     atsSafe: true,
     supportsPhoto: true,
     suggestedRoles: [
@@ -782,7 +840,7 @@ export const TEMPLATES: TemplateMeta[] = [
     name: "Operations Structured",
     description: "White + slate blue + amber, diagonal accent panels, KPI tiles. For operations & supply-chain leadership.",
     category: "operations",
-    component: asTemplate(OperationsStructured),
+    component: OperationsStructured as unknown as ComponentType<TemplateProps>,
     atsSafe: true,
     supportsPhoto: true,
     suggestedRoles: [
@@ -804,7 +862,7 @@ export const TEMPLATES: TemplateMeta[] = [
     name: "Insurance Trust",
     description: "Ivory + teal + bronze, shield emblem, middle trust-bar. Licenses and certifications front and centre.",
     category: "insurance",
-    component: asTemplate(InsuranceTrust),
+    component: InsuranceTrust as unknown as ComponentType<TemplateProps>,
     atsSafe: true,
     supportsPhoto: false,
     suggestedRoles: [
@@ -826,7 +884,7 @@ export const TEMPLATES: TemplateMeta[] = [
     name: "Veterinary Caring",
     description: "Cream + sage + dusty rose, wavy side bar with paw silhouettes. Warm but professional — distinct from clinical Healthcare.",
     category: "veterinary",
-    component: asTemplate(VeterinaryCaring),
+    component: VeterinaryCaring as unknown as ComponentType<TemplateProps>,
     atsSafe: true,
     supportsPhoto: false,
     suggestedRoles: [
@@ -847,7 +905,7 @@ export const TEMPLATES: TemplateMeta[] = [
     name: "Aviation Precise",
     description: "Sky-blue gradient + silver, wings emblem, altitude-line dividers. Technical precision for aviation roles.",
     category: "aviation",
-    component: asTemplate(AviationPrecise),
+    component: AviationPrecise as unknown as ComponentType<TemplateProps>,
     atsSafe: true,
     supportsPhoto: false,
     suggestedRoles: [
@@ -869,7 +927,7 @@ export const TEMPLATES: TemplateMeta[] = [
     name: "Hospitality Elegant",
     description: "Champagne + burgundy + gold, top wave + monogram. Premium feel for hotel and hospitality leadership.",
     category: "hospitality-elegant",
-    component: asTemplate(HospitalityElegant),
+    component: HospitalityElegant as unknown as ComponentType<TemplateProps>,
     atsSafe: true,
     supportsPhoto: false,
     suggestedRoles: [
@@ -893,7 +951,7 @@ export const TEMPLATES: TemplateMeta[] = [
     name: "Linguist Multilingual",
     description: "White + lavender + rose gold, multi-script header, languages-as-hero section. Built for translators and interpreters.",
     category: "linguist",
-    component: asTemplate(LinguistMultilingual),
+    component: LinguistMultilingual as unknown as ComponentType<TemplateProps>,
     atsSafe: true,
     supportsPhoto: false,
     suggestedRoles: [
@@ -2476,7 +2534,6 @@ export const TEMPLATES: TemplateMeta[] = [
     suggestedIndustries: ["accounting", "finance", "administration"],
   },
   {
-    addedAt: "2026-06-06T00:25:00.000Z",
     slug: "social-pulse",
     name: "Social Pulse",
     description: "White + vivid purple→pink→amber gradient + content grid + engagement-metric tiles. For creators & social media.",
@@ -2484,6 +2541,7 @@ export const TEMPLATES: TemplateMeta[] = [
     component: SocialPulse,
     atsSafe: false,
     supportsPhoto: true,
+    addedAt: "2026-06-06T00:25:00.000Z",
     suggestedRoles: [
       "content-creator", "social-media-manager", "influencer", "social-media-coordinator",
       "community-manager", "social-media-strategist", "content-producer", "youtuber",
