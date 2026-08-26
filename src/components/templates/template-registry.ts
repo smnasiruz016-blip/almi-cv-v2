@@ -1,3 +1,9 @@
+import {
+  StudioOchreEditorialTemplate,
+  PopCreativeCollageTemplate,
+  NordicSageMinimalTemplate,
+  DarkLuxeHolographicTemplate,
+} from "./batch-canva-creative";
 import type { ComponentType } from "react";
 import type { TemplateProps } from "./types";
 
