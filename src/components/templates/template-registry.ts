@@ -1,6 +1,14 @@
 import type { ComponentType } from "react";
 import type { TemplateProps } from "./types";
 
+// New Ultra-Creative Batch (Beauty, Childcare, Botanical, Curvy Agency)
+import {
+  BeautyMakeupArtistTemplate,
+  MothercareChildcareTemplate,
+  FloralBotanicalTemplate,
+  CurvyWaveModernTemplate,
+} from "./batch-ultra-creative";
+
 // Canva Iconic Batch Templates
 import {
   AveryDavisEditorialTemplate,
@@ -346,6 +354,62 @@ export function getTagline(t: TemplateMeta): string {
 }
 
 export const TEMPLATES: TemplateMeta[] = [
+  // --------------------------------------------------------------------------
+  // ULTRA-CREATIVE BATCH (Beauty, Childcare, Botanical, Curvy Agency)
+  // --------------------------------------------------------------------------
+  {
+    slug: "beauty-makeup-artist",
+    name: "Beauty & Makeup Artist Pro",
+    description: "Nude rose gold aesthetic with cosmetic props, floating lipstick/brush accents, and elegant layout.",
+    category: "beauty",
+    component: BeautyMakeupArtistTemplate as unknown as ComponentType<TemplateProps>,
+    atsSafe: false,
+    supportsPhoto: true,
+    addedAt: "2026-08-16T07:00:00.000Z",
+    suggestedRoles: ["makeup-artist", "beauty-stylist", "hair-stylist", "esthetician", "salon-manager"],
+    suggestedIndustries: ["beauty", "cosmetics", "wellness"],
+    themes: ["rose", "blush", "sand"],
+  },
+  {
+    slug: "mothercare-childcare",
+    name: "Mothercare & Childcare Warmth",
+    description: "Soft pastel aqua/peach organic waves with childcare toy motifs, friendly headings, and warm cards.",
+    category: "childcare",
+    component: MothercareChildcareTemplate as unknown as ComponentType<TemplateProps>,
+    atsSafe: true,
+    supportsPhoto: true,
+    addedAt: "2026-08-16T06:50:00.000Z",
+    suggestedRoles: ["nanny", "childcare-worker", "babysitter", "preschool-teacher", "early-years-educator"],
+    suggestedIndustries: ["childcare", "education", "family-care"],
+    themes: ["sage", "sky", "ivory"],
+  },
+  {
+    slug: "floral-botanical-wellness",
+    name: "Floral Botanical Wellness",
+    description: "Calm sage green palette with hand-drawn leaf motifs, serif typography, and natural aesthetic.",
+    category: "beauty",
+    component: FloralBotanicalTemplate as unknown as ComponentType<TemplateProps>,
+    atsSafe: true,
+    supportsPhoto: true,
+    addedAt: "2026-08-16T06:40:00.000Z",
+    suggestedRoles: ["florist", "floral-designer", "holistic-therapist", "wellness-coach", "botanist"],
+    suggestedIndustries: ["floristry", "wellness", "nature"],
+    themes: ["sage", "forest", "ivory"],
+  },
+  {
+    slug: "curvy-wave-modern-agency",
+    name: "Curvy Wave Modern Agency",
+    description: "Asymmetrical liquid gradient waves, glowing pill cards, and vibrant modern aesthetic for creative agencies.",
+    category: "creative",
+    component: CurvyWaveModernTemplate as unknown as ComponentType<TemplateProps>,
+    atsSafe: false,
+    supportsPhoto: true,
+    addedAt: "2026-08-16T06:30:00.000Z",
+    suggestedRoles: ["growth-marketer", "digital-marketer", "social-media-strategist", "campaign-manager"],
+    suggestedIndustries: ["marketing", "digital-agency", "growth"],
+    themes: ["midnight", "sky", "plum"],
+  },
+
   // --------------------------------------------------------------------------
   // CANVA ICONIC BATCH (Viral & High-Converting Archetypes)
   // --------------------------------------------------------------------------
