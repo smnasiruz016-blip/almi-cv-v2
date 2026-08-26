@@ -1,13 +1,15 @@
-import {
-  StudioOchreEditorialTemplate,
-  PopCreativeCollageTemplate,
-  NordicSageMinimalTemplate,
-  DarkLuxeHolographicTemplate,
-} from "./batch-canva-creative";
 import type { ComponentType } from "react";
 import type { TemplateProps } from "./types";
 
-// New Batch Commercial & Job-Specific Next-Gen Templates
+// Canva Iconic Batch Templates
+import {
+  AveryDavisEditorialTemplate,
+  OliviaWilsonTerracottaTemplate,
+  PedroFernandesDarkTemplate,
+  HelenaMoralesBlushTemplate,
+} from "./batch-canva-icons";
+
+// Batch Commercial & Job-Specific Templates
 import {
   CyberDevTerminalTemplate,
   VogueCreativeArchTemplate,
@@ -344,6 +346,65 @@ export function getTagline(t: TemplateMeta): string {
 }
 
 export const TEMPLATES: TemplateMeta[] = [
+  // --------------------------------------------------------------------------
+  // CANVA ICONIC BATCH (Viral & High-Converting Archetypes)
+  // --------------------------------------------------------------------------
+  {
+    slug: "avery-davis-editorial",
+    name: "Avery Davis Minimal Serif",
+    description: "Classic Canva-style editorial serif with centered portrait, clean hairline borders, and Swiss symmetry.",
+    category: "ats-classic",
+    component: AveryDavisEditorialTemplate as unknown as ComponentType<TemplateProps>,
+    atsSafe: true,
+    supportsPhoto: true,
+    addedAt: "2026-08-16T06:00:00.000Z",
+    suggestedRoles: ["marketing-lead", "brand-strategist", "consultant", "journalist", "executive-assistant"],
+    suggestedIndustries: ["marketing", "consulting", "editorial", "corporate"],
+    themes: ["mono", "sand", "ivory"],
+  },
+  {
+    slug: "olivia-wilson-terracotta",
+    name: "Olivia Wilson Terracotta",
+    description: "Famous Canva terracotta split-column layout with photo circle, skill bars, and warm coffee hues.",
+    category: "creative",
+    component: OliviaWilsonTerracottaTemplate as unknown as ComponentType<TemplateProps>,
+    atsSafe: false,
+    supportsPhoto: true,
+    addedAt: "2026-08-16T05:50:00.000Z",
+    suggestedRoles: ["graphic-designer", "ui-designer", "art-director", "illustrator", "content-creator"],
+    suggestedIndustries: ["creative", "design", "marketing"],
+    themes: ["terracotta", "sand", "linen"],
+  },
+  {
+    slug: "pedro-fernandes-dark",
+    name: "Pedro Fernandes Executive Dark",
+    description: "Bold charcoal sidebar with monochrome high-contrast content blocks and clean executive hierarchy.",
+    category: "executive",
+    component: PedroFernandesDarkTemplate as unknown as ComponentType<TemplateProps>,
+    atsSafe: false,
+    supportsPhoto: true,
+    addedAt: "2026-08-16T05:40:00.000Z",
+    suggestedRoles: ["executive-director", "operations-manager", "project-director", "consultant", "general-manager"],
+    suggestedIndustries: ["executive", "operations", "business"],
+    themes: ["charcoal", "slate", "mono"],
+  },
+  {
+    slug: "helena-morales-blush",
+    name: "Helena Morales Blush & Lavender",
+    description: "Gentle organic wave curves with soft pastel purple/blush palette and rounded glass cards.",
+    category: "creative",
+    component: HelenaMoralesBlushTemplate as unknown as ComponentType<TemplateProps>,
+    atsSafe: false,
+    supportsPhoto: true,
+    addedAt: "2026-08-16T05:30:00.000Z",
+    suggestedRoles: ["content-writer", "copywriter", "social-media-manager", "creative-assistant", "communications-specialist"],
+    suggestedIndustries: ["creative", "writing", "communications"],
+    themes: ["blush", "plum", "ivory"],
+  },
+
+  // --------------------------------------------------------------------------
+  // COMMERCIAL & TECH HIGH-IMPACT BATCH
+  // --------------------------------------------------------------------------
   {
     slug: "cyber-dev-terminal",
     name: "Cyber Dev Terminal UI",
@@ -396,6 +457,10 @@ export const TEMPLATES: TemplateMeta[] = [
     suggestedIndustries: ["real-estate", "sales"],
     themes: ["midnight", "wine", "sand"],
   },
+
+  // --------------------------------------------------------------------------
+  // MEDICAL & CLINICAL BATCH
+  // --------------------------------------------------------------------------
   {
     slug: "astrid-emerald",
     name: "Astrid Rose Emerald",
@@ -460,6 +525,10 @@ export const TEMPLATES: TemplateMeta[] = [
     suggestedIndustries: ["dentistry", "cosmetic-surgery", "healthcare"],
     themes: ["plum", "wine", "charcoal"],
   },
+
+  // --------------------------------------------------------------------------
+  // NEXT-GEN STUDIO TEMPLATES
+  // --------------------------------------------------------------------------
   {
     slug: "retro-desktop-window",
     name: "90s Retro Window Desktop",
@@ -603,6 +672,10 @@ export const TEMPLATES: TemplateMeta[] = [
     suggestedIndustries: ["technology", "cloud", "devops"],
     themes: ["midnight", "forest", "navy"],
   },
+
+  // --------------------------------------------------------------------------
+  // CORE & CATALOG TEMPLATES
+  // --------------------------------------------------------------------------
   {
     slug: "religious-traditional",
     name: "Religious Traditional",
