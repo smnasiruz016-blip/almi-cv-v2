@@ -1,6 +1,14 @@
 import type { ComponentType } from "react";
 import type { TemplateProps } from "./types";
 
+// New Batch Medical & Healthcare Templates
+import {
+  AstridEmeraldTemplate,
+  AuraMidwifeTemplate,
+  CyberParamedicTemplate,
+  RoyalDentalTemplate,
+} from "./batch-medical";
+
 // Next-Gen Canva & Modern Studio Templates
 import { RetroDesktopWindowUI } from "./RetroDesktopWindowUI";
 import { OrganicWaveEditorial } from "./OrganicWaveEditorial";
@@ -324,6 +332,70 @@ export function getTagline(t: TemplateMeta): string {
 }
 
 export const TEMPLATES: TemplateMeta[] = [
+  {
+    slug: "astrid-emerald",
+    name: "Astrid Rose Emerald",
+    description: "Luxury dark emerald canvas with liquid rose gold fluid wave ribbons, frosted glass translucent sidebar, and prism hexagon avatar frame.",
+    category: "medical",
+    component: AstridEmeraldTemplate as unknown as ComponentType<TemplateProps>,
+    atsSafe: false,
+    supportsPhoto: true,
+    addedAt: "2026-08-16T03:00:00.000Z",
+    suggestedRoles: [
+      "occupational-therapist", "physiotherapist", "physical-therapist",
+      "speech-therapist", "rehabilitation-specialist", "clinical-director", "hand-therapist"
+    ],
+    suggestedIndustries: ["healthcare", "rehabilitation", "clinical-care"],
+    themes: ["emerald", "rose", "forest"],
+  },
+  {
+    slug: "aura-midwife",
+    name: "Aura Midwife Organic",
+    description: "Soft pastel organic flow with dual-ring avatar, warm coral and lilac waves, and holistic clinical milestone timeline.",
+    category: "nursing",
+    component: AuraMidwifeTemplate as unknown as ComponentType<TemplateProps>,
+    atsSafe: true,
+    supportsPhoto: true,
+    addedAt: "2026-08-16T02:30:00.000Z",
+    suggestedRoles: [
+      "midwife", "certified-nurse-midwife", "doula", "lactation-consultant",
+      "labor-and-delivery-nurse", "neonatal-nurse", "maternity-care-specialist"
+    ],
+    suggestedIndustries: ["healthcare", "maternity", "nursing"],
+    themes: ["coral", "blush", "ivory"],
+  },
+  {
+    slug: "cyber-paramedic",
+    name: "Cyber Paramedic HUD",
+    description: "High-contrast dark terminal with cyan and emergency neon-red glowing rails, trauma metrics, and tactical service record.",
+    category: "medical",
+    component: CyberParamedicTemplate as unknown as ComponentType<TemplateProps>,
+    atsSafe: false,
+    supportsPhoto: true,
+    addedAt: "2026-08-16T02:00:00.000Z",
+    suggestedRoles: [
+      "flight-paramedic", "critical-care-paramedic", "paramedic", "emt",
+      "emergency-medical-technician", "trauma-medic", "first-responder", "er-technician"
+    ],
+    suggestedIndustries: ["emergency-services", "healthcare", "public-safety"],
+    themes: ["midnight", "charcoal", "wine"],
+  },
+  {
+    slug: "royal-dental",
+    name: "Royal Dental & Surgical",
+    description: "Deep imperial violet and liquid metallic gold ribbons with diamond-cut portrait frame and clinical procedure ratings.",
+    category: "medical",
+    component: RoyalDentalTemplate as unknown as ComponentType<TemplateProps>,
+    atsSafe: false,
+    supportsPhoto: true,
+    addedAt: "2026-08-16T01:30:00.000Z",
+    suggestedRoles: [
+      "dentist", "dental-surgeon", "cosmetic-dentist", "orthodontist",
+      "periodontist", "oral-surgeon", "implantologist", "prosthodontist"
+    ],
+    suggestedIndustries: ["dentistry", "cosmetic-surgery", "healthcare"],
+    themes: ["plum", "wine", "charcoal"],
+  },
   {
     slug: "retro-desktop-window",
     name: "90s Retro Window Desktop",
