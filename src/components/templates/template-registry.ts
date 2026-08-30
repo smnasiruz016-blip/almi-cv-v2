@@ -1,35 +1,27 @@
 import type { ComponentType } from "react";
 import type { TemplateProps } from "./types";
 
-// 1. Stable Masterclass & Canva Imported Batches
-import {
-  NeoGlassmorphismTemplate,
-  AsymmetricEditorialTemplate,
-  CyberGeometricTemplate,
-  BohoTerracottaTemplate,
-} from "./batch-masterclass";
+// 1. Direct Safe Imports for All Custom & Masterclass Templates
+import { NeoGlassmorphismTemplate } from "./batch-masterclass";
+import { AsymmetricEditorialTemplate } from "./batch-masterclass";
+import { CyberGeometricTemplate } from "./batch-masterclass";
+import { BohoTerracottaTemplate } from "./batch-masterclass";
 
-import {
-  MindMapGraphisteTemplate,
-  SachaDuboisEventTemplate,
-  ClipboardNotepadTemplate,
-  IdBadgeModernTemplate,
-  DottedNotebookTemplate,
-  FloralBotanistTemplate,
-  LouGarnierCommunityTemplate,
-  LouHuetIllustratorTemplate,
-  YaelleAllaouiTemplate,
-  ThomasGarciaSoundTemplate,
-} from "./batch-canva-imported";
+import { MindMapGraphisteTemplate } from "./batch-canva-imported";
+import { SachaDuboisEventTemplate } from "./batch-canva-imported";
+import { ClipboardNotepadTemplate } from "./batch-canva-imported";
+import { IdBadgeModernTemplate } from "./batch-canva-imported";
+import { DottedNotebookTemplate } from "./batch-canva-imported";
+import { FloralBotanistTemplate } from "./batch-canva-imported";
+import { LouGarnierCommunityTemplate } from "./batch-canva-imported";
+import { LouHuetIllustratorTemplate } from "./batch-canva-imported";
+import { YaelleAllaouiTemplate } from "./batch-canva-imported";
+import { ThomasGarciaSoundTemplate } from "./batch-canva-imported";
 
-import {
-  BeautyMakeupArtistTemplate,
-  MothercareChildcareTemplate,
-  FloralBotanicalTemplate,
-  CurvyWaveModernTemplate,
-} from "./batch-ultra-creative";
-
-import { CyberNurseFuturisticTemplate } from "./CyberNurseFuturisticTemplate";
+import { BeautyMakeupArtistTemplate } from "./batch-ultra-creative";
+import { MothercareChildcareTemplate } from "./batch-ultra-creative";
+import { FloralBotanicalTemplate } from "./batch-ultra-creative";
+import { CurvyWaveModernTemplate } from "./batch-ultra-creative";
 
 // 2. Core Popular & Professional Templates
 import ClassicSerif from "./ClassicSerif";
@@ -64,8 +56,7 @@ export type TemplateCategory =
   | "beauty"
   | "portfolio"
   | "executive"
-  | "childcare"
-  | "nursing";
+  | "childcare";
 
 export interface TemplateMeta {
   slug: string;
@@ -97,21 +88,8 @@ export function getTagline(t: TemplateMeta): string {
 
 export const TEMPLATES: TemplateMeta[] = [
   // --------------------------------------------------------------------------
-  // MASTERCLASS, FUTURISTIC & CANVA IMPORTED BATCH
+  // MASTERCLASS & CANVA CUSTOM DESIGNED TEMPLATES
   // --------------------------------------------------------------------------
-  {
-    slug: "cyber-nurse-futuristic",
-    name: "Cyber-Nurse HUD & Holo-Vital",
-    description: "Futuristic sci-fi neon HUD interface with telemetry progress bars, high-tech telemetry metrics, and dark mode grid.",
-    category: "nursing",
-    component: CyberNurseFuturisticTemplate as unknown as ComponentType<TemplateProps>,
-    atsSafe: false,
-    supportsPhoto: true,
-    addedAt: "2026-08-30T12:00:00.000Z",
-    suggestedRoles: ["registered-nurse", "icu-nurse", "er-nurse", "critical-care-nurse", "nurse-practitioner"],
-    suggestedIndustries: ["healthcare", "nursing", "clinical-medicine"],
-    themes: ["midnight", "cyan", "slate"],
-  },
   {
     slug: "neo-glassmorphism-executive",
     name: "Neo-Glassmorphism Executive",
@@ -221,7 +199,7 @@ export const TEMPLATES: TemplateMeta[] = [
     name: "Dotted Notebook (Elsa Belvaux)",
     description: "Spiral notebook aesthetic with dotted grid background, polaroid photo, and yellow marker highlights.",
     category: "creative",
-    component: NotebookDottedGridTemplate as unknown as ComponentType<TemplateProps>,
+    component: DottedNotebookTemplate as unknown as ComponentType<TemplateProps>,
     atsSafe: false,
     supportsPhoto: true,
     addedAt: "2026-08-16T08:20:00.000Z",
@@ -294,8 +272,6 @@ export const TEMPLATES: TemplateMeta[] = [
     suggestedIndustries: ["audio", "media", "production"],
     themes: ["slate", "sky", "midnight"],
   },
-
-  // Ultra-Creative Batch
   {
     slug: "beauty-makeup-artist",
     name: "Beauty & Makeup Artist Pro",
