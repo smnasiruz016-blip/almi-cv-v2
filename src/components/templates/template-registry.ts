@@ -1,83 +1,49 @@
 import type { ComponentType } from "react";
 import type { TemplateProps } from "./types";
 
-// Core Popular & Professional Templates (Direct Imports - 0% Error Risk)
+// 1. Your Custom Masterclass & Canva Imported Templates (Fully Recovered)
+import {
+  NeoGlassmorphismTemplate,
+  AsymmetricEditorialTemplate,
+  CyberGeometricTemplate,
+  BohoTerracottaTemplate,
+} from "./batch-masterclass";
+
+import {
+  MindMapGraphisteTemplate,
+  SachaDuboisEventTemplate,
+  ClipboardNotepadTemplate,
+  IdBadgeModernTemplate,
+  DottedNotebookTemplate,
+  FloralBotanistTemplate,
+  LouGarnierCommunityTemplate,
+  LouHuetIllustratorTemplate,
+  YaelleAllaouiTemplate,
+  ThomasGarciaSoundTemplate,
+} from "./batch-canva-imported";
+
+import {
+  BeautyMakeupArtistTemplate,
+  MothercareChildcareTemplate,
+  FloralBotanicalTemplate,
+  CurvyWaveModernTemplate,
+} from "./batch-ultra-creative";
+
+// 2. Core Popular & Professional Templates
 import ClassicSerif from "./ClassicSerif";
 import ModernTwoColumn from "./ModernTwoColumn";
 import TechMinimal from "./TechMinimal";
 import Healthcare from "./Healthcare";
 import CreativeDirector from "./CreativeDirector";
 import Academic from "./Academic";
-import CyberGrid from "./CyberGrid";
 import CorporateBlue from "./CorporateBlue";
-import WarmCreative from "./WarmCreative";
-import ReligiousTraditional from "./ReligiousTraditional";
-import TradesIndustrial from "./TradesIndustrial";
-import RealEstateElegant from "./RealEstateElegant";
-import LogisticsDirect from "./LogisticsDirect";
-import BeautyPortfolio from "./BeautyPortfolio";
-import ManufacturingPrecise from "./ManufacturingPrecise";
-import PublicServiceHonor from "./PublicServiceHonor";
-import EducationWarm from "./EducationWarm";
 import SalesModern from "./SalesModern";
-import ServiceFriendly from "./ServiceFriendly";
-import CreativePortfolio from "./CreativePortfolio";
+import MonochromeMinimal from "./MonochromeMinimal";
 import MidnightCyan from "./MidnightCyan";
-import CoralSunset from "./CoralSunset";
 import EmeraldExecutive from "./EmeraldExecutive";
 import RoyalBlueCorporate from "./RoyalBlueCorporate";
-import SageWatercolor from "./SageWatercolor";
-import VioletGlass from "./VioletGlass";
-import RetroModern from "./RetroModern";
-import GeometricAbstract from "./GeometricAbstract";
-import SlateMonoData from "./SlateMonoData";
 import RoseEditorial from "./RoseEditorial";
-import CharcoalTimeline from "./CharcoalTimeline";
-import TerracottaCaregiver from "./TerracottaCaregiver";
-import OceanTealSales from "./OceanTealSales";
 import WineLegal from "./WineLegal";
-import HolographicIridescent from "./HolographicIridescent";
-import IsometricIndigo from "./IsometricIndigo";
-import ForestTrades from "./ForestTrades";
-import SunnyHospitality from "./SunnyHospitality";
-import FreshGraduateMint from "./FreshGraduateMint";
-import BlueprintArchitect from "./BlueprintArchitect";
-import DarkLuxeGold from "./DarkLuxeGold";
-import CustomerServiceCoral from "./CustomerServiceCoral";
-import LedgerAccountant from "./LedgerAccountant";
-import HRPeople from "./HRPeople";
-import CulinaryMenu from "./CulinaryMenu";
-import RealEstateNavy from "./RealEstateNavy";
-import FitnessCoach from "./FitnessCoach";
-import JournalistColumn from "./JournalistColumn";
-import MechanicalEngineer from "./MechanicalEngineer";
-import MonochromeMinimal from "./MonochromeMinimal";
-import ClinicalTealNP from "./ClinicalTealNP";
-import ApothecaryPharmacist from "./ApothecaryPharmacist";
-import OxbloodLitigation from "./OxbloodLitigation";
-import CommunitySocialWorker from "./CommunitySocialWorker";
-import SkylineCabinCrew from "./SkylineCabinCrew";
-import VoltageElectrician from "./VoltageElectrician";
-import TimelineVideoEditor from "./TimelineVideoEditor";
-import LabNoteScientist from "./LabNoteScientist";
-import SwissClinicalDentist from "./SwissClinicalDentist";
-import MemphisUXResearcher from "./MemphisUXResearcher";
-import ArcadeNeonGamedev from "./ArcadeNeonGamedev";
-import ArtDecoEventPlanner from "./ArtDecoEventPlanner";
-import LinguistTranslator from "./LinguistTranslator";
-import MeadowVeterinarian from "./MeadowVeterinarian";
-import LogisticsSupplyChain from "./LogisticsSupplyChain";
-import MagazineCopywriter from "./MagazineCopywriter";
-import ParamedicEmergency from "./ParamedicEmergency";
-import NutritionFreshDietitian from "./NutritionFreshDietitian";
-import OptometryPrecision from "./OptometryPrecision";
-import StructuralCivilEngineer from "./StructuralCivilEngineer";
-import InteriorAtelier from "./InteriorAtelier";
-import StudioWaveformProducer from "./StudioWaveformProducer";
-import CafeRoastBarista from "./CafeRoastBarista";
-import SustainMeshESG from "./SustainMeshESG";
-import BrutalistCreativeTech from "./BrutalistCreativeTech";
-import GradientMeshGrowth from "./GradientMeshGrowth";
 
 export type TemplateCategory =
   | "ats-classic"
@@ -86,57 +52,17 @@ export type TemplateCategory =
   | "medical"
   | "creative"
   | "scholarly"
-  | "infographic"
   | "business"
   | "hospitality"
-  | "faith-based"
-  | "trades-industrial"
-  | "real-estate"
-  | "logistics"
-  | "beauty"
-  | "manufacturing"
-  | "public-service"
-  | "education-warm"
   | "sales"
   | "service"
   | "legal"
   | "finance"
   | "people-hr"
-  | "operations"
-  | "insurance"
-  | "veterinary"
-  | "aviation"
-  | "hospitality-elegant"
-  | "linguist"
-  | "agriculture"
-  | "automotive"
-  | "broadcast"
-  | "web-analytics"
-  | "caregiving"
-  | "childcare"
-  | "communications"
-  | "cybersecurity"
-  | "marketing"
-  | "environmental"
-  | "fashion"
-  | "game-dev"
-  | "government"
-  | "science"
-  | "music"
-  | "nonprofit"
-  | "restaurant"
-  | "creator"
-  | "customer-support"
-  | "travel"
-  | "warehouse"
-  | "culinary"
-  | "fitness"
-  | "library"
-  | "mobile"
-  | "nursing"
-  | "photography"
+  | "beauty"
   | "portfolio"
-  | "executive";
+  | "executive"
+  | "childcare";
 
 export interface TemplateMeta {
   slug: string;
@@ -168,7 +94,247 @@ export function getTagline(t: TemplateMeta): string {
 
 export const TEMPLATES: TemplateMeta[] = [
   // --------------------------------------------------------------------------
-  // ALL POPULAR & ORIGINAL TEMPLATES (Full Catalog Restored)
+  // YOUR CUSTOM DESIGNED & CANVA IMPORTED TEMPLATES (Restored & Live)
+  // --------------------------------------------------------------------------
+  {
+    slug: "neo-glassmorphism-executive",
+    name: "Neo-Glassmorphism Executive",
+    description: "Deep obsidian canvas with frosted glass cards, neon ambient orbs, and executive precision.",
+    category: "executive",
+    component: NeoGlassmorphismTemplate as unknown as ComponentType<TemplateProps>,
+    atsSafe: false,
+    supportsPhoto: true,
+    addedAt: "2026-08-30T10:00:00.000Z",
+    suggestedRoles: ["cto", "vp-engineering", "chief-technology-officer", "tech-lead"],
+    suggestedIndustries: ["technology", "executive", "software"],
+    themes: ["midnight", "indigo", "cyan"],
+  },
+  {
+    slug: "asymmetric-editorial",
+    name: "Asymmetric Editorial Masthead",
+    description: "Warm champagne and burnt wine magazine style with massive display serif headers and vertical lines.",
+    category: "creative",
+    component: AsymmetricEditorialTemplate as unknown as ComponentType<TemplateProps>,
+    atsSafe: true,
+    supportsPhoto: false,
+    addedAt: "2026-08-30T09:50:00.000Z",
+    suggestedRoles: ["editor-in-chief", "editorial-director", "brand-consultant", "journalist"],
+    suggestedIndustries: ["editorial", "publishing", "marketing"],
+    themes: ["sand", "wine", "ivory"],
+  },
+  {
+    slug: "cyber-geometric-matrix",
+    name: "Cyber-Geometric Matrix Data Hub",
+    description: "Midnight ink with electric cyan tech grid, asymmetric geometry, and high-contrast telemetry metrics.",
+    category: "developer",
+    component: CyberGeometricTemplate as unknown as ComponentType<TemplateProps>,
+    atsSafe: false,
+    supportsPhoto: false,
+    addedAt: "2026-08-30T09:40:00.000Z",
+    suggestedRoles: ["cybersecurity-architect", "penetration-tester", "systems-engineer", "security-lead"],
+    suggestedIndustries: ["cybersecurity", "technology", "infosec"],
+    themes: ["midnight", "cyan", "slate"],
+  },
+  {
+    slug: "boho-organic-terracotta",
+    name: "Boho Organic Terracotta",
+    description: "Warm sand and soft clay organic curved blobs with soft rounded skill pills and mindful layout.",
+    category: "creative",
+    component: BohoTerracottaTemplate as unknown as ComponentType<TemplateProps>,
+    atsSafe: true,
+    supportsPhoto: true,
+    addedAt: "2026-08-30T09:30:00.000Z",
+    suggestedRoles: ["product-designer", "ux-researcher", "content-writer", "wellness-coach"],
+    suggestedIndustries: ["design", "creative", "wellness"],
+    themes: ["terracotta", "sand", "ivory"],
+  },
+  {
+    slug: "mind-map-graphiste",
+    name: "Mind-Map Graphiste (Chloé Vallet)",
+    description: "Famous Canva radial mind-map layout with central circular portrait and hand-drawn pointer arrows.",
+    category: "creative",
+    component: MindMapGraphisteTemplate as unknown as ComponentType<TemplateProps>,
+    atsSafe: false,
+    supportsPhoto: true,
+    addedAt: "2026-08-16T09:00:00.000Z",
+    suggestedRoles: ["graphiste", "designer-graphique", "art-director", "ui-designer"],
+    suggestedIndustries: ["creative", "design", "communication"],
+    themes: ["sand", "wine", "ivory"],
+  },
+  {
+    slug: "sacha-dubois-event",
+    name: "Modern Event Manager (Sacha Dubois)",
+    description: "Clean modern layout with top-right red fluid wave header, circular portrait, and bold typography.",
+    category: "professional",
+    component: SachaDuboisEventTemplate as unknown as ComponentType<TemplateProps>,
+    atsSafe: true,
+    supportsPhoto: true,
+    addedAt: "2026-08-16T08:50:00.000Z",
+    suggestedRoles: ["chargee-de-projet", "event-manager", "project-coordinator", "marketing-manager"],
+    suggestedIndustries: ["events", "marketing", "corporate"],
+    themes: ["coral", "mono", "ivory"],
+  },
+  {
+    slug: "clipboard-notepad",
+    name: "Clipboard Notepad (Clémence Laurent)",
+    description: "Realistic blue clipboard mockup with polaroid photo frame and handwritten notepad styling.",
+    category: "creative",
+    component: ClipboardNotepadTemplate as unknown as ComponentType<TemplateProps>,
+    atsSafe: false,
+    supportsPhoto: true,
+    addedAt: "2026-08-16T08:40:00.000Z",
+    suggestedRoles: ["designer-graphique", "freelance-designer", "photographer", "art-director"],
+    suggestedIndustries: ["creative", "freelance", "photography"],
+    themes: ["navy", "mono", "ivory"],
+  },
+  {
+    slug: "security-badge-pr",
+    name: "Security ID Badge PR (Jonathan Martin)",
+    description: "Professional PR layout featuring a realistic security ID pass badge and minimalist grid boxes.",
+    category: "professional",
+    component: IdBadgeModernTemplate as unknown as ComponentType<TemplateProps>,
+    atsSafe: true,
+    supportsPhoto: true,
+    addedAt: "2026-08-16T08:30:00.000Z",
+    suggestedRoles: ["relations-publiques", "communication-manager", "pr-specialist", "attachse-de-presse"],
+    suggestedIndustries: ["communications", "pr", "corporate"],
+    themes: ["slate", "mono", "ivory"],
+  },
+  {
+    slug: "dotted-notebook-elsa",
+    name: "Dotted Notebook (Elsa Belvaux)",
+    description: "Spiral notebook aesthetic with dotted grid background, polaroid photo, and yellow marker highlights.",
+    category: "creative",
+    component: NotebookDottedGridTemplate as unknown as ComponentType<TemplateProps>,
+    atsSafe: false,
+    supportsPhoto: true,
+    addedAt: "2026-08-16T08:20:00.000Z",
+    suggestedRoles: ["chargee-de-communication", "content-strategist", "community-manager", "redacteur"],
+    suggestedIndustries: ["communication", "marketing", "media"],
+    themes: ["sand", "amber", "ivory"],
+  },
+  {
+    slug: "floral-botanist-helene",
+    name: "Floral Botanist (Hélène Roux)",
+    description: "Delicate floral motifs, soft rose/terracotta palette, and organic botanical leaf frames.",
+    category: "beauty",
+    component: FloralBotanistTemplate as unknown as ComponentType<TemplateProps>,
+    atsSafe: true,
+    supportsPhoto: true,
+    addedAt: "2026-08-16T08:10:00.000Z",
+    suggestedRoles: ["fleuriste", "botaniste", "floral-designer", "landscape-designer"],
+    suggestedIndustries: ["floristry", "nature", "gardening"],
+    themes: ["rose", "sand", "ivory"],
+  },
+  {
+    slug: "lou-garnier-community",
+    name: "Lou Garnier Community Manager",
+    description: "Cheerful botanical layout with soft pastel green accents, circular photo frame, and friendly vibe.",
+    category: "creative",
+    component: LouGarnierCommunityTemplate as unknown as ComponentType<TemplateProps>,
+    atsSafe: true,
+    supportsPhoto: true,
+    addedAt: "2026-08-16T08:00:00.000Z",
+    suggestedRoles: ["community-manager", "social-media-manager", "content-creator", "digital-marketer"],
+    suggestedIndustries: ["social-media", "marketing", "community"],
+    themes: ["sage", "forest", "ivory"],
+  },
+  {
+    slug: "lou-huet-illustrator",
+    name: "Lou Huet Illustrator Pop",
+    description: "Vibrant pink and yellow pop aesthetic with sticker badges and playful typography for illustrators.",
+    category: "creative",
+    component: LouHuetIllustratorTemplate as unknown as ComponentType<TemplateProps>,
+    atsSafe: false,
+    supportsPhoto: true,
+    addedAt: "2026-08-16T07:50:00.000Z",
+    suggestedRoles: ["illustrateur", "graphiste", "concept-artist", "visual-artist"],
+    suggestedIndustries: ["illustration", "creative", "art"],
+    themes: ["coral", "lime", "blush"],
+  },
+  {
+    slug: "yaelle-allaoui-folded",
+    name: "Yaelle Allaoui Crumpled Paper",
+    description: "Pink folded/crumpled paper look with dark charcoal base and high-contrast creative layout.",
+    category: "creative",
+    component: YaelleAllaouiTemplate as unknown as ComponentType<TemplateProps>,
+    atsSafe: false,
+    supportsPhoto: true,
+    addedAt: "2026-08-16T07:40:00.000Z",
+    suggestedRoles: ["designer-graphique", "art-director", "brand-designer", "creative-lead"],
+    suggestedIndustries: ["design", "creative", "branding"],
+    themes: ["plum", "coral", "charcoal"],
+  },
+  {
+    slug: "thomas-garcia-sound",
+    name: "Thomas Garcia Sound Tech",
+    description: "Dark audio/media technician theme with card blocks, project grids, and technical playlist pills.",
+    category: "developer",
+    component: ThomasGarciaSoundTemplate as unknown as ComponentType<TemplateProps>,
+    atsSafe: false,
+    supportsPhoto: true,
+    addedAt: "2026-08-16T07:30:00.000Z",
+    suggestedRoles: ["technicien-son", "sound-engineer", "audio-producer", "video-editor"],
+    suggestedIndustries: ["audio", "media", "production"],
+    themes: ["slate", "sky", "midnight"],
+  },
+
+  // Ultra-Creative Batch
+  {
+    slug: "beauty-makeup-artist",
+    name: "Beauty & Makeup Artist Pro",
+    description: "Nude rose gold aesthetic with cosmetic props, floating lipstick/brush accents, and elegant layout.",
+    category: "beauty",
+    component: BeautyMakeupArtistTemplate as unknown as ComponentType<TemplateProps>,
+    atsSafe: false,
+    supportsPhoto: true,
+    addedAt: "2026-08-16T07:00:00.000Z",
+    suggestedRoles: ["makeup-artist", "beauty-stylist", "hair-stylist", "esthetician", "salon-manager"],
+    suggestedIndustries: ["beauty", "cosmetics", "wellness"],
+    themes: ["rose", "blush", "sand"],
+  },
+  {
+    slug: "mothercare-childcare",
+    name: "Mothercare & Childcare Warmth",
+    description: "Soft pastel aqua/peach organic waves with childcare toy motifs, friendly headings, and warm cards.",
+    category: "childcare",
+    component: MothercareChildcareTemplate as unknown as ComponentType<TemplateProps>,
+    atsSafe: true,
+    supportsPhoto: true,
+    addedAt: "2026-08-16T06:50:00.000Z",
+    suggestedRoles: ["nanny", "childcare-worker", "babysitter", "preschool-teacher", "early-years-educator"],
+    suggestedIndustries: ["childcare", "education", "family-care"],
+    themes: ["sage", "sky", "ivory"],
+  },
+  {
+    slug: "floral-botanical-wellness",
+    name: "Floral Botanical Wellness",
+    description: "Calm sage green palette with hand-drawn leaf motifs, serif typography, and natural aesthetic.",
+    category: "beauty",
+    component: FloralBotanicalTemplate as unknown as ComponentType<TemplateProps>,
+    atsSafe: true,
+    supportsPhoto: true,
+    addedAt: "2026-08-16T06:40:00.000Z",
+    suggestedRoles: ["florist", "floral-designer", "holistic-therapist", "wellness-coach", "botanist"],
+    suggestedIndustries: ["floristry", "wellness", "nature"],
+    themes: ["sage", "forest", "ivory"],
+  },
+  {
+    slug: "curvy-wave-modern-agency",
+    name: "Curvy Wave Modern Agency",
+    description: "Asymmetrical liquid gradient waves, glowing pill cards, and vibrant modern aesthetic for creative agencies.",
+    category: "creative",
+    component: CurvyWaveModernTemplate as unknown as ComponentType<TemplateProps>,
+    atsSafe: false,
+    supportsPhoto: true,
+    addedAt: "2026-08-16T06:30:00.000Z",
+    suggestedRoles: ["growth-marketer", "digital-marketer", "social-media-strategist", "campaign-manager"],
+    suggestedIndustries: ["marketing", "digital-agency", "growth"],
+    themes: ["midnight", "sky", "plum"],
+  },
+
+  // --------------------------------------------------------------------------
+  // CORE POPULAR & PROFESSIONAL TEMPLATES
   // --------------------------------------------------------------------------
   {
     slug: "classic-serif",
@@ -325,607 +491,7 @@ export const TEMPLATES: TemplateMeta[] = [
     suggestedRoles: ["lawyer", "corporate-counsel", "attorney"],
     suggestedIndustries: ["legal", "law", "corporate"],
     themes: ["wine", "ivory", "forest"],
-  },
-  {
-    slug: "coral-sunset",
-    name: "Coral Sunset",
-    description: "Full-bleed coral-to-plum gradient hero, hexagon monogram and gradient skill bars.",
-    category: "education-warm",
-    component: CoralSunset,
-    atsSafe: false,
-    supportsPhoto: false,
-    suggestedRoles: ["teacher", "secondary-school-teacher", "primary-school-teacher"],
-    suggestedIndustries: ["education", "teaching", "schools"],
-    themes: ["coral", "plum", "sunset"],
-  },
-  {
-    slug: "sage-watercolor",
-    name: "Sage Watercolor",
-    description: "Soft sage and peach watercolour washes, circular photo and calm credential chips.",
-    category: "nursing",
-    component: SageWatercolor,
-    atsSafe: false,
-    supportsPhoto: true,
-    suggestedRoles: ["registered-nurse", "nurse", "midwife"],
-    suggestedIndustries: ["healthcare", "nursing", "medical"],
-    themes: ["sage", "ivory", "blush"],
-  },
-  {
-    slug: "violet-glass",
-    name: "Violet Glass",
-    description: "Violet-to-pink gradient with frosted glass cards and an impact-metrics strip.",
-    category: "creative",
-    component: VioletGlass,
-    atsSafe: false,
-    supportsPhoto: true,
-    suggestedRoles: ["product-designer", "ux-designer", "ui-designer"],
-    suggestedIndustries: ["design", "product", "technology"],
-    themes: ["plum", "blush", "violet"],
-  },
-  {
-    slug: "retro-modern",
-    name: "Retro Modern",
-    description: "Bold retro blocks in burnt orange, gold and ink with chunky Archivo display.",
-    category: "creative",
-    component: RetroModern,
-    atsSafe: false,
-    supportsPhoto: false,
-    suggestedRoles: ["art-director", "brand-director", "creative-director"],
-    suggestedIndustries: ["creative", "branding", "advertising"],
-    themes: ["orange", "sunset", "sand"],
-  },
-  {
-    slug: "geometric-abstract",
-    name: "Geometric Abstract",
-    description: "Angular teal, yellow and coral shapes framing a crisp two-column layout.",
-    category: "creative",
-    component: GeometricAbstract,
-    atsSafe: false,
-    supportsPhoto: false,
-    suggestedRoles: ["graphic-designer", "visual-designer", "illustrator"],
-    suggestedIndustries: ["design", "creative", "media"],
-    themes: ["teal", "mint", "coral"],
-  },
-  {
-    slug: "slate-mono-data",
-    name: "Slate Mono Data",
-    description: "Monospace terminal styling, teal accents, metric tiles and a mini bar chart.",
-    category: "web-analytics",
-    component: SlateMonoData,
-    atsSafe: false,
-    supportsPhoto: false,
-    suggestedRoles: ["data-analyst", "business-intelligence-analyst", "bi-developer"],
-    suggestedIndustries: ["data", "analytics", "technology"],
-    themes: ["slate", "teal", "navy"],
-  },
-  {
-    slug: "charcoal-timeline",
-    name: "Charcoal Timeline",
-    description: "Charcoal header with an amber vertical timeline tracing the career path.",
-    category: "operations",
-    component: CharcoalTimeline,
-    atsSafe: false,
-    supportsPhoto: false,
-    suggestedRoles: ["project-manager", "programme-manager", "scrum-master"],
-    suggestedIndustries: ["project-management", "operations", "consulting"],
-    themes: ["slate", "amber", "charcoal"],
-  },
-  {
-    slug: "terracotta-caregiver",
-    name: "Terracotta Caregiver",
-    description: "Warm terracotta with a soft rounded header, photo and friendly cards.",
-    category: "caregiving",
-    component: TerracottaCaregiver,
-    atsSafe: false,
-    supportsPhoto: true,
-    suggestedRoles: ["care-assistant", "support-worker", "healthcare-assistant"],
-    suggestedIndustries: ["care", "social-care", "healthcare"],
-    themes: ["terracotta", "sand", "blush"],
-  },
-  {
-    slug: "ocean-teal-sales",
-    name: "Ocean Teal Sales",
-    description: "Teal gradient header over a bold metrics stripe built to show numbers.",
-    category: "sales",
-    component: OceanTealSales,
-    atsSafe: false,
-    supportsPhoto: false,
-    suggestedRoles: ["sales-manager", "business-development-manager", "account-executive"],
-    suggestedIndustries: ["sales", "business-development", "saas"],
-    themes: ["teal", "ocean", "navy"],
-  },
-  {
-    slug: "holographic-iridescent",
-    name: "Holographic Iridescent",
-    description: "Iridescent pink-to-mint gradient over a dark canvas with gradient stat tiles.",
-    category: "photography",
-    component: HolographicIridescent,
-    atsSafe: false,
-    supportsPhoto: false,
-    suggestedRoles: ["photographer", "visual-artist", "commercial-photographer"],
-    suggestedIndustries: ["photography", "creative", "media"],
-    themes: ["plum", "violet", "blush"],
-  },
-  {
-    slug: "isometric-indigo",
-    name: "Isometric Indigo",
-    description: "Indigo grid hero with isometric 3D cubes, glowing skill bars and dark panels.",
-    category: "developer",
-    component: IsometricIndigo,
-    atsSafe: false,
-    supportsPhoto: false,
-    suggestedRoles: ["cloud-architect", "solutions-architect", "devops-engineer"],
-    suggestedIndustries: ["software", "cloud", "technology"],
-    themes: ["navy", "plum", "slate"],
-  },
-  {
-    slug: "forest-trades",
-    name: "Forest Trades",
-    description: "Sturdy forest-green and safety-amber with a hazard stripe and condensed type.",
-    category: "trades-industrial",
-    component: ForestTrades,
-    atsSafe: false,
-    supportsPhoto: false,
-    suggestedRoles: ["site-manager", "construction-manager", "site-foreman"],
-    suggestedIndustries: ["construction", "trades", "building"],
-    themes: ["forest", "amber", "sand"],
-  },
-  {
-    slug: "sunny-hospitality",
-    name: "Sunny Hospitality",
-    description: "Warm amber sunrise header with photo and friendly rounded card sections.",
-    category: "hospitality",
-    component: SunnyHospitality,
-    atsSafe: false,
-    supportsPhoto: true,
-    suggestedRoles: ["hotel-manager", "front-office-manager", "hospitality-manager"],
-    suggestedIndustries: ["hospitality", "hotels", "tourism"],
-    themes: ["amber", "coral", "sand"],
-  },
-  {
-    slug: "fresh-graduate-mint",
-    name: "Fresh Graduate Mint",
-    description: "Bright mint, education-first layout with space for awards. Built for students.",
-    category: "professional",
-    component: FreshGraduateMint,
-    atsSafe: false,
-    supportsPhoto: false,
-    suggestedRoles: ["graduate", "student", "intern", "entry-level"],
-    suggestedIndustries: ["graduate", "entry-level", "early-career"],
-    themes: ["mint", "sage", "ivory"],
-  },
-  {
-    slug: "blueprint-architect",
-    name: "Blueprint Architect",
-    description: "Navy blueprint grid header with mono numbering and a technical two-column body.",
-    category: "creative",
-    component: BlueprintArchitect,
-    atsSafe: false,
-    supportsPhoto: false,
-    suggestedRoles: ["architect", "project-architect", "architectural-designer"],
-    suggestedIndustries: ["architecture", "design", "construction"],
-    themes: ["navy", "slate", "royal"],
-  },
-  {
-    slug: "dark-luxe-gold",
-    name: "Dark Luxe Gold",
-    description: "Near-black with a gold hairline frame and centred serif. Quietly premium.",
-    category: "business",
-    component: DarkLuxeGold,
-    atsSafe: false,
-    supportsPhoto: false,
-    suggestedRoles: ["management-consultant", "strategy-consultant", "partner"],
-    suggestedIndustries: ["consulting", "strategy", "executive"],
-    themes: ["charcoal", "gold", "wine"],
-  },
-  {
-    slug: "customer-service-coral",
-    name: "Customer Service Coral",
-    description: "Friendly coral sidebar with photo, skill bars and a metrics stripe.",
-    category: "customer-support",
-    component: CustomerServiceCoral,
-    atsSafe: false,
-    supportsPhoto: true,
-    suggestedRoles: ["customer-service-representative", "customer-success-specialist"],
-    suggestedIndustries: ["customer-service", "support", "saas"],
-    themes: ["coral", "blush", "sand"],
-  },
-  {
-    slug: "ledger-accountant",
-    name: "Ledger Accountant",
-    description: "Double-rule ledger styling in forest green with tabular figures.",
-    category: "finance",
-    component: LedgerAccountant,
-    atsSafe: true,
-    supportsPhoto: false,
-    suggestedRoles: ["accountant", "chartered-accountant", "cpa"],
-    suggestedIndustries: ["accounting", "finance", "audit"],
-    themes: ["forest", "ivory", "sage"],
-  },
-  {
-    slug: "hr-people",
-    name: "HR People",
-    description: "Warm purple header with photo and soft lavender cards.",
-    category: "people-hr",
-    component: HRPeople,
-    atsSafe: false,
-    supportsPhoto: true,
-    suggestedRoles: ["hr-business-partner", "hr-manager", "recruiter"],
-    suggestedIndustries: ["human-resources", "people", "recruiting"],
-    themes: ["plum", "violet", "blush"],
-  },
-  {
-    slug: "culinary-menu",
-    name: "Culinary Menu",
-    description: "Dark menu-card styling with ember red, dotted leaders and a gold frame.",
-    category: "culinary",
-    component: CulinaryMenu,
-    atsSafe: false,
-    supportsPhoto: false,
-    suggestedRoles: ["executive-chef", "head-chef", "chef"],
-    suggestedIndustries: ["culinary", "restaurants", "hospitality"],
-    themes: ["charcoal", "wine", "gold"],
-  },
-  {
-    slug: "real-estate-navy",
-    name: "Real Estate Navy",
-    description: "Polished navy-and-gold with photo and a sales-volume metrics stripe.",
-    category: "real-estate",
-    component: RealEstateNavy,
-    atsSafe: false,
-    supportsPhoto: true,
-    suggestedRoles: ["real-estate-agent", "realtor", "estate-agent"],
-    suggestedIndustries: ["real-estate", "property", "sales"],
-    themes: ["navy", "gold", "slate"],
-  },
-  {
-    slug: "fitness-coach",
-    name: "Fitness Coach",
-    description: "High-energy black with electric-lime accents, condensed type and big stats.",
-    category: "fitness",
-    component: FitnessCoach,
-    atsSafe: false,
-    supportsPhoto: false,
-    suggestedRoles: ["fitness-coach", "personal-trainer", "strength-coach"],
-    suggestedIndustries: ["fitness", "coaching", "sports"],
-    themes: ["lime", "charcoal", "forest"],
-  },
-  {
-    slug: "journalist-column",
-    name: "Journalist Column",
-    description: "Newspaper masthead, drop-cap lead and a two-column body.",
-    category: "creative",
-    component: JournalistColumn,
-    atsSafe: false,
-    supportsPhoto: false,
-    suggestedRoles: ["journalist", "reporter", "editor"],
-    suggestedIndustries: ["journalism", "media", "publishing"],
-    themes: ["charcoal", "ivory", "slate"],
-  },
-  {
-    slug: "mechanical-engineer",
-    name: "Mechanical Engineer",
-    description: "Steel-blue sidebar with orange accents, mono labels and technical skill bars.",
-    category: "manufacturing",
-    component: MechanicalEngineer,
-    atsSafe: false,
-    supportsPhoto: false,
-    suggestedRoles: ["mechanical-engineer", "design-engineer", "product-engineer"],
-    suggestedIndustries: ["engineering", "manufacturing", "automotive"],
-    themes: ["slate", "amber", "steel"],
-  },
-  {
-    slug: "clinical-teal-np",
-    name: "Clinical Teal NP",
-    description: "Clean teal medical header with photo, cross motif and credential chips.",
-    category: "nursing",
-    component: ClinicalTealNP,
-    atsSafe: false,
-    supportsPhoto: true,
-    suggestedRoles: ["nurse-practitioner", "advanced-practice-nurse", "registered-nurse"],
-    suggestedIndustries: ["healthcare", "nursing", "medical"],
-    themes: ["teal", "ivory", "sage"],
-  },
-  {
-    slug: "apothecary-pharmacist",
-    name: "Apothecary Pharmacist",
-    description: "Deep apothecary-green sidebar with a clinical, methodical two-column body.",
-    category: "medical",
-    component: ApothecaryPharmacist,
-    atsSafe: false,
-    supportsPhoto: true,
-    suggestedRoles: ["pharmacist", "clinical-pharmacist", "pharmacy-manager"],
-    suggestedIndustries: ["pharmacy", "healthcare", "medical"],
-    themes: ["forest", "sage", "ivory"],
-  },
-  {
-    slug: "oxblood-litigation",
-    name: "Oxblood Litigation",
-    description: "Formal oxblood sidebar with gold crest and serif body.",
-    category: "legal",
-    component: OxbloodLitigation,
-    atsSafe: false,
-    supportsPhoto: true,
-    suggestedRoles: ["barrister", "litigator", "trial-lawyer"],
-    suggestedIndustries: ["legal", "law", "litigation"],
-    themes: ["wine", "gold", "charcoal"],
-  },
-  {
-    slug: "community-social-worker",
-    name: "Community Social Worker",
-    description: "Warm green rounded header with photo and compassionate card sections.",
-    category: "public-service",
-    component: CommunitySocialWorker,
-    atsSafe: false,
-    supportsPhoto: true,
-    suggestedRoles: ["social-worker", "case-manager", "community-worker"],
-    suggestedIndustries: ["social-work", "community", "public-service"],
-    themes: ["forest", "sage", "amber"],
-  },
-  {
-    slug: "skyline-cabin-crew",
-    name: "Skyline Cabin Crew",
-    description: "Sky-blue gradient with gold accents, photo and language proficiency bars.",
-    category: "aviation",
-    component: SkylineCabinCrew,
-    atsSafe: false,
-    supportsPhoto: true,
-    suggestedRoles: ["cabin-crew", "flight-attendant", "purser"],
-    suggestedIndustries: ["aviation", "airline", "hospitality"],
-    themes: ["sky", "gold", "navy"],
-  },
-  {
-    slug: "voltage-electrician",
-    name: "Voltage Electrician",
-    description: "Bold black-and-yellow hazard styling with condensed type and ticket chips.",
-    category: "trades-industrial",
-    component: VoltageElectrician,
-    atsSafe: false,
-    supportsPhoto: false,
-    suggestedRoles: ["electrician", "electrical-technician"],
-    suggestedIndustries: ["electrical", "trades", "construction"],
-    themes: ["amber", "charcoal", "steel"],
-  },
-  {
-    slug: "timeline-video-editor",
-    name: "Timeline Video Editor",
-    description: "Dark editor UI with a colourful timeline scrubber and gradient stat tiles.",
-    category: "creator",
-    component: TimelineVideoEditor,
-    atsSafe: false,
-    supportsPhoto: false,
-    suggestedRoles: ["video-editor", "motion-designer", "video-producer"],
-    suggestedIndustries: ["video", "media", "creative"],
-    themes: ["plum", "violet", "blush"],
-  },
-  {
-    slug: "lab-note-scientist",
-    name: "Lab Note Scientist",
-    description: "Cobalt header with hex molecule motif and a numbered publications list.",
-    category: "science",
-    component: LabNoteScientist,
-    atsSafe: false,
-    supportsPhoto: false,
-    suggestedRoles: ["research-scientist", "scientist", "postdoctoral-researcher"],
-    suggestedIndustries: ["science", "research", "academia"],
-    themes: ["navy", "cobalt", "slate"],
-  },
-  {
-    slug: "swiss-clinical-dentist",
-    name: "Swiss Clinical Dentist",
-    description: "Strict Swiss grid in clean sky-blue with a left rule. Precise and ATS-friendly.",
-    category: "medical",
-    component: SwissClinicalDentist,
-    atsSafe: true,
-    supportsPhoto: false,
-    suggestedRoles: ["dentist", "dental-surgeon", "orthodontist"],
-    suggestedIndustries: ["dentistry", "healthcare", "medical"],
-    themes: ["sky", "ivory", "slate"],
-  },
-  {
-    slug: "memphis-ux-researcher",
-    name: "Memphis UX Researcher",
-    description: "Playful Memphis shapes in coral, yellow and teal with bright pastel cards.",
-    category: "creative",
-    component: MemphisUXResearcher,
-    atsSafe: false,
-    supportsPhoto: false,
-    suggestedRoles: ["ux-researcher", "user-researcher", "design-researcher"],
-    suggestedIndustries: ["design", "research", "product"],
-    themes: ["coral", "mint", "blush"],
-  },
-  {
-    slug: "arcade-neon-gamedev",
-    name: "Arcade Neon Gamedev",
-    description: "Dark arcade grid with neon magenta and cyan glow and mono code styling.",
-    category: "game-dev",
-    component: ArcadeNeonGamedev,
-    atsSafe: false,
-    supportsPhoto: false,
-    suggestedRoles: ["game-developer", "gameplay-programmer", "game-programmer"],
-    suggestedIndustries: ["game-development", "software", "gaming"],
-    themes: ["plum", "violet", "navy"],
-  },
-  {
-    slug: "art-deco-event-planner",
-    name: "Art Deco Event Planner",
-    description: "Emerald-and-gold deco styling with fan motifs and centred serif elegance.",
-    category: "hospitality",
-    component: ArtDecoEventPlanner,
-    atsSafe: false,
-    supportsPhoto: false,
-    suggestedRoles: ["event-planner", "event-manager", "wedding-planner"],
-    suggestedIndustries: ["events", "hospitality", "planning"],
-    themes: ["forest", "gold", "ivory"],
-  },
-  {
-    slug: "linguist-translator",
-    name: "Linguist Translator",
-    description: "Type-driven and multilingual with elegant dot-scale language proficiency.",
-    category: "linguist",
-    component: LinguistTranslator,
-    atsSafe: false,
-    supportsPhoto: false,
-    suggestedRoles: ["translator", "interpreter", "linguist"],
-    suggestedIndustries: ["translation", "languages", "localization"],
-    themes: ["plum", "violet", "ivory"],
-  },
-  {
-    slug: "meadow-veterinarian",
-    name: "Meadow Veterinarian",
-    description: "Warm meadow-green header with photo, paw motif and friendly cards.",
-    category: "veterinary",
-    component: MeadowVeterinarian,
-    atsSafe: false,
-    supportsPhoto: true,
-    suggestedRoles: ["veterinary-surgeon", "veterinarian", "vet"],
-    suggestedIndustries: ["veterinary", "animal-care", "healthcare"],
-    themes: ["forest", "sage", "amber"],
-  },
-  {
-    slug: "logistics-supply-chain",
-    name: "Logistics Supply Chain",
-    description: "Industrial navy-and-orange with a route motif and a four-up KPI dashboard.",
-    category: "logistics",
-    component: LogisticsSupplyChain,
-    atsSafe: false,
-    supportsPhoto: false,
-    suggestedRoles: ["supply-chain-manager", "logistics-manager", "procurement-manager"],
-    suggestedIndustries: ["logistics", "supply-chain", "procurement"],
-    themes: ["navy", "orange", "slate"],
-  },
-  {
-    slug: "magazine-copywriter",
-    name: "Magazine Copywriter",
-    description: "Editorial magazine spread with a bold pull-quote and a two-column body.",
-    category: "marketing",
-    component: MagazineCopywriter,
-    atsSafe: false,
-    supportsPhoto: false,
-    suggestedRoles: ["copywriter", "senior-copywriter", "content-writer"],
-    suggestedIndustries: ["copywriting", "marketing", "advertising"],
-    themes: ["wine", "ivory", "charcoal"],
-  },
-  {
-    slug: "paramedic-emergency",
-    name: "Paramedic Emergency",
-    description: "Bold red-and-charcoal with an ECG pulse line and condensed display type.",
-    category: "medical",
-    component: ParamedicEmergency,
-    atsSafe: false,
-    supportsPhoto: false,
-    suggestedRoles: ["paramedic", "emt", "emergency-medical-technician"],
-    suggestedIndustries: ["emergency-medical", "healthcare", "ems"],
-    themes: ["wine", "charcoal", "steel"],
-  },
-  {
-    slug: "nutrition-fresh-dietitian",
-    name: "Nutrition Fresh Dietitian",
-    description: "Fresh leaf-green gradient with photo and clean, calm card sections.",
-    category: "medical",
-    component: NutritionFreshDietitian,
-    atsSafe: false,
-    supportsPhoto: true,
-    suggestedRoles: ["dietitian", "nutritionist", "clinical-dietitian"],
-    suggestedIndustries: ["dietetics", "nutrition", "healthcare"],
-    themes: ["mint", "forest", "sage"],
-  },
-  {
-    slug: "optometry-precision",
-    name: "Optometry Precision",
-    description: "Deep navy with a concentric-lens motif and crisp teal accents.",
-    category: "medical",
-    component: OptometryPrecision,
-    atsSafe: false,
-    supportsPhoto: false,
-    suggestedRoles: ["optometrist", "eye-doctor", "optician"],
-    suggestedIndustries: ["optometry", "eye-care", "healthcare"],
-    themes: ["navy", "teal", "slate"],
-  },
-  {
-    slug: "structural-civil-engineer",
-    name: "Structural Civil Engineer",
-    description: "Steel-grey sidebar with amber hazard rule, hex badge and technical bars.",
-    category: "manufacturing",
-    component: StructuralCivilEngineer,
-    atsSafe: false,
-    supportsPhoto: false,
-    suggestedRoles: ["civil-engineer", "structural-engineer", "geotechnical-engineer"],
-    suggestedIndustries: ["engineering", "construction", "infrastructure"],
-    themes: ["slate", "amber", "steel"],
-  },
-  {
-    slug: "interior-atelier",
-    name: "Interior Atelier",
-    description: "Warm taupe and terracotta with a photo and a material-palette swatch row.",
-    category: "creative",
-    component: InteriorAtelier,
-    atsSafe: false,
-    supportsPhoto: true,
-    suggestedRoles: ["interior-designer", "interior-architect", "spatial-designer"],
-    suggestedIndustries: ["interior-design", "design", "architecture"],
-    themes: ["sand", "terracotta", "ivory"],
-  },
-  {
-    slug: "studio-waveform-producer",
-    name: "Studio Waveform Producer",
-    description: "Dark studio look with a gradient audio-waveform and orange-violet accents.",
-    category: "music",
-    component: StudioWaveformProducer,
-    atsSafe: false,
-    supportsPhoto: false,
-    suggestedRoles: ["music-producer", "mix-engineer", "audio-engineer"],
-    suggestedIndustries: ["music", "audio", "media"],
-    themes: ["plum", "orange", "violet"],
-  },
-  {
-    slug: "cafe-roast-barista",
-    name: "Cafe Roast Barista",
-    description: "Warm coffee browns with photo and inviting rounded card sections.",
-    category: "hospitality",
-    component: CafeRoastBarista,
-    atsSafe: false,
-    supportsPhoto: true,
-    suggestedRoles: ["barista", "cafe-manager", "coffee-specialist"],
-    suggestedIndustries: ["coffee", "hospitality", "food-and-beverage"],
-    themes: ["terracotta", "sand", "gold"],
-  },
-  {
-    slug: "sustain-mesh-esg",
-    name: "Sustain Mesh ESG",
-    description: "Green-and-teal mesh-gradient header with an impact-metrics stripe.",
-    category: "environmental",
-    component: SustainMeshESG,
-    atsSafe: false,
-    supportsPhoto: false,
-    suggestedRoles: ["sustainability-manager", "esg-manager", "environmental-manager"],
-    suggestedIndustries: ["sustainability", "environmental", "esg"],
-    themes: ["forest", "teal", "mint"],
-  },
-  {
-    slug: "brutalist-creative-tech",
-    name: "Brutalist Creative Tech",
-    description: "Stark neo-brutalist blocks, heavy borders and high-vis yellow.",
-    category: "developer",
-    component: BrutalistCreativeTech,
-    atsSafe: false,
-    supportsPhoto: false,
-    suggestedRoles: ["creative-technologist", "creative-developer", "front-end-engineer"],
-    suggestedIndustries: ["software", "creative-tech", "technology"],
-    themes: ["amber", "charcoal", "mono"],
-  },
-  {
-    slug: "gradient-mesh-growth",
-    name: "Gradient Mesh Growth",
-    description: "Vibrant multi-colour mesh-gradient hero with a bold growth-metrics stripe.",
-    category: "marketing",
-    component: GradientMeshGrowth,
-    atsSafe: false,
-    supportsPhoto: false,
-    suggestedRoles: ["growth-marketer", "performance-marketer", "demand-generation-manager"],
-    suggestedIndustries: ["marketing", "growth", "saas"],
-    themes: ["plum", "blush", "violet"],
-  },
+  }
 ];
 
 const ADDED_AT_CACHE: Map<string, string> = (() => {
