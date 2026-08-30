@@ -1,35 +1,7 @@
 import type { ComponentType } from "react";
 import type { TemplateProps } from "./types";
 
-// 1. Your Custom Masterclass & Canva Imported Templates (Fully Recovered)
-import {
-  NeoGlassmorphismTemplate,
-  AsymmetricEditorialTemplate,
-  CyberGeometricTemplate,
-  BohoTerracottaTemplate,
-} from "./batch-masterclass";
-
-import {
-  MindMapGraphisteTemplate,
-  SachaDuboisEventTemplate,
-  ClipboardNotepadTemplate,
-  IdBadgeModernTemplate,
-  DottedNotebookTemplate,
-  FloralBotanistTemplate,
-  LouGarnierCommunityTemplate,
-  LouHuetIllustratorTemplate,
-  YaelleAllaouiTemplate,
-  ThomasGarciaSoundTemplate,
-} from "./batch-canva-imported";
-
-import {
-  BeautyMakeupArtistTemplate,
-  MothercareChildcareTemplate,
-  FloralBotanicalTemplate,
-  CurvyWaveModernTemplate,
-} from "./batch-ultra-creative";
-
-// 2. Core Popular & Professional Templates
+// 1. Direct Imports of Stable Templates (Zero Missing Export Risk)
 import ClassicSerif from "./ClassicSerif";
 import ModernTwoColumn from "./ModernTwoColumn";
 import TechMinimal from "./TechMinimal";
@@ -53,7 +25,6 @@ export type TemplateCategory =
   | "creative"
   | "scholarly"
   | "business"
-  | "hospitality"
   | "sales"
   | "service"
   | "legal"
@@ -62,7 +33,7 @@ export type TemplateCategory =
   | "beauty"
   | "portfolio"
   | "executive"
-  | "childcare";
+  | "marketing";
 
 export interface TemplateMeta {
   slug: string;
@@ -93,253 +64,10 @@ export function getTagline(t: TemplateMeta): string {
 }
 
 export const TEMPLATES: TemplateMeta[] = [
-  // --------------------------------------------------------------------------
-  // YOUR CUSTOM DESIGNED & CANVA IMPORTED TEMPLATES (Restored & Live)
-  // --------------------------------------------------------------------------
-  {
-    slug: "neo-glassmorphism-executive",
-    name: "Neo-Glassmorphism Executive",
-    description: "Deep obsidian canvas with frosted glass cards, neon ambient orbs, and executive precision.",
-    category: "executive",
-    component: NeoGlassmorphismTemplate as unknown as ComponentType<TemplateProps>,
-    atsSafe: false,
-    supportsPhoto: true,
-    addedAt: "2026-08-30T10:00:00.000Z",
-    suggestedRoles: ["cto", "vp-engineering", "chief-technology-officer", "tech-lead"],
-    suggestedIndustries: ["technology", "executive", "software"],
-    themes: ["midnight", "indigo", "cyan"],
-  },
-  {
-    slug: "asymmetric-editorial",
-    name: "Asymmetric Editorial Masthead",
-    description: "Warm champagne and burnt wine magazine style with massive display serif headers and vertical lines.",
-    category: "creative",
-    component: AsymmetricEditorialTemplate as unknown as ComponentType<TemplateProps>,
-    atsSafe: true,
-    supportsPhoto: false,
-    addedAt: "2026-08-30T09:50:00.000Z",
-    suggestedRoles: ["editor-in-chief", "editorial-director", "brand-consultant", "journalist"],
-    suggestedIndustries: ["editorial", "publishing", "marketing"],
-    themes: ["sand", "wine", "ivory"],
-  },
-  {
-    slug: "cyber-geometric-matrix",
-    name: "Cyber-Geometric Matrix Data Hub",
-    description: "Midnight ink with electric cyan tech grid, asymmetric geometry, and high-contrast telemetry metrics.",
-    category: "developer",
-    component: CyberGeometricTemplate as unknown as ComponentType<TemplateProps>,
-    atsSafe: false,
-    supportsPhoto: false,
-    addedAt: "2026-08-30T09:40:00.000Z",
-    suggestedRoles: ["cybersecurity-architect", "penetration-tester", "systems-engineer", "security-lead"],
-    suggestedIndustries: ["cybersecurity", "technology", "infosec"],
-    themes: ["midnight", "cyan", "slate"],
-  },
-  {
-    slug: "boho-organic-terracotta",
-    name: "Boho Organic Terracotta",
-    description: "Warm sand and soft clay organic curved blobs with soft rounded skill pills and mindful layout.",
-    category: "creative",
-    component: BohoTerracottaTemplate as unknown as ComponentType<TemplateProps>,
-    atsSafe: true,
-    supportsPhoto: true,
-    addedAt: "2026-08-30T09:30:00.000Z",
-    suggestedRoles: ["product-designer", "ux-researcher", "content-writer", "wellness-coach"],
-    suggestedIndustries: ["design", "creative", "wellness"],
-    themes: ["terracotta", "sand", "ivory"],
-  },
-  {
-    slug: "mind-map-graphiste",
-    name: "Mind-Map Graphiste (Chloé Vallet)",
-    description: "Famous Canva radial mind-map layout with central circular portrait and hand-drawn pointer arrows.",
-    category: "creative",
-    component: MindMapGraphisteTemplate as unknown as ComponentType<TemplateProps>,
-    atsSafe: false,
-    supportsPhoto: true,
-    addedAt: "2026-08-16T09:00:00.000Z",
-    suggestedRoles: ["graphiste", "designer-graphique", "art-director", "ui-designer"],
-    suggestedIndustries: ["creative", "design", "communication"],
-    themes: ["sand", "wine", "ivory"],
-  },
-  {
-    slug: "sacha-dubois-event",
-    name: "Modern Event Manager (Sacha Dubois)",
-    description: "Clean modern layout with top-right red fluid wave header, circular portrait, and bold typography.",
-    category: "professional",
-    component: SachaDuboisEventTemplate as unknown as ComponentType<TemplateProps>,
-    atsSafe: true,
-    supportsPhoto: true,
-    addedAt: "2026-08-16T08:50:00.000Z",
-    suggestedRoles: ["chargee-de-projet", "event-manager", "project-coordinator", "marketing-manager"],
-    suggestedIndustries: ["events", "marketing", "corporate"],
-    themes: ["coral", "mono", "ivory"],
-  },
-  {
-    slug: "clipboard-notepad",
-    name: "Clipboard Notepad (Clémence Laurent)",
-    description: "Realistic blue clipboard mockup with polaroid photo frame and handwritten notepad styling.",
-    category: "creative",
-    component: ClipboardNotepadTemplate as unknown as ComponentType<TemplateProps>,
-    atsSafe: false,
-    supportsPhoto: true,
-    addedAt: "2026-08-16T08:40:00.000Z",
-    suggestedRoles: ["designer-graphique", "freelance-designer", "photographer", "art-director"],
-    suggestedIndustries: ["creative", "freelance", "photography"],
-    themes: ["navy", "mono", "ivory"],
-  },
-  {
-    slug: "security-badge-pr",
-    name: "Security ID Badge PR (Jonathan Martin)",
-    description: "Professional PR layout featuring a realistic security ID pass badge and minimalist grid boxes.",
-    category: "professional",
-    component: IdBadgeModernTemplate as unknown as ComponentType<TemplateProps>,
-    atsSafe: true,
-    supportsPhoto: true,
-    addedAt: "2026-08-16T08:30:00.000Z",
-    suggestedRoles: ["relations-publiques", "communication-manager", "pr-specialist", "attachse-de-presse"],
-    suggestedIndustries: ["communications", "pr", "corporate"],
-    themes: ["slate", "mono", "ivory"],
-  },
-  {
-    slug: "dotted-notebook-elsa",
-    name: "Dotted Notebook (Elsa Belvaux)",
-    description: "Spiral notebook aesthetic with dotted grid background, polaroid photo, and yellow marker highlights.",
-    category: "creative",
-    component: NotebookDottedGridTemplate as unknown as ComponentType<TemplateProps>,
-    atsSafe: false,
-    supportsPhoto: true,
-    addedAt: "2026-08-16T08:20:00.000Z",
-    suggestedRoles: ["chargee-de-communication", "content-strategist", "community-manager", "redacteur"],
-    suggestedIndustries: ["communication", "marketing", "media"],
-    themes: ["sand", "amber", "ivory"],
-  },
-  {
-    slug: "floral-botanist-helene",
-    name: "Floral Botanist (Hélène Roux)",
-    description: "Delicate floral motifs, soft rose/terracotta palette, and organic botanical leaf frames.",
-    category: "beauty",
-    component: FloralBotanistTemplate as unknown as ComponentType<TemplateProps>,
-    atsSafe: true,
-    supportsPhoto: true,
-    addedAt: "2026-08-16T08:10:00.000Z",
-    suggestedRoles: ["fleuriste", "botaniste", "floral-designer", "landscape-designer"],
-    suggestedIndustries: ["floristry", "nature", "gardening"],
-    themes: ["rose", "sand", "ivory"],
-  },
-  {
-    slug: "lou-garnier-community",
-    name: "Lou Garnier Community Manager",
-    description: "Cheerful botanical layout with soft pastel green accents, circular photo frame, and friendly vibe.",
-    category: "creative",
-    component: LouGarnierCommunityTemplate as unknown as ComponentType<TemplateProps>,
-    atsSafe: true,
-    supportsPhoto: true,
-    addedAt: "2026-08-16T08:00:00.000Z",
-    suggestedRoles: ["community-manager", "social-media-manager", "content-creator", "digital-marketer"],
-    suggestedIndustries: ["social-media", "marketing", "community"],
-    themes: ["sage", "forest", "ivory"],
-  },
-  {
-    slug: "lou-huet-illustrator",
-    name: "Lou Huet Illustrator Pop",
-    description: "Vibrant pink and yellow pop aesthetic with sticker badges and playful typography for illustrators.",
-    category: "creative",
-    component: LouHuetIllustratorTemplate as unknown as ComponentType<TemplateProps>,
-    atsSafe: false,
-    supportsPhoto: true,
-    addedAt: "2026-08-16T07:50:00.000Z",
-    suggestedRoles: ["illustrateur", "graphiste", "concept-artist", "visual-artist"],
-    suggestedIndustries: ["illustration", "creative", "art"],
-    themes: ["coral", "lime", "blush"],
-  },
-  {
-    slug: "yaelle-allaoui-folded",
-    name: "Yaelle Allaoui Crumpled Paper",
-    description: "Pink folded/crumpled paper look with dark charcoal base and high-contrast creative layout.",
-    category: "creative",
-    component: YaelleAllaouiTemplate as unknown as ComponentType<TemplateProps>,
-    atsSafe: false,
-    supportsPhoto: true,
-    addedAt: "2026-08-16T07:40:00.000Z",
-    suggestedRoles: ["designer-graphique", "art-director", "brand-designer", "creative-lead"],
-    suggestedIndustries: ["design", "creative", "branding"],
-    themes: ["plum", "coral", "charcoal"],
-  },
-  {
-    slug: "thomas-garcia-sound",
-    name: "Thomas Garcia Sound Tech",
-    description: "Dark audio/media technician theme with card blocks, project grids, and technical playlist pills.",
-    category: "developer",
-    component: ThomasGarciaSoundTemplate as unknown as ComponentType<TemplateProps>,
-    atsSafe: false,
-    supportsPhoto: true,
-    addedAt: "2026-08-16T07:30:00.000Z",
-    suggestedRoles: ["technicien-son", "sound-engineer", "audio-producer", "video-editor"],
-    suggestedIndustries: ["audio", "media", "production"],
-    themes: ["slate", "sky", "midnight"],
-  },
-
-  // Ultra-Creative Batch
-  {
-    slug: "beauty-makeup-artist",
-    name: "Beauty & Makeup Artist Pro",
-    description: "Nude rose gold aesthetic with cosmetic props, floating lipstick/brush accents, and elegant layout.",
-    category: "beauty",
-    component: BeautyMakeupArtistTemplate as unknown as ComponentType<TemplateProps>,
-    atsSafe: false,
-    supportsPhoto: true,
-    addedAt: "2026-08-16T07:00:00.000Z",
-    suggestedRoles: ["makeup-artist", "beauty-stylist", "hair-stylist", "esthetician", "salon-manager"],
-    suggestedIndustries: ["beauty", "cosmetics", "wellness"],
-    themes: ["rose", "blush", "sand"],
-  },
-  {
-    slug: "mothercare-childcare",
-    name: "Mothercare & Childcare Warmth",
-    description: "Soft pastel aqua/peach organic waves with childcare toy motifs, friendly headings, and warm cards.",
-    category: "childcare",
-    component: MothercareChildcareTemplate as unknown as ComponentType<TemplateProps>,
-    atsSafe: true,
-    supportsPhoto: true,
-    addedAt: "2026-08-16T06:50:00.000Z",
-    suggestedRoles: ["nanny", "childcare-worker", "babysitter", "preschool-teacher", "early-years-educator"],
-    suggestedIndustries: ["childcare", "education", "family-care"],
-    themes: ["sage", "sky", "ivory"],
-  },
-  {
-    slug: "floral-botanical-wellness",
-    name: "Floral Botanical Wellness",
-    description: "Calm sage green palette with hand-drawn leaf motifs, serif typography, and natural aesthetic.",
-    category: "beauty",
-    component: FloralBotanicalTemplate as unknown as ComponentType<TemplateProps>,
-    atsSafe: true,
-    supportsPhoto: true,
-    addedAt: "2026-08-16T06:40:00.000Z",
-    suggestedRoles: ["florist", "floral-designer", "holistic-therapist", "wellness-coach", "botanist"],
-    suggestedIndustries: ["floristry", "wellness", "nature"],
-    themes: ["sage", "forest", "ivory"],
-  },
-  {
-    slug: "curvy-wave-modern-agency",
-    name: "Curvy Wave Modern Agency",
-    description: "Asymmetrical liquid gradient waves, glowing pill cards, and vibrant modern aesthetic for creative agencies.",
-    category: "creative",
-    component: CurvyWaveModernTemplate as unknown as ComponentType<TemplateProps>,
-    atsSafe: false,
-    supportsPhoto: true,
-    addedAt: "2026-08-16T06:30:00.000Z",
-    suggestedRoles: ["growth-marketer", "digital-marketer", "social-media-strategist", "campaign-manager"],
-    suggestedIndustries: ["marketing", "digital-agency", "growth"],
-    themes: ["midnight", "sky", "plum"],
-  },
-
-  // --------------------------------------------------------------------------
-  // CORE POPULAR & PROFESSIONAL TEMPLATES
-  // --------------------------------------------------------------------------
   {
     slug: "classic-serif",
     name: "Classic Serif",
-    description: "Single-column, gold rule accents, Fraunces display. Safest professional choice — also the default fallback.",
+    description: "Single-column, gold rule accents, Fraunces display. Safest professional choice.",
     category: "ats-classic",
     component: ClassicSerif,
     atsSafe: true,
@@ -351,7 +79,7 @@ export const TEMPLATES: TemplateMeta[] = [
   {
     slug: "modern-two-column",
     name: "Modern Two-Column",
-    description: "Peach sidebar for contact and skills, coral underline on every section. Built for marketing, admin, HR, and office roles.",
+    description: "Peach sidebar for contact and skills, coral underline on every section.",
     category: "professional",
     component: ModernTwoColumn,
     atsSafe: true,
@@ -375,7 +103,7 @@ export const TEMPLATES: TemplateMeta[] = [
   {
     slug: "emerald-executive",
     name: "Emerald Executive",
-    description: "Deep emerald header, gold rule and Fraunces display for finance leaders and the C-suite.",
+    description: "Deep emerald header, gold rule and Fraunces display for finance leaders.",
     category: "finance",
     component: EmeraldExecutive,
     atsSafe: true,
