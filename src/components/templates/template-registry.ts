@@ -15,7 +15,7 @@ import {
   SachaDuboisEventTemplate,
   ClipboardNotepadTemplate,
   IdBadgeModernTemplate,
-  DottedNotebookTemplate,
+  DottedNotebookTemplate as NotebookDottedGridTemplate,
   FloralBotanistTemplate,
   LouGarnierCommunityTemplate,
   LouHuetIllustratorTemplate,
@@ -100,7 +100,6 @@ export function getTagline(t: TemplateMeta): string {
 }
 
 export const TEMPLATES: TemplateMeta[] = [
-  // --- Cyber Nurse Futuristic ---
   {
     slug: "cyber-nurse-futuristic",
     name: "Cyber-Nurse HUD & Holo-Vital",
@@ -114,7 +113,6 @@ export const TEMPLATES: TemplateMeta[] = [
     suggestedIndustries: ["healthcare", "nursing", "clinical-medicine"],
     themes: ["midnight", "cyan", "slate"],
   },
-  // --- Masterclass Batch ---
   {
     slug: "neo-glassmorphism-executive",
     name: "Neo-Glassmorphism Executive",
@@ -167,7 +165,6 @@ export const TEMPLATES: TemplateMeta[] = [
     suggestedIndustries: ["design", "creative", "wellness"],
     themes: ["terracotta", "sand", "ivory"],
   },
-  // --- Canva Imported Batch ---
   {
     slug: "mind-map-graphiste",
     name: "Mind-Map Graphiste (Chloé Vallet)",
@@ -225,7 +222,7 @@ export const TEMPLATES: TemplateMeta[] = [
     name: "Dotted Notebook (Elsa Belvaux)",
     description: "Spiral notebook aesthetic with dotted grid background.",
     category: "creative",
-    component: DottedNotebookTemplate as unknown as ComponentType<TemplateProps>,
+    component: NotebookDottedGridTemplate as unknown as ComponentType<TemplateProps>,
     atsSafe: false,
     supportsPhoto: true,
     addedAt: "2026-08-16T08:20:00.000Z",
@@ -298,7 +295,6 @@ export const TEMPLATES: TemplateMeta[] = [
     suggestedIndustries: ["audio", "media", "production"],
     themes: ["slate", "sky", "midnight"],
   },
-  // --- Ultra-Creative Batch ---
   {
     slug: "beauty-makeup-artist",
     name: "Beauty & Makeup Artist Pro",
@@ -351,7 +347,6 @@ export const TEMPLATES: TemplateMeta[] = [
     suggestedIndustries: ["marketing", "digital-agency"],
     themes: ["midnight", "sky", "plum"],
   },
-  // --- Core Popular Templates ---
   {
     slug: "classic-serif",
     name: "Classic Serif",
@@ -401,6 +396,54 @@ export const TEMPLATES: TemplateMeta[] = [
     themes: ["forest", "ivory", "wine"],
   },
   {
+    slug: "tech-minimal",
+    name: "Tech Minimal",
+    description: "Inter + JetBrains Mono, monospace stack listings.",
+    category: "developer",
+    component: TechMinimal,
+    atsSafe: true,
+    supportsPhoto: false,
+    suggestedRoles: ["software-engineer", "web-developer"],
+    suggestedIndustries: ["technology", "software"],
+    themes: ["charcoal", "slate"],
+  },
+  {
+    slug: "healthcare",
+    name: "Healthcare",
+    description: "Forest + sage palette, credential pills, balanced two-column body.",
+    category: "medical",
+    component: Healthcare,
+    atsSafe: true,
+    supportsPhoto: true,
+    suggestedRoles: ["registered-nurse", "physician"],
+    suggestedIndustries: ["healthcare", "medical"],
+    themes: ["forest", "linen"],
+  },
+  {
+    slug: "creative-director",
+    name: "Creative Director",
+    description: "Dark plum hero with coral glow, sidebar card.",
+    category: "creative",
+    component: CreativeDirector,
+    atsSafe: false,
+    supportsPhoto: true,
+    suggestedRoles: ["creative-director", "art-director"],
+    suggestedIndustries: ["advertising", "media"],
+    themes: ["plum", "wine"],
+  },
+  {
+    slug: "corporate-blue",
+    name: "Corporate Blue",
+    description: "Navy hero band + clean white body, executive polish.",
+    category: "business",
+    component: CorporateBlue,
+    atsSafe: true,
+    supportsPhoto: true,
+    suggestedRoles: ["project-manager", "product-manager"],
+    suggestedIndustries: ["business", "management"],
+    themes: ["navy", "sky"],
+  },
+  {
     slug: "sales-modern",
     name: "Sales Modern",
     description: "Orange-pink gradient hero, KPI tiles overlapping.",
@@ -411,6 +454,54 @@ export const TEMPLATES: TemplateMeta[] = [
     suggestedRoles: ["sales-representative", "account-executive"],
     suggestedIndustries: ["sales"],
     themes: ["coral", "plum"],
+  },
+  {
+    slug: "monochrome-minimal",
+    name: "Monochrome Minimal",
+    description: "Pure black-on-white with generous whitespace.",
+    category: "ats-classic",
+    component: MonochromeMinimal,
+    atsSafe: true,
+    supportsPhoto: false,
+    suggestedRoles: ["product-manager", "analyst"],
+    suggestedIndustries: ["corporate"],
+    themes: ["mono", "slate"],
+  },
+  {
+    slug: "royal-blue-corporate",
+    name: "Royal Blue Corporate",
+    description: "Classic blue sidebar with photo and skill bars.",
+    category: "business",
+    component: RoyalBlueCorporate,
+    atsSafe: false,
+    supportsPhoto: true,
+    suggestedRoles: ["operations-manager", "general-manager"],
+    suggestedIndustries: ["operations", "corporate"],
+    themes: ["navy", "royal"],
+  },
+  {
+    slug: "rose-editorial",
+    name: "Rose Editorial",
+    description: "Elegant blush palette, DM Serif Display and centered masthead.",
+    category: "marketing",
+    component: RoseEditorial,
+    atsSafe: false,
+    supportsPhoto: true,
+    suggestedRoles: ["marketing-manager", "brand-manager"],
+    suggestedIndustries: ["marketing", "communications"],
+    themes: ["blush", "wine"],
+  },
+  {
+    slug: "wine-legal",
+    name: "Wine Legal",
+    description: "Refined wine-and-serif classic with centred headings.",
+    category: "legal",
+    component: WineLegal,
+    atsSafe: true,
+    supportsPhoto: false,
+    suggestedRoles: ["lawyer", "attorney"],
+    suggestedIndustries: ["legal", "corporate"],
+    themes: ["wine", "ivory"],
   }
 ];
 
@@ -455,6 +546,10 @@ export function suggestTemplate(opts: {
   }
   return defaultTemplate();
 }
+
+exports.templatesByCategory = function templatesByCategory(category: TemplateCategory): TemplateMeta[] {
+  return TEMPLATES.filter((t) => t.category === category);
+};
 
 export function templatesByCategory(category: TemplateCategory): TemplateMeta[] {
   return TEMPLATES.filter((t) => t.category === category);
