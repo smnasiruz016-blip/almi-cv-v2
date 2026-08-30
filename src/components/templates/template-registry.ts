@@ -1,3 +1,9 @@
+import {
+  MindMapDesignerTemplate,
+  ClipboardNoteTemplate,
+  IdBadgeModernTemplate,
+  NotebookDottedGridTemplate,
+} from "./batch-canva-imported";
 import type { ComponentType } from "react";
 import type { TemplateProps } from "./types";
 
