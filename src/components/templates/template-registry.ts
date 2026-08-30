@@ -1,7 +1,7 @@
 import type { ComponentType } from "react";
 import type { TemplateProps } from "./types";
 
-// New Masterclass Original Design Batch
+// 1. Stable Masterclass & Canva Imported Batches
 import {
   NeoGlassmorphismTemplate,
   AsymmetricEditorialTemplate,
@@ -9,7 +9,6 @@ import {
   BohoTerracottaTemplate,
 } from "./batch-masterclass";
 
-// Newly Imported French / Canva Templates Batch
 import {
   MindMapGraphisteTemplate,
   SachaDuboisEventTemplate,
@@ -23,7 +22,6 @@ import {
   ThomasGarciaSoundTemplate,
 } from "./batch-canva-imported";
 
-// New Ultra-Creative Batch (Beauty, Childcare, Botanical, Curvy Agency)
 import {
   BeautyMakeupArtistTemplate,
   MothercareChildcareTemplate,
@@ -31,262 +29,21 @@ import {
   CurvyWaveModernTemplate,
 } from "./batch-ultra-creative";
 
-// Canva Iconic Batch Templates
-import {
-  AveryDavisEditorialTemplate,
-  OliviaWilsonTerracottaTemplate,
-  PedroFernandesDarkTemplate,
-  HelenaMoralesBlushTemplate,
-} from "./batch-canva-icons";
-
-// Batch Commercial & Job-Specific Templates
-import {
-  CyberDevTerminalTemplate,
-  VogueCreativeArchTemplate,
-  AeroFlightCaptainTemplate,
-  LuxeRealEstateTemplate,
-} from "./batch-commercial";
-
-// Batch Medical & Healthcare Templates
-import {
-  AstridEmeraldTemplate,
-  AuraMidwifeTemplate,
-  CyberParamedicTemplate,
-  RoyalDentalTemplate,
-} from "./batch-medical";
-
-// Next-Gen Canva & Modern Studio Templates
-import { RetroDesktopWindowUI } from "./RetroDesktopWindowUI";
-import { OrganicWaveEditorial } from "./OrganicWaveEditorial";
-import { EditorialArchBlush } from "./EditorialArchBlush";
-import { ModernDarkContrast } from "./ModernDarkContrast";
-import { WarmCreativeMagazine } from "./WarmCreativeMagazine";
-import { SoftPastelFloatingCards } from "./SoftPastelFloatingCards";
-import { NurseICUPro } from "./NurseICUPro";
-import { LegalPartnerLuxe } from "./LegalPartnerLuxe";
-import { AiMlResearchArchitect } from "./AiMlResearchArchitect";
-import { DevOpsPipelineTemplate } from "./DevOpsPipelineTemplate";
-
-// Batch 1 (10)
+// 2. Core Popular & Professional Templates
 import ClassicSerif from "./ClassicSerif";
 import ModernTwoColumn from "./ModernTwoColumn";
 import TechMinimal from "./TechMinimal";
 import Healthcare from "./Healthcare";
 import CreativeDirector from "./CreativeDirector";
 import Academic from "./Academic";
-import CyberGrid from "./CyberGrid";
 import CorporateBlue from "./CorporateBlue";
-import WarmCreative from "./WarmCreative";
-import ReligiousTraditional from "./ReligiousTraditional";
-
-// Batch 2 (10)
-import TradesIndustrial from "./TradesIndustrial";
-import RealEstateElegant from "./RealEstateElegant";
-import LogisticsDirect from "./LogisticsDirect";
-import BeautyPortfolio from "./BeautyPortfolio";
-import ManufacturingPrecise from "./ManufacturingPrecise";
-import PublicServiceHonor from "./PublicServiceHonor";
-import EducationWarm from "./EducationWarm";
 import SalesModern from "./SalesModern";
-import ServiceFriendly from "./ServiceFriendly";
-import CreativePortfolio from "./CreativePortfolio";
-
-// Batch 3 (10)
-import LegalFormal from "./batch3/LegalFormal";
-import FinancePrecise from "./batch3/FinancePrecise";
-import FinanceElite from "./batch3/FinanceElite";
-import PeopleWarm from "./batch3/PeopleWarm";
-import OperationsStructured from "./batch3/OperationsStructured";
-import InsuranceTrust from "./batch3/InsuranceTrust";
-import VeterinaryCaring from "./batch3/VeterinaryCaring";
-import AviationPrecise from "./batch3/AviationPrecise";
-import HospitalityElegant from "./batch3/HospitalityElegant";
-import LinguistMultilingual from "./batch3/LinguistMultilingual";
-
-// Batch 4 (7)
-import IceBlueGlass from "./IceBlueGlass";
-import AdminFluid from "./AdminFluid";
-import CyberEmerald from "./CyberEmerald";
-import WellnessGolden from "./WellnessGolden";
-import MedicalSurgical from "./MedicalSurgical";
-import CloudLight from "./CloudLight";
-import PharmacyPastel from "./PharmacyPastel";
-
-// Expansion batch: 28 templates
-import ArchitectIsometric from "./ArchitectIsometric";
-import AviationHUD from "./AviationHUD";
-import BarberEditorial from "./BarberEditorial";
-import ConstructionBlueprint from "./ConstructionBlueprint";
-import CulinaryGold from "./CulinaryGold";
-import DataPulseDark from "./DataPulseDark";
-import DentalClean from "./DentalClean";
-import EditorialInk from "./EditorialInk";
-import EngineerBlueprint from "./EngineerBlueprint";
-import EventLumen from "./EventLumen";
-import FinanceAdvisorGold from "./FinanceAdvisorGold";
-import FitnessDynamic from "./FitnessDynamic";
-import GoldLiquidLuxe from "./GoldLiquidLuxe";
-import HolographicSunset from "./HolographicSunset";
-import IsometricSilver from "./IsometricSilver";
-import LegalLuxe from "./LegalLuxe";
-import MarketingGradient from "./MarketingGradient";
-import NeonServerStack from "./NeonServerStack";
-import NurseVitalSigns from "./NurseVitalSigns";
-import PhotographyGallery from "./PhotographyGallery";
-import ProductRoadmap from "./ProductRoadmap";
-import PurpleGradientPro from "./PurpleGradientPro";
-import RealEstateLuxe from "./RealEstateLuxe";
-import SpaZenWatercolor from "./SpaZenWatercolor";
-import TeacherChalk from "./TeacherChalk";
-import TealCleanSplit from "./TealCleanSplit";
-import TradesVolt from "./TradesVolt";
-import UXPortfolioGrid from "./UXPortfolioGrid";
-
-// Batch 12 (12)
-import WatercolorBlush from "./WatercolorBlush";
-import BotanicalSage from "./BotanicalSage";
-import GradientAura from "./GradientAura";
-import PlayfulPop from "./PlayfulPop";
-import OrganicBlush from "./OrganicBlush";
-import AbstractTeal from "./AbstractTeal";
-import BrushScriptBlue from "./BrushScriptBlue";
-import SunsetBoldSerif from "./SunsetBoldSerif";
-import OrganicBlobGray from "./OrganicBlobGray";
-import RedAccentClean from "./RedAccentClean";
-import TherapyCalm from "./TherapyCalm";
-import RetailVibrant from "./RetailVibrant";
-
-// Design System kit (2): 30 templates
-import AgricultureField from "./AgricultureField";
-import ArchPhotoBlue from "./ArchPhotoBlue";
-import AutomotiveGarage from "./AutomotiveGarage";
-import BroadcastMedia from "./BroadcastMedia";
-import BrowserAnalyst from "./BrowserAnalyst";
-import BubbleMinimal from "./BubbleMinimal";
-import CaregiverWarm from "./CaregiverWarm";
-import ChildcarePlayful from "./ChildcarePlayful";
-import CommSparkle from "./CommSparkle";
-import CurvedWaveNavy from "./CurvedWaveNavy";
-import CyberMatrix from "./CyberMatrix";
-import DaisyFieldGreen from "./DaisyFieldGreen";
-import DarkSplitPro from "./DarkSplitPro";
-import EcoSustainable from "./EcoSustainable";
-import FashionVogue from "./FashionVogue";
-import GameDevPixel from "./GameDevPixel";
-import GeoTriangleBlue from "./GeoTriangleBlue";
-import GovPolicyCrest from "./GovPolicyCrest";
-import LabResearch from "./LabResearch";
-import MusicWaveDark from "./MusicWaveDark";
-import NonprofitHeart from "./NonprofitHeart";
-import PeachGridOrganic from "./PeachGridOrganic";
-import RestaurantMenu from "./RestaurantMenu";
-import RetroDesktopOS from "./RetroDesktopOS";
-import SageSoftRounded from "./SageSoftRounded";
-import SocialPulse from "./SocialPulse";
-import SupportHeadset from "./SupportHeadset";
-import TimelineSpineNavy from "./TimelineSpineNavy";
-import TravelCompass from "./TravelCompass";
-import WarehouseOps from "./WarehouseOps";
-
-// Design System kit (3): 40 templates
-import BakerPastry from "./BakerPastry";
-import BankFinanceOps from "./BankFinanceOps";
-import ConciergeLuxe from "./ConciergeLuxe";
-import CourierRoute from "./CourierRoute";
-import CyberGradientIso from "./CyberGradientIso";
-import CyberShieldLight from "./CyberShieldLight";
-import DataAdminMono from "./DataAdminMono";
-import DevOpsPipeline from "./DevOpsPipeline";
-import DispatcherRadio from "./DispatcherRadio";
-import EduGradientPills from "./EduGradientPills";
-import EsportsStream from "./EsportsStream";
-import FlightInstructorSky from "./FlightInstructorSky";
-import FloristBloom from "./FloristBloom";
-import HRTalentWarm from "./HRTalentWarm";
-import HoloPremiumLight from "./HoloPremiumLight";
-import LabTechDark from "./LabTechDark";
-import LibrarianNeonWave from "./LibrarianNeonWave";
-import MedicalNeonHUD from "./MedicalNeonHUD";
-import MobileDevDuotone from "./MobileDevDuotone";
-import MuseumCurator from "./MuseumCurator";
-import NeonCircuitDev from "./NeonCircuitDev";
-import NeuroCleanLight from "./NeuroCleanLight";
-import NurseGlassPastel from "./NurseGlassPastel";
-import NurseryMeadow from "./NurseryMeadow";
-import OptometristVision from "./OptometristVision";
-import ParalegalBrief from "./ParalegalBrief";
-import ParamedicPulse from "./ParamedicPulse";
-import PhotoRealEstate from "./PhotoRealEstate";
-import SecurityShield from "./SecurityShield";
-import SkillRadarNavy from "./SkillRadarNavy";
-import SocialWorkerBridge from "./SocialWorkerBridge";
-import SportsCoachField from "./SportsCoachField";
-import SynthwaveGrid from "./SynthwaveGrid";
-import TattooInk from "./TattooInk";
-import TeacherSunshine from "./TeacherSunshine";
-import TealCodeTimeline from "./TealCodeTimeline";
-import TranslatorGlobal from "./TranslatorGlobal";
-import UtilityLineworker from "./UtilityLineworker";
-import VetTechPaws from "./VetTechPaws";
-import WarmMinimalDials from "./WarmMinimalDials";
-
-// Design templates kit (56)
+import MonochromeMinimal from "./MonochromeMinimal";
 import MidnightCyan from "./MidnightCyan";
-import CoralSunset from "./CoralSunset";
 import EmeraldExecutive from "./EmeraldExecutive";
 import RoyalBlueCorporate from "./RoyalBlueCorporate";
-import SageWatercolor from "./SageWatercolor";
-import VioletGlass from "./VioletGlass";
-import RetroModern from "./RetroModern";
-import GeometricAbstract from "./GeometricAbstract";
-import SlateMonoData from "./SlateMonoData";
 import RoseEditorial from "./RoseEditorial";
-import CharcoalTimeline from "./CharcoalTimeline";
-import TerracottaCaregiver from "./TerracottaCaregiver";
-import OceanTealSales from "./OceanTealSales";
 import WineLegal from "./WineLegal";
-import HolographicIridescent from "./HolographicIridescent";
-import IsometricIndigo from "./IsometricIndigo";
-import ForestTrades from "./ForestTrades";
-import SunnyHospitality from "./SunnyHospitality";
-import FreshGraduateMint from "./FreshGraduateMint";
-import BlueprintArchitect from "./BlueprintArchitect";
-import DarkLuxeGold from "./DarkLuxeGold";
-import CustomerServiceCoral from "./CustomerServiceCoral";
-import LedgerAccountant from "./LedgerAccountant";
-import HRPeople from "./HRPeople";
-import CulinaryMenu from "./CulinaryMenu";
-import RealEstateNavy from "./RealEstateNavy";
-import FitnessCoach from "./FitnessCoach";
-import JournalistColumn from "./JournalistColumn";
-import MechanicalEngineer from "./MechanicalEngineer";
-import MonochromeMinimal from "./MonochromeMinimal";
-import ClinicalTealNP from "./ClinicalTealNP";
-import ApothecaryPharmacist from "./ApothecaryPharmacist";
-import OxbloodLitigation from "./OxbloodLitigation";
-import CommunitySocialWorker from "./CommunitySocialWorker";
-import SkylineCabinCrew from "./SkylineCabinCrew";
-import VoltageElectrician from "./VoltageElectrician";
-import TimelineVideoEditor from "./TimelineVideoEditor";
-import LabNoteScientist from "./LabNoteScientist";
-import SwissClinicalDentist from "./SwissClinicalDentist";
-import MemphisUXResearcher from "./MemphisUXResearcher";
-import ArcadeNeonGamedev from "./ArcadeNeonGamedev";
-import ArtDecoEventPlanner from "./ArtDecoEventPlanner";
-import LinguistTranslator from "./LinguistTranslator";
-import MeadowVeterinarian from "./MeadowVeterinarian";
-import LogisticsSupplyChain from "./LogisticsSupplyChain";
-import MagazineCopywriter from "./MagazineCopywriter";
-import ParamedicEmergency from "./ParamedicEmergency";
-import NutritionFreshDietitian from "./NutritionFreshDietitian";
-import OptometryPrecision from "./OptometryPrecision";
-import StructuralCivilEngineer from "./StructuralCivilEngineer";
-import InteriorAtelier from "./InteriorAtelier";
-import StudioWaveformProducer from "./StudioWaveformProducer";
-import CafeRoastBarista from "./CafeRoastBarista";
-import SustainMeshESG from "./SustainMeshESG";
-import BrutalistCreativeTech from "./BrutalistCreativeTech";
-import GradientMeshGrowth from "./GradientMeshGrowth";
 
 export type TemplateCategory =
   | "ats-classic"
@@ -295,57 +52,16 @@ export type TemplateCategory =
   | "medical"
   | "creative"
   | "scholarly"
-  | "infographic"
   | "business"
   | "hospitality"
-  | "faith-based"
-  | "trades-industrial"
-  | "real-estate"
-  | "logistics"
-  | "beauty"
-  | "manufacturing"
-  | "public-service"
-  | "education-warm"
   | "sales"
   | "service"
   | "legal"
   | "finance"
-  | "people-hr"
-  | "operations"
-  | "insurance"
-  | "veterinary"
-  | "aviation"
-  | "hospitality-elegant"
-  | "linguist"
-  | "agriculture"
-  | "automotive"
-  | "broadcast"
-  | "web-analytics"
-  | "caregiving"
-  | "childcare"
-  | "communications"
-  | "cybersecurity"
-  | "marketing"
-  | "environmental"
-  | "fashion"
-  | "game-dev"
-  | "government"
-  | "science"
-  | "music"
-  | "nonprofit"
-  | "restaurant"
-  | "creator"
-  | "customer-support"
-  | "travel"
-  | "warehouse"
-  | "culinary"
-  | "fitness"
-  | "library"
-  | "mobile"
-  | "nursing"
-  | "photography"
+  | "beauty"
   | "portfolio"
-  | "executive";
+  | "executive"
+  | "childcare";
 
 export interface TemplateMeta {
   slug: string;
@@ -377,7 +93,7 @@ export function getTagline(t: TemplateMeta): string {
 
 export const TEMPLATES: TemplateMeta[] = [
   // --------------------------------------------------------------------------
-  // MASTERCLASS & CANVA IMPORTED BATCH
+  // MASTERCLASS & CANVA IMPORTED BATCH (Fresh High-End Designs)
   // --------------------------------------------------------------------------
   {
     slug: "neo-glassmorphism-executive",
@@ -617,7 +333,7 @@ export const TEMPLATES: TemplateMeta[] = [
   },
 
   // --------------------------------------------------------------------------
-  // CORE & CATALOG TEMPLATES
+  // CORE POPULAR & PROFESSIONAL TEMPLATES
   // --------------------------------------------------------------------------
   {
     slug: "classic-serif",
