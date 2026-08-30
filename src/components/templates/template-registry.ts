@@ -1,7 +1,8 @@
 import type { ComponentType } from "react";
 import type { TemplateProps } from "./types";
 
-// 1. Masterclass Original Design Batch
+// 1. Safe Individual Component Imports (No Batch Crash Risk)
+import { CyberNurseFuturisticTemplate } from "./CyberNurseFuturisticTemplate";
 import {
   NeoGlassmorphismTemplate,
   AsymmetricEditorialTemplate,
@@ -9,21 +10,6 @@ import {
   BohoTerracottaTemplate,
 } from "./batch-masterclass";
 
-// 2. Canva Imported Templates Batch
-import {
-  MindMapGraphisteTemplate,
-  SachaDuboisEventTemplate,
-  ClipboardNotepadTemplate,
-  IdBadgeModernTemplate,
-  DottedNotebookTemplate as NotebookDottedGridTemplate,
-  FloralBotanistTemplate,
-  LouGarnierCommunityTemplate,
-  LouHuetIllustratorTemplate,
-  YaelleAllaouiTemplate,
-  ThomasGarciaSoundTemplate,
-} from "./batch-canva-imported";
-
-// 3. Ultra-Creative Batch
 import {
   BeautyMakeupArtistTemplate,
   MothercareChildcareTemplate,
@@ -31,10 +17,6 @@ import {
   CurvyWaveModernTemplate,
 } from "./batch-ultra-creative";
 
-// 4. Futuristic Cyber Nurse Template
-import { CyberNurseFuturisticTemplate } from "./CyberNurseFuturisticTemplate";
-
-// 5. Core Popular Templates
 import ClassicSerif from "./ClassicSerif";
 import ModernTwoColumn from "./ModernTwoColumn";
 import TechMinimal from "./TechMinimal";
@@ -164,136 +146,6 @@ export const TEMPLATES: TemplateMeta[] = [
     suggestedRoles: ["product-designer", "ux-researcher", "content-writer"],
     suggestedIndustries: ["design", "creative", "wellness"],
     themes: ["terracotta", "sand", "ivory"],
-  },
-  {
-    slug: "mind-map-graphiste",
-    name: "Mind-Map Graphiste (Chloé Vallet)",
-    description: "Famous Canva radial mind-map layout with central circular portrait.",
-    category: "creative",
-    component: MindMapGraphisteTemplate as unknown as ComponentType<TemplateProps>,
-    atsSafe: false,
-    supportsPhoto: true,
-    addedAt: "2026-08-16T09:00:00.000Z",
-    suggestedRoles: ["graphiste", "designer-graphique", "art-director", "ui-designer"],
-    suggestedIndustries: ["creative", "design", "communication"],
-    themes: ["sand", "wine", "ivory"],
-  },
-  {
-    slug: "sacha-dubois-event",
-    name: "Modern Event Manager (Sacha Dubois)",
-    description: "Clean modern layout with top-right red fluid wave header.",
-    category: "professional",
-    component: SachaDuboisEventTemplate as unknown as ComponentType<TemplateProps>,
-    atsSafe: true,
-    supportsPhoto: true,
-    addedAt: "2026-08-16T08:50:00.000Z",
-    suggestedRoles: ["chargee-de-projet", "event-manager", "project-coordinator"],
-    suggestedIndustries: ["events", "marketing", "corporate"],
-    themes: ["coral", "mono", "ivory"],
-  },
-  {
-    slug: "clipboard-notepad",
-    name: "Clipboard Notepad (Clémence Laurent)",
-    description: "Realistic blue clipboard mockup with polaroid photo frame.",
-    category: "creative",
-    component: ClipboardNotepadTemplate as unknown as ComponentType<TemplateProps>,
-    atsSafe: false,
-    supportsPhoto: true,
-    addedAt: "2026-08-16T08:40:00.000Z",
-    suggestedRoles: ["designer-graphique", "freelance-designer", "photographer"],
-    suggestedIndustries: ["creative", "freelance", "photography"],
-    themes: ["navy", "mono", "ivory"],
-  },
-  {
-    slug: "security-badge-pr",
-    name: "Security ID Badge PR (Jonathan Martin)",
-    description: "Professional PR layout featuring a realistic security ID pass badge.",
-    category: "professional",
-    component: IdBadgeModernTemplate as unknown as ComponentType<TemplateProps>,
-    atsSafe: true,
-    supportsPhoto: true,
-    addedAt: "2026-08-16T08:30:00.000Z",
-    suggestedRoles: ["relations-publiques", "communication-manager", "pr-specialist"],
-    suggestedIndustries: ["communications", "pr", "corporate"],
-    themes: ["slate", "mono", "ivory"],
-  },
-  {
-    slug: "dotted-notebook-elsa",
-    name: "Dotted Notebook (Elsa Belvaux)",
-    description: "Spiral notebook aesthetic with dotted grid background.",
-    category: "creative",
-    component: NotebookDottedGridTemplate as unknown as ComponentType<TemplateProps>,
-    atsSafe: false,
-    supportsPhoto: true,
-    addedAt: "2026-08-16T08:20:00.000Z",
-    suggestedRoles: ["chargee-de-communication", "content-strategist", "community-manager"],
-    suggestedIndustries: ["communication", "marketing", "media"],
-    themes: ["sand", "amber", "ivory"],
-  },
-  {
-    slug: "floral-botanist-helene",
-    name: "Floral Botanist (Hélène Roux)",
-    description: "Delicate floral motifs, soft rose/terracotta palette.",
-    category: "beauty",
-    component: FloralBotanistTemplate as unknown as ComponentType<TemplateProps>,
-    atsSafe: true,
-    supportsPhoto: true,
-    addedAt: "2026-08-16T08:10:00.000Z",
-    suggestedRoles: ["fleuriste", "botaniste", "floral-designer"],
-    suggestedIndustries: ["floristry", "nature", "gardening"],
-    themes: ["rose", "sand", "ivory"],
-  },
-  {
-    slug: "lou-garnier-community",
-    name: "Lou Garnier Community Manager",
-    description: "Cheerful botanical layout with soft pastel green accents.",
-    category: "creative",
-    component: LouGarnierCommunityTemplate as unknown as ComponentType<TemplateProps>,
-    atsSafe: true,
-    supportsPhoto: true,
-    addedAt: "2026-08-16T08:00:00.000Z",
-    suggestedRoles: ["community-manager", "social-media-manager", "content-creator"],
-    suggestedIndustries: ["social-media", "marketing", "community"],
-    themes: ["sage", "forest", "ivory"],
-  },
-  {
-    slug: "lou-huet-illustrator",
-    name: "Lou Huet Illustrator Pop",
-    description: "Vibrant pink and yellow pop aesthetic with sticker badges.",
-    category: "creative",
-    component: LouHuetIllustratorTemplate as unknown as ComponentType<TemplateProps>,
-    atsSafe: false,
-    supportsPhoto: true,
-    addedAt: "2026-08-16T07:50:00.000Z",
-    suggestedRoles: ["illustrateur", "graphiste", "concept-artist"],
-    suggestedIndustries: ["illustration", "creative", "art"],
-    themes: ["coral", "lime", "blush"],
-  },
-  {
-    slug: "yaelle-allaoui-folded",
-    name: "Yaelle Allaoui Crumpled Paper",
-    description: "Pink folded paper look with dark charcoal base.",
-    category: "creative",
-    component: YaelleAllaouiTemplate as unknown as ComponentType<TemplateProps>,
-    atsSafe: false,
-    supportsPhoto: true,
-    addedAt: "2026-08-16T07:40:00.000Z",
-    suggestedRoles: ["designer-graphique", "art-director", "brand-designer"],
-    suggestedIndustries: ["design", "creative", "branding"],
-    themes: ["plum", "coral", "charcoal"],
-  },
-  {
-    slug: "thomas-garcia-sound",
-    name: "Thomas Garcia Sound Tech",
-    description: "Dark audio/media technician theme with project grids.",
-    category: "developer",
-    component: ThomasGarciaSoundTemplate as unknown as ComponentType<TemplateProps>,
-    atsSafe: false,
-    supportsPhoto: true,
-    addedAt: "2026-08-16T07:30:00.000Z",
-    suggestedRoles: ["technicien-son", "sound-engineer", "audio-producer"],
-    suggestedIndustries: ["audio", "media", "production"],
-    themes: ["slate", "sky", "midnight"],
   },
   {
     slug: "beauty-makeup-artist",
@@ -546,10 +398,6 @@ export function suggestTemplate(opts: {
   }
   return defaultTemplate();
 }
-
-exports.templatesByCategory = function templatesByCategory(category: TemplateCategory): TemplateMeta[] {
-  return TEMPLATES.filter((t) => t.category === category);
-};
 
 export function templatesByCategory(category: TemplateCategory): TemplateMeta[] {
   return TEMPLATES.filter((t) => t.category === category);
