@@ -479,7 +479,7 @@ export const TEMPLATES: TemplateMeta[] = [
     name: "Security ID Badge PR (Jonathan Martin)",
     description: "Professional PR layout featuring a realistic security ID pass badge and minimalist grid boxes.",
     category: "professional",
-    component: SecurityBadgeTemplate as unknown as ComponentType<TemplateProps>,
+    component: IdBadgeModernTemplate as unknown as ComponentType<TemplateProps>,
     atsSafe: true,
     supportsPhoto: true,
     addedAt: "2026-08-16T08:30:00.000Z",
@@ -492,7 +492,7 @@ export const TEMPLATES: TemplateMeta[] = [
     name: "Dotted Notebook (Elsa Belvaux)",
     description: "Spiral notebook aesthetic with dotted grid background, polaroid photo, and yellow marker highlights.",
     category: "creative",
-    component: DottedNotebookTemplate as unknown as ComponentType<TemplateProps>,
+    component: NotebookDottedGridTemplate as unknown as ComponentType<TemplateProps>,
     atsSafe: false,
     supportsPhoto: true,
     addedAt: "2026-08-16T08:20:00.000Z",
@@ -2478,7 +2478,7 @@ export const TEMPLATES: TemplateMeta[] = [
     component: RetailVibrant,
     atsSafe: true,
     supportsPhoto: true,
-    addedAt: "2026-06-06T00:00:00.000Z",
+    addedAt: "2026-06-06T00:00:00Z",
     suggestedRoles: [
       "retail-associate", "sales-associate", "store-associate", "cashier",
       "customer-service-representative", "retail-supervisor", "store-supervisor",
@@ -3973,7 +3973,7 @@ export const TEMPLATES: TemplateMeta[] = [
     slug: "real-estate-navy",
     name: "Real Estate Navy",
     description: "Polished navy-and-gold with photo and a sales-volume metrics stripe. Confident template for real estate agents.",
-    category: "real-real-estate",
+    category: "real-estate",
     component: RealEstateNavy,
     atsSafe: false,
     supportsPhoto: true,
@@ -4430,7 +4430,6 @@ export function getAllRoleMappings(): Record<string, string> {
   return map;
 }
 
-tradiestCount:
 export function getCoveredRoleCount(): number {
   const seen = new Set<string>();
   for (const t of TEMPLATES) for (const r of t.suggestedRoles) seen.add(r);
