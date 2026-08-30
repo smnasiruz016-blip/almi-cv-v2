@@ -9,7 +9,7 @@ import {
   BohoTerracottaTemplate,
 } from "./batch-masterclass";
 
-// Newly Imported French / Canva Templates Batch (Includes IdBadgeModernTemplate)
+// Newly Imported French / Canva Templates Batch
 import {
   MindMapGraphisteTemplate,
   SachaDuboisEventTemplate,
@@ -4309,7 +4309,7 @@ export const TEMPLATES: TemplateMeta[] = [
   },
   {
     slug: "studio-waveform-producer",
-    name: "Studio Waveform Producer",
+    name: "Studio WaveformProducer",
     description: "Dark studio look with a gradient audio-waveform and orange-violet accents. Atmospheric template for music producers.",
     category: "music",
     component: StudioWaveformProducer,
