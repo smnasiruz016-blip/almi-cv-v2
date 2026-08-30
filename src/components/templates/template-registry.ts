@@ -1,6 +1,14 @@
 import type { ComponentType } from "react";
 import type { TemplateProps } from "./types";
 
+// New Masterclass Original Design Batch
+import {
+  NeoGlassmorphismTemplate,
+  AsymmetricEditorialTemplate,
+  CyberGeometricTemplate,
+  BohoTerracottaTemplate,
+} from "./batch-masterclass";
+
 // Newly Imported French / Canva Templates Batch
 import {
   MindMapGraphisteTemplate,
@@ -13,7 +21,7 @@ import {
   LouHuetIllustratorTemplate,
   YaelleAllaouiTemplate,
   ThomasGarciaSoundTemplate,
-} from "./batch-imported-canva";
+} from "./batch-canva-imported";
 
 // New Ultra-Creative Batch (Beauty, Childcare, Botanical, Curvy Agency)
 import {
@@ -368,6 +376,62 @@ export function getTagline(t: TemplateMeta): string {
 }
 
 export const TEMPLATES: TemplateMeta[] = [
+  // --------------------------------------------------------------------------
+  // NEW MASTERCLASS ORIGINAL DESIGN BATCH
+  // --------------------------------------------------------------------------
+  {
+    slug: "neo-glassmorphism-executive",
+    name: "Neo-Glassmorphism Executive",
+    description: "Deep obsidian canvas with frosted glass cards, neon ambient orbs, and executive precision.",
+    category: "executive",
+    component: NeoGlassmorphismTemplate as unknown as ComponentType<TemplateProps>,
+    atsSafe: false,
+    supportsPhoto: true,
+    addedAt: "2026-08-30T10:00:00.000Z",
+    suggestedRoles: ["cto", "vp-engineering", "chief-technology-officer", "tech-lead"],
+    suggestedIndustries: ["technology", "executive", "software"],
+    themes: ["midnight", "indigo", "cyan"],
+  },
+  {
+    slug: "asymmetric-editorial",
+    name: "Asymmetric Editorial Masthead",
+    description: "Warm champagne and burnt wine magazine style with massive display serif headers and vertical lines.",
+    category: "creative",
+    component: AsymmetricEditorialTemplate as unknown as ComponentType<TemplateProps>,
+    atsSafe: true,
+    supportsPhoto: false,
+    addedAt: "2026-08-30T09:50:00.000Z",
+    suggestedRoles: ["editor-in-chief", "editorial-director", "brand-consultant", "journalist"],
+    suggestedIndustries: ["editorial", "publishing", "marketing"],
+    themes: ["sand", "wine", "ivory"],
+  },
+  {
+    slug: "cyber-geometric-matrix",
+    name: "Cyber-Geometric Matrix Data Hub",
+    description: "Midnight ink with electric cyan tech grid, asymmetric geometry, and high-contrast telemetry metrics.",
+    category: "developer",
+    component: CyberGeometricTemplate as unknown as ComponentType<TemplateProps>,
+    atsSafe: false,
+    supportsPhoto: false,
+    addedAt: "2026-08-30T09:40:00.000Z",
+    suggestedRoles: ["cybersecurity-architect", "penetration-tester", "systems-engineer", "security-lead"],
+    suggestedIndustries: ["cybersecurity", "technology", "infosec"],
+    themes: ["midnight", "cyan", "slate"],
+  },
+  {
+    slug: "boho-organic-terracotta",
+    name: "Boho Organic Terracotta",
+    description: "Warm sand and soft clay organic curved blobs with soft rounded skill pills and mindful layout.",
+    category: "creative",
+    component: BohoTerracottaTemplate as unknown as ComponentType<TemplateProps>,
+    atsSafe: true,
+    supportsPhoto: true,
+    addedAt: "2026-08-30T09:30:00.000Z",
+    suggestedRoles: ["product-designer", "ux-researcher", "content-writer", "wellness-coach"],
+    suggestedIndustries: ["design", "creative", "wellness"],
+    themes: ["terracotta", "sand", "ivory"],
+  },
+
   // --------------------------------------------------------------------------
   // RECENTLY IMPORTED CANVA TEMPLATES (Mind-Map, Clipboard, ID Badge, Notebook)
   // --------------------------------------------------------------------------
@@ -2414,7 +2478,7 @@ export const TEMPLATES: TemplateMeta[] = [
     component: RetailVibrant,
     atsSafe: true,
     supportsPhoto: true,
-    addedAt: "2026-06-06T00:00:00Z",
+    addedAt: "2026-06-06T00:00:00.000Z",
     suggestedRoles: [
       "retail-associate", "sales-associate", "store-associate", "cashier",
       "customer-service-representative", "retail-supervisor", "store-supervisor",
@@ -3909,7 +3973,7 @@ export const TEMPLATES: TemplateMeta[] = [
     slug: "real-estate-navy",
     name: "Real Estate Navy",
     description: "Polished navy-and-gold with photo and a sales-volume metrics stripe. Confident template for real estate agents.",
-    category: "real-estate",
+    category: "real-real-estate",
     component: RealEstateNavy,
     atsSafe: false,
     supportsPhoto: true,
@@ -4366,6 +4430,7 @@ export function getAllRoleMappings(): Record<string, string> {
   return map;
 }
 
+tradiestCount:
 export function getCoveredRoleCount(): number {
   const seen = new Set<string>();
   for (const t of TEMPLATES) for (const r of t.suggestedRoles) seen.add(r);
