@@ -11,6 +11,12 @@ import ChefMarcoThematic from "./ChefMarcoThematic";
 import FuturisticTechHUD from "./FuturisticTechHUD";
 import UltraCyberExecutive from "./UltraCyberExecutive";
 import CloudEngineerStack from "./CloudEngineerStack";
+import SwissHairline from "./SwissHairline";
+import SwissGrotesk from "./SwissGrotesk";
+import SwissAxis from "./SwissAxis";
+import SwissPlate from "./SwissPlate";
+import SwissRedRule from "./SwissRedRule";
+import SwissQuietRail from "./SwissQuietRail";
 
 // New Masterclass Original Design Batch
 import {
@@ -392,6 +398,84 @@ export function getTagline(t: TemplateMeta): string {
 }
 
 export const TEMPLATES: TemplateMeta[] = [
+  {
+    slug: "swiss-hairline",
+    name: "Swiss Hairline",
+    description: "Label-column rows divided by hairlines, square portrait and a single red accent.",
+    category: "professional",
+    component: SwissHairline as unknown as ComponentType<TemplateProps>,
+    atsSafe: true,
+    supportsPhoto: true,
+    addedAt: "2026-08-31T05:00:00.000Z",
+    suggestedRoles: ["design-systems-lead", "product-designer", "ux-designer", "information-architect"],
+    suggestedIndustries: ["design", "technology", "product"],
+    themes: ["ivory", "crimson", "slate"],
+  },
+  {
+    slug: "swiss-grotesk",
+    name: "Swiss Grotesk Rail",
+    description: "Black rail carrying a circular portrait and the sidebar sections, white main column.",
+    category: "creative",
+    component: SwissGrotesk as unknown as ComponentType<TemplateProps>,
+    atsSafe: false,
+    supportsPhoto: true,
+    addedAt: "2026-08-31T05:00:00.000Z",
+    suggestedRoles: ["brand-designer", "art-director", "marketing-manager", "graphic-designer"],
+    suggestedIndustries: ["design", "marketing", "branding"],
+    themes: ["charcoal", "ivory", "slate"],
+  },
+  {
+    slug: "swiss-axis",
+    name: "Swiss Axis",
+    description: "Horizontal masthead with right-aligned contact, then a timeline column beside a narrow sidebar.",
+    category: "professional",
+    component: SwissAxis as unknown as ComponentType<TemplateProps>,
+    atsSafe: false,
+    supportsPhoto: true,
+    addedAt: "2026-08-31T05:00:00.000Z",
+    suggestedRoles: ["engineering-manager", "consultant", "project-manager", "systems-engineer"],
+    suggestedIndustries: ["engineering", "consulting", "technology"],
+    themes: ["ivory", "sky", "slate"],
+  },
+  {
+    slug: "swiss-plate",
+    name: "Swiss Plate",
+    description: "Photo band with a bordered plate card overlapping it, on warm off-white.",
+    category: "creative",
+    component: SwissPlate as unknown as ComponentType<TemplateProps>,
+    atsSafe: false,
+    supportsPhoto: true,
+    addedAt: "2026-08-31T05:00:00.000Z",
+    suggestedRoles: ["architect", "editorial-designer", "studio-manager", "interior-designer"],
+    suggestedIndustries: ["architecture", "editorial", "design"],
+    themes: ["sand", "charcoal", "ivory"],
+  },
+  {
+    slug: "swiss-red-rule",
+    name: "Swiss Red Rule",
+    description: "Full-bleed red hero band carrying the portrait and summary, then a two-column body.",
+    category: "marketing",
+    component: SwissRedRule as unknown as ComponentType<TemplateProps>,
+    atsSafe: false,
+    supportsPhoto: true,
+    addedAt: "2026-08-31T05:00:00.000Z",
+    suggestedRoles: ["communications-manager", "pr-manager", "brand-strategist", "content-lead"],
+    suggestedIndustries: ["communications", "marketing", "media"],
+    themes: ["crimson", "ivory", "slate"],
+  },
+  {
+    slug: "swiss-quiet-rail",
+    name: "Swiss Quiet Rail",
+    description: "Main column beside a softly tinted green rail, square portrait set inline with the name.",
+    category: "professional",
+    component: SwissQuietRail as unknown as ComponentType<TemplateProps>,
+    atsSafe: true,
+    supportsPhoto: true,
+    addedAt: "2026-08-31T05:00:00.000Z",
+    suggestedRoles: ["research-scientist", "policy-adviser", "clinical-researcher", "public-health-officer"],
+    suggestedIndustries: ["research", "healthcare", "public-sector"],
+    themes: ["sage", "ivory", "forest"],
+  },
   {
     slug: "cloud-engineer-stack",
     name: "Cloud Engineer Stack",
