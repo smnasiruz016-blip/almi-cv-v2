@@ -8,6 +8,7 @@ import NoirBlancMinimal from "./NoirBlancMinimal";
 import YaelleAllaouiCrumpled from "./YaelleAllaouiCrumpled";
 import ChefMarcoBoard from "./ChefMarcoBoard";
 import ChefMarcoThematic from "./ChefMarcoThematic";
+import FuturisticTechHUD from "./FuturisticTechHUD";
 
 // New Masterclass Original Design Batch
 import {
@@ -389,6 +390,19 @@ export function getTagline(t: TemplateMeta): string {
 }
 
 export const TEMPLATES: TemplateMeta[] = [
+  {
+    slug: "futuristic-tech-hud",
+    name: "Futuristic Tech HUD",
+    description: "Deep navy console with cyan and indigo bloom, a grid underlay, glowing-node timeline and glass sidebar cards.",
+    category: "developer",
+    component: FuturisticTechHUD as unknown as ComponentType<TemplateProps>,
+    atsSafe: false,
+    supportsPhoto: false,
+    addedAt: "2026-08-31T03:00:00.000Z",
+    suggestedRoles: ["ai-engineer", "machine-learning-engineer", "systems-architect", "platform-engineer", "data-engineer"],
+    suggestedIndustries: ["technology", "artificial-intelligence", "software"],
+    themes: ["midnight", "cyan", "indigo"],
+  },
   {
     slug: "chef-marco-thematic",
     name: "Chef Marco Serving Tray",
