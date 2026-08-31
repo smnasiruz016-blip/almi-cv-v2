@@ -44,9 +44,9 @@ import ts from "typescript";
 // THE PINNED FLOOR. Hand-written. Do not derive, do not generate, do not import.
 // 243 entries survived in 0546f59 (the last good registry), + 1 for
 // cyber-nurse-futuristic, created at 609ce66 after that snapshot = 244.
-// 31 Aug: +1 noir-blanc-communication = 245, +1 noir-blanc-minimal = 246.
+// 31 Aug: +1 noir-blanc-communication = 245, +1 noir-blanc-minimal = 246, +1 chef-marco-board = 247.
 // ---------------------------------------------------------------------------
-const HIGH_WATER_MARK = 246;
+const HIGH_WATER_MARK = 247;
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const TEMPLATES_DIR = join(HERE, "..", "src", "components", "templates");
