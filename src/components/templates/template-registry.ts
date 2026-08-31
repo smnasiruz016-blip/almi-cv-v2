@@ -3,6 +3,7 @@ import type { TemplateProps } from "./types";
 
 // Added after the last-good registry snapshot (609ce66)
 import { CyberNurseFuturisticTemplate } from "./CyberNurseFuturisticTemplate";
+import NoirBlancCommunication from "./NoirBlancCommunication";
 
 // New Masterclass Original Design Batch
 import {
@@ -385,6 +386,19 @@ export function getTagline(t: TemplateMeta): string {
 }
 
 export const TEMPLATES: TemplateMeta[] = [
+  {
+    slug: "noir-blanc-communication",
+    name: "Noir & Blanc Communication",
+    description: "Cream editorial page inside a heavy black frame, with an offset-shadow portrait and uppercase rules.",
+    category: "communications",
+    component: NoirBlancCommunication as unknown as ComponentType<TemplateProps>,
+    atsSafe: false,
+    supportsPhoto: true,
+    addedAt: "2026-08-31T00:00:00.000Z",
+    suggestedRoles: ["communications-officer", "content-creator", "social-media-manager", "communications-manager"],
+    suggestedIndustries: ["communications", "marketing", "media"],
+    themes: ["ivory", "slate", "sand"],
+  },
   {
     slug: "cyber-nurse-futuristic",
     name: "Cyber-Nurse HUD & Holo-Vital",
