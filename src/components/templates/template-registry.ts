@@ -5,6 +5,7 @@ import type { TemplateProps } from "./types";
 import { CyberNurseFuturisticTemplate } from "./CyberNurseFuturisticTemplate";
 import NoirBlancCommunication from "./NoirBlancCommunication";
 import NoirBlancMinimal from "./NoirBlancMinimal";
+import YaelleAllaouiCrumpled from "./YaelleAllaouiCrumpled";
 
 // New Masterclass Original Design Batch
 import {
@@ -30,7 +31,6 @@ import {
   FloralBotanistTemplate,
   LouGarnierCommunityTemplate,
   LouHuetIllustratorTemplate,
-  YaelleAllaouiTemplate,
   ThomasGarciaSoundTemplate,
 } from "./batch-imported-canva";
 
@@ -594,7 +594,7 @@ export const TEMPLATES: TemplateMeta[] = [
     name: "Yaelle Allaoui Crumpled Paper",
     description: "Pink folded/crumpled paper look with dark charcoal base and high-contrast creative layout.",
     category: "creative",
-    component: YaelleAllaouiTemplate as unknown as ComponentType<TemplateProps>,
+    component: YaelleAllaouiCrumpled as unknown as ComponentType<TemplateProps>,
     atsSafe: false,
     supportsPhoto: true,
     addedAt: "2026-08-16T07:40:00.000Z",

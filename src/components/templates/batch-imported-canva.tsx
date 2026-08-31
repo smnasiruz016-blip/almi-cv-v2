@@ -586,65 +586,6 @@ export function LouHuetIllustratorTemplate({ data, labels }: TemplateProps) {
 }
 
 // ==========================================================================
-// 9. YAELLE ALLAOUI STYLE (Pink Crumpled Paper & Creative Portfolio)
-// ==========================================================================
-export function YaelleAllaouiTemplate({ data, labels }: TemplateProps) {
-  const b = data.basics || {};
-  const exp = Array.isArray(data.experience) ? data.experience : [];
-  const edu = Array.isArray(data.education) ? data.education : [];
-  const skills = Array.isArray(data.skills) ? data.skills : [];
-
-  return (
-    <div className="relative w-full max-w-[850px] mx-auto min-h-[1120px] bg-[#22252A] text-[#F1F5F9] font-sans p-10 overflow-hidden shadow-2xl print:shadow-none">
-      {/* Pink Top Fold Area */}
-      <div className="absolute top-0 left-0 right-0 h-96 bg-[#F472B6] text-[#1E293B] p-8 clip-path-slant shadow-md">
-        <h1 className="text-4xl font-extrabold uppercase tracking-tight text-center font-serif">
-          {b.fullName || "Yaelle Allaoui"}
-        </h1>
-        <p className="text-center font-mono text-xs font-bold uppercase tracking-widest mt-1 text-gray-900">
-          {b.role || "designer graphique"}
-        </p>
-        <p className="text-xs text-center italic mt-3 max-w-md mx-auto">
-          "{b.summary || "Je crée des identités visuelles qui marquent les esprits et des images qui captent l'attention."}"
-        </p>
-      </div>
-
-      <div className="relative z-10 pt-80 space-y-8">
-        <div className="grid grid-cols-2 gap-8">
-          <div className="bg-[#FB923C] text-black p-6 rounded-xl shadow-lg space-y-4">
-            <h3 className="text-sm font-black uppercase tracking-widest border-b border-black pb-1">
-              {labels?.experience || "Expérience"}
-            </h3>
-            <div className="space-y-3 text-xs">
-              {exp.map((item: any, idx: number) => (
-                <div key={idx}>
-                  <p className="font-bold">{item.role} chez {item.company}</p>
-                  <p className="text-[10px] font-mono">{item.startDate} - {item.endDate || "Present"}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="bg-[#FB923C] text-black p-6 rounded-xl shadow-lg space-y-4">
-            <h3 className="text-sm font-black uppercase tracking-widest border-b border-black pb-1">
-              {labels?.education || "Formation"}
-            </h3>
-            <div className="space-y-3 text-xs">
-              {edu.map((e: any, idx: number) => (
-                <div key={idx}>
-                  <p className="font-bold">{e.degree}</p>
-                  <p className="text-[10px] font-mono">{e.institution} ({e.year || e.gradYear})</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-// ==========================================================================
 // 10. THOMAS GARCIA STYLE (Dark Sound Technician & Media Grid)
 // ==========================================================================
 export function ThomasGarciaSoundTemplate({ data, labels }: TemplateProps) {
