@@ -10,6 +10,7 @@ import ChefMarcoBoard from "./ChefMarcoBoard";
 import ChefMarcoThematic from "./ChefMarcoThematic";
 import FuturisticTechHUD from "./FuturisticTechHUD";
 import UltraCyberExecutive from "./UltraCyberExecutive";
+import CloudEngineerStack from "./CloudEngineerStack";
 
 // New Masterclass Original Design Batch
 import {
@@ -391,6 +392,19 @@ export function getTagline(t: TemplateMeta): string {
 }
 
 export const TEMPLATES: TemplateMeta[] = [
+  {
+    slug: "cloud-engineer-stack",
+    name: "Cloud Engineer Stack",
+    description: "Deep slate ground with wide teal and indigo washes, a cyan-edged hero card and a dedicated credentials panel.",
+    category: "developer",
+    component: CloudEngineerStack as unknown as ComponentType<TemplateProps>,
+    atsSafe: false,
+    supportsPhoto: false,
+    addedAt: "2026-08-31T04:00:00.000Z",
+    suggestedRoles: ["cloud-engineer", "devops-engineer", "site-reliability-engineer", "cloud-architect", "platform-engineer"],
+    suggestedIndustries: ["technology", "cloud-infrastructure", "software"],
+    themes: ["midnight", "cyan", "indigo"],
+  },
   {
     slug: "ultra-cyber-executive",
     name: "Ultra Cyber Executive",
