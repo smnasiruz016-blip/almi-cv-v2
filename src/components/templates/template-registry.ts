@@ -9,6 +9,7 @@ import YaelleAllaouiCrumpled from "./YaelleAllaouiCrumpled";
 import ChefMarcoBoard from "./ChefMarcoBoard";
 import ChefMarcoThematic from "./ChefMarcoThematic";
 import FuturisticTechHUD from "./FuturisticTechHUD";
+import UltraCyberExecutive from "./UltraCyberExecutive";
 
 // New Masterclass Original Design Batch
 import {
@@ -390,6 +391,19 @@ export function getTagline(t: TemplateMeta): string {
 }
 
 export const TEMPLATES: TemplateMeta[] = [
+  {
+    slug: "ultra-cyber-executive",
+    name: "Ultra Cyber Executive",
+    description: "Near-black ground under three coloured bloom orbs, every section held in a rounded glass card, gradient-clipped masthead.",
+    category: "executive",
+    component: UltraCyberExecutive as unknown as ComponentType<TemplateProps>,
+    atsSafe: false,
+    supportsPhoto: false,
+    addedAt: "2026-08-31T03:30:00.000Z",
+    suggestedRoles: ["head-of-product", "product-director", "chief-product-officer", "vp-product", "product-strategist"],
+    suggestedIndustries: ["technology", "product", "executive"],
+    themes: ["midnight", "indigo", "plum"],
+  },
   {
     slug: "futuristic-tech-hud",
     name: "Futuristic Tech HUD",
