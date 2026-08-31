@@ -7,6 +7,7 @@ import NoirBlancCommunication from "./NoirBlancCommunication";
 import NoirBlancMinimal from "./NoirBlancMinimal";
 import YaelleAllaouiCrumpled from "./YaelleAllaouiCrumpled";
 import ChefMarcoBoard from "./ChefMarcoBoard";
+import ChefMarcoThematic from "./ChefMarcoThematic";
 
 // New Masterclass Original Design Batch
 import {
@@ -388,6 +389,19 @@ export function getTagline(t: TemplateMeta): string {
 }
 
 export const TEMPLATES: TemplateMeta[] = [
+  {
+    slug: "chef-marco-thematic",
+    name: "Chef Marco Serving Tray",
+    description: "Gilded serving tray with a gold masthead rule, herb garnish and utensil-marked headings on a charcoal ground.",
+    category: "culinary",
+    component: ChefMarcoThematic as unknown as ComponentType<TemplateProps>,
+    atsSafe: false,
+    supportsPhoto: false,
+    addedAt: "2026-08-31T02:30:00.000Z",
+    suggestedRoles: ["executive-chef", "head-chef", "sous-chef", "chef-de-cuisine", "restaurant-manager"],
+    suggestedIndustries: ["culinary", "fine-dining", "hospitality"],
+    themes: ["walnut", "gold", "charcoal"],
+  },
   {
     slug: "chef-marco-board",
     name: "Chef Marco Cutting Board",
