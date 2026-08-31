@@ -6,6 +6,7 @@ import { CyberNurseFuturisticTemplate } from "./CyberNurseFuturisticTemplate";
 import NoirBlancCommunication from "./NoirBlancCommunication";
 import NoirBlancMinimal from "./NoirBlancMinimal";
 import YaelleAllaouiCrumpled from "./YaelleAllaouiCrumpled";
+import ChefMarcoBoard from "./ChefMarcoBoard";
 
 // New Masterclass Original Design Batch
 import {
@@ -387,6 +388,19 @@ export function getTagline(t: TemplateMeta): string {
 }
 
 export const TEMPLATES: TemplateMeta[] = [
+  {
+    slug: "chef-marco-board",
+    name: "Chef Marco Cutting Board",
+    description: "Cream parchment sheet on a wooden cutting board against charcoal, with a chef-hat mark and cream masthead.",
+    category: "culinary",
+    component: ChefMarcoBoard as unknown as ComponentType<TemplateProps>,
+    atsSafe: false,
+    supportsPhoto: false,
+    addedAt: "2026-08-31T02:00:00.000Z",
+    suggestedRoles: ["chef", "pastry-chef", "sous-chef", "head-chef", "baker"],
+    suggestedIndustries: ["culinary", "hospitality", "restaurant"],
+    themes: ["walnut", "ivory", "charcoal"],
+  },
   {
     slug: "noir-blanc-minimal",
     name: "Noir & Blanc Minimal",
