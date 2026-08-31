@@ -4,6 +4,7 @@ import type { TemplateProps } from "./types";
 // Added after the last-good registry snapshot (609ce66)
 import { CyberNurseFuturisticTemplate } from "./CyberNurseFuturisticTemplate";
 import NoirBlancCommunication from "./NoirBlancCommunication";
+import NoirBlancMinimal from "./NoirBlancMinimal";
 
 // New Masterclass Original Design Batch
 import {
@@ -386,6 +387,19 @@ export function getTagline(t: TemplateMeta): string {
 }
 
 export const TEMPLATES: TemplateMeta[] = [
+  {
+    slug: "noir-blanc-minimal",
+    name: "Noir & Blanc Minimal",
+    description: "Unframed sibling of Noir & Blanc Communication: hairline border and soft shadow, tighter rules, same editorial bones.",
+    category: "communications",
+    component: NoirBlancMinimal as unknown as ComponentType<TemplateProps>,
+    atsSafe: false,
+    supportsPhoto: true,
+    addedAt: "2026-08-31T01:00:00.000Z",
+    suggestedRoles: ["communications-officer", "content-creator", "social-media-manager", "copywriter"],
+    suggestedIndustries: ["communications", "marketing", "media"],
+    themes: ["ivory", "slate", "sand"],
+  },
   {
     slug: "noir-blanc-communication",
     name: "Noir & Blanc Communication",
