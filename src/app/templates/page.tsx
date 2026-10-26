@@ -20,7 +20,7 @@ import { CVPreview } from "@/components/templates/CVPreview";
 // without a TemplateImage indirection. No DB calls, no infinite scroll,
 // no role-filter chips. Cards are ordered newest-first (by addedAt).
 
-export const revalidate = 3600;
+export const revalidate = 86400;
 
 export const metadata = {
   title: "CV templates · AlmiCV",

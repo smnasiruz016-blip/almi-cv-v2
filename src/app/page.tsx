@@ -17,9 +17,9 @@ import { SiteHeader } from "@/components/site-header";
 import { PricingClient } from "@/app/pricing/pricing-client";
 import type { Metadata } from "next";
 
-// Hourly ISR — admin upload action revalidates / via revalidatePath()
+// Daily ISR (was hourly; cost fix Oct 2026) — admin upload action revalidates / via revalidatePath()
 // for faster cache busting after a new batch lands.
-export const revalidate = 3600;
+export const revalidate = 86400;
 
 // SEO from AlmiCV_Page_Copy_v1.md. Layout sets a plain `title` (no template),
 // so this string fully replaces it — no double-brand suffix.
