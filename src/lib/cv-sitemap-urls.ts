@@ -1,17 +1,5 @@
 import type { MetadataRoute } from "next";
-import { COUNTRY_LANDING } from "@/lib/country-landing";
-import { COUNTRIES_SERVED } from "@/lib/countries";
 import { JOB_ROLES } from "@/lib/roles";
-import {
-  CV_ORIGINS,
-  CV_ORIGIN_DESTINATIONS,
-  isCvOriginIndexable,
-} from "@/lib/cv-origin-localization";
-import {
-  ROLE_CV_CONTENT_SLUGS,
-  CV_GRID_COUNTRIES,
-  isRoleCountryIndexable,
-} from "@/lib/role-cv-content";
 import { learnUrls } from "@/lib/cv/learn/articles";
 
 export const SITE_ORIGIN = "https://almicv.almiworld.com";
@@ -42,9 +30,7 @@ export const LEARN_LAST_MODIFIED = new Date("2026-08-25T00:00:00.000Z");
 // Shared by the chunk route + the index handler.
 //
 // WHICH LOOPS ARE GATED, precisely — keep this list correct or delete it.
-//   GATED:   role×country     by isRoleCountryIndexable()
-//   GATED:   origin×dest      by isCvOriginIndexable()
-//   UNGATED: static, role hubs, /jobs/[country], /cv-guide/[country] hubs
+//   UNGATED: static, role hubs, /learn (the gated grid loops were removed, Oct 2026)
 //
 // This comment used to read "only index-worthy URLs (gate-enforced)" while every
 // loop was unconditional, including the ~99k role×country grid. That was not a
@@ -59,36 +45,10 @@ export function buildAllCvUrls(): MetadataRoute.Sitemap {
 
   // /templates/role/[slug] role hubs (all JOB_ROLES — 514).
   for (const r of JOB_ROLES) out.push({ url: `${SITE_ORIGIN}/templates/role/${r.slug}`, lastModified: now, changeFrequency: "weekly", priority: 0.7 });
-  // /jobs/[country] (196, preserved).
-  for (const c of COUNTRY_LANDING) out.push({ url: `${SITE_ORIGIN}/jobs/${c.slug}`, lastModified: now, changeFrequency: "weekly", priority: 0.7 });
-  // /cv-guide/[country] hubs (193).
-  for (const c of COUNTRIES_SERVED) out.push({ url: `${SITE_ORIGIN}/cv-guide/${c.slug}`, lastModified: now, changeFrequency: "weekly", priority: 0.8 });
-  // NOTE: the free-cv-maker / cv-builder / ai-cv-builder advertise pages moved to
-  // the hub (world.almiworld.com) — they are NOT served from this subdomain.
-  // Origin × destination CV guides — GATED by isCvOriginIndexable, which now
-  // also requires a BUILDER for that origin. Only 10 of the 191 origins have
-  // written content; the rest 404 (previously they 500'd, and every one of them
-  // was being submitted here). Submitting a URL that 404s is a crawl budget
-  // spent on nothing, so the sitemap and the gate must agree.
-  for (const dest of CV_ORIGIN_DESTINATIONS)
-    for (const o of CV_ORIGINS)
-      if (isCvOriginIndexable(dest, o.slug))
-        out.push({ url: `${SITE_ORIGIN}/cv-guide/${dest}/from-${o.slug}`, lastModified: now, changeFrequency: "weekly", priority: 0.7 });
-  // Role × country grid — GATED, and the gate is the whole point of this loop.
-  // A cell ships only where the role has sourced CV content AND the country has
-  // a hand-verified convention (COUNTRY_OVERRIDES). Unverified countries render
-  // their REGION's template with the name swapped in, so their cells are
-  // near-duplicates; they still RENDER, they are simply not submitted and carry
-  // noindex + a canonical to the country hub.
-  //
-  // Submitting the ungated product was ~98.8k URLs of which ~84k were those
-  // near-duplicates — and because these pages are dynamic (revalidate=false,
-  // no generateStaticParams), every crawl of one is a render we pay for.
-  for (const role of ROLE_CV_CONTENT_SLUGS)
-    for (const country of CV_GRID_COUNTRIES)
-      if (isRoleCountryIndexable(role, country))
-        out.push({ url: `${SITE_ORIGIN}/cv-guide/${country}/${role}`, lastModified: now, changeFrequency: "weekly", priority: 0.6 });
-
+  // COST FIX (Oct 2026): /jobs/[country], /cv-guide/[country] hubs, the
+  // origin × destination guides and the role × country grid were removed
+  // (owner ruling 17 Oct; they answer 410 Gone from src/proxy.ts), so no
+  // sitemap lists them any more.
 
   // /learn — the hub and every guide, from the SAME directory scan that feeds
   // the routes and the hub page. One source of truth, three consumers: add a

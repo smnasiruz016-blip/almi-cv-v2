@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
-import { getRoleBySlug } from "@/lib/roles";
+import { getRoleBySlug, JOB_ROLES } from "@/lib/roles";
 import { suggestTemplate, TEMPLATES } from "@/components/templates/template-registry";
 import { CVPreview } from "@/components/templates/CVPreview";
 import { getRoleCvContent } from "@/lib/role-cv-content";
@@ -26,9 +26,14 @@ import {
 // preview + role-tailored copy + CTA), so generateStaticParams returns
 // the full 263.
 
-export const revalidate = 3600;
+// COST FIX (Oct 2026): fully static. Every JOB_ROLES hub is prerendered at
+// build (generateStaticParams below), never revalidated, and an unknown slug is
+// a cheap 404 (dynamicParams = false) — no on-demand render, no ISR write.
+// This replaces the "bounded on demand" shape described below: each first
+// request of a hub used to be an ISR write, and bots asked for all of them.
+export const revalidate = false;
 
-// BOUNDED ON DEMAND, NOT PRERENDERED — and the empty array is the mechanism.
+// HISTORY — BOUNDED ON DEMAND, NOT PRERENDERED (superseded Oct 2026).
 //
 // Until the session read was removed above, this route was dynamic, so the
 // generateStaticParams below never ran and `revalidate` never took effect.
@@ -42,10 +47,10 @@ export const revalidate = 3600;
 // an unknown slug still 404s, just at request time instead of build time —
 // getRoleBySlug returns undefined and the component calls notFound().
 export async function generateStaticParams() {
-  return [] as Array<{ roleSlug: string }>;
+  return JOB_ROLES.map((r) => ({ roleSlug: r.slug }));
 }
 
-export const dynamicParams = true;
+export const dynamicParams = false;
 
 export async function generateMetadata({
   params,
