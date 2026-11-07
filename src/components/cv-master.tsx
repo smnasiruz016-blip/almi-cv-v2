@@ -44,9 +44,9 @@ export function CvMasterHook({
           href={ctaHref}
           className="inline-block px-7 py-3.5 rounded-md bg-coral text-white text-base font-semibold hover:bg-coral-deep transition-colors"
         >
-          Open Dashboard — Start 7-day free trial →
+          Open Dashboard — Build 3 CVs free →
         </Link>
-        <p className="text-xs text-plum-soft mt-2">7-day free trial, then $12/month.</p>
+        <p className="text-xs text-plum-soft mt-2">3 free CVs (without AI), then $12/month for AI and unlimited CVs.</p>
       </div>
     </header>
   );
@@ -65,7 +65,7 @@ export function CvMasterPriceTrap() {
         paywall.
       </p>
       <p className="mt-3 text-base text-plum leading-relaxed max-w-3xl font-medium">
-        AlmiCV charges $12 flat per month after a 7-day free trial. No download walls. No tricks. We want you to
+        AlmiCV gives you 3 CVs free (without AI), then charges $12 flat per month for AI and unlimited CVs. No download walls. No tricks. We want you to
         stay because we&apos;re good — not because you&apos;re trapped.
       </p>
     </section>
@@ -138,7 +138,7 @@ const PRICING_ROWS: ReadonlyArray<{ feature: string; pro: string }> = [
   { feature: "Premium layouts", pro: "All layouts open" },
   { feature: "Translation", pro: "8 major languages" },
   { feature: "Interview prep", pro: "Custom question generator" },
-  { feature: "Billing", pro: "7-day free trial, then $12/mo — cancel anytime" },
+  { feature: "Billing", pro: "3 free CVs (without AI), then $12/mo — cancel anytime" },
 ];
 
 export function CvMasterPricing() {
@@ -178,8 +178,8 @@ const MASTER_FAQ: ReadonlyArray<FaqItem> = [
     a: "It scores your CV the way modern ATS software does and shows you exactly what to fix — starting with the biggest filter: matching your job title to the role.",
   },
   {
-    q: "Is there a free trial?",
-    a: "You get 7 days free with a card on file, then a flat $12/month — no hidden download walls, no weekly renewals. Cancel inside the trial and you pay nothing.",
+    q: "Is there a free plan?",
+    a: "Yes: 3 CVs free, with every template and a PDF download with no watermark, no card needed. AI and unlimited CVs are a flat $12/month — no hidden download walls, no weekly renewals. Cancel any time.",
   },
   {
     q: "Will the AI make my CV sound robotic?",

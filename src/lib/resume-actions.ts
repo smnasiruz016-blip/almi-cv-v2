@@ -8,18 +8,18 @@ import {
   hasFullAccess,
   hasProductAccess,
   isBillingEnabled,
-  PLAN_DISPLAY_NAME,
-  PLANS,
+  canCreateCv,
+  FREE_CVS_USED_MESSAGE,
+  TOMBSTONE,
 } from "@/lib/billing/plans";
 import { userCanAccessTier } from "@/lib/billing/template-access";
-import { startFreeWindowIfUnstarted } from "@/lib/billing/free-window";
 import { getTemplate, isKnownTemplate } from "@/lib/templates";
 import type { CVData, LanguageCode } from "@/lib/cv-types";
 import { SAMPLE_CV_DATA } from "@/lib/cv-sample";
 // security: sanitise at the data boundary — see src/lib/sanitize-resume.ts
 import { sanitizeResumeData } from "@/lib/sanitize-resume";
 import type { TranslatedCV } from "@/lib/ai/translate-cv-shared";
-import type { Prisma } from "@prisma/client";
+import { Prisma } from "@prisma/client";
 
 /** Empty CVData skeleton — the seed when no parsed PNG content is in
  *  hand. Required fields are populated with empty strings (CVData's
@@ -77,16 +77,14 @@ export async function createResume(
       // Needed by hasFullAccess: owner status is decided by email, not by any
       // subscription column.
       email: true,
-      // Needed by hasProductAccess: the 3-day window opens CV creation and
-      // templates without a card.
-      freeAccessStartedAt: true,
     },
   });
   // Both gates below are skipped wholesale for the owner: every template tier,
   // unlimited CVs. This is a GATE, hence hasFullAccess rather than isProActive.
   const fullAccess = planUser ? hasFullAccess(planUser) : false;
-  // The PRODUCT gate (create / templates / download) now also opens for an
-  // active 3-day window. The AI gate is untouched and stays subscription-only.
+  // The PRODUCT gate (templates / editing / download) is open to every account
+  // under the RR-391 offer; only CREATING a CV is counted (below). The AI gate
+  // is untouched and stays subscription-only.
   const productAccess = planUser ? hasProductAccess(planUser) : false;
   const plan = planUser ? getUserPlan(planUser) : "FREE";
   const tier = getTemplate(template).tier;
@@ -99,30 +97,14 @@ export async function createResume(
     };
   }
 
-  // Enforce CV cap unless billing is in dry-run mode (see plans.ts for
-  // why caps are disabled until launch flag flips).
-  if (isBillingEnabled() && !productAccess) {
-    const limit = PLANS[plan].cvLimit;
-    // limit is 0 once the 3-day window has expired (or was never opened AND the
-    // user is not paying) -- the window itself is checked above via
-    // productAccess, so reaching here means there is no window to rely on.
-    if (limit <= 0) {
-      return {
-        ok: false,
-        code: "CV_LIMIT_REACHED",
-        error:
-          "Your 3 free days have finished. Start the 7-day trial to carry on — it adds the AI features too.",
-      };
-    }
-    const count = await prisma.resume.count({ where: { userId: user.id } });
-    if (count >= limit) {
-      return {
-        ok: false,
-        code: "CV_LIMIT_REACHED",
-        error: `${PLAN_DISPLAY_NAME[plan]} is limited to ${limit} CVs. Please delete an existing CV to create a new one.`,
-      };
-    }
-  }
+  // 🔴 RR-391: a free account makes at most 3 CVs FOR LIFE (FREE_CV_LIMIT). The
+  // count is every Resume row the account ever made, in any status (a free
+  // user's delete leaves an empty ARCHIVED tombstone, see deleteResume), counted
+  // here on the server under a per-account lock, so two parallel creates cannot
+  // both take the 3rd place and nothing in the browser can reset it. Paying,
+  // trialling, comped and owner accounts are never counted. Dry-run billing
+  // (flag off) keeps the cap off, as before (see plans.ts isBillingEnabled).
+  const counted = isBillingEnabled() && !fullAccess;
 
   // Two creation paths:
   //   • PNG-parse path (seed present): merge the parsed fields into an
@@ -138,8 +120,7 @@ export async function createResume(
     ? mergeSeedIntoSkeleton(EMPTY_CV_DATA, seed)
     : SAMPLE_CV_DATA;
 
-  const resume = await prisma.resume.create({
-    data: {
+  const createData = {
       userId: user.id,
       title: "Untitled CV",
       // Phase 4 wired templateSlug as the authoritative column read by
@@ -154,17 +135,37 @@ export async function createResume(
       // security: sanitise at the data boundary — `seed` is caller-supplied
       // (the PNG-import path), so it reaches here without passing the editor.
       data: sanitizeResumeData(seeded) as unknown as Prisma.InputJsonValue,
-    },
+  } satisfies Prisma.ResumeUncheckedCreateInput;
+
+  const made = await createCounted(user.id, counted, createData);
+  if (!made) {
+    return { ok: false, code: "CV_LIMIT_REACHED", error: FREE_CVS_USED_MESSAGE };
+  }
+  return { ok: true, id: made.id };
+}
+
+/**
+ * 🔴 RR-391 · EVERY path that makes a CV (new, duplicate, translated) goes through here. `counted` = a free account
+ * with billing on. The count and the create run in ONE transaction behind a per-account advisory lock (released at
+ * commit), so a second parallel create waits for the first and counts its row. → the new row, or null when the 3
+ * free CVs are used.
+ */
+async function createCounted(userId: string, counted: boolean, data: Prisma.ResumeUncheckedCreateInput): Promise<{ id: string } | null> {
+  if (!counted) return prisma.resume.create({ data, select: { id: true } });
+  return prisma.$transaction(async (tx) => {
+    // (wrapped in SELECT 1: Prisma cannot read back a `void` column)
+    await tx.$queryRaw`SELECT 1 AS locked FROM (SELECT pg_advisory_xact_lock(hashtext(${`cv-count:${userId}`}))) AS l`;
+    const lifetimeCount = await tx.resume.count({ where: { userId } });
+    if (!canCreateCv({ fullAccess: false, lifetimeCount })) return null;
+    return tx.resume.create({ data, select: { id: true } });
   });
+}
 
-  // FIRST USE: start the 3-day clock. Here, beside the row creation, and not in
-  // cv/new/page.tsx -- that page redirects to an existing empty CV instead of
-  // creating a second one, so a write there would fire on a reuse that created
-  // nothing. After the create, so a failed create cannot cost the user a day.
-  // No-op for anyone who already has a window.
-  await startFreeWindowIfUnstarted(user.id);
-
-  return { ok: true, id: resume.id };
+/** Is this account counted against the 3 free CVs right now? (free, with billing on) */
+async function isCounted(userId: string): Promise<boolean> {
+  if (!isBillingEnabled()) return false;
+  const u = await prisma.user.findUnique({ where: { id: userId }, select: { subscriptionStatus: true, subscriptionCurrentPeriodEnd: true, subscriptionPlan: true, compProUntil: true, email: true } });
+  return u ? !hasFullAccess(u) : true;
 }
 
 /** Shallow per-section merge. A seed array (e.g. seed.experience) of
@@ -215,7 +216,7 @@ function mergeSeedIntoSkeleton(
 export async function getResume(id: string) {
   const user = await requireUser();
   const resume = await prisma.resume.findFirst({
-    where: { id, userId: user.id },
+    where: { id, userId: user.id, NOT: TOMBSTONE }, // RR-391: a deleted free CV never opens again
   });
   return resume;
 }
@@ -226,7 +227,7 @@ export async function updateResume(
 ) {
   const user = await requireUser();
   const owned = await prisma.resume.findFirst({
-    where: { id, userId: user.id },
+    where: { id, userId: user.id, NOT: TOMBSTONE }, // RR-391: a deleted free CV can never be written again
     select: { id: true },
   });
   if (!owned) {
@@ -358,8 +359,8 @@ export async function createTranslatedResume(input: {
       },
     };
 
-    const copy = await prisma.resume.create({
-      data: {
+    // RR-391: counted like any other new CV (a translation needs AI, so its maker pays; counted all the same)
+    const copy = await createCounted(user.id, await isCounted(user.id), {
         userId: user.id,
         title: `${source.title} (${input.languageName})`,
         template: source.template,
@@ -370,8 +371,8 @@ export async function createTranslatedResume(input: {
         // output, and the model was shown the source CV — anything injected
         // there can come back through the translation.
         data: sanitizeResumeData(mergedData) as unknown as Prisma.InputJsonValue,
-      },
     });
+    if (!copy) return { ok: false, error: FREE_CVS_USED_MESSAGE };
 
     revalidatePath("/dashboard");
     return { ok: true, id: copy.id };
@@ -390,8 +391,8 @@ export async function duplicateResume(id: string): Promise<string> {
     where: { id, userId: user.id },
   });
   if (!source) throw new Error("Resume not found");
-  const copy = await prisma.resume.create({
-    data: {
+  // RR-391: a copy is a new CV: counted like any other for a free account
+  const copy = await createCounted(user.id, await isCounted(user.id), {
       userId: user.id,
       title: `${source.title} (copy)`,
       template: source.template,
@@ -402,8 +403,8 @@ export async function duplicateResume(id: string): Promise<string> {
       // this fix, so a duplicate is the moment to clean it rather than to
       // copy the problem forward.
       data: sanitizeResumeData(source.data) as unknown as Prisma.InputJsonValue,
-    },
   });
+  if (!copy) throw new Error(FREE_CVS_USED_MESSAGE);
   revalidatePath("/dashboard");
   return copy.id;
 }
@@ -411,7 +412,7 @@ export async function duplicateResume(id: string): Promise<string> {
 export async function listResumes() {
   const user = await requireUser();
   return await prisma.resume.findMany({
-    where: { userId: user.id },
+    where: { userId: user.id, NOT: TOMBSTONE },
     orderBy: { updatedAt: "desc" },
   });
 }
@@ -425,8 +426,19 @@ export async function deleteResume(id: string) {
   if (!owned) {
     throw new Error("Resume not found");
   }
-  await prisma.resume.delete({
-    where: { id },
-  });
+  // 🔴 RR-391: a FREE account's delete empties the CV and keeps its row as an ARCHIVED tombstone (no content, no
+  // cover letters, no chat), so the 3 free CVs are counted for life: deleting never frees a place. A paying account's
+  // delete removes the row, as before.
+  if (await isCounted(user.id)) {
+    await prisma.$transaction([
+      prisma.coverLetter.deleteMany({ where: { resumeId: id } }),
+      prisma.chatMessage.deleteMany({ where: { cvId: id } }),
+      prisma.resume.update({ where: { id }, data: { ...TOMBSTONE, data: {}, draftData: Prisma.DbNull, lastSnapshot: Prisma.DbNull, lastSnapshotAt: null, isDraft: false /* never picked up again as a reusable draft */ } }),
+    ]);
+  } else {
+    await prisma.resume.delete({
+      where: { id },
+    });
+  }
   revalidatePath("/dashboard");
 }

@@ -61,7 +61,7 @@ export async function generateMetadata({
   const role = getRoleBySlug(roleSlug);
   if (!role) return { title: "CV templates · AlmiCV" };
   const title = `${role.name} CV Template — ATS-Ready · AlmiCV`;
-  const description = `Start your ${role.name} CV in under a minute with an ATS-ready template. AI writing, live ATS score, any language. 7-day free trial, then $12/mo.`;
+  const description = `Start your ${role.name} CV in under a minute with an ATS-ready template. AI writing, live ATS score, any language. 3 free CVs (without AI), then $12/mo for AI.`;
   return {
     title,
     description,

@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { TOMBSTONE } from "@/lib/billing/plans";
 import { headers } from "next/headers";
 import { requireUser } from "@/lib/auth";
 import { prisma } from "@/lib/db";
@@ -16,7 +17,7 @@ export async function POST(
   const user = await requireUser();
 
   const resume = await prisma.resume.findFirst({
-    where: { id, userId: user.id },
+    where: { id, userId: user.id, NOT: TOMBSTONE }, // RR-391
     select: { id: true, title: true },
   });
   if (!resume) {

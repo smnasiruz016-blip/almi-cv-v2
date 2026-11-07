@@ -76,9 +76,9 @@ export default async function CvGuideIndex() {
               href="/signup"
               className="inline-block px-8 py-4 rounded-md bg-coral text-white text-lg font-semibold hover:bg-coral-deep transition-colors"
             >
-              Start 7-day free trial →
+              Build 3 CVs free →
             </Link>
-            <p className="text-xs text-plum-soft mt-3">7-day free trial, then $12/month. Cancel anytime.</p>
+            <p className="text-xs text-plum-soft mt-3">3 free CVs (without AI), then $12/month for AI and unlimited CVs. Cancel anytime.</p>
           </section>
         </div>
       </main>

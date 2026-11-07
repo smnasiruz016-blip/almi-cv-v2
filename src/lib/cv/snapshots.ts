@@ -6,6 +6,7 @@ import { prisma } from "@/lib/db";
 import { requireUser } from "@/lib/auth";
 import type { CVData } from "@/lib/cv-types";
 import { sanitizeResumeData } from "@/lib/sanitize-resume";
+import { TOMBSTONE } from "@/lib/billing/plans";
 
 export type SnapshotResult<T> =
   | { ok: true; data: T }
@@ -18,7 +19,7 @@ const FAILED = "Couldn't complete that — try again";
 async function ownedResumeId(resumeId: string): Promise<string | null> {
   const user = await requireUser();
   const owned = await prisma.resume.findFirst({
-    where: { id: resumeId, userId: user.id },
+    where: { id: resumeId, userId: user.id, NOT: TOMBSTONE }, // RR-391
     select: { id: true },
   });
   return owned?.id ?? null;
@@ -91,7 +92,7 @@ export async function restoreSnapshot(
   try {
     const user = await requireUser();
     const row = await prisma.resume.findFirst({
-      where: { id: resumeId, userId: user.id },
+      where: { id: resumeId, userId: user.id, NOT: TOMBSTONE }, // RR-391
       select: { id: true, lastSnapshot: true },
     });
     if (!row) return { ok: false, error: NOT_FOUND };

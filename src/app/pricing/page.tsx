@@ -7,7 +7,7 @@ import { PricingClient } from "./pricing-client";
 export const metadata: Metadata = {
   title: "Pricing · AlmiCV",
   description:
-    "One plan: $12/month with a 7-day free trial. Unlimited CVs, unlimited AI, every premium template. Cancel anytime.",
+    "3 free CVs (without AI), then $12/month for AI and unlimited CVs. Every template, PDF download with no watermark. Cancel anytime.",
   alternates: { canonical: "https://almicv.almiworld.com/pricing" },
 };
 
@@ -18,9 +18,8 @@ export default async function PricingPage({
 }) {
   const user = await getCurrentUser();
   const params = await searchParams;
-  // Shown when a free-window user clicks an AI feature, or when their window
-  // has run out. Founder copy from _handoffs/AlmiCV_3day_copy.md.
-  const softUpgrade = params.from === "ai" || params.from === "expired";
+  // Shown when a free user clicks an AI feature, or has used the 3 free CVs (RR-391).
+  const softUpgrade = params.from === "ai" || params.from === "free-cvs" || params.from === "expired";
 
   let currentPlan: "FREE" | "PRO_MONTHLY" | "PRO_YEARLY" = "FREE";
   if (user) {
@@ -42,21 +41,20 @@ export default async function PricingPage({
         {softUpgrade && (
           <section className="mx-auto mb-10 max-w-2xl rounded-2xl border-2 border-gray-900/15 bg-white p-6 text-left shadow-sm">
             <h2 className="text-2xl font-bold text-gray-900">
-              {params.from === "expired" ? "Your 3 free days have finished" : "Ready for more?"}
+              {params.from === "ai" ? "AI is in the $12/month plan" : "You have used your 3 free CVs"}
             </h2>
             <p className="mt-2 text-sm text-gray-700">
-              {params.from === "expired"
-                ? "Start the 7-day trial to carry on building — and it adds the AI on top."
+              {params.from !== "ai"
+                ? "Get unlimited CVs and AI for $12/month. Your 3 CVs stay yours: you can still edit and download them."
                 : "You have built your CV. The AI can now rewrite your wording, score it against a job description, and tell you what a recruiter will notice first."}
             </p>
             <ul className="mt-4 space-y-1.5 text-sm text-gray-700">
               <li>✓ AI rewriting, scoring and job-tailoring</li>
-              <li>✓ Everything you already have — templates, downloads, unlimited CVs</li>
-              <li>✓ Keeps working after your 3 days end</li>
+              <li>✓ Unlimited CVs</li>
+              <li>✓ Everything you already have — every template, PDF downloads with no watermark</li>
             </ul>
             <p className="mt-4 text-sm text-gray-900">
-              <span className="font-bold">$0 today.</span> Then $12/month after your 7-day
-              trial. Cancel any time.
+              <span className="font-bold">$12/month.</span> Cancel any time.
             </p>
           </section>
         )}
@@ -69,8 +67,8 @@ export default async function PricingPage({
             One plan, everything included
           </h1>
           <p className="mx-auto mt-3 max-w-xl text-base leading-7 text-plum-soft">
-            One plan, everything included: unlimited CVs, unlimited AI and every
-            premium template. 7-day free trial, then $12/month. Cancel anytime.
+            3 free CVs (without AI), then $12/month for AI and unlimited CVs.
+            Every template and a PDF download with no watermark. Cancel anytime.
           </p>
         </header>
 

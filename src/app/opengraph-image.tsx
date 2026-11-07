@@ -3,7 +3,7 @@ import { readFile } from "fs/promises";
 import path from "path";
 
 export const alt =
-  "AlmiCV — AI-powered CV builder. Premium templates, ATS scoring, $12/month with a 7-day free trial.";
+  "AlmiCV — AI-powered CV builder. Premium templates, ATS scoring. 3 free CVs (without AI), then $12/month for AI and unlimited CVs.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -90,7 +90,7 @@ export default async function OpenGraphImage() {
               display: "flex",
             }}
           >
-            AI-powered CV builder · 7-day free trial · $12/month
+            AI-powered CV builder · 3 free CVs · $12/month for AI
           </div>
         </div>
 

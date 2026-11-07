@@ -25,7 +25,7 @@ export const revalidate = 86400;
 // so this string fully replaces it — no double-brand suffix.
 const HOME_TITLE = "AI Resume Builder with Real ATS Score | AlmiCV";
 const HOME_DESC =
-  "AI resume builder with a real ATS score. Beat the filter with the right keywords and templates — 7-day free trial, then $12/mo, no download traps. Build your CV now.";
+  "AI resume builder with a real ATS score. 3 free CVs (without AI), then $12/month for AI and unlimited CVs. No download traps, no watermark. Build your CV now.";
 
 export const metadata: Metadata = {
   title: HOME_TITLE,
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
 };
 
 // One primary CTA, repeated down the page (per the copy spec).
-const CTA_LABEL = "Start 7-day free trial";
+const CTA_LABEL = "Build 3 CVs free";
 
 // Honest trust statements (no invented numbers/reviews) — from the copy.
 const TRUST = [
@@ -94,7 +94,7 @@ const FAQS = [
   },
   {
     q: "Is AlmiCV free?",
-    a: "There is a 7-day free trial, then $12/month. You add a card up front and are charged on day 8; cancel any time in those 7 days and you pay nothing. No download paywall, no weekly-billing trick.",
+    a: "Yes, for 3 CVs: every template and a PDF download with no watermark, no card needed. AI writing, scoring and tailoring, and unlimited CVs, are in the $12/month plan. Cancel any time. No download paywall, no weekly-billing trick.",
   },
   {
     q: "How is AlmiCV cheaper than resume.io and Zety?",
@@ -212,7 +212,7 @@ function HeroSection({ isLoggedIn }: { isLoggedIn: boolean }) {
             </div>
             <p className="mt-5 text-sm text-plum-faint">
               Pro is $12/month — a fraction of what resume.io (~$30 every 4
-              weeks, ~$389/year) and Zety charge. 7-day free trial, cancel
+              weeks, ~$389/year) and Zety charge. 3 free CVs without AI first; cancel
               anytime. No download traps. No weekly-billing tricks.
             </p>
           </div>
@@ -409,12 +409,12 @@ function PricingSection({
       <Container>
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-balance font-display text-4xl text-plum md:text-5xl">
-            One plan. $12/month, 7-day free trial.
+            3 free CVs. Then one plan: $12/month.
           </h2>
           <p className="mt-3 text-base leading-7 text-plum-soft">
-            $12/month gets you everything: unlimited CVs, full AI, real ATS
-            scoring, and every premium template. Start with a 7-day free
-            trial — card up front, first charge on day 8. resume.io charges around $30
+            Your first 3 CVs are free: every template, a PDF download with no
+            watermark, no card. $12/month adds full AI and real ATS scoring, with
+            unlimited CVs. resume.io charges around $30
             every 4 weeks — roughly $389 a year. Zety bills you weekly and locks
             your download behind a paywall. We charge $12, flat, with no tricks —
             because we&apos;d rather you stayed for being good than for being
@@ -429,7 +429,7 @@ function PricingSection({
           />
         </div>
         <p className="mt-8 text-center text-sm text-plum-faint">
-          7-day free trial, then $12/month. Cancel anytime. No hidden fees.
+          3 free CVs (without AI), then $12/month for AI and unlimited CVs. Cancel anytime. No hidden fees.
         </p>
       </Container>
     </Section>

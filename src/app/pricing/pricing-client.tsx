@@ -150,7 +150,7 @@ export function PricingClient({
               <Sparkles className="h-4 w-4 text-coral" />
               <h2 className="text-base font-semibold text-plum">AlmiCV Pro</h2>
             </div>
-            <p className="mt-1 text-xs text-plum-soft">7-day free trial · cancel anytime</p>
+            <p className="mt-1 text-xs text-plum-soft">AI + unlimited CVs · cancel anytime</p>
             <p className="mt-4 font-display text-4xl font-bold text-plum">
               $12
               <span className="ml-1 text-sm font-normal text-plum-soft">
@@ -192,7 +192,7 @@ export function PricingClient({
                 disabled={loadingPlan !== null}
                 onClick={() => void handleCheckout()}
               >
-                Start 7-day free trial
+                Subscribe — $12/month
               </CtaButton>
             )}
           </div>
@@ -202,8 +202,8 @@ export function PricingClient({
 
       <div className="mt-10 text-center">
         <p className="text-xs text-plum-faint">
-          Cancel anytime via Stripe Customer Portal · Secure checkout · No
-          charge during free trial
+          Cancel anytime via Stripe Customer Portal · Secure checkout · 3 free
+          CVs (without AI) before you subscribe
         </p>
       </div>
     </>
