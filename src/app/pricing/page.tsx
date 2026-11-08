@@ -3,6 +3,8 @@ import { getCurrentUser } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 import { isBillingEnabled, getUserPlan } from "@/lib/billing/plans";
 import { PricingClient } from "./pricing-client";
+import { SiteHeader } from "@/components/site-header";
+import { Footer } from "@/components/footer";
 
 export const metadata: Metadata = {
   title: "Pricing · AlmiCV",
@@ -35,7 +37,10 @@ export default async function PricingPage({
     if (u) currentPlan = getUserPlan(u);
   }
 
+  // RR-398: the site header (AlmiWorld bar with Home + AlmiCV's own nav) and the AlmiWorld footer, as on every page.
   return (
+    <>
+    <SiteHeader isLoggedIn={Boolean(user)} />
     <main className="min-h-screen bg-gradient-to-b from-cream to-cream-soft">
       <section className="mx-auto w-full max-w-5xl px-6 pb-20 pt-12 md:pt-20">
         {softUpgrade && (
@@ -79,5 +84,7 @@ export default async function PricingPage({
         />
       </section>
     </main>
+    <Footer />
+    </>
   );
 }
