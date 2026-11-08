@@ -27,8 +27,9 @@ export type AIAccessResult =
 // and costs the conversion the trial exists to earn.
 export const TRIAL_EXHAUSTED_MESSAGE =
   "You have used your 5 trial AI credits. AI becomes unlimited when your subscription starts.";
+// RR-391: there is no trial to start any more: AI is in the $12/month plan
 export const PRO_REQUIRED_MESSAGE =
-  "Start your 7-day free trial to use AI features.";
+  "AI is in the $12/month plan. Get it for AI and unlimited CVs.";
 
 /**
  * Pure mirror of the atomic claim's WHERE clause.
@@ -101,7 +102,7 @@ export function decideAIAccess(input: {
 }
 
 /**
- * Gate every AI server action. AI is subscription-only, and the 7-day trial now
+ * Gate every AI server action. AI is subscription-only (RR-391: 3 free CVs have no AI). A trial that started before RR-391 (none are sold now)
  * buys a TASTE of it rather than the whole thing: 5 calls total while
  * `trialing`, unlimited once the day-8 charge flips the status to `active`.
  *

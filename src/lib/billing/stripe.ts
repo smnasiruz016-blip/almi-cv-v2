@@ -1,8 +1,7 @@
 import Stripe from "stripe";
 import { prisma } from "@/lib/db";
 import { priceIdToPlanLabel, type StripePriceId } from "@/lib/billing/plans";
-
-const TRIAL_PERIOD_DAYS = 7;
+import { checkoutSessionParams } from "@/lib/billing/checkout-params";
 
 let cachedClient: Stripe | null = null;
 
@@ -93,24 +92,11 @@ export async function createCheckoutSession(input: {
     : `/pricing?cancelled=true`;
 
   const stripe = getStripeClient();
-  const session = await stripe.checkout.sessions.create({
-    mode: "subscription",
-    customer: customerId,
-    line_items: [{ price: input.priceId, quantity: 1 }],
-    // Stripe's default here is already "always", so this changes nothing at
-    // runtime — it is pinned so nobody later assumes a $0 trial skips card
-    // capture. "if_required" would start the trial with no card on file and
-    // nothing to charge on day 8, which breaks the whole model.
-    payment_method_collection: "always",
-    subscription_data: {
-      trial_period_days: TRIAL_PERIOD_DAYS,
-      metadata: { userId: input.userId, plan: planLabel },
-    },
-    metadata: { userId: input.userId, plan: planLabel, product: "almi-cv" }, // product = routing key for almi-billing-router
-    allow_promotion_codes: true,
-    success_url: `${baseUrl}${successPath}`,
-    cancel_url: `${baseUrl}${cancelPath}`,
-  });
+  // RR-391: no trial for a new subscriber (src/lib/billing/checkout-params.ts)
+  const session = await stripe.checkout.sessions.create(
+    checkoutSessionParams({ customerId, priceId: input.priceId, userId: input.userId, planLabel, successUrl: `${baseUrl}${successPath}`, cancelUrl: `${baseUrl}${cancelPath}` }),
+  );
+
 
   if (!session.url) {
     throw new Error("Stripe did not return a Checkout URL");

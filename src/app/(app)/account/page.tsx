@@ -4,7 +4,8 @@ import { prisma } from "@/lib/db";
 import {
   getAccessLevel,
   getProductAccessLevel,
-  getFreeAccessDaysRemaining,
+  freeCvsLeft,
+  hasFullAccess,
   getCompProDaysRemaining,
   getUserPlan,
   isBillingEnabled,
@@ -46,8 +47,6 @@ export default async function AccountPage({
       compProUntil: true,
       // Owner status is decided by email, not by any subscription column.
       email: true,
-      // The 3-day no-card window drives the guidance box and the plan label.
-      freeAccessStartedAt: true,
     },
   });
 
@@ -73,7 +72,7 @@ export default async function AccountPage({
       ? "Unlimited"
       : accessLevel === "trialing"
         ? `${dbUser?.aiCallsThisMonth ?? 0} of ${TRIAL_AI_CALL_LIMIT} during your trial — unlimited once your subscription starts`
-        : "Not included — start your 7-day free trial";
+        : "Not included — AI is in the $12/month plan";
 
   // The owner has no subscription and never will, so every plan name is a
   // fabrication for them — including "Pro", which would also be the exact lie
@@ -83,20 +82,20 @@ export default async function AccountPage({
   // Three states, never two. PLAN_DISPLAY_NAME.FREE is "No active plan", which
   // is wrong for someone actively inside their free window and wrong in a
   // different way for someone who has not started one.
-  const productAccess = dbUser ? getProductAccessLevel(dbUser) : "NONE";
-  const freeDaysLeft = dbUser ? getFreeAccessDaysRemaining(dbUser) : null;
+  // RR-391: FREE (3 CVs for life, no AI; cvCount is every CV the account ever made, a free delete leaving an empty
+  // tombstone row) or PAID.
+  const productAccess = dbUser ? getProductAccessLevel(dbUser) : "FREE";
+  const freeLeft = freeCvsLeft({ fullAccess: dbUser ? hasFullAccess(dbUser) : false, lifetimeCount: cvCount });
   const planLabel = owner
     ? "Owner — full access"
-    : productAccess === "FREE_3DAY"
-      ? `Free — ${freeDaysLeft === 1 ? "last day" : `${freeDaysLeft} days left`}`
-      : productAccess === "FREE_EXPIRED"
-        ? "Free — 3 days used"
-        : PLAN_DISPLAY_NAME[plan];
+    : productAccess === "FREE"
+      ? `Free — ${freeLeft === 1 ? "1 free CV left" : `${freeLeft} free CVs left`} (no AI)`
+      : PLAN_DISPLAY_NAME[plan];
 
   return (
     <div className="mx-auto max-w-3xl space-y-8">
       {/* First thing a new registration sees — signup lands here. */}
-      <WelcomeGuidance access={productAccess} daysLeft={freeDaysLeft} />
+      <WelcomeGuidance access={productAccess} freeLeft={freeLeft} />
 
       <header>
         <h1 className="text-3xl text-plum md:text-4xl">Account</h1>

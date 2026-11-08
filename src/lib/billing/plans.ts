@@ -1,8 +1,8 @@
 import type { User } from "@prisma/client";
 import { isOwner } from "@/lib/owner";
 
-// AlmiCV is on the family standard: ONE price, $12/month, 7-day card-upfront
-// trial. The old $7/month + $60/year pair is retired.
+// AlmiCV: ONE price, $12/month (AI + unlimited CVs); 3 free CVs without AI; NO trial for new subscribers
+// (RR-391, 7 Nov 2026). The old $7/month + $60/year pair is retired.
 //
 // The price ID now comes from env like every other product in the family. It
 // used to be a hardcoded live `price_…` string, which meant a price change
@@ -34,28 +34,19 @@ export type PlanConfig = {
 // trial not started (or lapsed/cancelled). `trialing` counts as PRO_MONTHLY via
 // isProActive(), so a trialling user gets the full product from minute one.
 //
-// READ THIS BEFORE CHANGING A ZERO. As of 2026-08-19 the three zeros no longer
-// mean the same thing, and the old comment ("these zeros ARE the paywall") is
-// now half wrong:
+// READ THIS BEFORE CHANGING A NUMBER (RR-391, 7 Nov 2026: the owner's offer "3 free CVs (without AI), then
+// $12/month for AI and unlimited CVs", no trial):
 //
-//   aiCallsPerMonth: 0  -- STILL THE PAYWALL, and the load-bearing one. AI is
-//                          never free at any window state. This is the line the
-//                          whole 3-day strategy rests on: free access is only
-//                          safe because it costs nothing to serve. Restoring a
-//                          non-zero value here puts a metered model call behind
-//                          a no-card door. verify-paywall.ts fails if you do.
-//   cvLimit: 0          -- NOT the paywall any more. It is the EXPIRED-WINDOW
-//   templatesAccess     -- state. A user inside their 3-day window creates CVs
-//                          and opens every template; those gates now ask
-//                          hasProductAccess(), which consults the window first.
-//
-// So: the AI zero is the paywall; the CV and template zeros are the expired
-// state. Do not collapse them back into one idea.
+//   aiCallsPerMonth: 0  -- THE PAYWALL, and the load-bearing one. AI is never free. Free access is only safe
+//                          because it costs nothing to serve. Restoring a non-zero value here puts a metered
+//                          model call behind a no-card door. verify-paywall.ts fails if you do.
+//   cvLimit: 3          -- 3 CVs FOR LIFE, counted on the server (resume-actions.ts createCounted).
+//   templatesAccess     -- every template is free.
 export const PLANS: Record<PlanKey, PlanConfig> = {
   FREE: {
-    cvLimit: 0,
-    aiCallsPerMonth: 0,
-    templatesAccess: "none",
+    cvLimit: 3, // RR-391: 3 CVs for life (FREE_CV_LIMIT), counted on the server
+    aiCallsPerMonth: 0, // AI is never free
+    templatesAccess: "all", // every template is free
   },
   PRO_MONTHLY: {
     cvLimit: Infinity, // unlimited CVs on Pro (count >= Infinity is never true)
@@ -121,90 +112,68 @@ export function isProActive(user: ProUserShape): boolean {
 }
 
 /**
- * How many AI calls a user gets during the 7-day trial. A "taste", not a tier:
+ * How many AI calls a user gets during a trial that started before RR-391 (no new trials are sold). A "taste", not a tier:
  * the trial grants the FULL product for building, editing and downloading CVs
  * (isProActive stays true, so cvLimit and templates are untouched) — only AI
  * narrows, because AI is the one feature with a per-call vendor cost.
  */
 export const TRIAL_AI_CALL_LIMIT = 5;
 
-// ===================== 3-day no-card free window =====================
+// ===================== The free offer: 3 CVs for life, no AI =====================
 //
-// 2026-08-19. Deliberate network policy change: "3 days free of everything that
-// costs us nothing, then the card for everything that calls a paid model."
-// Not drift -- do not restore card-upfront on CV building.
+// RR-391 (owner, 7 Nov 2026 21:49: "3 free CVs (without AI), no 7 days, 12 USD per month. The new offer from now on").
+// REPLACES the no-card window of 2026-08-19 and the card-upfront trial (no trial is sold any more).
 //
-// THESE PREDICATES ARE DELIBERATELY SEPARATE FROM getAccessLevel() AND
-// requireAIAccess(). The AI path is untouched by this feature and must stay
-// that way: no window state may ever grant an AI call. If you find yourself
-// wanting to teach getAccessLevel() about the window, stop -- that is the
-// change that would put a paid model behind a no-card door.
+//   FREE   = 3 CVs per account, FOR LIFE (not per month), every template, PDF download with no watermark. NO AI.
+//   PAID   = $12/month: every AI feature and unlimited CVs.
+//   TRIAL  = none for anyone who subscribes from now on (stripe.ts sends no trial_period_days). A trial that is
+//            running today runs to its end ("trialing" still counts as Pro, and its 5 AI credits still apply).
+//
+// THE COUNT IS THE SERVER'S. It is every Resume row the account ever made, in any status: a free user's delete
+// does not remove the row, it empties it (resume-actions.ts deleteResume keeps an ARCHIVED tombstone with no
+// content), so deleting can never give a 4th free CV, and nothing in the browser can reset it.
+// AI is untouched by this section and must stay so: getAccessLevel() / requireAIAccess() know nothing of free CVs.
 
-/** Length of the no-card window. One constant; the DB stores only the start. */
-export const FREE_ACCESS_DAYS = 3;
-
-type FreeUserShape = Pick<User, "freeAccessStartedAt">;
-
-/** True while the 3-day window is open. */
-export function isFreeWindowActive(user: FreeUserShape): boolean {
-  if (!user.freeAccessStartedAt) return false;
-  return user.freeAccessStartedAt.getTime() + FREE_ACCESS_DAYS * 86_400_000 > Date.now();
-}
-
-/** True ONLY when a window was started and has since run out. "Never started"
- *  is NOT expired -- collapsing the two deadlocked AlmiPrep for every user. */
-export function isFreeWindowExpired(user: FreeUserShape): boolean {
-  return Boolean(user.freeAccessStartedAt) && !isFreeWindowActive(user);
-}
-
-/** Whole days left (ceil), or null when the window is not running. Null covers
- *  both "not started" and "expired" -- callers that must tell those apart read
- *  getProductAccessLevel(), which does. */
-export function getFreeAccessDaysRemaining(user: FreeUserShape): number | null {
-  if (!isFreeWindowActive(user)) return null;
-  const endsAt = user.freeAccessStartedAt!.getTime() + FREE_ACCESS_DAYS * 86_400_000;
-  return Math.ceil((endsAt - Date.now()) / 86_400_000);
-}
+/** The one line every page uses for the offer. */
+export const OFFER_LINE = `3 free CVs (without AI), then ${MONTHLY_PRICE_DISPLAY}/month for AI and unlimited CVs.`;
+/** Free CVs per account, for life. */
+export const FREE_CV_LIMIT = 3;
+/** What the 4th CV of a free account is told. */
+export const FREE_CVS_USED_MESSAGE = `You have used your ${FREE_CV_LIMIT} free CVs. Get unlimited CVs and AI for ${MONTHLY_PRICE_DISPLAY}/month.`;
 
 /**
- * Gate for the PRODUCT surface only: creating a CV, opening a template,
- * downloading. Never for AI.
- *
- * A superset of hasFullAccess() -- a paying user must never be refused
- * something a free-window user is given.
+ * Gate for the PRODUCT surface: opening a template, editing one's own CV, downloading the PDF. Free for every
+ * signed-in account under the new offer (only CREATING a 4th CV is counted, in canCreateCv). Never for AI.
+ * The signature is kept so every caller stays a gate call.
  */
 export function hasProductAccess(
-  user: AccessUserShape & FreeUserShape,
-  isOwnerFn: OwnerCheck = isOwner,
+  _user?: unknown,
+  _isOwnerFn?: OwnerCheck,
 ): boolean {
-  if (hasFullAccess(user, isOwnerFn)) return true;
-  // Refuse ONLY a window that was started and has run out.
-  //
-  // "Never started" must NOT be refused. Creating the first CV is what STARTS
-  // the window, so gating creation on an already-active window is a deadlock:
-  // the create is refused, so the clock is never set, so the create is refused
-  // forever. That shipped on AlmiPrep (27/27 users stuck at NULL) and then
-  // shipped again here on 2026-08-19 -- the tier gate in resume-actions.ts
-  // refused a fresh signup before the row existed, and the user was shown the
-  // pricing page instead.
-  //
-  // Do not "tighten" this back to isFreeWindowActive(). A user with no window
-  // yet has nothing to lose by being let in: they own no CVs, and the moment
-  // they create one the clock starts.
-  return !isFreeWindowExpired(user);
+  return true;
 }
 
-export type ProductAccessLevel = "NONE" | "FREE_3DAY" | "FREE_EXPIRED" | "PAID";
+/** A free account's deleted CV: the row stays (it counts), empty and hidden. Used as data AND as `NOT:` in every reader. */
+export const TOMBSTONE = { status: "ARCHIVED", title: "Deleted CV" } as const;
 
-/** The three non-paid states the UI must tell apart, plus PAID. */
+/** May this account create one more CV? A paying, trialling, comped or owner account always; a free one while it has made fewer than 3. */
+export function canCreateCv(input: { fullAccess: boolean; lifetimeCount: number }): boolean {
+  return input.fullAccess || input.lifetimeCount < FREE_CV_LIMIT;
+}
+
+/** Free CVs left (null = unlimited). */
+export function freeCvsLeft(input: { fullAccess: boolean; lifetimeCount: number }): number | null {
+  return input.fullAccess ? null : Math.max(0, FREE_CV_LIMIT - input.lifetimeCount);
+}
+
+export type ProductAccessLevel = "FREE" | "PAID";
+
+/** The plan as the account screens show it. */
 export function getProductAccessLevel(
-  user: AccessUserShape & FreeUserShape,
+  user: AccessUserShape,
   isOwnerFn: OwnerCheck = isOwner,
 ): ProductAccessLevel {
-  if (hasFullAccess(user, isOwnerFn)) return "PAID";
-  if (isFreeWindowActive(user)) return "FREE_3DAY";
-  if (isFreeWindowExpired(user)) return "FREE_EXPIRED";
-  return "NONE";
+  return hasFullAccess(user, isOwnerFn) ? "PAID" : "FREE";
 }
 
 export type AccessLevel = "none" | "trialing" | "paid";

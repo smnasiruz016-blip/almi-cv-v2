@@ -194,8 +194,8 @@ export function ScoreClient() {
           </h2>
           <p className="mx-auto mt-2 max-w-md text-sm text-plum-soft">
             Build a polished, tailored CV with AlmiCV — premium templates, AI
-            writing helper, and live ATS scoring. $12/month for
-            unlimited AI with a 7-day free trial.
+            writing helper, and live ATS scoring. 3 free CVs (without AI),
+            then $12/month for AI and unlimited CVs.
           </p>
           <Link
             href="/signup"
@@ -277,17 +277,17 @@ export function ScoreClient() {
               </Link>{" "}
               or{" "}
               <Link href="/signup" className="font-semibold underline">
-                start your 7-day free trial
+                build 3 CVs free
               </Link>{" "}
-              — then $12/month, cancel anytime.
+              — AI scoring is in the $12/month plan, cancel anytime.
             </p>
           )}
           {gate === "upgrade" && (
             <p className="mt-2">
               <Link href="/signup" className="font-semibold underline">
-                Start your 7-day free trial
+                AI is in the $12/month plan
               </Link>{" "}
-              — then $12/month, cancel anytime.
+              — with unlimited CVs, cancel anytime.
             </p>
           )}
         </div>

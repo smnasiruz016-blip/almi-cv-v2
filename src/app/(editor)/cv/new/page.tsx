@@ -1,4 +1,5 @@
 import { redirect } from "next/navigation";
+import { TOMBSTONE } from "@/lib/billing/plans";
 import { prisma } from "@/lib/db";
 import { requireUser } from "@/lib/auth";
 import { createResume } from "@/lib/resume-actions";
@@ -53,6 +54,7 @@ export default async function NewCVPage({
     where: {
       userId: user.id,
       isDraft: true,
+      NOT: TOMBSTONE, // RR-391
       ...(requestedTemplate !== undefined && {
         template: requestedTemplate,
       }),

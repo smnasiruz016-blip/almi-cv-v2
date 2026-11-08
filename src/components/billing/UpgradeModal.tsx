@@ -11,20 +11,19 @@ type Props = {
   message?: string;
 };
 
+// RR-391 (owner, 7 Nov 2026): 3 free CVs without AI, then $12/month for AI and unlimited CVs. No trial.
 const COPY: Record<Props["reason"], { title: string; default: string }> = {
   AI_LIMIT_REACHED: {
-    title: "AI limit reached",
-    default:
-      "Start your 7-day free trial for unlimited AI assists across rewrite, tailor, summary, cover letters, and chat.",
+    title: "AI is in the $12/month plan",
+    default: "Your trial's AI credits are used. AI becomes unlimited when your $12/month subscription starts.",
   },
   CV_LIMIT_REACHED: {
-    title: "CV limit reached",
-    default:
-      "Start your 7-day free trial for unlimited CVs and every premium template — $12/month after, cancel anytime.",
+    title: "You have used your 3 free CVs",
+    default: "Get unlimited CVs and AI for $12/month. Your 3 CVs stay yours: you can still edit and download them.",
   },
   PRO_REQUIRED: {
-    title: "Subscribers only",
-    default: "Start your 7-day free trial to use this — $12/month after, cancel anytime.",
+    title: "AI is in the $12/month plan",
+    default: "Your 3 free CVs have no AI. Get AI and unlimited CVs for $12/month — cancel anytime.",
   },
 };
 
@@ -54,7 +53,7 @@ export function UpgradeModal({ open, onClose, reason, message }: Props) {
         </ul>
 
         <p className="text-xs text-plum-faint">
-          7-day free trial · cancel anytime via Stripe Customer Portal
+          $12/month · cancel anytime via Stripe Customer Portal
         </p>
 
         <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-end">
@@ -68,10 +67,10 @@ export function UpgradeModal({ open, onClose, reason, message }: Props) {
           <Link
             href="/pricing"
             onClick={onClose}
-            className="inline-flex items-center justify-center gap-2 rounded-pill bg-coral px-5 py-2 text-sm font-semibold text-white transition-colors hover:bg-coral-deep focus:outline-none focus:ring-4 focus:ring-coral/30"
+            className="inline-flex items-center justify-center gap-2 rounded-pill bg-coral px-7 py-3.5 text-base font-bold text-white transition-colors hover:bg-coral-deep focus:outline-none focus:ring-4 focus:ring-coral/30"
           >
             <Sparkles className="h-4 w-4" />
-            See plans
+            Subscribe for $12/month
             <ArrowRight className="h-4 w-4" />
           </Link>
         </div>

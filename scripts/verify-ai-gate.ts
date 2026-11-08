@@ -200,12 +200,12 @@ check(
 console.log("\n7. the two refusal messages are distinct and correctly aimed");
 check(
   "exhausted-trial message does NOT tell the user to start a trial",
-  !/start (your )?7-day|start your trial/i.test(TRIAL_EXHAUSTED_MESSAGE),
+  !/start (your )?(?:\d+-day|free trial)|start your trial/i.test(TRIAL_EXHAUSTED_MESSAGE),
   TRIAL_EXHAUSTED_MESSAGE,
 );
 check(
-  "no-subscription message DOES invite the trial",
-  /7-day free trial/i.test(PRO_REQUIRED_MESSAGE),
+  "no-subscription message says AI is in the $12/month plan, and offers NO trial (RR-391)",
+  /AI is in the \$12\/month plan/.test(PRO_REQUIRED_MESSAGE) && !/trial/i.test(PRO_REQUIRED_MESSAGE),
   PRO_REQUIRED_MESSAGE,
 );
 // Widened to string on purpose: as const-literals TypeScript can see these two

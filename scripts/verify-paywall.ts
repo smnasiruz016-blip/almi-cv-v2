@@ -1,214 +1,143 @@
 /**
- * Prove the paywall sits where policy says it sits — at the LOGIC layer.
+ * Prove the offer sits where the owner put it — at the LOGIC layer, at build time (prebuild), with no database.
  *
- * WHAT THIS FILE USED TO ASSERT, AND WHY IT CHANGED
- * It asserted that the free tier was entirely gone: FREE.cvLimit === 0,
- * FREE.aiCallsPerMonth === 0, templatesAccess === "none", and that a FREE user
- * could not open even a free-tier template. That was correct policy until
- * 2026-08-19, when the network moved to "3 days free of everything that costs
- * us nothing, then the card for everything that calls a paid model."
+ * RR-391 (owner, 7 Nov 2026 21:49–21:50: "3 free CVs (without AI), no 7 days, 12 USD per month. The new offer from
+ * now on"). This file used to prove the 3-day no-card window; it now proves, rule by rule, the offer that replaces
+ * it. The one line that never moves: AI is never free.
  *
- * This file was NOT deleted and NOT weakened. It is rewritten to encode the new
- * policy, and it is STRICTER in the one place that matters: AI is never free,
- * under any window state, ever. That is the line the whole strategy rests on —
- * free access is only safe because it costs nothing to serve.
- *
- * The three PLANS.FREE zeros no longer mean one thing:
- *   aiCallsPerMonth: 0  -> STILL THE PAYWALL. Load-bearing. Never relax.
- *   cvLimit: 0          -> now the EXPIRED-WINDOW state, not the paywall.
- *   templatesAccess     -> likewise.
- *
- * If someone later restores a generous AI free tier, or closes CV building to a
- * user inside their window, or makes "never started" behave like "expired",
- * this fails. Run: npx tsx scripts/verify-paywall.ts
+ *   1. AI is refused on the server for a free user; allowed for a subscriber.
+ *   2. 3 free CVs for life; the 4th is refused with the owner's words; paying / trialling / comped / owner are never
+ *      counted. The count is the server's: every CV path goes through createCounted, a free delete keeps an empty
+ *      tombstone row, and no reader ever shows or opens a tombstone.
+ *   3. No trial on a new checkout session.
+ *   4. A trial running today is left alone (still Pro, its AI credits still metered).
+ *   5. A paying subscriber is unchanged (unlimited CVs, unlimited AI, every template).
+ *   6. Every template and the PDF download are free; the copy says the offer in one sentence.
+ * Run: npx tsx scripts/verify-paywall.ts
  */
+import { readFileSync } from "node:fs";
 import {
   PLANS,
   getUserPlan,
   isProActive,
   priceIdToPlanLabel,
   hasProductAccess,
+  hasFullAccess,
+  getAccessLevel,
   getProductAccessLevel,
-  isFreeWindowActive,
-  isFreeWindowExpired,
-  getFreeAccessDaysRemaining,
-  FREE_ACCESS_DAYS,
+  canCreateCv,
+  freeCvsLeft,
+  FREE_CV_LIMIT,
+  FREE_CVS_USED_MESSAGE,
+  OFFER_LINE,
+  TOMBSTONE,
 } from "../src/lib/billing/plans";
 import { userCanAccessTier, userCanAccessTemplate } from "../src/lib/billing/template-access";
-import { decideAIAccess } from "../src/lib/ai/access";
+import { decideAIAccess, PRO_REQUIRED_MESSAGE } from "../src/lib/ai/access";
+import { checkoutSessionParams } from "../src/lib/billing/checkout-params";
 import { TEMPLATES, getTier } from "../src/components/templates/template-registry";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { WelcomeGuidance } from "../src/components/billing/WelcomeGuidance";
-import type { ProductAccessLevel } from "../src/lib/billing/plans";
 
 type Check = { name: string; got: unknown; want: unknown };
 const checks: Check[] = [];
 const eq = (name: string, got: unknown, want: unknown) => checks.push({ name, got, want });
+const src = (p: string) => readFileSync(new URL(`../${p}`, import.meta.url), "utf8");
 
 const DAY = 86_400_000;
 const future = new Date(Date.now() + DAY);
 const past = new Date(Date.now() - DAY);
-
-const base = { subscriptionPlan: null, email: "user@example.com", freeAccessStartedAt: null };
-const noSub = { ...base, subscriptionStatus: null, subscriptionCurrentPeriodEnd: null, compProUntil: null };
+const base = { subscriptionPlan: null, email: "user@example.com" };
+const free = { ...base, subscriptionStatus: null, subscriptionCurrentPeriodEnd: null, compProUntil: null };
 const trialing = { ...base, subscriptionStatus: "trialing", subscriptionCurrentPeriodEnd: future, subscriptionPlan: "pro_monthly", compProUntil: null };
 const active = { ...base, subscriptionStatus: "active", subscriptionCurrentPeriodEnd: future, subscriptionPlan: "pro_monthly", compProUntil: null };
 const lapsed = { ...base, subscriptionStatus: "active", subscriptionCurrentPeriodEnd: past, subscriptionPlan: "pro_monthly", compProUntil: null };
 const canceled = { ...base, subscriptionStatus: "canceled", subscriptionCurrentPeriodEnd: future, subscriptionPlan: "pro_monthly", compProUntil: null };
 const legacyYearly = { ...base, subscriptionStatus: "active", subscriptionCurrentPeriodEnd: future, subscriptionPlan: "pro_yearly", compProUntil: null };
 const comped = { ...base, subscriptionStatus: null, subscriptionCurrentPeriodEnd: null, compProUntil: future };
+const noOwners = () => false;
 
-// The three window states, on a user with no subscription of any kind.
-const neverStarted = { ...noSub, freeAccessStartedAt: null };
-const inWindow = { ...noSub, freeAccessStartedAt: new Date(Date.now() - DAY) };
-const expiredWindow = { ...noSub, freeAccessStartedAt: new Date(Date.now() - (FREE_ACCESS_DAYS + 1) * DAY) };
-const paidWithStaleWindow = { ...active, freeAccessStartedAt: new Date(Date.now() - 99 * DAY) };
+// 1 · AI ===================================================================
+eq("FREE aiCallsPerMonth is 0 (AI is never free)", PLANS.FREE.aiCallsPerMonth, 0);
+eq("free user's billing level is 'none'", getAccessLevel(free, noOwners), "none");
+const aiFree = decideAIAccess({ billingEnabled: true, level: getAccessLevel(free, noOwners) });
+eq("AI refused for a free user", aiFree.ok, false);
+eq("AI refusal is PRO_REQUIRED", aiFree.ok === false ? aiFree.code : "(allowed)", "PRO_REQUIRED");
+eq("AI refusal says the $12/month plan", aiFree.ok === false && aiFree.error === PRO_REQUIRED_MESSAGE && /AI is in the \$12\/month plan/.test(aiFree.error), true);
+eq("AI allowed for a subscriber", decideAIAccess({ billingEnabled: true, level: getAccessLevel(active, noOwners) }).ok, true);
+eq("AI allowed for a comped account", decideAIAccess({ billingEnabled: true, level: getAccessLevel(comped, noOwners) }).ok, true);
+eq("AI refused for a lapsed subscription", decideAIAccess({ billingEnabled: true, level: getAccessLevel(lapsed, noOwners) }).ok, false);
+eq("every AI route goes through requireAIAccess (the server gate)", /export async function requireAIAccess/.test(src("src/lib/ai/access.ts")), true);
 
-const noOwners = () => false; // owner check stubbed off; owner access is proved separately
+// 2 · 3 free CVs for life ======================================================
+eq("FREE_CV_LIMIT is 3", FREE_CV_LIMIT, 3);
+eq("PLANS.FREE.cvLimit is 3", PLANS.FREE.cvLimit, 3);
+for (const n of [0, 1, 2]) eq(`free account with ${n} CV(s) may create one more`, canCreateCv({ fullAccess: false, lifetimeCount: n }), true);
+eq("free account with 3 CVs is REFUSED the 4th", canCreateCv({ fullAccess: false, lifetimeCount: 3 }), false);
+eq("free account with 7 CVs (made while paying) is refused", canCreateCv({ fullAccess: false, lifetimeCount: 7 }), false);
+eq("free CVs left after 1", freeCvsLeft({ fullAccess: false, lifetimeCount: 1 }), 2);
+eq("free CVs left never below 0", freeCvsLeft({ fullAccess: false, lifetimeCount: 9 }), 0);
+eq("the 4th CV's words are the owner's", FREE_CVS_USED_MESSAGE, "You have used your 3 free CVs. Get unlimited CVs and AI for $12/month.");
+const ra = src("src/lib/resume-actions.ts");
+eq("the count is every row the account made (all statuses), inside the lock", /pg_advisory_xact_lock[\s\S]{0,200}tx\.resume\.count\(\{ where: \{ userId \} \}\)/.test(ra), true);
+eq("every CV path creates through createCounted (no direct prisma.resume.create)", (ra.match(/prisma\.resume\.create\(/g) ?? []).length === 1 && /if \(!counted\) return prisma\.resume\.create\(/.test(ra) && (ra.match(/createCounted\(/g) ?? []).length >= 4, true);
+eq("a free account's delete keeps an empty tombstone (never frees a place)", /if \(await isCounted\(user\.id\)\) \{[\s\S]{0,400}prisma\.resume\.update\(\{ where: \{ id \}, data: \{ \.\.\.TOMBSTONE, data: \{\}/.test(ra), true);
+eq("the tombstone is never listed, opened, written or reused", [/where: \{ userId: user\.id, NOT: TOMBSTONE \}/, /where: \{ id, userId: user\.id, NOT: TOMBSTONE \}, \/\/ RR-391: a deleted free CV never opens again/, /where: \{ id, userId: user\.id, NOT: TOMBSTONE \}, \/\/ RR-391: a deleted free CV can never be written again/].every((re) => re.test(ra)) && /NOT: TOMBSTONE/.test(src("src/app/(editor)/cv/new/page.tsx")) && /NOT: TOMBSTONE/.test(src("src/app/api/pdf/[id]/route.ts")) && (src("src/lib/cv/snapshots.ts").match(/NOT: TOMBSTONE/g) ?? []).length === 2, true);
+eq("the tombstone is ARCHIVED with no title of the user's", JSON.stringify(TOMBSTONE), JSON.stringify({ status: "ARCHIVED", title: "Deleted CV" }));
 
-// =============================================================================
-// 1. AI IS NEVER FREE. The load-bearing assertion. Do not relax any of these.
-// =============================================================================
-eq("FREE aiCallsPerMonth is 0", PLANS.FREE.aiCallsPerMonth, 0);
-eq("AI: no subscription -> refused", decideAIAccess({ billingEnabled: true, level: "none" }).ok, false);
-const aiNoSub = decideAIAccess({ billingEnabled: true, level: "none" });
-eq("AI: no subscription -> PRO_REQUIRED", aiNoSub.ok === false ? aiNoSub.code : "(allowed)", "PRO_REQUIRED");
-// The window must be INVISIBLE to the AI decision. decideAIAccess takes an
-// AccessLevel that has no window state by design; these assert the design holds.
-eq("AI: getProductAccessLevel FREE_3DAY does not appear in AccessLevel",
-  ["none", "trialing", "paid"].includes(getProductAccessLevel(inWindow, noOwners).toLowerCase()), false);
-eq("AI: a user inside the free window is still level 'none' for AI",
-  decideAIAccess({ billingEnabled: true, level: "none" }).ok, false);
-eq("AI: trial is capped, not unlimited",
-  decideAIAccess({ billingEnabled: true, level: "trialing", claim: { claimed: false, used: 5 } }).ok, false);
-eq("AI: paid is allowed", decideAIAccess({ billingEnabled: true, level: "paid" }).ok, true);
+// 3 · no trial on a new checkout ================================================
+const p = checkoutSessionParams({ customerId: "cus_x", priceId: "price_x", userId: "u1", planLabel: "pro_monthly", successUrl: "https://a/s", cancelUrl: "https://a/c" });
+eq("checkout: no trial_period_days", JSON.stringify(p).includes("trial_period_days"), false);
+eq("checkout: no trial_end / trial_settings", /trial_end|trial_settings/.test(JSON.stringify(p)), false);
+eq("checkout: a subscription at the one price", p.mode === "subscription" && p.line_items?.[0]?.price === "price_x", true);
+eq("checkout: the card is taken", p.payment_method_collection, "always");
+eq("stripe.ts sends no trial", /trial_period_days|TRIAL_PERIOD_DAYS/.test(src("src/lib/billing/stripe.ts")), false);
+eq("stripe.ts builds the session with checkoutSessionParams", /stripe\.checkout\.sessions\.create\(\s*checkoutSessionParams\(/.test(src("src/lib/billing/stripe.ts")), true);
 
-// =============================================================================
-// 2. THE PRODUCT SURFACE IS OPEN INSIDE THE WINDOW.
-//    The opposite of what this file asserted before 2026-08-19.
-// =============================================================================
-eq("in-window: has product access", hasProductAccess(inWindow, noOwners), true);
-eq("in-window: opens a free-tier template", userCanAccessTemplate(inWindow, TEMPLATES[0].slug), true);
-eq("in-window: window is active", isFreeWindowActive(inWindow), true);
-eq("in-window: days remaining is a number", typeof getFreeAccessDaysRemaining(inWindow), "number");
-eq("paid: has product access", hasProductAccess(active, noOwners), true);
-eq("trialing: has product access", hasProductAccess(trialing, noOwners), true);
-eq("paid beats a stale window", hasProductAccess(paidWithStaleWindow, noOwners), true);
+// 4 · a trial running today is left alone ========================================
+eq("trialing is still Pro", isProActive(trialing), true);
+eq("trialing has full access (unlimited CVs, never counted)", hasFullAccess(trialing, noOwners), true);
+eq("trialing may create a 4th CV", canCreateCv({ fullAccess: hasFullAccess(trialing, noOwners), lifetimeCount: 9 }), true);
+eq("trialing's AI still metered by its credits (allowed while it has one)", decideAIAccess({ billingEnabled: true, level: "trialing", claim: { claimed: true, used: 2 } }).ok, true);
+eq("trialing's AI stops when its credits are used", decideAIAccess({ billingEnabled: true, level: "trialing", claim: { claimed: false, used: 5 } }).ok, false);
+eq("'trialing' is still an access status", /"trialing",\s*"active"/.test(src("src/lib/billing/plans.ts")), true);
 
-// =============================================================================
-// 3. NEVER-STARTED IS NOT EXPIRED.  (The bug that shipped on AlmiPrep and
-//    locked out 27 of 27 users. Three states, not two.)
-// =============================================================================
-eq("never started: not expired", isFreeWindowExpired(neverStarted), false);
-eq("never started: not active either", isFreeWindowActive(neverStarted), false);
-eq("never started: level is NONE", getProductAccessLevel(neverStarted, noOwners), "NONE");
-eq("never started: NOT reported as FREE_EXPIRED",
-  getProductAccessLevel(neverStarted, noOwners) === "FREE_EXPIRED", false);
-eq("expired: level is FREE_EXPIRED", getProductAccessLevel(expiredWindow, noOwners), "FREE_EXPIRED");
-eq("expired: is expired", isFreeWindowExpired(expiredWindow), true);
-eq("in window: level is FREE_3DAY", getProductAccessLevel(inWindow, noOwners), "FREE_3DAY");
-eq("paid: level is PAID", getProductAccessLevel(active, noOwners), "PAID");
-eq("days remaining is null when never started", getFreeAccessDaysRemaining(neverStarted), null);
-eq("days remaining is null when expired", getFreeAccessDaysRemaining(expiredWindow), null);
-
-// =============================================================================
-// 4. OUTSIDE A WINDOW AND NOT PAYING, THE PRODUCT IS CLOSED.
-// =============================================================================
-eq("expired: no product access", hasProductAccess(expiredWindow, noOwners), false);
-eq("expired: cannot open a template", userCanAccessTemplate(expiredWindow, TEMPLATES[0].slug), false);
-eq("expired: FREE cvLimit is 0", PLANS.FREE.cvLimit, 0);
-eq("expired: FREE templatesAccess is none", PLANS.FREE.templatesAccess, "none");
-
-// =============================================================================
-// 4b. THE DEADLOCK ASSERTION. Read this before changing anything above.
-//
-// The line that used to sit here was:
-//     eq("never started: no product access until they build",
-//        hasProductAccess(neverStarted), false)
-// and it was WRONG. It asserted the bug as correct behaviour, so the gate
-// passed 44/44 while a fresh signup could not create a CV at all. Creating the
-// first CV is what STARTS the window, so requiring an active window in order to
-// create is a deadlock: refused -> clock never set -> refused forever.
-//
-// Section 3 below was not enough on its own: it asserted how the never-started
-// state is LABELLED (NONE, not FREE_EXPIRED) and never asserted what that state
-// can DO. A correct label on a user who cannot use the product is not a pass.
-// =============================================================================
-eq("NEVER STARTED CAN CREATE — the state that starts the clock must not require the clock",
-  hasProductAccess(neverStarted, noOwners), true);
-eq("never started: can open a template (so the create is reachable)",
-  userCanAccessTemplate(neverStarted, TEMPLATES[0].slug), true);
-eq("never started is NOT refused as if expired",
-  hasProductAccess(neverStarted, noOwners) === hasProductAccess(expiredWindow, noOwners), false);
-
-// =============================================================================
-// 5. THE COPY SAYS "EVERY TEMPLATE". Assert that stays true.
-//    All templates are tier "free" today, so the copy is honest. The day
-//    someone adds a premium one, this fails and tells us the copy has become a
-//    lie — instead of a learner finding out.
-// =============================================================================
-const premium = TEMPLATES.filter((t) => getTier(t) === "premium").map((t) => t.slug);
-eq(`no template is tier "premium" (found: ${premium.slice(0, 3).join(",") || "none"})`, premium.length, 0);
-eq("template catalogue is non-empty", TEMPLATES.length > 0, true);
-
-// =============================================================================
-// 6. Subscription semantics, unchanged.
-// =============================================================================
-eq("PRO_MONTHLY opens templates", userCanAccessTier("PRO_MONTHLY", "free"), true);
-eq("PRO_MONTHLY cvLimit unlimited", PLANS.PRO_MONTHLY.cvLimit, Infinity);
-eq("trialing counts as active", isProActive(trialing), true);
-eq("trialing resolves to PRO_MONTHLY", getUserPlan(trialing), "PRO_MONTHLY");
-eq("no subscription is not active", isProActive(noSub), false);
-eq("lapsed period is not active", isProActive(lapsed), false);
-eq("canceled is not active", isProActive(canceled), false);
-eq("legacy yearly sub still active", isProActive(legacyYearly), true);
+// 5 · a paying subscriber is unchanged ============================================
+eq("subscriber: Pro", isProActive(active), true);
+eq("subscriber: plan PRO_MONTHLY", getUserPlan(active), "PRO_MONTHLY");
+eq("subscriber: unlimited CVs", PLANS.PRO_MONTHLY.cvLimit, Infinity);
+eq("subscriber: never counted", canCreateCv({ fullAccess: hasFullAccess(active, noOwners), lifetimeCount: 50 }), true);
+eq("subscriber: level PAID", getProductAccessLevel(active, noOwners), "PAID");
+eq("legacy yearly still active", isProActive(legacyYearly), true);
 eq("legacy yearly keeps its label", getUserPlan(legacyYearly), "PRO_YEARLY");
 eq("comp grant still works", isProActive(comped), true);
+eq("canceled is not active", isProActive(canceled), false);
 eq("retired $7 price rejected", priceIdToPlanLabel("price_1TSp04Q5pPhPaj6V3PJX0SC3"), null);
 eq("retired $60 price rejected", priceIdToPlanLabel("price_1TSp5TQ5pPhPaj6VBD0Zujwy"), null);
 eq("empty price rejected", priceIdToPlanLabel(""), null);
 
-// =============================================================================
-// 7. THE COPY HAS THREE STATES TOO.
-//
-// Rendered, not grepped: the component is actually rendered in each state and
-// the output inspected. A user mid-window was being shown "Your 3 days start
-// when you build your first CV, not now" underneath a badge reading "3 days
-// left" -- because the footnote keyed off `!expired`, collapsing never-started
-// and active into one branch. That is the same two-states-as-one defect that
-// caused both access P0s this week, in copy rather than in a gate.
-// =============================================================================
-const NEVER_STARTED_FOOTNOTE = "start when you build your first CV";
-const render = (access: ProductAccessLevel, daysLeft: number | null) =>
-  renderToStaticMarkup(createElement(WelcomeGuidance, { access, daysLeft }));
-
-const htmlNone = render("NONE", null);
-const htmlActive = render("FREE_3DAY", 2);
-const htmlExpired = render("FREE_EXPIRED", null);
-const htmlPaid = render("PAID", null);
-
-eq("copy: never-started SHOWS the never-started footnote", htmlNone.includes(NEVER_STARTED_FOOTNOTE), true);
-eq("copy: ACTIVE window must NOT show the never-started footnote", htmlActive.includes(NEVER_STARTED_FOOTNOTE), false);
-eq("copy: EXPIRED must NOT show the never-started footnote", htmlExpired.includes(NEVER_STARTED_FOOTNOTE), false);
-eq("copy: active shows the days-left badge", /days left of free building/.test(htmlActive), true);
-eq("copy: never-started does NOT claim days left", /days left of free building/.test(htmlNone), false);
-eq("copy: never-started button invites a first build", htmlNone.includes("Start building free"), true);
-eq("copy: active button does NOT say 'Start building free'", htmlActive.includes("Start building free"), false);
-eq("copy: expired button offers the trial", htmlExpired.includes("Start my 7-day free trial"), true);
-eq("copy: expired heading says the days finished", htmlExpired.includes("3 free days have finished"), true);
-eq("copy: active heading does NOT say the days finished", htmlActive.includes("3 free days have finished"), false);
-eq("copy: PAID renders nothing", htmlPaid, "");
+// 6 · templates, download, copy ================================================
+eq("free: product access (templates, editing, download)", hasProductAccess(free, noOwners), true);
+eq("free: opens a template", userCanAccessTemplate(free as never, TEMPLATES[0].slug), true);
+eq("FREE templatesAccess is all", PLANS.FREE.templatesAccess, "all");
+eq("PRO_MONTHLY opens templates", userCanAccessTier("PRO_MONTHLY", "free"), true);
+const premium = TEMPLATES.filter((t) => getTier(t) === "premium").map((t) => t.slug);
+eq(`no template is tier "premium" (found: ${premium.slice(0, 3).join(",") || "none"})`, premium.length, 0);
+eq("free: level FREE", getProductAccessLevel(free, noOwners), "FREE");
+eq("the offer in one sentence", OFFER_LINE, "3 free CVs (without AI), then $12/month for AI and unlimited CVs.");
+const render = (freeLeft: number | null) => renderToStaticMarkup(createElement(WelcomeGuidance, { access: "FREE", freeLeft }));
+eq("copy: a new account sees the offer and 3 left", render(3).includes("3 free CVs left") && render(3).includes("3 free CVs (without AI), then $12/month"), true);
+eq("copy: 1 left says so", render(1).includes("1 free CV left"), true);
+eq("copy: used up says the owner's words and keeps their CVs", render(0).includes("You have used your 3 free CVs") && render(0).includes("you can still edit and download them"), true);
+eq("copy: no trial anywhere in the guidance", /trial|free days/i.test(render(0) + render(3)), false);
+eq("copy: PAID renders nothing", renderToStaticMarkup(createElement(WelcomeGuidance, { access: "PAID", freeLeft: null })), "");
 
 let failed = 0;
 for (const c of checks) {
   const ok = Object.is(c.got, c.want);
   if (!ok) failed++;
-  console.log(`  [${ok ? "PASS" : "FAIL"}] ${c.name.padEnd(62)} got=${String(c.got)} want=${String(c.want)}`);
+  console.log(`  [${ok ? "PASS" : "FAIL"}] ${c.name.padEnd(70)} got=${String(c.got)} want=${String(c.want)}`);
 }
-console.log(
-  failed === 0
-    ? `\nALL ${checks.length} PASS — AI is never free; the product is open inside the window`
-    : `\n${failed} FAILED`,
-);
+console.log(failed === 0 ? `\nALL ${checks.length} PASS — the RR-391 offer: 3 free CVs without AI, then $12/month, no trial` : `\n${failed} FAILED`);
 process.exitCode = failed === 0 ? 0 : 1;

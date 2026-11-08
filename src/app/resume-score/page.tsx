@@ -4,7 +4,7 @@ import { ScoreClient } from "./score-client";
 export const metadata: Metadata = {
   title: "Resume Score Checker · AlmiCV",
   description:
-    "Get an instant 0-100 resume quality score with personalized improvement tips. Sign in to run it — your 7-day free trial includes AI scoring, then $12/month, cancel anytime.",
+    "Get an instant 0-100 resume quality score with personalized improvement tips. AI scoring is in the $12/month plan, with unlimited CVs. Cancel anytime.",
   openGraph: {
     title: "Resume Score Checker · AlmiCV",
     description:
@@ -20,7 +20,7 @@ export default function ResumeScorePage() {
       <section className="mx-auto w-full max-w-2xl px-6 pb-20 pt-14 md:pt-20">
         <header className="text-center">
           <span className="inline-flex items-center gap-1.5 rounded-pill bg-coral-soft/50 px-3 py-1 text-xs font-medium text-coral-deep">
-            ✨ Included in your 7-day free trial
+            ✨ Included in the $12/month plan
           </span>
           <h1 className="mt-4 text-4xl font-semibold tracking-tight text-plum md:text-5xl">
             Resume Score Checker

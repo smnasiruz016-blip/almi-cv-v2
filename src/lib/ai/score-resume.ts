@@ -185,7 +185,7 @@ export async function scoreResume(input: {
     }
 
     // THE PAYWALL GATE. /resume-score is on the same terms as every other AI
-    // feature: sign in, 7-day trial with 5 AI credits, then $12/month.
+    // feature: sign in, then the $12/month plan (RR-391: no new trials; 3 free CVs have no AI).
     //
     // It runs LAST of the free checks and immediately before the model call, on
     // purpose: requireAIAccess SPENDS a trial credit, so it must not run for a

@@ -46,11 +46,8 @@ export function userCanAccessTemplate(
   >,
   slug: string,
 ): boolean {
-  // GATE, so it uses hasProductAccess: the owner sees every template tier with
-  // no subscription, AND a user inside their 3-day no-card window opens every
-  // template. Templates cost nothing to serve, so they are on the free side of
-  // the line. Checked before getUserPlan because getUserPlan is built on
-  // isProActive, which deliberately knows about neither owners nor the window.
+  // GATE, so it uses hasProductAccess: under the RR-391 offer every account opens every template (templates cost
+  // nothing to serve, so they are on the free side of the line); only creating a 4th CV and AI are paid.
   if (hasProductAccess(user)) return true;
   const plan = getUserPlan(user);
   const template = getTemplate(slug);
