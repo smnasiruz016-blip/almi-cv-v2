@@ -11,6 +11,8 @@ import {
 import { destroySession, requireUser } from "@/lib/auth";
 import { isOwner } from "@/lib/owner";
 import { cvFontVariables } from "@/lib/cv-fonts";
+import { AlmiWorldBar } from "@/components/almiworld/AlmiWorldBar";
+import { Footer } from "@/components/footer";
 
 async function logoutAction() {
   "use server";
@@ -32,6 +34,8 @@ export default async function AppLayout({
   return (
     <div className={`min-h-screen bg-gradient-to-b from-cream to-cream-soft ${cvFontVariables}`}>
       <header className="sticky top-0 z-50 border-b border-plum/10 bg-cream/80 backdrop-blur-md">
+        {/* RR-398: the AlmiWorld family bar (logo + Home to almiworld.com, its menus) on top; AlmiCV's own nav below it. */}
+        <AlmiWorldBar />
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-6 py-4">
           <Link href="/dashboard" className="flex items-center gap-2.5">
             <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-coral">
@@ -86,6 +90,7 @@ export default async function AppLayout({
       </header>
 
       <main className="mx-auto max-w-6xl px-6 py-8">{children}</main>
+      <Footer />
     </div>
   );
 }

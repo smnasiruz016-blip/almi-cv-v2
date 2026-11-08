@@ -1,17 +1,15 @@
 "use client";
 
-import { familyStrip } from "@smnasiruz016-blip/almi-data";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { ArrowRight, Menu, X } from "lucide-react";
 import { Container } from "@/components/ui/container";
+import { AlmiWorldBar } from "@/components/almiworld/AlmiWorldBar";
 
-// Full canonical AlmiWorld family strip. Every sibling product + network links,
-// with AlmiCV (this site) omitted — its own home is the logo. Rendered inline as
-// real <a> anchors that wrap to 2–3 rows; no dropdown, no overflow clipping.
-// ⚠️ "cv" is an IDENTITY, not a label — it omits THIS product from its own strip.
-// The list itself lives in @smnasiruz016-blip/almi-data; do not re-inline it.
-const FAMILY_LINKS: ReadonlyArray<{ label: string; href: string }> = familyStrip("cv");
+// RR-398: on top, the AlmiWorld family bar (logo + Home to almiworld.com, and the same menus as almiworld.com) from the one
+// generated kit (src/lib/almiworld-family.ts + src/components/almiworld/). Under it AlmiCV's own wordmark, Templates, Pricing,
+// Log in and its own button. The old family strip (with its eBooks and WordPress links) is gone; the family links live in
+// the bar, including its own phone menu ("AlmiWorld ☰").
 
 const MENU_LINK_CLASS =
   "flex min-h-[48px] items-center rounded-lg px-3 text-base font-medium text-plum transition-colors hover:bg-coral/10 hover:text-coral focus:outline-none focus:ring-2 focus:ring-coral/40";
@@ -72,6 +70,7 @@ export function SiteHeader({ isLoggedIn }: { isLoggedIn: boolean }) {
   return (
     <>
       <header className="sticky top-0 z-50 bg-cream/80 backdrop-blur-md">
+        <AlmiWorldBar />
         <Container>
           <div className="flex items-center justify-between py-6">
             <Link
@@ -142,24 +141,6 @@ export function SiteHeader({ isLoggedIn }: { isLoggedIn: boolean }) {
               </button>
             </div>
           </div>
-
-          {/* Canonical family strip — desktop, wraps to 2–3 rows. */}
-          <nav
-            aria-label="AlmiWorld family"
-            className="hidden flex-wrap items-center gap-x-4 gap-y-1 pb-4 text-base font-semibold text-plum-soft md:flex"
-          >
-            {FAMILY_LINKS.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="transition hover:text-coral"
-              >
-                {link.label}
-              </a>
-            ))}
-          </nav>
         </Container>
 
         {isOpen && (
@@ -172,21 +153,8 @@ export function SiteHeader({ isLoggedIn }: { isLoggedIn: boolean }) {
             className="border-t border-plum/10 bg-cream shadow-lg md:hidden"
           >
             <nav className="flex flex-col gap-1 px-4 py-3">
-              {FAMILY_LINKS.map((link, index) => (
-                <a
-                  key={link.href}
-                  ref={index === 0 ? firstLinkRef : undefined}
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={closeMenu}
-                  className={MENU_LINK_CLASS}
-                >
-                  {link.label}
-                </a>
-              ))}
-
               <Link
+                ref={firstLinkRef}
                 href="/templates"
                 onClick={closeMenu}
                 className={MENU_LINK_CLASS}

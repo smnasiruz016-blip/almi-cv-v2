@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Footer } from "@/components/footer";
+import { AlmiWorldBar } from "@/components/almiworld/AlmiWorldBar";
 
 // Auth pages (login/signup/forgot/reset) must never be indexed.
 export const metadata: Metadata = {
@@ -12,6 +13,8 @@ export default function AuthLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <div className="relative isolate flex min-h-screen flex-col overflow-hidden bg-gradient-to-br from-cream via-cream to-peach">
+      {/* RR-398: the AlmiWorld family bar (logo + Home to almiworld.com, its menus) on top of every auth page. */}
+      <AlmiWorldBar />
       <div
         aria-hidden
         className="pointer-events-none absolute -top-10 -right-10 -z-10 h-64 w-64 rounded-full bg-coral/25 blur-3xl"

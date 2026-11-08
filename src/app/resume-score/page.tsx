@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { ScoreClient } from "./score-client";
+import { SiteHeader } from "@/components/site-header";
+import { Footer } from "@/components/footer";
 
 export const metadata: Metadata = {
   title: "Resume Score Checker · AlmiCV",
@@ -15,7 +17,10 @@ export const metadata: Metadata = {
 };
 
 export default function ResumeScorePage() {
+  // RR-398: the site header (AlmiWorld bar with Home + AlmiCV's own nav) and the AlmiWorld footer, as on every page.
   return (
+    <>
+    <SiteHeader isLoggedIn={false} />
     <main className="min-h-screen bg-cream-soft">
       <section className="mx-auto w-full max-w-2xl px-6 pb-20 pt-14 md:pt-20">
         <header className="text-center">
@@ -35,5 +40,7 @@ export default function ResumeScorePage() {
         <ScoreClient />
       </section>
     </main>
+    <Footer />
+    </>
   );
 }
