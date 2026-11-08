@@ -7,12 +7,12 @@ import { Section } from "@/components/ui/section";
 import { getCurrentUser } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 import { isBillingEnabled, getUserPlan } from "@/lib/billing/plans";
-import {
-  TEMPLATES,
-  getAddedAt,
-  type TemplateMeta,
-} from "@/components/templates/template-registry";
-import { CVPreview } from "@/components/templates/CVPreview";
+// RR-400: the 12 newest templates as plain data (scripts/gen-template-showcase.mts,
+// run in prebuild). Importing template-registry here made all ~250 "use client"
+// templates client references of the home page and shipped them on every visit.
+import SHOWCASE from "@/components/templates/showcase.generated.json";
+type ShowcaseTemplate = { slug: string; name: string };
+import { LazyCVPreview } from "@/components/templates/LazyCVPreview";
 import { SiteHeader } from "@/components/site-header";
 import { PricingClient } from "@/app/pricing/pricing-client";
 import type { Metadata } from "next";
@@ -114,9 +114,7 @@ export default async function HomePage() {
   const user = await getCurrentUser();
   const isLoggedIn = Boolean(user);
 
-  const showcaseTemplates: TemplateMeta[] = [...TEMPLATES]
-    .sort((a, b) => getAddedAt(b).localeCompare(getAddedAt(a)))
-    .slice(0, 12);
+  const showcaseTemplates: ShowcaseTemplate[] = SHOWCASE;
 
   let currentPlan: "FREE" | "PRO_MONTHLY" | "PRO_YEARLY" = "FREE";
   if (user) {
@@ -168,7 +166,7 @@ function PrimaryCTA({
     <Link
       href={href}
       className={
-        "inline-flex min-h-[44px] items-center justify-center gap-2 rounded-pill bg-coral px-6 py-3 text-sm font-semibold text-white shadow-warm-card transition hover:-translate-y-0.5 hover:bg-coral-deep focus:outline-none focus:ring-4 focus:ring-coral/30 " +
+        "inline-flex min-h-[44px] items-center justify-center gap-2 rounded-pill bg-coral-deep px-6 py-3 text-sm font-semibold text-white shadow-warm-card transition hover:-translate-y-0.5 hover:bg-coral-ink focus:outline-none focus:ring-4 focus:ring-coral/30 " +
         (className ?? "")
       }
     >
@@ -192,12 +190,12 @@ function HeroSection({ isLoggedIn }: { isLoggedIn: boolean }) {
       <Container>
         <div className="relative z-10 grid items-center gap-12 md:grid-cols-2">
           <div>
-            <h1 className="text-sm font-semibold uppercase tracking-wide text-coral">
+            <h1 className="text-sm font-semibold uppercase tracking-wide text-coral-deep">
               AI Resume Builder with a Real ATS Score
             </h1>
             <p className="mt-3 max-w-xl text-balance text-5xl font-medium leading-[1.05] text-plum lg:text-6xl xl:text-7xl">
               The CV that gets you{" "}
-              <span className="text-coral">the interview.</span>
+              <span className="text-coral-deep">the interview.</span>
             </p>
             <p className="mt-6 max-w-md text-lg text-plum-soft">
               Right now, a robot — an ATS — is deleting your resume before a
@@ -293,7 +291,7 @@ function BenefitsSection() {
                 key={b.title}
                 className="rounded-2xl border border-peach/40 bg-white p-7 shadow-warm-card"
               >
-                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-coral/10 text-coral">
+                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-coral/10 text-coral-deep">
                   <Icon className="h-5 w-5" />
                 </div>
                 <h3 className="mt-5 text-xl font-semibold text-plum">
@@ -315,7 +313,7 @@ function TemplatesShowcaseSection({
   templates,
   isLoggedIn,
 }: {
-  templates: TemplateMeta[];
+  templates: ShowcaseTemplate[];
   isLoggedIn: boolean;
 }) {
   if (templates.length === 0) return null;
@@ -343,7 +341,7 @@ function TemplatesShowcaseSection({
                 aria-label={`Use the ${t.name} template`}
               >
                 <div className="bg-plum/5">
-                  <CVPreview slug={t.slug} width={200} className="mx-auto" />
+                  <LazyCVPreview slug={t.slug} width={200} className="mx-auto" />
                 </div>
                 <div className="border-t border-peach/30 px-2 py-2">
                   <p className="truncate text-xs font-medium text-plum">
@@ -358,7 +356,7 @@ function TemplatesShowcaseSection({
         <div className="mt-10 flex justify-center">
           <Link
             href="/templates"
-            className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-pill px-5 py-3 text-sm font-semibold text-coral transition hover:text-coral-deep focus:outline-none focus:ring-4 focus:ring-coral/20"
+            className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-pill px-5 py-3 text-sm font-semibold text-coral-deep transition hover:text-coral-ink focus:outline-none focus:ring-4 focus:ring-coral/20"
           >
             Browse all templates
             <ArrowRight className="h-4 w-4" />
@@ -382,7 +380,7 @@ function HowItWorksSection() {
         <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-3">
           {STEPS.map((step) => (
             <div key={step.n}>
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-coral font-display text-xl font-medium text-white">
+              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-coral-deep font-display text-xl font-medium text-white">
                 {step.n}
               </div>
               <h3 className="mt-5 text-2xl text-plum">{step.title}</h3>

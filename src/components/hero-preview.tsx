@@ -226,7 +226,7 @@ function PreviewCardContent({ reduce }: { reduce: ReduceMotion }) {
       <div className="my-5 h-px w-full bg-plum/15" />
       <div className="space-y-4">
         <div className="rounded-lg border border-sage/30 bg-sage-soft p-4">
-          <h3 className="flex items-center gap-2 text-base font-medium text-plum">
+          <h2 className="flex items-center gap-2 text-base font-medium text-plum">
             <motion.span
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
@@ -236,7 +236,7 @@ function PreviewCardContent({ reduce }: { reduce: ReduceMotion }) {
               <CheckCircle2 className="h-4 w-4 text-sage" />
             </motion.span>
             Why it matched
-          </h3>
+          </h2>
           <ul className="mt-2 space-y-1.5 text-sm text-plum-soft">
             <li className="flex gap-2">
               <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-sage" />
@@ -249,7 +249,7 @@ function PreviewCardContent({ reduce }: { reduce: ReduceMotion }) {
           </ul>
         </div>
         <div className="rounded-lg border border-lavender/30 bg-lavender-soft p-4">
-          <h3 className="flex items-center gap-2 text-base font-medium text-plum">
+          <h2 className="flex items-center gap-2 text-base font-medium text-plum">
             <motion.span
               animate={
                 reduce
@@ -269,7 +269,7 @@ function PreviewCardContent({ reduce }: { reduce: ReduceMotion }) {
               <Sparkles className="h-4 w-4 text-[#9B7FD9]" />
             </motion.span>
             AI suggestion
-          </h3>
+          </h2>
           <p className="mt-2 text-sm italic text-plum-soft">
             <Typewriter text={RESUME_TIP} reduce={reduce} />
           </p>

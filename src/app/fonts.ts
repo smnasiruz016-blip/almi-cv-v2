@@ -1,8 +1,12 @@
 // ============================================================================
 // Google Fonts wiring for the 20-template engine.
 //
-// Each font here is loaded by next/font/google at build time (self-hosted +
-// preloaded; no FOIT/FOUT on the public network). The exported `variable`
+// Each font here is loaded by next/font/google at build time (self-hosted).
+// RR-400: preload is OFF for the 9 template-only faces. Preloading all 11 put
+// ~700 KB of fonts ahead of the home hero and made mobile LCP 10 s. Inter and
+// Fraunces keep preload: the site chrome uses them (the faces carry the plain
+// family names). The @font-face rules still ship, so a template face
+// downloads the moment a template or the editor uses it. The exported `variable`
 // strings get mounted on <html> in src/app/layout.tsx — templates reference
 // the fonts by literal family name in inline styles (e.g. fontFamily:
 // '"JetBrains Mono", monospace'), but loading them here guarantees the
@@ -39,6 +43,7 @@ export const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
   display: "swap",
+  preload: true, // RR-400: the site chrome uses this face (same family name as public/fonts)
 });
 
 export const fraunces = Fraunces({
@@ -46,6 +51,7 @@ export const fraunces = Fraunces({
   variable: "--font-fraunces",
   style: ["normal", "italic"],
   display: "swap",
+  preload: true, // RR-400: the site chrome uses this face (same family name as public/fonts)
 });
 
 // JetBrains Mono is a variable font — full weight axis loads in one file.
@@ -53,6 +59,7 @@ export const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   variable: "--font-jetbrains-mono",
   display: "swap",
+  preload: false,
 });
 
 // Space Grotesk is variable; covers 300-700 in a single face.
@@ -60,6 +67,7 @@ export const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
   variable: "--font-space-grotesk",
   display: "swap",
+  preload: false,
 });
 
 // DM Serif Display ships only at weight 400 on Google Fonts.
@@ -69,6 +77,7 @@ export const dmSerifDisplay = DM_Serif_Display({
   weight: "400",
   style: ["normal", "italic"],
   display: "swap",
+  preload: false,
 });
 
 // Lora is variable; supports italic.
@@ -77,6 +86,7 @@ export const lora = Lora({
   variable: "--font-lora",
   style: ["normal", "italic"],
   display: "swap",
+  preload: false,
 });
 
 // Crimson Pro is variable.
@@ -85,6 +95,7 @@ export const crimsonPro = Crimson_Pro({
   variable: "--font-crimson-pro",
   style: ["normal", "italic"],
   display: "swap",
+  preload: false,
 });
 
 // Cormorant Garamond is NOT variable — pin weights actually used.
@@ -95,6 +106,7 @@ export const cormorantGaramond = Cormorant_Garamond({
   weight: ["400", "500", "600", "700"],
   style: ["normal", "italic"],
   display: "swap",
+  preload: false,
 });
 
 // Playfair Display is variable; supports italic.
@@ -103,6 +115,7 @@ export const playfairDisplay = Playfair_Display({
   variable: "--font-playfair-display",
   style: ["normal", "italic"],
   display: "swap",
+  preload: false,
 });
 
 // Amiri is Arabic-first; load both arabic + latin subsets so the same
@@ -114,6 +127,7 @@ export const amiri = Amiri({
   weight: ["400", "700"],
   style: ["normal", "italic"],
   display: "swap",
+  preload: false,
 });
 
 // Plus Jakarta Sans is variable; Batch 4 templates reference it by literal
@@ -125,6 +139,7 @@ export const plusJakartaSans = Plus_Jakarta_Sans({
   variable: "--font-plus-jakarta-sans",
   style: ["normal", "italic"],
   display: "swap",
+  preload: false,
 });
 
 /** Convenience — concatenates every font's CSS variable class so the
