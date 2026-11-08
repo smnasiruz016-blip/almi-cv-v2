@@ -89,6 +89,10 @@ export function CVPreview({
           userSelect: "none",
         }}
         aria-hidden
+        // RR-400: a thumbnail is a picture of a CV, not text to read; inert
+        // takes it out of focus and the a11y tree for good (aria-hidden alone
+        // still let axe grade the template's own colours at 25% scale).
+        inert
         dangerouslySetInnerHTML={{ __html: markup }}
       />
     </div>

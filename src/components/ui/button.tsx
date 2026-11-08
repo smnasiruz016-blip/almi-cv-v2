@@ -17,7 +17,7 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        primary: "bg-coral text-white hover:bg-coral-deep focus:ring-coral/30",
+        primary: "bg-coral-deep text-white hover:bg-coral-ink focus:ring-coral/30",
         secondary: "bg-mint text-[#0F4A42] hover:bg-mint/80 focus:ring-mint/30",
         ghost: "text-plum hover:bg-plum/5 focus:ring-plum/15",
       },

@@ -78,7 +78,7 @@ export function SiteHeader({ isLoggedIn }: { isLoggedIn: boolean }) {
               className="flex items-center gap-2"
               onClick={closeMenu}
             >
-              <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-coral text-lg font-bold text-white">
+              <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-coral-deep text-lg font-bold text-white">
                 A
               </span>
               <span className="text-xl font-semibold tracking-tight text-plum">
@@ -116,7 +116,7 @@ export function SiteHeader({ isLoggedIn }: { isLoggedIn: boolean }) {
                   </Link>
                   <Link
                     href="/signup"
-                    className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-pill bg-coral px-5 py-3 text-sm font-semibold text-white shadow-warm-card transition hover:-translate-y-0.5 hover:bg-coral-deep focus:outline-none focus:ring-4 focus:ring-coral/30"
+                    className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-pill bg-coral-deep px-5 py-3 text-sm font-semibold text-white shadow-warm-card transition hover:-translate-y-0.5 hover:bg-coral-ink focus:outline-none focus:ring-4 focus:ring-coral/30"
                   >
                     Build 3 CVs free
                     <ArrowRight className="h-4 w-4" />
@@ -188,7 +188,7 @@ export function SiteHeader({ isLoggedIn }: { isLoggedIn: boolean }) {
                   <Link
                     href="/signup"
                     onClick={closeMenu}
-                    className="mt-2 inline-flex min-h-[48px] items-center justify-center gap-2 rounded-pill bg-coral px-5 py-3 text-sm font-semibold text-white shadow-warm-card transition hover:bg-coral-deep focus:outline-none focus:ring-4 focus:ring-coral/30"
+                    className="mt-2 inline-flex min-h-[48px] items-center justify-center gap-2 rounded-pill bg-coral-deep px-5 py-3 text-sm font-semibold text-white shadow-warm-card transition hover:bg-coral-ink focus:outline-none focus:ring-4 focus:ring-coral/30"
                   >
                     Build 3 CVs free
                     <ArrowRight className="h-4 w-4" />
